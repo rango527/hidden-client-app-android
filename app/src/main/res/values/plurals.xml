@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="interview_count">
+        <item quantity="zero">No interviews booked in. Make sure you\'re up to date with your current processes.</item>
+        <item quantity="one">One interview booked in.</item>
+        <item quantity="other">%d interviews booked in.</item>
+    </plurals>
+
+    <plurals name="shortlists_profile_count">
+        <item quantity="zero">Sorry, there are no new profiles in your\r\nvarious shortlists</item>
+        <item quantity="one"></item>
+        <item quantity="other"></item>
+    </plurals>
+
+
+</resources>

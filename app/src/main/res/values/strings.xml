@@ -1,6 +1,103 @@
 <resources>
     <string name="app_name">HiddenClient</string>
 
-    <!-- Image Des-->
+    <!-- Image Description-->
     <string name="image_description_logo">Logo Image</string>
+
+    <!-- Caption -->
+    <string name="sign_in">Sign In</string>
+    <string name="i_forgot_password">I\'ve Forgotten My Password</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_your_invite_code">Please enter your invite code\r\nbelow to get started</string>
+    <string name="get_started">Get Started</string>
+    <string name="not_have_code">I don\'t have a code</string>d
+    <string name="already_member">Already a member?</string>
+    <string name="what_can_we_call_you">What can we call you?</string>
+    <string name="next">Next</string>
+
+    <string name="dashboard">DASHBOARD</string>
+    <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
+    <string name="your_metrics">Your metrics</string>
+    <string name="company_metrics">Company metrics</string>
+    <string name="candidates_in_process">Candidates In\r\nProcess</string>
+    <string name="total_interviews_completed">Total Interviews\r\nCompleted</string>
+    <string name="shortlisted_candidates_received">Shortlisted\r\nCandidates Received</string>
+    <string name="shortlist_approve_percent">Shortlist Approve\r\n%</string>
+    <string name="average_feedback_received">Average Feedback\r\nReceived</string>
+    <string name="average_feedback_given">Average\r\nFeedback Given</string>
+    <string name="your_jobs">Your jobs</string>
+    <string name="colleagues_jobs">Colleagues\' jobs</string>
+    <string name="at">at</string>
+    <string name="what_hidden_says">What Hidden Says</string>
+    <string name="view_company_profile">View the %1$s\r\nCompany Profile</string>
+
+    <string name="shortlists">SHORTLISTS</string>
+    <string name="refresh">Refresh</string>
+    <string name="hello_user">Hello %1$s</string>
+    <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\r\ncandidates.\r\nCheck back later!</string>
+
+    <string name="processes">PROCESSES</string>
+    <string name="for_">For</string>
+    <string name="process">Process</string>
+    <string name="messages">Messages</string>
+
+    <string name="shortlisted">SHORTLISTED</string>
+    <string name="shortlist_stage">Shortlist Stage</string>
+    <string name="approved_guy">COMPLETE! You approved %1$s on %2$s</string>
+
+    <string name="first_stage_interview">First Stage Interview</string>
+    <string name="first_state_interview_description">Waiting for Guy\'s availability.\r\nYou\'ll get a notification when we\'ve confirmed the time/date</string>
+    <string name="give_availability">Give Availability</string>
+    <string name="has_been_rejected">%1$s has been rejected from the process</string>
+
+    <string name="further_interviews">FURTHER INTERVIEWS</string>
+    <string name="further_interviews_description">Don\'t jump the gun! Let\'s get through the First Stage first!</string>
+    <string name="further_stage_interviews">Further Stage Interviews</string>
+
+    <string name="final_interview">FINAL INTERVIEW</string>
+    <string name="final_stage_interviews">Final Stage Interviews</string>
+    <string name="chill_your_beans">Chill your beans! You\'ll have to interview</string>
+
+    <string name="offer_stage">Offer Stage</string>
+    <string name="not_so_fast">Not so fast! You can make an offer afterthe next interview</string>
+
+    <string name="offer_accepted">Offer Accepted</string>
+    <string name="offer_accepted_stage">OFFER ACCEPTED STAGE</string>
+    <string name="hold_your_horse">Hold your horses! Let\'s get the  offer to %1$s first...</string>
+
+    <string name="started">Started</string>
+    <string name="hold_tight">Hold tight! I\'m sure %1$s will be starting with you soon...</string>
+
+    <string name="filter_by_job">FILTER_BY_JOB</string>
+    <string name="all">All</string>
+    <string name="filter_sort">Filter and Sort</string>
+    <string name="job">Job</string>
+    <string name="process_stage">Process Stage</string>
+    <string name="read_status">Read Status</string>
+    <string name="has_unread_messages">Has Unread Messages</string>
+    <string name="has_no_unread_messages">Has No Unread Messages</string>
+    <string name="done">Done</string>
+    <string name="filter">Filter</string>
+    <string name="sort_by">Sort By</string>
+    <string name="most_recent_activity">Most Recent Activity</string>
+    <string name="shortlisting_date">Shortlisting Date</string>
+    <string name="clear">Clear</string>
+    <string name="view_process">View Process</string>
+
+    <string name="timeline">Timeline</string>
+    <string name="waiting_for_candidate">Waiting for Candidate</string>
+    <string name="view_your_feedback">View Your Feedback</string>
+
+    <string name="reply_to_hidden_team">Reply to the Hidden team</string>
+    <string name="send">Send</string>
+
+    <!-- Placeholder -->
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="invite_code">Invite Code</string>
+    <string name="my_first_name">My first name is...</string>
+    <string name="my_last_name">My last name if you must...</string>
+
 </resources>
