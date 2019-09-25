@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Activity FullScreen -->
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
@@ -15,4 +16,8 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!-- Customize EditText Border Bottom-->
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:colorControlActivated">@color/colorWhite_1</item>
+    </style>
 </resources>
