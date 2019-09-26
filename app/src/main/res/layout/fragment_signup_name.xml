@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack_1"
+    android:padding="@dimen/padding_default"
+    tools:context=".ui.fragments.signup.NameFragment" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <LinearLayout
+            android:id="@+id/layout_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_complete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/what_can_we_call_you"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_progress"
+            android:textColor="@color/colorWhite_1"
+            android:layout_marginTop="@dimen/margin_default"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/textview_signup_fragment_header"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edit_firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline4"
+            android:hint="@string/my_first_name"
+            android:textColorHint="@color/colorWhite_1"
+            android:textColor="@color/colorWhite_1"
+            android:padding="@dimen/padding_default"/>
+
+        <EditText
+            android:id="@+id/edit_lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline4"
+            android:hint="@string/my_last_name"
+            android:textColorHint="@color/colorWhite_1"
+            android:textColor="@color/colorWhite_1"
+            android:padding="@dimen/padding_default" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/button_round_gray"
+            android:textColor="@color/colorWhite_1"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

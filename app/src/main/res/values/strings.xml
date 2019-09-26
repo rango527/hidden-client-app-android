@@ -15,6 +15,30 @@
     <string name="already_member">Already a member?</string>
     <string name="what_can_we_call_you">What can we call you?</string>
     <string name="next">Next</string>
+    <string name="nice_to_meet_you">Nice to meet you Guy!\nWhere are you based?</string>
+    <string name="i_live">I live in...</string>
+    <string name="pick_3_job_title">Pick 3 job titles that best describe what you do</string>
+    <string name="primarily_i_am">Primarily, I\'m a...</string>
+    <string name="i_am_also">I am also a...</string>
+    <string name="some_call_me">Some call me a...</string>
+    <string name="lets_talk_money">Let\'s talk money...</string>
+    <string name="my_current_salary">My current salary is...</string>
+    <string name="i_am_looking_for">I\'m looking for...</string>
+    <string name="where_can_we_find_your_work">Where can we find your work</string>
+    <string name="my_linked_url_is">My LinkedIn URL is...</string>
+    <string name="my_github_url_is">My Github URL is...</string>
+    <string name="my_dribble_url_is">My Dribble URL is...</string>
+    <string name="my_behance_url_is">My Behance URL is...</string>
+    <string name="how_can_we_reach_you">How can we reach you to discuss your profile?</string>
+    <string name="call_me">Call me on...</string>
+    <string name="last_step">Last step! Set a username and password for access to the app</string>
+    <string name="super_secure_password">Super secure password</string>
+    <string name="read_terms_of_service">I have read and accept the Hidden <a href="https://www.google.com">Terms of Service</a></string>
+    <string name="i_want_to_receive_email">I want to receive emails from Hidden about updates, news and events</string>
+    <string name="read_privacy_policy">If you want to read about how we process your personal data please read our <a href="https://www.google.com">Privacy Policy</a></string>
+    <string name="thanks_for_applying">Thanks for applying to be part of the Hidden community!\n\nOur Tribe team are reviewing your application and will be in touch soon</string>
+    <string name="refresh_status">Refresh </string>
+    <string name="popular_cities">Popular Cities</string>
 
     <string name="dashboard">DASHBOARD</string>
     <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
@@ -99,5 +123,8 @@
     <string name="invite_code">Invite Code</string>
     <string name="my_first_name">My first name is...</string>
     <string name="my_last_name">My last name if you must...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

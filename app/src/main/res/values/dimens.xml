@@ -7,5 +7,9 @@
     <dimen name="margin_default">20dp</dimen>
     <dimen name="text_padding">8dp</dimen>
 
+    <dimen name="progress_item_height">13dp</dimen>
+
+    <!-- Font -->
     <dimen name="textview_bold">18sp</dimen>
+    <dimen name="textview_signup_fragment_header">21sp</dimen>
 </resources>

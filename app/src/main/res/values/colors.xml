@@ -4,9 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="splashBackground">#E74A5F</color>
+    <color name="colorWhite_1">#FFF</color>
+    <color name="colorBlack_1">#000040</color>
+    <color name="colorGreen_1">#6C6</color>
     <color name="colorGray_1">#c8c8c8</color>
 
-    <color name="splashBackground">#E74A5F</color>
-    <color name="colorWhite_1">#FFFFFF</color>
-    <color name="colorBlack_1">#000040</color>
 </resources>

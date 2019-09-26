@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack_1"
+    tools:context=".ui.fragments.signup.LocationFragment" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_default">
+
+        <LinearLayout
+            android:id="@+id/layout_progress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_complete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_complete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_item_height"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/progress_item_incomplete" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/nice_to_meet_you"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_progress"
+            android:textColor="@color/colorWhite_1"
+            android:layout_marginTop="@dimen/margin_default"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/textview_signup_fragment_header"
+            android:textStyle="bold"/>
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/button_round_gray"
+            android:textColor="@color/colorWhite_1"/>
+
+        <Spinner
+            android:id="@+id/spinner_Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_popularCities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_cities"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_Location"
+            android:textColor="@color/colorWhite_1"
+            android:layout_marginTop="@dimen/margin_default"
+            />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_popularCities"
+            android:layout_marginTop="@dimen/margin_default">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="@drawable/progress_item_complete"
+                android:text="London"
+                android:textColor="@color/colorWhite_1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="@drawable/progress_item_complete"
+                android:text="Tokyo"
+                android:textColor="@color/colorWhite_1"
+                android:layout_marginLeft="10dp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="@drawable/progress_item_complete"
+                android:text="New York"
+                android:textColor="@color/colorWhite_1"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="@drawable/progress_item_complete"
+                android:text="Paris"
+                android:textColor="@color/colorWhite_1"
+                android:layout_marginLeft="10dp"/>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
