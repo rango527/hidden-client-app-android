@@ -75,7 +75,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/colorBlack_1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +84,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
-            android:id="@+id/label_not_a_member"
+            android:id="@+id/text_not_a_member"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

@@ -15,9 +15,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         // Get the widgets
         val textForgotPassword = findViewById<TextView>(R.id.text_forgot_password)
+        var label_not_a_member = findViewById<TextView>(R.id.text_not_a_member)
 
         // Set a click listener
         textForgotPassword.setOnClickListener(this);
+        label_not_a_member.setOnClickListener(this);
     }
 
     override fun onClick(v: View?) {
@@ -27,6 +29,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when(id){
             R.id.text_forgot_password->{
                 val intent = Intent(applicationContext, ForgetPasswordActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            R.id.text_not_a_member->{
+                val intent = Intent(applicationContext, SignUpWithInviteCodeActivity::class.java)
                 startActivity(intent)
                 finish()
             }

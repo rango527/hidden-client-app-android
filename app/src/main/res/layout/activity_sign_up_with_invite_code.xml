@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack_1"
+    tools:context=".ui.activities.SignUpWithInviteCodeActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/default_margin_super_top" />
+
+    <LinearLayout
+        android:id="@+id/layout_already_a_member"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/splashBackground"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/text_already_a_member"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/already_member"
+            android:textColor="@color/colorWhite_1"
+            android:textSize="@dimen/textview_bold"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_already_a_member"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_description_logo"
+                app:srcCompat="@drawable/hidden_logo_red" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="@string/enter_your_invite_code"
+                android:textColor="@color/colorWhite_1"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/text_box_underline_selector"
+                android:hint="@string/email_address"
+                android:textColorHint="@color/colorWhite_1"
+                android:textColor="@color/colorWhite_1"
+                android:padding="@dimen/text_padding"/>
+
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/text_box_underline_selector"
+                android:hint="@string/set_password"
+                android:textColorHint="@color/colorWhite_1"
+                android:textColor="@color/colorWhite_1"
+                android:padding="@dimen/text_padding"/>
+
+            <EditText
+                android:id="@+id/edit_invite_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/text_box_underline_selector"
+                android:hint="@string/invite_code"
+                android:textColorHint="@color/colorWhite_1"
+                android:textColor="@color/colorWhite_1"
+                android:padding="@dimen/text_padding"/>
+
+            <Button
+                android:id="@+id/button_get_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_started"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/button_round_red"
+                android:textColor="@color/colorWhite_1"/>
+
+            <TextView
+                android:id="@+id/text_not_have_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/not_have_code"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textColor="@color/colorWhite_1"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

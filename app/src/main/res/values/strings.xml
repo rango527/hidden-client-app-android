@@ -9,7 +9,7 @@
     <string name="i_forgot_password">I\'ve Forgotten My Password</string>
     <string name="not_a_member">Not a member?</string>
     <string name="reset_password">Reset Password</string>
-    <string name="enter_your_invite_code">Please enter your invite code\r\nbelow to get started</string>
+    <string name="enter_your_invite_code">Please enter your invite code\nbelow to get started</string>
     <string name="get_started">Get Started</string>
     <string name="not_have_code">I don\'t have a code</string>d
     <string name="already_member">Already a member?</string>
@@ -20,22 +20,22 @@
     <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
     <string name="your_metrics">Your metrics</string>
     <string name="company_metrics">Company metrics</string>
-    <string name="candidates_in_process">Candidates In\r\nProcess</string>
-    <string name="total_interviews_completed">Total Interviews\r\nCompleted</string>
-    <string name="shortlisted_candidates_received">Shortlisted\r\nCandidates Received</string>
-    <string name="shortlist_approve_percent">Shortlist Approve\r\n%</string>
-    <string name="average_feedback_received">Average Feedback\r\nReceived</string>
-    <string name="average_feedback_given">Average\r\nFeedback Given</string>
+    <string name="candidates_in_process">Candidates In\nProcess</string>
+    <string name="total_interviews_completed">Total Interviews\nCompleted</string>
+    <string name="shortlisted_candidates_received">Shortlisted\nCandidates Received</string>
+    <string name="shortlist_approve_percent">Shortlist Approve\n%</string>
+    <string name="average_feedback_received">Average Feedback\nReceived</string>
+    <string name="average_feedback_given">Average\nFeedback Given</string>
     <string name="your_jobs">Your jobs</string>
     <string name="colleagues_jobs">Colleagues\' jobs</string>
     <string name="at">at</string>
     <string name="what_hidden_says">What Hidden Says</string>
-    <string name="view_company_profile">View the %1$s\r\nCompany Profile</string>
+    <string name="view_company_profile">View the %1$s\nCompany Profile</string>
 
     <string name="shortlists">SHORTLISTS</string>
     <string name="refresh">Refresh</string>
     <string name="hello_user">Hello %1$s</string>
-    <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\r\ncandidates.\r\nCheck back later!</string>
+    <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\ncandidates.\nCheck back later!</string>
 
     <string name="processes">PROCESSES</string>
     <string name="for_">For</string>
@@ -47,7 +47,7 @@
     <string name="approved_guy">COMPLETE! You approved %1$s on %2$s</string>
 
     <string name="first_stage_interview">First Stage Interview</string>
-    <string name="first_state_interview_description">Waiting for Guy\'s availability.\r\nYou\'ll get a notification when we\'ve confirmed the time/date</string>
+    <string name="first_state_interview_description">Waiting for Guy\'s availability.\nYou\'ll get a notification when we\'ve confirmed the time/date</string>
     <string name="give_availability">Give Availability</string>
     <string name="has_been_rejected">%1$s has been rejected from the process</string>
 
