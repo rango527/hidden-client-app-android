@@ -21,8 +21,8 @@ class ShortlistsFragment : Fragment() {
     ): View? {
         shortlistsViewModel =
             ViewModelProviders.of(this).get(ShortlistsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        val root = inflater.inflate(R.layout.fragment_home_shortlists, container, false)
+        val textView: TextView = root.findViewById(R.id.text_home)
         shortlistsViewModel.text.observe(this, Observer {
             textView.text = it
         })

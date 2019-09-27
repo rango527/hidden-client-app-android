@@ -12,7 +12,14 @@
     <!-- Font -->
     <dimen name="textview_bold">18sp</dimen>
     <dimen name="textview_signup_fragment_header">21sp</dimen>
+    <dimen name="metric_number">64sp</dimen>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Panel Size -->
+    <dimen name="default_panel_width">200dp</dimen>
+    <dimen name="default_panel_height">200dp</dimen>
+
 </resources>

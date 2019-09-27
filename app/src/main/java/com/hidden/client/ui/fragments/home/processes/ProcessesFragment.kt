@@ -22,6 +22,7 @@ class ProcessesFragment : Fragment() {
         processesViewModel =
             ViewModelProviders.of(this).get(ProcessesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home_processes, container, false)
+
         val textView: TextView = root.findViewById(R.id.text_notifications)
         processesViewModel.text.observe(this, Observer {
             textView.text = it
