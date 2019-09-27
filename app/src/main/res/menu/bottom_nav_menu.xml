@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/menu_dashboard_empty"
+        android:title="@string/dashboard" />
+
+    <item
+        android:id="@+id/navigation_shortlists"
+        android:icon="@drawable/menu_shortlists_filled"
+        android:title="@string/shortlists" />
+
+    <item
+        android:id="@+id/navigation_processes"
+        android:icon="@drawable/menu_processes_empty"
+        android:title="@string/processes" />
+
+</menu>
