@@ -9,7 +9,7 @@ import com.hidden.client.R
 class HCSplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
-    private val SPLASH_DELAY: Long = 3000   // 3 seconds
+    private val SPLASH_DELAY: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
 
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {

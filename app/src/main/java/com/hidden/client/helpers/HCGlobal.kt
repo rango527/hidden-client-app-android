@@ -5,6 +5,7 @@ import android.util.Log
 
 class HCGlobal private constructor(context: Context) {
 
+    private val IS_DEBUG = true
     private val LOG_TAG: String = "HiddenClient"
 
     init {
@@ -14,6 +15,7 @@ class HCGlobal private constructor(context: Context) {
     companion object : HCSingletonHolder<HCGlobal, Context>(::HCGlobal)
 
     fun HCLog(message: String) {
-        Log.d(this.LOG_TAG, message)
+        if (IS_DEBUG)
+            Log.d(this.LOG_TAG, message)
     }
 }
