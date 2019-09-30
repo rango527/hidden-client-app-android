@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.hidden.client.R
 
-class SplashActivity : AppCompatActivity() {
+class HCSplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
     private val SPLASH_DELAY: Long = 3000   // 3 seconds
@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent(applicationContext, HCLoginActivity::class.java)
             startActivity(intent)
             finish()
         }

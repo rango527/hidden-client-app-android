@@ -1,4 +1,4 @@
-package com.hidden.client.ui.fragments.home.shortlists
+package com.hidden.client.ui.fragments.home.processes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 
-class ShortlistsFragment : Fragment() {
+class HCProcessesFragment : Fragment() {
 
-    private lateinit var shortlistsViewModel: ShortlistsViewModel
+    private lateinit var processesViewModel: HCProcessesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shortlistsViewModel =
-            ViewModelProviders.of(this).get(ShortlistsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home_shortlists, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        shortlistsViewModel.text.observe(this, Observer {
+        processesViewModel =
+            ViewModelProviders.of(this).get(HCProcessesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_home_processes, container, false)
+
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        processesViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

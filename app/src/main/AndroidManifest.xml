@@ -10,24 +10,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activities.HCSettingsActivity"></activity>
         <activity
-            android:name=".ui.activities.HomeActivity"
+            android:name=".ui.activities.HCHomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.SignUpActivity"
+            android:name=".ui.activities.HCSignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.SignUpWithInviteCodeActivity"
+            android:name=".ui.activities.HCSignUpWithInviteCodeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.ForgetPasswordActivity"
+            android:name=".ui.activities.HCForgetPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.LoginActivity"
+            android:name=".ui.activities.HCLoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name=".ui.activities.HCSplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

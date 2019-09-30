@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 
-class DashboardFragment : Fragment() {
+class HCDashboardFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var dashboardViewModel: HCDashboardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +19,7 @@ class DashboardFragment : Fragment() {
     ): View? {
 
         dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+            ViewModelProviders.of(this).get(HCDashboardViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_home_dashboard, container, false)
 
