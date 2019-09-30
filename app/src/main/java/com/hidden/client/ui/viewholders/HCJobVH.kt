@@ -8,9 +8,9 @@ import com.hidden.client.R
 
 class HCJobVH : RecyclerView.ViewHolder {
 
-    lateinit var imgJob: ImageView
-    lateinit var textJobTitle: TextView
-    lateinit var textJobLocation: TextView
+    var imgJob: ImageView
+    var textJobTitle: TextView
+    var textJobLocation: TextView
 
     constructor(rv: View) : super(rv) {
         imgJob = rv.findViewById(R.id.img_job) as ImageView

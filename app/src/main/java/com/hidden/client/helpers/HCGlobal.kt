@@ -12,6 +12,8 @@ class HCGlobal private constructor(context: Context) {
 
     }
 
+    val g_name = "Akio"
+
     companion object : HCSingletonHolder<HCGlobal, Context>(::HCGlobal)
 
     fun HCLog(message: String) {

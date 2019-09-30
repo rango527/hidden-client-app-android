@@ -9,7 +9,7 @@ import com.hidden.client.R
 import com.hidden.client.models.HCJob
 import com.hidden.client.ui.viewholders.HCJobVH
 
-class HCYourJobAdapter : RecyclerView.Adapter<HCJobVH> {
+class HCColleaguesJobAdapter : RecyclerView.Adapter<HCJobVH> {
 
     var list: MutableList<HCJob> = mutableListOf()
 

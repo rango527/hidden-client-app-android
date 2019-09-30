@@ -63,13 +63,13 @@
                 android:text="@string/your_metrics"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_signup_fragment_header"
-                tools:visibility="gone" />
+                tools:visibility="visible" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -237,13 +237,13 @@
                 android:text="@string/company_metrics"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_signup_fragment_header"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -268,7 +268,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="5"
+                            android:text="13"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -293,7 +293,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="3"
+                            android:text="16"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -318,7 +318,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="18"
+                            android:text="48"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -343,7 +343,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="28"
+                            android:text="46"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -368,7 +368,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="1.80"
+                            android:text="2.95"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -393,7 +393,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="3.49"
+                            android:text="3.74"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="@dimen/metric_number"
                             android:textStyle="bold" />
@@ -403,10 +403,37 @@
 
             </HorizontalScrollView>
 
+            <TextView
+                android:id="@+id/text_your_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_super_top"
+                android:text="@string/your_jobs"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="@dimen/textview_signup_fragment_header"
+                android:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_your_jobs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"/>
+
+            <TextView
+                android:id="@+id/text_colleagu_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_super_top"
+                android:text="@string/colleagues_jobs"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="@dimen/textview_signup_fragment_header"
+                android:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_colleage_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
