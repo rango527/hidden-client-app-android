@@ -28,6 +28,7 @@ class HCHomeActivity : AppCompatActivity() {
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+
         when (menuItem.itemId) {
             R.id.navigation_dashboard -> {
                 supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
