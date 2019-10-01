@@ -82,9 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"
                 android:text="Blue Glue has lead huge Ad Campaingns with teams of 100+ for the brands below. See the examples of the work in portfolio. You must..."
-                android:textColor="@color/colorBlack_2"
-                android:textSize="@dimen/textview_bold"/>
-
+                android:textColor="@color/colorBlack_2"/>
 
             <TextView
                 android:id="@+id/text_has_work_with"
@@ -126,10 +124,35 @@
                 android:textSize="@dimen/textview_bold"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_skills"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"></LinearLayout>
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:alignItems="stretch"
+                app:alignContent="stretch">
+
+                <com.hidden.client.ui.custom.SkillItemView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:skill="Art Direction"/>
+
+                <com.hidden.client.ui.custom.SkillItemView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:skill="Production Manager"/>
+
+                <com.hidden.client.ui.custom.SkillItemView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:skill="Illustration"/>
+
+                <com.hidden.client.ui.custom.SkillItemView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:skill="Copy Writing"/>
+
+            </com.google.android.flexbox.FlexboxLayout>
 
         </LinearLayout>
     </ScrollView>

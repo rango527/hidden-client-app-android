@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCProfile
+import com.hidden.client.models.HCSkill
 import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
 
 class HCShortlistsFragment : Fragment() {
@@ -41,6 +42,10 @@ class HCShortlistsFragment : Fragment() {
         profileList.add(HCProfile())
         profileList[0].setJobTitles(arrayOf("Google", "Facebook", "Twitter"))
         profileList[0].setEmployeeHistory(arrayOf(R.drawable.facebook, R.drawable.coca, R.drawable.water))
+        profileList[0].setProjects(arrayOf(R.drawable.test, R.drawable.hidden_logo_black, R.drawable.test))
+        profileList[0].setSkills(arrayOf(HCSkill("Art Direction", 90), HCSkill("Product Manager", 86),
+            HCSkill("Android", 93), HCSkill("Kotlin", 96),
+            HCSkill("Copy Writing", 65), HCSkill("Simuation", 83)))
 
         profileList.add(HCProfile())
         profileList[1].setJobTitles(arrayOf("Github", "Paypal", "Microsoft"))

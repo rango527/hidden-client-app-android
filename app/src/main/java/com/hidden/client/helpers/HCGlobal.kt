@@ -12,7 +12,7 @@ class HCGlobal private constructor(context: Context) {
 
     }
 
-    val g_name = "Akio"
+    val g_name: String = "Akio"
 
     companion object : HCSingletonHolder<HCGlobal, Context>(::HCGlobal)
 
@@ -20,4 +20,7 @@ class HCGlobal private constructor(context: Context) {
         if (IS_DEBUG)
             Log.d(this.LOG_TAG, message)
     }
+
+    val IMAGE_TYPE_CIRCLE: Int = 0
+    val IMAGE_TYPE_ROUNDED_RECTANGLE: Int = 1
 }

@@ -1,17 +1,22 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.hidden.client.R
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCProfile
+import com.hidden.client.models.HCSkill
+import com.hidden.client.ui.custom.SkillItemView
 
 class HCProfileViewPagerAdapter:PagerAdapter {
 
@@ -40,27 +45,43 @@ class HCProfileViewPagerAdapter:PagerAdapter {
         var textProfileLocations: TextView = view.findViewById(R.id.text_profile_location)
         var textProfileFeedback: TextView = view.findViewById(R.id.text_profile_feedback)
 
-        var recyclerViewProfileProjects: RecyclerView = view.findViewById(R.id.recyclerview_profile_projects)
+        var rvProfileProjects: RecyclerView = view.findViewById(R.id.recyclerview_profile_projects)
 
         // Job Title
         var textProfileJobTitles: TextView = view.findViewById(R.id.text_profile_job_titles)
         textProfileJobTitles.setText(profileList[position].getJobTitleWithSeparator())
 
         // `Has Worked With` Image List
-        var recyclerViewProfileEmployeeHistories: RecyclerView = view.findViewById(R.id.recyclerview_profile_employee_history)
+        var rvProfileEmployeeHistories: RecyclerView = view.findViewById(R.id.recyclerview_profile_employee_history)
         var layoutProfileEmployeeHistories: RecyclerView.LayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewProfileEmployeeHistories.layoutManager = layoutProfileEmployeeHistories
-        recyclerViewProfileEmployeeHistories.setHasFixedSize(true)
-        var profileEmployeeHistoriesAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getEmployeeHistory(), context)
-        recyclerViewProfileEmployeeHistories.adapter = profileEmployeeHistoriesAdapter
+        rvProfileEmployeeHistories.layoutManager = layoutProfileEmployeeHistories
+        rvProfileEmployeeHistories.setHasFixedSize(true)
+        var profileEmployeeHistoriesAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getEmployeeHistory(),
+            HCGlobal.getInstance(context).IMAGE_TYPE_CIRCLE, context)
+        rvProfileEmployeeHistories.adapter = profileEmployeeHistoriesAdapter
 
-        container!!.addView(view)
+        // Portfolio RecyclerView
+        var rvProfilePortfolio: RecyclerView = view.findViewById(R.id.recyclerview_profile_projects)
+        var layoutProfilePortfolio: RecyclerView.LayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        rvProfilePortfolio.layoutManager = layoutProfilePortfolio
+        rvProfilePortfolio.setHasFixedSize(true)
+        var profilePortfolioAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getProjects(),
+            HCGlobal.getInstance(context).IMAGE_TYPE_ROUNDED_RECTANGLE, context)
+        rvProfilePortfolio.adapter = profilePortfolioAdapter
+
+        // Skill Layout
+        // var skillLayout: LinearLayout = view.findViewById(R.id.layout_skills)
+
+        //for (skill in profileList[position].getSkills()) {
+        //}
+
+        container.addView(view)
 
         return view
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container!!.removeView(`object` as ConstraintLayout)
+        container.removeView(`object` as ConstraintLayout)
     }
 
     override fun getPageWidth(position: Int): Float {

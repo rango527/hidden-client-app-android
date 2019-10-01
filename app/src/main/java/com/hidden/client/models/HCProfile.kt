@@ -11,7 +11,7 @@ class HCProfile {
 
     private var employeeHistory: Array<Int> = arrayOf()
 
-    private var projects: Array<String> = arrayOf()
+    private var projects: Array<Int> = arrayOf()
 
     private var skills: Array<HCSkill> = arrayOf()
 
@@ -40,7 +40,7 @@ class HCProfile {
         jobTitles: Array<String>,
         feedback: String,
         employeeHistory: Array<Int>,
-        projects: Array<String>,
+        projects: Array<Int>,
         skills: Array<HCSkill>
     ) {
         setTitle(title)
@@ -92,11 +92,11 @@ class HCProfile {
         this.employeeHistory = employeeHistory
     }
 
-    fun getProjects() : Array<String> {
+    fun getProjects() : Array<Int> {
         return projects
     }
 
-    fun setProjects(projects: Array<String>) {
+    fun setProjects(projects: Array<Int>) {
         this.projects = projects
     }
 

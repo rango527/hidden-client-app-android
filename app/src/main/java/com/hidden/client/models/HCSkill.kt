@@ -3,11 +3,11 @@ package com.hidden.client.models
 class HCSkill {
 
     private lateinit var skill: String
-    private var percent: Int = 0
+    private var proficiency: Int = 0
 
-    constructor(skill: String, percent: Int) {
+    constructor(skill: String, proficiency: Int) {
         setSkill(skill)
-        setPercent(percent)
+        setProficiency(proficiency)
     }
 
     fun getSkill() : String {
@@ -18,11 +18,11 @@ class HCSkill {
         this.skill = skill
     }
 
-    fun getPercent() : Int {
-        return percent
+    fun getProficiency() : Int {
+        return proficiency
     }
 
-    fun setPercent(percent: Int) {
-        this.percent = percent
+    fun setProficiency(proficiency: Int) {
+        this.proficiency = proficiency
     }
 }

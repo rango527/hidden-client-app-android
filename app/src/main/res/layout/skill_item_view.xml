@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/progress_item_incomplete"
+    android:paddingTop="@dimen/list_row_margin_default"
+    android:paddingBottom="@dimen/list_row_margin_default"
+    android:paddingLeft="@dimen/text_padding"
+    android:paddingRight="@dimen/text_padding"
+    android:layout_margin="@dimen/list_row_margin_default">
+
+    <TextView
+        android:id="@+id/text_skill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack_2"
+        android:textStyle="italic"
+        android:text="Art Direction" />
+</LinearLayout>
