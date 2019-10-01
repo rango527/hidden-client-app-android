@@ -5,14 +5,16 @@
     <application
         android:name=".HiddenClientApp"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".ui.activities.HCYourJobActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
             android:name=".ui.activities.HCHomeActivity"
             android:label="@string/title_activity_home"

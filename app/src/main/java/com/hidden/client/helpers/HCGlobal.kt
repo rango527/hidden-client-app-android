@@ -1,5 +1,6 @@
 package com.hidden.client.helpers
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 
@@ -7,6 +8,8 @@ class HCGlobal private constructor(context: Context) {
 
     private val IS_DEBUG = true
     private val LOG_TAG: String = "HiddenClient"
+
+    public lateinit var g_currentActivity: Activity;
 
     init {
 

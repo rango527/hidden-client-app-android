@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 
-class HCJobVH : RecyclerView.ViewHolder {
+class HCYourJobVH : RecyclerView.ViewHolder {
 
     var imgJob: ImageView
     var textJobTitle: TextView
@@ -17,4 +17,5 @@ class HCJobVH : RecyclerView.ViewHolder {
         textJobTitle = rv.findViewById(R.id.text_job_title) as TextView
         textJobLocation = rv.findViewById(R.id.text_job_location) as TextView
     }
+
 }
