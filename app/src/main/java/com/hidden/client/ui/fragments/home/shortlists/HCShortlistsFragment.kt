@@ -8,14 +8,22 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.HCProfile
+import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
 
 class HCShortlistsFragment : Fragment() {
 
     private lateinit var shortlistsViewModel: HCShortlistsViewModel
 
     private lateinit var textHello: TextView;
+
+    // Viewpager for Profile Sliding
+    private lateinit var viewPagerNewProfile: ViewPager
+    private var profileList: MutableList<HCProfile> = mutableListOf()
+    private lateinit var profileAdapter: HCProfileViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +36,18 @@ class HCShortlistsFragment : Fragment() {
 
         textHello = root.findViewById(R.id.text_hello)
         textHello.setText(resources.getString(R.string.hello_user, HCGlobal.getInstance(activity!!.applicationContext).g_name))
+
+        // New Profile Sliding
+        profileList.add(HCProfile())
+        profileList.add(HCProfile())
+        profileList.add(HCProfile())
+
+        viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
+        viewPagerNewProfile.clipToPadding = false
+        viewPagerNewProfile.pageMargin = 32
+
+        profileAdapter = HCProfileViewPagerAdapter(activity!!.applicationContext, profileList)
+        viewPagerNewProfile.adapter = profileAdapter
 
         return root
     }

@@ -64,6 +64,9 @@
     <string name="at">at</string>
     <string name="what_hidden_says">What Hidden Says</string>
     <string name="view_company_profile">View the %1$s\nCompany Profile</string>
+    <string name="has_worked_with">Has Worked With</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="skills">Skills</string>
 
     <string name="shortlists">SHORTLISTS</string>
     <string name="refresh">Refresh</string>

@@ -15,6 +15,10 @@ class HCProfile {
 
     private lateinit var skills: Array<HCSkill>
 
+    constructor() {
+
+    }
+
     constructor(
         title: String,
         location: String,
