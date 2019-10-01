@@ -39,8 +39,14 @@ class HCShortlistsFragment : Fragment() {
 
         // New Profile Sliding
         profileList.add(HCProfile())
+        profileList[0].setJobTitles(arrayOf("Google", "Facebook", "Twitter"))
+        profileList[0].setEmployeeHistory(arrayOf(R.drawable.facebook, R.drawable.coca, R.drawable.water))
+
         profileList.add(HCProfile())
+        profileList[1].setJobTitles(arrayOf("Github", "Paypal", "Microsoft"))
+
         profileList.add(HCProfile())
+        profileList[2].setJobTitles(arrayOf("Dropbox", "Amazon", "Hubstaff", "Bitbucket"))
 
         viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
         viewPagerNewProfile.clipToPadding = false

@@ -5,15 +5,30 @@ class HCProfile {
     private lateinit var title: String
     private lateinit var location: String
 
-    private lateinit var jobTitles: Array<String>
+    private var jobTitles: Array<String> = arrayOf()
 
     private lateinit var feedback: String
 
-    private lateinit var employeeHistory: Array<String>
+    private var employeeHistory: Array<Int> = arrayOf()
 
-    private lateinit var projects: Array<String>
+    private var projects: Array<String> = arrayOf()
 
-    private lateinit var skills: Array<HCSkill>
+    private var skills: Array<HCSkill> = arrayOf()
+
+    fun getJobTitleWithSeparator() : String {
+        var ret: String = ""
+
+        for ((index, value) in this.jobTitles.withIndex()) {
+
+            if (index != 0) {
+                ret += " | "
+            }
+
+            ret += value;
+        }
+
+        return ret;
+    }
 
     constructor() {
 
@@ -24,7 +39,7 @@ class HCProfile {
         location: String,
         jobTitles: Array<String>,
         feedback: String,
-        employeeHistory: Array<String>,
+        employeeHistory: Array<Int>,
         projects: Array<String>,
         skills: Array<HCSkill>
     ) {
@@ -69,11 +84,11 @@ class HCProfile {
         this.feedback = feedback
     }
 
-    fun getEmployeeHistory() : Array<String> {
+    fun getEmployeeHistory() : Array<Int> {
         return employeeHistory
     }
 
-    fun setEmployeeHistory(employeeHistory: Array<String>) {
+    fun setEmployeeHistory(employeeHistory: Array<Int>) {
         this.employeeHistory = employeeHistory
     }
 

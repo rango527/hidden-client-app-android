@@ -43,7 +43,7 @@
         android:text="St Albans" />
 
     <TextView
-        android:id="@+id/text_job_titles"
+        android:id="@+id/text_profile_job_titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/img_profile_logo"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/text_job_titles"
+        app:layout_constraintTop_toBottomOf="@id/text_profile_job_titles"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/margin_default">

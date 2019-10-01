@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.hidden.client.R
@@ -36,10 +37,22 @@ class HCProfileViewPagerAdapter:PagerAdapter {
 
         var imgProfileLogo: ImageView = view.findViewById(R.id.img_profile_logo)
         var textProfileTitle: TextView = view.findViewById(R.id.text_profile_title)
-        var textProfileLocation: TextView = view.findViewById(R.id.text_profile_location)
+        var textProfileLocations: TextView = view.findViewById(R.id.text_profile_location)
         var textProfileFeedback: TextView = view.findViewById(R.id.text_profile_feedback)
-        var recyclerViewProfileEmployeeHistory: RecyclerView = view.findViewById(R.id.recyclerview_profile_employee_history)
+
         var recyclerViewProfileProjects: RecyclerView = view.findViewById(R.id.recyclerview_profile_projects)
+
+        // Job Title
+        var textProfileJobTitles: TextView = view.findViewById(R.id.text_profile_job_titles)
+        textProfileJobTitles.setText(profileList[position].getJobTitleWithSeparator())
+
+        // `Has Worked With` Image List
+        var recyclerViewProfileEmployeeHistories: RecyclerView = view.findViewById(R.id.recyclerview_profile_employee_history)
+        var layoutProfileEmployeeHistories: RecyclerView.LayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewProfileEmployeeHistories.layoutManager = layoutProfileEmployeeHistories
+        recyclerViewProfileEmployeeHistories.setHasFixedSize(true)
+        var profileEmployeeHistoriesAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getEmployeeHistory(), context)
+        recyclerViewProfileEmployeeHistories.adapter = profileEmployeeHistoriesAdapter
 
         container!!.addView(view)
 
