@@ -14,6 +14,9 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".ui.activities.HCCompanyDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+        <activity
             android:name=".ui.activities.HcYourJobDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
