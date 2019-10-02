@@ -9,6 +9,8 @@ class HCJob {
     private var jobSalaryMin: Int = 0
     private var jobSalaryMax: Int = 0
 
+    private lateinit var jobCompany: String;
+
     constructor(jobImgURL: String, jobTitle: String, jobLocation: String) {
 
         this.setJobImgURL(jobImgURL)
@@ -16,13 +18,15 @@ class HCJob {
         this.setJobLocation(jobLocation)
     }
 
-    constructor(jobImgURL: String, jobTitle: String, jobLocation: String, jobSalaryMin: Int) {
-        this.jobImgURL = jobImgURL
-        this.jobTitle = jobTitle
-        this.jobLocation = jobLocation
-        this.jobSalaryMin = jobSalaryMin
-    }
+    constructor(jobImgURL: String, jobTitle: String, jobLocation: String, jobSalaryMin: Int, jobSalaryMax: Int, jobCompany: String) {
 
+        this.setJobImgURL(jobImgURL)
+        this.setJobTitle(jobTitle)
+        this.setJobLocation(jobLocation)
+        this.setJobSalaryMin(jobSalaryMin)
+        this.setJobSalarayMax(jobSalaryMax)
+        this.setJobCompany(jobCompany)
+    }
 
     fun getJobImgURL() : String {
         return jobImgURL
@@ -46,5 +50,29 @@ class HCJob {
 
     fun setJobLocation(jobLocation: String) {
         this.jobLocation = jobLocation
+    }
+
+    fun getJobSalaryMin(): Int {
+        return jobSalaryMin
+    }
+
+    fun setJobSalaryMin(jobSalaryMin: Int) {
+        this.jobSalaryMin = jobSalaryMin
+    }
+
+    fun getJobSalaryMax(): Int {
+        return jobSalaryMax
+    }
+
+    fun setJobSalarayMax(jobSalaryMax: Int) {
+        this.jobSalaryMax = jobSalaryMax
+    }
+
+    fun getJobCompany(): String {
+        return jobCompany
+    }
+
+    fun setJobCompany(jobCompany: String) {
+        this.jobCompany = jobCompany
     }
 }
