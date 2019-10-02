@@ -11,6 +11,8 @@
     <color name="colorGreen_1">#6C6</color>
     <color name="colorGray_1">#c8c8c8</color>
     <color name="colorCyan_1">#3BB1E1</color>
+    <color name="colorRed_1">#E74A5F</color>
+    <color name="colorDarkBlue">#1C1C4F</color>
 
     <color name="borderBottom">#E8E8E8</color>
 

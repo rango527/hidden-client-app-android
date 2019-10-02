@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activities.HcYourJobDetailActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ui.activities.HcYourJobDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.HCYourJobActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

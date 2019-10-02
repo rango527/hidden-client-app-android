@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_default"
     tools:context=".ui.activities.HCYourJobActivity"
-    android:background="@drawable/test_bg">
+    android:background="@drawable/test_bg"
+    android:id="@+id/layout_your_job">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="345dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <ImageButton
         android:id="@+id/button_back_to_dashboard"
@@ -105,6 +106,9 @@
         android:id="@+id/img_show_job_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_default"
+        android:paddingLeft="@dimen/padding_default"
+        android:paddingRight="@dimen/padding_default"
         app:srcCompat="@drawable/arrow_down"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
