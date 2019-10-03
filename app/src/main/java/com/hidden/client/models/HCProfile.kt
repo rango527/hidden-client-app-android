@@ -2,6 +2,8 @@ package com.hidden.client.models
 
 class HCProfile {
 
+    private var photo: Int = 0
+
     private lateinit var title: String
     private lateinit var location: String
 
@@ -35,6 +37,7 @@ class HCProfile {
     }
 
     constructor(
+        photo: Int,
         title: String,
         location: String,
         jobTitles: Array<String>,
@@ -43,6 +46,7 @@ class HCProfile {
         projects: Array<Int>,
         skills: Array<HCSkill>
     ) {
+        setPhoto(photo)
         setTitle(title)
         setLocation(location)
         setJobTitles(jobTitles)
@@ -50,6 +54,14 @@ class HCProfile {
         setEmployeeHistory(employeeHistory)
         setProjects(projects)
         setSkills(skills)
+    }
+
+    fun getPhoto(): Int {
+        return photo
+    }
+
+    fun setPhoto(photo: Int) {
+        this.photo = photo
     }
 
     fun getTitle() : String {

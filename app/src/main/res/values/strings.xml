@@ -121,6 +121,7 @@
     <string name="shortlisting_date">Shortlisting Date</string>
     <string name="clear">Clear</string>
     <string name="view_process">View Process</string>
+    <string name="job_and_location">For: %1$s, %2$s</string>
 
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>

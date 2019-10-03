@@ -14,8 +14,11 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".ui.activities.HCProcessActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity
             android:name=".ui.activities.HCCompanyDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.HcYourJobDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
@@ -43,6 +46,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
