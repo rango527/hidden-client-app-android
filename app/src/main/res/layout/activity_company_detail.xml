@@ -65,58 +65,13 @@
                         app:alignItems="stretch"
                         app:alignContent="stretch">
 
-                        <TextView
+                        <com.hidden.client.ui.custom.CompanyDetailBadgeView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/progress_item_purple"
-                            android:drawableLeft="@drawable/brand_type"
-                            android:textColor="#fff"
-                            android:padding="@dimen/list_row_margin_default"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
-                            android:text="   Brand"/>
+                            app:badge_color="@drawable/progress_item_black"
+                            app:badge_title="London"
+                            app:badge_icon="@drawable/pin"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/progress_item_complete"
-                            android:drawableLeft="@drawable/company_size"
-                            android:textColor="#fff"
-                            android:padding="@dimen/list_row_margin_default"
-                            android:text="   Brand"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:layout_marginLeft="@dimen/menu_padding_vertical_default"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/progress_item_black"
-                            android:drawableLeft="@drawable/pin"
-                            android:textColor="#fff"
-                            android:padding="@dimen/list_row_margin_default"
-                            android:text="   Hamburg"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:layout_marginLeft="@dimen/menu_padding_vertical_default"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/progress_item_black"
-                            android:drawableLeft="@drawable/pin"
-                            android:textColor="#fff"
-                            android:padding="@dimen/list_row_margin_default"
-                            android:text="   London"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:layout_marginLeft="@dimen/menu_padding_vertical_default"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/progress_item_black"
-                            android:drawableLeft="@drawable/pin"
-                            android:textColor="#fff"
-                            android:padding="@dimen/list_row_margin_default"
-                            android:text="   New York"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:layout_marginLeft="@dimen/menu_padding_vertical_default"/>
                     </com.google.android.flexbox.FlexboxLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

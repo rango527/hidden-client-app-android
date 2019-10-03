@@ -4,4 +4,10 @@
         <attr name="skill" format="string" />
         <attr name="proficiency" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="CompanyDetailBadge">
+        <attr name="badge_color" format="integer" />
+        <attr name="badge_icon" format="integer" />
+        <attr name="badge_title" format="string"/>
+    </declare-styleable>
 </resources>
