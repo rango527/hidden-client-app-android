@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_stage_init"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/progress_item_complete"/>
+
+        <ImageView
+            android:id="@+id/img_stage_first_interview"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_red"/>
+
+        <ImageView
+            android:id="@+id/img_stage_further_interview"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_incomplete"/>
+
+        <ImageView
+            android:id="@+id/img_stage_final_interview"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_incomplete"/>
+
+        <ImageView
+            android:id="@+id/img_stage_offer_stage"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_incomplete"/>
+
+        <ImageView
+            android:id="@+id/img_stage_offer_accepted_stage"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_incomplete"/>
+
+        <ImageView
+            android:id="@+id/img_stage_started"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:background="@drawable/progress_item_incomplete"/>
+
+</LinearLayout>

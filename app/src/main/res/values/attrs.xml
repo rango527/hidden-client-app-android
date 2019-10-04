@@ -10,4 +10,9 @@
         <attr name="badge_icon" format="integer" />
         <attr name="badge_title" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="ProcessStageBarView">
+        <attr name="process_stage" format="integer" />
+        <attr name="process_status" format="integer" />
+    </declare-styleable>
 </resources>
