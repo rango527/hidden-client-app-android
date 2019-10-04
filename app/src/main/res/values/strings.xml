@@ -54,7 +54,7 @@
     <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
     <string name="your_metrics">Your metrics</string>
     <string name="company_metrics">Company metrics</string>
-    <string name="candidates_in_process">Candidates In\nProcess</string>
+    <string name="candidates_in_process">Candidates\nIn Process</string>
     <string name="total_interviews_completed">Total Interviews\nCompleted</string>
     <string name="shortlisted_candidates_received">Shortlisted\nCandidates Received</string>
     <string name="shortlist_approve_percent">Shortlist Approve\n%</string>

@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_hello"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/menu_padding_vertical_default"
-        android:text="Sorry, there are no new profiles in your\nvarious shortlists"
+        android:text="Please review the 3 new profiles in your Creative Director shortlist"
         android:textColor="@color/colorWhite_1"/>
 
     <LinearLayout

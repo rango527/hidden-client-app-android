@@ -50,7 +50,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="Creative Director | Art Director | Typographer"
-        android:textSize="@dimen/textview_bold"
         android:textColor="@color/colorCyan_1"/>
 
     <ScrollView
@@ -60,7 +59,8 @@
         app:layout_constraintTop_toBottomOf="@id/text_profile_job_titles"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/margin_default">
+        android:layout_marginTop="@dimen/margin_default"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"

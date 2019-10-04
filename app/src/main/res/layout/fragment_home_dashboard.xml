@@ -13,7 +13,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingBottom="@dimen/padding_default">
+        android:paddingBottom="@dimen/padding_default"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/img_settings"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="end"
                 android:contentDescription="@string/settings"
                 app:srcCompat="@drawable/ic_settings" />
@@ -32,15 +33,17 @@
                 android:id="@+id/text_upcomingInterview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/upcoming_interview"
+                android:text="Hideo's upcomming interviews"
                 android:textColor="@color/colorBlack_1"
-                android:textSize="@dimen/textview_bold"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:layout_marginTop="@dimen/margin_default"/>
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="122dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/default_margin_super_top"
                 android:contentDescription="@string/upcoming_interview"
                 app:srcCompat="@drawable/empty_upcoming_interviews" />
@@ -51,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:text="No interviews booked in. Make sure you\'re up to date with your current processes."
                 android:textColor="@color/colorBlack_1"
-                android:textSize="@dimen/textview_bold"
                 android:layout_marginTop="@dimen/margin_default"
                 android:gravity="center_horizontal"/>
 
@@ -62,14 +64,16 @@
                 android:layout_marginTop="@dimen/default_margin_super_top"
                 android:text="@string/your_metrics"
                 android:textColor="@color/colorBlack_1"
-                android:textSize="@dimen/textview_signup_fragment_header"
+                android:textSize="@dimen/textview_bold"
+                android:textStyle="bold"
                 tools:visibility="visible" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -87,16 +91,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/candidates_in_process"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"
                             android:textColor="@color/colorBlack_1" />
 
                         <TextView
                             android:id="@+id/text_yours_candidates_in_process"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_horizontal|center_vertical"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
                             android:text="5"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -112,7 +119,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/total_interviews_completed"
-                            android:textColor="@color/colorBlack_1" />
+                            android:textColor="@color/colorBlack_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_yours_total_interview_completed"
@@ -121,7 +130,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="3"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -137,7 +147,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/shortlisted_candidates_received"
-                            android:textColor="@color/colorBlack_1" />
+                            android:textColor="@color/colorBlack_1"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_yours_shortlisted_candidate_received"
@@ -146,7 +158,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="18"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -162,7 +175,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/shortlist_approve_percent"
-                            android:textColor="@color/colorBlack_1" />
+                            android:textColor="@color/colorBlack_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_yours_shortlist_approve_percent"
@@ -171,7 +186,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="28"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -187,7 +203,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/average_feedback_received"
-                            android:textColor="@color/colorBlack_1" />
+                            android:textColor="@color/colorBlack_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_yours_average_feedback_received"
@@ -196,7 +214,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="1.80"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -212,7 +231,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/average_feedback_given"
-                            android:textColor="@color/colorBlack_1" />
+                            android:textColor="@color/colorBlack_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_yours_average_feedback_given"
@@ -221,7 +242,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="3.49"
                             android:textColor="@color/colorBlack_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -233,17 +255,19 @@
                 android:id="@+id/text_companyMetrics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_super_top"
+                android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/company_metrics"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_signup_fragment_header"
+                android:textStyle="bold"
                 android:visibility="visible" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -261,7 +285,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/candidates_in_process"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_candidates_in_process"
@@ -270,7 +296,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="13"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -286,7 +313,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/total_interviews_completed"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_total_interview_completed"
@@ -295,7 +324,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="16"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -311,7 +341,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/shortlisted_candidates_received"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_shortlisted_candidate_received"
@@ -320,7 +352,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="48"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -336,7 +369,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/shortlist_approve_percent"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_shortlist_approve_percent"
@@ -345,7 +380,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="46"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -361,7 +397,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/average_feedback_received"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_average_feedback_received"
@@ -370,7 +408,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="2.95"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -386,7 +425,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/average_feedback_given"
-                            android:textColor="@color/colorWhite_1" />
+                            android:textColor="@color/colorWhite_1"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/text_company_average_feedback_given"
@@ -395,7 +436,8 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:text="3.74"
                             android:textColor="@color/colorWhite_1"
-                            android:textSize="@dimen/metric_number"
+                            android:layout_marginTop="-20dp"
+                            android:textSize="104sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -407,9 +449,10 @@
                 android:id="@+id/text_your_jobs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_super_top"
+                android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/your_jobs"
                 android:textColor="@color/colorBlack_1"
+                android:textStyle="bold"
                 android:textSize="@dimen/textview_signup_fragment_header"
                 android:visibility="visible" />
 
@@ -423,10 +466,11 @@
                 android:id="@+id/text_colleagu_jobs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_super_top"
+                android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/colleagues_jobs"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_signup_fragment_header"
+                android:textStyle="bold"
                 android:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -43,7 +43,7 @@ class HCProcessAdapter : RecyclerView.Adapter<HCProcessVH> {
         holder.imgPhoto.setImageResource(process.getCandidatePhoto())
         holder.textName.setText(process.getCandidateName())
         holder.textFor.setText(String.format(context.resources.getString(R.string.job_and_location)
-            , process.getCandidateJob(), process.getCandidateJob()))
+            , process.getCandidateJob(), process.getCandidateLocation()))
 
         holder.itemView.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, HCProcessActivity::class.java)

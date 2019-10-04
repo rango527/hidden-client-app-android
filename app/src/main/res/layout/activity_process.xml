@@ -4,6 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_red"
     tools:context=".ui.activities.HCProcessActivity">
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/image_description_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_left"
+        android:background="@drawable/button_circle"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_default" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/man"
+        app:layout_constraintTop_toTopOf="@id/button_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img_photo"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/colorWhite_1"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold"
+        android:text="Minnie Daniels"
+        android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+
+    <TextView
+        android:id="@+id/text_for"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/colorWhite_1"
+        android:text="For: Account Director, New York, NY"
+        android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_for"
+        android:background="@color/colorWhite_1"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/menu_padding_vertical_default">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wednesday" />
+    </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
