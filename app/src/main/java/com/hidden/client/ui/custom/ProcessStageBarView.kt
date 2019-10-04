@@ -22,7 +22,7 @@ class ProcessStageBarView (context: Context, attrs: AttributeSet): LinearLayout(
         var imgOfferAcceptedStage: ImageView = findViewById(R.id.img_stage_offer_accepted_stage)
         var imgStarted: ImageView = findViewById(R.id.img_stage_started)
 
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.CompanyDetailBadge)
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.ProcessStageBarView)
 
         attributes.recycle()
     }

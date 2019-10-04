@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="15dp">
+        <ImageView
+            android:id="@+id/img_triangle_init"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+
+        <ImageView
+            android:id="@+id/img_triangle_first_interview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_red"/>
+        <ImageView
+            android:id="@+id/img_triangle_further_interview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+
+        <ImageView
+            android:id="@+id/img_triangle_final_interview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+
+        <ImageView
+            android:id="@+id/img_triangle_offer_stage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+
+        <ImageView
+            android:id="@+id/img_triangle_offer_accepted_stage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+
+        <ImageView
+            android:id="@+id/img_triangle_started"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panel_triangle_transparent"/>
+</LinearLayout>
