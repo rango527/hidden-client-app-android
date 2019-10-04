@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/man"
+                android:layout_marginTop="@dimen/margin_default"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
@@ -66,101 +67,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:background="@drawable/panel_top_rounded_border_small"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:paddingTop="@dimen/text_padding"
-                    android:paddingBottom="@dimen/menu_padding_vertical_default">
+                    android:layout_weight="1">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/text_process"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:textColor="@color/colorBlack_2"
+                        android:background="@drawable/panel_top_rounded_border_small"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="@string/process"
-                        android:textSize="@dimen/textview_bold"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:paddingTop="@dimen/text_padding"
-                    android:paddingBottom="@dimen/menu_padding_vertical_default"
-                    android:background="@android:color/transparent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite_1"
-                        android:text="@string/messages"
+                        android:paddingTop="@dimen/text_padding"
+                        android:paddingBottom="@dimen/menu_padding_vertical_default"
                         android:textSize="@dimen/textview_bold"
                         android:textStyle="bold"
                         android:textAllCaps="true"/>
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-2dp"
-                android:orientation="vertical"
-                android:background="@color/colorWhite_1"
-                android:paddingTop="@dimen/padding_default"
-                android:paddingBottom="@dimen/padding_default">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/margin_default"
-                    android:layout_marginRight="@dimen/margin_default">
-
-                    <com.hidden.client.ui.custom.ProcessStageBarView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:process_stage="3"
-                        app:process_status="2"/>
-
-                    <com.hidden.client.ui.custom.ProcessStageTriangleView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:process_stage="3"
-                        app:process_status="2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="-2dp">
-                    <ImageView
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_width="12dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/arrow_left" />
-                    <LinearLayout
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/text_message"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/button_round_red"
-                        android:layout_weight="1">
-
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_width="12dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/arrow_right" />
+                        android:textColor="@color/colorWhite_1"
+                        android:text="@string/messages"
+                        android:textSize="@dimen/textview_bold"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingTop="@dimen/text_padding"
+                        android:paddingBottom="@dimen/menu_padding_vertical_default"
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
+            <fragment
+                android:id="@+id/fragment_process"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorGray_2"
-                android:padding="@dimen/padding_default">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="-2dp"/>
 
-            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
