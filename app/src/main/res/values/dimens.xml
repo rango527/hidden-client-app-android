@@ -17,6 +17,7 @@
     <dimen name="metric_number">64sp</dimen>
     <dimen name="text_title">36sp</dimen>
 
+    <dimen name="font_size_small">16sp</dimen>
     <dimen name="font_size_medium">28sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
