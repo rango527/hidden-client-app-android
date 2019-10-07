@@ -73,6 +73,7 @@
     <string name="refresh">Refresh</string>
     <string name="hello_user">Hello %1$s</string>
     <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\ncandidates.\nCheck back later!</string>
+    <string name="add_more">+%1$s more</string>
 
     <string name="processes">PROCESSES</string>
     <string name="for_">For</string>

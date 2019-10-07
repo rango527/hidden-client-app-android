@@ -2,6 +2,7 @@ package com.hidden.client.ui.adapters
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,14 @@ import com.hidden.client.models.HCProfile
 import com.hidden.client.models.HCSkill
 import com.hidden.client.ui.custom.SkillItemView
 import android.widget.LinearLayout.LayoutParams
+import androidx.core.view.marginLeft
 import com.google.android.flexbox.FlexboxLayout
 
 class HCProfileViewPagerAdapter : PagerAdapter{
+
+    companion object {
+        val default_skill_show_count = 3
+    }
 
     var context: Context
     var profileList: MutableList<HCProfile> = mutableListOf()
@@ -74,18 +80,39 @@ class HCProfileViewPagerAdapter : PagerAdapter{
         // Skill Layout
         var skillLayout: FlexboxLayout = view.findViewById(R.id.layout_skills)
 
-        for (skill in profileList[position].getSkills()) {
+        var skillCount:Int = profileList[position].getSkills().size
+        var defaultShowCount = if (skillCount <= default_skill_show_count) skillCount else HCProfileViewPagerAdapter.default_skill_show_count
 
-            var skillView = SkillItemView(context, skill.getSkill(), skill.getProficiency())
+        for (i in 0 until defaultShowCount) {
+            var skillItem = profileList[position].getSkills().get(i)
+            var skillItemView = SkillItemView(context, skillItem.getSkill(), skillItem.getProficiency())
+            skillLayout.addView(skillItemView)
+        }
 
+        if (skillCount > default_skill_show_count) {
+            var textAddMore = TextView(context)
             var params : LayoutParams = LayoutParams(
                 LayoutParams.WRAP_CONTENT, // This will define text view width
-                LayoutParams.WRAP_CONTENT // This will define text view height
+                LayoutParams.MATCH_PARENT // This will define text view height
             )
+            params.leftMargin = 5
 
-            skillView.layoutParams = params
+            textAddMore.layoutParams = params
+            textAddMore.setText(String.format(context.resources.getString(R.string.add_more), skillCount - defaultShowCount))
+            textAddMore.gravity = Gravity.CENTER_VERTICAL
 
-            skillLayout.addView(skillView)
+            textAddMore.setOnClickListener(object: View.OnClickListener {
+                override fun onClick(v: View?) {
+                    v!!.visibility = View.GONE
+
+                    for (i in defaultShowCount until skillCount) {
+                        var skillItem = profileList[position].getSkills().get(i)
+                        var skillItemView = SkillItemView(context, skillItem.getSkill(), skillItem.getProficiency())
+                        skillLayout.addView(skillItemView)
+                    }
+                }
+            })
+            skillLayout.addView(textAddMore)
         }
 
         container.addView(view)
