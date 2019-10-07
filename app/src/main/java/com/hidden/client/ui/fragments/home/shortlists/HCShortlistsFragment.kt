@@ -49,6 +49,7 @@ class HCShortlistsFragment : Fragment() {
 
         profileList.add(HCProfile())
         profileList[1].setJobTitles(arrayOf("Github", "Paypal", "Microsoft"))
+        profileList[1].setSkills(arrayOf(HCSkill("Android Programming", 97), HCSkill("Agile", 89)))
 
         profileList.add(HCProfile())
         profileList[2].setJobTitles(arrayOf("Dropbox", "Amazon", "Hubstaff", "Bitbucket"))

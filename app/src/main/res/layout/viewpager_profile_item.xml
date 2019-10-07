@@ -132,25 +132,6 @@
                 app:alignItems="stretch"
                 app:alignContent="stretch">
 
-                <com.hidden.client.ui.custom.SkillItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:skill="Art Direction"/>
-
-                <com.hidden.client.ui.custom.SkillItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:skill="Production Manager"/>
-
-                <com.hidden.client.ui.custom.SkillItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:skill="Illustration"/>
-
-                <com.hidden.client.ui.custom.SkillItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:skill="Copy Writing"/>
 
             </com.google.android.flexbox.FlexboxLayout>
 

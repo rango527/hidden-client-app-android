@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,24 +16,21 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.custom.HCTabBar
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
 import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment
 import kotlinx.android.synthetic.main.list_row_circle_image.*
+import java.lang.Exception
 
-class HCHomeActivity : AppCompatActivity(), View.OnClickListener {
+class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
 
-    private lateinit var tabDashboard: LinearLayout
-    private lateinit var tabShortlists: LinearLayout
-    private lateinit var tabProcesses: LinearLayout
+    private var dashboardFrags: MutableList<Fragment> = mutableListOf<Fragment>()
+    private var shortlistsFrags: MutableList<Fragment> = mutableListOf<Fragment>()
+    private var processesFrags: MutableList<Fragment> = mutableListOf<Fragment>()
+    private lateinit var curTabFrags: MutableList<Fragment>
 
-    private lateinit var imgDashboard: ImageView
-    private lateinit var imgShortlists: ImageView
-    private lateinit var imgProcesses: ImageView
-
-    private lateinit var textDashboard: TextView
-    private lateinit var textShortlists: TextView
-    private lateinit var textProcesses: TextView
+    private lateinit var tabBar: HCTabBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,76 +38,71 @@ class HCHomeActivity : AppCompatActivity(), View.OnClickListener {
 
         HCGlobal.getInstance(this).g_currentActivity = this
 
-        tabDashboard = findViewById(R.id.layout_tab_dashboard)
-        tabDashboard.setOnClickListener(this)
+        dashboardFrags.add(HCDashboardFragment())
+        shortlistsFrags.add(HCShortlistsFragment())
+        processesFrags.add(HCProcessesFragment())
 
-        tabShortlists = findViewById(R.id.layout_tab_shortlists)
-        tabShortlists.setOnClickListener(this)
+        tabBar = findViewById(R.id.nav_view)
+        tabBar.setSelectedListener(this)
 
-        tabProcesses = findViewById(R.id.layout_tab_processes)
-        tabProcesses.setOnClickListener(this)
-
-        imgDashboard = findViewById(R.id.img_tab_dashboard)
-        imgShortlists = findViewById(R.id.img_tab_shortlists)
-        imgProcesses = findViewById(R.id.img_tab_processes)
-
-        textDashboard = findViewById(R.id.text_tab_dashboard)
-        textShortlists = findViewById(R.id.text_tab_shortlists)
-        textProcesses = findViewById(R.id.text_tab_processes)
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, HCShortlistsFragment()).commit()
-
-            imgShortlists.setImageResource(R.drawable.menu_shortlists_filled)
-            textShortlists.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_1))
-        }
-
+        onTabSelected(1)    // default tab is Shortlists
 
     }
 
-    override fun onClick(v: View?) {
-
-        when (v!!.id) {
-            R.id.layout_tab_dashboard -> {
-
-                setTabButtonDefault()
-
-                imgDashboard.setImageResource(R.drawable.menu_dashboard)
-                textDashboard.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_1))
-
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
-            }
-            R.id.layout_tab_shortlists -> {
-
-                setTabButtonDefault()
-
-                imgShortlists.setImageResource(R.drawable.menu_shortlists_filled)
-                textShortlists.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_1))
-
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCShortlistsFragment()).commit()
-            }
-            R.id.layout_tab_processes -> {
-
-                setTabButtonDefault()
-
-                imgProcesses.setImageResource(R.drawable.menu_processes_filled)
-                textProcesses.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_1))
-
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCProcessesFragment()).commit()
-            }
-        }
+    override fun onTabSelected(num: Int) {
+        var fragsList: Array<MutableList<Fragment>> = arrayOf(dashboardFrags, shortlistsFrags, processesFrags)
+        curTabFrags = fragsList[num]
+        val newFrag: Fragment = curTabFrags[curTabFrags.size - 1]
+        replaceFrag(newFrag)
     }
 
-    private fun setTabButtonDefault() {
+    fun replaceFrag(frag: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, frag).commit()
+    }
 
-        imgDashboard.setImageResource(R.drawable.menu_dashboard_empty)
-        textDashboard.setTextColor(ContextCompat.getColor(this, R.color.colorGray_3))
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (!popFragment())
+            finish();
+    }
 
-        imgShortlists.setImageResource(R.drawable.menu_shortlists_empty)
-        textShortlists.setTextColor(ContextCompat.getColor(this, R.color.colorGray_3))
+    fun pushFragment(fragment: Fragment) {
 
-        imgProcesses.setImageResource(R.drawable.menu_processes_empty)
-        textProcesses.setTextColor(ContextCompat.getColor(this, R.color.colorGray_3))
+        curTabFrags.add(fragment)
+
+        var curFrag: Fragment = curTabFrags[curTabFrags.size - 2]
+
+        try {
+            supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, fragment).commit()
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    fun popFragment(): Boolean {
+        if (curTabFrags.size <= 1)
+            return false
+
+        curTabFrags.removeAt(curTabFrags.size - 1)
+        var newFrag: Fragment = curTabFrags[curTabFrags.size - 1]
+
+        try {
+            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, newFrag).commit()
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return true
+    }
+
+    fun popToRootofShortlists() {
+        if (shortlistsFrags.size <= 1)
+            return
+        for (i in shortlistsFrags.size - 1 .. 1 ) {
+            shortlistsFrags.removeAt(i)
+        }
     }
 }

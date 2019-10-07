@@ -17,8 +17,10 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCProfile
 import com.hidden.client.models.HCSkill
 import com.hidden.client.ui.custom.SkillItemView
+import android.widget.LinearLayout.LayoutParams
+import com.google.android.flexbox.FlexboxLayout
 
-class HCProfileViewPagerAdapter:PagerAdapter {
+class HCProfileViewPagerAdapter : PagerAdapter{
 
     var context: Context
     var profileList: MutableList<HCProfile> = mutableListOf()
@@ -70,10 +72,21 @@ class HCProfileViewPagerAdapter:PagerAdapter {
         rvProfilePortfolio.adapter = profilePortfolioAdapter
 
         // Skill Layout
-        // var skillLayout: LinearLayout = view.findViewById(R.id.layout_skills)
+        var skillLayout: FlexboxLayout = view.findViewById(R.id.layout_skills)
 
-        //for (skill in profileList[position].getSkills()) {
-        //}
+        for (skill in profileList[position].getSkills()) {
+
+            var skillView = SkillItemView(context, skill.getSkill(), skill.getProficiency())
+
+            var params : LayoutParams = LayoutParams(
+                LayoutParams.WRAP_CONTENT, // This will define text view width
+                LayoutParams.WRAP_CONTENT // This will define text view height
+            )
+
+            skillView.layoutParams = params
+
+            skillLayout.addView(skillView)
+        }
 
         container.addView(view)
 

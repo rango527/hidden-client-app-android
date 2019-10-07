@@ -11,14 +11,16 @@
     android:background="@drawable/panel_round_shadow_white"
     android:paddingBottom="@dimen/activity_horizontal_margin">
 
-    <ImageView
+    <com.rishabhharit.roundedimageview.RoundedImageView
         android:id="@+id/img_job"
         android:layout_width="match_parent"
         android:layout_height="205dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="fitXY"
-        android:src="@drawable/test"/>
+        android:src="@drawable/test"
+        app:cornerRadius="24dp"
+        app:roundedCorners="topLeft|topRight"/>
 
     <TextView
         android:id="@+id/text_job_title"

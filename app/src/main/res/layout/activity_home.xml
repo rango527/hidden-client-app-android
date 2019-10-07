@@ -13,7 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nav_view"/>
 
-    <LinearLayout
+    <com.hidden.client.ui.custom.HCTabBar
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,75 +23,7 @@
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <LinearLayout
-            android:id="@+id/layout_tab_dashboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/menu_padding_vertical_default"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/img_tab_dashboard"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/menu_dashboard_empty"/>
-            <TextView
-                android:id="@+id/text_tab_dashboard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorGray_3"
-                android:layout_marginTop="3dp"
-                android:text="@string/dashboard"
-                android:textAllCaps="true"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/layout_tab_shortlists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/menu_padding_vertical_default"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/img_tab_shortlists"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/menu_shortlists_empty"/>
-            <TextView
-                android:id="@+id/text_tab_shortlists"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:textColor="@color/colorGray_3"
-                android:text="@string/shortlists"
-                android:textAllCaps="true"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/layout_tab_processes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/menu_padding_vertical_default"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/img_tab_processes"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/menu_processes_empty"/>
-            <TextView
-                android:id="@+id/text_tab_processes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:textColor="@color/colorGray_3"
-                android:text="@string/shortlists"
-                android:textAllCaps="true"/>
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <fragment
         android:id="@+id/nav_host_fragment"
