@@ -16,6 +16,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.animation.SlideAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
+import java.lang.Math.round
 
 class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -66,13 +67,34 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(android.R.color.transparent)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 
-                textName.visibility = View.VISIBLE
-                textFor.visibility = View.VISIBLE
-                imgPhoto.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                var density: Float = applicationContext.resources.displayMetrics.density
 
-                val param = imgPhoto.layoutParams as LinearLayout.LayoutParams
-                param.topMargin = resources.getDimension(R.dimen.margin_default).toInt()
-                imgPhoto.layoutParams = param
+                layoutTitle.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
+                animation.setInterpolator (AccelerateInterpolator())
+                animation.duration = 100
+
+                animation.setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(animation: Animation?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onAnimationStart(animation: Animation?) {
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        HCGlobal.getInstance(this@HCProcessActivity).HCLog("Animation end")
+
+                        val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
+                        param.topMargin = resources.getDimension(R.dimen.margin_default).toInt()
+                        layoutTitle.layoutParams = param
+                    }
+
+                })
+                layoutTitle.animation = animation
+                layoutTitle.startAnimation(animation)
 
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment()).commit()
             }
@@ -84,47 +106,34 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(R.drawable.panel_top_rounded_border_small)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_2))
 
-                layoutTitle.visibility = View.INVISIBLE
+                var density: Float = applicationContext.resources.displayMetrics.density
 
-                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, 0)
+                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, round(40 * density))
                 animation.setInterpolator (AccelerateInterpolator())
                 animation.duration = 100
+
+                animation.setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(animation: Animation?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onAnimationStart(animation: Animation?) {
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        HCGlobal.getInstance(this@HCProcessActivity).HCLog("Animation end")
+
+                        val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
+                        param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
+                        layoutTitle.layoutParams = param
+                    }
+
+                })
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 
-//                layoutTitle.visibility = View.GONE
-
-//                layoutTitle.animate()
-//                    .scaleY(0.0f)
-//                    .setDuration(2000)
-//                    .setListener(object: AnimatorListenerAdapter() {
-//                        override fun onAnimationEnd(animation: Animator) {
-//                            super.onAnimationEnd(animation)
-//                            layoutTitle.visibility = View.GONE
-//                        }
-//                    })
-
-//                val anim: ValueAnimator = ValueAnimator.ofInt(layoutTitle.measuredHeight, -300);
-//                anim.addUpdateListener { object: ValueAnimator.AnimatorUpdateListener {
-//                    override fun onAnimationUpdate(valueAnimator: ValueAnimator) {
-//                        var newHeight: Int = valueAnimator.animatedValue as Int
-//                        var layoutParams: ViewGroup.LayoutParams = layoutTitle.layoutParams
-//                        layoutParams.height = newHeight
-//                        layoutTitle.layoutParams = layoutParams
-//                    }
-//                } }
-//                anim.duration = 2000
-//                anim.start()
-
-//                var density: Float = applicationContext.resources.displayMetrics.density
-//                imgPhoto.layoutParams.height = Math.round(40 * density)
-//
-//                val param = imgPhoto.layoutParams as LinearLayout.LayoutParams
-//                param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
-//
-//                imgPhoto.layoutParams = param
-
-//                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCMessageFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCMessageFragment()).commit()
             }
             R.id.button_back -> {
                 finish()

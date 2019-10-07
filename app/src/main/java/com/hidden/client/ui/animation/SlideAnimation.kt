@@ -1,8 +1,11 @@
 package com.hidden.client.ui.animation
 
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.LinearLayout
+import com.hidden.client.helpers.HCGlobal
 
 class SlideAnimation: Animation {
 
@@ -22,6 +25,7 @@ class SlideAnimation: Animation {
         if (view.height !== toHeight) {
             newHeight = (fromHeight + (toHeight - fromHeight) * interpolatedTime).toInt()
             view.layoutParams.height = newHeight
+
             view.requestLayout()
         }
     }
@@ -33,4 +37,9 @@ class SlideAnimation: Animation {
     override fun willChangeBounds(): Boolean {
         return true
     }
+
+    override fun setAnimationListener(listener: AnimationListener?) {
+        super.setAnimationListener(listener)
+    }
+
 }
