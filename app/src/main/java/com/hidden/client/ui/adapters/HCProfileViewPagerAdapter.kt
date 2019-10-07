@@ -77,7 +77,7 @@ class HCProfileViewPagerAdapter : PagerAdapter{
             HCGlobal.getInstance(context).IMAGE_TYPE_ROUNDED_RECTANGLE, context)
         rvProfilePortfolio.adapter = profilePortfolioAdapter
 
-        // Skill Layout
+        // Skill Layout  (default limit count)
         var skillLayout: FlexboxLayout = view.findViewById(R.id.layout_skills)
 
         var skillCount:Int = profileList[position].getSkills().size
@@ -89,6 +89,7 @@ class HCProfileViewPagerAdapter : PagerAdapter{
             skillLayout.addView(skillItemView)
         }
 
+        // add `+ $(cnt) more`
         if (skillCount > default_skill_show_count) {
             var textAddMore = TextView(context)
             var params : LayoutParams = LayoutParams(

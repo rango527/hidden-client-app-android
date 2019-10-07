@@ -1,21 +1,21 @@
 package com.hidden.client.ui.activities
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.Animation
+import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.animation.SlideAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
-import kotlinx.android.synthetic.main.activity_process.*
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,8 +23,11 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textBtnMessage: TextView
 
     private lateinit var imgPhoto: ImageView
+    private lateinit var layoutTitle: LinearLayout
     private lateinit var textName: TextView
     private lateinit var textFor: TextView
+
+    private lateinit var buttonBack: ImageButton
 
     private lateinit var fragmentProcess: FrameLayout
 
@@ -41,12 +44,16 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
         imgPhoto = findViewById(R.id.img_photo)
         textName = findViewById(R.id.text_name)
         textFor = findViewById(R.id.text_for)
+        layoutTitle = findViewById(R.id.layout_title)
 
         textBtnProcess = findViewById(R.id.text_process)
         textBtnProcess.setOnClickListener(this)
 
         textBtnMessage = findViewById(R.id.text_message)
         textBtnMessage.setOnClickListener(this)
+
+        buttonBack = findViewById(R.id.button_back)
+        buttonBack.setOnClickListener(this)
 
     }
 
@@ -77,17 +84,50 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(R.drawable.panel_top_rounded_border_small)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_2))
 
-                textName.visibility = View.GONE
-                textFor.visibility = View.GONE
+                layoutTitle.visibility = View.INVISIBLE
 
-                var density: Float = applicationContext.resources.displayMetrics.density
-                imgPhoto.layoutParams.height = Math.round(40 * density)
+                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, 0)
+                animation.setInterpolator (AccelerateInterpolator())
+                animation.duration = 100
+                layoutTitle.animation = animation
+                layoutTitle.startAnimation(animation)
 
-                val param = imgPhoto.layoutParams as LinearLayout.LayoutParams
-                param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
-                imgPhoto.layoutParams = param
+//                layoutTitle.visibility = View.GONE
 
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCMessageFragment()).commit()
+//                layoutTitle.animate()
+//                    .scaleY(0.0f)
+//                    .setDuration(2000)
+//                    .setListener(object: AnimatorListenerAdapter() {
+//                        override fun onAnimationEnd(animation: Animator) {
+//                            super.onAnimationEnd(animation)
+//                            layoutTitle.visibility = View.GONE
+//                        }
+//                    })
+
+//                val anim: ValueAnimator = ValueAnimator.ofInt(layoutTitle.measuredHeight, -300);
+//                anim.addUpdateListener { object: ValueAnimator.AnimatorUpdateListener {
+//                    override fun onAnimationUpdate(valueAnimator: ValueAnimator) {
+//                        var newHeight: Int = valueAnimator.animatedValue as Int
+//                        var layoutParams: ViewGroup.LayoutParams = layoutTitle.layoutParams
+//                        layoutParams.height = newHeight
+//                        layoutTitle.layoutParams = layoutParams
+//                    }
+//                } }
+//                anim.duration = 2000
+//                anim.start()
+
+//                var density: Float = applicationContext.resources.displayMetrics.density
+//                imgPhoto.layoutParams.height = Math.round(40 * density)
+//
+//                val param = imgPhoto.layoutParams as LinearLayout.LayoutParams
+//                param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
+//
+//                imgPhoto.layoutParams = param
+
+//                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCMessageFragment()).commit()
+            }
+            R.id.button_back -> {
+                finish()
             }
         }
     }

@@ -57,7 +57,9 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
     }
 
     fun replaceFrag(frag: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, frag).commit()
+        supportFragmentManager.beginTransaction()
+//            .setCustomAnimations(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left)
+            .replace(R.id.nav_host_fragment, frag).commit()
     }
 
     override fun onBackPressed() {

@@ -81,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                android:textStyle="italic"
                 android:text="Blue Glue has lead huge Ad Campaingns with teams of 100+ for the brands below. See the examples of the work in portfolio. You must..."
                 android:textColor="@color/colorBlack_2"/>
 

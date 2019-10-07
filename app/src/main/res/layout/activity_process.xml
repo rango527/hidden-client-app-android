@@ -15,7 +15,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/button_back"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -24,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical" >
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -34,32 +35,34 @@
                     android:src="@drawable/man"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:id="@+id/text_name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/layout_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/img_photo"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:textColor="@color/colorWhite_1"
-                    android:textSize="@dimen/text_title"
-                    android:textStyle="bold"
-                    android:text="Minnie Daniels"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="@dimen/text_title"
+                        android:textStyle="bold"
+                        android:text="Minnie Daniels"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
-                <TextView
-                    android:id="@+id/text_for"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/text_name"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:textColor="@color/colorWhite_1"
-                    android:text="For: Account Director, New York, NY"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/list_row_margin_default"/>
+                    <TextView
+                        android:id="@+id/text_for"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/text_name"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:textColor="@color/colorWhite_1"
+                        android:text="For: Account Director, New York, NY"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/list_row_margin_default"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,12 +111,11 @@
                             android:background="@android:color/transparent"/>
                     </LinearLayout>
                 </LinearLayout>
-                <fragment
+                <FrameLayout
                     android:id="@+id/fragment_process"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
                     android:layout_marginTop="-2dp"/>
 
 

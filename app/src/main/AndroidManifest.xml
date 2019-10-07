@@ -38,7 +38,8 @@
         <activity
             android:name=".ui.activities.HCProcessActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:animateLayoutChanges="true"/>
         <activity
             android:name=".ui.activities.HCCompanyDetailActivity"
             android:screenOrientation="portrait"
