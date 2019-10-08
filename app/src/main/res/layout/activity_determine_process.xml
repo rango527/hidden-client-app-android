@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack_1"
+    android:padding="@dimen/padding_default"
+    tools:context=".ui.activities.process.HSDetermineProcessActivity">
+
+    <ImageButton
+        android:id="@+id/button_back_to_dashboard"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/image_description_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_left"
+        android:background="@drawable/button_circle"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        android:textColor="@color/colorWhite_1"
+        android:text="@string/what_was_the_outcome_of_the_interview"
+        android:textSize="@dimen/textview_bold"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round_green"
+        app:layout_constraintBottom_toTopOf="@id/guideline7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/progress_to_next_stage"
+        android:textColor="@color/colorWhite_1"
+        android:layout_marginBottom="@dimen/list_row_margin_default"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round_red"
+        app:layout_constraintTop_toBottomOf="@id/guideline7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/progress_to_next_stage"
+        android:textColor="@color/colorWhite_1"
+        android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

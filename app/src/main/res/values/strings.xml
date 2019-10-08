@@ -88,6 +88,13 @@
     <string name="first_state_interview_description">Waiting for Guy\'s availability.\nYou\'ll get a notification when we\'ve confirmed the time/date</string>
     <string name="give_availability">Give Availability</string>
     <string name="has_been_rejected">%1$s has been rejected from the process</string>
+    <string name="what_was_the_outcome_of_the_interview">What was the outcome of\nthe interview?</string>
+    <string name="progress_to_next_stage">Progress to next stage</string>
+    <string name="reject_from_process">Reject from process</string>
+    <string name="what_stage_do_you_want_to_progress_to">That\'s great!\nWhat stage do you want to\nprogress to?</string>
+    <string name="make_offer">Make Offer</string>
+    <string name="please_give_us_some_feedback">To progress %1$s, please give us some quick feedback</string>
+    <string name="this_goes_to_your_hiddenclient_team">*This goes to your Hidden Talent Partner and not to %1$s directly</string>
 
     <string name="further_interviews">FURTHER INTERVIEWS</string>
     <string name="further_interviews_description">Don\'t jump the gun! Let\'s get through the First Stage first!</string>

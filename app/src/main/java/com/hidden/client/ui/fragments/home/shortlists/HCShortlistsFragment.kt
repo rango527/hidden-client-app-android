@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,7 +17,7 @@ import com.hidden.client.models.HCProfile
 import com.hidden.client.models.HCSkill
 import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
 
-class HCShortlistsFragment : Fragment() {
+class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var shortlistsViewModel: HCShortlistsViewModel
 
@@ -25,6 +27,11 @@ class HCShortlistsFragment : Fragment() {
     private lateinit var viewPagerNewProfile: ViewPager
     private var profileList: MutableList<HCProfile> = mutableListOf()
     private lateinit var profileAdapter: HCProfileViewPagerAdapter
+
+    // Filter Layout
+    private lateinit var layoutFilter: ConstraintLayout
+    private lateinit var imgOpenFilter: ImageView
+    private lateinit var imgCloseFilter: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,6 +68,25 @@ class HCShortlistsFragment : Fragment() {
         profileAdapter = HCProfileViewPagerAdapter(activity!!.applicationContext, profileList)
         viewPagerNewProfile.adapter = profileAdapter
 
+        // Layout Filter
+        layoutFilter = root.findViewById(R.id.layout_filter)
+        imgOpenFilter = root.findViewById(R.id.img_open_filter_layout)
+        imgCloseFilter = root.findViewById(R.id.img_close_filter_layout)
+
+        imgOpenFilter.setOnClickListener(this)
+        imgCloseFilter.setOnClickListener(this)
+
         return root
+    }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.img_open_filter_layout -> {
+                layoutFilter.visibility = View.VISIBLE
+            }
+            R.id.img_close_filter_layout -> {
+                layoutFilter.visibility = View.GONE
+            }
+        }
     }
 }
