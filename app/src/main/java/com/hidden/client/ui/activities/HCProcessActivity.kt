@@ -73,7 +73,7 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
                 var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
                 animation.setInterpolator (AccelerateInterpolator())
-                animation.duration = 100
+                animation.duration = 50
 
                 animation.setAnimationListener(object: Animation.AnimationListener {
                     override fun onAnimationRepeat(animation: Animation?) {

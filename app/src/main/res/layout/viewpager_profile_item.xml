@@ -133,7 +133,6 @@
                 app:alignItems="stretch"
                 app:alignContent="stretch">
 
-
             </com.google.android.flexbox.FlexboxLayout>
 
         </LinearLayout>
