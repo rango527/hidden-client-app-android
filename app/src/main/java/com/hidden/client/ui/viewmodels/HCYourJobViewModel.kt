@@ -1,11 +1,10 @@
-package com.hidden.client.ui.fragments.home.dashboard
+package com.hidden.client.ui.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hidden.client.models.HCJob
 
-class HCDashboardViewModel : ViewModel {
+class HCYourJobViewModel: ViewModel {
 
     private lateinit var job: HCJob
 
@@ -15,16 +14,16 @@ class HCDashboardViewModel : ViewModel {
         this.job = job
     }
 
-    var yourJobListMutableLiveData = MutableLiveData<ArrayList<HCDashboardViewModel>>()
-    var yourJobList = ArrayList<HCDashboardViewModel>()
+    var yourJobListMutableLiveData = MutableLiveData<ArrayList<HCYourJobViewModel>>()
+    var yourJobList = ArrayList<HCYourJobViewModel>()
 
-    fun getYourJobList(): MutableLiveData<ArrayList<HCDashboardViewModel>> {
+    fun getYourJobList(): MutableLiveData<ArrayList<HCYourJobViewModel>> {
 
         val job1 = HCJob("", "Director", "NewYork, NY")
         val job2 = HCJob("", "Vice President", "Chicago")
 
-        val dashboardViewModel1: HCDashboardViewModel = HCDashboardViewModel(job1)
-        val dashboardViewModel2: HCDashboardViewModel = HCDashboardViewModel(job2)
+        val dashboardViewModel1: HCYourJobViewModel = HCYourJobViewModel(job1)
+        val dashboardViewModel2: HCYourJobViewModel = HCYourJobViewModel(job2)
 
         yourJobList.add(dashboardViewModel1)
         yourJobList.add(dashboardViewModel2)

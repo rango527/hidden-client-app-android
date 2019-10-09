@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.models.HCJob
+import com.hidden.client.ui.viewholders.HCColleagueJobVH
 import com.hidden.client.ui.viewholders.HCYourJobVH
 
-class HCColleaguesJobAdapter : RecyclerView.Adapter<HCYourJobVH> {
+class HCColleaguesJobAdapter : RecyclerView.Adapter<HCColleagueJobVH> {
 
     var list: MutableList<HCJob> = mutableListOf()
 
@@ -20,16 +21,16 @@ class HCColleaguesJobAdapter : RecyclerView.Adapter<HCYourJobVH> {
         this.context = context
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCYourJobVH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCColleagueJobVH {
         var rv: View
-        var holder: HCYourJobVH
-        rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_job, parent, false)
-        holder = HCYourJobVH(rv)
+        var holder: HCColleagueJobVH
+        rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_colleague_job, parent, false)
+        holder = HCColleagueJobVH(rv)
 
         return holder
     }
 
-    override fun onBindViewHolder(holder: HCYourJobVH, position: Int) {
+    override fun onBindViewHolder(holder: HCColleagueJobVH, position: Int) {
         var job: HCJob
 
         job = list.get(position)

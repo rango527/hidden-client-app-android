@@ -46,7 +46,6 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
         tabBar.setSelectedListener(this)
 
         onTabSelected(1)    // default tab is Shortlists
-
     }
 
     override fun onTabSelected(num: Int) {
@@ -80,7 +79,6 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
         catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     fun popFragment(): Boolean {
