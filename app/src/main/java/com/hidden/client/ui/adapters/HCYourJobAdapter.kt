@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCYourJobBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJob
 import com.hidden.client.ui.activities.HCYourJobActivity
 import com.hidden.client.ui.viewholders.HCYourJobVH
 import com.hidden.client.ui.viewmodels.HCYourJobViewModel
@@ -20,6 +19,12 @@ class HCYourJobAdapter(
     private val list: ArrayList<HCYourJobViewModel>) : RecyclerView.Adapter<HCYourJobVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCYourJobVH {
+
+//        var rv: View
+//        var holder: HCYourJobVH
+//        rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_job, parent, false)
+//        holder = HCYourJobVH(rv)
+//        return holder
 
 //        var rv: View
 //        var holder: HCYourJobVH

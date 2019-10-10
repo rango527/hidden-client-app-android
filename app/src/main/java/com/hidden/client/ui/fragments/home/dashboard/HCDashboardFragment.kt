@@ -16,7 +16,6 @@ import com.hidden.client.ui.adapters.HCColleaguesJobAdapter
 import com.hidden.client.ui.adapters.HCYourJobAdapter
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
 import com.hidden.client.ui.viewmodels.HCYourJobViewModel
-import kotlinx.android.synthetic.main.fragment_home_dashboard.*
 
 class HCDashboardFragment : Fragment(), View.OnClickListener {
 

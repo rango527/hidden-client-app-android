@@ -5,8 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.databinding.HCYourJobBinding
-import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 
 class HCColleagueJobVH: RecyclerView.ViewHolder {
 

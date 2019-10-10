@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data class="HCYourJobBinding">
+        <import type="android.view.View" />
         <variable
             name="job_model"
             type="com.hidden.client.ui.viewmodels.HCYourJobViewModel" />
@@ -34,7 +35,7 @@
             android:id="@+id/text_job_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{job_model.job.jobTitle}"
+            android:text="@{job_model.getJob().jobTitle}"
             app:layout_constraintTop_toBottomOf="@id/img_job"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textSize="@dimen/textview_signup_fragment_header"
@@ -48,7 +49,7 @@
             android:id="@+id/text_job_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{job_model.job.jobLocation}"
+            android:text="@{job_model.getJob().jobLocation}"
             app:layout_constraintTop_toBottomOf="@id/text_job_title"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@color/colorBlack_1"
@@ -78,7 +79,5 @@
                 android:textColor="@color/colorWhite_1"
                 android:textStyle="bold"/>
         </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

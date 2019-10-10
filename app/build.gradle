@@ -2,9 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -65,5 +63,4 @@ dependencies {
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
-    kapt "androidx.databinding:databinding-compiler:3.5.0-alpha16"
 }

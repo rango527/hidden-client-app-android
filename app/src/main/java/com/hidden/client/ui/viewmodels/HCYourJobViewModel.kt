@@ -3,6 +3,7 @@ package com.hidden.client.ui.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hidden.client.models.HCJob
+import com.hidden.client.DataBinderMapperImpl
 
 class HCYourJobViewModel: ViewModel {
 
@@ -14,6 +15,10 @@ class HCYourJobViewModel: ViewModel {
         this.job = job
     }
 
+    fun getJob(): HCJob {
+        return this.job
+    }
+
     var yourJobListMutableLiveData = MutableLiveData<ArrayList<HCYourJobViewModel>>()
     var yourJobList = ArrayList<HCYourJobViewModel>()
 
@@ -22,8 +27,10 @@ class HCYourJobViewModel: ViewModel {
         val job1 = HCJob("", "Director", "NewYork, NY")
         val job2 = HCJob("", "Vice President", "Chicago")
 
-        val dashboardViewModel1: HCYourJobViewModel = HCYourJobViewModel(job1)
-        val dashboardViewModel2: HCYourJobViewModel = HCYourJobViewModel(job2)
+        val dashboardViewModel1: HCYourJobViewModel =
+            HCYourJobViewModel(job1)
+        val dashboardViewModel2: HCYourJobViewModel =
+            HCYourJobViewModel(job2)
 
         yourJobList.add(dashboardViewModel1)
         yourJobList.add(dashboardViewModel2)

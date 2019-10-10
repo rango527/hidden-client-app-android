@@ -1,10 +1,6 @@
 package com.hidden.client.ui.viewholders
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.hidden.client.R
 import com.hidden.client.databinding.HCYourJobBinding
 import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 
