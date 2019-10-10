@@ -32,7 +32,6 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
     private lateinit var colleagueJobAdapter: HCColleagueJobAdapter
     private lateinit var layoutColleagueJobManager: RecyclerView.LayoutManager
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
