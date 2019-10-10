@@ -19,6 +19,8 @@
     <color name="colorPurple_1">#7B43C5</color>
     <color name="colorDarkBlue">#1C1C4F</color>
 
+    <color name="colorMask">#77000000</color>
+
     <color name="borderBottom">#E8E8E8</color>
 
 </resources>

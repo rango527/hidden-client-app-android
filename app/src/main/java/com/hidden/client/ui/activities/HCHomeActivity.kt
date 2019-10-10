@@ -32,6 +32,8 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
 
     private lateinit var tabBar: HCTabBar
 
+    private lateinit var layoutMask: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -46,6 +48,8 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
         tabBar.setSelectedListener(this)
 
         onTabSelected(1)    // default tab is Shortlists
+
+        layoutMask = findViewById(R.id.layout_mask)
     }
 
     override fun onTabSelected(num: Int) {
@@ -57,7 +61,6 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
 
     fun replaceFrag(frag: Fragment) {
         supportFragmentManager.beginTransaction()
-//            .setCustomAnimations(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left)
             .replace(R.id.nav_host_fragment, frag).commit()
     }
 
@@ -103,6 +106,14 @@ class HCHomeActivity : AppCompatActivity(), HCTabBar.OnTabSelectedListener {
             return
         for (i in shortlistsFrags.size - 1 .. 1 ) {
             shortlistsFrags.removeAt(i)
+        }
+    }
+
+    public fun toggleMask() {
+        if (layoutMask.visibility == View.GONE) {
+            layoutMask.visibility = View.VISIBLE
+        } else {
+            layoutMask.visibility = View.GONE
         }
     }
 }
