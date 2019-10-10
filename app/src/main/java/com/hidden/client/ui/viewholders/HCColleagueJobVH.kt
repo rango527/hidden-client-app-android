@@ -1,21 +1,14 @@
 package com.hidden.client.ui.viewholders
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.hidden.client.R
+import com.hidden.client.databinding.HCColleagueJobBinding
+import com.hidden.client.ui.viewmodels.HCColleagueJobViewModel
 
-class HCColleagueJobVH: RecyclerView.ViewHolder {
+class HCColleagueJobVH(private val jobBinding: HCColleagueJobBinding): RecyclerView.ViewHolder(jobBinding.root) {
 
-    var imgJob: ImageView
-    var textJobTitle: TextView
-    var textJobLocation: TextView
-
-    constructor(rv: View) : super(rv) {
-        imgJob = rv.findViewById(R.id.img_job) as ImageView
-        textJobTitle = rv.findViewById(R.id.text_job_title) as TextView
-        textJobLocation = rv.findViewById(R.id.text_job_location) as TextView
+    fun bind (jobViewModel: HCColleagueJobViewModel) {
+        this.jobBinding.jobModel = jobViewModel
+        jobBinding.executePendingBindings()
     }
 
 }

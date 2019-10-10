@@ -8,25 +8,25 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.databinding.HCYourJobBinding
+import com.hidden.client.databinding.HCColleagueJobBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.HCYourJobActivity
-import com.hidden.client.ui.viewholders.HCYourJobVH
-import com.hidden.client.ui.viewmodels.HCYourJobViewModel
+import com.hidden.client.ui.viewholders.HCColleagueJobVH
+import com.hidden.client.ui.viewmodels.HCColleagueJobViewModel
 
-class HCYourJobAdapter(
+class HCColleagueJobAdapter(
     private val context:Context,
-    private val list: ArrayList<HCYourJobViewModel>) : RecyclerView.Adapter<HCYourJobVH>() {
+    private val list: ArrayList<HCColleagueJobViewModel>) : RecyclerView.Adapter<HCColleagueJobVH>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCYourJobVH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCColleagueJobVH {
 
         val layoutInflater = LayoutInflater.from(parent.context)
-        val jobBinding: HCYourJobBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_row_job, parent, false)
+        val jobBinding: HCColleagueJobBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_row_colleague_job, parent, false)
 
-        return HCYourJobVH(jobBinding)
+        return HCColleagueJobVH(jobBinding)
     }
 
-    override fun onBindViewHolder(holder: HCYourJobVH, position: Int) {
+    override fun onBindViewHolder(holder: HCColleagueJobVH, position: Int) {
 
         val jobModel = list[position]
         holder.bind(jobModel)

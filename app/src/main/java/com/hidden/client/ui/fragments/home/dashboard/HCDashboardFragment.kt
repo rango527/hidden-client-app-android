@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.models.HCJob
-import com.hidden.client.ui.adapters.HCColleaguesJobAdapter
+import com.hidden.client.ui.adapters.HCColleagueJobAdapter
 import com.hidden.client.ui.adapters.HCYourJobAdapter
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
+import com.hidden.client.ui.viewmodels.HCColleagueJobViewModel
 import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 
 class HCDashboardFragment : Fragment(), View.OnClickListener {
@@ -27,8 +28,8 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
 
     // RecyclerView for Your Jobs
     private lateinit var rvColleagueJobs: RecyclerView
-    private var colleagueJobList: MutableList<HCJob> = mutableListOf()
-    private lateinit var colleagueJobAdapter: HCColleaguesJobAdapter
+    private lateinit var colleagueJobViewModel: HCColleagueJobViewModel
+    private lateinit var colleagueJobAdapter: HCColleagueJobAdapter
     private lateinit var layoutColleagueJobManager: RecyclerView.LayoutManager
 
 
@@ -57,27 +58,18 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
             rvYourJobs.adapter = yourJobAdapter
         })
 
+        // Colleague Job RecyclerView
+        rvColleagueJobs = root.findViewById(R.id.recyclerview_colleage_jobs)
+        colleagueJobViewModel = ViewModelProviders.of(this).get(HCColleagueJobViewModel::class.java)
+        colleagueJobViewModel.getColleagueJobList().observe(this, Observer {colleagueJobViewModels->
+            colleagueJobAdapter = HCColleagueJobAdapter(activity!!.applicationContext, colleagueJobViewModels)
 
+            layoutColleagueJobManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false)
+            rvColleagueJobs.layoutManager = layoutColleagueJobManager
+            rvColleagueJobs.setHasFixedSize(true)
 
-//        yourJobList.add(HCJob("", "Director", "NewYork, NY"))
-//        yourJobList.add(HCJob("", "Vice President", "Chicago"))
-//
-//        yourJobAdapter = HCYourJobAdapter(yourJobList, activity!!.applicationContext)
-//        rvYourJobs.adapter = yourJobAdapter
-//
-//        //Colleague Jobs
-//        rvColleagueJobs = root.findViewById(R.id.recyclerview_colleage_jobs)
-//        layoutColleagueJobManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false)
-//        rvColleagueJobs.layoutManager = layoutColleagueJobManager
-//        rvColleagueJobs.setHasFixedSize(true)
-//
-//        colleagueJobList.add(HCJob("", "UX Designer", "London"))
-//        colleagueJobList.add(HCJob("", "Tech Lead", "London"))
-//        colleagueJobList.add(HCJob("", "Social Media Manager", "NewYork, NY"))
-//        colleagueJobList.add(HCJob("", "Creative Director2", ""))
-//
-//        colleagueJobAdapter = HCColleaguesJobAdapter(colleagueJobList, activity!!.applicationContext)
-//        rvColleagueJobs.adapter = colleagueJobAdapter
+            rvColleagueJobs.adapter = colleagueJobAdapter
+        })
 
         return root
     }
