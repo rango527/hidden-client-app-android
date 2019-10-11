@@ -14,6 +14,7 @@ import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HCHomeActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -24,7 +25,6 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         // Add OnClickListener
-
         var imgBack: ImageButton = root.findViewById(R.id.button_back_to_dashboard);
         imgBack.setOnClickListener(this)
 
