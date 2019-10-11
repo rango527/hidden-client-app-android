@@ -1,19 +1,15 @@
 package com.hidden.client.ui.activities
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.animation.SlideAnimation
+import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
 import java.lang.Math.round
@@ -71,7 +67,7 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
                 layoutTitle.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
+                var animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
                 animation.setInterpolator (AccelerateInterpolator())
                 animation.duration = 50
 
@@ -108,7 +104,7 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
                 var density: Float = applicationContext.resources.displayMetrics.density
 
-                var animation: Animation = SlideAnimation(layoutTitle, layoutTitle.height, round(40 * density))
+                var animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
                 animation.setInterpolator (AccelerateInterpolator())
                 animation.duration = 100
 

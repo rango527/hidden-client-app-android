@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import com.hidden.client.R
+import com.hidden.client.ui.HCBaseActivity
 
-class HCCompanyDetailActivity : AppCompatActivity(), View.OnClickListener {
+class HCCompanyDetailActivity : HCBaseActivity(), View.OnClickListener {
 
     private lateinit var imgClose:ImageView
 

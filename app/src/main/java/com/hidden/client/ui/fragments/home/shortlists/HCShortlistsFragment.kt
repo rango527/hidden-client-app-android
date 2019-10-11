@@ -124,7 +124,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
                 layoutFilterContainer.animate()
                     .alpha(1f)
-                    .setDuration(150)
+                    .setDuration(200)
                     .setListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator) {
                             layoutFilterContainer.visibility = View.GONE

@@ -1,6 +1,5 @@
 package com.hidden.client.models
 
-import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 

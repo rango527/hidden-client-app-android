@@ -7,7 +7,7 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import com.hidden.client.helpers.HCGlobal
 
-class SlideAnimation: Animation {
+class TransformAnimation: Animation {
 
     private var fromHeight: Int
     private var toHeight: Int

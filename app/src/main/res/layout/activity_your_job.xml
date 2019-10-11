@@ -104,9 +104,10 @@
 
     <ImageView
         android:id="@+id/img_show_job_detail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/arrow_down"
+        android:padding="@dimen/menu_padding_vertical_default"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

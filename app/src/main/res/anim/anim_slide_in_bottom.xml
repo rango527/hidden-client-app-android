@@ -7,5 +7,5 @@
         android:toYDelta="0%"
         android:fromXDelta="0%"
         android:toXDelta="0%"
-        android:duration="150"/>
+        android:duration="@integer/slide_vertical_animation_duration"/>
 </set>
