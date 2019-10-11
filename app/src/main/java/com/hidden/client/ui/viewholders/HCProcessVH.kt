@@ -1,20 +1,13 @@
 package com.hidden.client.ui.viewholders
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.hidden.client.R
+import com.hidden.client.databinding.HCProcessBinding
+import com.hidden.client.ui.viewmodels.HCProcessViewModel
 
-class HCProcessVH : RecyclerView.ViewHolder {
+class HCProcessVH(private val processBinding: HCProcessBinding) : RecyclerView.ViewHolder(processBinding.root) {
 
-    var imgPhoto: ImageView
-    var textName: TextView
-    var textFor: TextView
-
-    constructor(rv: View) : super(rv) {
-        imgPhoto = rv.findViewById(R.id.img_photo) as ImageView
-        textName = rv.findViewById(R.id.text_name)
-        textFor = rv.findViewById(R.id.text_for)
+    fun bind (processViewModel: HCProcessViewModel) {
+        this.processBinding.processModel = processViewModel
+        processBinding.executePendingBindings()
     }
 }

@@ -1,5 +1,9 @@
 package com.hidden.client.models
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import de.hdodenhof.circleimageview.CircleImageView
+
 class HCProcess {
 
     private var candidatePhoto: Int = 0
@@ -27,6 +31,13 @@ class HCProcess {
         this.setProcessStatus(processStatus)
     }
 
+    companion object {
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun setImageViewResource(imageView: CircleImageView, resource: Int) {
+            imageView.setImageResource(resource)
+        }
+    }
 
     fun getCandidatePhoto(): Int {
         return candidatePhoto

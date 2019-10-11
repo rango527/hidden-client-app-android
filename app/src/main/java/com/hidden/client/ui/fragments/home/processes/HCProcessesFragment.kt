@@ -17,12 +17,14 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCProcess
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.adapters.HCProcessAdapter
+import com.hidden.client.ui.adapters.HCYourJobAdapter
+import com.hidden.client.ui.viewmodels.HCProcessViewModel
+import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 
 class HCProcessesFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var processesViewModel: HCProcessesViewModel
-
     private lateinit var rvProcess: RecyclerView
+    private lateinit var processesViewModel: HCProcessViewModel
     private var processList: MutableList<HCProcess> = mutableListOf()
     private lateinit var processAdapter: HCProcessAdapter
 
@@ -33,31 +35,20 @@ class HCProcessesFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        processesViewModel =
-            ViewModelProviders.of(this).get(HCProcessesViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_home_processes, container, false)
 
-        //Your Jobs
+        // Process RecyclerView
         rvProcess = root.findViewById(R.id.recyclerview_processes)
-        rvProcess.layoutManager = LinearLayoutManager(activity!!.applicationContext)
+        processesViewModel = ViewModelProviders.of(this).get(HCProcessViewModel::class.java)
+        processesViewModel.getProcessList().observe(this, Observer {processViewModels->
+            processAdapter = HCProcessAdapter(activity!!.applicationContext, processViewModels)
 
-        processList.add(
-            HCProcess(R.drawable.man, "Tanya Walters",
-            "Account Director", "New York, NY", 0, 0)
-        )
-        processList.add(HCProcess(R.drawable.water, "Sofia Bell",
-            "Software Developer", "London", 0, 0))
-        processList.add(HCProcess(R.drawable.coca, "Andrea Robinson",
-            "CTO", "San Francisco", 0, 0))
-        processList.add(HCProcess(R.drawable.coca, "Guy Guy",
-            "Recuriter", "Tokyo", 0, 0))
-        processList.add(HCProcess(R.drawable.man, "Jim Rose",
-            "DevOps Engineer", "Hamburg", 0, 0))
-        processList.add(HCProcess(R.drawable.man, "Tanya Walters",
-            "Account Director", "New York, NY", 0, 0))
+            rvProcess.layoutManager = LinearLayoutManager(activity!!.applicationContext)
+            rvProcess.setHasFixedSize(true)
 
-        processAdapter = HCProcessAdapter(processList, activity!!.applicationContext)
-        rvProcess.adapter = processAdapter
+            rvProcess.adapter = processAdapter
+        })
 
         layoutBtnFilterSearch = root.findViewById(R.id.layout_filter_search);
         layoutBtnFilterSearch.setOnClickListener(this)

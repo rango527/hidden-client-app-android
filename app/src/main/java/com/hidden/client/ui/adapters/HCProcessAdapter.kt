@@ -5,45 +5,31 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
+import com.hidden.client.databinding.HCProcessBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJob
-import com.hidden.client.models.HCProcess
 import com.hidden.client.ui.activities.HCProcessActivity
-import com.hidden.client.ui.activities.HCYourJobActivity
 import com.hidden.client.ui.viewholders.HCProcessVH
-import com.hidden.client.ui.viewholders.HCYourJobVH
+import com.hidden.client.ui.viewmodels.HCProcessViewModel
 
-class HCProcessAdapter : RecyclerView.Adapter<HCProcessVH> {
-
-    var list: MutableList<HCProcess> = mutableListOf()
-
-    var context: Context
-
-    constructor(list: MutableList<HCProcess>, context: Context) {
-        this.list = list
-        this.context = context
-    }
+class HCProcessAdapter(
+    private val context:Context,
+    private val list: ArrayList<HCProcessViewModel>) : RecyclerView.Adapter<HCProcessVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCProcessVH {
-        var rv: View
-        var holder: HCProcessVH
-        rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_process, parent, false)
-        holder = HCProcessVH(rv)
 
-        return holder
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val processBinding: HCProcessBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_row_process, parent, false)
+
+        return HCProcessVH(processBinding)
     }
 
     override fun onBindViewHolder(holder: HCProcessVH, position: Int) {
-        var process: HCProcess
 
-        process = list.get(position)
-
-        holder.imgPhoto.setImageResource(process.getCandidatePhoto())
-        holder.textName.setText(process.getCandidateName())
-        holder.textFor.setText(String.format(context.resources.getString(R.string.job_and_location)
-            , process.getCandidateJob(), process.getCandidateLocation()))
+        val processModel = list[position]
+        holder.bind(processModel)
 
         holder.itemView.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, HCProcessActivity::class.java)

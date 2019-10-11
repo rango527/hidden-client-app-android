@@ -24,7 +24,7 @@
             android:id="@+id/img_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/man"
+            android:src="@{process_model.getProcess().candidatePhoto, default=@drawable/man}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -35,7 +35,7 @@
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/colorBlack_2"
-            android:text="Tanya Walters"
+            android:text="@{process_model.getProcess().candidateName}"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
@@ -47,7 +47,7 @@
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toBottomOf="@id/text_name"
             android:textColor="@color/colorBlack_2"
-            android:text="Tanya Walters"
+            android:text="@{@string/job_and_location(process_model.getProcess().candidateJob, process_model.getProcess().candidateLocation)}"
             android:layout_marginLeft="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
 
