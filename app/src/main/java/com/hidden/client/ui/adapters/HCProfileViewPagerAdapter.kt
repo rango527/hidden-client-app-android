@@ -48,10 +48,11 @@ class HCProfileViewPagerAdapter : PagerAdapter{
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var view: View = inflater.inflate(R.layout.viewpager_profile_item, container, false)
 
-        var imgProfileLogo: ImageView = view.findViewById(R.id.img_profile_logo)
-        var textProfileTitle: TextView = view.findViewById(R.id.text_profile_title)
-        var textProfileLocations: TextView = view.findViewById(R.id.text_profile_location)
-        var textProfileFeedback: TextView = view.findViewById(R.id.text_profile_feedback)
+        // Not using for now
+//        var imgProfileLogo: ImageView = view.findViewById(R.id.img_profile_logo)
+//        var textProfileTitle: TextView = view.findViewById(R.id.text_profile_title)
+//        var textProfileLocations: TextView = view.findViewById(R.id.text_profile_location)
+//        var textProfileFeedback: TextView = view.findViewById(R.id.text_profile_feedback)
 
         var rvProfileProjects: RecyclerView = view.findViewById(R.id.recyclerview_profile_projects)
 

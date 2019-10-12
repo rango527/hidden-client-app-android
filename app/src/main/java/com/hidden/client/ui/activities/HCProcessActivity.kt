@@ -63,8 +63,6 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(android.R.color.transparent)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 
-                var density: Float = applicationContext.resources.displayMetrics.density
-
                 layoutTitle.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
                 var animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
