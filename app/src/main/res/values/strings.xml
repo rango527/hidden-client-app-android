@@ -51,6 +51,12 @@
     <string name="logout">Logout</string>
     <string name="candidates">Candidates</string>
     <string name="search">Search</string>
+    <string name="your_details">Your Details</string>
+    <string name="change_photo">Change Photo</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="title">Title</string>
+    <string name="save">Save</string>
 
     <string name="dashboard">DASHBOARD</string>
     <string name="upcoming_interview">%1$s\'s upcoming interviews</string>

@@ -1,9 +1,14 @@
 package com.hidden.client.models
 
+import androidx.databinding.BindingAdapter
+import com.rishabhharit.roundedimageview.RoundedImageView
+import de.hdodenhof.circleimageview.CircleImageView
+
 class HCCandidate {
 
     private var candidatePhoto: Int = 0
 
+    private lateinit var candidateName: String
     private lateinit var candidateTitle: String
     private var candidateJobTitle: Array<String> = arrayOf()
 
@@ -18,8 +23,14 @@ class HCCandidate {
 
     }
 
+    constructor(candidatePhoto: Int, candidateName: String) {
+        this.setCandidatePhoto(candidatePhoto)
+        this.setCandidateName(candidateName)
+    }
+
     constructor(
         candidatePhoto: Int,
+        candidateName: String,
         candidateTitle: String,
         candidateJobTitle: Array<String>,
         candidateSnapshot: String,
@@ -28,6 +39,7 @@ class HCCandidate {
         candidateWorkExperience: Array<HCWorkExperience>
     ) {
         setCandidatePhoto(candidatePhoto)
+        setCandidateName(candidateName)
         setCandidateTitle(candidateTitle)
         setCandidateJobTitle(candidateJobTitle)
         setCandidateSnapshot(candidateSnapshot)
@@ -36,6 +48,13 @@ class HCCandidate {
         setCandidateWorkExperience(candidateWorkExperience)
     }
 
+    companion object {
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun setImageViewResource(imageView: RoundedImageView, resource: Int) {
+            imageView.setImageResource(resource)
+        }
+    }
 
     fun getCandidatePhoto(): Int {
         return candidatePhoto
@@ -43,6 +62,14 @@ class HCCandidate {
 
     fun setCandidatePhoto(candidatePhoto: Int) {
         this.candidatePhoto = candidatePhoto
+    }
+
+    fun getCandidateName(): String {
+        return candidateName
+    }
+
+    fun setCandidateName(candidateName: String) {
+        this.candidateName = candidateName
     }
 
     fun getCandidateTitle(): String {

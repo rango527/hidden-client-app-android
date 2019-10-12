@@ -14,7 +14,6 @@ import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HCHomeActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -64,7 +63,7 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
             }
             R.id.layout_candidate_directory -> {
-                val intent = Intent(context, HCCandiatesActivity::class.java)
+                val intent = Intent(context, HCCandidateActivity::class.java)
                 startActivity(intent)
                 (activity as HCHomeActivity).overridePendingVTransitionEnter()
             }

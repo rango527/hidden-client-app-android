@@ -1,9 +1,19 @@
 package com.hidden.client.ui
 
+import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.hidden.client.R
+import com.hidden.client.helpers.HCGlobal
 
 open class HCBaseActivity: AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        HCGlobal.getInstance(this).g_currentActivity = this
+    }
 
     override fun finish() {
         super.finish()
@@ -15,6 +25,10 @@ open class HCBaseActivity: AppCompatActivity() {
         overridePendingVTransitionExit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        HCGlobal.getInstance(this).g_currentActivity = this
+    }
     /**
      * Ovverides the pending Activity transition by performing the "Enter" animation. Vertical
      */
@@ -41,5 +55,12 @@ open class HCBaseActivity: AppCompatActivity() {
      */
     public fun overridePendingHTransitionExit() {
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right)
+    }
+
+    fun initCloseButton() {
+        var imgClose: ImageView = findViewById(R.id.image_close);
+        imgClose.setOnClickListener(View.OnClickListener {
+            finish()
+        })
     }
 }

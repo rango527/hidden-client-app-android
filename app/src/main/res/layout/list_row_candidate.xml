@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="HCCandidateBinding">
+        <import type="android.view.View" />
+        <variable
+            name="candidate_model"
+            type="com.hidden.client.ui.viewmodels.HCCandidateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/menu_padding_vertical_default"
+        android:background="@drawable/layout_bottom_border_only">
+
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/img_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            android:src="@{candidate_model.getCandidate().candidatePhoto, default=@drawable/man}"
+            app:cornerRadius="12dp"
+            app:roundedCorners="topLeft|topRight|bottomLeft|bottomRight"/>
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/img_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorBlack_2"
+            android:text="@{candidate_model.getCandidate().candidateName}"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

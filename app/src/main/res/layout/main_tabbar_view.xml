@@ -15,15 +15,15 @@
         android:layout_weight="1"
         android:tag="tab0">
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:src="@drawable/menu_dashboard_empty"
             android:tag="tabIv0"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorGray_3"
-            android:layout_marginTop="3dp"
+            android:textSize="@dimen/font_size_tiny"
             android:text="@string/dashboard"
             android:textAllCaps="true"
             android:tag="tabTv0"/>
@@ -34,21 +34,22 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="@dimen/menu_padding_vertical_default"
+        android:paddingTop="15dp"
         android:layout_weight="1"
         android:tag="tab1">
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="32dp"
             android:layout_height="30dp"
             android:src="@drawable/menu_shortlists_empty"
             android:tag="tabIv1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:textColor="@color/colorGray_3"
             android:text="@string/shortlists"
             android:textAllCaps="true"
+            android:layout_marginTop="3dp"
+            android:textSize="@dimen/font_size_tiny"
             android:tag="tabTv1"/>
     </LinearLayout>
 
@@ -57,11 +58,11 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="@dimen/menu_padding_vertical_default"
+        android:paddingTop="15dp"
         android:layout_weight="1"
         android:tag="tab2">
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="32dp"
             android:layout_height="30dp"
             android:src="@drawable/menu_processes_empty"
             android:tag="tabIv2"/>
@@ -70,8 +71,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textColor="@color/colorGray_3"
-            android:text="@string/shortlists"
+            android:text="@string/processes"
             android:textAllCaps="true"
+            android:textSize="@dimen/font_size_tiny"
             android:tag="tabTv2"/>
     </LinearLayout>
 

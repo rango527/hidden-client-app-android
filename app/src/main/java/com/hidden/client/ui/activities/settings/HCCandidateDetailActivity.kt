@@ -5,12 +5,10 @@ import android.os.Bundle
 import com.hidden.client.R
 import com.hidden.client.ui.HCBaseActivity
 
-class HCMyProfileActivity : HCBaseActivity() {
+class HCCandidateDetailActivity : HCBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_profile)
-
-        initCloseButton()
+        setContentView(R.layout.activity_candidate_detail)
     }
 }

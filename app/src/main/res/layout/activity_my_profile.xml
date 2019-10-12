@@ -4,6 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite_1"
     tools:context=".ui.activities.settings.HCMyProfileActivity">
 
+    <ImageView
+        android:id="@+id/image_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_close"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/padding_default"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingLeft="@dimen/padding_default"
+        android:paddingRight="@dimen/padding_default"
+        android:paddingBottom="@dimen/padding_default"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/text_your_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_details"
+            android:layout_marginTop="@dimen/logo_margin_top"
+            android:textColor="@color/colorBlack_2"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/test"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_default"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round_black_12"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorWhite_1"
+            android:text="@string/change_photo"
+            android:layout_marginTop="@dimen/margin_default"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/layout_bottom_border_only"
+            android:layout_marginTop="@dimen/margin_default"
+            android:paddingTop="@dimen/menu_padding_vertical_default"
+            android:paddingBottom="@dimen/menu_padding_vertical_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textSize="@dimen/textview_bold"
+                android:textColor="@color/colorBlack_1"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="@dimen/textview_bold"
+                android:gravity="end"
+                android:text="Akio Den"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/layout_bottom_border_only"
+            android:layout_marginTop="@dimen/margin_default"
+            android:paddingTop="@dimen/menu_padding_vertical_default"
+            android:paddingBottom="@dimen/menu_padding_vertical_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_bold"
+                android:textColor="@color/colorBlack_1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="@dimen/textview_bold"
+                android:gravity="end"
+                android:text="akeno.den@protonmail.com"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/layout_bottom_border_only"
+            android:layout_marginTop="@dimen/margin_default"
+            android:paddingTop="@dimen/menu_padding_vertical_default"
+            android:paddingBottom="@dimen/menu_padding_vertical_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_bold"
+                android:textColor="@color/colorBlack_1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="@dimen/textview_bold"
+                android:gravity="end"
+                android:text="Developer"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:background="@color/colorGreen_1"
+        android:textColor="@color/colorWhite_1"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
