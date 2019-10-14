@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.hidden.client.R
+import kotlinx.android.synthetic.main.activity_login.*
 
 class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -26,7 +27,6 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-
         val id = v!!.id
 
         when(id){
@@ -41,9 +41,11 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.button_signin -> {
-                val intent = Intent(applicationContext, HCHomeActivity::class.java)
-                startActivity(intent)
-                finish()
+//                val email = edit_email.text.toString()
+
+//                val intent = Intent(applicationContext, HCHomeActivity::class.java)
+//                startActivity(intent)
+//                finish()
             }
         }
     }
