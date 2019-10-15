@@ -10,7 +10,7 @@ package com.hidden.client.datamodels
 }
 */
 
-data class HCClient(
+data class HCClientResponse(
     val id: Int,
     val is_admin: Boolean,
     val full_name: String,

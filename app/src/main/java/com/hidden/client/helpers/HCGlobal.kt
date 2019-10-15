@@ -3,20 +3,11 @@ package com.hidden.client.helpers
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.hidden.client.models.HCClient
 
 class HCGlobal private constructor(context: Context) {
 
-    private val IS_DEBUG = true
-    private val LOG_TAG: String = "HiddenClient"
-
-    public lateinit var g_currentActivity: Activity;
-
-    init {
-
-    }
-
-    val g_name: String = "Akio"
-
+    init { }
     companion object : HCSingletonHolder<HCGlobal, Context>(::HCGlobal)
 
     fun HCLog(message: String) {
@@ -24,6 +15,15 @@ class HCGlobal private constructor(context: Context) {
             Log.d(this.LOG_TAG, message)
     }
 
+    // Global Constants
+    private val IS_DEBUG = true
+    private val LOG_TAG: String = "HiddenClient"
+
     val IMAGE_TYPE_CIRCLE: Int = 0
     val IMAGE_TYPE_ROUNDED_RECTANGLE: Int = 1
+
+
+    // Global variable
+    lateinit var g_currentActivity: Activity;           // current activity instance
+    var g_client: HCClient = HCClient()                 // user info after login
 }

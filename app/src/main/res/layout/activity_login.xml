@@ -38,7 +38,8 @@
             android:inputType="textEmailAddress"
             android:padding="@dimen/text_padding"
             android:textColor="@color/colorWhite_1"
-            android:textColorHint="@color/colorWhite_1" />
+            android:textColorHint="@color/colorWhite_1"
+            android:text="test1@test.com"/>
 
         <EditText
             android:id="@+id/edit_password"
@@ -51,7 +52,8 @@
             android:inputType="textPassword"
             android:padding="@dimen/text_padding"
             android:textColor="@color/colorWhite_1"
-            android:textColorHint="@color/colorWhite_1" />
+            android:textColorHint="@color/colorWhite_1"
+            android:text="test"/>
 
         <Button
             android:id="@+id/button_signin"

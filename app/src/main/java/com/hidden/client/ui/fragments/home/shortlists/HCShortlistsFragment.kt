@@ -53,7 +53,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_home_shortlists, container, false)
 
         textHello = root.findViewById(R.id.text_hello)
-        textHello.setText(resources.getString(R.string.hello_user, HCGlobal.getInstance(activity!!.applicationContext).g_name))
+        textHello.setText(resources.getString(R.string.hello_user, HCGlobal.getInstance(activity!!.applicationContext).g_client.getFullName()))
 
         // Layout Filter
         layoutFilterContainer = root.findViewById(R.id.layout_filter_container)
