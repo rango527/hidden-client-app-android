@@ -60,6 +60,7 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="once_more">Once More</string>
+    <string name="privacy_statement">Privacy Statement</string>
 
     <string name="dashboard">DASHBOARD</string>
     <string name="upcoming_interview">%1$s\'s upcoming interviews</string>

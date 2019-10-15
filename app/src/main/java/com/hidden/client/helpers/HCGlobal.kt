@@ -26,4 +26,5 @@ class HCGlobal private constructor(context: Context) {
     // Global variable
     lateinit var g_currentActivity: Activity;           // current activity instance
     var g_client: HCClient = HCClient()                 // user info after login
+
 }

@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCClientResponse
+import com.hidden.client.enums.Consent
 import com.hidden.client.helpers.HCGlobal
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_login.*
@@ -34,6 +35,8 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
         textForgotPassword.setOnClickListener(this);
         labelNotMember.setOnClickListener(this);
         buttonSignIn.setOnClickListener(this);
+
+        HCGlobal.getInstance(this).HCLog(Consent.privacy.toString())
     }
 
     override fun onClick(v: View?) {
