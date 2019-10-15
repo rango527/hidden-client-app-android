@@ -11,12 +11,15 @@ import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCClientResponse
 import com.hidden.client.helpers.HCGlobal
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
+
+    private lateinit var progressDlg: KProgressHUD;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,16 +54,26 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                 val email = edit_email.text.toString().trim()
                 val password = edit_password.text.toString().trim()
 
+                progressDlg = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setCancellable(false)
+                    .setAnimationSpeed(2)
+                    .setDimAmount(0.5f)
+                progressDlg.show()
+
                 RetrofitClient.instance.clientLogin(email, password)
                     .enqueue(object: Callback<HCClientResponse> {
                         override fun onFailure(call: Call<HCClientResponse>, t: Throwable) {
-                            Toast.makeText(applicationContext, "dfjslfhkjsdf", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
                         }
 
                         override fun onResponse(
                             call: Call<HCClientResponse>,
                             response: Response<HCClientResponse>
                         ) {
+
+                            progressDlg.dismiss()
+
                             if (response.isSuccessful) {
                                 Toast.makeText(applicationContext, response.body()?.full_name, Toast.LENGTH_LONG).show()
 

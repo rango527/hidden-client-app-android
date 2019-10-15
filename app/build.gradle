@@ -77,6 +77,8 @@ dependencies {
     // Networking
     implementation 'com.amitshekhar.android:android-networking:1.0.0'
 
+    // Progress Dialog
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 
 
 }
