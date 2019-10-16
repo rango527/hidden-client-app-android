@@ -38,7 +38,11 @@ class HCCandidateAdapter(
         holder.bind(candidateModel)
 
         holder.itemView.setOnClickListener(View.OnClickListener {
+
+            var candidate = candidateModel.getCandidate()
+
             val intent = Intent(context, HCCandidateDetailActivity::class.java)
+            intent.putExtra("category_id", candidate.getCandiateId().toString())
             HCGlobal.getInstance(context).g_currentActivity.startActivity(intent)
             (HCGlobal.getInstance(context).g_currentActivity as HCCandidateActivity).overridePendingVTransitionEnter()
         })

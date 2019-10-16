@@ -1,5 +1,6 @@
 package com.hidden.client.apis
 
+import com.hidden.client.datamodels.HCCandidateDetailResponse
 import com.hidden.client.datamodels.HCCandidateResponse
 import com.hidden.client.datamodels.HCClientResponse
 import com.hidden.client.datamodels.HCConsentResponse
@@ -37,4 +38,10 @@ interface Api {
         @Header("Authorization") authToken: String,
         @Query("search") search: String
     ):Call<List<HCCandidateResponse>>
+
+    @GET("client/candidates/{candidate_id}")
+    fun getCandidateDetail(
+        @Header("Authorization") authToken: String,
+        @Path("candidate_id") candidateId: String
+    ):Call<HCCandidateDetailResponse>
 }
