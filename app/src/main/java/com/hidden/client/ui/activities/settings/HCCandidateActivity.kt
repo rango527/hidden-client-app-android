@@ -2,6 +2,8 @@ package com.hidden.client.ui.activities.settings
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -20,6 +22,7 @@ import com.hidden.client.models.HCCandidate
 import com.hidden.client.ui.HCBaseActivity
 import com.hidden.client.ui.adapters.HCCandidateAdapter
 import com.hidden.client.ui.viewmodels.HCCandidateViewModel
+import kotlinx.android.synthetic.main.fragment_process_message.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +40,8 @@ class HCCandidateActivity : HCBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_candidate)
 
+        initCloseButton()
+
         // Your Jobs RecyclerView
         rvCandidate = findViewById(R.id.recyclerview_candidates)
         candidateViewModel = ViewModelProviders.of(this).get(HCCandidateViewModel::class.java)
@@ -48,9 +53,20 @@ class HCCandidateActivity : HCBaseActivity() {
             rvCandidate.adapter = candidateAdapter
         })
 
-        initCloseButton()
-
         editSearch = findViewById(R.id.edit_search)
+        editSearch.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                getCandidateList()
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+
 
         getCandidateList()
     }
@@ -79,7 +95,7 @@ class HCCandidateActivity : HCBaseActivity() {
                         var candidateList: ArrayList<HCCandidate> = arrayListOf()
 
                         for (candidateResponse in candidateResponseList) run {
-                            var candidate: HCCandidate = HCCandidate()
+                            var candidate = HCCandidate()
 
                             candidate.setCandidateId(candidateResponse.candidate__candidate_id)
 

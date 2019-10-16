@@ -61,7 +61,6 @@ class HCCandidate {
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
-//            imageView.setImageResource(resource)
             Glide.with(activity).load(photoUrl).into(imageView)
         }
     }
