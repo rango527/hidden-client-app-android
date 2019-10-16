@@ -1,5 +1,6 @@
 package com.hidden.client.apis
 
+import com.hidden.client.datamodels.HCCandidateResponse
 import com.hidden.client.datamodels.HCClientResponse
 import com.hidden.client.datamodels.HCConsentResponse
 import retrofit2.Call
@@ -17,12 +18,23 @@ interface Api {
 
     /**
      * Get Consent Content
-     * user-type        : client|candidate
-     * consent-type     : privacy|terms
+     * URL              :   client/consent/{user-type}/{consent-type}
+     * user-type        :   client|candidate
+     * consent-type     :   privacy|terms
      */
     @GET("/content/consent/{user-type}/{consent-type}")
     fun getConsent(
         @Path("user-type") userType: String,
         @Path("consent-type") consentType: String
     ):Call<HCConsentResponse>
+
+    /**
+     * Get Candidates List
+     * URL              :   client/crud/candidate/data?search=
+     */
+    @GET("client/crud/candidate/data")
+    fun getCandidateList(
+        @Header("Authorization") authToken: String,
+        @Query("search") search: String
+    ):Call<List<HCCandidateResponse>>
 }

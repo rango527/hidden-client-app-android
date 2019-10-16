@@ -7,8 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private val AUTH = "Basic " + Base64.encodeToString("akeno:123456".toByteArray(), Base64.NO_WRAP)
-
     private const val BASE_URL = "https://staging-api.hidden.io"
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -16,7 +14,6 @@ object RetrofitClient {
             val original =  chain.request()
 
             val requestBuilder = original.newBuilder()
-                .addHeader("Authorization", AUTH)
                 .method(original.method(), original.body())
 
             val request = requestBuilder.build()

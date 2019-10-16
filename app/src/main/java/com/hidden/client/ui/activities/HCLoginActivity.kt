@@ -36,7 +36,6 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
         labelNotMember.setOnClickListener(this);
         buttonSignIn.setOnClickListener(this);
 
-        HCGlobal.getInstance(this).HCLog(Consent.privacy.toString())
     }
 
     override fun onClick(v: View?) {
@@ -78,7 +77,6 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                             progressDlg.dismiss()
 
                             if (response.isSuccessful) {
-                                Toast.makeText(applicationContext, response.body()?.full_name, Toast.LENGTH_LONG).show()
 
                                 HCGlobal.getInstance(this@HCLoginActivity).g_client.setId(response.body()!!.id)
                                 HCGlobal.getInstance(this@HCLoginActivity).g_client.setFullName(response.body()!!.full_name)

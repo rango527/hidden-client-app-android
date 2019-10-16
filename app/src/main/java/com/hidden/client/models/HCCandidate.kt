@@ -1,14 +1,20 @@
 package com.hidden.client.models
 
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.rishabhharit.roundedimageview.RoundedImageView
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HCCandidate {
 
-    private var candidatePhoto: Int = 0
+    private var candidateId: Int = 0
 
-    private lateinit var candidateName: String
+    private var candidatePhoto: Int = 0
+    private lateinit var candidatePhotoUrl:  String
+
+    private lateinit var candidateFirstName: String
+    private lateinit var candidateSurName: String
+
     private lateinit var candidateTitle: String
     private var candidateJobTitle: Array<String> = arrayOf()
 
@@ -19,18 +25,14 @@ class HCCandidate {
 
     private var candidateWorkExperience: Array<HCWorkExperience> = arrayOf()
 
-    constructor() {
-
-    }
-
-    constructor(candidatePhoto: Int, candidateName: String) {
-        this.setCandidatePhoto(candidatePhoto)
-        this.setCandidateName(candidateName)
-    }
+    constructor() { }
 
     constructor(
+        candidateId: Int,
         candidatePhoto: Int,
-        candidateName: String,
+        candidatePhotoUrl: String,
+        candidateFirstName: String,
+        candidateSurName: String,
         candidateTitle: String,
         candidateJobTitle: Array<String>,
         candidateSnapshot: String,
@@ -38,8 +40,11 @@ class HCCandidate {
         candidateSkill: Array<HCSkill>,
         candidateWorkExperience: Array<HCWorkExperience>
     ) {
+        setCandidateId(candidateId)
         setCandidatePhoto(candidatePhoto)
-        setCandidateName(candidateName)
+        setCandidatePhotoUrl(candidatePhotoUrl)
+        setCandidateFirstName(candidateFirstName)
+        setCandidateSurName(candidateSurName)
         setCandidateTitle(candidateTitle)
         setCandidateJobTitle(candidateJobTitle)
         setCandidateSnapshot(candidateSnapshot)
@@ -53,7 +58,24 @@ class HCCandidate {
         @JvmStatic
         fun setImageViewResource(imageView: RoundedImageView, resource: Int) {
             imageView.setImageResource(resource)
+//            Glide.with(this).load("https://s3.amazonaws.com/appsdeveloperblog/Micky.jpg").into(imageView)
         }
+    }
+
+    fun getCandiateId(): Int {
+        return candidateId
+    }
+
+    fun setCandidateId(candidateId: Int) {
+        this.candidateId = candidateId
+    }
+
+    fun getCandidatePhotoUrl(): String {
+        return candidatePhotoUrl
+    }
+
+    fun setCandidatePhotoUrl(candidatePhotoUrl: String) {
+        this.candidatePhotoUrl = candidatePhotoUrl
     }
 
     fun getCandidatePhoto(): Int {
@@ -64,12 +86,24 @@ class HCCandidate {
         this.candidatePhoto = candidatePhoto
     }
 
-    fun getCandidateName(): String {
-        return candidateName
+    fun getCandidateFirstName(): String {
+        return candidateFirstName
     }
 
-    fun setCandidateName(candidateName: String) {
-        this.candidateName = candidateName
+    fun setCandidateFirstName(candidateFirstName: String) {
+        this.candidateFirstName = candidateFirstName
+    }
+
+    fun getCandidateSurName(): String {
+        return candidateSurName
+    }
+
+    fun setCandidateSurName(candidateSurName: String) {
+        this.candidateSurName = candidateSurName
+    }
+
+    fun getCandidateFullName(): String {
+        return "$candidateFirstName $candidateSurName"
     }
 
     fun getCandidateTitle(): String {

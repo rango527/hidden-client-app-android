@@ -58,6 +58,10 @@ class HCClient {
         return token
     }
 
+    fun getBearerToken(): String {
+        return "Bearer " + token
+    }
+
     fun setToken(token: String) {
         this.token = token
     }

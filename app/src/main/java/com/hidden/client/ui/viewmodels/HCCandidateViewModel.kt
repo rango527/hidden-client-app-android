@@ -25,21 +25,17 @@ class HCCandidateViewModel: ViewModel {
 
     fun getCandidateList(): MutableLiveData<ArrayList<HCCandidateViewModel>> {
 
-        val job1 = HCJob("", "Director", "NewYork, NY")
-        val job2 = HCJob("", "Vice President", "Chicago")
-
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.test, "Tanya Walters")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.coca, "Sofia Bell")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.water, "Beatrice Carroll")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.man, "Holly Hawkins")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.test, "Minnie Daniels")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.coca, "Jason Austin")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.man, "Kirsty Crean")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.coca, "Jason Austin")))
-        candidateList.add(HCCandidateViewModel(HCCandidate(R.drawable.coca, "Jason Austin")))
-
-        candidateListMutableLiveData.value = candidateList
-
         return candidateListMutableLiveData
+    }
+
+    fun setCandidateList(candidateList: List<HCCandidate>) {
+
+        this.candidateList.clear()
+
+        for (candidate in candidateList) {
+            this.candidateList.add(HCCandidateViewModel(candidate))
+        }
+
+        candidateListMutableLiveData.value = this.candidateList
     }
 }
