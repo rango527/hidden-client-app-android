@@ -24,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="fitXY"
-            android:src="@{candidate_model.getCandidate().candidatePhoto, default=@drawable/man}"
+            android:src="@{candidate_model.getCandidate().candidatePhotoUrl, default=@drawable/man}"
             app:cornerRadius="12dp"
             app:roundedCorners="topLeft|topRight|bottomLeft|bottomRight"/>
 

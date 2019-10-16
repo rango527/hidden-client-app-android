@@ -71,6 +71,9 @@ class HCCandidateActivity : HCBaseActivity() {
                 ) {
 
                     if (response.isSuccessful) {
+
+                        HCCandidate.activity = this@HCCandidateActivity
+
                         val candidateResponseList: List<HCCandidateResponse> = response.body()!!
 
                         var candidateList: ArrayList<HCCandidate> = arrayListOf()
