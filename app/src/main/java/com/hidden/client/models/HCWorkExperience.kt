@@ -2,8 +2,11 @@ package com.hidden.client.models
 
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.hidden.client.R
+import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.*
 
 class HCWorkExperience {
 
@@ -47,7 +50,26 @@ class HCWorkExperience {
     }
 
     fun getWorkingPeriod(): String {
-        return "$experienceFrom - $experienceTo"
+
+
+        if (experienceFrom === null)
+            return ""
+
+        var strDate: String = ""
+
+        val fromDate = HCDate.stringToDate(experienceFrom!!, null)
+
+        strDate = HCDate.dateToString(fromDate!!, "d MMMM yyyy").toString()
+
+        if (experienceTo === null ) {
+
+            return strDate + " - " + HCGlobal.getInstance().currentActivity.resources.getString(R.string.present)
+
+        }
+
+        val toDate = HCDate.stringToDate(experienceTo!!, null)
+
+        return strDate + " - " + HCDate.dateToString(toDate!!, "d MMMM yyyy").toString()
     }
 
     fun getExperienceId() : Int? {
