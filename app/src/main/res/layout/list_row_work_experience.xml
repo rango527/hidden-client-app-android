@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="HCWorkExperienceBinding">
+        <import type="android.view.View" />
+        <variable
+            name="work_experience_model"
+            type="com.hidden.client.ui.viewmodels.HCWorkExperienceViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/menu_padding_vertical_default"
+        android:background="@drawable/button_round_white"
+        android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+        android:layout_marginRight="@dimen/menu_padding_vertical_default"
+        android:layout_marginBottom="@dimen/menu_padding_vertical_default">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@{work_experience_model.getWorkExperience().brandLogoUrl, default=@drawable/man}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/img_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorBlack_2"
+            android:text="@{work_experience_model.getWorkExperience().brandName}"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/img_photo"
+            app:layout_constraintTop_toBottomOf="@id/text_brand"
+            android:textColor="@color/colorBlack_2"
+            android:text="@{work_experience_model.getWorkExperience().experienceJobTitle}"
+            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+        <TextView
+            android:id="@+id/text_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/img_photo"
+            app:layout_constraintTop_toBottomOf="@id/text_title"
+            android:textColor="@color/colorBlack_2"
+            android:text="@{work_experience_model.getWorkExperience().getWorkingPeriod()}"
+            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/list_row_margin_default"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

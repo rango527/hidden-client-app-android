@@ -43,6 +43,7 @@
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
             <TextView
+                android:id="@+id/text_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"
@@ -63,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"
                 android:textColor="@color/colorBlack_2"
                 android:text="@string/snapshot"/>
 
@@ -82,6 +84,44 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:textColor="@color/colorBlack_2"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skills"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColor="@color/colorBlack_2"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_skills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                app:flexWrap="wrap"
+                app:alignItems="stretch"
+                app:alignContent="stretch" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/work_experience"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColor="@color/colorBlack_2"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_work_experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -94,6 +134,5 @@
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/man"
         android:layout_marginTop="@dimen/margin_default"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

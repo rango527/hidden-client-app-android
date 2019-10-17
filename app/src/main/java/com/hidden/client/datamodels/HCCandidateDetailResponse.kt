@@ -42,7 +42,7 @@ data class HCCandidateDetailResponse (
     val candidate__salary_current: Float,
     val candidate__salary_desired: Float,
     val candidate_city__name: String,
-    val candidate__brands: List<HCCandidateResponse>,
+    val candidate__brands: List<HCCandidateBrandResponse>,
     val candidate__work_experiences: List<HCCandidateWorkExperience>,
     val candidate__skills: List<HCCandidateSkillResponse>,
     val candidate__projects: List<HCCandidateProjectResponse>
