@@ -75,7 +75,7 @@ class HCCandidateActivity : HCBaseActivity() {
 
         val search = editSearch.text.toString()
 
-        RetrofitClient.instance.getCandidateList(HCGlobal.getInstance(this).g_client.getBearerToken(), search)
+        RetrofitClient.instance.getCandidateList(HCGlobal.getInstance().myInfo.getBearerToken(), search)
             .enqueue(object: Callback<List<HCCandidateResponse>> {
                 override fun onFailure(call: Call<List<HCCandidateResponse>>, t: Throwable) {
                     Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
@@ -87,8 +87,6 @@ class HCCandidateActivity : HCBaseActivity() {
                 ) {
 
                     if (response.isSuccessful) {
-
-                        HCCandidate.activity = this@HCCandidateActivity
 
                         val candidateResponseList: List<HCCandidateResponse> = response.body()!!
 

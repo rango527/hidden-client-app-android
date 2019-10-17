@@ -33,7 +33,7 @@ class HCYourJobAdapter(
 
         holder.itemView.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, HCYourJobActivity::class.java)
-            HCGlobal.getInstance(context).g_currentActivity.startActivity(intent)
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
         })
     }
 

@@ -78,18 +78,18 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
 
                             if (response.isSuccessful) {
 
-                                HCGlobal.getInstance(this@HCLoginActivity).g_client.setId(response.body()!!.id)
-                                HCGlobal.getInstance(this@HCLoginActivity).g_client.setFullName(response.body()!!.full_name)
-                                HCGlobal.getInstance(this@HCLoginActivity).g_client.setIsAdmin(response.body()!!.is_admin)
-                                HCGlobal.getInstance(this@HCLoginActivity).g_client.setStatus(response.body()!!.status)
-                                HCGlobal.getInstance(this@HCLoginActivity).g_client.setToken(response.body()!!.token)
+                                HCGlobal.getInstance().myInfo.setId(response.body()!!.id)
+                                HCGlobal.getInstance().myInfo.setFullName(response.body()!!.full_name)
+                                HCGlobal.getInstance().myInfo.setIsAdmin(response.body()!!.is_admin)
+                                HCGlobal.getInstance().myInfo.setStatus(response.body()!!.status)
+                                HCGlobal.getInstance().myInfo.setToken(response.body()!!.token)
 
                                 val intent = Intent(applicationContext, HCHomeActivity::class.java)
                                 startActivity(intent)
                                 finish()
 
                             } else {
-                                HCGlobal.getInstance(this@HCLoginActivity).HCLog(response.errorBody()!!.string())
+                                HCGlobal.getInstance().log(response.errorBody()!!.string())
                                 Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
                             }
                         }

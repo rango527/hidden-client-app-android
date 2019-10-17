@@ -12,7 +12,7 @@ open class HCBaseActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        HCGlobal.getInstance(this).g_currentActivity = this
+        HCGlobal.getInstance().currentActivity = this
     }
 
     override fun finish() {
@@ -27,7 +27,7 @@ open class HCBaseActivity: AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        HCGlobal.getInstance(this).g_currentActivity = this
+        HCGlobal.getInstance().currentActivity = this
     }
     /**
      * Ovverides the pending Activity transition by performing the "Enter" animation. Vertical

@@ -1,0 +1,42 @@
+package com.hidden.client.ui.viewmodels
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.hidden.client.models.HCJob
+import com.hidden.client.DataBinderMapperImpl
+
+class HCBrandViewModel: ViewModel {
+
+    private lateinit var job: HCJob
+
+    constructor() : super()
+
+    constructor(job: HCJob) : super() {
+        this.job = job
+    }
+
+    fun getJob(): HCJob {
+        return this.job
+    }
+
+    var yourJobListMutableLiveData = MutableLiveData<ArrayList<HCBrandViewModel>>()
+    var yourJobList = ArrayList<HCBrandViewModel>()
+
+    fun getYourJobList(): MutableLiveData<ArrayList<HCBrandViewModel>> {
+
+        val job1 = HCJob("", "Director", "NewYork, NY")
+        val job2 = HCJob("", "Vice President", "Chicago")
+
+        val dashboardViewModel1: HCBrandViewModel =
+            HCBrandViewModel(job1)
+        val dashboardViewModel2: HCBrandViewModel =
+            HCBrandViewModel(job2)
+
+        yourJobList.add(dashboardViewModel1)
+        yourJobList.add(dashboardViewModel2)
+
+        yourJobListMutableLiveData.value = yourJobList
+
+        return yourJobListMutableLiveData
+    }
+}

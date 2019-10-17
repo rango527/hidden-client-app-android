@@ -39,7 +39,7 @@ class HCHomeActivity : HCBaseActivity(), HCTabBar.OnTabSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        HCGlobal.getInstance(this).g_currentActivity = this
+        HCGlobal.getInstance().currentActivity = this
 
         dashboardFrags.add(HCDashboardFragment())
         shortlistsFrags.add(HCShortlistsFragment())

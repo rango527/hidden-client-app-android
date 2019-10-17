@@ -43,8 +43,8 @@ class HCCandidateAdapter(
 
             val intent = Intent(context, HCCandidateDetailActivity::class.java)
             intent.putExtra("category_id", candidate.getCandiateId().toString())
-            HCGlobal.getInstance(context).g_currentActivity.startActivity(intent)
-            (HCGlobal.getInstance(context).g_currentActivity as HCCandidateActivity).overridePendingVTransitionEnter()
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
+            (HCGlobal.getInstance().currentActivity as HCCandidateActivity).overridePendingVTransitionEnter()
         })
     }
 

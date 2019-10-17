@@ -21,6 +21,7 @@ import com.hidden.client.ui.custom.SkillItemView
 import android.widget.LinearLayout.LayoutParams
 import androidx.core.view.marginLeft
 import com.google.android.flexbox.FlexboxLayout
+import com.hidden.client.helpers.HCConstants
 
 class HCProfileViewPagerAdapter : PagerAdapter{
 
@@ -66,7 +67,7 @@ class HCProfileViewPagerAdapter : PagerAdapter{
         rvProfileEmployeeHistories.layoutManager = layoutProfileEmployeeHistories
         rvProfileEmployeeHistories.setHasFixedSize(true)
         var profileEmployeeHistoriesAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getEmployeeHistory(),
-            HCGlobal.getInstance(context).IMAGE_TYPE_CIRCLE, context)
+            HCConstants.IMAGE_TYPE_CIRCLE, context)
         rvProfileEmployeeHistories.adapter = profileEmployeeHistoriesAdapter
 
         // Portfolio RecyclerView
@@ -75,7 +76,7 @@ class HCProfileViewPagerAdapter : PagerAdapter{
         rvProfilePortfolio.layoutManager = layoutProfilePortfolio
         rvProfilePortfolio.setHasFixedSize(true)
         var profilePortfolioAdapter: HCImageAdapter = HCImageAdapter(profileList[position].getProjects(),
-            HCGlobal.getInstance(context).IMAGE_TYPE_ROUNDED_RECTANGLE, context)
+            HCConstants.IMAGE_TYPE_ROUNDED_RECTANGLE, context)
         rvProfilePortfolio.adapter = profilePortfolioAdapter
 
         // Skill Layout  (default limit count)

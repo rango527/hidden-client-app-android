@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
+import com.hidden.client.helpers.HCConstants
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.viewholders.HCImageVH
 
@@ -25,7 +26,7 @@ class HCImageAdapter : RecyclerView.Adapter<HCImageVH> {
         var rv: View
         var holder: HCImageVH
 
-        if (imageType == HCGlobal.getInstance(context).IMAGE_TYPE_CIRCLE) {
+        if (imageType == HCConstants.IMAGE_TYPE_CIRCLE) {
             rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_circle_image, parent, false)
         } else {
             rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_rounded_image, parent, false)

@@ -3,6 +3,7 @@ package com.hidden.client.models
 import android.app.Activity
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.hidden.client.helpers.HCGlobal
 import com.rishabhharit.roundedimageview.RoundedImageView
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -56,12 +57,10 @@ class HCCandidate {
 
     companion object {
 
-        lateinit var activity: Activity
-
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
-            Glide.with(activity).load(photoUrl).into(imageView)
+            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
         }
     }
 

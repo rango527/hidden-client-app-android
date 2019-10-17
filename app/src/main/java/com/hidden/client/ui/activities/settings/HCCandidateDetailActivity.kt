@@ -30,7 +30,7 @@ class HCCandidateDetailActivity : HCBaseActivity() {
 
         imgPhoto = findViewById(R.id.image_photo)
 
-        RetrofitClient.instance.getCandidateDetail(HCGlobal.getInstance(this).g_client.getBearerToken(), categoryId)
+        RetrofitClient.instance.getCandidateDetail(HCGlobal.getInstance().myInfo.getBearerToken(), categoryId)
             .enqueue(object: Callback<HCCandidateDetailResponse> {
                 override fun onFailure(call: Call<HCCandidateDetailResponse>, t: Throwable) {
                     Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
