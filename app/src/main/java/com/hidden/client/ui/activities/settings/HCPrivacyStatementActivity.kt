@@ -1,22 +1,16 @@
 package com.hidden.client.ui.activities.settings
 
-import android.content.Context
-import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
-import com.hidden.client.datamodels.HCClientResponse
 import com.hidden.client.datamodels.HCConsentResponse
 import com.hidden.client.enums.Consent
 import com.hidden.client.enums.UserType
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.HCBaseActivity
-import com.hidden.client.ui.activities.HCHomeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

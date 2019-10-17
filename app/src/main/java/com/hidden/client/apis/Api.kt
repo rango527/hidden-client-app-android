@@ -2,7 +2,7 @@ package com.hidden.client.apis
 
 import com.hidden.client.datamodels.HCCandidateDetailResponse
 import com.hidden.client.datamodels.HCCandidateResponse
-import com.hidden.client.datamodels.HCClientResponse
+import com.hidden.client.datamodels.HCLoginResponse
 import com.hidden.client.datamodels.HCConsentResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -14,7 +14,7 @@ interface Api {
     fun clientLogin(
         @Field("email") email: String,
         @Field("password") password: String
-    ):Call<HCClientResponse>
+    ):Call<HCLoginResponse>
 
 
     /**

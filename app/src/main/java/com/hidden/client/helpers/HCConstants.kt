@@ -7,4 +7,5 @@ object HCConstants {
 
     const val IMAGE_TYPE_CIRCLE: Int = 0
     const val IMAGE_TYPE_ROUNDED_RECTANGLE: Int = 1
+
 }

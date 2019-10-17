@@ -9,8 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
-import com.hidden.client.datamodels.HCClientResponse
-import com.hidden.client.enums.Consent
+import com.hidden.client.datamodels.HCLoginResponse
 import com.hidden.client.helpers.HCGlobal
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_login.*
@@ -64,14 +63,14 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                 progressDlg.show()
 
                 RetrofitClient.instance.clientLogin(email, password)
-                    .enqueue(object: Callback<HCClientResponse> {
-                        override fun onFailure(call: Call<HCClientResponse>, t: Throwable) {
+                    .enqueue(object: Callback<HCLoginResponse> {
+                        override fun onFailure(call: Call<HCLoginResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
                         }
 
                         override fun onResponse(
-                            call: Call<HCClientResponse>,
-                            response: Response<HCClientResponse>
+                            call: Call<HCLoginResponse>,
+                            response: Response<HCLoginResponse>
                         ) {
 
                             progressDlg.dismiss()
