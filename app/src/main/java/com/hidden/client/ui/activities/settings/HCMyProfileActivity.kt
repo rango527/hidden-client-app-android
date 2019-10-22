@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCProfileResponse
@@ -41,7 +43,10 @@ class HCMyProfileActivity : HCBaseActivity(), View.OnClickListener {
         imgPhoto = findViewById(R.id.image_photo)
 
         btnChoosePhoto = findViewById(R.id.button_choose_photo)
+        btnChoosePhoto.setOnClickListener(this)
+
         btnSave = findViewById(R.id.button_save)
+        btnSave.setOnClickListener(this)
 
         RetrofitClient.instance.getProfile(HCGlobal.getInstance().myInfo.getBearerToken())
             .enqueue(object: Callback<HCProfileResponse> {
@@ -70,6 +75,22 @@ class HCMyProfileActivity : HCBaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        when(v!!.id) {
+            R.id.button_choose_photo -> {
+                val dialog = BottomSheetDialog(this)
+                val view = layoutInflater.inflate(R.layout.photo_picker_bottom_sheet, null)
 
+                val layoutClose = view.findViewById<LinearLayout>(R.id.layout_cancel)
+                layoutClose.setOnClickListener(View.OnClickListener {
+                    dialog.dismiss();
+                })
+                dialog.setCancelable(false)
+                dialog.setContentView(view)
+                dialog.show()
+            }
+            R.id.button_save -> {
+
+            }
+        }
     }
 }
