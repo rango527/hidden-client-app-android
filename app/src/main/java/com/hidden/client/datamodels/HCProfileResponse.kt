@@ -9,7 +9,11 @@ data class HCProfileResponse(
 
     val asset_client__cloudinary_url: String,
     val client__created_at: String,
-    val client__last_updated: String
+    val client__last_updated: String,
+
+    val client__is_admin: Boolean,
+
+    val company: HCCompanyResponse
 
 ) {
 

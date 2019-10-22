@@ -46,6 +46,7 @@
             android:layout_marginTop="@dimen/margin_default"/>
 
         <Button
+            android:id="@+id/button_choose_photo"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_black_12"
@@ -70,14 +71,19 @@
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"
                 android:textStyle="bold"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:text="Akio Den"/>
+                android:background="@color/colorWhite_1"
+                android:text="Akio Den"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:lines="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -96,14 +102,19 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:text="akeno.den@protonmail.com"/>
+                android:background="@color/colorWhite_1"
+                android:text="akeno.den@protonmail.com"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:lines="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -122,14 +133,19 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
+                android:background="@color/colorWhite_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:text="Developer"/>
+                android:text="Developer"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:lines="1"/>
         </LinearLayout>
 
     </LinearLayout>

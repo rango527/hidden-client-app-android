@@ -1,9 +1,6 @@
 package com.hidden.client.apis
 
-import com.hidden.client.datamodels.HCCandidateDetailResponse
-import com.hidden.client.datamodels.HCCandidateResponse
-import com.hidden.client.datamodels.HCLoginResponse
-import com.hidden.client.datamodels.HCConsentResponse
+import com.hidden.client.datamodels.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -44,4 +41,20 @@ interface Api {
         @Header("Authorization") authToken: String,
         @Path("candidate_id") candidateId: String
     ):Call<HCCandidateDetailResponse>
+
+    /**
+     * Profile
+     */
+    @GET("client/profile")
+    fun getProfile(
+        @Header("Authorization") authToken: String
+    ):Call<HCProfileResponse>
+
+    /**
+     * Dashboard
+     */
+    @GET("client/dashboard")
+    fun getDashboard(
+        @Header("Authorization") authToken: String
+    ):Call<List<HCDashboardResponse>>
 }

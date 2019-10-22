@@ -1,9 +1,8 @@
 package com.hidden.client.helpers
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
-import com.hidden.client.models.HCClient
+import com.hidden.client.models.HCLogin
 
 class HCGlobal{
 
@@ -27,6 +26,6 @@ class HCGlobal{
 
     // Global variable
     lateinit var currentActivity: Activity;           // current activity instance
-    var myInfo: HCClient = HCClient()                 // user info after login
+    var myInfo: HCLogin = HCLogin()                 // user info after login
 
 }

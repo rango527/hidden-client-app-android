@@ -1,11 +1,9 @@
 package com.hidden.client.ui.activities.settings
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCCandidateResponse
-import com.hidden.client.datamodels.HCConsentResponse
-import com.hidden.client.enums.Consent
-import com.hidden.client.enums.UserType
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCCandidate
 import com.hidden.client.ui.HCBaseActivity

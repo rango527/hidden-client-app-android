@@ -14,11 +14,17 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <!-- Customize EditText Border Bottom-->
-    <!--<style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:colorControlActivated">@color/colorWhite_1</item>
-    </style>-->
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 </resources>
