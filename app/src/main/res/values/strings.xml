@@ -65,7 +65,6 @@
     <string name="snapshot">Snapshot</string>
 
     <string name="dashboard">DASHBOARD</string>
-    <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
     <string name="your_metrics">Your metrics</string>
     <string name="company_metrics">Company metrics</string>
     <string name="candidates_in_process">Candidates\nIn Process</string>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_upcomingInterview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorBlack_1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/margin_default"/>
+
+    <ImageView
+        android:id="@+id/image_status_icon"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/default_margin_super_top"
+        android:contentDescription="@string/dashboard" />
+
+    <TextView
+        android:id="@+id/text_upcoming_interview_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorBlack_1"
+        android:layout_marginTop="@dimen/margin_default"
+        android:gravity="center_horizontal"/>
+</LinearLayout>

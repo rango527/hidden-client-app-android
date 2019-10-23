@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/default_panel_width"
+    android:layout_height="@dimen/default_panel_height"
+    android:background="@drawable/panel_round_shadow_white"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/candidates_in_process"
+        android:textSize="@dimen/textview_bold"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack_1" />
+
+    <TextView
+        android:id="@+id/text_yours_candidates_in_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="5"
+        android:textColor="@color/colorBlack_1"
+        android:layout_marginTop="-20dp"
+        android:textSize="104sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
