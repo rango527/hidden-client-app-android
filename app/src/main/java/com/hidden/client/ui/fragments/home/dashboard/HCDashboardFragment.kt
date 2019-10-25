@@ -23,6 +23,7 @@ import com.hidden.client.models.HCJob
 import com.hidden.client.ui.adapters.HCColleagueJobAdapter
 import com.hidden.client.ui.adapters.HCYourJobAdapter
 import com.hidden.client.ui.custom.HCInterviewTileView
+import com.hidden.client.ui.custom.HCNumberTileView
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
 import com.hidden.client.ui.viewmodels.HCColleagueJobViewModel
 import com.hidden.client.ui.viewmodels.HCYourJobViewModel
@@ -71,7 +72,8 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                                 }
 
                                 TileContentType.SIMPLE_METRIC.value -> {
-
+                                    var tileView = HCNumberTileView(activity!!.applicationContext, dashboardResponse)
+                                    layoutScrollContent.addView(tileView)
                                 }
                             }
                         }
@@ -85,7 +87,7 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
+        when (v!!.id) {
             R.id.img_settings -> {
                 activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCSettingsFragment()).commit()
             }

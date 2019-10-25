@@ -58,14 +58,16 @@ interface Api {
         @Header("Authorization") authToken: String
     ):Call<List<HCDashboardResponse>>
 
-//    @GET("client/dashboard/upcoming-interviews")
-//    fun getUpcomingInterview(
-//        @Header("Authorization") authToken: String
-//    ):Call<List<HCUpcomingInterviewResponse>>
-
     @GET
     fun getUpcomingInterview(
         @Url url: String,
         @Header("Authorization") authToken: String
     ):Call<List<HCUpcomingInterviewResponse>>
+
+    @GET
+    fun getMetrics(
+        @Url url: String,
+
+        @Header("Authorization") authToken: String
+    ):Call<List<HCMetricsResponse>>
 }

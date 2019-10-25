@@ -1,15 +1,5 @@
 package com.hidden.client.models
 
-/**
-{
-    "client_id": "1",
-    "is_admin": true,
-    "full_name": "Hideo Den",
-    "status": "APPROVED",
-    "token": "782870fe7543596da15f258ec166e0fa"
-}
-*/
-
 class HCLogin {
 
     private var id: Int = 0
