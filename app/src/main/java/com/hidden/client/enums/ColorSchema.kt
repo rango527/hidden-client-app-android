@@ -1,6 +1,6 @@
 package com.hidden.client.enums
 
-enum class ColorSchema(value: String) {
+enum class ColorSchema(val value: String) {
     LIGHT("light"),
     DARK ("dark")
 }

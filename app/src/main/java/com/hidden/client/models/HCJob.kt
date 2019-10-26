@@ -1,78 +1,103 @@
 package com.hidden.client.models
 
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.hidden.client.helpers.HCGlobal
+import com.rishabhharit.roundedimageview.RoundedImageView
+
 class HCJob {
 
-    private lateinit var jobImgURL: String
-    private lateinit var jobTitle: String
-    private lateinit var jobLocation: String
+    private var jobPhoto: String? = ""
+    private var jobTag: String? = ""
+    private var jobTagColor: String? = ""
+    private var jobTitle: String? = ""
+    private var jobSubTitle: String? = ""
+    private var jobID: Int? = 0
 
-    private var jobSalaryMin: Int = 0
-    private var jobSalaryMax: Int = 0
+    private var jobType: String? = ""
 
-    private lateinit var jobCompany: String;
+    constructor() { }
 
-    constructor(jobImgURL: String, jobTitle: String, jobLocation: String) {
-
-        this.setJobImgURL(jobImgURL)
-        this.setJobTitle(jobTitle)
-        this.setJobLocation(jobLocation)
+    constructor(
+        jobPhoto: String?,
+        jobTag: String?,
+        jobTagColor: String?,
+        jobTitle: String?,
+        jobSubTitle: String?,
+        jobID: Int?,
+        jobType: String?
+    ) {
+        this.jobPhoto = jobPhoto
+        this.jobTag = jobTag
+        this.jobTagColor = jobTagColor
+        this.jobTitle = jobTitle
+        this.jobSubTitle = jobSubTitle
+        this.jobID = jobID
+        this.jobType = jobType
     }
 
-    constructor(jobImgURL: String, jobTitle: String, jobLocation: String, jobSalaryMin: Int, jobSalaryMax: Int, jobCompany: String) {
+    companion object {
 
-        this.setJobImgURL(jobImgURL)
-        this.setJobTitle(jobTitle)
-        this.setJobLocation(jobLocation)
-        this.setJobSalaryMin(jobSalaryMin)
-        this.setJobSalarayMax(jobSalaryMax)
-        this.setJobCompany(jobCompany)
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
+            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+        }
     }
 
-    fun getJobImgURL() : String {
-        return jobImgURL
+    fun getJobPhoto(): String? {
+        return jobPhoto
     }
 
-    fun setJobImgURL(jobImgURL: String) {
-        this.jobImgURL = jobImgURL
+    fun setJobPhoto(jobPhoto:  String?) {
+        this.jobPhoto = jobPhoto
     }
 
-    fun getJobTitle() : String {
+    fun getJobTag(): String? {
+        return jobTag
+    }
+
+    fun setJobTag(jobTag: String?) {
+        this.jobTag = jobTag
+    }
+
+    fun getJobTagColor(): String? {
+        return jobTagColor
+    }
+
+    fun setJobTagColor(jobTagColor: String?) {
+        this.jobTagColor = jobTagColor
+    }
+
+    fun getJobTitle(): String? {
         return jobTitle
     }
 
-    fun setJobTitle(jobTitle: String) {
+    fun setJobTitle(jobTitle: String?) {
         this.jobTitle = jobTitle
     }
 
-    fun getJobLocation(): String {
-        return jobLocation
+    fun getJobSubTitle(): String? {
+        return jobSubTitle
     }
 
-    fun setJobLocation(jobLocation: String) {
-        this.jobLocation = jobLocation
+    fun setJobSubTitle(jobSubTitle: String?) {
+        this.jobSubTitle = jobSubTitle
     }
 
-    fun getJobSalaryMin(): Int {
-        return jobSalaryMin
+    fun getJobID(): Int? {
+        return jobID
     }
 
-    fun setJobSalaryMin(jobSalaryMin: Int) {
-        this.jobSalaryMin = jobSalaryMin
+    fun setJobID(jobID: Int?) {
+        this.jobID = jobID
     }
 
-    fun getJobSalaryMax(): Int {
-        return jobSalaryMax
+    fun getJobType(): String? {
+        return jobType
     }
 
-    fun setJobSalarayMax(jobSalaryMax: Int) {
-        this.jobSalaryMax = jobSalaryMax
-    }
-
-    fun getJobCompany(): String {
-        return jobCompany
-    }
-
-    fun setJobCompany(jobCompany: String) {
-        this.jobCompany = jobCompany
+    fun setJobType(jobType: String?) {
+        this.jobType = jobType
     }
 }

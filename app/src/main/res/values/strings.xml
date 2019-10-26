@@ -143,8 +143,6 @@
     <string name="reply_to_hidden_team">Reply to the Hidden team</string>
     <string name="send">Send</string>
 
-    <string name="live">LIVE</string>
-
     <!-- Placeholder -->
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>

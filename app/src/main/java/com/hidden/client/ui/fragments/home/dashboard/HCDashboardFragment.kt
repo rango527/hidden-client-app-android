@@ -8,25 +8,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
-import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJob
-import com.hidden.client.ui.adapters.HCColleagueJobAdapter
-import com.hidden.client.ui.adapters.HCYourJobAdapter
 import com.hidden.client.ui.custom.HCInterviewTileView
+import com.hidden.client.ui.custom.HCJobTileView
 import com.hidden.client.ui.custom.HCNumberTileView
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
-import com.hidden.client.ui.viewmodels.HCColleagueJobViewModel
-import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,8 +62,13 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                                 }
 
                                 TileContentType.SIMPLE_METRIC.value -> {
-                                    var tileView = HCNumberTileView(activity!!.applicationContext, dashboardResponse)
+                                    var tileView = HCNumberTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
                                     layoutScrollContent.addView(tileView)
+                                }
+
+                                TileContentType.JOB.value -> {
+                                    var jobView = HCJobTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
+                                    layoutScrollContent.addView(jobView)
                                 }
                             }
                         }
@@ -85,7 +80,6 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
 
         return root
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.img_settings -> {

@@ -6,7 +6,7 @@ data class HCJobResponse (
     val tag_colour: String,
     val title: String,
     val subtitle: String,
-    val extra:  HCExtraResponse
+    val extra: HCExtraResponse
 ) {
 
 }

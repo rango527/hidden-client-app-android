@@ -5,38 +5,85 @@ import androidx.lifecycle.ViewModel
 import com.hidden.client.models.HCJob
 import com.hidden.client.DataBinderMapperImpl
 import com.hidden.client.datamodels.HCMetricsResponse
+import com.hidden.client.enums.MetricType
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCBrand
 
 class HCMetricViewModel: ViewModel {
 
-    private lateinit var metric: HCMetricsResponse
+    private lateinit var title: String
+    private lateinit var value: String
+
+    private lateinit var metricType: String
+    private lateinit var colorSchema: String
 
     constructor() : super()
 
-    constructor(metric: HCMetricsResponse) : super() {
-        this.metric = metric
+    constructor(title: String, value: String, metricType: String, colorSchema: String) : super() {
+        this.title = title
+        this.value = value
+        this.metricType = metricType
+        this.colorSchema = colorSchema
     }
 
-    fun getBrand(): HCMetricsResponse {
-        return this.metric
+    fun getTitle(): String {
+        return this.title
     }
 
-    var metricListMutableLiveData = MutableLiveData<ArrayList<HCMetricViewModel>>()
-    var metricList = ArrayList<HCMetricViewModel>()
-
-    fun getMetricList(): MutableLiveData<ArrayList<HCMetricViewModel>> {
-
-        return metricListMutableLiveData
+    fun getValue(): String {
+        return  this.value
     }
 
-    fun setMetricList(metricList: List<HCMetricsResponse>) {
+    fun getColorSchema(): String {
+        return this.colorSchema
+    }
 
-        this.metricList.clear()
+    fun getMetricType(): String {
+        return this.metricType
+    }
+
+    var yourMetricListMutableLiveData = MutableLiveData<ArrayList<HCMetricViewModel>>()
+    var yourMetricList = ArrayList<HCMetricViewModel>()
+
+    var companyMetricListMutableLiveData = MutableLiveData<ArrayList<HCMetricViewModel>>()
+    var companyMetricList = ArrayList<HCMetricViewModel>()
+
+    fun getMetricList(metricType: String): MutableLiveData<ArrayList<HCMetricViewModel>> {
+
+        return when (metricType) {
+            MetricType.YOUR_METRIC.value -> {
+                yourMetricListMutableLiveData
+            }
+            MetricType.COMPANY_METRIC.value -> {
+                companyMetricListMutableLiveData
+            }
+            else -> {
+                yourMetricListMutableLiveData
+            }
+        }
+    }
+
+    fun setMetricList(metricList: List<HCMetricsResponse>, metricType: String, colorSchema: String) {
+
+        var tempMetricList: ArrayList<HCMetricViewModel> = arrayListOf();
 
         for (metric in metricList) {
-            this.metricList.add(HCMetricViewModel(metric))
+            tempMetricList.add(HCMetricViewModel(metric.title, metric.value, metricType, colorSchema))
         }
 
-        metricListMutableLiveData.value = this.metricList
+        if (metricType == MetricType.YOUR_METRIC.value) {
+
+            this.yourMetricList.clear()
+            this.yourMetricList.addAll(tempMetricList)
+
+            this.yourMetricListMutableLiveData.value = this.yourMetricList
+
+        } else if (metricType == MetricType.COMPANY_METRIC.value) {
+
+            this.companyMetricList.clear()
+            this.companyMetricList.addAll(tempMetricList)
+
+            this.companyMetricListMutableLiveData.value = this.companyMetricList
+        }
     }
 }

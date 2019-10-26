@@ -6,20 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCProcess
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.adapters.HCProcessAdapter
-import com.hidden.client.ui.adapters.HCYourJobAdapter
 import com.hidden.client.ui.viewmodels.HCProcessViewModel
-import com.hidden.client.ui.viewmodels.HCYourJobViewModel
 
 class HCProcessesFragment : Fragment(), View.OnClickListener {
 

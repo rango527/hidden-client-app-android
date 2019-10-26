@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data class="HCYourJobBinding">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class="HCJobBinding">
         <import type="android.view.View" />
         <variable
             name="job_model"
-            type="com.hidden.client.ui.viewmodels.HCYourJobViewModel" />
+            type="com.hidden.client.ui.viewmodels.HCJobViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +26,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="fitXY"
-            android:src="@drawable/test"
+            android:src="@{job_model.getJob().jobPhoto, default=@drawable/man}"
             app:cornerRadius="24dp"
             app:roundedCorners="topLeft|topRight"/>
 
@@ -46,10 +45,10 @@
 
 
         <TextView
-            android:id="@+id/text_job_location"
+            android:id="@+id/text_job_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{job_model.getJob().jobLocation}"
+            android:text="@{job_model.getJob().jobSubTitle}"
             app:layout_constraintTop_toBottomOf="@id/text_job_title"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@color/colorBlack_1"
@@ -70,11 +69,11 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/text_job_tag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/live"
+                android:text="@{job_model.getJob().jobTag}"
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="@color/colorWhite_1"
                 android:textStyle="bold"/>

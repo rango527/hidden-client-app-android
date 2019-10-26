@@ -67,7 +67,12 @@ interface Api {
     @GET
     fun getMetrics(
         @Url url: String,
-
         @Header("Authorization") authToken: String
     ):Call<List<HCMetricsResponse>>
+
+    @GET
+    fun getJobs(
+        @Url url: String,
+        @Header("Authorization") authToken: String
+    ):Call<List<HCJobResponse>>
 }
