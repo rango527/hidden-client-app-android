@@ -2,6 +2,7 @@ package com.hidden.client.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hidden.client.enums.JobType
 import com.hidden.client.models.HCJob
 
 class HCJobViewModel: ViewModel {
@@ -18,21 +19,48 @@ class HCJobViewModel: ViewModel {
         return this.job
     }
 
-    var jobListMutableLiveData = MutableLiveData<ArrayList<HCJobViewModel>>()
-    var jobList = ArrayList<HCJobViewModel>()
+    var yourJobListMutableLiveData = MutableLiveData<ArrayList<HCJobViewModel>>()
+    var yourJobList = ArrayList<HCJobViewModel>()
 
-    fun getJobList(): MutableLiveData<ArrayList<HCJobViewModel>> {
-        return jobListMutableLiveData
+    var colleagueJobListMutableLiveData = MutableLiveData<ArrayList<HCJobViewModel>>()
+    var colleagueJobList = ArrayList<HCJobViewModel>()
+
+    fun getJobList(jobType: String): MutableLiveData<ArrayList<HCJobViewModel>> {
+        return when (jobType) {
+            JobType.YOUR_JOB.value -> {
+                yourJobListMutableLiveData
+            }
+            JobType.COLLEAGUE_JOB.value-> {
+                colleagueJobListMutableLiveData
+            }
+            else -> {
+                yourJobListMutableLiveData
+            }
+        }
     }
 
-    fun setJobList(jobList: List<HCJob>) {
+    fun setJobList(jobList: List<HCJob>, jobType: String) {
 
-        this.jobList.clear()
+        var tempJobList: ArrayList<HCJobViewModel> = arrayListOf();
 
         for (job in jobList) {
-            this.jobList.add(HCJobViewModel(job))
+            tempJobList.add(HCJobViewModel(job))
         }
 
-        jobListMutableLiveData.value = this.jobList
+        if (jobType == JobType.YOUR_JOB.value) {
+
+            this.yourJobList.clear()
+            this.yourJobList.addAll(tempJobList)
+
+            this.yourJobListMutableLiveData.value = this.yourJobList
+
+        } else if (jobType == JobType.COLLEAGUE_JOB.value) {
+
+            this.colleagueJobList.clear()
+            this.colleagueJobList.addAll(tempJobList)
+
+            this.colleagueJobListMutableLiveData.value = this.colleagueJobList
+        }
     }
+
 }
