@@ -75,4 +75,18 @@ interface Api {
         @Url url: String,
         @Header("Authorization") authToken: String
     ):Call<List<HCJobResponse>>
+
+    @GET("client/jobs/{job_id}")
+    fun getJobDetail(
+        @Header("Authorization") authToken: String,
+        @Path("job_id") jobId: String
+    ):Call<HCCandidateDetailResponse>
+
+    /**
+     * Shortlist
+     */
+    @GET("client/shortlist")
+    fun getShortlists(
+        @Header("Authorization") authToken: String
+    ):Call<HCCandidateResponse>
 }
