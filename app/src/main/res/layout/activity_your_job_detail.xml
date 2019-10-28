@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDarkBlue"
-    tools:context=".ui.activities.HcYourJobDetailActivity">
+    tools:context=".ui.activities.HCJobDetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,16 +31,16 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/test" />
 
-                <ImageView
-                    android:id="@+id/img_company_1"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_job_logo"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:contentDescription="@string/image_description_back"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/water"
                     android:layout_marginTop="@dimen/margin_default"
-                    android:layout_marginRight="@dimen/margin_default"/>
+                    android:layout_marginRight="@dimen/margin_default"
+                    app:civ_border_width="2dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -53,7 +53,7 @@
                 android:background="@drawable/layout_round_black"
                 android:orientation="vertical">
 
-                <TextView
+                <TextViewsdasd
                     android:id="@+id/text_job_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

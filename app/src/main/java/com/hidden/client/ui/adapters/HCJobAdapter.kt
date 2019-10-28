@@ -11,7 +11,7 @@ import com.hidden.client.R
 import com.hidden.client.databinding.HCJobBinding
 import com.hidden.client.enums.JobType
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.HCYourJobActivity
+import com.hidden.client.ui.activities.HCJobActivity
 import com.hidden.client.ui.viewholders.HCJobVH
 import com.hidden.client.ui.viewmodels.HCJobViewModel
 
@@ -34,14 +34,9 @@ class HCJobAdapter(
 
         holder.itemView.setOnClickListener(View.OnClickListener {
 
-            if (jobModel.getJob().getJobType().equals(JobType.YOUR_JOB.value)) {
-                val intent = Intent(context, HCYourJobActivity::class.java)
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
-            } else {
-//                val intent = Intent(context, HCYourJobActivity::class.java)
-//                HCGlobal.getInstance().currentActivity.startActivity(intent)
-            }
-
+            val intent = Intent(context, HCJobActivity::class.java)
+            intent.putExtra("jobId", jobModel.getJob().getJobID().toString())
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
         })
     }
 

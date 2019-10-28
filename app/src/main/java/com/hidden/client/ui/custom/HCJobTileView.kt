@@ -51,8 +51,6 @@ class HCJobTileView : LinearLayout {
                 rvJob.adapter = jobAdapter
             })
 
-            HCGlobal.getInstance().log(data.title);
-
             if (data.title == JobType.YOUR_JOB.value) {
                 jobViewModel.setJobList(setViewData(data.content, data.title), data.title)
             } else {

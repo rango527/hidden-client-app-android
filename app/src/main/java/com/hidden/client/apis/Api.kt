@@ -80,7 +80,7 @@ interface Api {
     fun getJobDetail(
         @Header("Authorization") authToken: String,
         @Path("job_id") jobId: String
-    ):Call<HCCandidateDetailResponse>
+    ):Call<HCJobDetailResponse>
 
     /**
      * Shortlist
