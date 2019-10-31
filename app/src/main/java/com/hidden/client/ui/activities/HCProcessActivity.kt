@@ -122,8 +122,8 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                         param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
                         layoutTitle.layoutParams = param
                     }
-
                 })
+
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 

@@ -14,7 +14,19 @@ class HCJob {
     private var jobSubTitle: String? = ""
     private var jobID: Int? = 0
 
-    private var jobType: String? = ""
+    private var jobType: String? = ""       // Your or Colleague
+
+    // Additional Job Info
+    private var jobCompany: String? = ""
+    private var jobSalaryFrom: Float? = 0f
+    private var jobSalaryTo: Float? = 0f
+
+    private var jobCoverPhoto: String? = ""
+    private var jobCompanyPhoto: String? = ""
+    private var jobCompanyName: String? = ""
+    private var jobHiddenSays: String? = ""
+
+    private var jobDetailTilesList: ArrayList<HCJobDetailTile> = arrayListOf()
 
     constructor() { }
 
@@ -100,4 +112,69 @@ class HCJob {
     fun setJobType(jobType: String?) {
         this.jobType = jobType
     }
+
+    fun getJobCompany(): String? {
+        return jobCompany
+    }
+
+    fun setJobCompany(jobCompany: String?) {
+        this.jobCompany = jobCompany
+    }
+
+    fun getJobSalaryFrom(): Float? {
+        return jobSalaryFrom
+    }
+
+    fun setJobSalaryFrom(jobSalaryFrom: Float?) {
+        this.jobSalaryFrom = jobSalaryFrom
+    }
+
+    fun getJobSalaryTo(): Float? {
+        return jobSalaryTo
+    }
+
+    fun setJobSalaryTo(jobSalaryTo: Float?) {
+        this.jobSalaryTo = jobSalaryTo
+    }
+
+    fun getJobCoverPhoto(): String? {
+        return jobCoverPhoto
+    }
+
+    fun setJobCoverPhoto(jobCoverPhoto: String?) {
+        this.jobCoverPhoto = jobCoverPhoto
+    }
+
+    fun getJobCompanyPhoto(): String? {
+        return jobCompanyPhoto
+    }
+
+    fun setJobCompanyPhoto(jobCompanyPhoto: String?) {
+        this.jobCoverPhoto = jobCompanyPhoto
+    }
+
+    fun getJobCompanyName(): String? {
+        return jobCompanyName
+    }
+
+    fun setJobCompanyName(jobCompanyName: String?) {
+        this.jobCompanyName = jobCompanyName
+    }
+
+    fun getJobHiddenSays(): String? {
+        return jobHiddenSays
+    }
+
+    fun setJobHiddenSays(jobHiddenSays: String?) {
+        this.jobHiddenSays = jobHiddenSays
+    }
+
+    fun getJobDetailTileList(): ArrayList<HCJobDetailTile> {
+        return jobDetailTilesList
+    }
+
+    fun setJobDetailTileList(jobDetailTileList: ArrayList<HCJobDetailTile>) {
+        this.jobDetailTilesList = jobDetailTilesList
+    }
+
 }

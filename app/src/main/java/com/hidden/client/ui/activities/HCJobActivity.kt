@@ -60,7 +60,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
          */
         jobId = intent.getStringExtra("jobId")
 
-        // Fetch Dashboard API
+        // Fetch JobDetail API
         RetrofitClient.instance.getJobDetail(HCGlobal.getInstance().myInfo.getBearerToken(), jobId)
             .enqueue(object: Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
@@ -86,7 +86,6 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             })
-
     }
 
     override fun onClick(v: View?) {

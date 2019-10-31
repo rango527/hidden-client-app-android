@@ -28,11 +28,10 @@
                     android:layout_height="240dp"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/test" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_job_logo"
+                    android:id="@+id/img_company"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:contentDescription="@string/image_description_back"
@@ -40,7 +39,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginRight="@dimen/margin_default"
-                    app:civ_border_width="2dp"/>
+                    app:civ_border_width="0dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -53,11 +52,11 @@
                 android:background="@drawable/layout_round_black"
                 android:orientation="vertical">
 
-                <TextViewsdasd
+                <TextView
                     android:id="@+id/text_job_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Creative Director"
+                    android:text=""
                     android:textAllCaps="true"
                     android:textColor="@color/colorWhite_1"
                     android:textSize="@dimen/font_size_medium"
@@ -83,7 +82,7 @@
                     android:textSize="@dimen/font_size_medium"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
-                    android:text="Vend" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/text_job_salary"
@@ -95,7 +94,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
                     android:gravity="center_horizontal"
-                    android:text="£95,000 - £110,000" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/text_job_location"
@@ -106,7 +105,8 @@
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorRed_1"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                    android:text="   London" />
+                    android:hint=""
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -117,12 +117,12 @@
                     android:text="@string/what_hidden_says" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/text_hidden_says"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite_1"
                     android:layout_marginTop="@dimen/list_row_margin_default"
-                    android:text="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commo\nFusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commo" />
+                    android:text="" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/layout_show_company_detail"
@@ -130,14 +130,15 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_default"
                 android:gravity="center_vertical">
-                <ImageView
-                    android:id="@+id/img_company"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/water" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_company2"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:civ_border_width="0dp"/>
+
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/text_view_company_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite_1"
