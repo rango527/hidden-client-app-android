@@ -18,8 +18,8 @@ class HCJobDetailTileViewModel: ViewModel {
         return this.jobDetailTile
     }
 
-    var jobDetailTileListMutableLiveData = MutableLiveData<ArrayList<HCJobDetailTileViewModel>>()
-    var jobDetailTileList = ArrayList<HCJobDetailTileViewModel>()
+    private var jobDetailTileListMutableLiveData = MutableLiveData<ArrayList<HCJobDetailTileViewModel>>()
+    private var jobDetailTileList = ArrayList<HCJobDetailTileViewModel>()
 
     fun getJobDetailTileList(): MutableLiveData<ArrayList<HCJobDetailTileViewModel>> {
        return jobDetailTileListMutableLiveData

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data class="HCJobDetailTileBinding">
+        <import type="android.view.View" />
+        <variable
+            name="job_detail_tile_model"
+            type="com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_text_tile"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
+            android:layout_marginRight="@dimen/list_row_margin_default"
+            android:background="@drawable/panel_round_shadow_white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default">
+
+            <TextView
+                android:id="@+id/text_tile_title"
+                android:text="@{job_detail_tile_model.getJobDetailTile().jobDetailTileTitle}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_xsmall"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/text_tile_content"
+                android:text="@{job_detail_tile_model.getJobDetailTile().jobDetailTileContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_xsmall"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_img_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image_tile"
+                android:src="@{job_detail_tile_model.getJobDetailTile().jobDetailTileImg, default=@drawable/man}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

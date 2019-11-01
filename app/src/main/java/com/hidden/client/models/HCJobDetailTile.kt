@@ -24,7 +24,7 @@ class HCJobDetailTile {
         }
     }
 
-    fun getJobDetailTitleTitle(): String? {
+    fun getJobDetailTileTitle(): String? {
         return jobDetailTileTitle
     }
 
@@ -55,7 +55,7 @@ class HCJobDetailTile {
         this.jobDetailTileId = jobDetailTileId
     }
 
-    fun getToDetailTileImg(): String? {
+    fun getJobDetailTileImg(): String? {
         return jobDetailTileImg
     }
 
