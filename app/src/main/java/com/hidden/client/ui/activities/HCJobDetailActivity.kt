@@ -5,11 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.HCJobDetailTile
+import com.hidden.client.ui.adapters.HCCandidateAdapter
+import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
+import com.hidden.client.ui.viewmodels.HCCandidateViewModel
+import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import org.w3c.dom.Text
 import retrofit2.Call
@@ -33,6 +42,10 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtJobLocation: TextView
     private lateinit var txtHiddenSays: TextView
     private lateinit var txtViewCompanyProfile: TextView
+
+    private lateinit var rvJobDetailTile: RecyclerView
+    private lateinit var jobDetailTileViewModel: HCJobDetailTileViewModel
+    private lateinit var jobDetailTileAdapter: HCJobDetailTileAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -60,6 +73,17 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         txtJobLocation = findViewById(R.id.text_job_location)
         txtHiddenSays = findViewById(R.id.text_hidden_says)
         txtViewCompanyProfile = findViewById(R.id.text_view_company_profile)
+
+        // Job Detail Tile RecyclerView
+        rvJobDetailTile = findViewById(R.id.recyclerview_job_detail_tile)
+        jobDetailTileViewModel = ViewModelProviders.of(this).get(HCJobDetailTileViewModel::class.java)
+        jobDetailTileViewModel.getJobDetailTileList().observe(this, Observer {jobDetailTileViewModels->
+            jobDetailTileAdapter = HCJobDetailTileAdapter(applicationContext, jobDetailTileViewModels)
+            rvJobDetailTile.layoutManager = LinearLayoutManager(applicationContext)
+            rvJobDetailTile.setHasFixedSize(true)
+
+            rvJobDetailTile.adapter = jobDetailTileAdapter
+        })
 
         /***
          * Get JobDetail
@@ -91,6 +115,21 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                         txtHiddenSays.text = response.body()!!.company__hidden_says
                         txtViewCompanyProfile.text = String.format(resources.getString(R.string.view_company_profile)
                             , response.body()!!.company__name)
+
+                        var jobDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
+                        for (detail_tile in response.body()!!.job__tiles) {
+                            val jobDetailTile: HCJobDetailTile = HCJobDetailTile()
+                            jobDetailTile.setJobDetailTitleId(detail_tile.tile__tile_id)
+                            jobDetailTile.setJobDetailTileTitle(detail_tile.tile__title)
+                            jobDetailTile.setJobDetailTileContent(detail_tile.tile__content)
+                            jobDetailTile.setJobDetailTileType(detail_tile.tile__type)
+                            jobDetailTile.setJobDetailTileSortOrder(detail_tile.tile__sort_order)
+                            jobDetailTile.setJobDetailTileImg(detail_tile.tile_asset__cloudinary_url)
+
+                            jobDetailTileList.add(jobDetailTile)
+                        }
+
+                        jobDetailTileViewModel.setJobDetailTileList(jobDetailTileList)
 
                     } else {
                         Toast.makeText(this@HCJobDetailActivity, "Error", Toast.LENGTH_LONG).show()
