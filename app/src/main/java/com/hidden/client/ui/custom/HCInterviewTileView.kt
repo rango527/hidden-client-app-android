@@ -35,13 +35,13 @@ class HCInterviewTileView : LinearLayout {
 
                     override fun onResponse(
                         call: Call<List<HCUpcomingInterviewResponse>>,
-                        response: Response<List<HCUpcomingInterviewResponse>>
-                    ) {
-                        if (response.isSuccessful) {
-                            if (response.body()!!.isEmpty()) {
-                                txtUpcomingIntervieCount.setText(data.empty_status)
-                                imgStatusIcon.setImageResource(R.drawable.empty_upcoming_interviews)
-                            } else {
+                            response: Response<List<HCUpcomingInterviewResponse>>
+                        ) {
+                            if (response.isSuccessful) {
+                                if (response.body()!!.isEmpty()) {
+                                    txtUpcomingIntervieCount.setText(data.empty_status)
+                                    imgStatusIcon.setImageResource(R.drawable.empty_upcoming_interviews)
+                                } else {
 
                             }
                         } else {

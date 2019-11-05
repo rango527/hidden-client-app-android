@@ -14,6 +14,7 @@ import com.hidden.client.databinding.HCJobDetailTileBinding
 import com.hidden.client.databinding.HCMetricBinding
 import com.hidden.client.enums.ColorSchema
 import com.hidden.client.enums.JobDetailTileType
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.viewholders.HCJobDetailTileVH
 import com.hidden.client.ui.viewholders.HCMetricVH
 import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
@@ -40,10 +41,17 @@ class HCJobDetailTileAdapter(
         val layoutText: LinearLayout = holder.itemView.findViewById(R.id.layout_text_tile);
         val layoutImage: LinearLayout = holder.itemView.findViewById(R.id.layout_img_title);
 
-        if (jobDetailTileViewModel.getJobDetailTile().getJobDetailTitleType() ===  JobDetailTileType.TEXT.value) {
+        HCGlobal.getInstance().log(jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType()!!);
+
+        if (jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType().equals(JobDetailTileType.TEXT.value)) {
+            layoutText.visibility = View.VISIBLE
             layoutImage.visibility = View.GONE
-        } else if (jobDetailTileViewModel.getJobDetailTile().getJobDetailTitleType() ===  JobDetailTileType.IMAGE.value) {
+        } else if (jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType().equals(JobDetailTileType.IMAGE.value)) {
             layoutText.visibility = View.GONE
+            layoutImage.visibility = View.VISIBLE
+        } else {
+            layoutText.visibility = View.GONE
+            layoutImage.visibility = View.GONE
         }
     }
 

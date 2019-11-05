@@ -39,8 +39,6 @@ class HCHomeActivity : HCBaseActivity(), HCTabBar.OnTabSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        HCGlobal.getInstance().currentActivity = this
-
         dashboardFrags.add(HCDashboardFragment())
         shortlistsFrags.add(HCShortlistsFragment())
         processesFrags.add(HCProcessesFragment())
@@ -53,6 +51,11 @@ class HCHomeActivity : HCBaseActivity(), HCTabBar.OnTabSelectedListener {
         layoutMask = findViewById(R.id.layout_mask)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        HCGlobal.getInstance().currentActivity = this
+    }
     override fun onTabSelected(num: Int) {
         var fragsList: Array<MutableList<Fragment>> = arrayOf(dashboardFrags, shortlistsFrags, processesFrags)
         curTabFrags = fragsList[num]

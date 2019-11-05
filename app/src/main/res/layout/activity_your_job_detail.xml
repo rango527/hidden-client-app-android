@@ -7,7 +7,7 @@
     android:background="@color/colorDarkBlue"
     tools:context=".ui.activities.HCJobDetailActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -112,7 +112,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_job_detail_tile"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -154,7 +154,7 @@
                     android:text="@string/view_company_profile" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ImageButton
         android:id="@+id/button_back_to_your_job"

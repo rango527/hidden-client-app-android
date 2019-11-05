@@ -1,7 +1,10 @@
 package com.hidden.client.models
 
+import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -19,8 +22,12 @@ class HCJobDetailTile {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+        fun setImageViewResource(imageView: ImageView, photoUrl: String?) {
+            if (photoUrl !== null) {
+                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl!!).into(imageView)
+            } else {
+                imageView.visibility = View.GONE
+            }
         }
     }
 
@@ -28,11 +35,11 @@ class HCJobDetailTile {
         return jobDetailTileTitle
     }
 
-    fun setJobDetailTileTitle(jobDetailTileType: String?) {
-        this.jobDetailTileType = jobDetailTileType
+    fun setJobDetailTileTitle(jobDetailTileTitle: String?) {
+        this.jobDetailTileTitle = jobDetailTileTitle
     }
 
-    fun getJobDetailTitleType(): String? {
+    fun getJobDetailTileType(): String? {
         return jobDetailTileType
     }
 
@@ -67,7 +74,7 @@ class HCJobDetailTile {
         return jobDetailTileContent
     }
 
-    fun setJobDetailTileContent(jobDetailTitleContent: String?) {
+    fun setJobDetailTileContent(jobDetailTileContent: String?) {
         this.jobDetailTileContent = jobDetailTileContent
     }
 

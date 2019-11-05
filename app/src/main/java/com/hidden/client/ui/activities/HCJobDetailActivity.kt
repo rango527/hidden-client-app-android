@@ -52,6 +52,8 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_your_job_detail)
 
+        HCGlobal.getInstance().currentActivity = this;
+
         /***
          * Click Listener
          */
