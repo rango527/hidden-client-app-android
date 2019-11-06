@@ -9,9 +9,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.hidden.client.R
 
-class CompanyDetailBadgeView (context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
+class CompanyDetailBadgeView : LinearLayout {
 
-    init {
+    constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
+
         inflate(context, R.layout.company_detail_badge_view, this)
 
         var layoutBackground: LinearLayout = findViewById(R.id.layout_background)
@@ -38,5 +39,18 @@ class CompanyDetailBadgeView (context: Context, attrs: AttributeSet): LinearLayo
         }
 
         attributes.recycle()
+    }
+
+    constructor(context: Context, text:String? = null, icon:Int? = null, bgColor: Int? = null) : super(context) {
+        inflate(context, R.layout.company_detail_badge_view, this)
+        if (text !== null) {
+            var layoutBackground: LinearLayout = findViewById(R.id.layout_background)
+            val textTitle: TextView = findViewById(R.id.text_title)
+            val imgIcon: ImageView = findViewById(R.id.img_icon)
+
+            textTitle.text = text
+            layoutBackground.setBackgroundColor(bgColor!!)
+            imgIcon.setImageResource(icon!!)
+        }
     }
 }

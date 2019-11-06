@@ -82,6 +82,11 @@ interface Api {
         @Path("job_id") jobId: String
     ):Call<HCJobDetailResponse>
 
+    @GET("client/profile/company")
+    fun getCompanyProfile(
+        @Header("Authorization") authToken: String
+    ):Call<HCCompanyResponse>
+
     /**
      * Shortlist
      */
