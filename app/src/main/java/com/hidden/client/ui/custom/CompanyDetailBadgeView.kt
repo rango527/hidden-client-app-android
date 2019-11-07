@@ -49,7 +49,7 @@ class CompanyDetailBadgeView : LinearLayout {
             val imgIcon: ImageView = findViewById(R.id.img_icon)
 
             textTitle.text = text
-            layoutBackground.setBackgroundColor(bgColor!!)
+            layoutBackground.setBackgroundResource(bgColor!!)
             imgIcon.setImageResource(icon!!)
         }
     }

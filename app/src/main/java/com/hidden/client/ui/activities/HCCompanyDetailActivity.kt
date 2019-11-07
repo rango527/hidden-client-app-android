@@ -3,8 +3,10 @@ package com.hidden.client.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -21,6 +23,9 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.HCJobDetailTile
 import com.hidden.client.ui.HCBaseActivity
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
+import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
+import com.hidden.client.ui.custom.CompanyDetailBadgeView
+import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
 import org.w3c.dom.Text
 import pl.droidsonroids.gif.GifImageView
@@ -41,6 +46,10 @@ class HCCompanyDetailActivity : HCBaseActivity(), View.OnClickListener {
     private lateinit var rvCompanyDetailTile: RecyclerView
     private lateinit var companyDetailTileViewModel: HCJobDetailTileViewModel
     private lateinit var companyDetailTileAdapter: HCJobDetailTileAdapter
+
+    companion object {
+        val default_badge_show_count = 3
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,12 +92,61 @@ class HCCompanyDetailActivity : HCBaseActivity(), View.OnClickListener {
                         Glide.with(this@HCCompanyDetailActivity).load(response.body()!!.company_cover_image_asset__cloudinary_url).into(imgCompanyBg)
                         Glide.with(this@HCCompanyDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompanyLogo)
 
-
                         txtCompanyName.text = response.body()!!.company__name
                         txtHiddenSays.text = response.body()!!.company__hidden_says
 
                         /** Add Badge View **/
-                            
+                        var brandItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                            response.body()!!.company_type__name, R.drawable.brand_type, R.drawable.progress_item_purple_12)
+                        var sizeItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                            response.body()!!.company_size__name, R.drawable.company_size, R.drawable.progress_item_complete_12)
+
+                        layoutBadge.addView(brandItemBadge)
+                        layoutBadge.addView(sizeItemBadge)
+
+                        // add `+ $(cnt) more`
+                        val cityLocationList = response.body()!!.company__cities
+                        val badgeCount = cityLocationList.size
+
+                        var defaultShowCount = if (badgeCount <= default_badge_show_count) badgeCount else default_badge_show_count
+
+                        for (i in 0 until defaultShowCount) {
+                            var location = cityLocationList[i].city__name
+
+                            var locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                                location, R.drawable.pin, R.drawable.progress_item_black_24)
+
+                            layoutBadge.addView(locationItemBadge)
+                        }
+
+                        // add `+ $(cnt) more`
+                        if (badgeCount > default_badge_show_count) {
+                            var textAddMore = TextView(this@HCCompanyDetailActivity)
+                            var params : LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT, // This will define text view width
+                                LinearLayout.LayoutParams.MATCH_PARENT // This will define text view height
+                            )
+                            params.leftMargin = 5
+
+                            textAddMore.layoutParams = params
+                            textAddMore.setText(String.format(resources.getString(R.string.add_more), badgeCount - defaultShowCount))
+                            textAddMore.gravity = Gravity.CENTER_VERTICAL
+
+                            textAddMore.setOnClickListener(object: View.OnClickListener {
+                                override fun onClick(v: View?) {
+                                    v!!.visibility = View.GONE
+
+                                    for (i in defaultShowCount until badgeCount) {
+                                        var location = cityLocationList[i].city__name
+                                        var locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                                            location, R.drawable.pin, R.drawable.progress_item_black_24)
+
+                                        layoutBadge.addView(locationItemBadge)
+                                    }
+                                }
+                            })
+                            layoutBadge.addView(textAddMore)
+                        }
 
                         var companyDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
                         for (detail_tile in response.body()!!.company__tiles) {
