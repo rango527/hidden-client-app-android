@@ -1,25 +1,19 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
-import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.hidden.client.R
-import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCProfile
-import com.hidden.client.models.HCSkill
+import com.hidden.client.models_.HCProfile
 import com.hidden.client.ui.custom.SkillItemView
 import android.widget.LinearLayout.LayoutParams
-import androidx.core.view.marginLeft
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.helpers.HCConstants
 

@@ -1,12 +1,10 @@
-package com.hidden.client.models
+package com.hidden.client.models_
 
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
-import de.hdodenhof.circleimageview.CircleImageView
 
 class HCJobDetailTile {
 

@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCJobResponse
 import com.hidden.client.enums.JobType
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJob
+import com.hidden.client.models_.HCJob
 import com.hidden.client.ui.adapters.HCJobAdapter
 import com.hidden.client.ui.viewmodels.HCJobViewModel
 import retrofit2.Call

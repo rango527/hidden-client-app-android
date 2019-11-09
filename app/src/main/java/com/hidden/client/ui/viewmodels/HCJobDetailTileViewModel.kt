@@ -2,7 +2,7 @@ package com.hidden.client.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hidden.client.models.HCJobDetailTile
+import com.hidden.client.models_.HCJobDetailTile
 
 class HCJobDetailTileViewModel: ViewModel {
 

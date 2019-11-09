@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.HCGlobal

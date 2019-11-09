@@ -1,13 +1,12 @@
 package com.hidden.client.ui.custom
 
 import android.content.Context
-import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCUpcomingInterviewResponse
 import com.hidden.client.helpers.HCGlobal

@@ -1,8 +1,6 @@
 package com.hidden.client.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -16,18 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCompanyResponse
-import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJobDetailTile
+import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.HCBaseActivity
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
-import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
 import com.hidden.client.ui.custom.CompanyDetailBadgeView
-import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
-import org.w3c.dom.Text
 import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Callback

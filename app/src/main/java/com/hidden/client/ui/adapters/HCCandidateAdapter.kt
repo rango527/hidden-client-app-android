@@ -9,16 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCCandidateBinding
-import com.hidden.client.databinding.HCProcessBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCCandidate
-import com.hidden.client.ui.activities.HCProcessActivity
 import com.hidden.client.ui.activities.settings.HCCandidateActivity
 import com.hidden.client.ui.activities.settings.HCCandidateDetailActivity
 import com.hidden.client.ui.viewholders.HCCandidateVH
-import com.hidden.client.ui.viewholders.HCProcessVH
 import com.hidden.client.ui.viewmodels.HCCandidateViewModel
-import com.hidden.client.ui.viewmodels.HCProcessViewModel
 
 class HCCandidateAdapter(
     private val context:Context,

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,8 +13,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCProfile
-import com.hidden.client.models.HCSkill
+import com.hidden.client.models_.HCProfile
+import com.hidden.client.models_.HCSkill
 import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
 import com.hidden.client.ui.activities.HCHomeActivity
 import android.view.animation.AnimationUtils

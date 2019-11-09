@@ -3,7 +3,7 @@ package com.hidden.client.ui.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hidden.client.enums.JobType
-import com.hidden.client.models.HCJob
+import com.hidden.client.models_.HCJob
 
 class HCJobViewModel: ViewModel {
 

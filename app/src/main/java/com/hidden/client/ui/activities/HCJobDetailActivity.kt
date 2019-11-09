@@ -11,16 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCJobDetailTile
-import com.hidden.client.ui.adapters.HCCandidateAdapter
+import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
-import com.hidden.client.ui.viewmodels.HCCandidateViewModel
 import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -90,7 +87,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         /***
          * Get JobDetail
          */
-        jobId = intent.getStringExtra("jobId")
+        jobId = intent.getStringExtra("jobId")!!
 
         // Fetch JobDetail API
         RetrofitClient.instance.getJobDetail(HCGlobal.getInstance().myInfo.getBearerToken(), jobId)

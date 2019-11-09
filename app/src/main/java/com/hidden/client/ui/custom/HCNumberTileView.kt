@@ -10,15 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCMetricsResponse
-import com.hidden.client.datamodels.HCUpcomingInterviewResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.adapters.HCMetricAdapter
-import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
 import com.hidden.client.ui.viewmodels.HCMetricViewModel
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,11 +1,9 @@
-package com.hidden.client.models
+package com.hidden.client.models_
 
-import android.app.Activity
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
 import com.rishabhharit.roundedimageview.RoundedImageView
-import de.hdodenhof.circleimageview.CircleImageView
 
 class HCCandidate {
 

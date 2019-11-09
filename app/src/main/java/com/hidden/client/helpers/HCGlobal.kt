@@ -2,7 +2,7 @@ package com.hidden.client.helpers
 
 import android.app.Activity
 import android.util.Log
-import com.hidden.client.models.HCLogin
+import com.hidden.client.models_.HCLogin
 
 class HCGlobal{
 

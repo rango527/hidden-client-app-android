@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.HCGlobal
 import de.hdodenhof.circleimageview.CircleImageView
@@ -58,7 +58,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
         /***
          * Get Job Detail API
          */
-        jobId = intent.getStringExtra("jobId")
+        jobId = intent.getStringExtra("jobId")!!
 
         // Fetch JobDetail API
         RetrofitClient.instance.getJobDetail(HCGlobal.getInstance().myInfo.getBearerToken(), jobId)

@@ -2,12 +2,7 @@ package com.hidden.client.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hidden.client.models.HCJob
-import com.hidden.client.DataBinderMapperImpl
-import com.hidden.client.R
-import com.hidden.client.models.HCCandidate
-import com.hidden.client.models.HCProcess
-import com.hidden.client.models.HCWorkExperience
+import com.hidden.client.models_.HCWorkExperience
 
 class HCWorkExperienceViewModel: ViewModel {
 

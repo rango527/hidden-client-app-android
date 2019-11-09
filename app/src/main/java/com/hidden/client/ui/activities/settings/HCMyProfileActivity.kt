@@ -5,7 +5,6 @@ import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
@@ -17,19 +16,14 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.HCBaseActivity
-import com.hidden.client.ui.custom.HCRoundedBottomSheetDialogFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class HCMyProfileActivity : HCBaseActivity(), View.OnClickListener {
 

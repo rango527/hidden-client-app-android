@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.models.HCProcess
+import com.hidden.client.models_.HCProcess
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.adapters.HCProcessAdapter
 import com.hidden.client.ui.viewmodels.HCProcessViewModel

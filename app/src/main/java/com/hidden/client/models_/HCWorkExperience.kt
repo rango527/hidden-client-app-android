@@ -1,4 +1,4 @@
-package com.hidden.client.models
+package com.hidden.client.models_
 
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -6,7 +6,6 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
 import de.hdodenhof.circleimageview.CircleImageView
-import java.util.*
 
 class HCWorkExperience {
 
@@ -55,7 +54,7 @@ class HCWorkExperience {
         if (experienceFrom === null)
             return ""
 
-        var strDate: String = ""
+        var strDate: String
 
         val fromDate = HCDate.stringToDate(experienceFrom!!, null)
 

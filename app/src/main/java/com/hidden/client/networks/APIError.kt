@@ -1,4 +1,4 @@
-package com.hidden.client.apis
+package com.hidden.client.networks
 
 class APIError {
 

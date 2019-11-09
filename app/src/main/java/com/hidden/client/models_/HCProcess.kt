@@ -1,4 +1,4 @@
-package com.hidden.client.models
+package com.hidden.client.models_
 
 import androidx.databinding.BindingAdapter
 import de.hdodenhof.circleimageview.CircleImageView

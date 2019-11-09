@@ -1,4 +1,4 @@
-package com.hidden.client.apis
+package com.hidden.client.networks
 
 import com.hidden.client.datamodels.*
 import retrofit2.Call

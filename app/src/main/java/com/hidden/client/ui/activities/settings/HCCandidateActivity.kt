@@ -10,14 +10,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCandidateResponse
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.HCCandidate
+import com.hidden.client.models_.HCCandidate
 import com.hidden.client.ui.HCBaseActivity
 import com.hidden.client.ui.adapters.HCCandidateAdapter
 import com.hidden.client.ui.viewmodels.HCCandidateViewModel
-import kotlinx.android.synthetic.main.fragment_process_message.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

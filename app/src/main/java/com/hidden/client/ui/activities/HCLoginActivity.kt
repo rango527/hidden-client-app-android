@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
-import com.hidden.client.apis.RetrofitClient
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCLoginResponse
 import com.hidden.client.helpers.HCGlobal
 import com.kaopiz.kprogresshud.KProgressHUD
