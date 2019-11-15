@@ -12,7 +12,7 @@ import com.hidden.client.databinding.HCProcessBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.HCProcessActivity
 import com.hidden.client.ui.viewholders.HCProcessVH
-import com.hidden.client.ui.viewmodels.HCProcessViewModel
+import com.hidden.client.ui.viewmodels___.HCProcessViewModel
 
 class HCProcessAdapter(
     private val context:Context,

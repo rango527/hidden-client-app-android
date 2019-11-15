@@ -15,18 +15,18 @@ import com.hidden.client.datamodels.HCCandidateDetailResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCWorkExperience
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCBrandAdapter
 import com.hidden.client.ui.adapters.HCWorkExperienceAdapter
 import com.hidden.client.ui.custom.SkillItemView
-import com.hidden.client.ui.viewmodels.HCBrandViewModel
-import com.hidden.client.ui.viewmodels.HCWorkExperienceViewModel
+import com.hidden.client.ui.viewmodels___.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCCandidateDetailActivity : HCBaseActivity() {
+class HCCandidateDetailActivity : BaseActivity() {
 
     private lateinit var imgPhoto: CircleImageView
     private lateinit var textName: TextView

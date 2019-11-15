@@ -1,11 +1,10 @@
 package com.hidden.client.ui.activities.settings
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hidden.client.R
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 
-class HCResetPasswordActivity : HCBaseActivity() {
+class HCResetPasswordActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -15,7 +15,7 @@ import com.hidden.client.R
 import com.hidden.client.models_.HCProcess
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.adapters.HCProcessAdapter
-import com.hidden.client.ui.viewmodels.HCProcessViewModel
+import com.hidden.client.ui.viewmodels___.HCProcessViewModel
 
 class HCProcessesFragment : Fragment(), View.OnClickListener {
 

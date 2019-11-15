@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCBrandBinding
 import com.hidden.client.ui.viewholders.HCBrandVH
-import com.hidden.client.ui.viewmodels.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 
 class HCBrandAdapter(
     private val context:Context,

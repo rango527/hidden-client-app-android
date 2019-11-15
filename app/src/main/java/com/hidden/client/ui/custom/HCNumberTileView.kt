@@ -15,7 +15,7 @@ import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCMetricsResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.adapters.HCMetricAdapter
-import com.hidden.client.ui.viewmodels.HCMetricViewModel
+import com.hidden.client.ui.viewmodels___.HCMetricViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

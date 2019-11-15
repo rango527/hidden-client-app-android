@@ -9,11 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCJobBinding
-import com.hidden.client.enums.JobType
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.HCJobActivity
 import com.hidden.client.ui.viewholders.HCJobVH
-import com.hidden.client.ui.viewmodels.HCJobViewModel
+import com.hidden.client.ui.viewmodels___.HCJobViewModel
 
 class HCJobAdapter(
     private val context:Context,

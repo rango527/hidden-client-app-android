@@ -11,7 +11,7 @@ import com.hidden.client.R
 import com.hidden.client.databinding.HCJobDetailTileBinding
 import com.hidden.client.enums.DetailTileType
 import com.hidden.client.ui.viewholders.HCJobDetailTileVH
-import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
 class HCJobDetailTileAdapter(
     private val context:Context,

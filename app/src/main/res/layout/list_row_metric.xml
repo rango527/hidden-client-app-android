@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="metric_model"
-            type="com.hidden.client.ui.viewmodels.HCMetricViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCMetricViewModel" />
     </data>
 
     <LinearLayout

@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="brand_model"
-            type="com.hidden.client.ui.viewmodels.HCBrandViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCBrandViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

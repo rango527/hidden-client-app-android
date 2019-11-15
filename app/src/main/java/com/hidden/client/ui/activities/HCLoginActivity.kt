@@ -5,12 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCLoginResponse
+import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.Environment
+import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.helpers.extension.isEmailValid
+import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
@@ -21,20 +31,44 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var progressDlg: KProgressHUD;
 
+    private lateinit var viewModel: LoginVM
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Get the widgets
-        val textForgotPassword = findViewById<TextView>(R.id.text_forgot_password)
-        var labelNotMember = findViewById<TextView>(R.id.text_not_a_member)
-        var buttonSignIn = findViewById<Button>(R.id.button_signin)
+        // Init View
+        val txtForgotPassword: TextView    = findViewById(R.id.text_forgot_password)
+        val lblNotMember: TextView        = findViewById(R.id.text_not_a_member)
+        val btnSignIn: Button            = findViewById(R.id.button_signin)
+        val editEmail: EditText             = findViewById(R.id.edit_email)
+        val editPassword: EditText          = findViewById(R.id.edit_password)
 
-        // Set a click listener
-        textForgotPassword.setOnClickListener(this);
-        labelNotMember.setOnClickListener(this);
-        buttonSignIn.setOnClickListener(this);
+        // Set OnClick Listener
+        txtForgotPassword.setOnClickListener(this);
+        lblNotMember.setOnClickListener(this);
+        btnSignIn.setOnClickListener(this);
 
+        // KProgressHUD
+        progressDlg = HCDialog.KProgressDialog(this)
+
+        // Init ViewModel
+//        viewModel = ViewModelProviders.of(this).get(LoginVM::class.java)
+//
+//        viewModel.isFormValid.observe(this, Observer { valid ->
+//            btnSignIn.isEnabled = valid ?: false
+//        })
+//
+//        viewModel.loadingVisibility.observe(this, Observer { show ->
+//            HCGlobal.getInstance().log(show.toString())
+//            if (show)
+//                progressDlg.show()
+//            else
+//                progressDlg.dismiss()
+//        })
+//
+//        editEmail.doAfterTextChanged { text -> viewModel.email = text?.toString() ?: "" }
+//        editPassword.doAfterTextChanged { text -> viewModel.password = text?.toString() ?: "" }
     }
 
     override fun onClick(v: View?) {
@@ -52,6 +86,8 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.button_signin -> {
+//                viewModel.authLogin()
+
                 val email = edit_email.text.toString().trim()
                 val password = edit_password.text.toString().trim()
 
@@ -82,6 +118,8 @@ class HCLoginActivity : AppCompatActivity(), View.OnClickListener {
                                 HCGlobal.getInstance().myInfo.setIsAdmin(response.body()!!.is_admin)
                                 HCGlobal.getInstance().myInfo.setStatus(response.body()!!.status)
                                 HCGlobal.getInstance().myInfo.setToken(response.body()!!.token)
+
+                                AppPreferences.apiAccessToken = response.body()!!.token
 
                                 val intent = Intent(applicationContext, HCHomeActivity::class.java)
                                 startActivity(intent)

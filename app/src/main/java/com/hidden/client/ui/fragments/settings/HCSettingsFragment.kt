@@ -63,7 +63,7 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
             }
             R.id.layout_candidate_directory -> {
-                val intent = Intent(context, HCCandidateActivity::class.java)
+                val intent = Intent(context, CandidateListActivity::class.java)
                 startActivity(intent)
                 (activity as HCHomeActivity).overridePendingVTransitionEnter()
             }

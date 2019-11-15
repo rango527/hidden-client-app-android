@@ -17,7 +17,7 @@ import com.hidden.client.enums.JobType
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJob
 import com.hidden.client.ui.adapters.HCJobAdapter
-import com.hidden.client.ui.viewmodels.HCJobViewModel
+import com.hidden.client.ui.viewmodels___.HCJobViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

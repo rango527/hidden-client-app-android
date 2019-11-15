@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 
-open class HCBaseActivity: AppCompatActivity() {
+open class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="work_experience_model"
-            type="com.hidden.client.ui.viewmodels.HCWorkExperienceViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,8 +12,7 @@ import com.hidden.client.R
 import com.hidden.client.databinding.HCMetricBinding
 import com.hidden.client.enums.ColorSchema
 import com.hidden.client.ui.viewholders.HCMetricVH
-import com.hidden.client.ui.viewmodels.HCMetricViewModel
-import org.w3c.dom.Text
+import com.hidden.client.ui.viewmodels___.HCMetricViewModel
 
 class HCMetricAdapter(
     private val context:Context,

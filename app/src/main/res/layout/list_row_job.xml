@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="job_model"
-            type="com.hidden.client.ui.viewmodels.HCJobViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCJobViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -18,16 +18,16 @@ import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCompanyResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
 import com.hidden.client.ui.custom.CompanyDetailBadgeView
-import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCCompanyDetailActivity : HCBaseActivity(), View.OnClickListener {
+class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var imgClose: ImageView
 

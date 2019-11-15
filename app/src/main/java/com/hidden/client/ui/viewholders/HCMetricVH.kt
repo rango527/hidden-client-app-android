@@ -2,7 +2,7 @@ package com.hidden.client.ui.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.databinding.HCMetricBinding
-import com.hidden.client.ui.viewmodels.HCMetricViewModel
+import com.hidden.client.ui.viewmodels___.HCMetricViewModel
 
 class HCMetricVH(private val metricBinding: HCMetricBinding) : RecyclerView.ViewHolder(metricBinding.root) {
 

@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="process_model"
-            type="com.hidden.client.ui.viewmodels.HCProcessViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCProcessViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,12 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.databinding.HCBrandBinding
 import com.hidden.client.databinding.HCWorkExperienceBinding
-import com.hidden.client.ui.viewholders.HCBrandVH
 import com.hidden.client.ui.viewholders.HCWorkExperienceVH
-import com.hidden.client.ui.viewmodels.HCBrandViewModel
-import com.hidden.client.ui.viewmodels.HCWorkExperienceViewModel
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 
 class HCWorkExperienceAdapter(
     private val context:Context,

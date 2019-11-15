@@ -8,6 +8,4 @@ data class HCDashboardResponse(
     val empty_status: String,
     val empty_status_icon: String,
     val color_scheme: String,
-    val content: List<HCJobResponse>) {
-
-}
+    val content: List<HCJobResponse>)

@@ -19,13 +19,13 @@ import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCMyProfileActivity : HCBaseActivity(), View.OnClickListener {
+class HCMyProfileActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var editName: EditText
     private lateinit var editEmail: EditText

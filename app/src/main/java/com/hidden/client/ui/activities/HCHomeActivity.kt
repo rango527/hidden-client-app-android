@@ -2,29 +2,18 @@ package com.hidden.client.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.HCTabBar
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
 import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment
-import kotlinx.android.synthetic.main.list_row_circle_image.*
 import java.lang.Exception
 
-class HCHomeActivity : HCBaseActivity(), HCTabBar.OnTabSelectedListener {
+class HCHomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
 
     private var dashboardFrags: MutableList<Fragment> = mutableListOf<Fragment>()
     private var shortlistsFrags: MutableList<Fragment> = mutableListOf<Fragment>()

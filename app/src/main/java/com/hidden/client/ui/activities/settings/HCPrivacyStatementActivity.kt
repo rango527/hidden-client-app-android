@@ -10,12 +10,12 @@ import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCConsentResponse
 import com.hidden.client.enums.Consent
 import com.hidden.client.enums.UserType
-import com.hidden.client.ui.HCBaseActivity
+import com.hidden.client.ui.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCPrivacyStatementActivity : HCBaseActivity() {
+class HCPrivacyStatementActivity : BaseActivity() {
 
     private lateinit var txtPrivacy: TextView
 

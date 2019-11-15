@@ -5,7 +5,7 @@
         <import type="android.view.View" />
         <variable
             name="job_detail_tile_model"
-            type="com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel" />
+            type="com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel" />
     </data>
 
     <LinearLayout

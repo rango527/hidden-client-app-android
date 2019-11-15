@@ -2,7 +2,7 @@ package com.hidden.client.ui.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.databinding.HCJobBinding
-import com.hidden.client.ui.viewmodels.HCJobViewModel
+import com.hidden.client.ui.viewmodels___.HCJobViewModel
 
 class HCJobVH(private val jobBinding: HCJobBinding): RecyclerView.ViewHolder(jobBinding.root) {
 

@@ -16,7 +16,7 @@ import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
-import com.hidden.client.ui.viewmodels.HCJobDetailTileViewModel
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
