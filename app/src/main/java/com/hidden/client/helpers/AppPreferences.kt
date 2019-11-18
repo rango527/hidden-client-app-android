@@ -10,6 +10,8 @@ object AppPreferences {
     private lateinit var preferences: SharedPreferences
 
     // list of app specific preferences
+    private val MY_ID = Pair("my_id", 0)
+    private val MY_FULL_NAME = Pair("my_full_name", "")
     private val API_ACCESS_TOKEN = Pair("api_access_token", "")
 
     fun init(context: Context) {
@@ -33,5 +35,23 @@ object AppPreferences {
         // custom setter to save a preference back to preferences file
         set(value) = preferences.edit {
             it.putString(API_ACCESS_TOKEN.first, value)
+        }
+
+    var myId: Int
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getInt(MY_ID.first, MY_ID.second)
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putInt(MY_ID.first, value)
+        }
+
+    var myFullName: String
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getString(MY_FULL_NAME.first, MY_FULL_NAME.second).toString()
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putString(MY_FULL_NAME.first, value)
         }
 }

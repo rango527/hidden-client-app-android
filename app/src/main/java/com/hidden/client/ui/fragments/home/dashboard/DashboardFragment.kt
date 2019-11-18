@@ -22,7 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCDashboardFragment : Fragment(), View.OnClickListener {
+class DashboardFragment : Fragment(), View.OnClickListener {
 
     private lateinit var imgSetting: ImageView;
     private lateinit var layoutScrollContent: LinearLayout
@@ -63,12 +63,12 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                                 }
 
                                 TileContentType.SIMPLE_METRIC.value -> {
-                                    var tileView = HCNumberTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
+                                    var tileView = HCNumberTileView(activity!!.applicationContext, this@DashboardFragment, dashboardResponse)
                                     layoutScrollContent.addView(tileView)
                                 }
 
                                 TileContentType.JOB.value -> {
-                                    var jobView = HCJobTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
+                                    var jobView = HCJobTileView(activity!!.applicationContext, this@DashboardFragment, dashboardResponse)
                                     layoutScrollContent.addView(jobView)
                                 }
                             }

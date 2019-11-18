@@ -30,7 +30,7 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
 
         when(id){
             R.id.text_already_a_member->{
-                val intent = Intent(applicationContext, HCLoginActivity::class.java)
+                val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 
 import com.hidden.client.R
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
-import com.hidden.client.ui.activities.HCHomeActivity
+import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
 
@@ -65,32 +65,32 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
             R.id.layout_candidate_directory -> {
                 val intent = Intent(context, CandidateListActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_edit_your_detail -> {
                 val intent = Intent(context, HCMyProfileActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_view_company_profile -> {
                 val intent = Intent(context, HCCompanyDetailActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_terms_of_service -> {
                 val intent = Intent(context, HCTermsOfServiceActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_privacy_policy -> {
                 val intent = Intent(context, HCPrivacyStatementActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_reset_password -> {
                 val intent = Intent(context, HCResetPasswordActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_logout -> {
 

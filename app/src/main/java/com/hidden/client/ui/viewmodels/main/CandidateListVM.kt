@@ -1,5 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
@@ -16,7 +17,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
+class CandidateListVM(private val context: Context, private val candidateDao: CandidateDao): RootVM() {
 
     @Inject
     lateinit var candidateApi: CandidateApi
@@ -24,17 +25,17 @@ class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
-    val errorClickListener = View.OnClickListener { loadCandidateList() }
 
     var search = ""
         set(value) {
             field = value
+            loadCandidateList(true)
         }
 
     private lateinit var subscription: Disposable
 
     init {
-        loadCandidateList()
+        loadCandidateList(false)
     }
 
     override fun onCleared() {
@@ -42,13 +43,13 @@ class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
         subscription.dispose()
     }
 
-    private fun loadCandidateList(){
-        subscription = Observable.fromCallable { candidateDao.all }
+    private fun loadCandidateList(getOnlyFromLocal: Boolean){
+        subscription = Observable.fromCallable { candidateDao.getCandidates("%$search%") }
             .concatMap {
                     dbCandidateList ->
-                if(dbCandidateList.isEmpty())
+                if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
                     candidateApi.getCandidateList(AppPreferences.apiAccessToken, search).concatMap {
-                            apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
+                        apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
                         Observable.just(apiCandidateList)
                     }
                 else
@@ -60,7 +61,7 @@ class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
             .doOnTerminate { onRetrieveCandidateListFinish() }
             .subscribe(
                 { result -> onRetrieveCandidateListSuccess(result) },
-                { onRetrieveCandidateListError() }
+                { error -> onRetrieveCandidateListError(error) }
             )
     }
 
@@ -77,7 +78,8 @@ class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
         candidateListAdapter.updateCandidateList(candidateList)
     }
 
-    private fun onRetrieveCandidateListError(){
+    private fun onRetrieveCandidateListError(e: Throwable){
+        e.printStackTrace()
         errorMessage.value = R.string.server_error
     }
 }

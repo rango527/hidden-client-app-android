@@ -30,8 +30,10 @@ class CandidateViewVM: RootVM() {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+        fun setImageViewResource(imageView: RoundedImageView, photoUrl: String?) {
+            if (photoUrl !== null) {
+                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+            }
         }
     }
 }

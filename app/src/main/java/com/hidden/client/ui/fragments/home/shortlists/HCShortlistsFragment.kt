@@ -16,10 +16,11 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCProfile
 import com.hidden.client.models_.HCSkill
 import com.hidden.client.ui.adapters.HCProfileViewPagerAdapter
-import com.hidden.client.ui.activities.HCHomeActivity
+import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import com.hidden.client.helpers.AppPreferences
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
@@ -52,7 +53,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_home_shortlists, container, false)
 
         textHello = root.findViewById(R.id.text_hello)
-        textHello.setText(resources.getString(R.string.hello_user, HCGlobal.getInstance().myInfo.getFullName()))
+        textHello.setText(resources.getString(R.string.hello_user, AppPreferences.myFullName))
 
         // Layout Filter
         layoutFilterContainer = root.findViewById(R.id.layout_filter_container)
@@ -112,7 +113,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                 layoutFilterPanel.visibility = View.VISIBLE
                 layoutFilterPanel.startAnimation(slideUp)
 
-                (activity as HCHomeActivity).toggleMask()
+                (activity as HomeActivity).toggleMask()
             }
             R.id.img_close_filter_layout -> {
 
@@ -127,7 +128,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                     .setListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator) {
                             layoutFilterContainer.visibility = View.GONE
-                            (activity as HCHomeActivity).toggleMask()
+                            (activity as HomeActivity).toggleMask()
                         }
                     })
             }

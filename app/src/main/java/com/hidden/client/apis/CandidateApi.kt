@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface CandidateApi {
 
-    @GET("client/crud/candidate/data")
+    @GET("/client/crud/candidate/data")
     fun getCandidateList(
         @Header("Authorization") authToken: String,
         @Query("search") search: String

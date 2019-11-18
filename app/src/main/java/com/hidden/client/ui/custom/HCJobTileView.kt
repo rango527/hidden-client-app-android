@@ -14,6 +14,7 @@ import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCJobResponse
 import com.hidden.client.enums.JobType
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJob
 import com.hidden.client.ui.adapters.HCJobAdapter
@@ -54,7 +55,7 @@ class HCJobTileView : LinearLayout {
             if (data.title == JobType.YOUR_JOB.value) {
                 jobViewModel.setJobList(setViewData(data.content, data.title), data.title)
             } else {
-                RetrofitClient.instance.getJobs(data.url, HCGlobal.getInstance().myInfo.getBearerToken())
+                RetrofitClient.instance.getJobs(data.url, AppPreferences.apiAccessToken)
                     .enqueue(object: Callback<List<HCJobResponse>> {
                         override fun onFailure(call: Call<List<HCJobResponse>>, t: Throwable) {
                             Toast.makeText(context, "Failed...", Toast.LENGTH_LONG).show()

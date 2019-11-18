@@ -8,6 +8,9 @@ interface CandidateDao {
     @get:Query("SELECT * FROM Candidate")
     val all: List<Candidate>
 
+    @Query("SELECT * FROM Candidate WHERE candidateFullName like :search")
+    fun getCandidates(search: String): List<Candidate>
+
     @Insert
     fun insertAll(vararg candidates: Candidate)
 

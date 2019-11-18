@@ -14,7 +14,7 @@ class HCSplashActivity : AppCompatActivity() {
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, HCLoginActivity::class.java)
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

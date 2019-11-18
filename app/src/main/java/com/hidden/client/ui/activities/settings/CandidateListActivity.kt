@@ -50,6 +50,7 @@ class CandidateListActivity : BaseActivity() {
         viewModel.errorMessage.observe(this, Observer {
                 errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
         })
+
         binding.viewModel = viewModel
 
         progressDlg = HCDialog.KProgressDialog(this)
@@ -68,7 +69,6 @@ class CandidateListActivity : BaseActivity() {
 
     private fun showError(@StringRes errorMessage:Int){
         errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
         errorSnackbar?.show()
     }
 

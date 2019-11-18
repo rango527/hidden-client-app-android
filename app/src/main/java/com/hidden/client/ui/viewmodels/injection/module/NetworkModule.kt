@@ -2,10 +2,7 @@ package com.hidden.client.ui.viewmodels.injection.module
 
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.apis.LoginApi
-import com.hidden.client.helpers.API
-import com.hidden.client.helpers.APP
-import com.hidden.client.helpers.Environment
-import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -63,13 +60,18 @@ object NetworkModule {
             }
         }
 
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val moshi = Moshi.Builder()
+            .add(NULL_TO_EMPTY_STRING_ADAPTER)
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
-        return Retrofit.Builder()
+        val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
 //            .addConverterFactory(MoshiConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
+
+        return retrofit
     }
 }

@@ -22,6 +22,7 @@
             android:layout_height="50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@{viewModel.getCandidatePhoto(), default=@drawable/man}"
             android:scaleType="fitXY"
             app:cornerRadius="12dp"
             app:roundedCorners="topLeft|topRight|bottomLeft|bottomRight" />
@@ -30,6 +31,7 @@
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:mutableText="@{viewModel.getCandidateName()}"
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

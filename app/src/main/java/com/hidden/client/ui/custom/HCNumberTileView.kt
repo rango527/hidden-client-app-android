@@ -13,6 +13,7 @@ import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCMetricsResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.adapters.HCMetricAdapter
 import com.hidden.client.ui.viewmodels___.HCMetricViewModel
@@ -50,7 +51,7 @@ class HCNumberTileView : LinearLayout {
                 rvMetric.adapter = metricAdapter
             })
 
-            RetrofitClient.instance.getMetrics(data.url, HCGlobal.getInstance().myInfo.getBearerToken())
+            RetrofitClient.instance.getMetrics(data.url, AppPreferences.apiAccessToken)
                 .enqueue(object: Callback<List<HCMetricsResponse>> {
                     override fun onFailure(call: Call<List<HCMetricsResponse>>, t: Throwable) {
                         Toast.makeText(context, "Failed...", Toast.LENGTH_LONG).show()

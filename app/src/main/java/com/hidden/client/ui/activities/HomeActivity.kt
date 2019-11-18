@@ -13,7 +13,7 @@ import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment
 import java.lang.Exception
 
-class HCHomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
+class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
 
     private var dashboardFrags: MutableList<Fragment> = mutableListOf<Fragment>()
     private var shortlistsFrags: MutableList<Fragment> = mutableListOf<Fragment>()
