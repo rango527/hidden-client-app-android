@@ -43,6 +43,7 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
         layoutScrollContent = root.findViewById(R.id.layout_dashboard_scroll)
 
         // Fetch Dashboard API
+
         RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<List<HCDashboardResponse>> {
                 override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {

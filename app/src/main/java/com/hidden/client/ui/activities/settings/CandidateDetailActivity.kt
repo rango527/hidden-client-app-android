@@ -12,6 +12,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCandidateDetailResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCWorkExperience
@@ -26,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCCandidateDetailActivity : BaseActivity() {
+class CandidateDetailActivity : BaseActivity() {
 
     private lateinit var imgPhoto: CircleImageView
     private lateinit var textName: TextView
@@ -54,6 +55,7 @@ class HCCandidateDetailActivity : BaseActivity() {
         initCloseButton()
 
         val categoryId: String = intent.getStringExtra("category_id")
+
 
         imgPhoto = findViewById(R.id.image_photo)
         textName = findViewById(R.id.text_name)
@@ -86,7 +88,7 @@ class HCCandidateDetailActivity : BaseActivity() {
             rvWorkExperience.adapter = workExperienceAdapter
         })
 
-        RetrofitClient.instance.getCandidateDetail(HCGlobal.getInstance().myInfo.getBearerToken(), categoryId)
+        RetrofitClient.instance.getCandidateDetail(AppPreferences.apiAccessToken, categoryId)
             .enqueue(object: Callback<HCCandidateDetailResponse> {
                 override fun onFailure(call: Call<HCCandidateDetailResponse>, t: Throwable) {
                     Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
@@ -102,7 +104,7 @@ class HCCandidateDetailActivity : BaseActivity() {
                         var candidateDetail = response.body()!!
 
                         val photoUrl = candidateDetail.asset__cloudinary_url
-                        Glide.with(this@HCCandidateDetailActivity).load(photoUrl).into(imgPhoto)
+                        Glide.with(this@CandidateDetailActivity).load(photoUrl).into(imgPhoto)
 
                         textName.setText(candidateDetail.candidate__full_name)
                         textLocation.setText(candidateDetail.candidate_city__name)
@@ -120,7 +122,7 @@ class HCCandidateDetailActivity : BaseActivity() {
                         layoutSkill = findViewById(R.id.layout_skills)
 
                         for (candidate_skill in candidateDetail.candidate__skills) {
-                            var skillItemView = SkillItemView(this@HCCandidateDetailActivity, candidate_skill.skill__name, candidate_skill.candidate_skill__ranking)
+                            var skillItemView = SkillItemView(this@CandidateDetailActivity, candidate_skill.skill__name, candidate_skill.candidate_skill__ranking)
                             layoutSkill.addView(skillItemView)
                         }
 

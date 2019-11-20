@@ -11,8 +11,8 @@ import com.hidden.client.databinding.CandidateItemBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.getParentActivity
 import com.hidden.client.models.Candidate
+import com.hidden.client.ui.activities.settings.CandidateDetailActivity
 import com.hidden.client.ui.activities.settings.CandidateListActivity
-import com.hidden.client.ui.activities.settings.HCCandidateDetailActivity
 import com.hidden.client.ui.viewmodels.main.CandidateViewVM
 
 class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder>() {
@@ -32,8 +32,8 @@ class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder
 
             var candidate = candidateList[position]
 
-            val intent = Intent(HCGlobal.getInstance().currentActivity, HCCandidateDetailActivity::class.java)
-            intent.putExtra("category_id", candidate.candidateId)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, CandidateDetailActivity::class.java)
+            intent.putExtra("category_id", candidate.candidateId.toString())
             HCGlobal.getInstance().currentActivity.startActivity(intent)
             (HCGlobal.getInstance().currentActivity as CandidateListActivity).overridePendingVTransitionEnter()
         })

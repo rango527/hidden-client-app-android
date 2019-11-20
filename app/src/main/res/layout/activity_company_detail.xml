@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activities.HCCompanyDetailActivity"
@@ -73,6 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
                             android:layout_gravity="center_horizontal"
+                            android:foregroundGravity="center_horizontal"
                             app:flexWrap="wrap"
                             app:alignItems="stretch"
                             app:alignContent="stretch">
@@ -191,7 +192,7 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ImageView
         android:id="@+id/img_close"

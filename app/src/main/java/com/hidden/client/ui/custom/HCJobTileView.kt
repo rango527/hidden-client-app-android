@@ -1,6 +1,8 @@
 package com.hidden.client.ui.custom
 
 import android.content.Context
+import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -52,8 +54,19 @@ class HCJobTileView : LinearLayout {
                 rvJob.adapter = jobAdapter
             })
 
+            val layoutEmpty: LinearLayout = findViewById(R.id.layout_empty)
+            val imgEmpty: ImageView = findViewById(R.id.image_empty)
+            val txtEmpty: TextView = findViewById(R.id.text_empty)
+
             if (data.title == JobType.YOUR_JOB.value) {
-                jobViewModel.setJobList(setViewData(data.content, data.title), data.title)
+                if (data.content.size === 0) {
+                    rvJob.visibility = View.GONE
+                    layoutEmpty.visibility = View.VISIBLE
+                    imgEmpty.setImageResource(R.drawable.empty_your_jobs)
+                    txtEmpty.text = data.empty_status
+                } else {
+                    jobViewModel.setJobList(setViewData(data.content, data.title), data.title)
+                }
             } else {
                 RetrofitClient.instance.getJobs(data.url, AppPreferences.apiAccessToken)
                     .enqueue(object: Callback<List<HCJobResponse>> {
@@ -68,6 +81,11 @@ class HCJobTileView : LinearLayout {
                             if (response.isSuccessful) {
                                 if (!response.body()!!.isEmpty()) {
                                     jobViewModel.setJobList(setViewData(response.body()!!, data.title), data.title)
+                                } else {
+                                    rvJob.visibility = View.GONE
+                                    layoutEmpty.visibility = View.VISIBLE
+                                    imgEmpty.setImageResource(R.drawable.empty_colleagues_jobs)
+                                    txtEmpty.text = data.empty_status
                                 }
                             } else {
                                 Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()

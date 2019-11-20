@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCJobDetailTileBinding
 import com.hidden.client.enums.DetailTileType
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.viewholders.HCJobDetailTileVH
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
@@ -21,6 +24,8 @@ class HCJobDetailTileAdapter(
 
         val layoutInflater = LayoutInflater.from(parent.context)
         val jobDetailTileBinding: HCJobDetailTileBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_row_job_detail_tile, parent, false)
+
+        HCGlobal.getInstance().currrentJobTitleList = list
 
         return HCJobDetailTileVH(jobDetailTileBinding)
     }
@@ -42,11 +47,21 @@ class HCJobDetailTileAdapter(
                 layoutText.visibility = View.GONE
                 layoutImage.visibility = View.VISIBLE
             }
+            jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType().equals(DetailTileType.VIDEO.value) -> {
+                HCGlobal.getInstance().log("video video video")
+                layoutText.visibility = View.GONE
+                layoutImage.visibility = View.VISIBLE
+            }
             else -> {
                 layoutText.visibility = View.GONE
                 layoutImage.visibility = View.GONE
             }
         }
+
+        layoutImage.setOnClickListener(View.OnClickListener {
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobImageSliderActivity::class.java)
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
+        })
     }
 
     override fun getItemCount(): Int {

@@ -13,4 +13,9 @@ interface CandidateApi {
         @Query("search") search: String
     ): Observable<List<Candidate>>
 
+    @GET("client/candidates/{candidate_id}")
+    fun getCandidateById(
+        @Header("Authorization") authToken: String,
+        @Path("candidate_id") candidateId: String
+    ): Observable<List<Candidate>>
 }

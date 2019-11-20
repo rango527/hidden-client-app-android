@@ -16,6 +16,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCompanyResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.BaseActivity
@@ -71,7 +72,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
         })
 
         // Fetch Company Detail API
-        RetrofitClient.instance.getCompanyProfile(HCGlobal.getInstance().myInfo.getBearerToken())
+        RetrofitClient.instance.getCompanyProfile(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<HCCompanyResponse> {
                 override fun onFailure(call: Call<HCCompanyResponse>, t: Throwable) {
                     Toast.makeText(this@HCCompanyDetailActivity, "Failed...", Toast.LENGTH_LONG).show()

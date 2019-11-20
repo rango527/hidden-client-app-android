@@ -3,6 +3,7 @@ package com.hidden.client.ui.viewmodels.injection.component
 import dagger.Component
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
+import com.hidden.client.ui.viewmodels.main.CandidateDetailVM
 import com.hidden.client.ui.viewmodels.main.CandidateListVM
 import com.hidden.client.ui.viewmodels.main.CandidateViewVM
 import javax.inject.Singleton
@@ -15,6 +16,7 @@ interface ViewModelInjector {
 
     fun inject(candidateListVM: CandidateListVM)
     fun inject(candidateViewVM: CandidateViewVM)
+    fun inject(candidateDetailVM: CandidateDetailVM)
 
     @Component.Builder
     interface Builder {

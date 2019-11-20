@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCProfileResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import de.hdodenhof.circleimageview.CircleImageView
@@ -61,7 +62,7 @@ class HCMyProfileActivity : BaseActivity(), View.OnClickListener {
 
         var currentPhotoPath: String;
 
-        RetrofitClient.instance.getProfile(HCGlobal.getInstance().myInfo.getBearerToken())
+        RetrofitClient.instance.getProfile(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<HCProfileResponse> {
                 override fun onFailure(call: Call<HCProfileResponse>, t: Throwable) {
                     Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()

@@ -3,6 +3,10 @@ package com.hidden.client.ui.viewmodels.injection.module
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.*
+import com.hidden.client.helpers.nullable.NullToEmptyArray
+import com.hidden.client.helpers.nullable.NullToEmptyArrayAdapter
+import com.hidden.client.helpers.nullable.NullToEmptyStringAdapter
+import com.hidden.client.helpers.nullable.NullToZeroAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -61,7 +65,9 @@ object NetworkModule {
         }
 
         val moshi = Moshi.Builder()
-            .add(NULL_TO_EMPTY_STRING_ADAPTER)
+            .add(NullToEmptyStringAdapter())
+            .add(NullToEmptyArrayAdapter())
+            .add(NullToZeroAdapter())
             .add(KotlinJsonAdapterFactory())
             .build()
 

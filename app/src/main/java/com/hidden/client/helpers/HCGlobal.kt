@@ -3,6 +3,7 @@ package com.hidden.client.helpers
 import android.app.Activity
 import android.util.Log
 import com.hidden.client.models_.HCLogin
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
 class HCGlobal{
 
@@ -25,7 +26,8 @@ class HCGlobal{
 
 
     // Global variable
-    lateinit var currentActivity: Activity;           // current activity instance
+    lateinit var currentActivity: Activity           // current activity instance
     var myInfo: HCLogin = HCLogin()                 // user info after login
 
+    lateinit var currrentJobTitleList: ArrayList<HCJobDetailTileViewModel>
 }

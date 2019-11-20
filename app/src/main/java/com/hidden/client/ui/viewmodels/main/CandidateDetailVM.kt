@@ -8,7 +8,7 @@ import com.hidden.client.apis.CandidateApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.Candidate
-import com.hidden.client.models.dao.CandidateDao
+import com.hidden.client.models.dao.*
 import com.hidden.client.ui.adapters.CandidateListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -17,7 +17,17 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CandidateListVM(private val context: Context, private val candidateDao: CandidateDao): RootVM() {
+class CandidateDetailVM(private val context: Context,
+                        private val candidateDao: CandidateDao,
+                        private val candidateBrandDao: CandidateBrandDao,
+                        private val candidateProjectDao: CandidateProjectDao,
+                        private val candidateSkillDao: CandidateSkillDao,
+                        private val candidateWorkExperienceDao: CandidateWorkExperienceDao): RootVM() {
+
+    var candidateId = 0
+        set(value) {
+            field = value
+        }
 
     @Inject
     lateinit var candidateApi: CandidateApi
@@ -26,16 +36,11 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
 
-    var search = ""
-        set(value) {
-            field = value
-            loadCandidateList(true)
-        }
+    val candidateInfo: MutableLiveData<Candidate> = MutableLiveData()
 
     private lateinit var subscription: Disposable
 
     init {
-        loadCandidateList(false)
     }
 
     override fun onCleared() {
@@ -44,12 +49,12 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
     }
 
     private fun loadCandidateList(getOnlyFromLocal: Boolean){
-        subscription = Observable.fromCallable { candidateDao.getCandidates("%$search%") }
+        subscription = Observable.fromCallable { candidateDao.getCandidateById(candidateId) }
             .concatMap {
                     dbCandidateList ->
                 if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
-                    candidateApi.getCandidateList(AppPreferences.apiAccessToken, search).concatMap {
-                        apiCandidateList -> /*candidateDao.insertAll(*apiCandidateList.toTypedArray())*/
+                    candidateApi.getCandidateById(AppPreferences.apiAccessToken, candidateId.toString()).concatMap {
+                        apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
                         Observable.just(apiCandidateList)
                     }
                 else

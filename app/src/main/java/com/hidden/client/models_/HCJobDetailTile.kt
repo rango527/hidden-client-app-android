@@ -1,10 +1,17 @@
 package com.hidden.client.models_
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.resource.bitmap.VideoBitmapDecoder
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
+import com.hidden.client.helpers.extension.setImageBitmapFromVideoThumbnail
+
 
 class HCJobDetailTile {
 
@@ -22,7 +29,13 @@ class HCJobDetailTile {
         @JvmStatic
         fun setImageViewResource(imageView: ImageView, photoUrl: String?) {
             if (photoUrl !== null) {
-                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl!!).into(imageView)
+                if (photoUrl.endsWith(".jpg", true) || photoUrl.endsWith(".png", true) ||
+                            photoUrl.endsWith(".gif", true)) {
+                    Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+                } else {
+                    val newPhotoUrl = photoUrl.substring(0, photoUrl.length - 3) + "jpg"
+                    Glide.with(HCGlobal.getInstance().currentActivity).load(newPhotoUrl).into(imageView)
+                }
             } else {
                 imageView.visibility = View.GONE
             }
