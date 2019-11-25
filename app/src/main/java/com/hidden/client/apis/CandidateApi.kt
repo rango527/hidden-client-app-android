@@ -1,7 +1,6 @@
 package com.hidden.client.apis
 
 import com.hidden.client.models.Candidate
-import com.hidden.client.models.Login
 import io.reactivex.Observable
 import retrofit2.http.*
 

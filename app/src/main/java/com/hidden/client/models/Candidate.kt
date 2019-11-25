@@ -3,8 +3,7 @@ package com.hidden.client.models
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.hidden.client.helpers.nullable.NullToEmptyArray
-import com.hidden.client.helpers.nullable.NullToEmptyString
+import com.hidden.client.helpers.nullable.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -71,27 +70,27 @@ data class Candidate (
 
     @NullToEmptyString
     @Json(name = "candidate_city__name")
-    var cityName: String = ""
+    var cityName: String = "",
 
-//    @Json(name = "candidate__brands")
-//    @Ignore
-//    @NullToEmptyArray
-//    var brands: List<CandidateBrand> = listOf(),
-//
-//    @Json(name = "candidate__work_experiences")
-//    @Ignore
-//    @NullToEmptyArray
-//    var workExperiences: List<CandidateWorkExperience> = listOf(),
-//
-//    @Json(name = "candidate__skills")
-//    @Ignore
-//    @NullToEmptyArray
-//    var skills: List<CandidateSkill> = listOf(),
-//
-//    @Json(name = "candidate__projects")
-//    @Ignore
-//    @NullToEmptyArray
-//    var projects: List<CandidateProject> = listOf()
+    @Json(name = "candidate__brands")
+    @Ignore
+    @NullableCandidateBrand
+    var brands: List<CandidateBrand> = listOf(),
+
+    @Json(name = "candidate__work_experiences")
+    @Ignore
+    @NullableCandidateWorkExperience
+    var workExperiences: List<CandidateWorkExperience> = listOf(),
+
+    @Json(name = "candidate__skills")
+    @Ignore
+    @NullableCandidateSkill
+    var skills: List<CandidateSkill> = listOf(),
+
+    @Json(name = "candidate__projects")
+    @Ignore
+    @NullableCandidateProject
+    var projects: List<CandidateProject> = listOf()
 ) {
     constructor() : this(
         0,
@@ -109,6 +108,10 @@ data class Candidate (
         "",
         "",
         "",
-        ""
+        "",
+        emptyList(),
+        emptyList(),
+        emptyList(),
+        emptyList()
     )
 }

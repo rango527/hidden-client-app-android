@@ -1,8 +1,6 @@
 package com.hidden.client.models.dao
 
 import androidx.room.*
-import com.hidden.client.models.Candidate
-import com.hidden.client.models.CandidateBrand
 import com.hidden.client.models.CandidateWorkExperience
 
 @Dao

@@ -1,12 +1,10 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.Candidate
 import com.hidden.client.models.dao.CandidateDao
 import com.hidden.client.ui.adapters.CandidateListAdapter

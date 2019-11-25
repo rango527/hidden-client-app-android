@@ -24,6 +24,7 @@ data class CandidateBrand (
     @Json(name = "asset__cloudinary_url")
     val assetImage: Int,
 
+    @Json(name = "p_candidate_id")
     @NullToZero
     var pCandidateId: Int = 0
 

@@ -56,7 +56,6 @@ class CandidateDetailActivity : BaseActivity() {
 
         val categoryId: String = intent.getStringExtra("category_id")
 
-
         imgPhoto = findViewById(R.id.image_photo)
         textName = findViewById(R.id.text_name)
         textLocation = findViewById(R.id.text_location)

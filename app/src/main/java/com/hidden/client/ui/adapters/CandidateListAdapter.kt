@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateItemBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.helpers.extension.getParentActivity
 import com.hidden.client.models.Candidate
 import com.hidden.client.ui.activities.settings.CandidateDetailActivity
 import com.hidden.client.ui.activities.settings.CandidateListActivity
