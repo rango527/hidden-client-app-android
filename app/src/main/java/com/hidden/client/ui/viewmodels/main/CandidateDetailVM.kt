@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.models.Candidate
+import com.hidden.client.models.json.CandidateJson
 import com.hidden.client.models.dao.*
+import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.ui.adapters.CandidateListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -34,7 +35,7 @@ class CandidateDetailVM(private val context: Context,
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
 
-    val candidateInfo: MutableLiveData<Candidate> = MutableLiveData()
+    val candidateInfo: MutableLiveData<CandidateJson> = MutableLiveData()
 
     private lateinit var subscription: Disposable
 
@@ -47,25 +48,25 @@ class CandidateDetailVM(private val context: Context,
     }
 
     private fun loadCandidateList(getOnlyFromLocal: Boolean){
-        subscription = Observable.fromCallable { candidateDao.getCandidateById(candidateId) }
-            .concatMap {
-                    dbCandidateList ->
-                if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
-                    candidateApi.getCandidateById(AppPreferences.apiAccessToken, candidateId.toString()).concatMap {
-                        apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
-                        Observable.just(apiCandidateList)
-                    }
-                else
-                    Observable.just(dbCandidateList)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveCandidateListStart() }
-            .doOnTerminate { onRetrieveCandidateListFinish() }
-            .subscribe(
-                { result -> onRetrieveCandidateListSuccess(result) },
-                { error -> onRetrieveCandidateListError(error) }
-            )
+//        subscription = Observable.fromCallable { candidateDao.getCandidateById(candidateId) }
+//            .concatMap {
+//                    dbCandidateList ->
+//                if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
+//                    candidateApi.getCandidateById(AppPreferences.apiAccessToken, candidateId.toString()).concatMap {
+//                        apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
+//                        Observable.just(apiCandidateList)
+//                    }
+//                else
+//                    Observable.just(dbCandidateList)
+//            }
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .doOnSubscribe { onRetrieveCandidateListStart() }
+//            .doOnTerminate { onRetrieveCandidateListFinish() }
+//            .subscribe(
+//                { result -> onRetrieveCandidateListSuccess(result) },
+//                { error -> onRetrieveCandidateListError(error) }
+//            )
     }
 
     private fun onRetrieveCandidateListStart(){
@@ -77,7 +78,7 @@ class CandidateDetailVM(private val context: Context,
         loadingVisibility.value = false
     }
 
-    private fun onRetrieveCandidateListSuccess(candidateList: List<Candidate>){
+    private fun onRetrieveCandidateListSuccess(candidateList: List<CandidateEntity>){
         candidateListAdapter.updateCandidateList(candidateList)
     }
 

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
@@ -90,7 +91,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         jobId = intent.getStringExtra("jobId")!!
 
         // Fetch JobDetail API
-        RetrofitClient.instance.getJobDetail(HCGlobal.getInstance().myInfo.getBearerToken(), jobId)
+        RetrofitClient.instance.getJobDetail(AppPreferences.apiAccessToken, jobId)
             .enqueue(object: Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
                     Toast.makeText(this@HCJobDetailActivity, "Failed...", Toast.LENGTH_LONG).show()

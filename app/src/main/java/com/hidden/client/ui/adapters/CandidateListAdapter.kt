@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateItemBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.Candidate
+import com.hidden.client.models.entity.CandidateEntity
+import com.hidden.client.models.json.CandidateJson
 import com.hidden.client.ui.activities.settings.CandidateDetailActivity
 import com.hidden.client.ui.activities.settings.CandidateListActivity
 import com.hidden.client.ui.viewmodels.main.CandidateViewVM
 
 class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder>() {
 
-    private lateinit var candidateList: List<Candidate>
+    private lateinit var candidateList: List<CandidateEntity>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidateListAdapter.ViewHolder {
         val binding: CandidateItemBinding = DataBindingUtil.inflate(
@@ -42,7 +43,7 @@ class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder
         return if(::candidateList.isInitialized) candidateList.size else 0
     }
 
-    fun updateCandidateList(candidateList: List<Candidate>){
+    fun updateCandidateList(candidateList: List<CandidateEntity>){
         this.candidateList = candidateList
         notifyDataSetChanged()
     }
@@ -51,7 +52,7 @@ class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder
 
         private val viewModel = CandidateViewVM()
 
-        fun bind(candidate: Candidate){
+        fun bind(candidate: CandidateEntity){
             viewModel.bind(candidate)
             binding.viewModel = viewModel
         }

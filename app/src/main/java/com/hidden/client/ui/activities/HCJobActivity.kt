@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
@@ -61,7 +62,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
         jobId = intent.getStringExtra("jobId")!!
 
         // Fetch JobDetail API
-        RetrofitClient.instance.getJobDetail(HCGlobal.getInstance().myInfo.getBearerToken(), jobId)
+        RetrofitClient.instance.getJobDetail(AppPreferences.apiAccessToken, jobId)
             .enqueue(object: Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
                     Toast.makeText(this@HCJobActivity, "Failed...", Toast.LENGTH_LONG).show()

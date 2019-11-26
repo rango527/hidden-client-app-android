@@ -7,14 +7,15 @@ import androidx.room.RoomDatabase
 import com.hidden.client.helpers.APP
 import com.hidden.client.models.*
 import com.hidden.client.models.dao.*
+import com.hidden.client.models.entity.CandidateEntity
 
 
 @Database(entities = [
-    Candidate::class,
-    CandidateBrand::class,
-    CandidateProject::class,
-    CandidateSkill::class,
-    CandidateWorkExperience::class
+    CandidateEntity::class,
+    CandidateBrandEntity::class,
+    CandidateProjectEntity::class,
+    CandidateSkillEntity::class,
+    CandidateWorkExperienceEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 

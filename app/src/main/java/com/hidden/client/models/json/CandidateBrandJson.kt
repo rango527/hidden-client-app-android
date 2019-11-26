@@ -1,17 +1,12 @@
-package com.hidden.client.models
+package com.hidden.client.models.json
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.hidden.client.helpers.nullable.NullToEmptyString
 import com.hidden.client.helpers.nullable.NullToZero
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Entity
 @JsonClass(generateAdapter = true)
-data class CandidateBrand (
+data class CandidateBrandJson (
 
-    @field:PrimaryKey
     @Json(name = "brand__brand_id")
     val brandId: Int,
 
@@ -19,13 +14,14 @@ data class CandidateBrand (
     val assetId: Int,
 
     @Json(name = "brand__name")
-    val brandName: Int,
+    val brandName: String,
 
     @Json(name = "asset__cloudinary_url")
-    val assetImage: Int,
+    val assetImage: String,
 
     @Json(name = "p_candidate_id")
     @NullToZero
     var pCandidateId: Int = 0
+){
 
-)
+}

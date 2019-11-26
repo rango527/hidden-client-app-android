@@ -64,10 +64,6 @@ object NetworkModule {
         val moshi = Moshi.Builder()
             .add(NullToEmptyStringAdapter())
             .add(NullToZeroAdapter())
-            .add(NullToEmptyCandidateBrandList())
-            .add(NullToEmptyCandidateProjectList())
-            .add(NullToEmptyCandidateSkillList())
-            .add(NullToEmptyCandidateWorkExperienceList())
             .add(KotlinJsonAdapterFactory())
             .build()
 

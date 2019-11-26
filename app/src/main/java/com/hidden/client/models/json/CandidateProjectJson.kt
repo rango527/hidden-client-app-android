@@ -1,16 +1,12 @@
-package com.hidden.client.models
+package com.hidden.client.models.json
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.hidden.client.helpers.nullable.NullToZero
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Entity
 @JsonClass(generateAdapter = true)
-data class CandidateProject (
+data class CandidateProjectJson (
 
-    @field:PrimaryKey
     @Json(name = "project__project_id")
     val projectId: Int,
 
@@ -31,4 +27,6 @@ data class CandidateProject (
 
     @NullToZero
     var pCandidateId: Int = 0
-)
+) {
+
+}

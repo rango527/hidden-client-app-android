@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.Candidate
+import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.ui.viewmodels.root.RootVM
 import com.rishabhharit.roundedimageview.RoundedImageView
 
@@ -13,7 +13,7 @@ class CandidateViewVM: RootVM() {
     private val candidateName = MutableLiveData<String>()
     private val candidatePhoto = MutableLiveData<String>()
 
-    fun bind(candidate: Candidate) {
+    fun bind(candidate: CandidateEntity) {
         candidateName.value = candidate.candidateFullName
         candidatePhoto.value = candidate.candidatePhoto
     }

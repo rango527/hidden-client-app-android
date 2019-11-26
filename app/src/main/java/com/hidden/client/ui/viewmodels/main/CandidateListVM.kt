@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.models.Candidate
+import com.hidden.client.models.json.CandidateJson
 import com.hidden.client.models.dao.CandidateDao
+import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.ui.adapters.CandidateListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -47,8 +48,19 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
                     dbCandidateList ->
                 if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
                     candidateApi.getCandidateList(AppPreferences.apiAccessToken, search).concatMap {
-                        apiCandidateList -> /*candidateDao.insertAll(*apiCandidateList.toTypedArray())*/
-                        Observable.just(apiCandidateList)
+                        apiCandidateList ->
+                            var candidateList: ArrayList<CandidateEntity> = arrayListOf()
+                            for (item in apiCandidateList) {
+                                val photo = if (item.candidatePhoto === null) "" else item.candidatePhoto
+
+                                var candidate = CandidateEntity(item.candidateId, photo, item.candidateFirstName,
+                                    item.candidateLastName, item.candidateFullName, "", "", "", "",
+                                    "", "", "", "", "", "", "")
+
+                                candidateList.add(candidate)
+                            }
+                            candidateDao.insertAll(*candidateList.toTypedArray())
+                            Observable.just(candidateList)
                     }
                 else
                     Observable.just(dbCandidateList)
@@ -72,7 +84,7 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
         loadingVisibility.value = false
     }
 
-    private fun onRetrieveCandidateListSuccess(candidateList: List<Candidate>){
+    private fun onRetrieveCandidateListSuccess(candidateList: List<CandidateEntity>){
         candidateListAdapter.updateCandidateList(candidateList)
     }
 

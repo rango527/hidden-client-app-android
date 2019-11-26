@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.User
 import com.hidden.client.helpers.extension.isEmailValid
-import com.hidden.client.models.Login
+import com.hidden.client.models.json.LoginJson
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -31,7 +30,7 @@ class LoginVM: RootVM() {
     val navigateToHome: LiveData<Event<Boolean>>
         get() = _navigateToHome
 
-    // Login form validation
+    // LoginJson form validation
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean>
         get() = _isFormValid
@@ -90,7 +89,7 @@ class LoginVM: RootVM() {
         loadingVisibility.value = false
     }
 
-    private fun onAuthLoginSuccess(loginResult: Login){
+    private fun onAuthLoginSuccess(loginResult: LoginJson){
         if (loginResult.status == User.approved) {
             AppPreferences.myId = loginResult.clientId
             AppPreferences.myFullName = loginResult.fullName
