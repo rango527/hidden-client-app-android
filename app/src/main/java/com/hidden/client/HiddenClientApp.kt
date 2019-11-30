@@ -9,5 +9,6 @@ class HiddenClientApp : Application() {
         super.onCreate()
 
         AppPreferences.init(this)
+
     }
 }
