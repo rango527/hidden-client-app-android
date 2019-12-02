@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_red"
-    tools:context=".ui.activities.settings.HCCandidateDetailActivity">
+    android:background="@drawable/bg_gradient_red">
 
     <ImageView
         android:id="@+id/image_close"

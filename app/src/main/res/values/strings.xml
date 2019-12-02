@@ -81,6 +81,15 @@
     <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\ncandidates.\nCheck back later!</string>
     <string name="add_more">+%1$s more</string>
 
+    <!-- Approve -->
+    <string name="feedback_notice">To Approve AQUAD DART, Please Give Us Some Quick Feedback</string>
+    <string name="feedback_notice2">"This goes to your Hidden Talent Partner and not to Aqua Dart directly</string>
+    <string name="feedback_notice3">To Reject AQUAD DART, Please Give Us Some Quick Feedback</string>
+    <string name="anything_else_to_add">Anything else to add?</string>
+    <string name="feedback_her">Add any other comments or \n feedback here...</string>
+    <string name="approve">Approve</string>
+    <string name="reject">Reject</string>
+
     <string name="processes">PROCESSES</string>
     <string name="for_">For</string>
     <string name="process">Process</string>

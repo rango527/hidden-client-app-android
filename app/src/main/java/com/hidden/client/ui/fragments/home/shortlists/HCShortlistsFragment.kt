@@ -81,13 +81,13 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         // New Profile Sliding
         profileList.add(HCProfile())
         profileList[0].setJobTitles(arrayOf("Google", "Facebook", "Twitter"))
-        profileList[0].setEmployeeHistory(
-            arrayOf(
-                R.drawable.facebook,
-                R.drawable.coca,
-                R.drawable.water
-            )
-        )
+//        profileList[0].setEmployeeHistory(
+//            arrayOf(
+//                R.drawable.facebook,
+//                R.drawable.coca,
+//                R.drawable.water
+//            )
+//        )
         profileList[0].setProjects(
             arrayOf(
                 "https://res.cloudinary.com/dioyg7htb/image/upload/v1534146352/hidden/brands/737/logo/5b71372f6bcca.jpg",

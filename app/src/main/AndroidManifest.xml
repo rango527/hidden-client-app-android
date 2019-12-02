@@ -19,9 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.settings.VideoPlayerActivity"
+        <activity android:name=".ui.activities.shortlist.RejectActivity"></activity>
+        <activity android:name=".ui.activities.shortlist.ApproveActivity" />
+        <activity
+            android:name=".ui.activities.settings.VideoPlayerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.settings.JobImageSliderActivity"
             android:screenOrientation="portrait"
