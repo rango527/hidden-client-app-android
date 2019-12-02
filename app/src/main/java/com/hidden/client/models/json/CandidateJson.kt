@@ -1,27 +1,49 @@
 package com.hidden.client.models.json
 
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.helpers.nullable.NullToEmptyString
+import com.hidden.client.models.entity.CandidateEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class CandidateJson (
+data class CandidateJson(
 
     @Json(name = "candidate__candidate_id")
-    val candidateId: Int,
+    val id: Int?,
 
     @Json(name = "asset_candidate__cloudinary_url")
     @NullToEmptyString
-    var candidatePhoto: String? = "",
+    var photo: String?,
 
     @Json(name = "candidate__first_name")
-    val candidateFirstName: String,
+    val firstName: String?,
 
     @Json(name = "candidate__surname")
-    val candidateLastName: String,
+    val lastName: String?,
 
     @Json(name = "candidate__full_name")
-    val candidateFullName: String
+    val fullName: String?
 ) {
 
+    fun toEntity(): CandidateEntity {
+        return CandidateEntity(
+            id.safeValue(),
+            photo.safeValue(),
+            firstName.safeValue(),
+            lastName.safeValue(),
+            fullName.safeValue(),
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        );
+    }
 }

@@ -4,14 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "CandidateSkill")
-data class CandidateSkillEntity (
+data class SkillEntity (
 
     @field:PrimaryKey
-    var skillId: Int,
+    var id: Int,
 
-    var skillName: String,
+    var name: String,
 
-    var skillRanking: Int,
+    var ranking: Int,
 
     var pCandidateId: Int
 )

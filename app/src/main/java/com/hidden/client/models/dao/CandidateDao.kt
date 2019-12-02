@@ -9,10 +9,10 @@ interface CandidateDao {
     @get:Query("SELECT * FROM Candidate")
     val all: List<CandidateEntity>
 
-    @Query("SELECT * FROM Candidate WHERE candidateFullName like :search")
+    @Query("SELECT * FROM Candidate WHERE fullName like :search")
     fun getCandidates(search: String): List<CandidateEntity>
 
-    @Query("SELECT * FROM Candidate WHERE candidateId = :id AND candidateEmail <> ''")
+    @Query("SELECT * FROM Candidate WHERE id = :id AND email <> ''")
     fun getCandidateById(id: Int): List<CandidateEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

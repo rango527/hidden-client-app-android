@@ -51,13 +51,7 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
                         apiCandidateList ->
                             var candidateList: ArrayList<CandidateEntity> = arrayListOf()
                             for (item in apiCandidateList) {
-                                val photo = if (item.candidatePhoto === null) "" else item.candidatePhoto
-
-                                var candidate = CandidateEntity(item.candidateId, photo, item.candidateFirstName,
-                                    item.candidateLastName, item.candidateFullName, "", "", "", "",
-                                    "", "", "", "", "", "", "")
-
-                                candidateList.add(candidate)
+                                candidateList.add(item.toEntity())
                             }
                             candidateDao.insertAll(*candidateList.toTypedArray())
                             Observable.just(candidateList)

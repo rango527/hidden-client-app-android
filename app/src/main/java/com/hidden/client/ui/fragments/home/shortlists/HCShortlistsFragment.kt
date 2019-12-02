@@ -20,11 +20,24 @@ import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.widget.Toast
+import com.hidden.client.datamodels.HCDashboardResponse
+import com.hidden.client.datamodels.HCShortlistCandidateResponse
+import com.hidden.client.datamodels.HCShortlistResponse
+import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.models.json.ShortlistJson
+import com.hidden.client.networks.RetrofitClient
+import com.hidden.client.ui.custom.HCInterviewTileView
+import com.hidden.client.ui.custom.HCJobTileView
+import com.hidden.client.ui.custom.HCNumberTileView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
-
-    private lateinit var shortlistsViewModel: HCShortlistsViewModel
 
     private lateinit var textHello: TextView;
 
@@ -48,8 +61,6 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shortlistsViewModel =
-            ViewModelProviders.of(this).get(HCShortlistsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home_shortlists, container, false)
 
         textHello = root.findViewById(R.id.text_hello)
@@ -70,11 +81,26 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         // New Profile Sliding
         profileList.add(HCProfile())
         profileList[0].setJobTitles(arrayOf("Google", "Facebook", "Twitter"))
-        profileList[0].setEmployeeHistory(arrayOf(R.drawable.facebook, R.drawable.coca, R.drawable.water))
-        profileList[0].setProjects(arrayOf(R.drawable.test, R.drawable.hidden_logo_black, R.drawable.test))
-        profileList[0].setSkills(arrayOf(HCSkill("Art Direction", 90), HCSkill("Product Manager", 86),
-            HCSkill("Android", 93), HCSkill("Kotlin", 96),
-            HCSkill("Copy Writing", 65), HCSkill("Simuation", 83)))
+        profileList[0].setEmployeeHistory(
+            arrayOf(
+                R.drawable.facebook,
+                R.drawable.coca,
+                R.drawable.water
+            )
+        )
+        profileList[0].setProjects(
+            arrayOf(
+                "https://res.cloudinary.com/dioyg7htb/image/upload/v1534146352/hidden/brands/737/logo/5b71372f6bcca.jpg",
+                "https://res.cloudinary.com/dioyg7htb/image/upload/v1534146352/hidden/brands/737/logo/5b71372f6bcca.jpg"
+            )
+        )
+        profileList[0].setSkills(
+            arrayOf(
+                HCSkill("Art Direction", 90), HCSkill("Product Manager", 86),
+                HCSkill("Android", 93), HCSkill("Kotlin", 96),
+                HCSkill("Copy Writing", 65), HCSkill("Simuation", 83)
+            )
+        )
 
         profileList.add(HCProfile())
         profileList[1].setJobTitles(arrayOf("Github", "Paypal", "Microsoft"))
@@ -99,6 +125,43 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
             layoutEmpty.visibility = View.VISIBLE
         }
 
+        // Fetch Dashboard API
+        RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
+            .enqueue(object : Callback<HCShortlistResponse> {
+                override fun onFailure(call: Call<HCShortlistResponse>, t: Throwable) {
+                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                override fun onResponse(
+                    call: Call<HCShortlistResponse>,
+                    response: Response<HCShortlistResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val candidateList: List<HCShortlistCandidateResponse> =
+                            response.body()!!.candidates
+
+                        for (candidate in candidateList) {
+                            var profile: HCProfile = HCProfile()
+                            profile.setJobTitles(
+                                arrayOf(
+                                    candidate.job_title_1__name,
+                                    candidate.job_title_2__name,
+                                    candidate.job_title_3__name
+                                )
+                            )
+
+                            var employeeHistoryList: ArrayList<String> = arrayListOf()
+                            for (workExperience in candidate.candidate__work_experiences) {
+                                employeeHistoryList.add(workExperience.asset__cloudinary_url)
+                            }
+                            profile.setEmployeeHistory(*employeeHistoryList.toTypedArray())
+                        }
+
+
+                    }
+                }
+            })
         return root
     }
 

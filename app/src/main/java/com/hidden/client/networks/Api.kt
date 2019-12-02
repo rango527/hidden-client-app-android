@@ -1,6 +1,7 @@
 package com.hidden.client.networks
 
 import com.hidden.client.datamodels.*
+import com.hidden.client.models.json.ShortlistJson
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -93,5 +94,5 @@ interface Api {
     @GET("client/shortlist")
     fun getShortlists(
         @Header("Authorization") authToken: String
-    ):Call<HCCandidateResponse>
+    ):Call<HCShortlistResponse>
 }

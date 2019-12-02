@@ -2,7 +2,6 @@ package com.hidden.client.models.dao
 
 import androidx.room.*
 import com.hidden.client.models.ShortlistEntity
-import com.hidden.client.models.entity.CandidateEntity
 
 @Dao
 interface ShortlistDao {
@@ -10,7 +9,7 @@ interface ShortlistDao {
     @get:Query("SELECT * FROM Shortlist")
     val all: List<ShortlistEntity>
 
-    @Query("SELECT * FROM Shortlist WHERE entityId = :id")
+    @Query("SELECT * FROM Shortlist WHERE clientId = :id")
     fun getShortlistById(id: Int): List<ShortlistEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

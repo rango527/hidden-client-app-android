@@ -48,7 +48,6 @@ class HCJobDetailTileAdapter(
                 layoutImage.visibility = View.VISIBLE
             }
             jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType().equals(DetailTileType.VIDEO.value) -> {
-                HCGlobal.getInstance().log("video video video")
                 layoutText.visibility = View.GONE
                 layoutImage.visibility = View.VISIBLE
             }

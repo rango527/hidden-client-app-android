@@ -4,24 +4,20 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.CandidateApi
-import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.models.json.CandidateJson
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.ui.adapters.CandidateListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class CandidateDetailVM(private val context: Context,
                         private val candidateDao: CandidateDao,
-                        private val candidateBrandDao: CandidateBrandDao,
-                        private val candidateProjectDao: CandidateProjectDao,
-                        private val candidateSkillDao: CandidateSkillDao,
-                        private val candidateWorkExperienceDao: CandidateWorkExperienceDao): RootVM() {
+                        private val brandDao: BrandDao,
+                        private val projectDao: ProjectDao,
+                        private val skillDao: SkillDao,
+                        private val workExperienceDao: WorkExperienceDao): RootVM() {
 
     var candidateId = 0
         set(value) {

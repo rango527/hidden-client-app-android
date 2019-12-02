@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity (tableName = "CandidateWorkExperience")
-data class CandidateWorkExperienceEntity (
+data class WorkExperienceEntity (
 
     @field:PrimaryKey
-    var experienceId: Int,
+    var id: Int,
 
     var jobTitle: String,
 

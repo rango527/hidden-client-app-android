@@ -11,9 +11,9 @@ class HCProfile {
 
     private lateinit var feedback: String
 
-    private var employeeHistory: Array<Int> = arrayOf()
+    private var employeeHistory: Array<String> = arrayOf()
 
-    private var projects: Array<Int> = arrayOf()
+    private var projects: Array<String> = arrayOf()
 
     private var skills: Array<HCSkill> = arrayOf()
 
@@ -42,8 +42,8 @@ class HCProfile {
         location: String,
         jobTitles: Array<String>,
         feedback: String,
-        employeeHistory: Array<Int>,
-        projects: Array<Int>,
+        employeeHistory: Array<String>,
+        projects: Array<String>,
         skills: Array<HCSkill>
     ) {
         setPhoto(photo)
@@ -96,19 +96,19 @@ class HCProfile {
         this.feedback = feedback
     }
 
-    fun getEmployeeHistory() : Array<Int> {
+    fun getEmployeeHistory() : Array<String> {
         return employeeHistory
     }
 
-    fun setEmployeeHistory(employeeHistory: Array<Int>) {
+    fun setEmployeeHistory(employeeHistory: Array<String>) {
         this.employeeHistory = employeeHistory
     }
 
-    fun getProjects() : Array<Int> {
+    fun getProjects() : Array<String> {
         return projects
     }
 
-    fun setProjects(projects: Array<Int>) {
+    fun setProjects(projects: Array<String>) {
         this.projects = projects
     }
 

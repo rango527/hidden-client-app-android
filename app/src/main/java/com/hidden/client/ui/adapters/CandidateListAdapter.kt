@@ -33,7 +33,7 @@ class CandidateListAdapter: RecyclerView.Adapter<CandidateListAdapter.ViewHolder
             var candidate = candidateList[position]
 
             val intent = Intent(HCGlobal.getInstance().currentActivity, CandidateDetailActivity::class.java)
-            intent.putExtra("category_id", candidate.candidateId.toString())
+            intent.putExtra("category_id", candidate.id.toString())
             HCGlobal.getInstance().currentActivity.startActivity(intent)
             (HCGlobal.getInstance().currentActivity as CandidateListActivity).overridePendingVTransitionEnter()
         })

@@ -12,18 +12,24 @@ import com.hidden.client.models.entity.CandidateEntity
 
 @Database(entities = [
     CandidateEntity::class,
-    CandidateBrandEntity::class,
-    CandidateProjectEntity::class,
-    CandidateSkillEntity::class,
-    CandidateWorkExperienceEntity::class
+    BrandEntity::class,
+    ProjectEntity::class,
+    SkillEntity::class,
+    WorkExperienceEntity::class,
+    ShortlistEntity::class,
+    ShortlistCandidateEntity::class,
+    FeedbackEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun candidateDao(): CandidateDao
-    abstract fun candidateBrandDao(): CandidateBrandDao
-    abstract fun candidateProjectDao(): CandidateProjectDao
-    abstract fun candidateSkillDao(): CandidateSkillDao
-    abstract fun candidateWorkExperienceDao(): CandidateWorkExperienceDao
+    abstract fun brandDao(): BrandDao
+    abstract fun projectDao(): ProjectDao
+    abstract fun skillDao(): SkillDao
+    abstract fun workExperienceDao(): WorkExperienceDao
+    abstract fun shortlistDao(): ShortlistDao
+    abstract fun shortlistCandidateDao(): ShortlistCandidateDao
+    abstract fun feedbackDao(): FeedbackDao
 
     companion object {
 

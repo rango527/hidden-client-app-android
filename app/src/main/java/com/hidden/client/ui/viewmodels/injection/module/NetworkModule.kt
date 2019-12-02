@@ -2,6 +2,7 @@ package com.hidden.client.ui.viewmodels.injection.module
 
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.apis.LoginApi
+import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.nullable.*
 import com.squareup.moshi.Moshi
@@ -40,6 +41,13 @@ object NetworkModule {
         return retrofit.create(CandidateApi::class.java)
     }
 
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideShortlistApi(retrofit: Retrofit): ShortlistApi {
+        return retrofit.create(ShortlistApi::class.java)
+    }
+
     /**
      * Provides the Retrofit object.
      * @return the Retrofit object
@@ -72,6 +80,7 @@ object NetworkModule {
 //            .addConverterFactory(MoshiConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
 
         return retrofit

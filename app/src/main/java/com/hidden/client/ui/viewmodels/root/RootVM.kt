@@ -8,6 +8,8 @@ import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.CandidateListVM
 import com.hidden.client.ui.viewmodels.main.CandidateViewVM
+import com.hidden.client.ui.viewmodels.main.ShortlistListVM
+import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 
 abstract class RootVM: ViewModel() {
 
@@ -29,6 +31,8 @@ abstract class RootVM: ViewModel() {
 
             is CandidateListVM -> injector.inject(this)
             is CandidateViewVM -> injector.inject(this)
+            is ShortlistListVM -> injector.inject(this)
+            is ShortlistViewVM -> injector.inject(this)
         }
     }
 }

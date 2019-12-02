@@ -14,8 +14,8 @@ class CandidateViewVM: RootVM() {
     private val candidatePhoto = MutableLiveData<String>()
 
     fun bind(candidate: CandidateEntity) {
-        candidateName.value = candidate.candidateFullName
-        candidatePhoto.value = candidate.candidatePhoto
+        candidateName.value = candidate.fullName
+        candidatePhoto.value = candidate.photo
     }
 
     fun getCandidateName(): MutableLiveData<String> {

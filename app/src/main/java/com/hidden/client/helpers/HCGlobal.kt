@@ -19,7 +19,7 @@ class HCGlobal{
     }
 
     fun log(message: String) {
-        if (HCConstants.IS_DEBUG) {
+        if (APP.is_debug) {
             Log.d(HCConstants.LOG_TAG, message)
         }
     }

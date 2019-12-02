@@ -13,7 +13,9 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.viewmodels.intro.LoginVM
+import com.hidden.client.ui.viewmodels.main.ShortlistListVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -66,6 +68,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         })
+
     }
 
     override fun onClick(v: View?) {

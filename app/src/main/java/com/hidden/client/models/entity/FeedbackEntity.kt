@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 data class FeedbackEntity (
 
     @field:PrimaryKey
-    val feedbackId: Int,
+    val id: Int,
 
-    val feedbackQuestion: String,
+    val question: String,
 
     val outcome: String,
 

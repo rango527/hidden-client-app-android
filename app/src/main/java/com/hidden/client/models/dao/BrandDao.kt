@@ -1,19 +1,19 @@
 package com.hidden.client.models.dao
 
 import androidx.room.*
-import com.hidden.client.models.CandidateBrandEntity
+import com.hidden.client.models.BrandEntity
 
 @Dao
-interface CandidateBrandDao {
+interface BrandDao {
 
     @get:Query("SELECT * FROM CandidateBrand")
-    val all: List<CandidateBrandEntity>
+    val all: List<BrandEntity>
 
     @Query("SELECT * FROM CandidateBrand WHERE pCandidateId = :candidateId")
-    fun getBrandByCandidateId(candidateId: Int): List<CandidateBrandEntity>
+    fun getBrandByCandidateId(candidateId: Int): List<BrandEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg candidateBrands: CandidateBrandEntity)
+    fun insertAll(vararg brands: BrandEntity)
 
     @Query("DELETE FROM CandidateBrand")
     fun deleteAll()

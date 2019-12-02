@@ -9,5 +9,5 @@ interface ShortlistApi {
     @GET("/client/shortlist")
     fun getShortlist(
         @Header("Authorization") authToken: String
-    ): Observable<List<ShortlistJson>>
+    ): Observable<ShortlistJson>
 }
