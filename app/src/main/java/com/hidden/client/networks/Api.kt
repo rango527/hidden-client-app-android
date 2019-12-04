@@ -95,4 +95,17 @@ interface Api {
     fun getShortlists(
         @Header("Authorization") authToken: String
     ):Call<HCShortlistResponse>
+
+    @POST("client/processes/{process_id}/accept-submission")
+    fun approveShortlist(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ):Call<HCResponse>
+
+    @POST("client/processes/{process_id}/reject")
+    fun rejectShortlist(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ):Call<HCResponse>
+
 }

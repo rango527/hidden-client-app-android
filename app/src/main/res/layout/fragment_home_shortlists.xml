@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_default"
     android:background="@drawable/bg_gradient_green">
 
     <ImageView
@@ -48,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_hello"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/menu_padding_vertical_default"
-        android:text="Please review the 3 new profiles in your Creative Director shortlist"
+        android:text=""
         android:textColor="@color/colorWhite_1"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"/>
@@ -112,6 +111,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_new_profile"
             android:layout_width="match_parent"
+            android:layout_margin="@dimen/margin_default"
             android:layout_height="0dp"
             android:layout_weight="1"/>
     </LinearLayout>

@@ -6,6 +6,7 @@ data class HCCandidateProjectResponse(
     val project__brief: String,
     val project__activity: String,
     val brand__name: String,
-    val brand_logo__cloudinary_url: String
+    val brand_logo__cloudinary_url: String,
+    val candidate__project_assets: List<HCCandidateProjectAssets> = listOf()
 ) {
 }

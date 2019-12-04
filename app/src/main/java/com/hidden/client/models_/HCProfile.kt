@@ -1,8 +1,12 @@
 package com.hidden.client.models_
 
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
+
 class HCProfile {
 
-    private var photo: Int = 0
+    private var id: Int = 0;
+
+    private var photo: String = ""
 
     private lateinit var title: String
     private lateinit var location: String
@@ -15,17 +19,24 @@ class HCProfile {
 
     private var projects: Array<String> = arrayOf()
 
+    private lateinit var workExperience: HCWorkExperienceViewModel
+
     private var skills: Array<HCSkill> = arrayOf()
 
     fun getJobTitleWithSeparator() : String {
         var ret: String = ""
 
-        for ((index, value) in this.jobTitles.withIndex()) {
+        var index = 0
+        for (value in this.jobTitles) {
+
+            if (value === null) continue;
+            if (value === "") continue;
 
             if (index != 0) {
                 ret += " | "
             }
 
+            index++
             ret += value;
         }
 
@@ -36,31 +47,19 @@ class HCProfile {
 
     }
 
-    constructor(
-        photo: Int,
-        title: String,
-        location: String,
-        jobTitles: Array<String>,
-        feedback: String,
-        employeeHistory: Array<String>,
-        projects: Array<String>,
-        skills: Array<HCSkill>
-    ) {
-        setPhoto(photo)
-        setTitle(title)
-        setLocation(location)
-        setJobTitles(jobTitles)
-        setFeedback(feedback)
-        setEmployeeHistory(employeeHistory)
-        setProjects(projects)
-        setSkills(skills)
+    fun getId(): Int {
+        return id
     }
 
-    fun getPhoto(): Int {
+    fun setId(id: Int) {
+        this.id = id
+    }
+
+    fun getPhoto(): String {
         return photo
     }
 
-    fun setPhoto(photo: Int) {
+    fun setPhoto(photo: String) {
         this.photo = photo
     }
 
@@ -118,5 +117,13 @@ class HCProfile {
 
     fun setSkills(skills: Array<HCSkill>) {
         this.skills = skills
+    }
+
+    fun getWorkExperience(): HCWorkExperienceViewModel {
+        return workExperience
+    }
+
+    fun setWorkExperience(workExperience:HCWorkExperienceViewModel) {
+        this.workExperience = workExperience
     }
 }

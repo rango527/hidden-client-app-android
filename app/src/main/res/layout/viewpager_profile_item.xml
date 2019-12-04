@@ -1,98 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="ShortlistItemBinding">
+
         <variable
             name="viewModel"
             type="com.hidden.client.ui.viewmodels.main.ShortlistViewVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_default"
-        android:background="@drawable/button_round_white">
+        android:background="@drawable/button_round_white"
+        android:padding="@dimen/padding_default">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_profile_logo"
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:contentDescription="@string/view_company_profiles"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/blue_glue"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_profile_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
-            android:textColor="@color/colorBlack_2"
-            android:textSize="@dimen/textview_signup_fragment_header"
             android:layout_marginLeft="@dimen/margin_default"
             android:layout_marginTop="@dimen/list_row_margin_default"
+            android:text="BLUE GLUE"
+            android:textColor="@color/colorBlack_2"
+            android:textSize="@dimen/textview_signup_fragment_header"
             android:textStyle="bold"
-            android:text="BLUE GLUE" />
+            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_profile_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/text_profile_title"
-            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
-            android:textColor="@color/colorBlack_2"
             android:layout_marginLeft="@dimen/margin_default"
             android:layout_marginTop="@dimen/list_row_margin_default"
-            android:text="St Albans" />
+            android:text="St Albans"
+            android:textColor="@color/colorBlack_2"
+            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
+            app:layout_constraintTop_toBottomOf="@id/text_profile_title" />
 
         <TextView
             android:id="@+id/text_profile_job_titles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/img_profile_logo"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Creative Director | Art Director | Typographer"
-            android:textColor="@color/colorCyan_1"/>
+            android:textColor="@color/colorCyan_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_profile_logo" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/text_profile_job_titles"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/margin_default"
-            android:scrollbars="none">
+            android:orientation="vertical"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_profile_job_titles">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/lbl_hidden_says"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/what_hidden_says"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="@dimen/textview_bold"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text_profile_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                    android:textStyle="italic"
                     android:text="Blue Glue has lead huge Ad Campaingns with teams of 100+ for the brands below. See the examples of the work in portfolio. You must..."
-                    android:textColor="@color/colorBlack_2"/>
+                    android:textColor="@color/colorBlack_2"
+                    android:textStyle="italic" />
 
                 <TextView
-                    android:id="@+id/text_has_work_with"
+                    android:id="@+id/lbl_has_work_with"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -107,26 +109,27 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/lbl_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/portfolio"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/portfolio"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="@dimen/textview_bold"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_profile_projects"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:clickable="true"/>
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/lbl_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/skills"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/skills"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="@dimen/textview_bold"
                     android:textStyle="bold" />
@@ -135,14 +138,14 @@
                     android:id="@+id/layout_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:flexWrap="wrap"
+                    app:alignContent="stretch"
                     app:alignItems="stretch"
-                    app:alignContent="stretch">
+                    app:flexWrap="wrap">
 
                 </com.google.android.flexbox.FlexboxLayout>
 
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

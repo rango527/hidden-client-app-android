@@ -20,17 +20,22 @@ import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.view.Gravity
 import android.widget.Toast
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.datamodels.HCShortlistResponse
 import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.json.ShortlistJson
+import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.custom.HCInterviewTileView
 import com.hidden.client.ui.custom.HCJobTileView
 import com.hidden.client.ui.custom.HCNumberTileView
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
+import kotlinx.android.synthetic.main.activity_sign_up_with_invite_code.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +44,8 @@ import kotlin.collections.ArrayList
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var textHello: TextView;
+    private lateinit var textHello: TextView
+    private lateinit var textProfileCount: TextView
 
     // Layout: Empty & ViewPager
     private lateinit var layoutEmpty: LinearLayout
@@ -56,6 +62,9 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
     private lateinit var imgOpenFilter: ImageView
     private lateinit var imgCloseFilter: ImageView
 
+    // View Model
+    private lateinit var workExperienceViewModel: HCWorkExperienceViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,6 +74,8 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
         textHello = root.findViewById(R.id.text_hello)
         textHello.setText(resources.getString(R.string.hello_user, AppPreferences.myFullName))
+
+        textProfileCount = root.findViewById(R.id.text_new_profile_count)
 
         // Layout Filter
         layoutFilterContainer = root.findViewById(R.id.layout_filter_container)
@@ -78,52 +89,9 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         layoutEmpty = root.findViewById(R.id.layout_empty_shortlists)
         layoutViewPager = root.findViewById(R.id.layout_has_shortlists)
 
-        // New Profile Sliding
-        profileList.add(HCProfile())
-        profileList[0].setJobTitles(arrayOf("Google", "Facebook", "Twitter"))
-//        profileList[0].setEmployeeHistory(
-//            arrayOf(
-//                R.drawable.facebook,
-//                R.drawable.coca,
-//                R.drawable.water
-//            )
-//        )
-        profileList[0].setProjects(
-            arrayOf(
-                "https://res.cloudinary.com/dioyg7htb/image/upload/v1534146352/hidden/brands/737/logo/5b71372f6bcca.jpg",
-                "https://res.cloudinary.com/dioyg7htb/image/upload/v1534146352/hidden/brands/737/logo/5b71372f6bcca.jpg"
-            )
-        )
-        profileList[0].setSkills(
-            arrayOf(
-                HCSkill("Art Direction", 90), HCSkill("Product Manager", 86),
-                HCSkill("Android", 93), HCSkill("Kotlin", 96),
-                HCSkill("Copy Writing", 65), HCSkill("Simuation", 83)
-            )
-        )
-
-        profileList.add(HCProfile())
-        profileList[1].setJobTitles(arrayOf("Github", "Paypal", "Microsoft"))
-        profileList[1].setSkills(arrayOf(HCSkill("Android Programming", 97), HCSkill("Agile", 89)))
-
-        profileList.add(HCProfile())
-        profileList[2].setJobTitles(arrayOf("Dropbox", "Amazon", "Hubstaff", "Bitbucket"))
-
-        if (profileList.size > 0) {
-            viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
-            viewPagerNewProfile.clipToPadding = false
-            viewPagerNewProfile.pageMargin = 32
-
-            profileAdapter = HCProfileViewPagerAdapter(activity!!.applicationContext, profileList)
-            viewPagerNewProfile.adapter = profileAdapter
-
-            layoutViewPager.visibility = View.VISIBLE
-            layoutEmpty.visibility = View.GONE
-
-        } else {
-            layoutViewPager.visibility = View.GONE
-            layoutEmpty.visibility = View.VISIBLE
-        }
+        // View Models
+        workExperienceViewModel =
+            ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
 
         // Fetch Dashboard API
         RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
@@ -137,12 +105,22 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                     call: Call<HCShortlistResponse>,
                     response: Response<HCShortlistResponse>
                 ) {
-                    if (response.isSuccessful) {
-                        val candidateList: List<HCShortlistCandidateResponse> =
-                            response.body()!!.candidates
+                    profileList.clear()
 
-                        for (candidate in candidateList) {
+                    if (response.isSuccessful) {
+                        HCGlobal.getInstance().currentShortlist = response.body()!!.candidates
+
+                        textProfileCount.text = context!!.resources.getQuantityString(R.plurals.shortlists_profile_count, HCGlobal.getInstance().currentShortlist.size)
+
+                        for (candidate in HCGlobal.getInstance().currentShortlist) {
                             var profile: HCProfile = HCProfile()
+
+                            profile.setId(candidate.candidate__candidate_id)
+                            profile.setPhoto(candidate.avatar__image.safeValue())
+                            profile.setTitle(candidate.avatar__name.safeValue())
+                            profile.setLocation(candidate.candidate_city__name.safeValue())
+                            profile.setFeedback(candidate.candidate__hidden_says.safeValue())
+
                             profile.setJobTitles(
                                 arrayOf(
                                     candidate.job_title_1__name,
@@ -152,13 +130,52 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                             )
 
                             var employeeHistoryList: ArrayList<String> = arrayListOf()
-                            for (workExperience in candidate.candidate__work_experiences) {
-                                employeeHistoryList.add(workExperience.asset__cloudinary_url)
+                            for (brand in candidate.candidate__brands) {
+                                employeeHistoryList.add(brand.asset__cloudinary_url)
                             }
-                            profile.setEmployeeHistory(*employeeHistoryList.toTypedArray())
+                            profile.setEmployeeHistory(employeeHistoryList.toTypedArray())
+
+                            var projectList: ArrayList<String> = arrayListOf()
+                            for (project in candidate.candidate__projects) {
+                                if (project.candidate__project_assets.isNotEmpty()){
+                                    projectList.add(project.brand_logo__cloudinary_url)
+                                }
+                            }
+                            profile.setProjects(projectList.toTypedArray())
+
+                            var skillList: ArrayList<HCSkill> = arrayListOf()
+                            for (skill in candidate.candidate__skills) {
+                                skillList.add(
+                                    HCSkill(
+                                        skill.skill__name,
+                                        skill.candidate_skill__ranking
+                                    )
+                                )
+                            }
+                            profile.setSkills(skillList.toTypedArray())
+
+                            profileList.add(profile)
                         }
+                    }
 
+                    if (profileList.size > 0) {
+                        viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
+                        viewPagerNewProfile.clipToPadding = false
+                        viewPagerNewProfile.pageMargin = 32
 
+                        profileAdapter = HCProfileViewPagerAdapter(
+                            activity!!.applicationContext,
+                            profileList,
+                            this@HCShortlistsFragment
+                        )
+                        viewPagerNewProfile.adapter = profileAdapter
+
+                        layoutViewPager.visibility = View.VISIBLE
+                        layoutEmpty.visibility = View.GONE
+
+                    } else {
+                        layoutViewPager.visibility = View.GONE
+                        layoutEmpty.visibility = View.VISIBLE
                     }
                 }
             })

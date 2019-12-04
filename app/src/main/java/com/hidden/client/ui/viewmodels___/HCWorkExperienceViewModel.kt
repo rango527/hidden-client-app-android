@@ -18,8 +18,8 @@ class HCWorkExperienceViewModel: ViewModel {
         return this.workExperience
     }
 
-    var workExperienceListMutableLiveData = MutableLiveData<ArrayList<HCWorkExperienceViewModel>>()
-    var workExperienceList = ArrayList<HCWorkExperienceViewModel>()
+    private var workExperienceListMutableLiveData = MutableLiveData<ArrayList<HCWorkExperienceViewModel>>()
+    private var workExperienceList = ArrayList<HCWorkExperienceViewModel>()
 
     fun getWorkExperienceList(): MutableLiveData<ArrayList<HCWorkExperienceViewModel>> {
 
