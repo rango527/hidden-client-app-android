@@ -66,4 +66,10 @@ class ApproveActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, ShortlistDetailActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

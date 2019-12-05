@@ -20,27 +20,19 @@ import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.view.Gravity
 import android.widget.Toast
-import com.hidden.client.datamodels.HCDashboardResponse
-import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.datamodels.HCShortlistResponse
-import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.json.ShortlistJson
-import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.networks.RetrofitClient
-import com.hidden.client.ui.custom.HCInterviewTileView
-import com.hidden.client.ui.custom.HCJobTileView
-import com.hidden.client.ui.custom.HCNumberTileView
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
-import kotlinx.android.synthetic.main.activity_sign_up_with_invite_code.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.viewpagerindicator.CirclePageIndicator
+
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
@@ -62,8 +54,13 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
     private lateinit var imgOpenFilter: ImageView
     private lateinit var imgCloseFilter: ImageView
 
+    // View Pager Indicator
+    private lateinit var indicator: CirclePageIndicator
+
     // View Model
     private lateinit var workExperienceViewModel: HCWorkExperienceViewModel
+
+    private lateinit var layoutBackground: ConstraintLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,6 +86,12 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         layoutEmpty = root.findViewById(R.id.layout_empty_shortlists)
         layoutViewPager = root.findViewById(R.id.layout_has_shortlists)
 
+        // View Pager
+        viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
+        indicator = root.findViewById(R.id.indicator)
+
+        layoutBackground = root.findViewById(R.id.layout_background)
+
         // View Models
         workExperienceViewModel =
             ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
@@ -110,7 +113,10 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                     if (response.isSuccessful) {
                         HCGlobal.getInstance().currentShortlist = response.body()!!.candidates
 
-                        textProfileCount.text = context!!.resources.getQuantityString(R.plurals.shortlists_profile_count, HCGlobal.getInstance().currentShortlist.size)
+                        textProfileCount.text = context!!.resources.getQuantityString(
+                            R.plurals.shortlists_profile_count,
+                            HCGlobal.getInstance().currentShortlist.size
+                        )
 
                         for (candidate in HCGlobal.getInstance().currentShortlist) {
                             var profile: HCProfile = HCProfile()
@@ -120,6 +126,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                             profile.setTitle(candidate.avatar__name.safeValue())
                             profile.setLocation(candidate.candidate_city__name.safeValue())
                             profile.setFeedback(candidate.candidate__hidden_says.safeValue())
+                            profile.setAvatarColor(candidate.avatar__colour)
 
                             profile.setJobTitles(
                                 arrayOf(
@@ -137,7 +144,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
                             var projectList: ArrayList<String> = arrayListOf()
                             for (project in candidate.candidate__projects) {
-                                if (project.candidate__project_assets.isNotEmpty()){
+                                if (project.candidate__project_assets.isNotEmpty()) {
                                     projectList.add(project.brand_logo__cloudinary_url)
                                 }
                             }
@@ -159,20 +166,19 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                     }
 
                     if (profileList.size > 0) {
-                        viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
-                        viewPagerNewProfile.clipToPadding = false
-                        viewPagerNewProfile.pageMargin = 32
 
-                        profileAdapter = HCProfileViewPagerAdapter(
-                            activity!!.applicationContext,
-                            profileList,
-                            this@HCShortlistsFragment
-                        )
-                        viewPagerNewProfile.adapter = profileAdapter
+                        initViewPager()
 
                         layoutViewPager.visibility = View.VISIBLE
                         layoutEmpty.visibility = View.GONE
 
+                        layoutBackground.setBackgroundResource(
+                            resources.getIdentifier(
+                                profileList[0].getAvatarColor(),
+                                "drawable",
+                                context!!.packageName
+                            )
+                        )
                     } else {
                         layoutViewPager.visibility = View.GONE
                         layoutEmpty.visibility = View.VISIBLE
@@ -180,6 +186,49 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                 }
             })
         return root
+    }
+
+    private fun initViewPager() {
+
+        viewPagerNewProfile.clipToPadding = false
+        viewPagerNewProfile.pageMargin = 32
+
+        profileAdapter = HCProfileViewPagerAdapter(
+            activity!!.applicationContext,
+            profileList,
+            this@HCShortlistsFragment
+        )
+        viewPagerNewProfile.adapter = profileAdapter
+
+        // Indicator Init
+        indicator.setViewPager(viewPagerNewProfile)
+
+        val density = resources.displayMetrics.density
+
+        //Set circle indicator radius
+        indicator.setRadius(5 * density)
+
+        // Pager listener over indicator
+        indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageSelected(position: Int) {
+                layoutBackground.setBackgroundResource(
+                    resources.getIdentifier(
+                        profileList[position].getAvatarColor(),
+                        "drawable",
+                        context!!.packageName
+                    )
+                )
+            }
+
+            override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {
+
+            }
+
+            override fun onPageScrollStateChanged(pos: Int) {
+
+            }
+        })
     }
 
     override fun onClick(v: View?) {

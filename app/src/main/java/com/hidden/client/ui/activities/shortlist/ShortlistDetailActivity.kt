@@ -56,6 +56,8 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shortlist_detail)
 
+        HCGlobal.getInstance().currentActivity = this
+
         imgClose = findViewById(R.id.image_close);
         imgClose.setOnClickListener(this)
 

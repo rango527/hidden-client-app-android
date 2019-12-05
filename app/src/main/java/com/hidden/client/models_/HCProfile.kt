@@ -23,6 +23,8 @@ class HCProfile {
 
     private var skills: Array<HCSkill> = arrayOf()
 
+    private lateinit var avatarColor: String
+
     fun getJobTitleWithSeparator() : String {
         var ret: String = ""
 
@@ -125,5 +127,13 @@ class HCProfile {
 
     fun setWorkExperience(workExperience:HCWorkExperienceViewModel) {
         this.workExperience = workExperience
+    }
+
+    fun getAvatarColor(): String {
+        return  avatarColor
+    }
+
+    fun setAvatarColor(avatarColor: String) {
+        this.avatarColor = avatarColor
     }
 }
