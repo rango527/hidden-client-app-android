@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_red">
-
-    <ImageView
-        android:id="@+id/image_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_close"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/padding_default"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/logo_margin_top"
-        android:background="@color/colorWhite_1">
+        android:layout_marginTop="@dimen/logo_margin_top">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_default">
+            android:paddingTop="@dimen/padding_default"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:background="@drawable/panel_top_rounded_border">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/image_photo"
@@ -66,6 +60,7 @@
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
             <TextView
+                android:id="@+id/lbl_snapshot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -82,6 +77,7 @@
                 android:text="blablabla"/>
 
             <TextView
+                android:id="@+id/lbl_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/has_worked_with"
@@ -96,6 +92,7 @@
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
             <TextView
+                android:id="@+id/lbl_skills"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/skills"
@@ -113,6 +110,7 @@
                 app:alignContent="stretch" />
 
             <TextView
+                android:id="@+id/lbl_experience"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/work_experience"
@@ -165,4 +163,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/thumb_down_small"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_close"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/ic_close"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/padding_default"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

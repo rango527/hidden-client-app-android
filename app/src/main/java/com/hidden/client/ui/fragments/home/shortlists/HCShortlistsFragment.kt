@@ -206,7 +206,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         val density = resources.displayMetrics.density
 
         //Set circle indicator radius
-        indicator.setRadius(5 * density)
+        indicator.radius = 5 * density
 
         // Pager listener over indicator
         indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.ui.BaseActivity
@@ -25,6 +27,7 @@ import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_shortlist_detail.*
 
 class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgPhoto: CircleImageView
@@ -50,6 +53,15 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var layoutApprove: LinearLayout
     private lateinit var layoutReject: LinearLayout
 
+    // Labels
+    private lateinit var lblSnapshot: TextView
+    private lateinit var lblBrand: TextView
+    private lateinit var lblSkills: TextView
+    private lateinit var lblExperience: TextView
+
+    // Background
+    private lateinit var layoutBackground: ConstraintLayout
+
     private lateinit var imgClose: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +84,13 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
         layoutReject = findViewById(R.id.layout_reject)
         layoutReject.setOnClickListener(this)
 
+        lblSnapshot = findViewById(R.id.lbl_snapshot)
+        lblBrand = findViewById(R.id.lbl_brand)
+        lblSkills = findViewById(R.id.lbl_skills)
+        lblExperience = findViewById(R.id.lbl_experience)
+
+        layoutBackground = findViewById(R.id.layout_background)
+
         // Brand RecyclerView
         rvBrand = findViewById(R.id.recyclerview_brand)
         brandViewModel = ViewModelProviders.of(this).get(HCBrandViewModel::class.java)
@@ -83,6 +102,10 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
             rvBrand.setHasFixedSize(true)
 
             rvBrand.adapter = brandAdapter
+
+            if (brandViewModel.isEmpty()) {
+                lblBrand.visibility = View.GONE
+            }
         })
 
         // Work Experience RecyclerView
@@ -97,12 +120,20 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
                 rvWorkExperience.setHasFixedSize(true)
 
                 rvWorkExperience.adapter = workExperienceAdapter
+
+                if (workExperienceViewModels.isEmpty()) {
+                    lblExperience.visibility = View.GONE
+                }
             })
 
         // -------------------------------------------------------------------
 
         var candidateDetail =
             HCGlobal.getInstance().currentShortlist[HCGlobal.getInstance().currentIndex]
+
+        layoutBackground.setBackgroundResource(
+            resources.getIdentifier(candidateDetail.avatar__colour, "drawable", packageName)
+        )
 
         val photoUrl = candidateDetail.avatar__image
         Glide.with(this).load(photoUrl).into(imgPhoto)
@@ -111,6 +142,10 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
         textLocation.setText(candidateDetail.candidate_city__name)
         textJobTitle.setText(candidateDetail.job_title_1__name + " | " + candidateDetail.job_title_2__name + " | " + candidateDetail.job_title_3__name)
         textSnapshot.setText(candidateDetail.candidate__hidden_says)
+
+        if (candidateDetail.candidate__hidden_says.safeValue().isEmpty()) {
+            lblSnapshot.visibility = View.GONE
+        }
 
         // Set Brand List
         var candidateBrandList: ArrayList<HCBrand> = arrayListOf()
@@ -129,6 +164,10 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
                 candidate_skill.candidate_skill__ranking
             )
             layoutSkill.addView(skillItemView)
+        }
+
+        if (candidateDetail.candidate__skills.isEmpty()) {
+            lbl_skills.visibility = View.GONE
         }
 
         // Set WorkExperienceList
