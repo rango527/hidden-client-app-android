@@ -200,7 +200,7 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
                 finish()
             }
-            R.id.img_close -> {
+            R.id.image_close -> {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
