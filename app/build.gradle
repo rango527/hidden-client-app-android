@@ -107,4 +107,6 @@ dependencies {
         exclude module: 'appcompat-v7'
         exclude module: 'support-v4'
     }
+
+    implementation 'me.anwarshahriar:calligrapher:1.0'
 }

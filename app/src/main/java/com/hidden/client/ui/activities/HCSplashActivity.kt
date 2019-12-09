@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.hidden.client.R
+import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.extension.safeValue
+import me.anwarshahriar.calligrapher.Calligrapher
 
 class HCSplashActivity : AppCompatActivity() {
 
@@ -14,8 +17,13 @@ class HCSplashActivity : AppCompatActivity() {
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, LoginActivity::class.java)
-            startActivity(intent)
+            if (AppPreferences.apiAccessToken.safeValue().isNotEmpty() && AppPreferences.myFullName.safeValue().isNotEmpty() && AppPreferences.myId.safeValue() !== 0) {
+                val intent = Intent(applicationContext, HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         }
     }

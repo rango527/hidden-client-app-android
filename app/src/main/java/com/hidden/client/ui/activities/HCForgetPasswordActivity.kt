@@ -24,7 +24,7 @@ class HCForgetPasswordActivity : AppCompatActivity(), View.OnClickListener {
 
         when(id){
             R.id.button_backToLogin->{
-                val intent = Intent(applicationContext, LoginActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

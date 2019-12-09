@@ -10,5 +10,11 @@ class HiddenClientApp : Application() {
 
         AppPreferences.init(this)
 
+//        FontsOverride.setDefaultFcont(this, "DEFAULT", "fonts/alex.ttf");
+//        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/alex.ttf");
+//        FontsOverride.setDefaultFont(this, "SERIF", "fonts/alex.ttf");
+//        FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/alex.ttf");
+
+//        TypefaceUtil.overrideFont(applicationContext, "SERIF", "fonts/alex.ttf");
     }
 }

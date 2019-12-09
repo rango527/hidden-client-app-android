@@ -20,6 +20,7 @@ import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.provider.Settings
 import android.widget.Toast
 import com.hidden.client.datamodels.HCShortlistResponse
 import com.hidden.client.helpers.AppPreferences
@@ -115,6 +116,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
                         textProfileCount.text = context!!.resources.getQuantityString(
                             R.plurals.shortlists_profile_count,
+                            HCGlobal.getInstance().currentShortlist.size,
                             HCGlobal.getInstance().currentShortlist.size
                         )
 
@@ -208,6 +210,18 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         //Set circle indicator radius
         indicator.radius = 5 * density
 
+        if (profileList.size > HCGlobal.getInstance().currentIndex) {
+            indicator.setCurrentItem(HCGlobal.getInstance().currentIndex)
+            layoutBackground.setBackgroundResource(
+                resources.getIdentifier(
+                    profileList[HCGlobal.getInstance().currentIndex].getAvatarColor(),
+                    "drawable",
+                    context!!.packageName
+                )
+            )
+        }
+
+
         // Pager listener over indicator
         indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
@@ -222,11 +236,9 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {
-
             }
 
             override fun onPageScrollStateChanged(pos: Int) {
-
             }
         })
     }

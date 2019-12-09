@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
+import android.view.ViewGroup
+import com.hidden.client.R
+import com.hidden.client.ui.fonts.FontChangeCrawler
+
+
 
 open class BaseActivity: AppCompatActivity() {
 

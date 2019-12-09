@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
@@ -30,11 +31,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
 
         // Init View
-        val txtForgotPassword: TextView     = findViewById(R.id.text_forgot_password)
-        val lblNotMember: TextView          = findViewById(R.id.text_not_a_member)
-        val btnSignIn: Button               = findViewById(R.id.button_signin)
-        val editEmail: EditText             = findViewById(R.id.edit_email)
-        val editPassword: EditText          = findViewById(R.id.edit_password)
+        val txtForgotPassword: TextView = findViewById(R.id.text_forgot_password)
+        val lblNotMember: TextView = findViewById(R.id.text_not_a_member)
+        val btnSignIn: Button = findViewById(R.id.button_signin)
+        val editEmail: EditText = findViewById(R.id.edit_email)
+        val editPassword: EditText = findViewById(R.id.edit_password)
 
         // Set OnClick Listener
         txtForgotPassword.setOnClickListener(this);
@@ -66,6 +67,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             it.getContentIfNotHandled()?.let {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         })
 
@@ -74,13 +76,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         val id = v!!.id
 
-        when(id){
+        when (id) {
             R.id.text_forgot_password -> {
                 val intent = Intent(applicationContext, HCForgetPasswordActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-            R.id.text_not_a_member ->{
+            R.id.text_not_a_member -> {
                 val intent = Intent(applicationContext, HCSignUpWithInviteCodeActivity::class.java)
                 startActivity(intent)
                 finish()

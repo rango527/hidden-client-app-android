@@ -73,7 +73,6 @@ class HCProfileViewPagerAdapter : PagerAdapter {
             HCGlobal.getInstance().currentIndex = position
             val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistDetailActivity::class.java)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
-            HCGlobal.getInstance().currentActivity.finish()
         })
 
         val lblHiddenSays: TextView = view.findViewById(R.id.lbl_hidden_says)

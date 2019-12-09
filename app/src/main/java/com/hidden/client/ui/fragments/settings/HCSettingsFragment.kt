@@ -10,8 +10,11 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 
 import com.hidden.client.R
+import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HomeActivity
+import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
 
@@ -94,6 +97,13 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
             }
             R.id.layout_logout -> {
 
+                AppPreferences.myFullName = ""
+                AppPreferences.apiAccessToken = ""
+                AppPreferences.myId = 0
+
+                val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
+                startActivity(intent);
+                HCGlobal.getInstance().currentActivity.finish()
             }
         }
     }

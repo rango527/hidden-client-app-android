@@ -10,7 +10,7 @@
         <item quantity="zero">Sorry, there are no new profiles in your various shortlists</item>
         <item quantity="one">Please review the new profile in your various shortlists</item>
         <item quantity="two">Please review the 2 new profiles in your various shortlists</item>
-        <item quantity="other">Please review the %d new profiles in your various shortlists</item>
+        <item quantity="other">Please review the %1$d new profiles in your various shortlists</item>
     </plurals>
 
 </resources>

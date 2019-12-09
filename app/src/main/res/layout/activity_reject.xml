@@ -8,7 +8,7 @@
     tools:context=".ui.activities.shortlist.RejectActivity">
 
     <ImageButton
-        android:id="@+id/button_back"
+        android:id="@+id/image_close"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginLeft="@dimen/margin_default"
@@ -28,7 +28,7 @@
         android:contentDescription="@string/image_description_back"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/thumb_up_large" />
+        app:srcCompat="@drawable/thumb_down_large" />
 
     <TextView
         android:id="@+id/text_feedback_notice"
@@ -42,7 +42,7 @@
         android:textColor="@color/colorBlack_1"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/button_back" />
+        app:layout_constraintTop_toBottomOf="@id/image_close" />
 
     <TextView
         android:id="@+id/text_feedback_notice2"

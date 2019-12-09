@@ -29,7 +29,7 @@ import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_shortlist_detail.*
 
-class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
+class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     private lateinit var imgPhoto: CircleImageView
     private lateinit var textName: TextView
     private lateinit var textLocation: TextView
@@ -62,16 +62,13 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
     // Background
     private lateinit var layoutBackground: ConstraintLayout
 
-    private lateinit var imgClose: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shortlist_detail)
 
         HCGlobal.getInstance().currentActivity = this
 
-        imgClose = findViewById(R.id.image_close);
-        imgClose.setOnClickListener(this)
+        initCloseButton()
 
         imgPhoto = findViewById(R.id.image_photo)
         textName = findViewById(R.id.text_name)
@@ -193,24 +190,11 @@ class ShortlistDetailActivity : AppCompatActivity(), View.OnClickListener {
             R.id.layout_approve -> {
                 val intent = Intent(this, ApproveActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.layout_reject -> {
                 val intent = Intent(this, RejectActivity::class.java)
                 startActivity(intent)
-                finish()
-            }
-            R.id.image_close -> {
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
             }
         }
-    }
-
-    override fun onBackPressed() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
