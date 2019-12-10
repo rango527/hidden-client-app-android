@@ -7,7 +7,6 @@ import android.os.Handler
 import com.hidden.client.R
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.extension.safeValue
-import me.anwarshahriar.calligrapher.Calligrapher
 
 class HCSplashActivity : AppCompatActivity() {
 

@@ -8,12 +8,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.enums.TileContentType
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.custom.HCInterviewTileView
 import com.hidden.client.ui.custom.HCJobTileView
 import com.hidden.client.ui.custom.HCNumberTileView
@@ -26,6 +26,8 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
 
     private lateinit var imgSetting: ImageView;
     private lateinit var layoutScrollContent: LinearLayout
+
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +44,18 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
         // Scrollview Layout
         layoutScrollContent = root.findViewById(R.id.layout_dashboard_scroll)
 
-        // Fetch Dashboard API
+        swipeContainer = root.findViewById(R.id.swipe_container)
+        swipeContainer.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            getDashboard()
+        })
 
+        // Fetch Dashboard API
+        getDashboard()
+
+        return root
+    }
+
+    private fun getDashboard() {
         RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<List<HCDashboardResponse>> {
                 override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {
@@ -74,13 +86,12 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                                 }
                             }
                         }
+                        swipeContainer.isRefreshing = false
                     } else {
                         Toast.makeText(activity!!.applicationContext, "Error", Toast.LENGTH_LONG).show()
                     }
                 }
             })
-
-        return root
     }
     override fun onClick(v: View?) {
         when (v!!.id) {

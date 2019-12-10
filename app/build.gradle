@@ -108,5 +108,7 @@ dependencies {
         exclude module: 'support-v4'
     }
 
-    implementation 'me.anwarshahriar:calligrapher:1.0'
+    // Pull to Refresh
+    implementation 'com.github.huzenan:EasyPullLayout:v1.0.0'
+    implementation project(':horizontalswipelayout')
 }

@@ -42,7 +42,7 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
         subscription.dispose()
     }
 
-    private fun loadCandidateList(getOnlyFromLocal: Boolean){
+    fun loadCandidateList(getOnlyFromLocal: Boolean){
         subscription = Observable.fromCallable { candidateDao.getCandidates("%$search%") }
             .concatMap {
                     dbCandidateList ->

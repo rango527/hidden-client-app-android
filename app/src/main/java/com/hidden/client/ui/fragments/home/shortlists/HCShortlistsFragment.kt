@@ -32,6 +32,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.collections.ArrayList
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.hidden.client.ui.custom.CustomSwipeToRefresh
+import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.viewpagerindicator.CirclePageIndicator
 
 
@@ -42,7 +44,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
     // Layout: Empty & ViewPager
     private lateinit var layoutEmpty: LinearLayout
-    private lateinit var layoutViewPager: LinearLayout
+    private lateinit var layoutViewPager: CustomSwipeToRefresh
 
     // Viewpager for Profile Sliding
     private lateinit var viewPagerNewProfile: ViewPager
@@ -54,6 +56,9 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
     private lateinit var layoutFilterPanel: ConstraintLayout
     private lateinit var imgOpenFilter: ImageView
     private lateinit var imgCloseFilter: ImageView
+
+    // Swipe Container
+    private lateinit var swipeContainer: HorizontalSwipeRefreshLayout
 
     // View Pager Indicator
     private lateinit var indicator: CirclePageIndicator
@@ -87,6 +92,11 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         layoutEmpty = root.findViewById(R.id.layout_empty_shortlists)
         layoutViewPager = root.findViewById(R.id.layout_has_shortlists)
 
+        swipeContainer = root.findViewById(R.id.swipe_container)
+        swipeContainer.setOnRefreshListener(HorizontalSwipeRefreshLayout.OnRefreshListener {
+            getShortlist()
+        })
+
         // View Pager
         viewPagerNewProfile = root.findViewById(R.id.viewpager_new_profile)
         indicator = root.findViewById(R.id.indicator)
@@ -97,6 +107,12 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         workExperienceViewModel =
             ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
 
+        getShortlist()
+
+        return root
+    }
+
+    private fun getShortlist() {
         // Fetch Dashboard API
         RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
             .enqueue(object : Callback<HCShortlistResponse> {
@@ -185,9 +201,10 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                         layoutViewPager.visibility = View.GONE
                         layoutEmpty.visibility = View.VISIBLE
                     }
+
+                    swipeContainer.isRefreshing = false
                 }
             })
-        return root
     }
 
     private fun initViewPager() {
