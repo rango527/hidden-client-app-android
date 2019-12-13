@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.project.ImageSliderActivity
 import com.hidden.client.ui.viewholders.HCImageVH
 
 class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
@@ -36,11 +34,6 @@ class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
 
         var imgUrl: String = list[position]
         Glide.with(context).load(imgUrl).into(holder.img)
-
-        holder.itemView.setOnClickListener(View.OnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ImageSliderActivity::class.java)
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
-        })
     }
 
     override fun getItemCount(): Int {

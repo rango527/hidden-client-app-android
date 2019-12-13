@@ -18,6 +18,7 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models_.HCBrand
+import com.hidden.client.models_.HCProject
 import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.HomeActivity
@@ -116,21 +117,21 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
         })
 
         // Project RecyclerView
-//        rvProject = findViewById(R.id.recyclerview_project)
-//        projectViewModel = ViewModelProviders.of(this).get(HCProjectViewModel::class.java)
-//        projectViewModel.getProjectList().observe(this, Observer { projectViewModel ->
-//            projectAdapter = HCProjectAdapter(this, projectViewModel)
-//
-//            layoutProjectdManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//            rvProject.layoutManager = layoutProjectdManager
-//            rvProject.setHasFixedSize(true)
-//
-//            rvProject.adapter = projectAdapter
-//
-//            if (projectViewModel.isEmpty()) {
-//                lblProject.visibility = View.GONE
-//            }
-//        })
+        rvProject = findViewById(R.id.recyclerview_project)
+        projectViewModel = ViewModelProviders.of(this).get(HCProjectViewModel::class.java)
+        projectViewModel.getProjectList().observe(this, Observer { projectViewModel ->
+            projectAdapter = HCProjectAdapter(this, projectViewModel)
+
+            layoutProjectdManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            rvProject.layoutManager = layoutProjectdManager
+            rvProject.setHasFixedSize(true)
+
+            rvProject.adapter = projectAdapter
+
+            if (projectViewModel.isEmpty()) {
+                lblProject.visibility = View.GONE
+            }
+        })
 
         // Work Experience RecyclerView
         rvWorkExperience = findViewById(R.id.recyclerview_work_experience)
@@ -177,6 +178,32 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
             candidateBrandList.add(HCBrand(candidate_brand_response.asset__cloudinary_url))
         }
         brandViewModel.setBrandList(candidateBrandList)
+
+        // Set ProjectList
+        var candidateProjectList: ArrayList<HCProject> = arrayListOf()
+        for (candidate_project_response in candidateDetail.candidate__projects) {
+            var mainImageUrl = ""
+
+            val mainAssets =
+                candidate_project_response.candidate__project_assets.filter { it.project_asset__is_main_image }
+            if (mainAssets.isNotEmpty()) {
+                mainImageUrl = mainAssets[0].project_asset__cloudinary_url
+            }
+
+            if (mainImageUrl.isNotBlank()) {
+                val project = HCProject(
+                    candidate_project_response.project__project_id,
+                    candidate_project_response.project__title,
+                    candidate_project_response.project__brief,
+                    candidate_project_response.project__activity,
+                    candidate_project_response.brand__name,
+                    candidate_project_response.brand_logo__cloudinary_url,
+                    mainImageUrl
+                )
+                candidateProjectList.add(project)
+            }
+        }
+        projectViewModel.setProjectList(candidateProjectList)
 
         // Skill Layout
         layoutSkill = findViewById(R.id.layout_skills)

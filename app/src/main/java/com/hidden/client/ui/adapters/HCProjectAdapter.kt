@@ -1,13 +1,17 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.HCBrandBinding
 import com.hidden.client.databinding.HCProjectBinding
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.activities.project.ImageSliderActivity
 import com.hidden.client.ui.viewholders.HCBrandVH
 import com.hidden.client.ui.viewholders.HCProjectVH
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
@@ -29,6 +33,11 @@ class HCProjectAdapter(
 
         val projectModel = list[position]
         holder.bind(projectModel)
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            val intent = Intent(HCGlobal.getInstance().currentActivity, ImageSliderActivity::class.java)
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
+        })
     }
 
     override fun getItemCount(): Int {

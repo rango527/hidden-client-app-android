@@ -54,15 +54,6 @@ class HCImageAdapter : RecyclerView.Adapter<HCImageVH> {
 
         var imgUrl: String = list[position]
         Glide.with(context).load(imgUrl).into(holder.img)
-
-        if (clickable) {
-            holder.itemView.setOnClickListener(View.OnClickListener {
-                HCGlobal.getInstance().currentIndex = parentIndex
-                HCGlobal.getInstance().currentProjectIndex = position
-                val intent = Intent(HCGlobal.getInstance().currentActivity, ProjectDetailActivity::class.java)
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
-            })
-        }
     }
 
     override fun getItemCount(): Int {
