@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/img_open_filter_layout"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:contentDescription="@string/filter"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,8 +20,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_photo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:src="@drawable/man"
         app:civ_border_color="@android:color/transparent"
         app:civ_border_width="2dp"
@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/menu_padding_vertical_default"
         android:text="@string/hello_user"
         android:textColor="@color/colorWhite_1"
-        android:textSize="@dimen/textview_signup_fragment_header"
+        android:textSize="17sp"
         android:layout_marginLeft="@dimen/margin_default"/>
 
     <TextView
@@ -99,17 +99,7 @@
             android:textColor="@color/colorWhite_1"/>
     </LinearLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/layout_has_shortlists"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginTop="@dimen/margin_default"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/text_new_profile_count"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        android:visibility="visible"-->
-<!--        android:layout_marginBottom="@dimen/margin_default">-->
-    <com.hidden.client.ui.custom.CustomSwipeToRefresh
+    <LinearLayout
         android:id="@+id/layout_has_shortlists"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -118,23 +108,29 @@
         app:layout_constraintTop_toBottomOf="@id/text_new_profile_count"
         app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="visible"
+        android:gravity="center"
         android:layout_marginBottom="@dimen/margin_default">
 
         <com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
             android:id="@+id/swipe_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:foregroundGravity="center_horizontal">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager_new_profile"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="@dimen/margin_default"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:clipToPadding="false"
+                android:foregroundGravity="center"
+                android:overScrollMode="never"/>
 
         </com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout>
 
-    </com.hidden.client.ui.custom.CustomSwipeToRefresh>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_filter_container"

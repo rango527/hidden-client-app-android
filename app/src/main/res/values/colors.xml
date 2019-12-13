@@ -23,4 +23,17 @@
 
     <color name="borderBottom">#E8E8E8</color>
 
+    <color name="aqua">#00FFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="cobalt">#0047AB</color>
+    <color name="coral">#FF7F50</color>
+    <color name="green">#00FF00</color>
+    <color name="indigo">#4B0082</color>
+    <color name="mint">#98FF98</color>
+    <color name="orange">#FFA500</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="purple">#6A0DAD</color>
+    <color name="red">#FF0000</color>
+    <color name="silver">#AAA9AD</color>
+
 </resources>

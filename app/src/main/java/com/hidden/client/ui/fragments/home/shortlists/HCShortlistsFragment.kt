@@ -20,7 +20,6 @@ import com.hidden.client.ui.activities.HomeActivity
 import android.view.animation.AnimationUtils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.provider.Settings
 import android.widget.Toast
 import com.hidden.client.datamodels.HCShortlistResponse
 import com.hidden.client.helpers.AppPreferences
@@ -31,10 +30,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.collections.ArrayList
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.hidden.client.ui.custom.CustomSwipeToRefresh
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.viewpagerindicator.CirclePageIndicator
+import android.util.DisplayMetrics
+import kotlinx.android.synthetic.main.viewpager_profile_item.*
 
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
@@ -44,7 +43,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
     // Layout: Empty & ViewPager
     private lateinit var layoutEmpty: LinearLayout
-    private lateinit var layoutViewPager: CustomSwipeToRefresh
+    private lateinit var layoutViewPager: LinearLayout
 
     // Viewpager for Profile Sliding
     private lateinit var viewPagerNewProfile: ViewPager
@@ -117,8 +116,9 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
         RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
             .enqueue(object : Callback<HCShortlistResponse> {
                 override fun onFailure(call: Call<HCShortlistResponse>, t: Throwable) {
-                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG)
-                        .show()
+                    if (activity !== null) {
+                        Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onResponse(
@@ -162,8 +162,10 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
                             var projectList: ArrayList<String> = arrayListOf()
                             for (project in candidate.candidate__projects) {
-                                if (project.candidate__project_assets.isNotEmpty()) {
-                                    projectList.add(project.brand_logo__cloudinary_url)
+
+                                val mainImage = project.candidate__project_assets.filter { it.project_asset__is_main_image }
+                                if (mainImage.isNotEmpty()) {
+                                    projectList.add(mainImage[0].project_asset__cloudinary_url)
                                 }
                             }
                             profile.setProjects(projectList.toTypedArray())
@@ -209,8 +211,7 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
     private fun initViewPager() {
 
-        viewPagerNewProfile.clipToPadding = false
-        viewPagerNewProfile.pageMargin = 32
+        viewPagerNewProfile.pageMargin = 10
 
         profileAdapter = HCProfileViewPagerAdapter(
             activity!!.applicationContext,

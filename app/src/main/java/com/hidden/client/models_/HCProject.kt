@@ -16,13 +16,16 @@ class HCProject {
     private lateinit var brandName: String
     private lateinit var brandLogoUrl: String
 
+    private lateinit var mainImg: String
+
     constructor(
         projectId: Int,
         projectTitle: String,
         projectBrief: String,
         projectActivity: String,
         brandName: String,
-        brandLogoUrl: String
+        brandLogoUrl: String,
+        mainImg: String
     ) {
         setProjectId(projectId)
         setProjectTitle(projectTitle)
@@ -30,6 +33,7 @@ class HCProject {
         setProjectActivity(projectActivity)
         setBrandName(brandName)
         setBrandLogoUrl(brandLogoUrl)
+        setMainImg(mainImg)
     }
 
     companion object {
@@ -89,4 +93,11 @@ class HCProject {
         this.brandLogoUrl = brandLogoUrl
     }
 
+    fun getMainImg(): String {
+        return this.mainImg
+    }
+
+    fun setMainImg(mainImg: String) {
+        this.mainImg = mainImg
+    }
 }

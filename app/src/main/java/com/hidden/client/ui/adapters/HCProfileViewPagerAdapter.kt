@@ -2,11 +2,13 @@ package com.hidden.client.ui.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,8 @@ import com.hidden.client.R
 import com.hidden.client.models_.HCProfile
 import com.hidden.client.ui.custom.SkillItemView
 import android.widget.LinearLayout.LayoutParams
+import androidx.cardview.widget.CardView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -57,7 +61,7 @@ class HCProfileViewPagerAdapter : PagerAdapter {
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =
-        view == `object` as ConstraintLayout
+        view == `object` as View
 
     override fun getCount(): Int {
         return profileList.size;
@@ -68,7 +72,11 @@ class HCProfileViewPagerAdapter : PagerAdapter {
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.viewpager_profile_item, container, false)
 
-        val layout: ConstraintLayout = view.findViewById(R.id.viewpager)
+        val displayMetrics = DisplayMetrics()
+        HCGlobal.getInstance().currentActivity.windowManager.getDefaultDisplay().getMetrics(displayMetrics)
+        val screenWidth = displayMetrics.widthPixels
+
+        val layout: LinearLayout = view.findViewById(R.id.viewpager)
         layout.setOnClickListener(View.OnClickListener {
             HCGlobal.getInstance().currentIndex = position
             val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistDetailActivity::class.java)
@@ -100,6 +108,13 @@ class HCProfileViewPagerAdapter : PagerAdapter {
         // Job Title
         val textProfileJobTitles: TextView = view.findViewById(R.id.text_profile_job_titles)
         textProfileJobTitles.setText(profileList[position].getJobTitleWithSeparator())
+        textProfileJobTitles.setTextColor(
+            context.resources.getIdentifier(
+                profileList[position].getAvatarColor(),
+                "color",
+                context!!.packageName
+            )
+        )
 
         // `Has Worked With` Image List
         val rvProfileEmployeeHistories: RecyclerView =
@@ -171,18 +186,6 @@ class HCProfileViewPagerAdapter : PagerAdapter {
             )
             textAddMore.gravity = Gravity.CENTER_VERTICAL
 
-            textAddMore.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    v!!.visibility = View.GONE
-
-                    for (i in defaultShowCount until skillCount) {
-                        var skillItem = profileList[position].getSkills().get(i)
-                        var skillItemView =
-                            SkillItemView(context, skillItem.getSkill(), skillItem.getProficiency())
-                        skillLayout.addView(skillItemView)
-                    }
-                }
-            })
             skillLayout.addView(textAddMore)
         }
 
@@ -197,10 +200,10 @@ class HCProfileViewPagerAdapter : PagerAdapter {
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as ConstraintLayout)
+        container.removeView(`object` as View   )
     }
 
     override fun getPageWidth(position: Int): Float {
-        return 0.83f
+        return 1.0f
     }
 }

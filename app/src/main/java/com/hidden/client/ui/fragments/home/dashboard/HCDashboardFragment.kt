@@ -59,7 +59,9 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
         RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<List<HCDashboardResponse>> {
                 override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {
-                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
+                    if (activity !== null) {
+                        Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onResponse(
@@ -67,6 +69,11 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                     response: Response<List<HCDashboardResponse>>
                 ) {
                     if (response.isSuccessful) {
+
+                        if (layoutScrollContent.childCount > 0) {
+                            layoutScrollContent.removeAllViewsInLayout()
+                        }
+
                         for (dashboardResponse in response.body()!!) {
                             when (dashboardResponse.content_type) {
 

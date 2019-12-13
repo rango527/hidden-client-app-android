@@ -3,141 +3,199 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="ShortlistItemBinding">
-
         <variable
             name="viewModel"
             type="com.hidden.client.ui.viewmodels.main.ShortlistViewVM" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/viewpager"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/button_round_white"
-        android:padding="@dimen/padding_default">
+        android:background="@drawable/panel_rounded_white_30"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:scrollbars="none">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profile_logo"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:contentDescription="@string/view_company_profiles"
-            app:civ_border_color="@android:color/transparent"
-            app:civ_border_width="2dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_profile_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginTop="@dimen/list_row_margin_default"
-            android:text="BLUE GLUE"
-            android:textColor="@color/colorBlack_2"
-            android:textSize="@dimen/textview_signup_fragment_header"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_profile_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginTop="@dimen/list_row_margin_default"
-            android:text="St Albans"
-            android:textColor="@color/colorBlack_2"
-            app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
-            app:layout_constraintTop_toBottomOf="@id/text_profile_title" />
-
-        <TextView
-            android:id="@+id/text_profile_job_titles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Creative Director | Art Director | Typographer"
-            android:textColor="@color/colorCyan_1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_profile_logo" />
-
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_default"
-            android:orientation="vertical"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_profile_job_titles">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_profile_logo"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/view_company_profiles"
+                    app:civ_border_color="@android:color/transparent"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_profile_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="3dp"
+                    android:text="BLUE GLUE"
+                    android:textColor="@color/colorBlack_2"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_profile_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="1dp"
+                    android:text="St Albans"
+                    android:textColor="@color/colorBlack_2"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
+                    app:layout_constraintTop_toBottomOf="@id/text_profile_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/text_profile_job_titles"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="Creative Director | Art Director | Typographer"
+                    android:textColor="@color/colorCyan_1"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lbl_hidden_says"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/what_hidden_says"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/snapshot"
                     android:textColor="@color/colorBlack_2"
-                    android:textSize="@dimen/textview_bold"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text_profile_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                    android:text="Blue Glue has lead huge Ad Campaingns with teams of 100+ for the brands below. See the examples of the work in portfolio. You must..."
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="test"
                     android:textColor="@color/colorBlack_2"
+                    android:textSize="12sp"
                     android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lbl_has_work_with"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/has_worked_with"
                     android:textColor="@color/colorBlack_2"
-                    android:textSize="@dimen/textview_bold"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_profile_employee_history"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lbl_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:text="@string/portfolio"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/highlights"
                     android:textColor="@color/colorBlack_2"
-                    android:textSize="@dimen/textview_bold"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_profile_projects"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="true"/>
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:clickable="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lbl_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/skills"
                     android:textColor="@color/colorBlack_2"
-                    android:textSize="@dimen/textview_bold"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/layout_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp"
                     app:alignContent="stretch"
                     app:alignItems="stretch"
                     app:flexWrap="wrap">
@@ -145,7 +203,7 @@
                 </com.google.android.flexbox.FlexboxLayout>
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

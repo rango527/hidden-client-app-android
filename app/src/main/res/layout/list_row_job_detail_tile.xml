@@ -57,7 +57,7 @@
                 android:id="@+id/image_tile"
                 android:src="@{job_detail_tile_model.getJobDetailTile().jobDetailTileImg, default=@drawable/man}"
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

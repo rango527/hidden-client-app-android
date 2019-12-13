@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/image_status_icon"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
+        android:layout_width="148dp"
+        android:layout_height="112dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/default_margin_super_top"
         android:contentDescription="@string/dashboard" />
@@ -29,7 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:textColor="@color/colorBlack_1"
-        android:layout_marginTop="@dimen/margin_default"
         android:gravity="center_horizontal"/>
 </LinearLayout>

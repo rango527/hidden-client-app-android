@@ -111,4 +111,5 @@ dependencies {
     // Pull to Refresh
     implementation 'com.github.huzenan:EasyPullLayout:v1.0.0'
     implementation project(':horizontalswipelayout')
+    implementation 'androidx.cardview:cardview:1.0.0'
 }

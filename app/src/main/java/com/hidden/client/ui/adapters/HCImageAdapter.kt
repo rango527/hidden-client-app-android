@@ -42,7 +42,7 @@ class HCImageAdapter : RecyclerView.Adapter<HCImageVH> {
         if (imageType == HCConstants.IMAGE_TYPE_CIRCLE) {
             rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_circle_image, parent, false)
         } else {
-            rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_rounded_image, parent, false)
+            rv = LayoutInflater.from(parent.context).inflate(R.layout.list_row_hightlight_image, parent, false)
         }
 
         holder = HCImageVH(rv)

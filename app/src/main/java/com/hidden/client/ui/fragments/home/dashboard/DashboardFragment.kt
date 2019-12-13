@@ -54,6 +54,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     response: Response<List<HCDashboardResponse>>
                 ) {
                     if (response.isSuccessful) {
+
                         for (dashboardResponse in response.body()!!) {
                             when (dashboardResponse.content_type) {
 

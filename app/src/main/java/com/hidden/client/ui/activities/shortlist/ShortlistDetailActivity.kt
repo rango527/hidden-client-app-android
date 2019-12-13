@@ -22,9 +22,11 @@ import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.adapters.HCBrandAdapter
+import com.hidden.client.ui.adapters.HCProjectAdapter
 import com.hidden.client.ui.adapters.HCWorkExperienceAdapter
 import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCProjectViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_shortlist_detail.*
@@ -43,6 +45,12 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     private lateinit var brandAdapter: HCBrandAdapter
     private lateinit var layoutBrandManager: RecyclerView.LayoutManager
 
+    // RecyclerView for Brand
+    private lateinit var rvProject: RecyclerView
+    private lateinit var projectViewModel: HCProjectViewModel
+    private lateinit var projectAdapter: HCProjectAdapter
+    private lateinit var layoutProjectdManager: RecyclerView.LayoutManager
+
     // RecyclerView for Work Experience
     private lateinit var rvWorkExperience: RecyclerView
     private lateinit var workExperienceViewModel: HCWorkExperienceViewModel
@@ -56,6 +64,7 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     // Labels
     private lateinit var lblSnapshot: TextView
     private lateinit var lblBrand: TextView
+    private lateinit var lblProject: TextView
     private lateinit var lblSkills: TextView
     private lateinit var lblExperience: TextView
 
@@ -83,6 +92,7 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
 
         lblSnapshot = findViewById(R.id.lbl_snapshot)
         lblBrand = findViewById(R.id.lbl_brand)
+        lblProject = findViewById(R.id.lbl_project)
         lblSkills = findViewById(R.id.lbl_skills)
         lblExperience = findViewById(R.id.lbl_experience)
 
@@ -104,6 +114,23 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
                 lblBrand.visibility = View.GONE
             }
         })
+
+        // Project RecyclerView
+//        rvProject = findViewById(R.id.recyclerview_project)
+//        projectViewModel = ViewModelProviders.of(this).get(HCProjectViewModel::class.java)
+//        projectViewModel.getProjectList().observe(this, Observer { projectViewModel ->
+//            projectAdapter = HCProjectAdapter(this, projectViewModel)
+//
+//            layoutProjectdManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//            rvProject.layoutManager = layoutProjectdManager
+//            rvProject.setHasFixedSize(true)
+//
+//            rvProject.adapter = projectAdapter
+//
+//            if (projectViewModel.isEmpty()) {
+//                lblProject.visibility = View.GONE
+//            }
+//        })
 
         // Work Experience RecyclerView
         rvWorkExperience = findViewById(R.id.recyclerview_work_experience)

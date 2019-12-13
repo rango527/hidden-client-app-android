@@ -92,6 +92,23 @@
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
             <TextView
+                android:id="@+id/lbl_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/highlights"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColor="@color/colorBlack_2"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/lbl_skills"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

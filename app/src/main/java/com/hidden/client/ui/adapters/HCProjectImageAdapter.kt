@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.helpers.HCConstants
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.ProjectDetailActivity
 import com.hidden.client.ui.activities.project.ImageSliderActivity
 import com.hidden.client.ui.viewholders.HCImageVH
 
@@ -27,7 +25,7 @@ class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCImageVH {
 
         val rv: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_row_rounded_image, parent, false)
+            .inflate(R.layout.list_row_hightlight_image, parent, false)
 
         val holder: HCImageVH = HCImageVH(rv)
 

@@ -23,7 +23,6 @@
             android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/layout_dashboard_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_default"
@@ -37,6 +36,13 @@
                     android:contentDescription="@string/settings"
                     app:srcCompat="@drawable/ic_settings" />
 
+                <LinearLayout
+                    android:id="@+id/layout_dashboard_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

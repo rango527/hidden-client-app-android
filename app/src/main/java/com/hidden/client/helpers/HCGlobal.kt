@@ -1,6 +1,7 @@
 package com.hidden.client.helpers
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.models_.HCLogin
@@ -26,6 +27,14 @@ class HCGlobal{
         }
     }
 
+
+    fun convertDpToPx(context: Context, dp: Float): Float {
+        return dp * context.resources.displayMetrics.density
+    }
+
+    fun convertPxToDp(context: Context, px: Float): Float {
+        return px / context.resources.displayMetrics.density
+    }
 
     // Global variable
     lateinit var currentActivity: Activity           // current activity instance
