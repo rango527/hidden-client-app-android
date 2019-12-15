@@ -29,6 +29,8 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
 
     private lateinit var swipeContainer: SwipeRefreshLayout
 
+    private lateinit var retrofitCall: Call<List<HCDashboardResponse>>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,49 +58,49 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getDashboard() {
-        RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
-            .enqueue(object: Callback<List<HCDashboardResponse>> {
-                override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {
-                    if (activity !== null) {
-                        Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
-                    }
+        retrofitCall = RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
+        retrofitCall.enqueue(object: Callback<List<HCDashboardResponse>> {
+            override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {
+                if (activity !== null) {
+                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
                 }
+            }
 
-                override fun onResponse(
-                    call: Call<List<HCDashboardResponse>>,
-                    response: Response<List<HCDashboardResponse>>
-                ) {
-                    if (response.isSuccessful) {
+            override fun onResponse(
+                call: Call<List<HCDashboardResponse>>,
+                response: Response<List<HCDashboardResponse>>
+            ) {
+                if (response.isSuccessful) {
 
-                        if (layoutScrollContent.childCount > 0) {
-                            layoutScrollContent.removeAllViewsInLayout()
-                        }
+                    if (layoutScrollContent.childCount > 0) {
+                        layoutScrollContent.removeAllViewsInLayout()
+                    }
 
-                        for (dashboardResponse in response.body()!!) {
-                            when (dashboardResponse.content_type) {
+                    for (dashboardResponse in response.body()!!) {
+                        when (dashboardResponse.content_type) {
 
-                                TileContentType.UPCOMING_INTERVIEW.value -> {
-                                    var tileView = HCInterviewTileView(activity!!.applicationContext, dashboardResponse)
-                                    layoutScrollContent.addView(tileView)
-                                }
+                            TileContentType.UPCOMING_INTERVIEW.value -> {
+                                var tileView = HCInterviewTileView(activity!!.applicationContext, dashboardResponse)
+                                layoutScrollContent.addView(tileView)
+                            }
 
-                                TileContentType.SIMPLE_METRIC.value -> {
-                                    var tileView = HCNumberTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
-                                    layoutScrollContent.addView(tileView)
-                                }
+                            TileContentType.SIMPLE_METRIC.value -> {
+                                var tileView = HCNumberTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
+                                layoutScrollContent.addView(tileView)
+                            }
 
-                                TileContentType.JOB.value -> {
-                                    var jobView = HCJobTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
-                                    layoutScrollContent.addView(jobView)
-                                }
+                            TileContentType.JOB.value -> {
+                                var jobView = HCJobTileView(activity!!.applicationContext, this@HCDashboardFragment, dashboardResponse)
+                                layoutScrollContent.addView(jobView)
                             }
                         }
-                        swipeContainer.isRefreshing = false
-                    } else {
-                        Toast.makeText(activity!!.applicationContext, "Error", Toast.LENGTH_LONG).show()
                     }
+                    swipeContainer.isRefreshing = false
+                } else {
+                    Toast.makeText(activity!!.applicationContext, "Error", Toast.LENGTH_LONG).show()
                 }
-            })
+            }
+        })
     }
     override fun onClick(v: View?) {
         when (v!!.id) {
@@ -106,5 +108,10 @@ class HCDashboardFragment : Fragment(), View.OnClickListener {
                 activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCSettingsFragment()).commit()
             }
         }
+    }
+
+    override fun onPause() {
+        retrofitCall.cancel()
+        super.onPause()
     }
 }

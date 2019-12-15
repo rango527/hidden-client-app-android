@@ -57,14 +57,14 @@ class LoginVM: RootVM() {
         }
     }
 
-    private lateinit var subscription: Disposable
+    private var subscription: Disposable? = null
 
     init {
     }
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        subscription?.dispose()
     }
 
     fun authLogin() {

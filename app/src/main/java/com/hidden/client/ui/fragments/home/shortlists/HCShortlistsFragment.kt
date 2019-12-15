@@ -32,9 +32,6 @@ import retrofit2.Response
 import kotlin.collections.ArrayList
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.viewpagerindicator.CirclePageIndicator
-import android.util.DisplayMetrics
-import kotlinx.android.synthetic.main.viewpager_profile_item.*
-
 
 class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
@@ -66,6 +63,8 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
     private lateinit var workExperienceViewModel: HCWorkExperienceViewModel
 
     private lateinit var layoutBackground: ConstraintLayout
+
+    private lateinit var retrofitCall: Call<HCShortlistResponse>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,100 +112,100 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
 
     private fun getShortlist() {
         // Fetch Dashboard API
-        RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
-            .enqueue(object : Callback<HCShortlistResponse> {
-                override fun onFailure(call: Call<HCShortlistResponse>, t: Throwable) {
-                    if (activity !== null) {
-                        Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
-                    }
+        retrofitCall = RetrofitClient.instance.getShortlists(AppPreferences.apiAccessToken)
+        retrofitCall.enqueue(object : Callback<HCShortlistResponse> {
+            override fun onFailure(call: Call<HCShortlistResponse>, t: Throwable) {
+                if (activity !== null) {
+                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
                 }
+            }
 
-                override fun onResponse(
-                    call: Call<HCShortlistResponse>,
-                    response: Response<HCShortlistResponse>
-                ) {
-                    profileList.clear()
+            override fun onResponse(
+                call: Call<HCShortlistResponse>,
+                response: Response<HCShortlistResponse>
+            ) {
+                profileList.clear()
 
-                    if (response.isSuccessful) {
-                        HCGlobal.getInstance().currentShortlist = response.body()!!.candidates
+                if (response.isSuccessful) {
+                    HCGlobal.getInstance().currentShortlist = response.body()!!.candidates
 
-                        textProfileCount.text = context!!.resources.getQuantityString(
-                            R.plurals.shortlists_profile_count,
-                            HCGlobal.getInstance().currentShortlist.size,
-                            HCGlobal.getInstance().currentShortlist.size
+                    textProfileCount.text = context!!.resources.getQuantityString(
+                        R.plurals.shortlists_profile_count,
+                        HCGlobal.getInstance().currentShortlist.size,
+                        HCGlobal.getInstance().currentShortlist.size
+                    )
+
+                    for (candidate in HCGlobal.getInstance().currentShortlist) {
+                        var profile: HCProfile = HCProfile()
+
+                        profile.setId(candidate.candidate__candidate_id)
+                        profile.setPhoto(candidate.avatar__image.safeValue())
+                        profile.setTitle(candidate.avatar__name.safeValue())
+                        profile.setLocation(candidate.candidate_city__name.safeValue())
+                        profile.setFeedback(candidate.candidate__hidden_says.safeValue())
+                        profile.setAvatarColor(candidate.avatar__colour)
+
+                        profile.setJobTitles(
+                            arrayOf(
+                                candidate.job_title_1__name,
+                                candidate.job_title_2__name,
+                                candidate.job_title_3__name
+                            )
                         )
 
-                        for (candidate in HCGlobal.getInstance().currentShortlist) {
-                            var profile: HCProfile = HCProfile()
-
-                            profile.setId(candidate.candidate__candidate_id)
-                            profile.setPhoto(candidate.avatar__image.safeValue())
-                            profile.setTitle(candidate.avatar__name.safeValue())
-                            profile.setLocation(candidate.candidate_city__name.safeValue())
-                            profile.setFeedback(candidate.candidate__hidden_says.safeValue())
-                            profile.setAvatarColor(candidate.avatar__colour)
-
-                            profile.setJobTitles(
-                                arrayOf(
-                                    candidate.job_title_1__name,
-                                    candidate.job_title_2__name,
-                                    candidate.job_title_3__name
-                                )
-                            )
-
-                            var employeeHistoryList: ArrayList<String> = arrayListOf()
-                            for (brand in candidate.candidate__brands) {
-                                employeeHistoryList.add(brand.asset__cloudinary_url)
-                            }
-                            profile.setEmployeeHistory(employeeHistoryList.toTypedArray())
-
-                            var projectList: ArrayList<String> = arrayListOf()
-                            for (project in candidate.candidate__projects) {
-
-                                val mainImage = project.candidate__project_assets.filter { it.project_asset__is_main_image }
-                                if (mainImage.isNotEmpty()) {
-                                    projectList.add(mainImage[0].project_asset__cloudinary_url)
-                                }
-                            }
-                            profile.setProjects(projectList.toTypedArray())
-
-                            var skillList: ArrayList<HCSkill> = arrayListOf()
-                            for (skill in candidate.candidate__skills) {
-                                skillList.add(
-                                    HCSkill(
-                                        skill.skill__name,
-                                        skill.candidate_skill__ranking
-                                    )
-                                )
-                            }
-                            profile.setSkills(skillList.toTypedArray())
-
-                            profileList.add(profile)
+                        var employeeHistoryList: ArrayList<String> = arrayListOf()
+                        for (brand in candidate.candidate__brands) {
+                            employeeHistoryList.add(brand.asset__cloudinary_url)
                         }
-                    }
+                        profile.setEmployeeHistory(employeeHistoryList.toTypedArray())
 
-                    if (profileList.size > 0) {
+                        var projectList: ArrayList<String> = arrayListOf()
+                        for (project in candidate.candidate__projects) {
 
-                        initViewPager()
+                            val mainImage = project.candidate__project_assets.filter { it.project_asset__is_main_image }
+                            if (mainImage.isNotEmpty()) {
+                                projectList.add(mainImage[0].project_asset__cloudinary_url)
+                            }
+                        }
+                        profile.setProjects(projectList.toTypedArray())
 
-                        layoutViewPager.visibility = View.VISIBLE
-                        layoutEmpty.visibility = View.GONE
-
-                        layoutBackground.setBackgroundResource(
-                            resources.getIdentifier(
-                                profileList[0].getAvatarColor(),
-                                "drawable",
-                                context!!.packageName
+                        var skillList: ArrayList<HCSkill> = arrayListOf()
+                        for (skill in candidate.candidate__skills) {
+                            skillList.add(
+                                HCSkill(
+                                    skill.skill__name,
+                                    skill.candidate_skill__ranking
+                                )
                             )
-                        )
-                    } else {
-                        layoutViewPager.visibility = View.GONE
-                        layoutEmpty.visibility = View.VISIBLE
-                    }
+                        }
+                        profile.setSkills(skillList.toTypedArray())
 
-                    swipeContainer.isRefreshing = false
+                        profileList.add(profile)
+                    }
                 }
-            })
+
+                if (profileList.size > 0) {
+
+                    initViewPager()
+
+                    layoutViewPager.visibility = View.VISIBLE
+                    layoutEmpty.visibility = View.GONE
+
+                    layoutBackground.setBackgroundResource(
+                        resources.getIdentifier(
+                            profileList[0].getAvatarColor(),
+                            "drawable",
+                            context!!.packageName
+                        )
+                    )
+                } else {
+                    layoutViewPager.visibility = View.GONE
+                    layoutEmpty.visibility = View.VISIBLE
+                }
+
+                swipeContainer.isRefreshing = false
+            }
+        })
     }
 
     private fun initViewPager() {
@@ -292,5 +291,11 @@ class HCShortlistsFragment : Fragment(), View.OnClickListener {
                     })
             }
         }
+    }
+
+    override fun onPause() {
+
+        retrofitCall.cancel()
+        super.onPause()
     }
 }
