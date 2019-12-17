@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification action buttons text. The action buttons are displayed under a variety of alert messages -->
+    <!-- Examples: Would you like to fill out a survey? [Yes] [No], 20% off Mens shoes [Shop now] -->
+    <string name="ua_notification_button_yes">Yes</string>
+    <string name="ua_notification_button_no">No</string>
+    <string name="ua_notification_button_shop_now">Shop Now</string>
+    <string name="ua_notification_button_buy_now">Buy Now</string>
+    <string name="ua_notification_button_follow">Follow</string>
+    <string name="ua_notification_button_unfollow">Unfollow</string>
+    <string name="ua_notification_button_opt_in">Opt-in</string>
+    <string name="ua_notification_button_opt_out">Opt-out</string>
+    <string name="ua_notification_button_remind">Remind Me Later</string>
+    <string name="ua_notification_button_share">Share</string>
+    <string name="ua_notification_button_accept">Accept</string>
+    <string name="ua_notification_button_decline">Decline</string>
+    <string name="ua_notification_button_download">Download</string>
+    <string name="ua_notification_button_more_like">More Like This</string>
+    <string name="ua_notification_button_less_like">Less Like This</string>
+    <string name="ua_notification_button_like">Like</string>
+    <string name="ua_notification_button_dislike">Dislike</string>
+    <string name="ua_notification_button_copy">Copy</string>
+    <string name="ua_notification_button_save">Save</string>
+    <string name="ua_notification_button_add_to_calendar">Add to Calendar</string>
+    <string name="ua_notification_button_add">Add</string>
+    <string name="ua_notification_button_tell_me_more">Tell Me More</string>
+    <string name="ua_notification_button_send_info">Send Info</string>
+    <string name="ua_notification_button_rate_now">Rate Now</string>
+    <string name="ua_notification_button_search">Search</string>
+    <string name="ua_notification_button_book_now">Book Now</string>
+
+    <!--Share dialog title. The share dialog is used to share a message to a variety of social media and/or messaging apps.-->
+    <string name="ua_share_dialog_title">Share</string>
+
+    <!-- Channel Capture -->
+    <string name="ua_channel_notification_ticker">Airship Channel</string>
+    <string name="ua_channel_copy_toast">Channel copied to clipboard!</string>
+
+    <!-- Message Center -->
+    <string name="ua_message_center_title">Message Center</string>
+    <string name="ua_empty_message_list">No messages</string>
+    <string name="ua_message_not_selected">No messages selected</string>
+    <string name="ua_mc_failed_to_load">Unable to load message. Please try again later.</string>
+    <string name="ua_retry_button">Retry</string>
+    <string name="ua_ok">OK</string>
+    <string name="ua_cancel">Cancel</string>
+    <string name="ua_select_none">Select None</string>
+    <string name="ua_select_all">Select All</string>
+    <string name="ua_connection_error">Connection Error</string>
+    <string name="ua_mark_read">Mark Read</string>
+    <string name="ua_delete">Delete</string>
+    <string name="ua_mc_no_longer_available">The selected message is no longer available.</string>
+    <string name="ua_content_error">Content Error</string>
+
+    <!-- Label describing the number of selected items -->
+    <plurals name="ua_selected_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> selected</item>
+        <item quantity="other"><xliff:g id="count" example="3">%1$d</xliff:g> selected</item>
+    </plurals>
+
+    <!-- General -->
+    <string name="ua_refresh">Refresh</string>
+    <string name="ua_open">Open</string>
+
+    <!-- Rate App Action -->
+    <string name="ua_rate_app_action_default_rate_positive_button">Rate</string>
+    <string name="ua_rate_app_action_default_rate_negative_button">No Thanks</string>
+    <string name="ua_rate_app_action_default_title">Enjoying <xliff:g id="app_name" example="this App">%1$2s</xliff:g>?</string>
+    <string name="ua_rate_app_action_default_body">Tap <xliff:g id="ok_button_title" example="Rate">%1$2s</xliff:g> to rate it on the app store.</string>
+    <string name="ua_rate_app_action_generic_display_name">This App</string>
+
+    <!-- Channels -->
+    <string name="ua_default_channel_name">Notifications</string>
+    <string name="ua_default_channel_description">General app updates</string>
+    <string name="ua_channel_id">Channel ID</string>
+
+    <string name="ua_service_channel_name">Service Notifications</string>
+    <string name="ua_service_channel_description">Service Messages</string>
+    <string name="ua_service_channel_id">Service Channel ID</string>
+
+    <string name="ua_news_channel_name">News Notifications</string>
+    <string name="ua_news_channel_description">News Messages</string>
+    <string name="ua_news_channel_id">News Channel ID</string>
+
+    <string name="ua_urgent_channel_name">Urgent Notifications</string>
+    <string name="ua_urgent_channel_description">Urgent Messages</string>
+    <string name="ua_urgent_channel_id">Urgent Channel ID</string>
+
+    <string name="ua_low_priority_channel_name">Low priority Notifications</string>
+    <string name="ua_low_priority_channel_description">Low priority Messages</string>
+    <string name="ua_low_priority_channel_id">Low priority Channel ID</string>
+
+    <string name="ua_min_priority_channel_name">Minimum priority Notifications</string>
+    <string name="ua_min_priority_channel_description">Minimum priority Messages</string>
+    <string name="ua_min_priority_channel_id">Minimum Channel ID</string>
+
+</resources>

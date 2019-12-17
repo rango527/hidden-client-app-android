@@ -10,6 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/horizontalswipelayout" />
+            <option value="$PROJECT_DIR$/urbanairship-core" />
+            <option value="$PROJECT_DIR$/urbanairship-fcm" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

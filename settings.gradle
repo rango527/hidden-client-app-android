@@ -1,2 +1,6 @@
-include ':app', ':horizontalswipelayout'
+include ':app',
+        ':horizontalswipelayout',
+        ':urbanairship-core',
+        ':urbanairship-fcm'
+
 rootProject.name='HiddenClient'

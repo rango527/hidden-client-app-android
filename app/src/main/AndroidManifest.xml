@@ -22,16 +22,21 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+<!--        <meta-data android:name="com.urbanairship.autopilot"-->
+<!--            android:value="com.hidden.client.manager.airship.HCAutoPilot"/>-->
+
+        <activity
+            android:name=".ui.activities.intro.InviteAcceptActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
             android:name=".ui.activities.project.VideoSliderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.project.ImageSliderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.ProjectDetailActivity"
             android:screenOrientation="portrait"
