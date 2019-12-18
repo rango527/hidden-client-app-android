@@ -1,0 +1,78 @@
+description = "Airship Android Debug Library"
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.kotlinVersion"
+    }
+}
+
+
+apply from: "../common-build.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android.dataBinding.enabled = true
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ "room.incremental":"true" ]
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(':urbanairship-core')
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.kotlinCoroutinesVersion"
+
+    // Room
+    implementation "androidx.room:room-runtime:$rootProject.androidxRoomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.androidxRoomVersion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment:$rootProject.androidxNavigationVersion"
+    implementation "androidx.navigation:navigation-ui:$rootProject.androidxNavigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.androidxNavigationVersion"
+
+    // Constraint layout
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.androidxConstraintLayoutVersion"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.androidxLifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidxLifeCycleVersion"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:$rootProject.androidxPagingVersion"
+
+    // Support libraries
+    implementation "androidx.appcompat:appcompat:$rootProject.androidxAppCompatVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.vectordrawable:vectordrawable:$rootProject.androidxVectorDrawableVersion"
+    implementation "androidx.preference:preference:$rootProject.androidxPreferenceVersion"
+
+    // Urban Airship Advertising ID tracking
+    implementation project(':urbanairship-ads-identifier')
+
+    // Urban Airship Preferences
+    implementation project(':urbanairship-preference')
+}
+
+bintrayUpload.enabled = false

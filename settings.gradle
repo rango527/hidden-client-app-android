@@ -1,6 +1,10 @@
 include ':app',
         ':horizontalswipelayout',
+        ':urbanairship-adm',
+        ':urbanairship-ads-identifier',
         ':urbanairship-core',
-        ':urbanairship-fcm'
+        ':urbanairship-debug',
+        ':urbanairship-fcm',
+        ':urbanairship-preference'
 
 rootProject.name='HiddenClient'

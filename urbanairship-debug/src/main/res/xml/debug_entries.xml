@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DebugScreens>
+
+    <entry
+        description="@string/ua_device_info_view_description"
+        navigationId="@id/deviceInfoFragment"
+        title="@string/ua_device_info_title" />
+
+    <entry
+        description="@string/ua_event_view_description"
+        navigationId="@id/eventListFragment"
+        title="@string/ua_event_view_title" />
+
+    <entry
+        description="@string/ua_push_view_description"
+        navigationId="@id/pushListFragment"
+        title="@string/ua_push_view_title" />
+
+</DebugScreens>

@@ -22,8 +22,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-<!--        <meta-data android:name="com.urbanairship.autopilot"-->
-<!--            android:value="com.hidden.client.manager.airship.HCAutoPilot"/>-->
+        <!-- Autopilot calls takeOff without the need to override the Application -->
+        <meta-data
+            android:name="com.urbanairship.autopilot"
+            android:value="com.hidden.client.manager.airship.HCAutoPilot" />
+
+        <!-- Optional: Enable local storage on UAWebView -->
+        <meta-data
+            android:name="com.urbanairship.webview.ENABLE_LOCAL_STORAGE"
+            android:value="true" />
 
         <activity
             android:name=".ui.activities.intro.InviteAcceptActivity"

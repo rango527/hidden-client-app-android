@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.core:core-ktx:$androidxCoreVersion"
     implementation "androidx.constraintlayout:constraintlayout:$androidxConstraintLayoutVersion"
@@ -112,4 +112,27 @@ dependencies {
 
     implementation "com.urbanairship.android:urbanairship-fcm:11.0.1"
 
+    // Allows Airship location services to use Fused Location
+    implementation "com.google.android.gms:play-services-location:$rootProject.playServicesLocationVersion"
+
+    // Airship ADM
+    implementation project(':urbanairship-adm')
+
+    // Airship FCM
+    implementation project(':urbanairship-fcm')
+
+    // Airship Debug: Normally this is a debug only dependency but we
+    // embed the view in sample app
+    implementation project(':urbanairship-debug')
+
+    // Airship Advertising ID tracking
+    implementation project(':urbanairship-ads-identifier')
+
+    // Airship Preferences
+    implementation project(':urbanairship-preference')
+}
+
+def googleServicesFile = rootProject.file('app/google-services.json')
+if (googleServicesFile.exists()) {
+    apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 }
