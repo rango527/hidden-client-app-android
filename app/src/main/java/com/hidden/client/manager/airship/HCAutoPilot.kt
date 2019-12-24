@@ -6,21 +6,21 @@ import com.urbanairship.AirshipConfigOptions
 import android.content.Intent
 import android.net.Uri
 import androidx.annotation.Nullable
+import com.hidden.client.helpers.AppPreferences
 import com.urbanairship.Autopilot
-import com.urbanairship.push.PushListener
 
 /**
 * Autopilot that enables user notifications on first run.
 */
-class SampleAutopilot : Autopilot() {
+class HCAutoPilot : Autopilot() {
 
     override fun onAirshipReady(airship: UAirship) {
-        val preferences = UAirship.getApplicationContext()
-            .getSharedPreferences(NO_BACKUP_PREFERENCES, Context.MODE_PRIVATE)
 
-        val isFirstRun = preferences.getBoolean(FIRST_RUN_KEY, true)
+        val preferences = AppPreferences.noBackupPreferences
+
+        val isFirstRun = AppPreferences.firstRunKey
         if (isFirstRun) {
-            preferences.edit().putBoolean(FIRST_RUN_KEY, false).apply()
+            AppPreferences.firstRunKey = false
 
             // Enable user notifications on first run
             airship.pushManager.userNotificationsEnabled = true
@@ -71,13 +71,6 @@ class SampleAutopilot : Autopilot() {
 
         // defaults to loading config from airshipconfig.properties file
         return super.createAirshipConfigOptions(context)
-    }
-
-    companion object {
-
-        private val NO_BACKUP_PREFERENCES = "com.hidden.client.manager.airship.no_backup"
-
-        private val FIRST_RUN_KEY = "first_run"
     }
 
 }

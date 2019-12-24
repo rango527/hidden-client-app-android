@@ -14,6 +14,10 @@ object AppPreferences {
     private val MY_FULL_NAME = Pair("my_full_name", "")
     private val API_ACCESS_TOKEN = Pair("api_access_token", "")
 
+    // For Push Notification (UrbanAirship)
+    private val FIRST_RUN_KEY = Pair("first_run_key", true)
+    private val NO_BACKUP_PREFERENCES = Pair("no_backup_preferences", "com.hidden.client.manager.airship.no_backup")
+
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
     }
@@ -53,5 +57,23 @@ object AppPreferences {
         // custom setter to save a preference back to preferences file
         set(value) = preferences.edit {
             it.putString(MY_FULL_NAME.first, value)
+        }
+
+    var firstRunKey: Boolean
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getBoolean(FIRST_RUN_KEY.first, FIRST_RUN_KEY.second)
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putBoolean(FIRST_RUN_KEY.first, value)
+        }
+
+    var noBackupPreferences: String
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getString(NO_BACKUP_PREFERENCES.first, NO_BACKUP_PREFERENCES.second).toString()
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putString(NO_BACKUP_PREFERENCES.first, value)
         }
 }
