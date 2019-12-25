@@ -8,7 +8,7 @@ import android.widget.ImageView
 
 @Throws(Throwable::class)
 fun ImageView.setImageBitmapFromVideoThumbnail(videoPath: String) {
-    var bitmap: Bitmap? = null
+    var bitmap: Bitmap?
     var mediaMetadataRetriever: MediaMetadataRetriever? = null
     try {
         mediaMetadataRetriever = MediaMetadataRetriever()

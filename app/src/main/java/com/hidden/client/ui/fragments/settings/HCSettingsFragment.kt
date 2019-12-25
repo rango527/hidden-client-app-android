@@ -16,7 +16,7 @@ import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
-import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
+import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -63,7 +63,7 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.button_back_to_dashboard -> {
-                activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
+                activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, DashboardFragment()).commit()
             }
             R.id.layout_candidate_directory -> {
                 val intent = Intent(context, CandidateListActivity::class.java)

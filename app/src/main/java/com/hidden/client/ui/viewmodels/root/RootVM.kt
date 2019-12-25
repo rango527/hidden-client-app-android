@@ -6,10 +6,7 @@ import com.hidden.client.ui.viewmodels.injection.component.ViewModelInjector
 
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
-import com.hidden.client.ui.viewmodels.main.CandidateListVM
-import com.hidden.client.ui.viewmodels.main.CandidateViewVM
-import com.hidden.client.ui.viewmodels.main.ShortlistListVM
-import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
+import com.hidden.client.ui.viewmodels.main.*
 
 abstract class RootVM: ViewModel() {
 
@@ -29,10 +26,15 @@ abstract class RootVM: ViewModel() {
         when (this) {
             is LoginVM -> injector.inject(this)
 
+            // Dashboard
+            is DashboardVM -> injector.inject(this)
+
+            // CandidateList
             is CandidateListVM -> injector.inject(this)
             is CandidateViewVM -> injector.inject(this)
+
+            // Shortlists
             is ShortlistListVM -> injector.inject(this)
-            is ShortlistViewVM -> injector.inject(this)
         }
     }
 }

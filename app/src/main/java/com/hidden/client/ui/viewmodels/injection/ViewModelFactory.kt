@@ -1,6 +1,6 @@
 package com.hidden.client.ui.viewmodels.injection
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -8,38 +8,58 @@ import com.hidden.client.helpers.APP
 import com.hidden.client.models.room.AppDatabase
 import com.hidden.client.ui.viewmodels.main.CandidateDetailVM
 import com.hidden.client.ui.viewmodels.main.CandidateListVM
+import com.hidden.client.ui.viewmodels.main.DashboardVM
 import com.hidden.client.ui.viewmodels.main.ShortlistListVM
 
-class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvider.Factory {
+class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(CandidateListVM::class.java)) {
+        /* ------------------------------------------------------------
+           Dashboard
+        -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(DashboardVM::class.java)) {
             val db = Room.databaseBuilder(
-                activity.applicationContext,
+                context,
                 AppDatabase::class.java,
                 APP.database
             ).build()
             @Suppress("UNCHECKED_CAST")
-            return CandidateListVM(activity, db.candidateDao()) as T
+            return DashboardVM(db.dashboardTileDao(), db.dashboardTileContentDao()) as T
+        }
+
+        /* ------------------------------------------------------------
+           Candidate List
+        -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(CandidateListVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return CandidateListVM(context, db.candidateDao()) as T
         }
 
         if (modelClass.isAssignableFrom(CandidateDetailVM::class.java)) {
             val db = Room.databaseBuilder(
-                activity.applicationContext,
+                context,
                 AppDatabase::class.java,
                 APP.database
             ).build()
             @Suppress("UNCHECKED_CAST")
             return CandidateDetailVM(
-                activity,
+                context,
                 db.candidateDao(), db.brandDao(), db.projectDao(),
                 db.skillDao(), db.workExperienceDao()
             ) as T
         }
 
+        /* ------------------------------------------------------------
+           Shortlists
+        -------------------------------------------------------------- */
         if (modelClass.isAssignableFrom(ShortlistListVM::class.java)) {
             val db = Room.databaseBuilder(
-                activity.applicationContext,
+                context,
                 AppDatabase::class.java,
                 APP.database
             ).build()
@@ -55,19 +75,6 @@ class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvi
             ) as T
         }
 
-//        if (modelClass.isAssignableFrom(ShortlistListVM::class.java)) {
-//            val db = Room.databaseBuilder(
-//                activity.applicationContext,
-//                AppDatabase::class.java,
-//                APP.database
-//            ).build()
-//            @Suppress("UNCHECKED_CAST")
-//            return ShortlistListVM(
-//                db.shortlistCandidateDao()
-//            ) as T
-//        }
-
         throw IllegalArgumentException("Unknown ViewModel class")
-
     }
 }

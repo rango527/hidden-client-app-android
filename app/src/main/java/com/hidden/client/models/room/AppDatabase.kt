@@ -18,7 +18,9 @@ import com.hidden.client.models.entity.CandidateEntity
     WorkExperienceEntity::class,
     ShortlistEntity::class,
     ShortlistCandidateEntity::class,
-    FeedbackEntity::class
+    FeedbackEntity::class,
+    DashboardTileEntity::class,
+    DashboardTileContentEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -30,6 +32,10 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun shortlistDao(): ShortlistDao
     abstract fun shortlistCandidateDao(): ShortlistCandidateDao
     abstract fun feedbackDao(): FeedbackDao
+
+    // Dashboard
+    abstract fun dashboardTileDao(): DashboardTileDao
+    abstract fun dashboardTileContentDao(): DashboardTileContentDao
 
     companion object {
 

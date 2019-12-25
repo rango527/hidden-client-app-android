@@ -12,11 +12,16 @@ interface ViewModelInjector {
 
     fun inject(loginVM: LoginVM)
 
+    // Dashboard
+    fun inject(dashboardVM: DashboardVM)
+
+    // Candidate List
     fun inject(candidateListVM: CandidateListVM)
     fun inject(candidateViewVM: CandidateViewVM)
     fun inject(candidateDetailVM: CandidateDetailVM)
+
+    // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)
-    fun inject(shortlistViewVM: ShortlistViewVM)
 
     @Component.Builder
     interface Builder {

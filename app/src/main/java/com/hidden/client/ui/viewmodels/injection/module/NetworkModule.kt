@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.injection.module
 
 import com.hidden.client.apis.CandidateApi
+import com.hidden.client.apis.DashboardApi
 import com.hidden.client.apis.LoginApi
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.*
@@ -27,12 +28,20 @@ object NetworkModule {
      * @param retrofit the Retrofit object used to instantiate the service
      * @return the Post service implementation.
      */
+
+    /*-------------------------------------------------------------------
+    Login
+    ------------------------------------------------------------------- */
     @Provides
     @Reusable
     @JvmStatic
     internal fun provideLoginApi(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
     }
+
+    /*-------------------------------------------------------------------
+    Candidate List
+    ------------------------------------------------------------------- */
 
     @Provides
     @Reusable
@@ -41,6 +50,19 @@ object NetworkModule {
         return retrofit.create(CandidateApi::class.java)
     }
 
+    /*-------------------------------------------------------------------
+    Dashboard
+    ------------------------------------------------------------------- */
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideDashboardApi(retrofit: Retrofit): DashboardApi {
+        return retrofit.create(DashboardApi::class.java)
+    }
+
+    /*-------------------------------------------------------------------
+    Shortlists
+    ------------------------------------------------------------------- */
     @Provides
     @Reusable
     @JvmStatic
@@ -75,14 +97,10 @@ object NetworkModule {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-        val retrofit = Retrofit.Builder()
+        return Retrofit.Builder()
             .baseUrl(baseUrl)
-//            .addConverterFactory(MoshiConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
-
-        return retrofit
     }
 }

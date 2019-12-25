@@ -8,7 +8,7 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.HCTabBar
-import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
+import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment
 import java.lang.Exception
@@ -28,7 +28,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        dashboardFrags.add(HCDashboardFragment())
+        dashboardFrags.add(DashboardFragment())
         shortlistsFrags.add(HCShortlistsFragment())
         processesFrags.add(HCProcessesFragment())
 
