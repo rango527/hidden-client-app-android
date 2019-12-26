@@ -1,11 +1,9 @@
 package com.hidden.client.ui.viewmodels.main
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.CandidateApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.models.json.CandidateJson
 import com.hidden.client.models.dao.CandidateDao
 import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.ui.adapters.CandidateListAdapter
@@ -16,7 +14,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CandidateListVM(private val context: Context, private val candidateDao: CandidateDao): RootVM() {
+class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
 
     @Inject
     lateinit var candidateApi: CandidateApi
@@ -49,7 +47,7 @@ class CandidateListVM(private val context: Context, private val candidateDao: Ca
                 if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
                     candidateApi.getCandidateList(AppPreferences.apiAccessToken, search).concatMap {
                         apiCandidateList ->
-                            var candidateList: ArrayList<CandidateEntity> = arrayListOf()
+                            val candidateList: ArrayList<CandidateEntity> = arrayListOf()
                             for (item in apiCandidateList) {
                                 candidateList.add(item.toEntity())
                             }

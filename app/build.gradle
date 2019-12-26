@@ -57,7 +57,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoVersion"
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
+    implementation 'ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0'
 
     // Custom ImageView
     implementation 'de.hdodenhof:circleimageview:3.0.1'
@@ -70,9 +70,9 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$androidxSwipeRefreshLayoutVersion"
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.5.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
+    implementation "com.squareup.retrofit2:retrofit:2.6.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.9.1"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.6.0"
 

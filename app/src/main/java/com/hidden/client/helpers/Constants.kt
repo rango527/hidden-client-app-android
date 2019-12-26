@@ -22,3 +22,17 @@ object User {
     const val passwordMinLength: Int = 4
     const val approved: String = "APPROVED"
 }
+
+object Enums {
+    enum class TileContentType(val value: String) {
+        UPCOMING_INTERVIEW("UPCOMING_INTERVIEW"),
+        SIMPLE_METRIC("SIMPLE_METRIC"),
+        JOB("JOB")
+    }
+
+    enum class TileType(val value: String) {
+        DATETIME_LOCATION_TILE_LIST("DateTimeLocationTileList"),
+        NUMBER_TILE_LIST("NumberTileList"),
+        PHOTO_TILE_LIST("PhotoTileList")
+    }
+}

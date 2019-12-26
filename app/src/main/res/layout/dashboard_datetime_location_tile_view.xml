@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_upcomingInterview"
+        android:id="@+id/text_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/margin_default"/>
 
     <ImageView
-        android:id="@+id/image_status_icon"
+        android:id="@+id/image_empty_status"
         android:layout_width="148dp"
         android:layout_height="112dp"
         android:layout_gravity="center_horizontal"
@@ -25,7 +25,7 @@
         android:contentDescription="@string/dashboard" />
 
     <TextView
-        android:id="@+id/text_upcoming_interview_count"
+        android:id="@+id/text_empty_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""

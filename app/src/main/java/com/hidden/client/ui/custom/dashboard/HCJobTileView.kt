@@ -1,4 +1,4 @@
-package com.hidden.client.ui.custom
+package com.hidden.client.ui.custom.dashboard
 
 import android.content.Context
 import android.view.View
@@ -17,7 +17,6 @@ import com.hidden.client.datamodels.HCDashboardResponse
 import com.hidden.client.datamodels.HCJobResponse
 import com.hidden.client.enums.JobType
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJob
 import com.hidden.client.ui.adapters.HCJobAdapter
 import com.hidden.client.ui.viewmodels___.HCJobViewModel
@@ -35,7 +34,7 @@ class HCJobTileView : LinearLayout {
     private lateinit var layoutJobManager: RecyclerView.LayoutManager
 
     constructor(context: Context, fragment: Fragment, data: HCDashboardResponse? = null) : super(context) {
-        inflate(context, R.layout.dashboard_tile_job_view, this)
+        inflate(context, R.layout.dashboard_photo_tile_view, this)
         if (data != null) {
 
             txtJobName = findViewById(R.id.text_job);

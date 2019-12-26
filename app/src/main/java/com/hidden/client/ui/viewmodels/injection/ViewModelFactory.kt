@@ -37,7 +37,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 APP.database
             ).build()
             @Suppress("UNCHECKED_CAST")
-            return CandidateListVM(context, db.candidateDao()) as T
+            return CandidateListVM(db.candidateDao()) as T
         }
 
         if (modelClass.isAssignableFrom(CandidateDetailVM::class.java)) {
