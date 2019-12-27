@@ -2,6 +2,7 @@ package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.helpers.nullable.NullToZero
+import com.hidden.client.models.ProjectAssetsEntity
 import com.hidden.client.models.ProjectEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -27,6 +28,9 @@ data class ProjectJson(
     @Json(name = "brand_logo__cloudinary_url")
     val image: String?,
 
+    @Json(name = "candidate__project_assets")
+    val assetsList: List<ProjectAssetsJson>?,
+
     @NullToZero
     var pCandidateId: Int? = 0
 ) {
@@ -40,5 +44,15 @@ data class ProjectJson(
             image.safeValue(),
             pCandidateId
         )
+    }
+
+    fun toAssetsList(pProjectId: Int): List<ProjectAssetsEntity> {
+        var assetsEntityList: ArrayList<ProjectAssetsEntity> = arrayListOf()
+
+        for (assets in this.assetsList!!) {
+            assetsEntityList.add(assets.toEntity(pProjectId))
+        }
+
+        return assetsEntityList
     }
 }

@@ -1,6 +1,7 @@
 package com.hidden.client.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "CandidateProject")
@@ -20,4 +21,15 @@ data class ProjectEntity (
     var image: String,
 
     var pCandidateId: Int
-)
+) {
+    @Ignore
+    private var assetsList: List<ProjectAssetsEntity> = listOf()
+
+    fun getAssetsList(): List<ProjectAssetsEntity> {
+        return assetsList
+    }
+
+    fun setAssetsList(assetsList: List<ProjectAssetsEntity>) {
+        this.assetsList = assetsList
+    }
+}

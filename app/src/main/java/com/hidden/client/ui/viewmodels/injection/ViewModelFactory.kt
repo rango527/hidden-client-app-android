@@ -79,8 +79,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 db.shortlistDao(),
                 db.shortlistCandidateDao(),
                 db.feedbackDao(),
+                db.feedbackQuestionDao(),
                 db.brandDao(),
                 db.projectDao(),
+                db.projectAssetsDao(),
                 db.workExperienceDao(),
                 db.skillDao()
             ) as T

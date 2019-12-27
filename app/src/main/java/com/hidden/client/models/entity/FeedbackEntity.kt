@@ -1,6 +1,7 @@
-package com.hidden.client.models
+package com.hidden.client.models.entity
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Feedback")
@@ -9,7 +10,7 @@ data class FeedbackEntity (
     @field:PrimaryKey
     val id: Int,
 
-    val question: String,
+    val clientId: Int,
 
     val outcome: String,
 
@@ -22,4 +23,15 @@ data class FeedbackEntity (
     val translated: String,
 
     var pCandidateId: Int
-)
+) {
+    @Ignore
+    private var questionList: List<FeedbackQuestionEntity> = listOf()
+
+    fun getQuestionList(): List<FeedbackQuestionEntity> {
+        return questionList
+    }
+
+    fun setQuestionList(questionList: List<FeedbackQuestionEntity>) {
+        this.questionList = questionList
+    }
+}

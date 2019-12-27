@@ -3,6 +3,7 @@ package com.hidden.client.models
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.hidden.client.models.entity.FeedbackEntity
 
 @Entity(tableName = "ShortlistCandidate")
 data class ShortlistCandidateEntity (

@@ -1,7 +1,8 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.FeedbackEntity
+import com.hidden.client.models.entity.FeedbackEntity
+import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -11,8 +12,8 @@ data class FeedbackJson(
     @Json(name = "feedback__feedback_id")
     val id: Int?,
 
-    @Json(name = "feedback__questions")
-    val question: String?,
+    @Json(name = "feedback__client_id")
+    val clientId: Int?,
 
     @Json(name = "feedback__outcome")
     val outcome: String?,
@@ -27,12 +28,15 @@ data class FeedbackJson(
     val type: String?,
 
     @Json(name = "feedback__translated")
-    val translated: String?
+    val translated: String?,
+
+    @Json(name = "feedback__questions")
+    val questionList: List<FeedbackQuestionJson>?
 ) {
     fun toEntity(pCandidateId: Int): FeedbackEntity {
         return FeedbackEntity(
             id.safeValue(),
-            question.safeValue(),
+            clientId.safeValue(),
             outcome.safeValue(),
             comment.safeValue(),
             from.safeValue(),
@@ -40,5 +44,15 @@ data class FeedbackJson(
             translated.safeValue(),
             pCandidateId
         )
+    }
+
+    fun toQuestionList(pFeedbackId: Int): List<FeedbackQuestionEntity> {
+        var questionEntityList: ArrayList<FeedbackQuestionEntity> = arrayListOf()
+
+        for (question in this.questionList!!) {
+            questionEntityList.add(question.toEntity(pFeedbackId))
+        }
+
+        return questionEntityList
     }
 }

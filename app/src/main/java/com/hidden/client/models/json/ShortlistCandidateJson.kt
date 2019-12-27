@@ -2,6 +2,7 @@ package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.*
+import com.hidden.client.models.entity.FeedbackEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -148,8 +149,10 @@ data class ShortlistCandidateJson(
     fun toProjectEntityList(pCandidateId: Int): List<ProjectEntity> {
         var projectEntityList: ArrayList<ProjectEntity> = arrayListOf()
 
-        for (workExperience in projectList!!) {
-            projectEntityList.add(workExperience.toEntity(pCandidateId))
+        for (project in projectList!!) {
+            val projectEntity: ProjectEntity = project.toEntity(pCandidateId)
+            projectEntity.setAssetsList(project.toAssetsList(project.id.safeValue()))
+            projectEntityList.add(projectEntity)
         }
 
         return projectEntityList
@@ -169,7 +172,9 @@ data class ShortlistCandidateJson(
         var skillFeedbackList: ArrayList<FeedbackEntity> = arrayListOf()
 
         for (candidateFeedback in feedbackList!!) {
-            skillFeedbackList.add(candidateFeedback.toEntity(pCandidateId))
+            val feedbackEntity: FeedbackEntity = candidateFeedback.toEntity(pCandidateId)
+            feedbackEntity.setQuestionList(candidateFeedback.toQuestionList(candidateFeedback.id.safeValue()))
+            skillFeedbackList.add(feedbackEntity)
         }
 
         return skillFeedbackList
