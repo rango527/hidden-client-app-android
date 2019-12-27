@@ -14,6 +14,9 @@ interface ViewModelInjector {
 
     // Dashboard
     fun inject(dashboardVM: DashboardVM)
+    fun inject(dashboardTileListVM: DashboardTileListVM)
+    fun inject(dashboardNumberTileViewVM: DashboardNumberTileViewVM)
+    fun inject(dashboardPhotoTileViewVM: DashboardPhotoTileViewVM)
 
     // Candidate List
     fun inject(candidateListVM: CandidateListVM)

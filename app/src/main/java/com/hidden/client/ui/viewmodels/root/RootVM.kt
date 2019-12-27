@@ -28,6 +28,9 @@ abstract class RootVM: ViewModel() {
 
             // Dashboard
             is DashboardVM -> injector.inject(this)
+            is DashboardTileListVM -> injector.inject(this)
+            is DashboardNumberTileViewVM -> injector.inject(this)
+            is DashboardPhotoTileViewVM -> injector.inject(this)
 
             // CandidateList
             is CandidateListVM -> injector.inject(this)

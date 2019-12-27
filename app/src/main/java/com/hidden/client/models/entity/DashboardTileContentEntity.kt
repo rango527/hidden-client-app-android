@@ -21,5 +21,7 @@ data class DashboardTileContentEntity (
 
     val jobId: Int,
 
+    val value: String,
+
     var pDashboardTileId: Int
 )

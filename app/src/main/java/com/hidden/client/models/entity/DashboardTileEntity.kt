@@ -10,7 +10,7 @@ import com.hidden.client.models.entity.CandidateEntity
 data class DashboardTileEntity (
 
     @field:PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
 
     var contentType: String,
 

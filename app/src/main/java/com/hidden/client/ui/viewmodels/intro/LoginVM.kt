@@ -68,7 +68,7 @@ class LoginVM: RootVM() {
     }
 
     fun authLogin() {
-        subscription =loginApi.clientLogin(email, password).concatMap {
+        subscription = loginApi.clientLogin(email, password).concatMap {
                         loginResult -> Observable.just(loginResult)
             }
             .subscribeOn(Schedulers.io())

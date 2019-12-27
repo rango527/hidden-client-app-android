@@ -14,13 +14,14 @@ import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.ui.custom.dashboard.HCDatetimeLocationTileView
 import com.hidden.client.ui.custom.dashboard.HCNumberTileView
+import com.hidden.client.ui.custom.dashboard.HCPhotoTileView
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.DashboardVM
 
 class DashboardFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var imgSetting: ImageView;
+    private lateinit var imgSetting: ImageView
     private lateinit var layoutScrollContent: LinearLayout
 
     private lateinit var swipeContainer: SwipeRefreshLayout
@@ -42,7 +43,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         viewModel.loadingVisibility.observe(this, Observer { visibility ->
             if (!visibility) {
-                swipeContainer.isRefreshing = false;
+                swipeContainer.isRefreshing = false
             }
         })
 
@@ -55,27 +56,23 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 when(tileEntity.type) {
                     Enums.TileType.DATETIME_LOCATION_TILE_LIST.value -> {
 
-                        var tileView = HCDatetimeLocationTileView(activity!!.applicationContext, tileEntity)
+                        val tileView = HCDatetimeLocationTileView(activity!!.applicationContext, tileEntity)
                         layoutScrollContent.addView(tileView)
                     }
 
                     Enums.TileType.NUMBER_TILE_LIST.value -> {
 
-                        var tileView = HCNumberTileView(activity!!.applicationContext, this@DashboardFragment, tileEntity)
+                        val tileView = HCNumberTileView(activity!!.applicationContext, this@DashboardFragment, tileEntity)
                         layoutScrollContent.addView(tileView)
+                    }
+
+                    Enums.TileType.PHOTO_TILE_LIST.value -> {
+
+                        val jobView = HCPhotoTileView(activity!!.applicationContext, this@DashboardFragment, tileEntity)
+                        layoutScrollContent.addView(jobView)
                     }
                 }
             }
-
-//
-//                TileContentType.SIMPLE_METRIC.value -> {
-
-//            }
-//
-//                TileContentType.JOB.value -> {
-//                var jobView = HCJobTileView(activity!!.applicationContext, this@DashboardFragment, dashboardResponse)
-//                layoutScrollContent.addView(jobView)
-//            }
         })
 
         return root
@@ -92,55 +89,10 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         // SwipeContainer
         swipeContainer = root.findViewById(R.id.swipe_container)
-        swipeContainer.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+        swipeContainer.setOnRefreshListener {
             viewModel.loadDashboard(true)
-        })
+        }
     }
-
-
-//    private fun getDashboard() {
-//        retrofitCall = RetrofitClient.instance.getDashboard(AppPreferences.apiAccessToken)
-//        retrofitCall.enqueue(object: Callback<List<HCDashboardResponse>> {
-//            override fun onFailure(call: Call<List<HCDashboardResponse>>, t: Throwable) {
-//                if (activity !== null) {
-//                    Toast.makeText(activity!!.applicationContext, "Failed...", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//
-//            override fun onResponse(
-//                call: Call<List<HCDashboardResponse>>,
-//                response: Response<List<HCDashboardResponse>>
-//            ) {
-//                if (response.isSuccessful) {
-//
-//
-//
-//                    for (dashboardResponse in response.body()!!) {
-//                        when (dashboardResponse.content_type) {
-//
-//                            TileContentType.UPCOMING_INTERVIEW.value -> {
-//                                var tileView = HCDatetimeLocationTileView(activity!!.applicationContext, dashboardResponse)
-//                                layoutScrollContent.addView(tileView)
-//                            }
-//
-//                            TileContentType.SIMPLE_METRIC.value -> {
-//                                var tileView = HCNumberTileView(activity!!.applicationContext, this@DashboardFragment, dashboardResponse)
-//                                layoutScrollContent.addView(tileView)
-//                            }
-//
-//                            TileContentType.JOB.value -> {
-//                                var jobView = HCJobTileView(activity!!.applicationContext, this@DashboardFragment, dashboardResponse)
-//                                layoutScrollContent.addView(jobView)
-//                            }
-//                        }
-//                    }
-//                    swipeContainer.isRefreshing = false
-//                } else {
-//                    Toast.makeText(activity!!.applicationContext, "Error", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        })
-//    }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
@@ -150,7 +102,4 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-    }
 }

@@ -2,11 +2,12 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data class="HCJobBinding">
+
+    <data class="DashboardPhotoTileViewBinding">
         <import type="android.view.View" />
         <variable
-            name="job_model"
-            type="com.hidden.client.ui.viewmodels___.HCJobViewModel" />
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.DashboardPhotoTileViewVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
-            android:src="@{job_model.getJob().jobPhoto, default=@drawable/man}"
+            android:src="@{viewModel.tileContent.photo, default=@drawable/man}"
             app:cornerRadius="24dp"
             app:roundedCorners="topLeft|topRight"/>
 
@@ -34,7 +35,7 @@
             android:id="@+id/text_job_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{job_model.getJob().jobTitle}"
+            android:text="@{viewModel.tileContent.title}"
             app:layout_constraintTop_toBottomOf="@id/img_job"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textSize="@dimen/textview_signup_fragment_header"
@@ -48,7 +49,7 @@
             android:id="@+id/text_job_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{job_model.getJob().jobSubTitle}"
+            android:text="@{viewModel.tileContent.subTitle}"
             app:layout_constraintTop_toBottomOf="@id/text_job_title"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@color/colorBlack_1"
@@ -73,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@{job_model.getJob().jobTag}"
+                android:text="@{viewModel.tileContent.tag}"
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="@color/colorWhite_1"
                 android:textStyle="bold"/>

@@ -87,6 +87,7 @@ class DashboardVM (
             val tileEntity: DashboardTileEntity = tileJson.toEntity()
 
             val pDashboardTileId = dashboardTileDao.insert(tileEntity).toInt()
+            tileEntity.id = pDashboardTileId
 
             if (tileJson.tileContentList!!.isNotEmpty()) {
                 tileEntity.setTileContentList(tileJson.toTileContentList(pDashboardTileId))

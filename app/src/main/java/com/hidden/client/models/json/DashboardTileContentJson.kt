@@ -24,10 +24,19 @@ data class DashboardTileContentJson(
     val subTitle: String?,
 
     @Json(name = "extra")
-    val extra: DashboardTileExtraJson?
+    val extra: DashboardTileExtraJson?,
+
+    @Json(name = "value")
+    val value: String?
 
 ) {
     fun toEntity(pDashboardTileId: Int): DashboardTileContentEntity {
+        var jobId: Int = 0;
+
+        if (extra != null) {
+            jobId = extra.jobId.safeValue()
+        }
+
         return DashboardTileContentEntity(
             0,
             photo.safeValue(),
@@ -35,7 +44,8 @@ data class DashboardTileContentJson(
             tag_colour.safeValue(),
             title.safeValue(),
             subTitle.safeValue(),
-            extra!!.jobId.safeValue(),
+            jobId.safeValue(),
+            value.safeValue(),
             pDashboardTileId
         )
     }

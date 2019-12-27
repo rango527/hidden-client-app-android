@@ -35,4 +35,16 @@ object Enums {
         NUMBER_TILE_LIST("NumberTileList"),
         PHOTO_TILE_LIST("PhotoTileList")
     }
+
+    enum class TileTitle(val value: String) {
+        YOUR_METRICS("Your metrics"),
+        COMPANY_METRICS("Company metrics"),
+        YOUR_JOBS("Your jobs"),
+        COLLEAGUE_JOBS(" Colleagues' jobs")
+    }
+
+    enum class TileColorScheme(val value: String) {
+        LIGHT("light"),
+        DARK("dark")
+    }
 }

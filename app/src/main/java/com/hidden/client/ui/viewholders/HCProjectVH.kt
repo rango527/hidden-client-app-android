@@ -9,5 +9,6 @@ class HCProjectVH(private val projectBinding: HCProjectBinding) : RecyclerView.V
     fun bind (projectViewModel: HCProjectViewModel) {
         this.projectBinding.projectModel = projectViewModel
         projectBinding.executePendingBindings()
+
     }
 }

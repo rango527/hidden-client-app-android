@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data class="HCMetricBinding">
+    <data class="DashboardNumberTileViewBinding">
         <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
         <variable
-            name="metric_model"
-            type="com.hidden.client.ui.viewmodels___.HCMetricViewModel" />
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.DashboardNumberTileViewVM" />
     </data>
 
     <LinearLayout
         android:id="@+id/layout_background"
         android:layout_width="@dimen/default_panel_width"
         android:layout_height="@dimen/default_panel_height"
-        android:background="@drawable/panel_round_shadow_white"
+        android:background="@{context.getDrawable(viewModel.getNumberTileBackground())}"
         android:orientation="vertical"
-        android:layout_marginRight="@dimen/menu_padding_vertical_default"
+        android:layout_marginEnd="@dimen/menu_padding_vertical_default"
         android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             android:id="@+id/text_title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="@{metric_model.getTitle()}"
+            android:text="@{viewModel.tileContent.title}"
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeMaxTextSize="100sp"
-            android:textColor="@color/colorBlack_1"
+            android:textColor="@{ContextCompat.getColor(context, viewModel.getNumberTileTextColor())}"
             android:textStyle="bold"/>
 
         <TextView
@@ -34,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@{metric_model.getValue()}"
-            android:textColor="@color/colorBlack_1"
+            android:text="@{viewModel.getTileContent().value}"
+            android:textColor="@{ContextCompat.getColor(context, viewModel.getNumberTileTextColor())}"
             android:layout_marginTop="-20dp"
             android:textSize="104sp"
             android:textStyle="bold" />
