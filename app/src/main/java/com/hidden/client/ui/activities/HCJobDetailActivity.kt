@@ -1,8 +1,15 @@
 package com.hidden.client.ui.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.Explode
+import android.transition.Slide
+import android.util.Pair
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
@@ -51,6 +58,9 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_your_job_detail)
 
         HCGlobal.getInstance().currentActivity = this;
+
+        // Animation
+        setupWindowAnimations()
 
         /***
          * Click Listener
@@ -141,6 +151,20 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_back_to_your_job -> {
+//                val intent = Intent(applicationContext, HCJobActivity::class.java)
+//
+//                val p1 = Pair.create<View, String>(imgJob, getString(R.string.job_cover_transition))
+//                val p2 = Pair.create<View, String>(imgCompany, getString(R.string.job_logo_transition))
+//
+//                val pairs = ArrayList<Pair<View, String>>()
+//                pairs.add(p1)
+//                pairs.add(p2)
+//                val pairsArray: Array<Pair<View, String>> = pairs.toTypedArray()
+//
+//                val transitionActivityOption: ActivityOptions =
+//                    ActivityOptions.makeSceneTransitionAnimation(this, *pairsArray)
+//                intent.putExtra("jobId", jobId)
+//                startActivity(intent, transitionActivityOption.toBundle())
                 finish()
             }
             R.id.layout_show_company_detail -> {
@@ -148,5 +172,21 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun setupWindowAnimations() {
+        val slideTransition = Explode()
+//        slideTransition.slideEdge = Gravity.BOTTOM
+        slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
+
+        val changeBoundsTransaction = ChangeBounds();
+        changeBoundsTransaction.duration = resources.getInteger(R.integer.anim_duration_medium).toLong()
+
+//        window.enterTransition = slideTransition
+        window.reenterTransition = slideTransition
+        window.exitTransition = slideTransition
+        window.allowEnterTransitionOverlap = true
+        window.allowReturnTransitionOverlap = true
+        window.sharedElementEnterTransition = changeBoundsTransaction
     }
 }

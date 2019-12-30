@@ -28,7 +28,8 @@
                     android:layout_height="240dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:transitionName="@string/job_cover_transition"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_company"
@@ -39,7 +40,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginRight="@dimen/margin_default"
-                    app:civ_border_width="0dp"/>
+                    app:civ_border_width="0dp"
+                    android:transitionName="@string/job_logo_transition"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -133,6 +133,9 @@ dependencies {
 
     // Airship Preferences
     implementation project(':urbanairship-preference')
+
+    // Swipe Library
+    compile 'com.github.pwittchen:swipe-rx2:0.3.0'
 }
 
 def googleServicesFile = rootProject.file('app/google-services.json')

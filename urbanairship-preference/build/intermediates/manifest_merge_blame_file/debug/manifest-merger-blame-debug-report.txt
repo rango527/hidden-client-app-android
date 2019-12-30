@@ -5,7 +5,7 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="17"
+8        android:minSdkVersion="21"
 8-->E:\workspace\hidden-client\hidden-client-app-android\urbanairship-preference\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="29" />
 9-->E:\workspace\hidden-client\hidden-client-app-android\urbanairship-preference\src\main\AndroidManifest.xml

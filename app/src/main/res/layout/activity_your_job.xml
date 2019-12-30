@@ -10,9 +10,11 @@
         android:id="@+id/img_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
+        android:id="@+id/layout_transparent"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_green_transparent"/>
@@ -58,7 +60,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_job_title"
         app:civ_border_color="@android:color/transparent"
-        app:civ_border_width="2dp" />
+        app:civ_border_width="2dp"
+        android:transitionName="@string/job_logo_transition"/>
 
     <TextView
         android:id="@+id/text_at"
@@ -119,7 +122,8 @@
         android:padding="@dimen/menu_padding_vertical_default"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:transitionName="@string/job_cover_transition"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

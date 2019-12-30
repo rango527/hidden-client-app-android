@@ -1,37 +1,49 @@
 package com.hidden.client.ui.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.Explode
+import android.transition.Slide
+import android.view.Gravity
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.networks.RetrofitClient
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.Pair
+import com.github.pwittchen.swipe.library.rx2.Swipe
+import com.github.pwittchen.swipe.library.rx2.SwipeListener
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
+import android.view.MotionEvent
+import com.hidden.client.helpers.HCGlobal
+
 
 class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var jobId: String
 
     private lateinit var btnBackToDashboard: ImageButton
-    private lateinit var imgShowJobDetails :ImageView
+    private lateinit var imgShowJobDetails: ImageView
 
     private lateinit var imgBackground: ImageView
+    private lateinit var layoutTransparent: LinearLayout
+
     private lateinit var imgJob: CircleImageView
     private lateinit var txtJobTitle: TextView
     private lateinit var txtJobCompany: TextView
     private lateinit var txtJobSalary: TextView
     private lateinit var txtJobLocation: TextView
+
+    private lateinit var swipe: Swipe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +62,19 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
          * Init View
          */
         imgBackground = findViewById(R.id.img_background)
+        layoutTransparent = findViewById(R.id.layout_transparent)
+
         imgJob = findViewById(R.id.img_job)
         txtJobTitle = findViewById(R.id.text_job_title)
         txtJobCompany = findViewById(R.id.text_job_company)
         txtJobSalary = findViewById(R.id.text_job_salary)
         txtJobLocation = findViewById(R.id.text_job_location)
+
+        // Animation Configuration
+        setupWindowAnimations()
+
+        // Init Swipe
+        initSwipe()
 
         /***
          * Get Job Detail API
@@ -63,7 +83,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
         // Fetch JobDetail API
         RetrofitClient.instance.getJobDetail(AppPreferences.apiAccessToken, jobId)
-            .enqueue(object: Callback<HCJobDetailResponse> {
+            .enqueue(object : Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
                     Toast.makeText(this@HCJobActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
@@ -74,12 +94,17 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                 ) {
                     if (response.isSuccessful) {
 
-                        Glide.with(this@HCJobActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgBackground)
-                        Glide.with(this@HCJobActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgJob)
+                        Glide.with(this@HCJobActivity)
+                            .load(response.body()!!.job_cover_image_asset__cloudinary_url)
+                            .into(imgBackground)
+                        Glide.with(this@HCJobActivity)
+                            .load(response.body()!!.company_logo_asset__cloudinary_url).into(imgJob)
                         txtJobTitle.text = response.body()!!.job__title
                         txtJobCompany.text = response.body()!!.company__name
-                        txtJobSalary.text = String.format(resources.getString(R.string.salary_range)
-                            , response.body()!!.job__salary_from, response.body()!!.job__salary_to)
+                        txtJobSalary.text = String.format(
+                            resources.getString(R.string.salary_range)
+                            , response.body()!!.job__salary_from, response.body()!!.job__salary_to
+                        )
                         txtJobLocation.text = """   ${response.body()!!.job_city__name}"""
 
                     } else {
@@ -95,10 +120,83 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.img_show_job_detail -> {
-                val intent = Intent(applicationContext, HCJobDetailActivity::class.java)
-                intent.putExtra("jobId", jobId)
-                startActivity(intent)
+                navigateJobDetailActivity()
             }
         }
+    }
+
+    private fun navigateJobDetailActivity() {
+        val intent = Intent(applicationContext, HCJobDetailActivity::class.java)
+
+        val p1 = Pair.create<View, String>(imgShowJobDetails, getString(R.string.job_cover_transition))
+        val p2 = Pair.create<View, String>(imgJob, getString(R.string.job_logo_transition))
+
+        val pairs = ArrayList<Pair<View, String>>()
+        pairs.add(p1)
+        pairs.add(p2)
+        val pairsArray: Array<Pair<View, String>> = pairs.toTypedArray()
+
+        val transitionActivityOption: ActivityOptions =
+            ActivityOptions.makeSceneTransitionAnimation(this, *pairsArray)
+        intent.putExtra("jobId", jobId)
+        startActivity(intent, transitionActivityOption.toBundle())
+
+//        finish()
+    }
+
+    private fun setupWindowAnimations() {
+        val slideTransition = Explode()
+//        slideTransition.slideEdge = Gravity.BOTTOM
+        slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
+
+        val changeBoundsTransaction = ChangeBounds();
+        changeBoundsTransaction.duration =
+            resources.getInteger(R.integer.anim_duration_medium).toLong()
+
+//        window.enterTransition = slideTransition
+        window.reenterTransition = slideTransition
+        window.exitTransition = slideTransition
+        window.allowEnterTransitionOverlap = true
+        window.allowReturnTransitionOverlap = true
+        window.sharedElementEnterTransition = changeBoundsTransaction
+    }
+
+    private fun initSwipe() {
+        swipe = Swipe()
+        swipe.setListener(object : SwipeListener {
+            override fun onSwipingLeft(event: MotionEvent) {
+            }
+
+            override fun onSwipedLeft(event: MotionEvent): Boolean {
+                return true;
+            }
+
+            override fun onSwipingRight(event: MotionEvent) {
+            }
+
+            override fun onSwipedRight(event: MotionEvent): Boolean {
+                return true;
+            }
+
+            override fun onSwipingUp(event: MotionEvent) {
+            }
+
+            override fun onSwipedUp(event: MotionEvent): Boolean {
+                navigateJobDetailActivity()
+                return true;
+            }
+
+            override fun onSwipingDown(event: MotionEvent) {
+            }
+
+            override fun onSwipedDown(event: MotionEvent): Boolean {
+                return true;
+            }
+        })
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        swipe.dispatchTouchEvent(ev)
+        return super.dispatchTouchEvent(ev)
     }
 }
