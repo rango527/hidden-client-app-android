@@ -14,7 +14,7 @@ data class ProjectAssetsEntity (
 
     var url: String,
 
-    var mainImage: String,
+    var mainImage: Boolean,
 
     var pProjectId: Int
 )

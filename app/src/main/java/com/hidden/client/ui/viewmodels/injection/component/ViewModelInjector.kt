@@ -1,5 +1,7 @@
 package com.hidden.client.ui.viewmodels.injection.component
 
+import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
+import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import dagger.Component
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
@@ -25,6 +27,7 @@ interface ViewModelInjector {
 
     // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)
+    fun inject(sthortlistViewVM: ShortlistViewVM)
 
     @Component.Builder
     interface Builder {

@@ -10,7 +10,7 @@ import com.hidden.client.R
 import com.hidden.client.databinding.DashboardPhotoTileViewBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.HCJobActivity
-import com.hidden.client.ui.viewmodels.main.DashboardPhotoTileViewVM
+import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 
 class PhotoTileListAdapter(
     private val context:Context,

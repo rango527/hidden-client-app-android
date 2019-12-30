@@ -16,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/filter"
         android:layout_marginTop="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"/>
+        android:layout_marginEnd="@dimen/margin_default"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_photo"
+        android:id="@+id/image_client_photo"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:src="@drawable/man"
@@ -28,19 +28,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/margin_default"
-        android:layout_marginLeft="@dimen/margin_default"/>
+        android:layout_marginStart="@dimen/margin_default"/>
 
     <TextView
         android:id="@+id/text_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_photo"
+        app:layout_constraintTop_toBottomOf="@id/image_client_photo"
         android:layout_marginTop="@dimen/menu_padding_vertical_default"
         android:text="@string/hello_user"
         android:textColor="@color/colorWhite_1"
         android:textSize="17sp"
-        android:layout_marginLeft="@dimen/margin_default"/>
+        android:layout_marginStart="@dimen/margin_default"/>
 
     <TextView
         android:id="@+id/text_new_profile_count"
@@ -86,7 +86,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/refresh"
@@ -118,16 +118,15 @@
             android:foregroundGravity="center_horizontal">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager_new_profile"
+                android:id="@+id/viewpager_shortlist"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:clipToPadding="false"
                 android:foregroundGravity="center"
-                android:overScrollMode="never"/>
-
+                android:overScrollMode="never"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" />
         </com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout>
 
     </LinearLayout>
@@ -141,7 +140,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/colorMask"
         android:visibility="gone"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_filter_panel"
@@ -150,7 +150,8 @@
             android:background="@color/colorWhite_1"
             android:paddingBottom="@dimen/list_row_margin_default"
             android:visibility="invisible"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/text_filter_by_job"
@@ -176,15 +177,17 @@
                 android:textColor="@color/colorRed_1"
                 android:textSize="@dimen/font_size_small"
                 android:textStyle="bold"/>
+
             <ImageView
                 android:id="@+id/img_close_filter_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_close"
+                android:contentDescription="@string/cancel"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/list_row_margin_default"/>
+                android:layout_marginEnd="@dimen/list_row_margin_default"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

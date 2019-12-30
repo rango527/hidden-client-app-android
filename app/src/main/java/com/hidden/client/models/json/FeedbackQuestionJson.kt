@@ -17,10 +17,7 @@ data class FeedbackQuestionJson(
     val question: String?,
 
     @Json(name = "feedback_answer__score")
-    val score: Int?,
-
-    @NullToZero
-    val pFeedbackId: Int?
+    val score: Int?
 ) {
     fun toEntity(pFeedbackId: Int?): FeedbackQuestionEntity {
         return FeedbackQuestionEntity(

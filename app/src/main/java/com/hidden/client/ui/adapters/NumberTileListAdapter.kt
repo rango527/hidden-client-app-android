@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.DashboardNumberTileViewBinding
-import com.hidden.client.ui.viewmodels.main.DashboardNumberTileViewVM
+import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
 
 class NumberTileListAdapter(
     private val list: ArrayList<DashboardNumberTileViewVM>) : RecyclerView.Adapter<NumberTileListAdapter.ViewHolder>() {

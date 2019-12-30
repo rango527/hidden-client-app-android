@@ -19,10 +19,7 @@ data class BrandJson(
     val name: String?,
 
     @Json(name = "asset__cloudinary_url")
-    val assetImage: String?,
-
-    @NullToZero
-    var pCandidateId: Int? = 0
+    val assetImage: String?
 ) {
     fun toEntity(pCandidateId: Int): BrandEntity {
         return BrandEntity(

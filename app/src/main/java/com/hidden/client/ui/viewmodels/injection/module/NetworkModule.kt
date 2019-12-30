@@ -92,9 +92,16 @@ object NetworkModule {
         }
 
         val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
             .add(NullToEmptyStringAdapter())
             .add(NullToZeroAdapter())
-            .add(KotlinJsonAdapterFactory())
+            .add(NullToFalseAdapter())
+            .add(NullToEmptyBrandList())
+            .add(NullToEmptyProjectList())
+            .add(NullToEmptyProjectAssetsList())
+            .add(NullToEmptySkillList())
+            .add(NullToEmptyWorkExperienceList())
+            .add(NullToEmptyFeedbackList())
             .build()
 
         return Retrofit.Builder()

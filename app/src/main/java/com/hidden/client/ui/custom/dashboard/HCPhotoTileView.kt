@@ -17,7 +17,7 @@ import com.hidden.client.ui.adapters.PhotoTileListAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.DashboardTileListVM
 
-import kotlinx.android.synthetic.main.dashboard_photo_tile_view.view.*
+import kotlinx.android.synthetic.main.view_dashboard_photo_tile.view.*
 
 @SuppressLint("ViewConstructor")
 class HCPhotoTileView(context: Context, fragment: Fragment, data: DashboardTileEntity? = null) :
@@ -30,7 +30,7 @@ class HCPhotoTileView(context: Context, fragment: Fragment, data: DashboardTileE
     private lateinit var adapter: PhotoTileListAdapter
 
     init {
-        inflate(context, R.layout.dashboard_photo_tile_view, this)
+        inflate(context, R.layout.view_dashboard_photo_tile, this)
 
         txtJobName = findViewById(R.id.text_job)
         txtJobName.text = data!!.title

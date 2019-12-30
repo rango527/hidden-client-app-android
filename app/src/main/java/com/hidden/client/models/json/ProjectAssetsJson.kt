@@ -20,10 +20,7 @@ data class ProjectAssetsJson(
     val url: String?,
 
     @Json(name = "project_asset__is_main_image")
-    val mainImage: String?,
-
-    @NullToZero
-    var pProjectId: Int? = 0
+    val mainImage: Boolean?
 ) {
     fun toEntity(pProjectId: Int): ProjectAssetsEntity {
         return ProjectAssetsEntity(

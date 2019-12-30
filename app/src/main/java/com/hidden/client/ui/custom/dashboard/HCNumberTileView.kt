@@ -13,7 +13,7 @@ import com.hidden.client.models.DashboardTileEntity
 import com.hidden.client.ui.adapters.NumberTileListAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.DashboardTileListVM
-import kotlinx.android.synthetic.main.dashboard_number_tile_view.view.*
+import kotlinx.android.synthetic.main.view_dashboard_number_tile.view.*
 
 @SuppressLint("ViewConstructor")
 class HCNumberTileView(context: Context, fragment: Fragment, data: DashboardTileEntity? = null) :
@@ -26,7 +26,7 @@ class HCNumberTileView(context: Context, fragment: Fragment, data: DashboardTile
 
     init {
 
-        inflate(context, R.layout.dashboard_number_tile_view, this)
+        inflate(context, R.layout.view_dashboard_number_tile, this)
 
         txtTitle = findViewById(R.id.text_metric_name)
         txtTitle.text = data!!.title

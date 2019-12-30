@@ -28,10 +28,7 @@ data class WorkExperienceJson(
     val brandName: String?,
 
     @Json(name = "asset__cloudinary_url")
-    val brandImage: String?,
-
-    @NullToZero
-    var pCandidateId: Int? = 0
+    val brandImage: String?
 ) {
     fun toEntity(pCandidateId: Int): WorkExperienceEntity {
         return WorkExperienceEntity(

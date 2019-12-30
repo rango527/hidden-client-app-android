@@ -1,25 +1,25 @@
 package com.hidden.client.helpers.nullable
 
 import androidx.annotation.Nullable
-import com.hidden.client.models.json.SkillJson
+import com.hidden.client.models.json.FeedbackJson
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonQualifier
 import com.squareup.moshi.ToJson
 
 @Retention(AnnotationRetention.RUNTIME)
 @JsonQualifier
-annotation class NullableCandidateSkill
+annotation class NullableFeedback
 
-class NullToEmptyCandidateSkillList {
+class NullToEmptyFeedbackList {
 
     @ToJson
-    fun toJson(@NullableCandidateSkill value: List<SkillJson>?): List<SkillJson>? {
+    fun toJson(@NullableFeedback value: List<FeedbackJson>?): List<FeedbackJson>? {
         return listOf()
     }
 
     @FromJson
-    @NullableCandidateSkill
-    fun fromJson(@Nullable data: List<SkillJson>?): List<SkillJson>? {
+    @NullableFeedback
+    fun fromJson(@Nullable data: List<FeedbackJson>?): List<FeedbackJson>? {
         return data ?: emptyList()
     }
 }

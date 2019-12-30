@@ -8,6 +8,8 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.models.DashboardTileContentEntity
 import com.hidden.client.models.DashboardTileEntity
 import com.hidden.client.models.dao.DashboardTileContentDao
+import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
+import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +28,7 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
     private var colleagueJobList: MutableLiveData<ArrayList<DashboardPhotoTileViewVM>> = MutableLiveData()
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     private var subscription: Disposable? = null
 
@@ -56,14 +58,14 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
 
                     Observable.just(tileContentEntityList)
                 }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { onRetrieveTileContentListStart() }
-                    .doOnTerminate { onRetrieveTileContentListFinish() }
-                    .subscribe(
-                        { result -> onRetrieveTileContentListSuccess(result, tileEntity) },
-                        { error -> onRetrieveTileContentListError(error) }
-                    )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { onRetrieveTileContentListStart() }
+                .doOnTerminate { onRetrieveTileContentListFinish() }
+                .subscribe(
+                    { result -> onRetrieveTileContentListSuccess(result, tileEntity) },
+                    { error -> onRetrieveTileContentListError(error) }
+                )
             }
         }
     }
@@ -110,7 +112,12 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
         if (tileEntity.type == Enums.TileType.NUMBER_TILE_LIST.value) {
             val viewModelList: ArrayList<DashboardNumberTileViewVM> = arrayListOf()
             for (tileContentEntity in tileContentEntityList) {
-                viewModelList.add(DashboardNumberTileViewVM(tileContentEntity, tileEntity.colorScheme))
+                viewModelList.add(
+                    DashboardNumberTileViewVM(
+                        tileContentEntity,
+                        tileEntity.colorScheme
+                    )
+                )
             }
 
             if (tileEntity.title == Enums.TileTitle.YOUR_METRICS.value) {
@@ -125,7 +132,11 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
         if (tileEntity.type == Enums.TileType.PHOTO_TILE_LIST.value) {
             val viewModelList: ArrayList<DashboardPhotoTileViewVM> = arrayListOf()
             for (tileContentEntity in tileContentEntityList) {
-                viewModelList.add(DashboardPhotoTileViewVM(tileContentEntity))
+                viewModelList.add(
+                    DashboardPhotoTileViewVM(
+                        tileContentEntity
+                    )
+                )
             }
 
             if (tileEntity.title == Enums.TileTitle.YOUR_JOBS.value) {

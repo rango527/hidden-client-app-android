@@ -14,7 +14,7 @@ class HCDatetimeLocationTileView : LinearLayout {
         if (data != null) {
 
             if (data.getTileContentList().isEmpty()) {
-                inflate(context, R.layout.dashboard_datetime_location_tile_view, this)
+                inflate(context, R.layout.view_dashboard_datetime_location_tile, this)
 
                 val txtHeaderTitle: TextView = findViewById(R.id.text_header_title);
                 txtHeaderTitle.setText(data.title)

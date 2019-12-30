@@ -6,7 +6,7 @@
         <import type="androidx.core.content.ContextCompat" />
         <variable
             name="viewModel"
-            type="com.hidden.client.ui.viewmodels.main.DashboardNumberTileViewVM" />
+            type="com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM" />
     </data>
 
     <LinearLayout

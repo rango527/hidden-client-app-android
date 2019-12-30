@@ -1,11 +1,11 @@
-package com.hidden.client.ui.viewmodels.main
+package com.hidden.client.ui.viewmodels.custom
 
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.models.DashboardTileContentEntity
 import com.hidden.client.ui.viewmodels.root.RootVM
 
-class DashboardNumberTileViewVM(
+class DashboardNumberTileViewVM (
     private var tileContent: DashboardTileContentEntity,
     private var colorScheme: String
 ) : RootVM() {

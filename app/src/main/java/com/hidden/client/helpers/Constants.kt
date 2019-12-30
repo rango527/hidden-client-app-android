@@ -23,6 +23,10 @@ object User {
     const val approved: String = "APPROVED"
 }
 
+object UI {
+    const val defaultSkillItemViewCount = 3
+}
+
 object Enums {
     enum class TileContentType(val value: String) {
         UPCOMING_INTERVIEW("UPCOMING_INTERVIEW"),
@@ -46,5 +50,10 @@ object Enums {
     enum class TileColorScheme(val value: String) {
         LIGHT("light"),
         DARK("dark")
+    }
+
+    enum class Resource(val value: String) {
+        DRAWABLE("drawable"),
+        COLOR("color")
     }
 }

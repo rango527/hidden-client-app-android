@@ -9,14 +9,7 @@ class HCBrand {
 
     private lateinit var brandPhotoUrl: String
 
-    companion object {
 
-        @BindingAdapter("android:src")
-        @JvmStatic
-        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
-        }
-    }
 
     constructor() { }
 

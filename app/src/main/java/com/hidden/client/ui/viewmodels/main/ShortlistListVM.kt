@@ -7,8 +7,6 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.*
 import com.hidden.client.models.dao.*
-import com.hidden.client.models.entity.FeedbackEntity
-import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.models.json.ShortlistCandidateJson
 import com.hidden.client.models.json.ShortlistJson
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -37,6 +35,7 @@ class ShortlistListVM(
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     val shortlist: MutableLiveData<ShortlistEntity> = MutableLiveData()
+    val candidateList: MutableLiveData<List<ShortlistViewVM>> = MutableLiveData()
 
     private var subscription: Disposable? = null
 
@@ -49,9 +48,9 @@ class ShortlistListVM(
         subscription?.dispose()
     }
 
-    private fun loadShortlistList(cashMode: Boolean) {
+    fun loadShortlistList(cashMode: Boolean) {
 
-        var apiObservable: Observable<ShortlistEntity>
+        val apiObservable: Observable<ShortlistEntity>
 
         if (cashMode) {
             apiObservable =
@@ -78,11 +77,11 @@ class ShortlistListVM(
 
         subscription = apiObservable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveCandidateListStart() }
-            .doOnTerminate { onRetrieveCandidateListFinish() }
+            .doOnSubscribe { onRetrieveShortlistStart() }
+            .doOnTerminate { onRetrieveShortlistFinish() }
             .subscribe(
-                { result -> onRetrieveCandidateListSuccess(result) },
-                { error -> onRetrieveCandidateListError(error) }
+                { result -> onRetrieveShortlistSuccess(result) },
+                { error -> onRetrieveShortlistError(error) }
             )
     }
 
@@ -132,14 +131,11 @@ class ShortlistListVM(
             skillDao.insertAll(*skillList.toTypedArray())
 
             // Update Feedback Table
-            val feedbackList: List<FeedbackEntity> =
-                candidateJson.toFeedbackEntityList(candidateJson.id.safeValue())
-            feedbackDao.insertAll(*feedbackList.toTypedArray())
+            val feedback = candidateJson.feedback!!.toEntity(candidateJson.id.safeValue())
+            feedbackDao.insertAll(feedback)
 
             // Update FeedbackQuestion Table
-            for (feedback in feedbackList) {
-                feedbackQuestionDao.insertAll(*feedback.getQuestionList().toTypedArray())
-            }
+            feedbackQuestionDao.insertAll(*candidateJson.feedback.toQuestionList(feedback.id).toTypedArray())
         }
 
         candidateList.forEachIndexed { index, element ->
@@ -172,11 +168,13 @@ class ShortlistListVM(
                     element.candidateId
                 )
             )
-            candidateList[index].setProjectList(
-                projectDao.getProjectByCandidateId(
-                    element.candidateId
-                )
-            )
+
+            val projectList = projectDao.getProjectByCandidateId(element.candidateId)
+            for (project in projectList) {
+                project.setAssetsList(projectAssetsDao.getProjectAssetsByProjectId(project.id))
+            }
+            candidateList[index].setProjectList(projectList)
+
             candidateList[index].setExperienceList(
                 workExperienceDao.getExperienceByCandidateId(
                     element.candidateId
@@ -187,11 +185,6 @@ class ShortlistListVM(
                     element.candidateId
                 )
             )
-            candidateList[index].setFeedbackList(
-                feedbackDao.getFeedbackByCandidateId(
-                    element.candidateId
-                )
-            )
         }
 
         shortlist.setCandidateList(candidateList)
@@ -199,20 +192,26 @@ class ShortlistListVM(
         return shortlist
     }
 
-    private fun onRetrieveCandidateListStart() {
+    private fun onRetrieveShortlistStart() {
         loadingVisibility.value = true
         errorMessage.value = null
     }
 
-    private fun onRetrieveCandidateListFinish() {
+    private fun onRetrieveShortlistFinish() {
         loadingVisibility.value = false
     }
 
-    private fun onRetrieveCandidateListSuccess(shortlist: ShortlistEntity) {
+    private fun onRetrieveShortlistSuccess(shortlist: ShortlistEntity) {
         this.shortlist.value = shortlist
+
+        var shortlistViewVMList: ArrayList<ShortlistViewVM> = arrayListOf()
+        for (candidate in shortlist.getCandidateList()) {
+            shortlistViewVMList.add(ShortlistViewVM(candidate))
+        }
+        this.candidateList.value = shortlistViewVMList
     }
 
-    private fun onRetrieveCandidateListError(e: Throwable) {
+    private fun onRetrieveShortlistError(e: Throwable) {
         e.printStackTrace()
         errorMessage.value = R.string.server_error
     }

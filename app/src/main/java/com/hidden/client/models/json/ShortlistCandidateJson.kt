@@ -1,6 +1,7 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.helpers.nullable.*
 import com.hidden.client.models.*
 import com.hidden.client.models.entity.FeedbackEntity
 import com.squareup.moshi.Json
@@ -94,7 +95,7 @@ data class ShortlistCandidateJson(
     val jobClientIsMessenger: Boolean?,
 
     @Json(name = "feedback")
-    val feedbackList: List<FeedbackJson>?
+    val feedback: FeedbackJson?
 ) {
     fun toEntity(pClientId: Int): ShortlistCandidateEntity {
         return ShortlistCandidateEntity(
@@ -166,17 +167,5 @@ data class ShortlistCandidateJson(
         }
 
         return skillEntityList
-    }
-
-    fun toFeedbackEntityList(pCandidateId: Int): List<FeedbackEntity> {
-        var skillFeedbackList: ArrayList<FeedbackEntity> = arrayListOf()
-
-        for (candidateFeedback in feedbackList!!) {
-            val feedbackEntity: FeedbackEntity = candidateFeedback.toEntity(pCandidateId)
-            feedbackEntity.setQuestionList(candidateFeedback.toQuestionList(candidateFeedback.id.safeValue()))
-            skillFeedbackList.add(feedbackEntity)
-        }
-
-        return skillFeedbackList
     }
 }

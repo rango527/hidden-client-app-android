@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="ShortlistItemBinding">
+    <data class="ShortlistItemViewBinding">
+        <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
         <variable
             name="viewModel"
             type="com.hidden.client.ui.viewmodels.main.ShortlistViewVM" />
@@ -28,39 +31,40 @@
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_profile_logo"
+                    android:id="@+id/image_avatar"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="@string/view_company_profiles"
+                    android:src="@{viewModel.shortlistCandidate.avatarImage, default=@drawable/man}"
                     app:civ_border_color="@android:color/transparent"
                     app:civ_border_width="2dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text_profile_title"
+                    android:id="@+id/text_avatar_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="3dp"
-                    android:text="BLUE GLUE"
+                    android:text="@{viewModel.shortlistCandidate.avatarName}"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="19sp"
                     android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
+                    app:layout_constraintLeft_toRightOf="@id/image_avatar"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text_profile_location"
+                    android:id="@+id/text_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="1dp"
-                    android:text="St Albans"
+                    android:text="@{viewModel.shortlistCandidate.cityName}"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="12sp"
-                    app:layout_constraintLeft_toRightOf="@id/img_profile_logo"
-                    app:layout_constraintTop_toBottomOf="@id/text_profile_title" />
+                    app:layout_constraintLeft_toRightOf="@id/image_avatar"
+                    app:layout_constraintTop_toBottomOf="@id/text_avatar_name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,12 +76,12 @@
                 android:paddingRight="5dp">
 
                 <TextView
-                    android:id="@+id/text_profile_job_titles"
+                    android:id="@+id/text_job_title"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:gravity="center_horizontal"
-                    android:text="Creative Director | Art Director | Typographer"
-                    android:textColor="@color/colorCyan_1"
+                    android:text="@{viewModel.getJobTitle()}"
+                    android:textColor="@{ContextCompat.getColor(context, viewModel.getJobTitleTextColor(context))}"
                     android:textSize="12dp" />
             </LinearLayout>
 
@@ -85,10 +89,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="@{viewModel.getSnapshotVisibility()}">
 
                 <TextView
-                    android:id="@+id/lbl_hidden_says"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -100,15 +104,15 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/text_profile_feedback"
+                    android:id="@+id/text_snapshot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:ellipsize="end"
-                    android:lines="3"
                     android:maxLines="3"
-                    android:text="test"
+                    android:lines="3"
+                    android:ellipsize="end"
+                    android:text="@{viewModel.shortlistCandidate.hiddenSays}"
                     android:textColor="@color/colorBlack_2"
                     android:textSize="12sp"
                     android:textStyle="italic" />

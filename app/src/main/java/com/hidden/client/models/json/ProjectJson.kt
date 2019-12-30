@@ -29,10 +29,7 @@ data class ProjectJson(
     val image: String?,
 
     @Json(name = "candidate__project_assets")
-    val assetsList: List<ProjectAssetsJson>?,
-
-    @NullToZero
-    var pCandidateId: Int? = 0
+    val assetsList: List<ProjectAssetsJson>?
 ) {
     fun toEntity(pCandidateId: Int): ProjectEntity {
         return ProjectEntity(

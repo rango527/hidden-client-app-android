@@ -1,12 +1,19 @@
 package com.hidden.client.ui.viewmodels.root
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
+import com.bumptech.glide.Glide
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
+import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import com.hidden.client.ui.viewmodels.injection.component.DaggerViewModelInjector
 import com.hidden.client.ui.viewmodels.injection.component.ViewModelInjector
 
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.*
+import de.hdodenhof.circleimageview.CircleImageView
 
 abstract class RootVM: ViewModel() {
 
@@ -38,6 +45,17 @@ abstract class RootVM: ViewModel() {
 
             // Shortlists
             is ShortlistListVM -> injector.inject(this)
+            is ShortlistViewVM -> injector.inject(this)
+        }
+    }
+
+    // Binding Adapter
+    companion object {
+
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
+            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
         }
     }
 }

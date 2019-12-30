@@ -17,7 +17,5 @@ data class BrandEntity (
 
     var assetImage: String,
 
-    @ForeignKey(entity = CandidateEntity::class, parentColumns = ["id"], childColumns = ["pCandidateId"])
     var pCandidateId: Int
-
 )

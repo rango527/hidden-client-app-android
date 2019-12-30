@@ -16,10 +16,7 @@ data class SkillJson(
     val name: String?,
 
     @Json(name = "candidate_skill__ranking")
-    val ranking: Int?,
-
-    @NullToZero
-    var pCandidateId: Int? = 0
+    val ranking: Int?
 ) {
     fun toEntity(pCandidateId: Int): SkillEntity {
         return SkillEntity(

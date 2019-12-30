@@ -27,7 +27,6 @@ class HCGlobal{
         }
     }
 
-
     fun convertDpToPx(context: Context, dp: Float): Float {
         return dp * context.resources.displayMetrics.density
     }

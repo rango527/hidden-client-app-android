@@ -8,17 +8,17 @@ import com.squareup.moshi.ToJson
 
 @Retention(AnnotationRetention.RUNTIME)
 @JsonQualifier
-annotation class NullableCandidateWorkExperience
+annotation class NullableWorkExperience
 
-class NullToEmptyCandidateWorkExperienceList {
+class NullToEmptyWorkExperienceList {
 
     @ToJson
-    fun toJson(@NullableCandidateWorkExperience value: List<WorkExperienceJson>?): List<WorkExperienceJson>? {
+    fun toJson(@NullableWorkExperience value: List<WorkExperienceJson>?): List<WorkExperienceJson>? {
         return listOf()
     }
 
     @FromJson
-    @NullableCandidateWorkExperience
+    @NullableWorkExperience
     fun fromJson(@Nullable data: List<WorkExperienceJson>?): List<WorkExperienceJson>? {
         return data ?: emptyList()
     }
