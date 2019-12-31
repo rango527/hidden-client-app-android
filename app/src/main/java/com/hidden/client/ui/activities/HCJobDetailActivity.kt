@@ -4,12 +4,10 @@ import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.ChangeImageTransform
-import android.transition.Explode
-import android.transition.Slide
+import android.transition.*
 import android.util.Pair
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
@@ -17,6 +15,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.pwittchen.swipe.library.rx2.Swipe
+import com.github.pwittchen.swipe.library.rx2.SwipeListener
 import com.hidden.client.R
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
@@ -52,6 +52,8 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var jobDetailTileViewModel: HCJobDetailTileViewModel
     private lateinit var jobDetailTileAdapter: HCJobDetailTileAdapter
 
+    private lateinit var swipe: Swipe
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -61,6 +63,9 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         // Animation
         setupWindowAnimations()
+
+        // Init Swipe
+        initSwipe()
 
         /***
          * Click Listener
@@ -115,7 +120,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
                         Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany)
                         Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany2)
-                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
+//                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
 
                         txtJobTitle.text = response.body()!!.job__title
                         txtJobCompany.text = response.body()!!.company__name
@@ -151,21 +156,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_back_to_your_job -> {
-//                val intent = Intent(applicationContext, HCJobActivity::class.java)
-//
-//                val p1 = Pair.create<View, String>(imgJob, getString(R.string.job_cover_transition))
-//                val p2 = Pair.create<View, String>(imgCompany, getString(R.string.job_logo_transition))
-//
-//                val pairs = ArrayList<Pair<View, String>>()
-//                pairs.add(p1)
-//                pairs.add(p2)
-//                val pairsArray: Array<Pair<View, String>> = pairs.toTypedArray()
-//
-//                val transitionActivityOption: ActivityOptions =
-//                    ActivityOptions.makeSceneTransitionAnimation(this, *pairsArray)
-//                intent.putExtra("jobId", jobId)
-//                startActivity(intent, transitionActivityOption.toBundle())
-                finish()
+                backToJobActivity()
             }
             R.id.layout_show_company_detail -> {
                 val intent = Intent(applicationContext, HCCompanyDetailActivity::class.java)
@@ -174,8 +165,30 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun backToJobActivity() {
+        val intent = Intent(applicationContext, HCJobActivity::class.java)
+
+        val p1 = Pair.create<View, String>(imgJob, getString(R.string.job_cover_transition))
+        val p2 = Pair.create<View, String>(imgCompany, getString(R.string.job_logo_transition))
+
+        val pairs = ArrayList<Pair<View, String>>()
+        pairs.add(p1)
+        pairs.add(p2)
+        val pairsArray: Array<Pair<View, String>> = pairs.toTypedArray()
+
+        val transitionActivityOption: ActivityOptions =
+            ActivityOptions.makeSceneTransitionAnimation(this, *pairsArray)
+        intent.putExtra("jobId", jobId)
+        startActivity(intent, transitionActivityOption.toBundle())
+        finish()
+    }
+
+    override fun onBackPressed() {
+        backToJobActivity()
+    }
+
     private fun setupWindowAnimations() {
-        val slideTransition = Explode()
+        val slideTransition = ChangeClipBounds()
 //        slideTransition.slideEdge = Gravity.BOTTOM
         slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
 
@@ -188,5 +201,45 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         window.allowEnterTransitionOverlap = true
         window.allowReturnTransitionOverlap = true
         window.sharedElementEnterTransition = changeBoundsTransaction
+        window.sharedElementExitTransition = changeBoundsTransaction
+    }
+
+    private fun initSwipe() {
+        swipe = Swipe()
+        swipe.setListener(object : SwipeListener {
+            override fun onSwipingLeft(event: MotionEvent) {
+            }
+
+            override fun onSwipedLeft(event: MotionEvent): Boolean {
+                return true;
+            }
+
+            override fun onSwipingRight(event: MotionEvent) {
+            }
+
+            override fun onSwipedRight(event: MotionEvent): Boolean {
+                return true;
+            }
+
+            override fun onSwipingUp(event: MotionEvent) {
+            }
+
+            override fun onSwipedUp(event: MotionEvent): Boolean {
+                return true;
+            }
+
+            override fun onSwipingDown(event: MotionEvent) {
+            }
+
+            override fun onSwipedDown(event: MotionEvent): Boolean {
+                backToJobActivity()
+                return true;
+            }
+        })
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        swipe.dispatchTouchEvent(ev)
+        return super.dispatchTouchEvent(ev)
     }
 }

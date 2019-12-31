@@ -3,9 +3,7 @@ package com.hidden.client.ui.activities
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.Explode
-import android.transition.Slide
+import android.transition.*
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -128,8 +126,8 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
     private fun navigateJobDetailActivity() {
         val intent = Intent(applicationContext, HCJobDetailActivity::class.java)
 
-        val p1 = Pair.create<View, String>(imgShowJobDetails, getString(R.string.job_cover_transition))
-        val p2 = Pair.create<View, String>(imgJob, getString(R.string.job_logo_transition))
+        val p1 = Pair.create<View, String>(imgJob, getString(R.string.job_logo_transition))
+        val p2 = Pair.create<View, String>(imgBackground, getString(R.string.job_cover_transition))
 
         val pairs = ArrayList<Pair<View, String>>()
         pairs.add(p1)
@@ -141,11 +139,11 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra("jobId", jobId)
         startActivity(intent, transitionActivityOption.toBundle())
 
-//        finish()
+        finish()
     }
 
     private fun setupWindowAnimations() {
-        val slideTransition = Explode()
+        val slideTransition = ChangeClipBounds()
 //        slideTransition.slideEdge = Gravity.BOTTOM
         slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
 
@@ -159,6 +157,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
         window.allowEnterTransitionOverlap = true
         window.allowReturnTransitionOverlap = true
         window.sharedElementEnterTransition = changeBoundsTransaction
+        window.sharedElementExitTransition = changeBoundsTransaction
     }
 
     private fun initSwipe() {

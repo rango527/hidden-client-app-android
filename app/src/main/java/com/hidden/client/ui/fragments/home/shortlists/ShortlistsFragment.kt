@@ -160,7 +160,7 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
 
     private fun initViewPager() {
 
-        viewPagerShortlist.pageMargin = 10
+        viewPagerShortlist.pageMargin = 30
 
         pageAdapter = ShortlistViewPagerAdapter(
             activity!!.applicationContext,
