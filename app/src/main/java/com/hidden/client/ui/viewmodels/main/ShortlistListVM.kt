@@ -1,12 +1,11 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.R
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.*
 import com.hidden.client.models.dao.*
+import com.hidden.client.models.entity.*
 import com.hidden.client.models.json.ShortlistCandidateJson
 import com.hidden.client.models.json.ShortlistJson
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -32,7 +31,6 @@ class ShortlistListVM(
     lateinit var shortlistApi: ShortlistApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-    val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     val shortlist: MutableLiveData<ShortlistEntity> = MutableLiveData()
     val candidateList: MutableLiveData<List<ShortlistViewVM>> = MutableLiveData()
@@ -194,7 +192,6 @@ class ShortlistListVM(
 
     private fun onRetrieveShortlistStart() {
         loadingVisibility.value = true
-        errorMessage.value = null
     }
 
     private fun onRetrieveShortlistFinish() {
@@ -204,7 +201,7 @@ class ShortlistListVM(
     private fun onRetrieveShortlistSuccess(shortlist: ShortlistEntity) {
         this.shortlist.value = shortlist
 
-        var shortlistViewVMList: ArrayList<ShortlistViewVM> = arrayListOf()
+        val shortlistViewVMList: ArrayList<ShortlistViewVM> = arrayListOf()
         for (candidate in shortlist.getCandidateList()) {
             shortlistViewVMList.add(ShortlistViewVM(candidate))
         }
@@ -213,6 +210,5 @@ class ShortlistListVM(
 
     private fun onRetrieveShortlistError(e: Throwable) {
         e.printStackTrace()
-        errorMessage.value = R.string.server_error
     }
 }

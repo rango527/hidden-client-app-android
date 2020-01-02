@@ -1,8 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.models.BrandEntity
-import com.hidden.client.models.WorkExperienceEntity
+import com.hidden.client.models.entity.WorkExperienceEntity
 import com.hidden.client.ui.viewmodels.root.RootVM
 
 class WorkExperienceViewVM: RootVM() {

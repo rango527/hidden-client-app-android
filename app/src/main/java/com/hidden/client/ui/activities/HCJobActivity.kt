@@ -1,14 +1,19 @@
 package com.hidden.client.ui.activities
 
+import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.transition.*
-import android.view.Gravity
+import android.transition.ChangeBounds
+import android.transition.ChangeClipBounds
+import android.util.Pair
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.github.pwittchen.swipe.library.rx2.Swipe
+import com.github.pwittchen.swipe.library.rx2.SwipeListener
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
@@ -17,12 +22,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.util.Pair
-import com.github.pwittchen.swipe.library.rx2.Swipe
-import com.github.pwittchen.swipe.library.rx2.SwipeListener
-import androidx.databinding.adapters.TextViewBindingAdapter.setText
-import android.view.MotionEvent
-import com.hidden.client.helpers.HCGlobal
 
 
 class HCJobActivity : AppCompatActivity(), View.OnClickListener {
@@ -86,6 +85,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(this@HCJobActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
+                @SuppressLint("SetTextI18n")
                 override fun onResponse(
                     call: Call<HCJobDetailResponse>,
                     response: Response<HCJobDetailResponse>
@@ -144,14 +144,11 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setupWindowAnimations() {
         val slideTransition = ChangeClipBounds()
-//        slideTransition.slideEdge = Gravity.BOTTOM
         slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
 
-        val changeBoundsTransaction = ChangeBounds();
-        changeBoundsTransaction.duration =
-            resources.getInteger(R.integer.anim_duration_medium).toLong()
+        val changeBoundsTransaction = ChangeBounds()
+        changeBoundsTransaction.duration = resources.getInteger(R.integer.anim_duration_medium).toLong()
 
-//        window.enterTransition = slideTransition
         window.reenterTransition = slideTransition
         window.exitTransition = slideTransition
         window.allowEnterTransitionOverlap = true
@@ -167,14 +164,14 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onSwipedLeft(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
 
             override fun onSwipingRight(event: MotionEvent) {
             }
 
             override fun onSwipedRight(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
 
             override fun onSwipingUp(event: MotionEvent) {
@@ -182,14 +179,14 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
             override fun onSwipedUp(event: MotionEvent): Boolean {
                 navigateJobDetailActivity()
-                return true;
+                return true
             }
 
             override fun onSwipingDown(event: MotionEvent) {
             }
 
             override fun onSwipedDown(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
         })
     }

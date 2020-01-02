@@ -1,7 +1,6 @@
 package com.hidden.client.models
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "CandidateProjectAssets")

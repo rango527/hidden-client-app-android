@@ -22,7 +22,7 @@ fun ImageView.setImageBitmapFromVideoThumbnail(videoPath: String) {
 
         if (bitmap != null) {
             bitmap = Bitmap.createScaledBitmap(bitmap, 240, 240, false);
-            this.setImageBitmap(bitmap);
+            this.setImageBitmap(bitmap)
         }
 
     } catch (e: Exception) {

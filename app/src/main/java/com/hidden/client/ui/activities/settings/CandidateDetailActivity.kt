@@ -1,5 +1,6 @@
 package com.hidden.client.ui.activities.settings
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -10,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
-import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCandidateDetailResponse
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCWorkExperience
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCBrandAdapter
 import com.hidden.client.ui.adapters.HCWorkExperienceAdapter
@@ -54,7 +54,7 @@ class CandidateDetailActivity : BaseActivity() {
 
         initCloseButton()
 
-        val categoryId: String = intent.getStringExtra("category_id")
+        val categoryId: String = intent.getStringExtra("category_id")!!
 
         imgPhoto = findViewById(R.id.image_photo)
         textName = findViewById(R.id.text_name)
@@ -93,6 +93,7 @@ class CandidateDetailActivity : BaseActivity() {
                     Toast.makeText(applicationContext, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
+                @SuppressLint("SetTextI18n")
                 override fun onResponse(
                     call: Call<HCCandidateDetailResponse>,
                     response: Response<HCCandidateDetailResponse>
@@ -100,18 +101,18 @@ class CandidateDetailActivity : BaseActivity() {
 
                     if (response.isSuccessful) {
 
-                        var candidateDetail = response.body()!!
+                        val candidateDetail = response.body()!!
 
                         val photoUrl = candidateDetail.asset__cloudinary_url
                         Glide.with(this@CandidateDetailActivity).load(photoUrl).into(imgPhoto)
 
-                        textName.setText(candidateDetail.candidate__full_name)
-                        textLocation.setText(candidateDetail.candidate_city__name)
-                        textJobTitle.setText(candidateDetail.job_title_1__name + " | " + candidateDetail.job_title_2__name + " | " + candidateDetail.job_title_3__name)
-                        textSnapshot.setText(candidateDetail.candidate__hidden_says)
+                        textName.text = candidateDetail.candidate__full_name
+                        textLocation.text = candidateDetail.candidate_city__name
+                        textJobTitle.text = candidateDetail.job_title_1__name + " | " + candidateDetail.job_title_2__name + " | " + candidateDetail.job_title_3__name
+                        textSnapshot.text = candidateDetail.candidate__hidden_says
 
                         // Set Brand List
-                        var candidateBrandList : ArrayList<HCBrand> = arrayListOf()
+                        val candidateBrandList : ArrayList<HCBrand> = arrayListOf()
                         for (candidate_brand_response in candidateDetail.candidate__brands) {
                             candidateBrandList.add(HCBrand(candidate_brand_response.asset__cloudinary_url))
                         }
@@ -121,15 +122,15 @@ class CandidateDetailActivity : BaseActivity() {
                         layoutSkill = findViewById(R.id.layout_skills)
 
                         for (candidate_skill in candidateDetail.candidate__skills) {
-                            var skillItemView = SkillItemView(this@CandidateDetailActivity, candidate_skill.skill__name, candidate_skill.candidate_skill__ranking)
+                            val skillItemView = SkillItemView(this@CandidateDetailActivity, candidate_skill.skill__name, candidate_skill.candidate_skill__ranking)
                             layoutSkill.addView(skillItemView)
                         }
 
                         // Set WorkExperienceList
-                        var workExperienceList : ArrayList<HCWorkExperience> = arrayListOf()
+                        val workExperienceList : ArrayList<HCWorkExperience> = arrayListOf()
                         for (work_experience_response in candidateDetail.candidate__work_experiences) {
 
-                            var workExperience = HCWorkExperience()
+                            val workExperience = HCWorkExperience()
                             workExperience.setExperienceId(work_experience_response.work_experience__work_experience_id)
                             workExperience.setExperienceJobTitle(work_experience_response.work_experience__job_title)
                             workExperience.setExperienceDescription(work_experience_response.work_experience__description)

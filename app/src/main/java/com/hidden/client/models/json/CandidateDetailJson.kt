@@ -1,10 +1,10 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.BrandEntity
-import com.hidden.client.models.ProjectEntity
-import com.hidden.client.models.SkillEntity
-import com.hidden.client.models.WorkExperienceEntity
+import com.hidden.client.models.entity.BrandEntity
+import com.hidden.client.models.entity.ProjectEntity
+import com.hidden.client.models.entity.SkillEntity
+import com.hidden.client.models.entity.WorkExperienceEntity
 import com.hidden.client.models.entity.CandidateEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

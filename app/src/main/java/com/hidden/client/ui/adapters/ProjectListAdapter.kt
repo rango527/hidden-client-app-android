@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateProjectItemBinding
-import com.hidden.client.models.ProjectEntity
+import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.viewmodels.main.ProjectViewVM
 
 class ProjectListAdapter: RecyclerView.Adapter<ProjectListAdapter.ViewHolder>() {

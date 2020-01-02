@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import com.google.android.flexbox.FlexboxLayout
@@ -43,11 +42,11 @@ class ShortlistViewPagerAdapter(
         val view = binding.root
 
         val layout: LinearLayout = view.findViewById(R.id.viewpager)
-        layout.setOnClickListener(View.OnClickListener {
+        layout.setOnClickListener {
             HCGlobal.getInstance().currentIndex = position
             val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistDetailActivity::class.java)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
-        })
+        }
 
         // BrandList View
         view.recyclerview_brand.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

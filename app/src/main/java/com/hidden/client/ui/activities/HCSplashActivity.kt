@@ -13,10 +13,10 @@ class HCSplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
     private val SPLASH_DELAY: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
 
-    internal val mRunnable: Runnable = Runnable {
+    private val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            if (AppPreferences.apiAccessToken.safeValue().isNotEmpty() && AppPreferences.myFullName.safeValue().isNotEmpty() && AppPreferences.myId.safeValue() !== 0) {
+            if (AppPreferences.apiAccessToken.safeValue().isNotEmpty() && AppPreferences.myFullName.safeValue().isNotEmpty() && AppPreferences.myId.safeValue() != 0) {
                 val intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(intent)
             } else {

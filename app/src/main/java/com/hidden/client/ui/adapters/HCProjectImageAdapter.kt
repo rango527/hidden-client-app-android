@@ -1,7 +1,6 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +24,7 @@ class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
         val rv: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_row_hightlight_image, parent, false)
 
-        val holder: HCImageVH = HCImageVH(rv)
-
-        return holder
+        return HCImageVH(rv)
     }
 
     override fun onBindViewHolder(holder: HCImageVH, position: Int) {

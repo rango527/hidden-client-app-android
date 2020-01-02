@@ -27,7 +27,6 @@ import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
-import okhttp3.internal.Util
 
 class ShortlistsFragment : Fragment(), View.OnClickListener {
 

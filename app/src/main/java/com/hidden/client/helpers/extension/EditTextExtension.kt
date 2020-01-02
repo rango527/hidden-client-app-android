@@ -3,7 +3,6 @@ package com.hidden.client.helpers.extension
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import com.hidden.client.helpers.HCGlobal
 
 fun EditText.doAfterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {

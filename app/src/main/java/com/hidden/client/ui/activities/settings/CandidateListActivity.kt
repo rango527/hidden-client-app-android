@@ -24,7 +24,7 @@ class CandidateListActivity : BaseActivity() {
     private lateinit var viewModel: CandidateListVM
     private var errorSnackbar: Snackbar? = null
 
-    private lateinit var progressDlg: KProgressHUD;
+    private lateinit var progressDlg: KProgressHUD
 
     private lateinit var editSearch: EditText
 
@@ -55,14 +55,14 @@ class CandidateListActivity : BaseActivity() {
         })
 
         editSearch = findViewById(R.id.edit_search)
-        editSearch.doAfterTextChanged { text -> viewModel.search = text?.toString() ?: "" }
+        editSearch.doAfterTextChanged { text -> viewModel.search = text }
 
         initCloseButton()
 
         swipeContainer = findViewById(R.id.swipe_container)
-        swipeContainer.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+        swipeContainer.setOnRefreshListener {
             viewModel.loadCandidateList(false)
-        })
+        }
     }
 
     private fun showError(@StringRes errorMessage:Int){

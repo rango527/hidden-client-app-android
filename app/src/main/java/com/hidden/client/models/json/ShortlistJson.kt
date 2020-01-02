@@ -1,8 +1,8 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.ShortlistCandidateEntity
-import com.hidden.client.models.ShortlistEntity
+import com.hidden.client.models.entity.ShortlistCandidateEntity
+import com.hidden.client.models.entity.ShortlistEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

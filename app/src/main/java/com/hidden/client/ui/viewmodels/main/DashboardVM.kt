@@ -1,11 +1,12 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.R
 import com.hidden.client.apis.DashboardApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.models.*
-import com.hidden.client.models.dao.*
+import com.hidden.client.models.entity.DashboardTileContentEntity
+import com.hidden.client.models.entity.DashboardTileEntity
+import com.hidden.client.models.dao.DashboardTileContentDao
+import com.hidden.client.models.dao.DashboardTileDao
 import com.hidden.client.models.json.DashboardTileJson
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -23,7 +24,6 @@ class DashboardVM (
     lateinit var dashboardApi: DashboardApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-    val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     val dashboardTileList: MutableLiveData<List<DashboardTileEntity>> = MutableLiveData()
 
@@ -113,7 +113,6 @@ class DashboardVM (
 
     private fun onRetrieveDashboardStart(){
         loadingVisibility.value = true
-        errorMessage.value = null
     }
 
     private fun onRetrieveDashboardFinish(){
@@ -127,6 +126,5 @@ class DashboardVM (
 
     private fun onRetrieveDashboardError(e: Throwable){
         e.printStackTrace()
-        errorMessage.value = R.string.server_error
     }
 }

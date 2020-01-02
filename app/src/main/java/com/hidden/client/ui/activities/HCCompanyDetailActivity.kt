@@ -18,6 +18,7 @@ import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCCompanyResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.UI
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
@@ -41,10 +42,6 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
     private lateinit var rvCompanyDetailTile: RecyclerView
     private lateinit var companyDetailTileViewModel: HCJobDetailTileViewModel
     private lateinit var companyDetailTileAdapter: HCJobDetailTileAdapter
-
-    companion object {
-        val default_badge_show_count = 3
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,9 +88,9 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                         txtHiddenSays.text = response.body()!!.company__hidden_says
 
                         /** Add Badge View **/
-                        var brandItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                        val brandItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
                             response.body()!!.company_type__name, R.drawable.brand_type, R.drawable.progress_item_purple_12)
-                        var sizeItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                        val sizeItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
                             response.body()!!.company_size__name, R.drawable.company_size, R.drawable.progress_item_complete_12)
 
                         layoutBadge.addView(brandItemBadge)
@@ -103,21 +100,21 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                         val cityLocationList = response.body()!!.company__cities
                         val badgeCount = cityLocationList.size
 
-                        var defaultShowCount = if (badgeCount <= default_badge_show_count) badgeCount else default_badge_show_count
+                        val defaultShowCount = if (badgeCount <= UI.defaultSkillItemViewCount) badgeCount else UI.defaultSkillItemViewCount
 
                         for (i in 0 until defaultShowCount) {
-                            var location = cityLocationList[i].city__name
+                            val location = cityLocationList[i].city__name
 
-                            var locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                            val locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
                                 location, R.drawable.pin, R.drawable.progress_item_black_24)
 
                             layoutBadge.addView(locationItemBadge)
                         }
 
                         // add `+ $(cnt) more`
-                        if (badgeCount > default_badge_show_count) {
-                            var textAddMore = TextView(this@HCCompanyDetailActivity)
-                            var params : LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                        if (badgeCount > UI.defaultSkillItemViewCount) {
+                            val textAddMore = TextView(this@HCCompanyDetailActivity)
+                            val params : LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT, // This will define text view width
                                 LinearLayout.LayoutParams.MATCH_PARENT // This will define text view height
                             )
@@ -127,26 +124,24 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                             textAddMore.setText(String.format(resources.getString(R.string.add_more), badgeCount - defaultShowCount))
                             textAddMore.gravity = Gravity.CENTER_VERTICAL
 
-                            textAddMore.setOnClickListener(object: View.OnClickListener {
-                                override fun onClick(v: View?) {
-                                    v!!.visibility = View.GONE
+                            textAddMore.setOnClickListener { v ->
+                                v!!.visibility = View.GONE
 
-                                    for (i in defaultShowCount until badgeCount) {
-                                        var location = cityLocationList[i].city__name
-                                        var locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
-                                            location, R.drawable.pin, R.drawable.progress_item_black_24)
+                                for (i in defaultShowCount until badgeCount) {
+                                    val location = cityLocationList[i].city__name
+                                    val locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                                        location, R.drawable.pin, R.drawable.progress_item_black_24)
 
-                                        layoutBadge.addView(locationItemBadge)
-                                    }
+                                    layoutBadge.addView(locationItemBadge)
                                 }
-                            })
+                            }
                             layoutBadge.addView(textAddMore)
                         }
 
-                        var companyDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
+                        val companyDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
                         for (detail_tile in response.body()!!.company__tiles) {
 
-                            val companyDetailTile: HCJobDetailTile = HCJobDetailTile()
+                            val companyDetailTile = HCJobDetailTile()
                             companyDetailTile.setJobDetailTitleId(detail_tile.tile__tile_id)
                             companyDetailTile.setJobDetailTileTitle(detail_tile.tile__title)
                             companyDetailTile.setJobDetailTileContent(detail_tile.tile__content)

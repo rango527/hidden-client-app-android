@@ -5,8 +5,8 @@ import com.hidden.client.R
 import com.hidden.client.apis.DashboardApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.models.DashboardTileContentEntity
-import com.hidden.client.models.DashboardTileEntity
+import com.hidden.client.models.entity.DashboardTileContentEntity
+import com.hidden.client.models.entity.DashboardTileEntity
 import com.hidden.client.models.dao.DashboardTileContentDao
 import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
 import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM

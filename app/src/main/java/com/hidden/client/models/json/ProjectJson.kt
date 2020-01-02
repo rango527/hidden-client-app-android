@@ -1,9 +1,8 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.helpers.nullable.NullToZero
 import com.hidden.client.models.ProjectAssetsEntity
-import com.hidden.client.models.ProjectEntity
+import com.hidden.client.models.entity.ProjectEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
+import com.hidden.client.databinding.ShortlistDetailViewBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models_.HCBrand
@@ -73,36 +75,43 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     // Background
     private lateinit var layoutBackground: ConstraintLayout
 
-    private lateinit var videwModel: ShortlistViewVM
+    private lateinit var binding: ShortlistDetailViewBinding
+    private lateinit var viewModel: ShortlistViewVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shortlist_detail)
+
+        viewModel = HCGlobal.getInstance().shortlistCandidateVMList[HCGlobal.getInstance().currentIndex]
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_shortlist_detail)
+        binding.viewModel = viewModel
 
         HCGlobal.getInstance().currentActivity = this
 
         initCloseButton()
 
+
+
 //        viewModel = HCGlobal.getInstance().shortlistCandidateVMList
 
-        imgPhoto = findViewById(R.id.image_photo)
-        textName = findViewById(R.id.text_name)
-        textLocation = findViewById(R.id.text_location)
-        textJobTitle = findViewById(R.id.text_job_title)
-        textSnapshot = findViewById(R.id.text_snapshot)
-
-        layoutApprove = findViewById(R.id.layout_approve)
-        layoutApprove.setOnClickListener(this)
-        layoutReject = findViewById(R.id.layout_reject)
-        layoutReject.setOnClickListener(this)
-
-        lblSnapshot = findViewById(R.id.lbl_snapshot)
-        lblBrand = findViewById(R.id.lbl_brand)
-        lblProject = findViewById(R.id.lbl_project)
-        lblSkills = findViewById(R.id.lbl_skills)
-        lblExperience = findViewById(R.id.lbl_experience)
-
-        layoutBackground = findViewById(R.id.layout_background)
+//        imgPhoto = findViewById(R.id.image_photo)
+//        textName = findViewById(R.id.text_name)
+//        textLocation = findViewById(R.id.text_location)
+//        textJobTitle = findViewById(R.id.text_job_title)
+//        textSnapshot = findViewById(R.id.text_snapshot)
+//
+//        layoutApprove = findViewById(R.id.layout_approve)
+//        layoutApprove.setOnClickListener(this)
+//        layoutReject = findViewById(R.id.layout_reject)
+//        layoutReject.setOnClickListener(this)
+//
+//        lblSnapshot = findViewById(R.id.lbl_snapshot)
+//        lblBrand = findViewById(R.id.lbl_brand)
+//        lblProject = findViewById(R.id.lbl_project)
+//        lblSkills = findViewById(R.id.lbl_skills)
+//        lblExperience = findViewById(R.id.lbl_experience)
+//
+//        layoutBackground = findViewById(R.id.layout_background)
 
     }
 

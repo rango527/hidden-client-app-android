@@ -2,8 +2,8 @@ package com.hidden.client.models.json
 
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.DashboardTileContentEntity
-import com.hidden.client.models.DashboardTileEntity
+import com.hidden.client.models.entity.DashboardTileContentEntity
+import com.hidden.client.models.entity.DashboardTileEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

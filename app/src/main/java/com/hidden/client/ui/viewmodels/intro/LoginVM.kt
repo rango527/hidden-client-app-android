@@ -1,11 +1,9 @@
 package com.hidden.client.ui.viewmodels.intro
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.User
 import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.models.json.LoginJson
@@ -24,7 +22,6 @@ class LoginVM: RootVM() {
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
-    val errorClickListener = View.OnClickListener { authLogin() }
 
     // To jump to HomeActivity after login success
     private val _navigateToHome = MutableLiveData<Event<Boolean>>()

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.Utility
-import com.hidden.client.models.ShortlistCandidateEntity
+import com.hidden.client.models.entity.ShortlistCandidateEntity
 import com.hidden.client.ui.adapters.BrandListAdapter
 import com.hidden.client.ui.adapters.ProjectListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM

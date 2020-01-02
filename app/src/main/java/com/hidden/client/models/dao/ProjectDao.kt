@@ -1,7 +1,7 @@
 package com.hidden.client.models.dao
 
 import androidx.room.*
-import com.hidden.client.models.ProjectEntity
+import com.hidden.client.models.entity.ProjectEntity
 
 @Dao
 interface ProjectDao {

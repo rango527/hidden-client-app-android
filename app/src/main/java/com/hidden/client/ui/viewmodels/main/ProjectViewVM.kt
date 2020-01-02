@@ -1,7 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.models.ProjectEntity
+import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.viewmodels.root.RootVM
 
 class ProjectViewVM: RootVM() {

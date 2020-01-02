@@ -6,20 +6,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateBrandItemBinding
-import com.hidden.client.models.BrandEntity
+import com.hidden.client.models.entity.BrandEntity
 import com.hidden.client.ui.viewmodels.main.BrandViewVM
 
 class BrandListAdapter: RecyclerView.Adapter<BrandListAdapter.ViewHolder>() {
 
     private lateinit var brandList: List<BrandEntity>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: CandidateBrandItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.list_item_candidate_brand, parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: BrandListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(brandList[position])
     }
 

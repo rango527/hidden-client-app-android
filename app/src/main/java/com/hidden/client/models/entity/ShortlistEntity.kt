@@ -1,4 +1,4 @@
-package com.hidden.client.models
+package com.hidden.client.models.entity
 
 import androidx.room.Entity
 import androidx.room.Ignore
