@@ -6,6 +6,7 @@ import android.util.Log
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.models_.HCLogin
 import com.hidden.client.models_.HCProfile
+import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
 class HCGlobal{
@@ -44,4 +45,6 @@ class HCGlobal{
     var currentShortlist: List<HCShortlistCandidateResponse> = arrayListOf()
     var currentIndex: Int = 0
     var currentProjectIndex: Int = 0
+
+    var shortlistCandidateVMList: List<ShortlistViewVM> = listOf()
 }

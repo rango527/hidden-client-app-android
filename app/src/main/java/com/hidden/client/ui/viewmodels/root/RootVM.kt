@@ -43,6 +43,10 @@ abstract class RootVM: ViewModel() {
             is CandidateListVM -> injector.inject(this)
             is CandidateViewVM -> injector.inject(this)
 
+            is BrandViewVM -> injector.inject(this)
+            is ProjectViewVM -> injector.inject(this)
+            is WorkExperienceViewVM -> injector.inject(this)
+
             // Shortlists
             is ShortlistListVM -> injector.inject(this)
             is ShortlistViewVM -> injector.inject(this)

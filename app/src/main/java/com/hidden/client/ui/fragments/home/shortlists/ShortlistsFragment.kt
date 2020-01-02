@@ -96,6 +96,7 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
         viewModel.candidateList.observe(this, Observer {candidateVMList ->
 
             this.candidateVMList = candidateVMList
+            HCGlobal.getInstance().shortlistCandidateVMList = candidateVMList
 
             txtNewProfileCount.text = resources.getQuantityString(
                 R.plurals.shortlists_profile_count,
@@ -164,8 +165,7 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
 
         pageAdapter = ShortlistViewPagerAdapter(
             activity!!.applicationContext,
-            candidateVMList,
-            this@ShortlistsFragment
+            candidateVMList
         )
         viewPagerShortlist.adapter = pageAdapter
 

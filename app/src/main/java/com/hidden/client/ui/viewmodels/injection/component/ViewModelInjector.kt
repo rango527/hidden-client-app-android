@@ -25,6 +25,10 @@ interface ViewModelInjector {
     fun inject(candidateViewVM: CandidateViewVM)
     fun inject(candidateDetailVM: CandidateDetailVM)
 
+    fun inject(brandViewVM: BrandViewVM)
+    fun inject(projectViewVM: ProjectViewVM)
+    fun inject(workExperienceViewVM: WorkExperienceViewVM)
+
     // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)
     fun inject(sthortlistViewVM: ShortlistViewVM)

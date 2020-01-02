@@ -1,18 +1,29 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
+import com.google.android.flexbox.FlexboxLayout
+import com.hidden.client.R
 import com.hidden.client.databinding.ShortlistItemViewBinding
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.UI
+import com.hidden.client.ui.activities.shortlist.ShortlistDetailActivity
+import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
+import kotlinx.android.synthetic.main.viewpager_candidate_item.view.*
 
 class ShortlistViewPagerAdapter(
     private val context: Context,
-    private val candidateVMList: List<ShortlistViewVM>,
-    private val fragment: Fragment
+    private val candidateVMList: List<ShortlistViewVM>
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =
@@ -25,42 +36,60 @@ class ShortlistViewPagerAdapter(
     override fun instantiateItem(container: ViewGroup, position: Int): View {
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        val view = inflater.inflate(R.layout.viewpager_candidate_item, container, false)
-//        var viewModel = candidateVMList[position]
-        // Init ViewModel
-//        viewModel = ViewModelProviders.of(fragment, ViewModelFactory(context!!)).get(ShortlistViewVM::class.java)
 
         val binding: ShortlistItemViewBinding = ShortlistItemViewBinding.inflate(inflater, container, false)
         binding.viewModel = candidateVMList[position]
 
-//        val imgAvatar: CircleImageView = view.findViewById(R.id.image_avatar)
-//        Glide.with(context).load(candidateList[position].avatarImage).into(imgAvatar)
-
-//        val txtAvatarName: TextView = view.findViewById(R.id.text_avatar_name)
-//        txtAvatarName.text = candidateList[position].avatarName
-
-//        val txtCity: TextView = view.findViewById(R.id.text_city)
-//        txtCity.text = candidateList[position].cityName
-
-//        val txtJobTitle: TextView = view.findViewById(R.id.text_job_title)
-//        txtJobTitle.text = Utility.makeJobString(
-//            candidateList[position].jobTitle_1,
-//            candidateList[position].jobTitle_2,
-//            candidateList[position].jobTitle_3
-//        )
-//
-//        txtJobTitle.setTextColor(
-//            ContextCompat.getColor(
-//                context,
-
-//            )
-//        )
-
-//        val snapshotView: SnapshotView = view.findViewById(R.id.snapshot)
-//        snapshotView.
-
-
         val view = binding.root
+
+        val layout: LinearLayout = view.findViewById(R.id.viewpager)
+        layout.setOnClickListener(View.OnClickListener {
+            HCGlobal.getInstance().currentIndex = position
+            val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistDetailActivity::class.java)
+            HCGlobal.getInstance().currentActivity.startActivity(intent)
+        })
+
+        // BrandList View
+        view.recyclerview_brand.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        view.recyclerview_brand.setHasFixedSize(true)
+
+        // ProjectList View
+        view.recyclerview_projects.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        view.recyclerview_projects.setHasFixedSize(true)
+
+        // Skill Layout  (default limit count)
+        val skillLayout: FlexboxLayout = view.findViewById(R.id.layout_skills)
+
+        val skillCount: Int = candidateVMList[position].getShortlistCandidate().getSkillList().size
+        val defaultShowCount =
+            if (skillCount <= UI.defaultSkillItemViewCount) skillCount else UI.defaultSkillItemViewCount
+
+        for (i in 0 until defaultShowCount) {
+            val skillItem = candidateVMList[position].getShortlistCandidate().getSkillList()[i]
+            val skillItemView =
+                SkillItemView(context, skillItem.name, skillItem.ranking)
+            skillLayout.addView(skillItemView)
+        }
+
+        // add `+ $(cnt) more`
+        if (skillCount > UI.defaultSkillItemViewCount) {
+            val textAddMore = TextView(context)
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, // This will define text view width
+                LinearLayout.LayoutParams.MATCH_PARENT // This will define text view height
+            )
+            params.leftMargin = 5
+
+            textAddMore.layoutParams = params
+            textAddMore.text = String.format(
+                context.resources.getString(R.string.add_more),
+                skillCount - defaultShowCount
+            )
+            textAddMore.gravity = Gravity.CENTER_VERTICAL
+
+            skillLayout.addView(textAddMore)
+        }
+
         container.addView(view)
         return view
     }
