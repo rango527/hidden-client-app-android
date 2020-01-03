@@ -3,7 +3,6 @@ package com.hidden.client.ui.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +30,10 @@ class HCProcessAdapter(
         val processModel = list[position]
         holder.bind(processModel)
 
-        holder.itemView.setOnClickListener(View.OnClickListener {
+        holder.itemView.setOnClickListener {
             val intent = Intent(context, HCProcessActivity::class.java)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
-        })
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,6 +1,5 @@
 package com.hidden.client.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCCandidateProjectResponse
-import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.enums.DetailTileType
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
@@ -53,7 +51,7 @@ class ProjectDetailActivity : BaseActivity() {
         txtBrief.text = project.project__brief
         txtWhatdid.text = project.project__activity
 
-        var mainImgUrl: String = ""
+        var mainImgUrl = ""
 
         for (assets in project.candidate__project_assets) {
             if (assets.project_asset__is_main_image) {
@@ -73,14 +71,14 @@ class ProjectDetailActivity : BaseActivity() {
         val layoutImage: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvImages.layoutManager = layoutImage
         rvImages.setHasFixedSize(true)
-        val imageAdapater: HCProjectImageAdapter = HCProjectImageAdapter(imageList.toTypedArray(),this)
-        rvImages.adapter = imageAdapater
+        val imageAdapter = HCProjectImageAdapter(imageList.toTypedArray(),this)
+        rvImages.adapter = imageAdapter
 
         rvVideos = findViewById(R.id.recyclerview_video)
         val layoutVideo: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvVideos.layoutManager = layoutVideo
         rvVideos.setHasFixedSize(true)
-        val videoAdapter: HCProjectImageAdapter = HCProjectImageAdapter(videoList.toTypedArray(),this)
+        val videoAdapter = HCProjectImageAdapter(videoList.toTypedArray(),this)
         rvVideos.adapter = videoAdapter
     }
 }

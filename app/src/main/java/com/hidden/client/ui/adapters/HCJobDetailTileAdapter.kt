@@ -1,6 +1,5 @@
 package com.hidden.client.ui.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import com.hidden.client.ui.viewholders.HCJobDetailTileVH
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
 class HCJobDetailTileAdapter(
-    private val context:Context,
     private val list: ArrayList<HCJobDetailTileViewModel>) : RecyclerView.Adapter<HCJobDetailTileVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCJobDetailTileVH {
@@ -35,8 +33,8 @@ class HCJobDetailTileAdapter(
         val jobDetailTileViewModel = list[position]
         holder.bind(jobDetailTileViewModel)
 
-        val layoutText: LinearLayout = holder.itemView.findViewById(R.id.layout_text_tile);
-        val layoutImage: LinearLayout = holder.itemView.findViewById(R.id.layout_img_title);
+        val layoutText: LinearLayout = holder.itemView.findViewById(R.id.layout_text_tile)
+        val layoutImage: LinearLayout = holder.itemView.findViewById(R.id.layout_img_title)
 
         when {
             jobDetailTileViewModel.getJobDetailTile().getJobDetailTileType().equals(DetailTileType.TEXT.value) -> {
@@ -57,10 +55,10 @@ class HCJobDetailTileAdapter(
             }
         }
 
-        layoutImage.setOnClickListener(View.OnClickListener {
+        layoutImage.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobImageSliderActivity::class.java)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
-        })
+        }
     }
 
     override fun getItemCount(): Int {

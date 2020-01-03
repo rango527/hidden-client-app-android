@@ -1,10 +1,8 @@
 package com.hidden.client.ui.activities.shortlist
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -62,7 +60,7 @@ class RejectActivity : BaseActivity(), View.OnClickListener {
                             if (response.isSuccessful) {
                                 val intent = Intent(this@RejectActivity, HomeActivity::class.java)
                                 intent.putExtra("saveIndex", true)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(intent)
                             } else {
                                 Toast.makeText(this@RejectActivity, "Error", Toast.LENGTH_LONG).show()

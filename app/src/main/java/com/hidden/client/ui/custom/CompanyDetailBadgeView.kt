@@ -15,7 +15,7 @@ class CompanyDetailBadgeView : LinearLayout {
 
         inflate(context, R.layout.company_detail_badge_view, this)
 
-        var layoutBackground: LinearLayout = findViewById(R.id.layout_background)
+        val layoutBackground: LinearLayout = findViewById(R.id.layout_background)
         val textTitle: TextView = findViewById(R.id.text_title)
         val imgIcon: ImageView = findViewById(R.id.img_icon)
 
@@ -23,12 +23,12 @@ class CompanyDetailBadgeView : LinearLayout {
 
         textTitle.text = attributes.getString(R.styleable.CompanyDetailBadge_badge_title)
 
-        var iconDrawable: Drawable? = attributes.getDrawable(R.styleable.CompanyDetailBadge_badge_icon)
+        val iconDrawable: Drawable? = attributes.getDrawable(R.styleable.CompanyDetailBadge_badge_icon)
         if (iconDrawable != null) {
             imgIcon.setImageDrawable(iconDrawable)
         }
 
-        var backgroundDrawable: Drawable? = attributes.getDrawable(R.styleable.CompanyDetailBadge_badge_color)
+        val backgroundDrawable: Drawable? = attributes.getDrawable(R.styleable.CompanyDetailBadge_badge_color)
         if (backgroundDrawable != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 layoutBackground.background = backgroundDrawable
@@ -44,7 +44,7 @@ class CompanyDetailBadgeView : LinearLayout {
     constructor(context: Context, text:String? = null, icon:Int? = null, bgColor: Int? = null) : super(context) {
         inflate(context, R.layout.company_detail_badge_view, this)
         if (text !== null) {
-            var layoutBackground: LinearLayout = findViewById(R.id.layout_background)
+            val layoutBackground: LinearLayout = findViewById(R.id.layout_background)
             val textTitle: TextView = findViewById(R.id.text_title)
             val imgIcon: ImageView = findViewById(R.id.img_icon)
 

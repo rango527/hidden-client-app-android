@@ -11,7 +11,7 @@ import com.hidden.client.helpers.extension.safeValue
 class HCSplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
-    private val SPLASH_DELAY: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
+    private val splashDelay: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
 
     private val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
@@ -35,7 +35,7 @@ class HCSplashActivity : AppCompatActivity() {
         mDelayHandler = Handler()
 
         // Navigate with delay
-        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+        mDelayHandler!!.postDelayed(mRunnable, splashDelay)
     }
 
     public override fun onDestroy() {

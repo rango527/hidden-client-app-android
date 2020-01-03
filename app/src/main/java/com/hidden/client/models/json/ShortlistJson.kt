@@ -30,7 +30,7 @@ data class ShortlistJson(
     }
 
     fun toShortlistCandidateEntityList(pShortlistId: Int): List<ShortlistCandidateEntity> {
-        var shortlistCandidateEntityList: ArrayList<ShortlistCandidateEntity> = arrayListOf()
+        val shortlistCandidateEntityList: ArrayList<ShortlistCandidateEntity> = arrayListOf()
 
         for (shortlistCandidate in shortlistCandidates!!) {
             shortlistCandidateEntityList.add(shortlistCandidate.toEntity(pShortlistId))

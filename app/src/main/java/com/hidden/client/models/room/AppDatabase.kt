@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.hidden.client.helpers.APP
-import com.hidden.client.models.*
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.*
 

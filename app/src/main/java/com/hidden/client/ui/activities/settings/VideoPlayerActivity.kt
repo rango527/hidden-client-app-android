@@ -1,13 +1,12 @@
 package com.hidden.client.ui.activities.settings
 
-import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.MediaController
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import kotlinx.android.synthetic.main.activity_video_player.*
 
 class VideoPlayerActivity : AppCompatActivity() {
@@ -19,23 +18,23 @@ class VideoPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
 
-        movieUrl = intent.getStringExtra("movieUrl")
+        movieUrl = intent.getStringExtra("movieUrl").safeValue()
 
         val thumbUrl: String = movieUrl.substring(0, movieUrl.length - 3) + "jpg"
         Glide.with(this).load(thumbUrl).into(image_background)
 
-        fn_playvideo()
+        fnPlayVideo()
     }
 
-    private fun fn_playvideo() {
+    private fun fnPlayVideo() {
         videoview.setVideoPath(movieUrl)
         videoview.start()
         mediaController = MediaController(this)
         mediaController.setAnchorView(videoview)
         videoview.setMediaController(mediaController)
 
-        videoview.setOnPreparedListener (MediaPlayer.OnPreparedListener {
+        videoview.setOnPreparedListener {
             progressbar.visibility = View.GONE
-        })
+        }
     }
 }

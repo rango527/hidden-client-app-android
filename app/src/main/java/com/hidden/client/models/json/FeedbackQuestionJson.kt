@@ -1,8 +1,6 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.helpers.nullable.NullToZero
-import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

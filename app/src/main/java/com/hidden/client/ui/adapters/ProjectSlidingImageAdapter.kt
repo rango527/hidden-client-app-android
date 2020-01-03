@@ -8,29 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCCandidateProjectAssets
 import com.hidden.client.enums.DetailTileType
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.activities.project.ImageSliderActivity
-import com.hidden.client.ui.activities.settings.CandidateDetailActivity
-import com.hidden.client.ui.activities.settings.CandidateListActivity
-import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.activities.settings.VideoPlayerActivity
-import org.w3c.dom.Text
-import java.util.ArrayList
 
-class ProjectSlidingImageAdapter(private val context: Context, private val dataList: List<HCCandidateProjectAssets>) : PagerAdapter() {
+class ProjectSlidingImageAdapter(context: Context, private val dataList: List<HCCandidateProjectAssets>) : PagerAdapter() {
 
-    private val inflater: LayoutInflater
-
-    init {
-        inflater = LayoutInflater.from(context)
-    }
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
@@ -49,11 +38,11 @@ class ProjectSlidingImageAdapter(private val context: Context, private val dataL
         val imgBackground: ImageView = imageLayout.findViewById(R.id.image_background)
 
         val txtClose: TextView = imageLayout.findViewById(R.id.text_close)
-        txtClose.setOnClickListener(View.OnClickListener {
+        txtClose.setOnClickListener {
             HCGlobal.getInstance().currentActivity.finish()
-        })
+        }
 
-        if (dataList[position].project_asset__asset_type.equals(DetailTileType.IMAGE.value)) {
+        if (dataList[position].project_asset__asset_type == DetailTileType.IMAGE.value) {
             Glide.with(HCGlobal.getInstance().currentActivity).load(dataList[position].project_asset__cloudinary_url).into(imgPhoto)
             Glide.with(HCGlobal.getInstance().currentActivity).load(dataList[position].project_asset__cloudinary_url).into(imgBackground)
         } else {
@@ -62,16 +51,16 @@ class ProjectSlidingImageAdapter(private val context: Context, private val dataL
             Glide.with(HCGlobal.getInstance().currentActivity).load(movieUrl).into(imgBackground)
         }
 
-        imgPhoto.setOnClickListener(View.OnClickListener {
-            if (dataList[position].project_asset__asset_type.equals(DetailTileType.VIDEO.value)) {
+        imgPhoto.setOnClickListener {
+            if (dataList[position].project_asset__asset_type == DetailTileType.VIDEO.value) {
                 val intent = Intent(HCGlobal.getInstance().currentActivity, VideoPlayerActivity::class.java)
-                intent.putExtra("movieUrl", dataList[position].project_asset__cloudinary_url.toString())
+                intent.putExtra("movieUrl", dataList[position].project_asset__cloudinary_url)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
                 (HCGlobal.getInstance().currentActivity as ImageSliderActivity).overridePendingVTransitionEnter()
             }
-        })
+        }
 
-        if (dataList[position].project_asset__asset_type.equals(DetailTileType.VIDEO.value)) {
+        if (dataList[position].project_asset__asset_type == DetailTileType.VIDEO.value) {
             val imgPlay: ImageView = imageLayout.findViewById(R.id.image_play)
             imgPlay.visibility = View.VISIBLE
         }

@@ -1,15 +1,8 @@
 package com.hidden.client.networks
 
-import com.hidden.client.helpers.nullable.NullToEmptyStringAdapter
-import com.hidden.client.helpers.nullable.NullToZeroAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitClient {
 

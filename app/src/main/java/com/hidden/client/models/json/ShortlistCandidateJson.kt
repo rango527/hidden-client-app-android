@@ -126,7 +126,7 @@ data class ShortlistCandidateJson(
     }
 
     fun toBrandEntityList(pCandidateId: Int): List<BrandEntity> {
-        var brandEntityList: ArrayList<BrandEntity> = arrayListOf()
+        val brandEntityList: ArrayList<BrandEntity> = arrayListOf()
 
         for (brand in brandList!!) {
             brandEntityList.add(brand.toEntity(pCandidateId))
@@ -136,7 +136,7 @@ data class ShortlistCandidateJson(
     }
 
     fun toExperienceEntityList(pCandidateId: Int): List<WorkExperienceEntity> {
-        var workExperienceEntityList: ArrayList<WorkExperienceEntity> = arrayListOf()
+        val workExperienceEntityList: ArrayList<WorkExperienceEntity> = arrayListOf()
 
         for (candidateWorkExperience in experienceList!!) {
             workExperienceEntityList.add(candidateWorkExperience.toEntity(pCandidateId))
@@ -146,7 +146,7 @@ data class ShortlistCandidateJson(
     }
 
     fun toProjectEntityList(pCandidateId: Int): List<ProjectEntity> {
-        var projectEntityList: ArrayList<ProjectEntity> = arrayListOf()
+        val projectEntityList: ArrayList<ProjectEntity> = arrayListOf()
 
         for (project in projectList!!) {
             val projectEntity: ProjectEntity = project.toEntity(pCandidateId)
@@ -158,7 +158,7 @@ data class ShortlistCandidateJson(
     }
 
     fun toSkillEntityList(pCandidateId: Int): List<SkillEntity> {
-        var skillEntityList: ArrayList<SkillEntity> = arrayListOf()
+        val skillEntityList: ArrayList<SkillEntity> = arrayListOf()
 
         for (candidateSkill in skillList!!) {
             skillEntityList.add(candidateSkill.toEntity(pCandidateId))

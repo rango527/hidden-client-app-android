@@ -3,7 +3,6 @@ package com.hidden.client.models.entity
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.hidden.client.models.ProjectAssetsEntity
 
 @Entity(tableName = "CandidateProject")
 data class ProjectEntity (

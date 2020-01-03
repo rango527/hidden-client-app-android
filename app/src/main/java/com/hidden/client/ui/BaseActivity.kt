@@ -1,16 +1,14 @@
 package com.hidden.client.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.hidden.client.helpers.HCGlobal
-import android.view.ViewGroup
 import com.hidden.client.R
-import com.hidden.client.ui.fonts.FontChangeCrawler
+import com.hidden.client.helpers.HCGlobal
 
 
-
+@SuppressLint("Registered")
 open class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,38 +31,28 @@ open class BaseActivity: AppCompatActivity() {
         super.onResume()
         HCGlobal.getInstance().currentActivity = this
     }
+
     /**
-     * Ovverides the pending Activity transition by performing the "Enter" animation. Vertical
+     * Overrides the pending Activity transition by performing the "Enter" animation. Vertical
      */
-    public fun overridePendingVTransitionEnter() {
+    fun overridePendingVTransitionEnter() {
         overridePendingTransition(R.anim.anim_slide_in_bottom, R.anim.anim_slide_out_top)
     }
 
     /**
      * Overrides the pending Activity transition by performing the "Exit" animation. Vertical
      */
-    public fun overridePendingVTransitionExit() {
+    private fun overridePendingVTransitionExit() {
         overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom)
-    }
-
-    /**
-     * Ovverides the pending Activity transition by performing the "Enter" animation. Horizontal
-     */
-    public fun overridePendingHTransitionEnter() {
-        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left)
     }
 
     /**
      * Overrides the pending Activity transition by performing the "Exit" animation. Horizontal
      */
-    public fun overridePendingHTransitionExit() {
-        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right)
-    }
-
     fun initCloseButton() {
-        var imgClose: ImageView = findViewById(R.id.image_close);
-        imgClose.setOnClickListener(View.OnClickListener {
+        val imgClose = findViewById<ImageView>(R.id.image_close)
+        imgClose.setOnClickListener {
             finish()
-        })
+        }
     }
 }

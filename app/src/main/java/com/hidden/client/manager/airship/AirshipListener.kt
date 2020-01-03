@@ -2,13 +2,13 @@ package com.hidden.client.manager.airship
 
 import android.util.Log
 import androidx.annotation.NonNull
-import com.urbanairship.channel.AirshipChannelListener;
-import com.urbanairship.push.NotificationActionButtonInfo;
-import com.urbanairship.push.NotificationInfo;
-import com.urbanairship.push.NotificationListener;
-import com.urbanairship.push.PushListener;
-import com.urbanairship.push.PushMessage;
-import com.urbanairship.push.PushTokenListener;
+import com.urbanairship.channel.AirshipChannelListener
+import com.urbanairship.push.NotificationActionButtonInfo
+import com.urbanairship.push.NotificationInfo
+import com.urbanairship.push.NotificationListener
+import com.urbanairship.push.PushListener
+import com.urbanairship.push.PushMessage
+import com.urbanairship.push.PushTokenListener
 
 /**
  * Listener for push, notifications, and registrations events.
@@ -68,7 +68,7 @@ class AirshipListener : PushListener, NotificationListener, PushTokenListener,
 
     companion object {
 
-        private val TAG = "AirshipListener"
+        private const val TAG = "AirshipListener"
     }
 
 }

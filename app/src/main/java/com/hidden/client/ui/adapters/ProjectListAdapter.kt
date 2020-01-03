@@ -13,13 +13,13 @@ class ProjectListAdapter: RecyclerView.Adapter<ProjectListAdapter.ViewHolder>() 
 
     private lateinit var projectList: List<ProjectEntity>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: CandidateProjectItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.list_item_candidate_highlight, parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ProjectListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(projectList[position])
     }
 

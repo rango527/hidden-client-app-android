@@ -63,21 +63,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
             finish()
     }
 
-    fun pushFragment(fragment: Fragment) {
-
-        curTabFrags.add(fragment)
-
-        var curFrag: Fragment = curTabFrags[curTabFrags.size - 2]
-
-        try {
-            supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, fragment).commit()
-        }
-        catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    fun popFragment(): Boolean {
+    private fun popFragment(): Boolean {
         if (curTabFrags.size <= 1)
             return false
 
@@ -92,14 +78,6 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         }
 
         return true
-    }
-
-    fun popToRootofShortlists() {
-        if (shortlistsFrags.size <= 1)
-            return
-        for (i in shortlistsFrags.size - 1 .. 1 ) {
-            shortlistsFrags.removeAt(i)
-        }
     }
 
     fun toggleMask() {

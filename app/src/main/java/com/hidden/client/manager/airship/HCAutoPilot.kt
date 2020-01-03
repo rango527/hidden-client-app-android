@@ -16,8 +16,6 @@ class HCAutoPilot : Autopilot() {
 
     override fun onAirshipReady(airship: UAirship) {
 
-        val preferences = AppPreferences.noBackupPreferences
-
         val isFirstRun = AppPreferences.firstRunKey
         if (isFirstRun) {
             AppPreferences.firstRunKey = false

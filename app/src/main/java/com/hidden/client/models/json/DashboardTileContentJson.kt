@@ -31,7 +31,7 @@ data class DashboardTileContentJson(
 
 ) {
     fun toEntity(pDashboardTileId: Int): DashboardTileContentEntity {
-        var jobId: Int = 0;
+        var jobId = 0
 
         if (extra != null) {
             jobId = extra.jobId.safeValue()

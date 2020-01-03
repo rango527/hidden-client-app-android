@@ -9,15 +9,8 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.ui.viewholders.HCImageVH
 
-class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
-
-    var list: Array<String> = arrayOf()
-    var context: Context
-
-    constructor(list: Array<String>, context: Context) {
-        this.list = list
-        this.context = context
-    }
+class HCProjectImageAdapter(var list: Array<String>, var context: Context) :
+    RecyclerView.Adapter<HCImageVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCImageVH {
 
@@ -29,7 +22,7 @@ class HCProjectImageAdapter : RecyclerView.Adapter<HCImageVH> {
 
     override fun onBindViewHolder(holder: HCImageVH, position: Int) {
 
-        var imgUrl: String = list[position]
+        val imgUrl: String = list[position]
         Glide.with(context).load(imgUrl).into(holder.img)
     }
 

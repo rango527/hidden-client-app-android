@@ -27,37 +27,32 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         // Add OnClickListener
-        var imgBack: ImageButton = root.findViewById(R.id.button_back_to_dashboard);
+        val imgBack: ImageButton = root.findViewById(R.id.button_back_to_dashboard)
         imgBack.setOnClickListener(this)
 
-        var layoutCandidateDirectory: LinearLayout = root.findViewById(R.id.layout_candidate_directory);
-        layoutCandidateDirectory.setOnClickListener(this);
+        val layoutCandidateDirectory: LinearLayout = root.findViewById(R.id.layout_candidate_directory)
+        layoutCandidateDirectory.setOnClickListener(this)
 
-        var layoutEditDetails: LinearLayout = root.findViewById(R.id.layout_edit_your_detail);
-        layoutEditDetails.setOnClickListener(this);
+        val layoutEditDetails: LinearLayout = root.findViewById(R.id.layout_edit_your_detail)
+        layoutEditDetails.setOnClickListener(this)
 
-        var layoutViewCompanyProfile: LinearLayout = root.findViewById(R.id.layout_view_company_profile);
-        layoutViewCompanyProfile.setOnClickListener(this);
+        val layoutViewCompanyProfile: LinearLayout = root.findViewById(R.id.layout_view_company_profile)
+        layoutViewCompanyProfile.setOnClickListener(this)
 
-        var layoutTermsService: LinearLayout = root.findViewById(R.id.layout_terms_of_service);
-        layoutTermsService.setOnClickListener(this);
+        val layoutTermsService: LinearLayout = root.findViewById(R.id.layout_terms_of_service)
+        layoutTermsService.setOnClickListener(this)
 
-        var layoutPrivacyPolicy: LinearLayout = root.findViewById(R.id.layout_privacy_policy);
-        layoutPrivacyPolicy.setOnClickListener(this);
+        val layoutPrivacyPolicy: LinearLayout = root.findViewById(R.id.layout_privacy_policy)
+        layoutPrivacyPolicy.setOnClickListener(this)
 
-        var layoutResetPassword: LinearLayout = root.findViewById(R.id.layout_reset_password);
-        layoutResetPassword.setOnClickListener(this);
+        val layoutResetPassword: LinearLayout = root.findViewById(R.id.layout_reset_password)
+        layoutResetPassword.setOnClickListener(this)
 
-        var layoutLogout: LinearLayout = root.findViewById(R.id.layout_logout);
-        layoutLogout.setOnClickListener(this);
+        val layoutLogout: LinearLayout = root.findViewById(R.id.layout_logout)
+        layoutLogout.setOnClickListener(this)
 
         return root
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
     override fun onClick(v: View?) {
@@ -102,7 +97,7 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 AppPreferences.myId = 0
 
                 val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
                 HCGlobal.getInstance().currentActivity.finish()
             }
         }

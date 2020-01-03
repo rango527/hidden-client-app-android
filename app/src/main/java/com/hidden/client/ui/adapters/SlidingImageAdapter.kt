@@ -1,5 +1,6 @@
 package com.hidden.client.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
@@ -8,27 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.enums.DetailTileType
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
-import com.hidden.client.ui.activities.settings.CandidateDetailActivity
-import com.hidden.client.ui.activities.settings.CandidateListActivity
 import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.activities.settings.VideoPlayerActivity
-import org.w3c.dom.Text
-import java.util.ArrayList
+import java.util.*
 
-class SlidingImageAdapter(private val context: Context, private val dataList: ArrayList<HCJobDetailTile>) : PagerAdapter() {
+class SlidingImageAdapter(context: Context, private val dataList: ArrayList<HCJobDetailTile>) : PagerAdapter() {
 
-    private val inflater: LayoutInflater
-
-    init {
-        inflater = LayoutInflater.from(context)
-    }
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
@@ -38,6 +31,7 @@ class SlidingImageAdapter(private val context: Context, private val dataList: Ar
         return dataList.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun instantiateItem(view: ViewGroup, position: Int): Any {
         val imageLayout = inflater.inflate(R.layout.image_slider_item, view, false)!!
 
@@ -47,15 +41,15 @@ class SlidingImageAdapter(private val context: Context, private val dataList: Ar
         val imgBackground: ImageView = imageLayout.findViewById(R.id.image_background)
 
         val txtClose: TextView = imageLayout.findViewById(R.id.text_close)
-        txtClose.setOnClickListener(View.OnClickListener {
+        txtClose.setOnClickListener {
             HCGlobal.getInstance().currentActivity.finish()
-        })
+        }
 
         val txtShow: TextView = imageLayout.findViewById(R.id.text_show_more)
         val txtTitle: TextView = imageLayout.findViewById(R.id.text_title)
         txtTitle.text = dataList[position].getJobDetailTileTitle()
 
-        txtTitle.setOnClickListener(View.OnClickListener {
+        txtTitle.setOnClickListener {
             if (dataList[position].getJobDetailTileType().equals(DetailTileType.IMAGE.value)) {
                 txtTitle.visibility = View.GONE
                 txtShow.text =
@@ -66,12 +60,12 @@ class SlidingImageAdapter(private val context: Context, private val dataList: Ar
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
                 (HCGlobal.getInstance().currentActivity as JobImageSliderActivity).overridePendingVTransitionEnter()
             }
-        })
+        }
 
-        txtShow.setOnClickListener(View.OnClickListener {
+        txtShow.setOnClickListener {
             txtTitle.visibility = View.VISIBLE
             txtShow.text = "... Show more"
-        })
+        }
 
         val txtPageNum: TextView = imageLayout.findViewById(R.id.text_page)
         txtPageNum.text = (position + 1).toString() + "/" + dataList.size.toString()
@@ -85,7 +79,7 @@ class SlidingImageAdapter(private val context: Context, private val dataList: Ar
             Glide.with(HCGlobal.getInstance().currentActivity).load(movieUrl).into(imgBackground)
         }
 
-        imgPhoto.setOnClickListener(View.OnClickListener {
+        imgPhoto.setOnClickListener {
             if (dataList[position].getJobDetailTileType().equals(DetailTileType.IMAGE.value)) {
                 txtTitle.visibility = View.VISIBLE
                 txtShow.text = "... Show more"
@@ -95,7 +89,7 @@ class SlidingImageAdapter(private val context: Context, private val dataList: Ar
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
                 (HCGlobal.getInstance().currentActivity as JobImageSliderActivity).overridePendingVTransitionEnter()
             }
-        })
+        }
 
         if (dataList[position].getJobDetailTileType().equals(DetailTileType.VIDEO.value)) {
             val imgPlay: ImageView = imageLayout.findViewById(R.id.image_play)

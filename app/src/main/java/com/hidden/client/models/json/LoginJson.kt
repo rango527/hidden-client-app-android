@@ -19,6 +19,4 @@ data class LoginJson(
     val status: String?,
     @Json(name = "token")
     val token: String?
-) {
-
-}
+)

@@ -1,16 +1,13 @@
 package com.hidden.client.ui.activities.settings
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.webkit.WebView
-import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
-import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCConsentResponse
 import com.hidden.client.enums.Consent
 import com.hidden.client.enums.UserType
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_privacy_statement.*
 import retrofit2.Call

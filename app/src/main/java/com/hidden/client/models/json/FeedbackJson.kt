@@ -47,7 +47,7 @@ data class FeedbackJson(
     }
 
     fun toQuestionList(pFeedbackId: Int): List<FeedbackQuestionEntity> {
-        var questionEntityList: ArrayList<FeedbackQuestionEntity> = arrayListOf()
+        val questionEntityList: ArrayList<FeedbackQuestionEntity> = arrayListOf()
 
         for (question in this.questionList!!) {
             questionEntityList.add(question.toEntity(pFeedbackId))

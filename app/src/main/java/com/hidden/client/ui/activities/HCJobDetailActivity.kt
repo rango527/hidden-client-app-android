@@ -1,15 +1,16 @@
 package com.hidden.client.ui.activities
 
+import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.*
+import android.transition.ChangeBounds
+import android.transition.ChangeClipBounds
 import android.util.Pair
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,11 +19,11 @@ import com.bumptech.glide.Glide
 import com.github.pwittchen.swipe.library.rx2.Swipe
 import com.github.pwittchen.swipe.library.rx2.SwipeListener
 import com.hidden.client.R
-import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -33,7 +34,6 @@ import retrofit2.Response
 class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var jobId: String
-    private lateinit var companyId: String
 
     private lateinit var btnBackToYourJob: ImageButton
     private lateinit var layoutShowCompanyDetail: LinearLayout
@@ -59,7 +59,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_your_job_detail)
 
-        HCGlobal.getInstance().currentActivity = this;
+        HCGlobal.getInstance().currentActivity = this
 
         // Animation
         setupWindowAnimations()
@@ -112,6 +112,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(this@HCJobDetailActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
+                @SuppressLint("SetTextI18n")
                 override fun onResponse(
                     call: Call<HCJobDetailResponse>,
                     response: Response<HCJobDetailResponse>
@@ -131,9 +132,9 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                         txtViewCompanyProfile.text = String.format(resources.getString(R.string.view_company_profile)
                             , response.body()!!.company__name)
 
-                        var jobDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
+                        val jobDetailTileList: ArrayList<HCJobDetailTile> = arrayListOf()
                         for (detail_tile in response.body()!!.job__tiles) {
-                            val jobDetailTile: HCJobDetailTile = HCJobDetailTile()
+                            val jobDetailTile = HCJobDetailTile()
                             jobDetailTile.setJobDetailTitleId(detail_tile.tile__tile_id)
                             jobDetailTile.setJobDetailTileTitle(detail_tile.tile__title)
                             jobDetailTile.setJobDetailTileContent(detail_tile.tile__content)
@@ -192,7 +193,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 //        slideTransition.slideEdge = Gravity.BOTTOM
         slideTransition.duration = resources.getInteger(R.integer.anim_duration_long).toLong()
 
-        val changeBoundsTransaction = ChangeBounds();
+        val changeBoundsTransaction = ChangeBounds()
         changeBoundsTransaction.duration = resources.getInteger(R.integer.anim_duration_medium).toLong()
 
 //        window.enterTransition = slideTransition
@@ -211,21 +212,21 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onSwipedLeft(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
 
             override fun onSwipingRight(event: MotionEvent) {
             }
 
             override fun onSwipedRight(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
 
             override fun onSwipingUp(event: MotionEvent) {
             }
 
             override fun onSwipedUp(event: MotionEvent): Boolean {
-                return true;
+                return true
             }
 
             override fun onSwipingDown(event: MotionEvent) {
@@ -233,7 +234,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
             override fun onSwipedDown(event: MotionEvent): Boolean {
                 backToJobActivity()
-                return true;
+                return true
             }
         })
     }

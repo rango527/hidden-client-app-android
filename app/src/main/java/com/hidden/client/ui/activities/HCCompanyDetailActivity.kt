@@ -98,7 +98,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
 
                         // add `+ $(cnt) more`
                         val cityLocationList = response.body()!!.company__cities
-                        val badgeCount = cityLocationList.size
+                        val badgeCount: Int = cityLocationList.size
 
                         val defaultShowCount = if (badgeCount <= UI.defaultSkillItemViewCount) badgeCount else UI.defaultSkillItemViewCount
 
@@ -121,7 +121,8 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                             params.leftMargin = 5
 
                             textAddMore.layoutParams = params
-                            textAddMore.setText(String.format(resources.getString(R.string.add_more), badgeCount - defaultShowCount))
+                            textAddMore.text =
+                                String.format(resources.getString(R.string.add_more), badgeCount - defaultShowCount)
                             textAddMore.gravity = Gravity.CENTER_VERTICAL
 
                             textAddMore.setOnClickListener { v ->

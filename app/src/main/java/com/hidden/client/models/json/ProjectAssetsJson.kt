@@ -1,7 +1,7 @@
 package com.hidden.client.models.json
 
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.ProjectAssetsEntity
+import com.hidden.client.models.entity.ProjectAssetsEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

@@ -50,7 +50,7 @@ data class DashboardTileJson(
     }
 
     fun toTileContentList(pDashboardTileId: Int): List<DashboardTileContentEntity> {
-        var tileContentList: ArrayList<DashboardTileContentEntity> = arrayListOf()
+        val tileContentList: ArrayList<DashboardTileContentEntity> = arrayListOf()
 
         for (tileContent in this.tileContentList!!) {
             tileContentList.add(tileContent.toEntity(pDashboardTileId))

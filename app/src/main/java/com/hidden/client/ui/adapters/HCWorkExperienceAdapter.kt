@@ -1,6 +1,5 @@
 package com.hidden.client.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,7 +10,6 @@ import com.hidden.client.ui.viewholders.HCWorkExperienceVH
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 
 class HCWorkExperienceAdapter(
-    private val context:Context,
     private val list: ArrayList<HCWorkExperienceViewModel>) : RecyclerView.Adapter<HCWorkExperienceVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HCWorkExperienceVH {

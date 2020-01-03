@@ -1,6 +1,5 @@
 package com.hidden.client.ui.activities.project
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
@@ -25,8 +24,8 @@ class ImageSliderActivity : BaseActivity() {
 
     private fun init() {
 
-        var mPager = findViewById(R.id.container) as ViewPager
-        mPager!!.adapter = ProjectSlidingImageAdapter(this, this.imgSourceList)
+        val mPager = findViewById<ViewPager>(R.id.container)
+        mPager.adapter = ProjectSlidingImageAdapter(this, this.imgSourceList)
 
     }
 }
