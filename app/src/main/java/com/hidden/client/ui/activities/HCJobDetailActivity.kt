@@ -93,7 +93,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         rvJobDetailTile = findViewById(R.id.recyclerview_job_detail_tile)
         jobDetailTileViewModel = ViewModelProviders.of(this).get(HCJobDetailTileViewModel::class.java)
         jobDetailTileViewModel.getJobDetailTileList().observe(this, Observer {jobDetailTileViewModels->
-            jobDetailTileAdapter = HCJobDetailTileAdapter(applicationContext, jobDetailTileViewModels)
+            jobDetailTileAdapter = HCJobDetailTileAdapter(jobDetailTileViewModels)
             rvJobDetailTile.layoutManager = LinearLayoutManager(applicationContext)
             rvJobDetailTile.setHasFixedSize(true)
 

@@ -18,7 +18,8 @@
         android:orientation="vertical"
         android:padding="15dp"
         android:scrollbars="none"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <LinearLayout
             android:id="@+id/viewpager"
@@ -52,7 +53,7 @@
                     android:id="@+id/text_avatar_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="17dp"
+                    android:layout_marginStart="17dp"
                     android:layout_marginTop="3dp"
                     android:text="@{viewModel.shortlistCandidate.avatarName}"
                     android:textColor="@color/colorBlack_2"
@@ -67,7 +68,7 @@
                     android:id="@+id/text_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="17dp"
+                    android:layout_marginStart="17dp"
                     android:layout_marginTop="1dp"
                     android:text="@{viewModel.shortlistCandidate.cityName}"
                     android:textColor="@color/colorBlack_2"
@@ -95,7 +96,7 @@
                     android:gravity="center_horizontal"
                     android:text="@{viewModel.getJobTitle()}"
                     android:textColor="@{ContextCompat.getColor(context, viewModel.getJobTitleTextColor(context))}"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     android:duplicateParentState="true"
                     android:clickable="false"/>
             </LinearLayout>
@@ -112,7 +113,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/snapshot"
@@ -152,7 +153,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/has_worked_with"
@@ -187,7 +188,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/highlights"
@@ -222,7 +223,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/skills"

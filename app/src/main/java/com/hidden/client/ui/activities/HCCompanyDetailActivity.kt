@@ -61,7 +61,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
         rvCompanyDetailTile = findViewById(R.id.recyclerview_company_detail_tile)
         companyDetailTileViewModel = ViewModelProviders.of(this).get(HCJobDetailTileViewModel::class.java)
         companyDetailTileViewModel.getJobDetailTileList().observe(this, Observer {jobDetailTileViewModels->
-            companyDetailTileAdapter = HCJobDetailTileAdapter(applicationContext, jobDetailTileViewModels)
+            companyDetailTileAdapter = HCJobDetailTileAdapter(jobDetailTileViewModels)
             rvCompanyDetailTile.layoutManager = LinearLayoutManager(applicationContext)
             rvCompanyDetailTile.setHasFixedSize(true)
 

@@ -66,7 +66,7 @@ class CandidateDetailActivity : BaseActivity() {
         rvBrand = findViewById(R.id.recyclerview_brand)
         brandViewModel = ViewModelProviders.of(this).get(HCBrandViewModel::class.java)
         brandViewModel.getBrandList().observe(this, Observer {brandViewModel ->
-            brandAdapter = HCBrandAdapter(this, brandViewModel)
+            brandAdapter = HCBrandAdapter(brandViewModel)
 
             layoutBrandManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             rvBrand.layoutManager = layoutBrandManager
@@ -79,7 +79,7 @@ class CandidateDetailActivity : BaseActivity() {
         rvWorkExperience = findViewById(R.id.recyclerview_work_experience)
         workExperienceViewModel = ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
         workExperienceViewModel.getWorkExperienceList().observe(this, Observer {workExperienceViewModels->
-            workExperienceAdapter = HCWorkExperienceAdapter(this, workExperienceViewModels)
+            workExperienceAdapter = HCWorkExperienceAdapter(workExperienceViewModels)
 
             rvWorkExperience.layoutManager = LinearLayoutManager(this)
             rvWorkExperience.setHasFixedSize(true)
