@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
 import com.hidden.client.databinding.ShortlistDetailViewBinding
+import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.Utility
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.SkillItemView
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
@@ -73,7 +75,15 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
         layoutReject = findViewById(R.id.layout_reject)
         layoutReject.setOnClickListener(this)
 
-//        layoutBackground = findViewById(R.id.layout_background)
+        layoutBackground = findViewById(R.id.layout_background)
+
+        layoutBackground.setBackgroundResource(
+            Utility.getResourceByName(
+                this,
+                Enums.Resource.DRAWABLE.value,
+                HCGlobal.getInstance().shortlistCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
+            )
+        )
     }
 
     override fun onClick(v: View?) {
