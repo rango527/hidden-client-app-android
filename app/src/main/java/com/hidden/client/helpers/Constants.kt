@@ -56,4 +56,10 @@ object Enums {
         DRAWABLE("drawable"),
         COLOR("color")
     }
+
+    enum class ProjectAssetsType(val value: String) {
+        TEXT("TEXT"),
+        IMAGE("IMAGE"),
+        VIDEO("VIDEO")
+    }
 }

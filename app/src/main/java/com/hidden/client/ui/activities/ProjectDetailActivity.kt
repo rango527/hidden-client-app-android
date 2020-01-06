@@ -7,20 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.datamodels.HCCandidateProjectResponse
-import com.hidden.client.enums.DetailTileType
+import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCProjectImageAdapter
 
 class ProjectDetailActivity : BaseActivity() {
 
-    private lateinit var project: HCCandidateProjectResponse
+    private lateinit var project: ProjectEntity
 
     private lateinit var txtProject: TextView
     private lateinit var txtCompany: TextView
     private lateinit var txtBrief: TextView
-    private lateinit var txtWhatdid: TextView
+    private lateinit var txtWhatDid: TextView
 
     private lateinit var imgMain: ImageView
 
@@ -36,32 +36,31 @@ class ProjectDetailActivity : BaseActivity() {
 
         initCloseButton()
 
-        project =
-            HCGlobal.getInstance().currentShortlist[HCGlobal.getInstance().currentIndex].candidate__projects[HCGlobal.getInstance().currentProjectIndex]
+        project = HCGlobal.getInstance().shortlistCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().getProjectList()[HCGlobal.getInstance().currentProjectIndex]
 
         txtProject = findViewById(R.id.text_project)
         txtCompany = findViewById(R.id.text_company)
         txtBrief = findViewById(R.id.text_brief)
-        txtWhatdid = findViewById(R.id.text_what_did)
+        txtWhatDid = findViewById(R.id.text_what_did)
 
         imgMain = findViewById(R.id.img_main)
 
-        txtProject.text = project.project__title
-        txtCompany.text = project.brand__name
-        txtBrief.text = project.project__brief
-        txtWhatdid.text = project.project__activity
+        txtProject.text = project.title
+        txtCompany.text = project.name
+        txtBrief.text = project.brief
+        txtWhatDid.text = project.activity
 
         var mainImgUrl = ""
 
-        for (assets in project.candidate__project_assets) {
-            if (assets.project_asset__is_main_image) {
-                mainImgUrl = assets.project_asset__cloudinary_url
+        for (assets in project.getAssetsList()) {
+            if (assets.mainImage) {
+                mainImgUrl = assets.url
             }
-            if (assets.project_asset__asset_type == DetailTileType.IMAGE.value) {
-                imageList.add(assets.project_asset__cloudinary_url)
+            if (assets.type == Enums.ProjectAssetsType.IMAGE.value) {
+                imageList.add(assets.url)
             }
-            if (assets.project_asset__asset_type == DetailTileType.VIDEO.value) {
-                videoList.add(assets.project_asset__cloudinary_url.substring(0, assets.project_asset__cloudinary_url.length - 3) + "jpg")
+            if (assets.type == Enums.ProjectAssetsType.VIDEO.value) {
+                videoList.add(assets.url.substring(0, assets.url.length - 3) + "jpg")
             }
         }
 

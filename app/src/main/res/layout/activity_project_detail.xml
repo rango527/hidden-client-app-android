@@ -7,15 +7,6 @@
     tools:context=".ui.activities.ProjectDetailActivity">
 
     <ImageView
-        android:id="@+id/image_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_close"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/padding_default"/>
-
-    <ImageView
         android:id="@+id/img_main"
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -141,5 +132,14 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/image_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/padding_default"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
