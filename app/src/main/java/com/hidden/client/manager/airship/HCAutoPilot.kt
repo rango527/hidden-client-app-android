@@ -27,11 +27,10 @@ class HCAutoPilot : Autopilot() {
         airship.messageCenter.setOnShowMessageCenterListener { messageId ->
             // Use an implicit navigation deep link for now as explicit deep links are broken
             // with multi navigation host fragments
-            val uri: Uri
-            if (messageId != null) {
-                uri = Uri.parse("vnd.urbanairship.sample://deepLink/inbox/message/$messageId")
+            val uri: Uri = if (messageId != null) {
+                Uri.parse("vnd.urbanairship.sample://deepLink/inbox/message/$messageId")
             } else {
-                uri = Uri.parse("vnd.urbanairship.sample://deepLink/inbox")
+                Uri.parse("vnd.urbanairship.sample://deepLink/inbox")
             }
 
             val intent = Intent(Intent.ACTION_VIEW, uri)

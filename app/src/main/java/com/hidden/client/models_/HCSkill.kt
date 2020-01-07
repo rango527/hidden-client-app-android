@@ -1,11 +1,11 @@
 package com.hidden.client.models_
 
-class HCSkill {
+class HCSkill(skill: String, proficiency: Int) {
 
     private lateinit var skill: String
     private var proficiency: Int = 0
 
-    constructor(skill: String, proficiency: Int) {
+    init {
         setSkill(skill)
         setProficiency(proficiency)
     }

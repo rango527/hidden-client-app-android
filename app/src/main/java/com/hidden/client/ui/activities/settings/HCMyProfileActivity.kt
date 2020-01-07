@@ -16,10 +16,9 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hidden.client.R
-import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.BaseActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
@@ -95,20 +94,20 @@ class HCMyProfileActivity : BaseActivity(), View.OnClickListener {
                 val view = layoutInflater.inflate(R.layout.photo_picker_bottom_sheet, null)
 
                 val layoutClose = view.findViewById<LinearLayout>(R.id.layout_cancel)
-                layoutClose.setOnClickListener(View.OnClickListener {
-                    dialog.dismiss();
-                })
+                layoutClose.setOnClickListener {
+                    dialog.dismiss()
+                }
 
-                var layoutTakePhoto = view.findViewById<LinearLayout>(R.id.layout_take_photo)
-                layoutTakePhoto.setOnClickListener(View.OnClickListener {
-                    if (checkPersmission()) {
+                val layoutTakePhoto = view.findViewById<LinearLayout>(R.id.layout_take_photo)
+                layoutTakePhoto.setOnClickListener {
+                    if (checkPermission()) {
                         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                         startActivityForResult(intent, CAPTURE_FROM_CAMERA)
                     } else {
                         requestPermission()
                     }
 
-                })
+                }
 
                 dialog.setCancelable(false)
                 dialog.setContentView(view)
@@ -120,10 +119,11 @@ class HCMyProfileActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun checkPersmission(): Boolean {
-        return (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) ==
+    private fun checkPermission(): Boolean {
+        return (ContextCompat.checkSelfPermission(this, CAMERA) ==
                 PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+            READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED)
     }
 
     private fun requestPermission() {

@@ -7,6 +7,4 @@ data class HCJobTileResponse (
     val tile__type: String,
     val tile__sort_order: Int,
     val tile_asset__cloudinary_url: String
-) {
-
-}
+)

@@ -8,5 +8,4 @@ data class HCCandidateWorkExperience(
     val work_experience__worked_to: String,
     val brand__name: String,
     val asset__cloudinary_url: String
-) {
-}
+)

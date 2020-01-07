@@ -19,26 +19,6 @@ class HCWorkExperience {
     private var brandName: String?              =   ""
     private var brandLogoUrl: String?           =   ""
 
-    constructor() {}
-
-    constructor(
-        experienceId: Int?,
-        experienceJobTitle: String?,
-        experienceDescription: String?,
-        experienceFrom: String?,
-        experienceTo: String?,
-        brandName: String?,
-        brandLogoUrl: String?
-    ) {
-        this.experienceId = experienceId
-        this.experienceJobTitle = experienceJobTitle
-        this.experienceDescription = experienceDescription
-        this.experienceFrom = experienceFrom
-        this.experienceTo = experienceTo
-        this.brandName = brandName
-        this.brandLogoUrl = brandLogoUrl
-    }
-
     companion object {
 
         @BindingAdapter("android:src")

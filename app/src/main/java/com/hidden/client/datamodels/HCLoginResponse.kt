@@ -5,6 +5,5 @@ data class HCLoginResponse(
     val is_admin: Boolean,
     val full_name: String,
     val status: String,
-    val token: String) {
-
-}
+    val token: String
+)

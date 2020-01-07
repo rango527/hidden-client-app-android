@@ -31,6 +31,4 @@ data class HCShortlistCandidateResponse (
     val job_client__is_interview_advancer: Boolean,
     val job_client__is_offer_manager: Boolean,
     val job_client__is_messenger: Boolean
-) {
-
-}
+)

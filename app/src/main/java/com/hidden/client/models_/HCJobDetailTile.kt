@@ -1,16 +1,10 @@
 package com.hidden.client.models_
 
-import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.load.DecodeFormat
-import com.bumptech.glide.load.resource.bitmap.VideoBitmapDecoder
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
-import com.hidden.client.helpers.extension.setImageBitmapFromVideoThumbnail
 
 
 class HCJobDetailTile {

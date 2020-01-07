@@ -7,6 +7,4 @@ data class HCJobResponse (
     val title: String,
     val subtitle: String,
     val extra: HCExtraResponse
-) {
-
-}
+)

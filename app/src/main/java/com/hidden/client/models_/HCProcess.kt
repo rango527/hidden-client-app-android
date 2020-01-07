@@ -3,25 +3,25 @@ package com.hidden.client.models_
 import androidx.databinding.BindingAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 
-class HCProcess {
+class HCProcess(
+    candidatePhoto: Int,
+    candidateName: String,
+    candidateJob: String,
+    candidateLocation: String,
+    processStage: Int,
+    processStatus: Int
+) {
 
     private var candidatePhoto: Int = 0
     private lateinit var candidateName: String
     private lateinit var candidateJob: String
     private lateinit var candidateLocation: String
 
-    private var processStage: Int = 0;
+    private var processStage: Int = 0
 
-    private var processStatus: Int = 0;
+    private var processStatus: Int = 0
 
-    constructor(
-        candidatePhoto: Int,
-        candidateName: String,
-        candidateJob: String,
-        candidateLocation: String,
-        processStage: Int,
-        processStatus: Int
-    ) {
+    init {
         this.setCandidatePhoto(candidatePhoto)
         this.setCandidateName(candidateName)
         this.setCandidateJob(candidateJob)

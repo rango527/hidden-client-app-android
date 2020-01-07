@@ -5,6 +5,4 @@ data class HCShortlistResponse(
     val client__full_name: String,
     val asset_client__cloudinary_url: String,
     val candidates: List<HCShortlistCandidateResponse>
-) {
-
-}
+)

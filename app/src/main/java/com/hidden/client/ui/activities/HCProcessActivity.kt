@@ -65,8 +65,8 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
 
                 layoutTitle.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-                var animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
-                animation.setInterpolator (AccelerateInterpolator())
+                val animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
+                animation.interpolator = AccelerateInterpolator()
                 animation.duration = 50
 
                 animation.setAnimationListener(object: Animation.AnimationListener {
@@ -100,10 +100,10 @@ class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(R.drawable.panel_top_rounded_border_small)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_2))
 
-                var density: Float = applicationContext.resources.displayMetrics.density
+                val density: Float = applicationContext.resources.displayMetrics.density
 
-                var animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
-                animation.setInterpolator (AccelerateInterpolator())
+                val animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
+                animation.interpolator = AccelerateInterpolator()
                 animation.duration = 100
 
                 animation.setAnimationListener(object: Animation.AnimationListener {

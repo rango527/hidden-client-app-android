@@ -5,6 +5,4 @@ data class HCCandidateBrandResponse(
     val asset__asset_id: Int,
     val brand__name: String,
     val asset__cloudinary_url: String
-) {
-
-}
+)

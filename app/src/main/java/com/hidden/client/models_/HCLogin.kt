@@ -8,10 +8,6 @@ class HCLogin {
     private lateinit var status: String
     private lateinit var token: String
 
-    constructor() {
-
-    }
-
     fun getId(): Int {
         return id
     }

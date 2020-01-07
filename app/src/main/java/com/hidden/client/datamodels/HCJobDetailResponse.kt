@@ -22,6 +22,4 @@ data class HCJobDetailResponse(
     val job__created_at: String,
     val job__last_updated: String,
     val job__tiles: List<HCJobTileResponse>
-) {
-
-}
+)

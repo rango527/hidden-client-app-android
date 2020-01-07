@@ -6,6 +6,4 @@ data class HCCandidateResponse(
     val candidate__first_name: String,
     val candidate__surname: String,
     val candidate__full_name: String
-) {
-
-}
+)

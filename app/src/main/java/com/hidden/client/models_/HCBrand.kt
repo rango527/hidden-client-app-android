@@ -1,19 +1,10 @@
 package com.hidden.client.models_
 
-import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.hidden.client.helpers.HCGlobal
-import de.hdodenhof.circleimageview.CircleImageView
-
-class HCBrand {
+class HCBrand(brandPhotoUrl: String) {
 
     private lateinit var brandPhotoUrl: String
 
-
-
-    constructor() { }
-
-    constructor(brandPhotoUrl: String) {
+    init {
         setBrandPhotoUrl(brandPhotoUrl)
     }
 

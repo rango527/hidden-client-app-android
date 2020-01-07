@@ -32,7 +32,7 @@ class ApproveActivity : BaseActivity(), View.OnClickListener {
 
         initCloseButton()
 
-        processId = intent.getIntExtra("processId", 0);
+        processId = intent.getIntExtra("processId", 0)
 
         txtFeedback = findViewById(R.id.text_feedback_notice)
         txtFeedback2 = findViewById(R.id.text_feedback_notice2)

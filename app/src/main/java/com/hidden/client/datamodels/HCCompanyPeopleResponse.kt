@@ -7,6 +7,4 @@ data class HCCompanyPeopleResponse(
     val company_person__content: String,
     val company_person__sort_order: Int,
     val company_person_asset__cloudinary_url: String
-) {
-
-}
+)

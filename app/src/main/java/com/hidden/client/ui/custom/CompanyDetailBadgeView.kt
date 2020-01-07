@@ -1,5 +1,6 @@
 package com.hidden.client.ui.custom
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -11,6 +12,7 @@ import com.hidden.client.R
 
 class CompanyDetailBadgeView : LinearLayout {
 
+    @SuppressLint("CustomViewStyleable", "ObsoleteSdkInt")
     constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
 
         inflate(context, R.layout.company_detail_badge_view, this)

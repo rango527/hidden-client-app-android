@@ -1,9 +1,9 @@
 package com.hidden.client.helpers
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 object HCDate {
 
@@ -23,9 +23,9 @@ object HCDate {
     fun dateToString(date: Date, fmtStr: String?): String? {
 
         val str = fmtStr ?: "yyyy-MM-dd'T'HH:mm:ssZ"
-        val dateformat = SimpleDateFormat(str, Locale.US)
+        val dateFormat = SimpleDateFormat(str, Locale.US)
         try {
-            return dateformat.format(date)
+            return dateFormat.format(date)
         } catch (e: Exception) {
             e.printStackTrace()
         }

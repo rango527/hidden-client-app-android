@@ -21,7 +21,6 @@ class LoginVM: RootVM() {
     lateinit var loginApi: LoginApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-    val errorMessage:MutableLiveData<Int> = MutableLiveData()
 
     // To jump to HomeActivity after login success
     private val _navigateToHome = MutableLiveData<Event<Boolean>>()
@@ -80,7 +79,6 @@ class LoginVM: RootVM() {
 
     private fun onAuthLoginStart(){
         loadingVisibility.value = true
-        errorMessage.value = null
     }
 
     private fun onAuthLoginFinish(){

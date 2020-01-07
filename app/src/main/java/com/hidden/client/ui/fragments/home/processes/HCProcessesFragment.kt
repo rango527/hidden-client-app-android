@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.models_.HCProcess
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.adapters.HCProcessAdapter
 import com.hidden.client.ui.viewmodels___.HCProcessViewModel
@@ -21,7 +20,6 @@ class HCProcessesFragment : Fragment(), View.OnClickListener {
 
     private lateinit var rvProcess: RecyclerView
     private lateinit var processesViewModel: HCProcessViewModel
-    private var processList: MutableList<HCProcess> = mutableListOf()
     private lateinit var processAdapter: HCProcessAdapter
 
     private lateinit var layoutBtnFilterSearch: LinearLayout
@@ -46,7 +44,7 @@ class HCProcessesFragment : Fragment(), View.OnClickListener {
             rvProcess.adapter = processAdapter
         })
 
-        layoutBtnFilterSearch = root.findViewById(R.id.layout_filter_search);
+        layoutBtnFilterSearch = root.findViewById(R.id.layout_filter_search)
         layoutBtnFilterSearch.setOnClickListener(this)
 
         return root

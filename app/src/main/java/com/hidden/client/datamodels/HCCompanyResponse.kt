@@ -17,6 +17,4 @@ data class HCCompanyResponse (
     val company__people: List<HCCompanyPeopleResponse>,
     val company__tiles: List<HCJobTileResponse>,
     val jobs: List<HCJobResponse>
-) {
-
-}
+)

@@ -15,6 +15,4 @@ data class HCProfileResponse(
 
     val company: HCCompanyResponse
 
-) {
-
-}
+)

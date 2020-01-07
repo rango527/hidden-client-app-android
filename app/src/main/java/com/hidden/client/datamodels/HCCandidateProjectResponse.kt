@@ -8,5 +8,4 @@ data class HCCandidateProjectResponse(
     val brand__name: String,
     val brand_logo__cloudinary_url: String,
     val candidate__project_assets: List<HCCandidateProjectAssets> = listOf()
-) {
-}
+)

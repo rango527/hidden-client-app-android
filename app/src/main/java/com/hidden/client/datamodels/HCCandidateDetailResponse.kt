@@ -22,6 +22,4 @@ data class HCCandidateDetailResponse (
     val candidate__work_experiences: List<HCCandidateWorkExperience>,
     val candidate__skills: List<HCCandidateSkillResponse>,
     val candidate__projects: List<HCCandidateProjectResponse>
-) {
-
-}
+)
