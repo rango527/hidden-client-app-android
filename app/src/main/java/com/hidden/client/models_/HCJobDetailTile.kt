@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
 
-
 class HCJobDetailTile {
 
     private var jobDetailTileId: Int? = 0
@@ -51,16 +50,9 @@ class HCJobDetailTile {
     fun setJobDetailTileType(jobDetailTileType: String?) {
         this.jobDetailTileType = jobDetailTileType
     }
-    fun getJobDetailTileSortOrder(): Int? {
-        return jobDetailTileSortOrder
-    }
 
     fun setJobDetailTileSortOrder(jobDetailTileSortOrder: Int?) {
         this.jobDetailTileSortOrder = jobDetailTileSortOrder
-    }
-
-    fun getJobDetailTileId(): Int? {
-        return jobDetailTileId
     }
 
     fun setJobDetailTitleId(jobDetailTileId: Int?) {

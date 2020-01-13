@@ -23,6 +23,6 @@ object Utility {
     }
 
     fun getResourceByName(context: Context, defType: String, name: String): Int {
-        return context.resources.getIdentifier(name, defType,context!!.packageName)
+        return context.resources.getIdentifier(name, defType, context.packageName)
     }
 }

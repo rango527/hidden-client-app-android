@@ -31,7 +31,9 @@ interface ViewModelInjector {
 
     // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)
-    fun inject(sthortlistViewVM: ShortlistViewVM)
+    fun inject(shortlistViewVM: ShortlistViewVM)
+    fun inject(shortlistApproveCandidateVM: ShortlistApproveCandidateVM)
+    fun inject(shortlistRejectCandidateVM: ShortlistRejectCandidateVM)
 
     @Component.Builder
     interface Builder {

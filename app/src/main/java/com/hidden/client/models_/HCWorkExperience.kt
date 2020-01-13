@@ -30,19 +30,16 @@ class HCWorkExperience {
 
     fun getWorkingPeriod(): String {
 
-
         if (experienceFrom === null)
             return ""
 
-        var strDate: String
-
         val fromDate = HCDate.stringToDate(experienceFrom!!, null)
 
-        strDate = HCDate.dateToString(fromDate!!, "d MMMM yyyy").toString()
+        val strDate = HCDate.dateToString(fromDate!!, "d MMMM yyyy").toString()
 
         if (experienceTo === null ) {
 
-            return strDate + " - " + HCGlobal.getInstance().currentActivity.resources.getString(R.string.present)
+            return """$strDate - ${HCGlobal.getInstance().currentActivity.resources.getString(R.string.present)}"""
 
         }
 

@@ -79,7 +79,7 @@ object NetworkModule {
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
 
-        val baseUrl: String = when (APP.enviroment) {
+        val baseUrl: String = when (APP.environment) {
             Environment.Production.env -> {
                 API.production
             }

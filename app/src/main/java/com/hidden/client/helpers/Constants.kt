@@ -7,7 +7,7 @@ enum class Environment(val env: String) {
 
 object APP {
     const val is_debug : Boolean = true
-    const val enviroment: String = "development"          // production or development
+    const val environment: String = "development"          // production or development
     const val database: String = "hiddenclient"
     const val databaseVersion: Int = 1
 }

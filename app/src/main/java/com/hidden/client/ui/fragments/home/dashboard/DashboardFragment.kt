@@ -38,7 +38,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         initUI(root)
 
-        // Init ViewModel
+        // Init ViewModel customers from 2018, 2019, 2020 customers from 2018, 2019, 2020
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(DashboardVM::class.java)
 
         viewModel.loadingVisibility.observe(this, Observer { visibility ->
