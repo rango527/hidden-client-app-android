@@ -12,6 +12,9 @@ interface ShortlistCandidateDao {
     @Query("SELECT * FROM ShortlistCandidate WHERE pClientId = :clientId")
     fun getCandidateByClientId(clientId: Int): List<ShortlistCandidateEntity>
 
+    @Query("SELECT * FROM ShortlistCandidate WHERE candidateId = :candidateId")
+    fun getCandidateById(candidateId: Int): List<ShortlistCandidateEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg shortlistCandidateList: ShortlistCandidateEntity)
 
