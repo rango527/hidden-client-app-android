@@ -12,11 +12,13 @@ import android.widget.LinearLayout
 import com.hidden.client.R
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
+import com.urbanairship.UAirship
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -95,6 +97,9 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 AppPreferences.myFullName = ""
                 AppPreferences.apiAccessToken = ""
                 AppPreferences.myId = 0
+
+                UAirship.shared().namedUser.id = null
+                UAirship.shared().namedUser.forceUpdate()
 
                 val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
                 startActivity(intent)

@@ -5,12 +5,15 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.HCTabBar
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.ShortlistsFragment
+import com.urbanairship.UAirship
 import java.lang.Exception
 
 class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
@@ -27,6 +30,11 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val pushId = """client-${AppPreferences.myId}"""
+        if (UAirship.shared().namedUser.id != pushId) {
+            UAirship.shared().namedUser.id = """client-${AppPreferences.myId}"""
+        }
 
         dashboardFrags.add(DashboardFragment())
         shortlistsFrags.add(ShortlistsFragment())

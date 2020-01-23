@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -119,14 +120,14 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$rootProject.playServicesLocationVersion"
 
     // Airship ADM
-    implementation project(':urbanairship-adm')
+    // implementation project(':urbanairship-adm')
 
     // Airship FCM
     implementation project(':urbanairship-fcm')
 
     // Airship Debug: Normally this is a debug only dependency but we
     // embed the view in sample app
-    implementation project(':urbanairship-debug')
+    // implementation project(':urbanairship-debug')
 
     // Airship Advertising ID tracking
     implementation project(':urbanairship-ads-identifier')
@@ -135,10 +136,5 @@ dependencies {
     implementation project(':urbanairship-preference')
 
     // Swipe Library
-    compile 'com.github.pwittchen:swipe-rx2:0.3.0'
-}
-
-def googleServicesFile = rootProject.file('app/google-services.json')
-if (googleServicesFile.exists()) {
-    apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+    implementation 'com.github.pwittchen:swipe-rx2:0.3.0'
 }

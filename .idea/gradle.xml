@@ -10,10 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/horizontalswipelayout" />
-            <option value="$PROJECT_DIR$/urbanairship-adm" />
             <option value="$PROJECT_DIR$/urbanairship-ads-identifier" />
             <option value="$PROJECT_DIR$/urbanairship-core" />
-            <option value="$PROJECT_DIR$/urbanairship-debug" />
             <option value="$PROJECT_DIR$/urbanairship-fcm" />
             <option value="$PROJECT_DIR$/urbanairship-preference" />
           </set>

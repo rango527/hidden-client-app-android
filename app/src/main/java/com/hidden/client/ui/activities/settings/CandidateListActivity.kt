@@ -12,11 +12,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateListBinding
 import com.hidden.client.helpers.HCDialog
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.CandidateListVM
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.urbanairship.UAirship
 
 class CandidateListActivity : BaseActivity() {
 

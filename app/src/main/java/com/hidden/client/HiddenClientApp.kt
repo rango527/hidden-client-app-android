@@ -5,7 +5,9 @@ import android.os.StrictMode
 import android.os.StrictMode.setThreadPolicy
 import android.os.StrictMode.setVmPolicy
 import com.hidden.client.helpers.AppPreferences
-
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
+import com.urbanairship.UAirship
 
 class HiddenClientApp : Application() {
 
@@ -13,6 +15,11 @@ class HiddenClientApp : Application() {
         super.onCreate()
 
         AppPreferences.init(this)
+
+        val pushId = """client-${AppPreferences.myId}"""
+        if (UAirship.shared().namedUser.id != pushId) {
+            UAirship.shared().namedUser.id = """client-${AppPreferences.myId}"""
+        }
 
         if (BuildConfig.DEBUG) {
             setThreadPolicy(
