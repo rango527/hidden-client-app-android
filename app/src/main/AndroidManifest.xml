@@ -150,10 +150,25 @@
             android:name=".ui.activities.HCSignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
         <activity
             android:name=".ui.activities.HCSignUpWithInviteCodeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+
+            <intent-filter android:label="Invite">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://com.hidden.client/invite” -->
+                <data android:scheme="http"
+                    android:host="com.hidden.client"
+                    android:pathPrefix="/invite" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".ui.activities.HCForgetPasswordActivity"
             android:screenOrientation="portrait"

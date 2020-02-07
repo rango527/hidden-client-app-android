@@ -11,7 +11,6 @@ import com.urbanairship.Autopilot
 import com.urbanairship.UAirship
 import com.urbanairship.push.notifications.NotificationChannelCompat
 
-
 /**
  * Autopilot that enables user notifications on first run.
  */
@@ -62,6 +61,9 @@ class HCAutoPilot : Autopilot() {
         airship.pushManager.addPushTokenListener(airshipListener)
         airship.pushManager.setNotificationListener(airshipListener)
         airship.channel.addChannelListener(airshipListener)
+
+        val  deepLinkListener = DeepLinkListener()
+        airship.deepLinkListener = deepLinkListener
     }
 
     @Nullable

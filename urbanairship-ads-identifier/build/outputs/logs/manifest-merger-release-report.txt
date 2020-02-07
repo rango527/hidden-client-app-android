@@ -1,0 +1,39 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:1-10:12
+	package
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:1:11-42
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:4:5-30
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:2:5-63
+	android:versionCode
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:3:5-28
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+application
+ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml:6:5-9:19
+uses-sdk
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		ADDED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml
+		INJECTED from E:\workspace\hidden-client\hidden-client-app-android\urbanairship-ads-identifier\src\main\AndroidManifest.xml

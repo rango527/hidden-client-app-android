@@ -62,4 +62,11 @@ object Enums {
         IMAGE("IMAGE"),
         VIDEO("VIDEO")
     }
+
+    enum class ReviewerType(val value: Int) {
+        INTERVIEWER(1),
+        SHORTLIST_REVIEWER(2),
+        INTERVIEWER_ADVANCER(3),
+        OFFER_MANAGER(4)
+    }
 }

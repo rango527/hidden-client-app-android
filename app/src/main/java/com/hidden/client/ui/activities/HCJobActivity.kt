@@ -18,6 +18,7 @@ import com.hidden.client.R
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.networks.RetrofitClient
+import com.hidden.client.ui.dialogs.JobSettingDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +31,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var btnBackToDashboard: ImageButton
     private lateinit var imgShowJobDetails: ImageView
+    private lateinit var imgJobSetting: ImageView
 
     private lateinit var imgBackground: ImageView
     private lateinit var layoutTransparent: LinearLayout
@@ -54,6 +56,9 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
 
         imgShowJobDetails = findViewById(R.id.img_show_job_detail)
         imgShowJobDetails.setOnClickListener(this)
+
+        imgJobSetting = findViewById(R.id.img_job_setting)
+        imgJobSetting.setOnClickListener(this)
 
         /***
          * Init View
@@ -119,6 +124,9 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.img_show_job_detail -> {
                 navigateJobDetailActivity()
+            }
+            R.id.img_job_setting -> {
+                JobSettingDialog.display(supportFragmentManager);
             }
         }
     }

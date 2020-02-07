@@ -148,6 +148,9 @@
     <string name="view_process">View Process</string>
     <string name="job_and_location">For: %1$s, %2$s</string>
 
+    <string name="job_settings">Job Settings</string>
+    <string name="shortlist_review_type">Shortlist Review Type</string>
+
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>
     <string name="view_your_feedback">View Your Feedback</string>

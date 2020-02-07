@@ -13,4 +13,28 @@
         <item quantity="other">Please review the %1$d new profiles in your various shortlists</item>
     </plurals>
 
+    <plurals name="shortlist_reviewer">
+        <item quantity="zero"></item>
+        <item quantity="one">Shortlist Reviewer</item>
+        <item quantity="other">Shortlist Reviewers</item>
+    </plurals>
+
+    <plurals name="interviewer">
+        <item quantity="zero"></item>
+        <item quantity="one">Interviewer</item>
+        <item quantity="other">Interviewers</item>
+    </plurals>
+
+    <plurals name="interviewer_advancer">
+        <item quantity="zero"></item>
+        <item quantity="one">Interview Reviewer</item>
+        <item quantity="other">Interview Reviewers</item>
+    </plurals>
+
+    <plurals name="offer_manager">
+        <item quantity="zero"></item>
+        <item quantity="one">Offer Manager</item>
+        <item quantity="other">Offer Managers</item>
+    </plurals>
+
 </resources>
