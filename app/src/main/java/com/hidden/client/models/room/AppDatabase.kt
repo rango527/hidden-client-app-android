@@ -20,7 +20,9 @@ import com.hidden.client.models.entity.*
     FeedbackEntity::class,
     FeedbackQuestionEntity::class,
     DashboardTileEntity::class,
-    DashboardTileContentEntity::class
+    DashboardTileContentEntity::class,
+    JobSettingEntity::class,
+    ReviewerEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -43,6 +45,10 @@ abstract class AppDatabase : RoomDatabase() {
     // Dashboard
     abstract fun dashboardTileDao(): DashboardTileDao
     abstract fun dashboardTileContentDao(): DashboardTileContentDao
+
+    // Job Settings
+    abstract fun jobSettingDao(): JobSettingDao
+    abstract fun reviewerDao(): ReviewerDao
 
     companion object {
 

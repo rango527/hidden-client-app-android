@@ -17,6 +17,7 @@ import com.github.pwittchen.swipe.library.rx2.SwipeListener
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.dialogs.JobSettingDialog
 import de.hdodenhof.circleimageview.CircleImageView
@@ -47,6 +48,8 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_your_job)
+
+        HCGlobal.getInstance().currentActivity = this
 
         /***
          * Click Listener

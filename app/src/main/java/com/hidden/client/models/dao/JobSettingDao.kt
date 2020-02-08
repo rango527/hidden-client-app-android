@@ -9,15 +9,12 @@ interface JobSettingDao {
     @get:Query("SELECT * FROM JobSetting")
     val all: List<JobSettingEntity>
 
-    @Query("SELECT * FROM JobSetting WHERE myId = :myId")
-    fun getMyJobSetting(myId: Int): List<JobSettingEntity>
+    @Query("SELECT * FROM JobSetting WHERE myId = :myId AND jobId = :jobId")
+    fun getMyJobSettingByJobId(myId: Int, jobId: Int): List<JobSettingEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg jobSettings: JobSettingEntity)
 
     @Query("DELETE FROM JobSetting")
     fun deleteAll()
-
-    @Query("DELETE FROM JobSetting WHERE myId = :myId")
-    fun deleteMyJobSetting(myId: Int)
 }

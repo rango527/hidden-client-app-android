@@ -35,6 +35,10 @@ interface ViewModelInjector {
     fun inject(shortlistApproveCandidateVM: ShortlistApproveCandidateVM)
     fun inject(shortlistRejectCandidateVM: ShortlistRejectCandidateVM)
 
+    // JobSetting
+    fun inject(jobSettingVM: JobSettingVM)
+    fun inject(reviewerViewVM: ReviewerViewVM)
+
     @Component.Builder
     interface Builder {
         fun build(): ViewModelInjector

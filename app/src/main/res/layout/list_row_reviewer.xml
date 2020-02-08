@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="ReviewerItemBinding">
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.ReviewerViewVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/menu_padding_vertical_default">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@{viewModel.getReviewerPhoto(), default=@drawable/man}"
+            android:scaleType="fitXY"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mutableText="@{viewModel.getReviewerName()}"
+            app:layout_constraintLeft_toRightOf="@id/img_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/colorBlack_2"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/menu_padding_vertical_default" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

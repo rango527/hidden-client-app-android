@@ -67,6 +67,7 @@ object Enums {
         INTERVIEWER(1),
         SHORTLIST_REVIEWER(2),
         INTERVIEWER_ADVANCER(3),
-        OFFER_MANAGER(4)
+        OFFER_MANAGER(4),
+        USER_MANAGER(5)
     }
 }

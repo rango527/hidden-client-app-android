@@ -51,6 +51,10 @@ abstract class RootVM: ViewModel() {
 
             is ShortlistApproveCandidateVM -> injector.inject(this)
             is ShortlistRejectCandidateVM -> injector.inject(this)
+
+            // JobSettingVM
+            is JobSettingVM -> injector.inject(this)
+            is ReviewerViewVM -> injector.inject(this)
         }
     }
 

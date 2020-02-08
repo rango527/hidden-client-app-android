@@ -18,6 +18,7 @@ class CandidateListVM(private val candidateDao: CandidateDao): RootVM() {
 
     @Inject
     lateinit var candidateApi: CandidateApi
+
     val candidateListAdapter: CandidateListAdapter = CandidateListAdapter()
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()

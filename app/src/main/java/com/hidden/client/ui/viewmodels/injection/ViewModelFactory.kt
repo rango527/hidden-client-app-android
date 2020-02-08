@@ -108,6 +108,22 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        /* ------------------------------------------------------------
+          JobSettingVM
+       -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(JobSettingVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return JobSettingVM(
+                db.jobSettingDao(),
+                db.reviewerDao()
+            ) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

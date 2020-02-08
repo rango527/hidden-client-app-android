@@ -17,13 +17,14 @@ data class ReviewerJson(
     @Json(name = "client__full_name")
     val fullName: String?
 ) {
-    fun toEntity(reviewerType: Int, myId: Int): ReviewerEntity {
+    fun toEntity(reviewerType: Int, jobId: Int, myId: Int): ReviewerEntity {
         return ReviewerEntity(
             0,
             id.safeValue(),
             avatar.safeValue(),
             fullName.safeValue(),
             reviewerType,
+            jobId,
             myId
         )
     }

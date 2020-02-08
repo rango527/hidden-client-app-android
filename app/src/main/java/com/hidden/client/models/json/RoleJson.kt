@@ -21,38 +21,38 @@ data class RoleJson(
     val offerManagerList: List<ReviewerJson>?
 
 ) {
-    fun toInterviewerList(myId: Int): List<ReviewerEntity> {
+    fun toInterviewerList(jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.interviewerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER.value, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER.value, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toShortlistReviewerList(myId: Int): List<ReviewerEntity> {
+    fun toShortlistReviewerList(jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.shortlistReviewerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.SHORTLIST_REVIEWER.value, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.SHORTLIST_REVIEWER.value, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toInterviewAdvancerList(myId: Int): List<ReviewerEntity> {
+    fun toInterviewAdvancerList(jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.interviewAdvancerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER_ADVANCER.value, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER_ADVANCER.value, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toOfferManagerList(myId: Int): List<ReviewerEntity> {
+    fun toOfferManagerList(jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.offerManagerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.OFFER_MANAGER.value, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.OFFER_MANAGER.value, jobId,  myId))
         }
         return reviewerEntityList
     }

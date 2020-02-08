@@ -1,9 +1,6 @@
 package com.hidden.client.ui.viewmodels.injection.module
 
-import com.hidden.client.apis.CandidateApi
-import com.hidden.client.apis.DashboardApi
-import com.hidden.client.apis.LoginApi
-import com.hidden.client.apis.ShortlistApi
+import com.hidden.client.apis.*
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.nullable.*
 import com.squareup.moshi.Moshi
@@ -68,6 +65,16 @@ object NetworkModule {
     @JvmStatic
     internal fun provideShortlistApi(retrofit: Retrofit): ShortlistApi {
         return retrofit.create(ShortlistApi::class.java)
+    }
+
+    /*-------------------------------------------------------------------
+    Job Setting
+    ------------------------------------------------------------------- */
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideJobApi(retrofit: Retrofit): JobApi {
+        return retrofit.create(JobApi::class.java)
     }
 
     /**

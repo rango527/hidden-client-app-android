@@ -17,5 +17,7 @@ data class ReviewerEntity (
 
     var reviewerType: Int,
 
+    var jobId: Int,
+
     var myId: Int
 )
