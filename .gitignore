@@ -20,3 +20,7 @@ google-services.json
 
 # Airship
 airshipconfig.properties
+
+# urbanairship build
+/urbanairship-fcm/build
+/urbanairship-preference/build
