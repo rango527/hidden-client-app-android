@@ -1,9 +1,6 @@
 include ':app',
         ':horizontalswipelayout',
-//         ':urbanairship-adm',
-        ':urbanairship-ads-identifier',
         ':urbanairship-core',
-//        ':urbanairship-debug',
         ':urbanairship-fcm',
         ':urbanairship-preference'
 

@@ -14,25 +14,25 @@
     </plurals>
 
     <plurals name="shortlist_reviewer">
-        <item quantity="zero"></item>
+        <item quantity="zero">Shortlist Reviewer</item>
         <item quantity="one">Shortlist Reviewer</item>
         <item quantity="other">Shortlist Reviewers</item>
     </plurals>
 
     <plurals name="interviewer">
-        <item quantity="zero"></item>
+        <item quantity="zero">Interviewer</item>
         <item quantity="one">Interviewer</item>
         <item quantity="other">Interviewers</item>
     </plurals>
 
     <plurals name="interviewer_advancer">
-        <item quantity="zero"></item>
+        <item quantity="zero">Interview Reviewer</item>
         <item quantity="one">Interview Reviewer</item>
         <item quantity="other">Interview Reviewers</item>
     </plurals>
 
     <plurals name="offer_manager">
-        <item quantity="zero"></item>
+        <item quantity="zero">Offer Manager</item>
         <item quantity="one">Offer Manager</item>
         <item quantity="other">Offer Managers</item>
     </plurals>

@@ -12,6 +12,10 @@ data class JobSettingEntity (
 
     var reviewType: String,
 
+    var cityName: String,
+
+    var jobTitle: String,
+
     var isUserManager: Boolean,
 
     var jobId: Int,

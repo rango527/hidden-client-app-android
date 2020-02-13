@@ -1,9 +1,11 @@
 package com.hidden.client.ui.viewmodels.root
 
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
 import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import com.hidden.client.ui.viewmodels.injection.component.DaggerViewModelInjector
@@ -55,6 +57,7 @@ abstract class RootVM: ViewModel() {
             // JobSettingVM
             is JobSettingVM -> injector.inject(this)
             is ReviewerViewVM -> injector.inject(this)
+            is UserManagerViewVM -> injector.inject(this)
         }
     }
 
@@ -63,8 +66,10 @@ abstract class RootVM: ViewModel() {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+        fun setImageViewResource(imageView: ImageView, photoUrl: String) {
+            if (photoUrl.safeValue() != "") {
+                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+            }
         }
     }
 }

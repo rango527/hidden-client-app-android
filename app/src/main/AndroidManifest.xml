@@ -25,17 +25,27 @@
         <!-- Autopilot calls takeOff without the need to override the Application -->
         <meta-data
             android:name="com.urbanairship.autopilot"
-            android:value="com.hidden.client.manager.airship.HCAutoPilot" />
-
-        <!-- Optional: Enable local storage on UAWebView -->
+            android:value="com.hidden.client.manager.airship.HCAutoPilot" /> <!-- Optional: Enable local storage on UAWebView -->
         <meta-data
             android:name="com.urbanairship.webview.ENABLE_LOCAL_STORAGE"
             android:value="true" />
 
         <activity
-            android:name=".ui.activities.intro.InviteAcceptActivity"
+            android:name=".ui.activities.InviteTeamMember"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity
+            android:name=".ui.activities.JobAddRoleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ui.activities.JobReviewerType"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ui.activities.intro.InviteAcceptActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.project.VideoSliderActivity"
             android:screenOrientation="portrait"
@@ -150,25 +160,23 @@
             android:name=".ui.activities.HCSignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-
         <activity
             android:name=".ui.activities.HCSignUpWithInviteCodeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter android:label="Invite">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://com.hidden.client/invite” -->
-                <data android:scheme="http"
+                <data
                     android:host="com.hidden.client"
-                    android:pathPrefix="/invite" />
-                <!-- note that the leading "/" is required for pathPrefix-->
+                    android:pathPrefix="/invite"
+                    android:scheme="http" />
+                <!-- note that the leading "/" is required for pathPrefix -->
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".ui.activities.HCForgetPasswordActivity"
             android:screenOrientation="portrait"

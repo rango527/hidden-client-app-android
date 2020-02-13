@@ -129,7 +129,7 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                 navigateJobDetailActivity()
             }
             R.id.img_job_setting -> {
-                JobSettingDialog.display(supportFragmentManager);
+                JobSettingDialog.display(supportFragmentManager, this.jobId.toInt());
             }
         }
     }

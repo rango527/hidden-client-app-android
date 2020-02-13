@@ -11,7 +11,7 @@ data class ReviewerJson(
     @Json(name = "client__client_id")
     val id: Int?,
 
-    @Json(name = "client__avatar")
+    @Json(name = "asset_client__cloudinary_url")
     val avatar: String?,
 
     @Json(name = "client__full_name")

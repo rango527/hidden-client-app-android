@@ -16,6 +16,12 @@ data class JobSettingJson(
     @Json(name = "is_user_manager")
     val isUserManager: Boolean?,
 
+    @Json(name = "city__name")
+    val cityName: String?,
+
+    @Json(name = "job__title")
+    val jobTitle: String?,
+
     @Json(name = "user_managers")
     val userManagerList: List<ReviewerJson>?,
 
@@ -27,6 +33,8 @@ data class JobSettingJson(
         return JobSettingEntity(
             0,
             reviewType.safeValue(),
+            cityName.safeValue(),
+            jobTitle.safeValue(),
             isUserManager.safeValue(),
             jobId,
             myId

@@ -119,6 +119,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ).build()
             @Suppress("UNCHECKED_CAST")
             return JobSettingVM(
+                context,
                 db.jobSettingDao(),
                 db.reviewerDao()
             ) as T

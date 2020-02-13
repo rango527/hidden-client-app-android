@@ -1,15 +1,20 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.custom.UserManager
 import com.hidden.client.models.dao.JobSettingDao
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
+import com.hidden.client.ui.adapters.UserManagerListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class JobSettingVM(
+    private val context: Context,
     private val jobSettingDao: JobSettingDao,
     private val reviewerDao: ReviewerDao
 ) : RootVM() {
@@ -33,11 +39,24 @@ class JobSettingVM(
             loadJobSetting(true)
         }
 
-    private val userManagerListAdapater = ReviewerListAdapter()
-    private val shortlistInterviewerListAdapter = ReviewerListAdapter()
-    private val interviewerListAdapter = ReviewerListAdapter()
-    private val interviewAdvancerListAdapter = ReviewerListAdapter()
-    private val offerManagerListAdapter = ReviewerListAdapter()
+    var userManagerList: ArrayList<UserManager> = arrayListOf()
+
+    val jobTitle: MutableLiveData<String> = MutableLiveData("")
+    val reviewText: MutableLiveData<String> = MutableLiveData("")
+
+    val shortlistReviewerText: MutableLiveData<String> = MutableLiveData("")
+    val shortlistReviewerListAdapter: ReviewerListAdapter = ReviewerListAdapter()
+
+    val interviewerText: MutableLiveData<String> = MutableLiveData("")
+    val interviewerListAdapter: ReviewerListAdapter = ReviewerListAdapter()
+
+    val interviewAdvancerText: MutableLiveData<String> = MutableLiveData("")
+    val interviewAdvancerListAdapter: ReviewerListAdapter = ReviewerListAdapter()
+
+    val offerManagerText: MutableLiveData<String> = MutableLiveData("")
+    val offerManagerListAdapter: ReviewerListAdapter = ReviewerListAdapter()
+
+    val userManagerListAdapter: UserManagerListAdapter = UserManagerListAdapter()
 
     private var subscription: Disposable? = null
 
@@ -149,11 +168,44 @@ class JobSettingVM(
     }
 
     private fun onRetrieveJobSettingSuccess(jobSetting: JobSettingEntity) {
-        userManagerListAdapater.updateReviewerList(jobSetting.getUserManagerList())
-        shortlistInterviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList())
+
+        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList())
         interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList())
         interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList())
         offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList())
+
+        jobTitle.value = jobSetting.jobTitle
+        reviewText.value = jobSetting.reviewType
+
+
+        for (userManager in jobSetting.getUserManagerList()) {
+            userManagerList.add(UserManager(userManager, false))
+        }
+        userManagerListAdapter.updateUserManagerList(userManagerList)
+
+        shortlistReviewerText.value = context.resources.getQuantityString(
+                R.plurals.shortlist_reviewer,
+                jobSetting.getShortlistReviewerList().size,
+                jobSetting.getShortlistReviewerList().size
+            )
+
+        interviewerText.value = context.resources.getQuantityString(
+            R.plurals.interviewer,
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
+        )
+
+        interviewAdvancerText.value = context.resources.getQuantityString(
+            R.plurals.interviewer_advancer,
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
+        )
+
+        offerManagerText.value = context.resources.getQuantityString(
+            R.plurals.offer_manager,
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
+        )
     }
 
     private fun onRetrieveJobSettingError(e: Throwable) {
