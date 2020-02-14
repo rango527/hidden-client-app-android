@@ -87,35 +87,35 @@ class JobSettingActivity : BaseActivity() {
         imgClose.setOnClickListener { finish() }
 
         // Description
-        imgShortlistReviewerTypeDescription.setOnClickListener{
+        imgShortlistReviewerTypeDescription.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
             intent.putExtra("reviewType", 0)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
-        imgShortlistReviewerDescription.setOnClickListener{
+        imgShortlistReviewerDescription.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.SHORTLIST_REVIEWER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
-        imgInterviewersDescription.setOnClickListener{
+        imgInterviewersDescription.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
-        imgInterviewAdvancerDescription.setOnClickListener{
+        imgInterviewAdvancerDescription.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER_ADVANCER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
-        imgOfferManagerDescription.setOnClickListener{
+        imgOfferManagerDescription.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.OFFER_MANAGER.value)
             startActivity(intent)
@@ -124,20 +124,29 @@ class JobSettingActivity : BaseActivity() {
 
         // Add Role
         imgAddRoleShortlistReviewer.setOnClickListener {
-//            val intent = Intent(HCGlobal.getInstance().currentActivity, JobAddRoleActivity::class.java)
-//            intent.putExtra("reviewType", Enums.ReviewerType.SHORTLIST_REVIEWER.value)
-//            intent.putExtra("jobId", jobId)
-//            startActivity(intent)
-//            overridePendingVTransitionEnter()
-
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobUserManagerActivity::class.java)
+            val intent =
+                if (viewModel.isUserManager) Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobAddRoleActivity::class.java
+                ) else Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobUserManagerActivity::class.java
+                )
+            intent.putExtra("reviewType", Enums.ReviewerType.SHORTLIST_REVIEWER.value)
             intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
         imgAddRoleInterviewer.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobAddRoleActivity::class.java)
+            val intent =
+                if (viewModel.isUserManager) Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobAddRoleActivity::class.java
+                ) else Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobUserManagerActivity::class.java
+                )
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER.value)
             intent.putExtra("jobId", jobId)
             startActivity(intent)
@@ -145,7 +154,14 @@ class JobSettingActivity : BaseActivity() {
         }
 
         imgAddRoleInterviewAdvancer.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobAddRoleActivity::class.java)
+            val intent =
+                if (viewModel.isUserManager) Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobAddRoleActivity::class.java
+                ) else Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobUserManagerActivity::class.java
+                )
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER_ADVANCER.value)
             intent.putExtra("jobId", jobId)
             startActivity(intent)
@@ -153,7 +169,14 @@ class JobSettingActivity : BaseActivity() {
         }
 
         imgAddRoleOfferManager.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobAddRoleActivity::class.java)
+            val intent =
+                if (viewModel.isUserManager) Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobAddRoleActivity::class.java
+                ) else Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    JobUserManagerActivity::class.java
+                )
             intent.putExtra("reviewType", Enums.ReviewerType.OFFER_MANAGER.value)
             intent.putExtra("jobId", jobId)
             startActivity(intent)

@@ -39,6 +39,8 @@ class JobSettingVM(
             loadJobSetting(true)
         }
 
+    var isUserManager: Boolean = false
+
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
     val reviewText: MutableLiveData<String> = MutableLiveData("")
 
@@ -166,6 +168,8 @@ class JobSettingVM(
     }
 
     private fun onRetrieveJobSettingSuccess(jobSetting: JobSettingEntity) {
+
+        isUserManager = jobSetting.isUserManager
 
         shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList())
         interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList())
