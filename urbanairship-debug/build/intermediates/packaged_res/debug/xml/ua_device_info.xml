@@ -44,7 +44,7 @@
             app:title="@string/ua_user_id" />
 
         <com.urbanairship.debug.deviceinfo.preferences.NamedUserPreference
-            app:key="named user"
+            app:key="named roleAvailableUser"
             app:persistent="false"
             app:title="@string/ua_set_named_user_info_title" />
 

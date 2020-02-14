@@ -6,36 +6,36 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.databinding.UserManagerItemBinding
+import com.hidden.client.databinding.RoleAvailableUserItemBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.custom.UserManager
-import com.hidden.client.ui.viewmodels.main.UserManagerViewVM
+import com.hidden.client.models.custom.RoleAvailableUser
+import com.hidden.client.ui.viewmodels.main.RoleAvailableUserViewVM
 import com.hidden.client.ui.activities.JobAddRoleActivity
 
 
-class UserManagerListAdapter: RecyclerView.Adapter<UserManagerListAdapter.ViewHolder>() {
+class RoleAvailableUserListAdapter: RecyclerView.Adapter<RoleAvailableUserListAdapter.ViewHolder>() {
 
-    private lateinit var userManagerList: List<UserManager>
+    private lateinit var roleAvailableUserList: List<RoleAvailableUser>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: UserManagerItemBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), R.layout.list_row_user_manager, parent, false)
+        val binding: RoleAvailableUserItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), R.layout.list_row_role_available_user, parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(userManagerList[position])
+        holder.bind(roleAvailableUserList[position])
 
         val imgTick: ImageView = holder.itemView.findViewById(R.id.img_tick)
-        if (userManagerList[position].tick) {
+        if (roleAvailableUserList[position].tick) {
             imgTick.setImageResource(R.drawable.tick_on)
         } else {
             imgTick.setImageResource(R.drawable.tick_off)
         }
 
         imgTick.setOnClickListener {
-            userManagerList[position].tick = ! userManagerList[position].tick
-            if (userManagerList[position].tick) {
+            roleAvailableUserList[position].tick = ! roleAvailableUserList[position].tick
+            if (roleAvailableUserList[position].tick) {
                 imgTick.setImageResource(R.drawable.tick_on)
             } else {
                 imgTick.setImageResource(R.drawable.tick_off)
@@ -48,16 +48,16 @@ class UserManagerListAdapter: RecyclerView.Adapter<UserManagerListAdapter.ViewHo
         }
     }
 
-    fun getUserManagerList(): List<UserManager> {
-        return  userManagerList
+    fun getRoleAvailableUserList(): List<RoleAvailableUser> {
+        return  roleAvailableUserList
     }
 
     override fun getItemCount(): Int {
-        return if(::userManagerList.isInitialized) userManagerList.size else 0
+        return if(::roleAvailableUserList.isInitialized) roleAvailableUserList.size else 0
     }
 
-    fun updateUserManagerList(userManagerList: List<UserManager>){
-        this.userManagerList = userManagerList
+    fun updateUserManagerList(roleAvailableUserList: List<RoleAvailableUser>){
+        this.roleAvailableUserList = roleAvailableUserList
 
         // Set Save Button Enable/Disable
         if (HCGlobal.getInstance().currentActivity is JobAddRoleActivity) {
@@ -67,12 +67,12 @@ class UserManagerListAdapter: RecyclerView.Adapter<UserManagerListAdapter.ViewHo
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: UserManagerItemBinding):RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: RoleAvailableUserItemBinding):RecyclerView.ViewHolder(binding.root){
 
-        private val viewModel = UserManagerViewVM()
+        private val viewModel = RoleAvailableUserViewVM()
 
-        fun bind(user: UserManager){
-            viewModel.bind(user)
+        fun bind(roleAvailableUser: RoleAvailableUser){
+            viewModel.bind(roleAvailableUser)
             binding.viewModel = viewModel
         }
     }

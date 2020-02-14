@@ -3,21 +3,14 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.custom.UserManager
-import com.hidden.client.models.dao.JobSettingDao
-import com.hidden.client.models.dao.ReviewerDao
-import com.hidden.client.models.entity.JobSettingEntity
+import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.models.entity.ReviewerEntity
-import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.models.json.ReviewerJson
 import com.hidden.client.models.json.SimpleResponseJson
-import com.hidden.client.ui.adapters.ReviewerListAdapter
-import com.hidden.client.ui.adapters.UserManagerListAdapter
+import com.hidden.client.ui.adapters.RoleAvailableUserListAdapter
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -40,25 +33,25 @@ class JobAddUserRoleVM(
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
-    val userManagerListAdapter: UserManagerListAdapter = UserManagerListAdapter()
+    val roleAvailableUserListAdapter: RoleAvailableUserListAdapter = RoleAvailableUserListAdapter()
 
     var search = ""
         set(value) {
             field = value
 
-            val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
+            val tempRoleAvailableUserList: ArrayList<RoleAvailableUser> = arrayListOf()
 
-            for ((index, userManager) in userManagerList.withIndex()) {
+            for ((index, userManager) in roleAvailableUserList.withIndex()) {
                 if (userManager.user.fullName.contains(value, true)) {
-                    tempUserManagerList.add(userManager)
+                    tempRoleAvailableUserList.add(userManager)
                 } else {
-                    userManagerList[index].show = false
+                    roleAvailableUserList[index].show = false
                 }
             }
-            userManagerListAdapter.updateUserManagerList(tempUserManagerList)
+            roleAvailableUserListAdapter.updateUserManagerList(tempRoleAvailableUserList)
         }
 
-    var userManagerList: ArrayList<UserManager> = arrayListOf()
+    var roleAvailableUserList: ArrayList<RoleAvailableUser> = arrayListOf()
 
     private var subscription: Disposable? = null
 
@@ -86,6 +79,7 @@ class JobAddUserRoleVM(
     }
 
     fun addUserRoleToJobSetting(jobId: Int, role: String, clientIds: ArrayList<Int>, cascade: Boolean) {
+        HCGlobal.getInstance().log(role)
         subscription = jobApi.addUserRoleJobSetting(AppPreferences.apiAccessToken, jobId, role, clientIds, cascade).concatMap {
                 addResult -> Observable.just(addResult)
         }
@@ -115,15 +109,15 @@ class JobAddUserRoleVM(
             userList.add(reviewer.toEntity(0, 0, 0))
         }
 
-        val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
+        val tempRoleAvailableUserList: ArrayList<RoleAvailableUser> = arrayListOf()
 
         for (user in userList) {
-            tempUserManagerList.add(UserManager(user, false, show = true))
+            tempRoleAvailableUserList.add(RoleAvailableUser(user, false, show = true))
         }
 
-        userManagerList = tempUserManagerList
+        roleAvailableUserList = tempRoleAvailableUserList
 
-        userManagerListAdapter.updateUserManagerList(tempUserManagerList)
+        roleAvailableUserListAdapter.updateUserManagerList(tempRoleAvailableUserList)
     }
 
     fun onAddRoleSuccess(result: SimpleResponseJson) {

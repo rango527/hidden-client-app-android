@@ -1,16 +1,16 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.models.custom.UserManager
+import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.ui.viewmodels.root.RootVM
 
-class UserManagerViewVM: RootVM() {
+class RoleAvailableUserViewVM: RootVM() {
 
     private val reviewerName = MutableLiveData<String>()
     private val reviewerPhoto = MutableLiveData<String>()
     private val tick = MutableLiveData<Boolean>()
 
-    fun bind(reviewer: UserManager) {
+    fun bind(reviewer: RoleAvailableUser) {
         reviewerName.value = reviewer.user.fullName
         reviewerPhoto.value = reviewer.user.avatar
         tick.value = reviewer.tick

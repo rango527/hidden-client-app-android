@@ -5,13 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hidden.client.R
-import com.hidden.client.databinding.UserManagerListBinding
+import com.hidden.client.databinding.AddUserRoleBinding
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
@@ -20,14 +19,13 @@ import com.hidden.client.helpers.extension.doAfterTextChanged
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.JobAddUserRoleVM
-import com.hidden.client.ui.viewmodels.main.JobSettingVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
 
 
 class JobAddRoleActivity : BaseActivity() {
 
-    private lateinit var binding: UserManagerListBinding
+    private lateinit var binding: AddUserRoleBinding
     private lateinit var viewModel: JobAddUserRoleVM
 
     private lateinit var imgClose: ImageView
@@ -91,7 +89,7 @@ class JobAddRoleActivity : BaseActivity() {
 
     fun setSaveButtonEnable() {
         var enable = false;
-        for (userManager in viewModel.userManagerListAdapter.getUserManagerList()) {
+        for (userManager in viewModel.roleAvailableUserListAdapter.getRoleAvailableUserList()) {
             if (userManager.tick) {
                 enable = true
                 break;
@@ -113,7 +111,7 @@ class JobAddRoleActivity : BaseActivity() {
 
         txtAddTeamMember = findViewById(R.id.text_add_team_member)
         txtAddTeamMember.setOnClickListener {
-            val intent = Intent(this, InviteTeamMember::class.java)
+            val intent = Intent(this, JobInviteTeamMember::class.java)
             startActivity(intent)
         }
 
@@ -123,7 +121,7 @@ class JobAddRoleActivity : BaseActivity() {
             if (layoutCascade.visibility == View.GONE) {
                 layoutCascade.visibility = View.VISIBLE
             } else {
-                val userManagerList = viewModel.userManagerListAdapter.getUserManagerList()
+                val userManagerList = viewModel.roleAvailableUserListAdapter.getRoleAvailableUserList()
                 val userManagerIdList: ArrayList<Int> = arrayListOf()
                 for (userManager in userManagerList) {
                     if (userManager.tick) {

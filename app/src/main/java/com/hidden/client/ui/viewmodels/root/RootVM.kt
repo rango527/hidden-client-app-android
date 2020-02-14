@@ -13,7 +13,6 @@ import com.hidden.client.ui.viewmodels.injection.component.ViewModelInjector
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.*
-import de.hdodenhof.circleimageview.CircleImageView
 
 abstract class RootVM: ViewModel() {
 
@@ -57,8 +56,9 @@ abstract class RootVM: ViewModel() {
             // JobSettingVM
             is JobSettingVM -> injector.inject(this)
             is ReviewerViewVM -> injector.inject(this)
-            is UserManagerViewVM -> injector.inject(this)
+            is RoleAvailableUserViewVM -> injector.inject(this)
             is JobAddUserRoleVM -> injector.inject(this)
+            is JobUserManagerVM -> injector.inject(this)
         }
     }
 

@@ -7,6 +7,7 @@ import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.JobSettingDao
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.JobSettingEntity

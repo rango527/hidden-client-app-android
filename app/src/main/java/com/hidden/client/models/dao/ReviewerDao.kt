@@ -15,6 +15,9 @@ interface ReviewerDao {
     @Query("SELECT * FROM Reviewer WHERE myId = :myId AND jobId = :jobId")
     fun getReviewerByJobId(myId: Int, jobId: Int): List<ReviewerEntity>
 
+    @Query("SELECT * FROM Reviewer WHERE myId = :myId AND jobId = :jobId AND reviewerType = :reviewType")
+    fun getReviewerByJobIdAndReviewType(myId: Int, jobId: Int, reviewType: Int): List<ReviewerEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg reviewers: ReviewerEntity)
 

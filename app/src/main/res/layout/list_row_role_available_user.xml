@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="UserManagerItemBinding">
+    <data class="RoleAvailableUserItemBinding">
         <variable
             name="viewModel"
-            type="com.hidden.client.ui.viewmodels.main.UserManagerViewVM" />
+            type="com.hidden.client.ui.viewmodels.main.RoleAvailableUserViewVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

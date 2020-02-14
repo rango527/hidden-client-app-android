@@ -38,8 +38,9 @@ interface ViewModelInjector {
     // JobSetting
     fun inject(jobSettingVM: JobSettingVM)
     fun inject(reviewerViewVM: ReviewerViewVM)
-    fun inject(userManagerViewVM: UserManagerViewVM)
+    fun inject(roleAvailableUserViewVM: RoleAvailableUserViewVM)
     fun inject(jobAddUserRoleVM: JobAddUserRoleVM)
+    fun inject(jobUserManagerVM: JobUserManagerVM)
 
     @Component.Builder
     interface Builder {

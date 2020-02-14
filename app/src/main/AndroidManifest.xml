@@ -31,9 +31,19 @@
             android:value="true" />
 
         <activity
-            android:name=".ui.activities.InviteTeamMember"
+            android:name=".ui.activities.JobUserManagerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+        <activity
+            android:name=".ui.activities.JobSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+        <activity
+            android:name=".ui.activities.JobInviteTeamMember"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.JobAddRoleActivity"
             android:screenOrientation="portrait"
@@ -160,6 +170,7 @@
             android:name=".ui.activities.HCSignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
         <activity
             android:name=".ui.activities.HCSignUpWithInviteCodeActivity"
             android:screenOrientation="portrait"
@@ -177,6 +188,7 @@
                 <!-- note that the leading "/" is required for pathPrefix -->
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activities.HCForgetPasswordActivity"
             android:screenOrientation="portrait"

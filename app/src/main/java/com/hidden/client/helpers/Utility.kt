@@ -28,10 +28,10 @@ object Utility {
 
     fun getReviewTextFromType(reviewType: Int): String {
         return when (reviewType) {
-            Enums.ReviewerType.SHORTLIST_REVIEWER.value -> Enums.ReviewerTypeText.SHORTLIST_REVIEWER.value
-            Enums.ReviewerType.INTERVIEWER.value -> Enums.ReviewerTypeText.INTERVIEWER.value
-            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> Enums.ReviewerTypeText.INTERVIEWER_ADVANCER.value
-            Enums.ReviewerType.OFFER_MANAGER.value -> Enums.ReviewerTypeText.OFFER_MANAGER.value
+            Enums.ReviewerType.SHORTLIST_REVIEWER.value -> "submission_reviewer"
+            Enums.ReviewerType.INTERVIEWER.value -> "interviewer"
+            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> "interview_advancer"
+            Enums.ReviewerType.OFFER_MANAGER.value -> "offer_manager"
             else -> ""
         }
     }

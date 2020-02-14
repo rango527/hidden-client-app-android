@@ -10,7 +10,6 @@ import android.util.Pair
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.github.pwittchen.swipe.library.rx2.Swipe
 import com.github.pwittchen.swipe.library.rx2.SwipeListener
@@ -19,14 +18,14 @@ import com.hidden.client.datamodels.HCJobDetailResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.networks.RetrofitClient
-import com.hidden.client.ui.dialogs.JobSettingDialog
+import com.hidden.client.ui.BaseActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class HCJobActivity : AppCompatActivity(), View.OnClickListener {
+class HCJobActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var jobId: String
 
@@ -129,7 +128,10 @@ class HCJobActivity : AppCompatActivity(), View.OnClickListener {
                 navigateJobDetailActivity()
             }
             R.id.img_job_setting -> {
-                JobSettingDialog.display(supportFragmentManager, this.jobId.toInt());
+                val intent = Intent(this, JobSettingActivity::class.java)
+                intent.putExtra("jobId", jobId.toInt())
+                startActivity(intent)
+                overridePendingVTransitionEnter()
             }
         }
     }
