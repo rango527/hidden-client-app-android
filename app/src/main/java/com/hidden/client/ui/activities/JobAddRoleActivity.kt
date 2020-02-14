@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,15 +15,20 @@ import com.hidden.client.databinding.UserManagerListBinding
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
+import com.hidden.client.ui.viewmodels.main.JobAddUserRoleVM
 import com.hidden.client.ui.viewmodels.main.JobSettingVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
-class JobAddRoleActivity : AppCompatActivity() {
+
+
+class JobAddRoleActivity : BaseActivity() {
 
     private lateinit var binding: UserManagerListBinding
-    private lateinit var viewModel: JobSettingVM
+    private lateinit var viewModel: JobAddUserRoleVM
 
     private lateinit var imgClose: ImageView
     private lateinit var txtReviewType: TextView
@@ -36,10 +40,15 @@ class JobAddRoleActivity : AppCompatActivity() {
     private lateinit var editSearch: EditText
     private lateinit var layoutCascade: LinearLayout
 
+    private lateinit var imgAddUserRoleTip: ImageView
+
     private lateinit var txtAddNewOnly: TextView
     private lateinit var txtAddNewAndOld: TextView
 
     private var cascadeType: Int = Enums.AddUserRoleJobSetting.NEW_PROCESS_ONLY.value
+
+    private var jobId: Int = 0
+    private var reviewType: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +59,7 @@ class JobAddRoleActivity : AppCompatActivity() {
         binding.recyclerviewUserManager.layoutManager = LinearLayoutManager(this)
 
         viewModel =
-            ViewModelProviders.of(this, ViewModelFactory(this)).get(JobSettingVM::class.java)
+            ViewModelProviders.of(this, ViewModelFactory(this)).get(JobAddUserRoleVM::class.java)
 
         binding.viewModel = viewModel
 
@@ -63,15 +72,21 @@ class JobAddRoleActivity : AppCompatActivity() {
             }
         })
 
-        val jobId: Int = intent.getIntExtra("jobId", 0)
-        val reviewType: Int = intent.getIntExtra("reviewType", 0)
+        jobId = intent.getIntExtra("jobId", 0)
+        reviewType = intent.getIntExtra("reviewType", 0)
 
-        viewModel.reviewerTypeNum = reviewType
-        viewModel.jobId = jobId
+        // Observing for jumping HomeActivity after login success
+        viewModel.navigateToJobSetting.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                finish()
+            }
+        })
+
+        viewModel.loadAvailableUsers(jobId, Utility.getReviewTextFromType(reviewType))
 
         // Init View
         initUI()
-        initShortlistReviewerText(reviewType)
+        initShortlistReviewerText()
     }
 
     fun setSaveButtonEnable() {
@@ -104,18 +119,30 @@ class JobAddRoleActivity : AppCompatActivity() {
 
         btnSave = findViewById(R.id.button_save)
         btnSave.setOnClickListener {
+
             if (layoutCascade.visibility == View.GONE) {
                 layoutCascade.visibility = View.VISIBLE
             } else {
                 val userManagerList = viewModel.userManagerListAdapter.getUserManagerList()
-                val userManagerIdList: MutableList<Int> = mutableListOf()
+                val userManagerIdList: ArrayList<Int> = arrayListOf()
                 for (userManager in userManagerList) {
                     if (userManager.tick) {
                         userManagerIdList.add(userManager.user.clientId)
                     }
                 }
-            }
 
+                val cascade: Boolean = this.cascadeType == Enums.AddUserRoleJobSetting.NEW_PROCESS_ONLY.value
+
+                val role: String  = when (reviewType) {
+                    Enums.ReviewerType.SHORTLIST_REVIEWER.value -> Enums.ReviewerTypeText.SHORTLIST_REVIEWER.value
+                    Enums.ReviewerType.INTERVIEWER.value -> Enums.ReviewerTypeText.INTERVIEWER.value
+                    Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> Enums.ReviewerTypeText.INTERVIEWER_ADVANCER.value
+                    Enums.ReviewerType.OFFER_MANAGER.value -> Enums.ReviewerTypeText.OFFER_MANAGER.value
+                    else -> ""
+                }
+
+                viewModel.addUserRoleToJobSetting(jobId, role, userManagerIdList, cascade)
+            }
         }
 
         layoutCascade = findViewById(R.id.layout_cascade)
@@ -134,9 +161,17 @@ class JobAddRoleActivity : AppCompatActivity() {
             txtAddNewAndOld.setBackgroundResource(R.drawable.button_round_white_1x)
             cascadeType = Enums.AddUserRoleJobSetting.INCLUDE_OLD_PROCESS.value
         }
+
+        imgAddUserRoleTip = findViewById(R.id.image_add_user_tip)
+        imgAddUserRoleTip.setOnClickListener {
+            val intent: Intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            intent.putExtra("reviewType", reviewType)
+            startActivity(intent)
+            overridePendingVTransitionEnter()
+        }
     }
 
-    private fun initShortlistReviewerText(reviewType: Int) {
+    private fun initShortlistReviewerText() {
         txtReviewType = findViewById(R.id.text_review_type)
         when (reviewType) {
             Enums.ReviewerType.SHORTLIST_REVIEWER.value -> txtReviewType.text =

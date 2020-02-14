@@ -6,8 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
+import com.hidden.client.ui.BaseActivity
 
-class JobReviewerType : AppCompatActivity() {
+class JobReviewerType : BaseActivity() {
 
     private lateinit var imgClose: ImageView
     private lateinit var txtReviewType: TextView

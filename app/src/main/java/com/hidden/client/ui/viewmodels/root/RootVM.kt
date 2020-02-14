@@ -58,6 +58,7 @@ abstract class RootVM: ViewModel() {
             is JobSettingVM -> injector.inject(this)
             is ReviewerViewVM -> injector.inject(this)
             is UserManagerViewVM -> injector.inject(this)
+            is JobAddUserRoleVM -> injector.inject(this)
         }
     }
 

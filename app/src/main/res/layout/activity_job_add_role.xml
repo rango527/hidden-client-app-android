@@ -7,7 +7,7 @@
     <data class="UserManagerListBinding">
         <variable
             name="viewModel"
-            type="com.hidden.client.ui.viewmodels.main.JobSettingVM" />
+            type="com.hidden.client.ui.viewmodels.main.JobAddUserRoleVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

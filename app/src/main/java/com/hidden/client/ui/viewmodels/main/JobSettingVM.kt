@@ -1,20 +1,19 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.custom.UserManager
 import com.hidden.client.models.dao.JobSettingDao
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
-import com.hidden.client.ui.adapters.UserManagerListAdapter
+import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,31 +32,11 @@ class JobSettingVM(
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
-    var reviewerTypeNum = 0
-
     var jobId: Int = 0
         set(value) {
             field = value
             loadJobSetting(true)
         }
-
-    var search = ""
-        set(value) {
-            field = value
-
-            val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
-
-            for ((index, userManager) in userManagerList.withIndex()) {
-                if (userManager.user.fullName.contains(value, true)) {
-                    tempUserManagerList.add(userManager)
-                } else {
-                    userManagerList[index].show = false
-                }
-            }
-            userManagerListAdapter.updateUserManagerList(tempUserManagerList)
-        }
-
-    var userManagerList: ArrayList<UserManager> = arrayListOf()
 
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
     val reviewText: MutableLiveData<String> = MutableLiveData("")
@@ -73,8 +52,6 @@ class JobSettingVM(
 
     val offerManagerText: MutableLiveData<String> = MutableLiveData("")
     val offerManagerListAdapter: ReviewerListAdapter = ReviewerListAdapter()
-
-    val userManagerListAdapter: UserManagerListAdapter = UserManagerListAdapter()
 
     private var subscription: Disposable? = null
 
@@ -129,7 +106,7 @@ class JobSettingVM(
 
         val jobSetting: JobSettingEntity = json.toJobSettingEntity(jobId, AppPreferences.myId)
 
-        val reviewerList: ArrayList<ReviewerEntity> = arrayListOf();
+        val reviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         reviewerList.addAll(json.toReviewerList(jobId, AppPreferences.myId))
 
         // Update JobSetting & Reviewer Db
@@ -196,34 +173,6 @@ class JobSettingVM(
 
         jobTitle.value = jobSetting.jobTitle
         reviewText.value = jobSetting.reviewType
-
-        val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
-
-        for (userManager in jobSetting.getUserManagerList()) {
-            tempUserManagerList.add(UserManager(userManager, false, show = true))
-        }
-
-        userManagerList = tempUserManagerList
-
-        // Init Tick
-        var tickArrayComparer: List<ReviewerEntity> = listOf()
-        when (reviewerTypeNum) {
-            Enums.ReviewerType.SHORTLIST_REVIEWER.value -> tickArrayComparer = jobSetting.getShortlistReviewerList()
-            Enums.ReviewerType.INTERVIEWER.value -> tickArrayComparer = jobSetting.getInterviewerList()
-            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> tickArrayComparer = jobSetting.getInterviewAdvancerList()
-            Enums.ReviewerType.OFFER_MANAGER.value -> tickArrayComparer = jobSetting.getOfferManagerList()
-        }
-
-        for (userManager in userManagerList) {
-            for (reviewer in tickArrayComparer) {
-                if (userManager.user.clientId == reviewer.clientId) {
-                    userManager.tick = true
-                    break
-                }
-            }
-        }
-
-        userManagerListAdapter.updateUserManagerList(tempUserManagerList)
 
         shortlistReviewerText.value = context.resources.getQuantityString(
                 R.plurals.shortlist_reviewer,

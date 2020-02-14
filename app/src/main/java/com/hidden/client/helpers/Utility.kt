@@ -25,4 +25,14 @@ object Utility {
     fun getResourceByName(context: Context, defType: String, name: String): Int {
         return context.resources.getIdentifier(name, defType, context.packageName)
     }
+
+    fun getReviewTextFromType(reviewType: Int): String {
+        return when (reviewType) {
+            Enums.ReviewerType.SHORTLIST_REVIEWER.value -> Enums.ReviewerTypeText.SHORTLIST_REVIEWER.value
+            Enums.ReviewerType.INTERVIEWER.value -> Enums.ReviewerTypeText.INTERVIEWER.value
+            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> Enums.ReviewerTypeText.INTERVIEWER_ADVANCER.value
+            Enums.ReviewerType.OFFER_MANAGER.value -> Enums.ReviewerTypeText.OFFER_MANAGER.value
+            else -> ""
+        }
+    }
 }
