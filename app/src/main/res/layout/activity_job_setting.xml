@@ -25,7 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp">
 
                 <ImageView
                     android:id="@+id/img_close"
@@ -45,6 +48,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/job_settings"
                         android:textColor="@color/colorBlack_1"
+                        android:layout_marginTop="30dp"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:layout_marginBottom="5dp"
@@ -92,9 +96,10 @@
 
                             <ImageView
                                 android:id="@+id/img_shortlist_review_text_tip"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginStart="5dp"
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="5dp"
                                 android:src="@drawable/question"/>
 
                         </LinearLayout>
@@ -106,7 +111,7 @@
                             android:textColor="@color/colorBlack_1"
                             android:textStyle="bold"
                             android:textSize="17sp"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="21dp"
                             android:layout_marginBottom="5dp"/>
 
                     </LinearLayout>
@@ -116,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="42dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -142,16 +147,17 @@
 
                                 <ImageView
                                     android:id="@+id/img_shortlist_reviewer_tip"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="5dp"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
                                     android:src="@drawable/question" />
                             </LinearLayout>
 
                             <ImageView
                                 android:id="@+id/img_add_role_to_shortlist_reviewer"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
                                 android:src="@drawable/add_interviewer"/>
 
                         </LinearLayout>
@@ -174,7 +180,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="43dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -200,17 +206,18 @@
 
                                 <ImageView
                                     android:id="@+id/img_interviewer_tip"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="5dp"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
                                     android:src="@drawable/question" />
 
                             </LinearLayout>
 
                             <ImageView
                                 android:id="@+id/img_add_role_to_interviewer"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
                                 android:src="@drawable/add_interviewer"/>
 
                         </LinearLayout>
@@ -233,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="43dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -259,16 +266,17 @@
 
                                 <ImageView
                                     android:id="@+id/img_interview_advancer_tip"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="5dp"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
                                     android:src="@drawable/question" />
                             </LinearLayout>
 
                             <ImageView
                                 android:id="@+id/img_add_role_to_interview_advancer"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
                                 android:src="@drawable/add_interviewer"/>
 
                         </LinearLayout>
@@ -291,7 +299,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="43dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -317,16 +325,17 @@
 
                                 <ImageView
                                     android:id="@+id/img_offer_manager_tip"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginLeft="15dp"
                                     android:src="@drawable/question" />
                             </LinearLayout>
 
                             <ImageView
                                 android:id="@+id/img_add_role_to_offer_manager"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
                                 android:src="@drawable/add_interviewer"/>
 
                         </LinearLayout>

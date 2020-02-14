@@ -14,16 +14,16 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/menu_padding_vertical_default">
 
-        <com.rishabhharit.roundedimageview.RoundedImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@{viewModel.getReviewerPhoto(), default=@drawable/man}"
-            android:scaleType="fitXY"
-            app:cornerRadius="12dp"
-            app:roundedCorners="topLeft|topRight|bottomLeft|bottomRight" />
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp" />
+
 
         <TextView
             android:id="@+id/text_name"

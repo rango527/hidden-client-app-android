@@ -26,9 +26,9 @@
     </plurals>
 
     <plurals name="interviewer_advancer">
-        <item quantity="zero">Interview Reviewer</item>
-        <item quantity="one">Interview Reviewer</item>
-        <item quantity="other">Interview Reviewers</item>
+        <item quantity="zero">Interview Advancer</item>
+        <item quantity="one">Interview Advancer</item>
+        <item quantity="other">Interview Advancers</item>
     </plurals>
 
     <plurals name="offer_manager">
