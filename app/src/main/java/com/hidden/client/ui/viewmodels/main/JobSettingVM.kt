@@ -33,10 +33,28 @@ class JobSettingVM(
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
+    var reviewerTypeNum = 0
+
     var jobId: Int = 0
         set(value) {
             field = value
             loadJobSetting(true)
+        }
+
+    var search = ""
+        set(value) {
+            field = value
+
+            val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
+
+            for ((index, userManager) in userManagerList.withIndex()) {
+                if (userManager.user.fullName.contains(value, true)) {
+                    tempUserManagerList.add(userManager)
+                } else {
+                    userManagerList[index].show = false
+                }
+            }
+            userManagerListAdapter.updateUserManagerList(tempUserManagerList)
         }
 
     var userManagerList: ArrayList<UserManager> = arrayListOf()
@@ -83,7 +101,7 @@ class JobSettingVM(
                                 }
                         } else {
                             val jobSettingEntity = dbJobSettingData[0]
-                            val reviewerList = reviewerDao.getReviewerByClientIdAndJobId(AppPreferences.myId, jobId)
+                            val reviewerList = reviewerDao.getReviewerByJobId(AppPreferences.myId, jobId)
                             Observable.just(parseEntityResult(jobSettingEntity, reviewerList))
                         }
                     }
@@ -110,7 +128,9 @@ class JobSettingVM(
     private fun parseJsonResult(json: JobSettingJson): JobSettingEntity {
 
         val jobSetting: JobSettingEntity = json.toJobSettingEntity(jobId, AppPreferences.myId)
-        val reviewerList = json.toReviewerList(jobId, AppPreferences.myId)
+
+        val reviewerList: ArrayList<ReviewerEntity> = arrayListOf();
+        reviewerList.addAll(json.toReviewerList(jobId, AppPreferences.myId))
 
         // Update JobSetting & Reviewer Db
         jobSettingDao.deleteAll()
@@ -177,11 +197,33 @@ class JobSettingVM(
         jobTitle.value = jobSetting.jobTitle
         reviewText.value = jobSetting.reviewType
 
+        val tempUserManagerList: ArrayList<UserManager> = arrayListOf()
 
         for (userManager in jobSetting.getUserManagerList()) {
-            userManagerList.add(UserManager(userManager, false))
+            tempUserManagerList.add(UserManager(userManager, false, show = true))
         }
-        userManagerListAdapter.updateUserManagerList(userManagerList)
+
+        userManagerList = tempUserManagerList
+
+        // Init Tick
+        var tickArrayComparer: List<ReviewerEntity> = listOf()
+        when (reviewerTypeNum) {
+            Enums.ReviewerType.SHORTLIST_REVIEWER.value -> tickArrayComparer = jobSetting.getShortlistReviewerList()
+            Enums.ReviewerType.INTERVIEWER.value -> tickArrayComparer = jobSetting.getInterviewerList()
+            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> tickArrayComparer = jobSetting.getInterviewAdvancerList()
+            Enums.ReviewerType.OFFER_MANAGER.value -> tickArrayComparer = jobSetting.getOfferManagerList()
+        }
+
+        for (userManager in userManagerList) {
+            for (reviewer in tickArrayComparer) {
+                if (userManager.user.clientId == reviewer.clientId) {
+                    userManager.tick = true
+                    break
+                }
+            }
+        }
+
+        userManagerListAdapter.updateUserManagerList(tempUserManagerList)
 
         shortlistReviewerText.value = context.resources.getQuantityString(
                 R.plurals.shortlist_reviewer,

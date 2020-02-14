@@ -19,9 +19,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.JobAddRoleActivity
 import com.hidden.client.ui.activities.JobReviewerType
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.main.CandidateListVM
 import com.hidden.client.ui.viewmodels.main.JobSettingVM
-import com.hidden.client.ui.viewmodels.main.JobSettingViewVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.dialog_job_settings.view.*
 

@@ -4,5 +4,6 @@ import com.hidden.client.models.entity.ReviewerEntity
 
 data class UserManager (
     val user: ReviewerEntity,
-    val tick: Boolean
+    var tick: Boolean,
+    var show: Boolean
 )

@@ -70,4 +70,17 @@ object Enums {
         OFFER_MANAGER(4),
         USER_MANAGER(5)
     }
+
+    enum class ReviewerTypeText(val value: String) {
+        INTERVIEWER("interviewer"),
+        SHORTLIST_REVIEWER("submission_reviewer"),
+        INTERVIEWER_ADVANCER("interview_advancer"),
+        OFFER_MANAGER("offer_manager"),
+        USER_MANAGER("")
+    }
+
+    enum class AddUserRoleJobSetting(val value: Int) {
+        NEW_PROCESS_ONLY(1),
+        INCLUDE_OLD_PROCESS(2)
+    }
 }

@@ -13,6 +13,7 @@
     <color name="colorGray_2">#F0F0F0</color>
     <color name="colorGray_3">#B8B6B6</color>
     <color name="colorGray_4">#1b221c35</color>
+    <color name="colorGray_5">#f1f0ee</color>
     <color name="colorCyan_1">#3BB1E1</color>
     <color name="colorRed_1">#E74A5F</color>
 
@@ -22,6 +23,7 @@
     <color name="colorMask">#77000000</color>
 
     <color name="borderBottom">#E8E8E8</color>
+    <color name="borderTop">#808080</color>
 
     <color name="aqua">#00FFFF</color>
     <color name="blue">#0000FF</color>

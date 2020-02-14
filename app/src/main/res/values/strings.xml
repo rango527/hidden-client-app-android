@@ -155,6 +155,9 @@
     <string name="interviewers_description">These are the users who can be added to interviews for processes associated with this job</string>
     <string name="interview_advancers_description">Once an interview is completed, these users are responsible for entering whether the candidate is progressing or whether they are rejected. If there are multiple Interview Advancers, only one user has to make a decision to keep things moving</string>
     <string name="offer_manager_description">These users are the points of contact for gathering offer information. Users who are not Offer Managers will not see any of the offer details, nor will they be able to see any candidate’s salary on their profile, nor the salary on the job in question</string>
+    <string name="add_new_users_to">Add new users to:</string>
+    <string name="new_processes_only">New Processes Only</string>
+    <string name="old_new_processes_only">Old + New Processes</string>
 
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>
