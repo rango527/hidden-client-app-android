@@ -88,35 +88,35 @@ class JobSettingActivity : BaseActivity() {
 
         // Description
         imgShortlistReviewerTypeDescription.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", 0)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
         imgShortlistReviewerDescription.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.SHORTLIST_REVIEWER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
         imgInterviewersDescription.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
         imgInterviewAdvancerDescription.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER_ADVANCER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
 
         imgOfferManagerDescription.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", Enums.ReviewerType.OFFER_MANAGER.value)
             startActivity(intent)
             overridePendingVTransitionEnter()

@@ -111,7 +111,7 @@ class JobAddRoleActivity : BaseActivity() {
 
         txtAddTeamMember = findViewById(R.id.text_add_team_member)
         txtAddTeamMember.setOnClickListener {
-            val intent = Intent(this, JobInviteTeamMember::class.java)
+            val intent = Intent(this, JobInviteTeamMemberActivity::class.java)
             startActivity(intent)
         }
 
@@ -162,7 +162,7 @@ class JobAddRoleActivity : BaseActivity() {
 
         imgAddUserRoleTip = findViewById(R.id.image_add_user_tip)
         imgAddUserRoleTip.setOnClickListener {
-            val intent: Intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerType::class.java)
+            val intent: Intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
             intent.putExtra("reviewType", reviewType)
             startActivity(intent)
             overridePendingVTransitionEnter()

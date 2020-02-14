@@ -41,6 +41,7 @@ interface ViewModelInjector {
     fun inject(roleAvailableUserViewVM: RoleAvailableUserViewVM)
     fun inject(jobAddUserRoleVM: JobAddUserRoleVM)
     fun inject(jobUserManagerVM: JobUserManagerVM)
+    fun inject(jobInviteTeamMemberVM: JobInviteTeamMemberVM)
 
     @Component.Builder
     interface Builder {

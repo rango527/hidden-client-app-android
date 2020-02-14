@@ -8,7 +8,7 @@ import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.ui.BaseActivity
 
-class JobReviewerType : BaseActivity() {
+class JobReviewerTypeActivity : BaseActivity() {
 
     private lateinit var imgClose: ImageView
     private lateinit var txtReviewType: TextView

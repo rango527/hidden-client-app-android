@@ -31,4 +31,14 @@ interface JobApi {
         @Field("client_ids[]") clientIds: ArrayList<Int>,
         @Field("cascade") cascade: Boolean
     ): Observable<SimpleResponseJson>
+
+    @FormUrlEncoded
+    @POST("client/invite")
+    fun inviteTeamMember(
+        @Header("Authorization") authToken: String,
+        @Field("first_name") firstName: String,
+        @Field("surname") lastName: String,
+        @Field("email") email: String,
+        @Field("is_user_manager") isUserManager: Boolean
+    ): Observable<SimpleResponseJson>
 }
