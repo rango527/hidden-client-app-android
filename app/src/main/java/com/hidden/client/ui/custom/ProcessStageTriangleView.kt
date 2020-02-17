@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.hidden.client.R
 
-class wProcessStageTriangleView (context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
+class ProcessStageTriangleView (context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
 
     init {
         inflate(context, R.layout.process_stage_triangle_view, this)

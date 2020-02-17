@@ -92,8 +92,9 @@
     <string name="approve">Approve</string>
     <string name="reject">Reject</string>
 
+    <!-- Process -->
     <string name="processes">PROCESSES</string>
-    <string name="for_">For</string>
+    <string name="for_">For %1$s, %2$s</string>
     <string name="process">Process</string>
     <string name="messages">Messages</string>
 

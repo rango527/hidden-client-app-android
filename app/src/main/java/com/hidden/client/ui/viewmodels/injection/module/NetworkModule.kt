@@ -77,6 +77,16 @@ object NetworkModule {
         return retrofit.create(JobApi::class.java)
     }
 
+    /*-------------------------------------------------------------------
+    Process
+    ------------------------------------------------------------------- */
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideProcessApi(retrofit: Retrofit): ProcessApi {
+        return retrofit.create(ProcessApi::class.java)
+    }
+
     /**
      * Provides the Retrofit object.
      * @return the Retrofit object
