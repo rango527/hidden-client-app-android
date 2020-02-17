@@ -7,6 +7,7 @@ import com.hidden.client.models.dao.ProcessDao
 import com.hidden.client.models.dao.ProcessStageDao
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.json.ProcessJson
+import com.hidden.client.ui.adapters.ProcessListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +24,8 @@ class ProcessListVM(
     lateinit var processApi: ProcessApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
+
+    val processListAdapter: ProcessListAdapter = ProcessListAdapter()
 
     private var subscription: Disposable? = null
 
@@ -113,6 +116,7 @@ class ProcessListVM(
     }
 
     private fun onRetrieveProcessSuccess(processList: List<ProcessEntity>) {
+        processListAdapter.updateProcessList(processList)
     }
 
     private fun onRetrieveProcessError(e: Throwable) {

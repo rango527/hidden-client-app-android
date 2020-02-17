@@ -43,6 +43,10 @@ interface ViewModelInjector {
     fun inject(jobUserManagerVM: JobUserManagerVM)
     fun inject(jobInviteTeamMemberVM: JobInviteTeamMemberVM)
 
+    // Process
+    fun inject(processListVM: ProcessListVM)
+    fun inject(processViewVM: ProcessViewVM)
+
     @Component.Builder
     interface Builder {
         fun build(): ViewModelInjector

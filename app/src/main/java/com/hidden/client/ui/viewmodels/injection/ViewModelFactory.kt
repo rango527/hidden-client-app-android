@@ -161,6 +161,19 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        if (modelClass.isAssignableFrom(ProcessListVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessListVM(
+                db.processDao(),
+                db.processStageDao()
+            ) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

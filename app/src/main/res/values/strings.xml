@@ -94,7 +94,7 @@
 
     <!-- Process -->
     <string name="processes">PROCESSES</string>
-    <string name="for_">For %1$s, %2$s</string>
+    <string name="for_">For</string>
     <string name="process">Process</string>
     <string name="messages">Messages</string>
 
@@ -148,7 +148,6 @@
     <string name="clear">Clear</string>
     <string name="view_process">View Process</string>
     <string name="job_and_location">For: %1$s, %2$s</string>
-    <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
 
     <string name="job_settings">Job Settings</string>c
     <string name="shortlist_review_type">Shortlist Review Type</string>
@@ -161,6 +160,7 @@
     <string name="new_processes_only">New Processes Only</string>
     <string name="old_new_processes_only">Old + New Processes</string>
     <string name="no_user_manager_permission">Sorry, you don\'t have roleAvailableUser manager permissions so cannot edit roleAvailableUser responsibilities. Please get in touch with your colleagues below who do have the correct permission. They can make the changes for you or can give you the permissions you need:</string>
+    <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
 
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>

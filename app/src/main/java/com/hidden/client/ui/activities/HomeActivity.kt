@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.HCTabBar
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
-import com.hidden.client.ui.fragments.home.processes.HCProcessesFragment
+import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
 import com.hidden.client.ui.fragments.home.shortlists.ShortlistsFragment
 import com.urbanairship.UAirship
 import java.lang.Exception
@@ -38,7 +37,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
 
         dashboardFrags.add(DashboardFragment())
         shortlistsFrags.add(ShortlistsFragment())
-        processesFrags.add(HCProcessesFragment())
+        processesFrags.add(ProcessesFragment())
 
         tabBar = findViewById(R.id.nav_view)
         tabBar.setSelectedListener(this)

@@ -14,7 +14,7 @@ import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
 import java.lang.Math.round
 
-class HCProcessActivity : AppCompatActivity(), View.OnClickListener {
+class ProcessActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var textBtnProcess: TextView
     private lateinit var textBtnMessage: TextView
