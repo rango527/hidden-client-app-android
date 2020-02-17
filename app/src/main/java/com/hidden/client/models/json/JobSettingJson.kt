@@ -2,7 +2,7 @@ package com.hidden.client.models.json
 
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.entity.JobSettingEntity
+import com.hidden.client.models.entity.SettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -29,8 +29,8 @@ data class JobSettingJson(
     val roles: RoleJson?
 
 ) {
-    fun toJobSettingEntity(jobId:Int, myId: Int): JobSettingEntity {
-        return JobSettingEntity(
+    fun toJobSettingEntity(jobId:Int, myId: Int): SettingEntity {
+        return SettingEntity(
             0,
             reviewType.safeValue(),
             cityName.safeValue(),
@@ -44,15 +44,15 @@ data class JobSettingJson(
     fun toReviewerList(jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerList = ArrayList<ReviewerEntity>()
 
-        val interviewerList = roles!!.toInterviewerList(jobId, myId)
-        val shortlistInterviewerList = roles.toShortlistReviewerList(jobId, myId)
-        val interviewAdvancerList = roles.toInterviewAdvancerList(jobId, myId)
-        val offerManagerList = roles.toOfferManagerList(jobId, myId)
+        val interviewerList = roles!!.toInterviewerList(Enums.SettingType.JOB.value, jobId, myId)
+        val shortlistInterviewerList = roles.toShortlistReviewerList(Enums.SettingType.JOB.value, jobId, myId)
+        val interviewAdvancerList = roles.toInterviewAdvancerList(Enums.SettingType.JOB.value, jobId, myId)
+        val offerManagerList = roles.toOfferManagerList(Enums.SettingType.JOB.value, jobId, myId)
 
         val userManagerList = ArrayList<ReviewerEntity>()
 
         for (reviewer in this.userManagerList!!) {
-            userManagerList.add(reviewer.toEntity(Enums.ReviewerType.USER_MANAGER.value, jobId, myId))
+            userManagerList.add(reviewer.toEntity(Enums.ReviewerType.USER_MANAGER.value, Enums.SettingType.JOB.value, jobId, myId))
         }
 
         reviewerList.addAll(interviewerList)

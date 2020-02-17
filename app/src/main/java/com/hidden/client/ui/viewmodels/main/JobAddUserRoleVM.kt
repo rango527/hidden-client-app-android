@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.models.entity.ReviewerEntity
@@ -106,7 +107,7 @@ class JobAddUserRoleVM(
         val userList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in json) {
-            userList.add(reviewer.toEntity(0, 0, 0))
+            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
         }
 
         val tempRoleAvailableUserList: ArrayList<RoleAvailableUser> = arrayListOf()

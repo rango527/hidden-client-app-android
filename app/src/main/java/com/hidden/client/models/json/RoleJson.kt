@@ -21,38 +21,38 @@ data class RoleJson(
     val offerManagerList: List<ReviewerJson>?
 
 ) {
-    fun toInterviewerList(jobId:Int, myId: Int): List<ReviewerEntity> {
+    fun toInterviewerList(settingType: Int, jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.interviewerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER.value, jobId, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER.value, settingType, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toShortlistReviewerList(jobId:Int, myId: Int): List<ReviewerEntity> {
+    fun toShortlistReviewerList(settingType: Int, jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.shortlistReviewerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.SHORTLIST_REVIEWER.value, jobId, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.SHORTLIST_REVIEWER.value, settingType, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toInterviewAdvancerList(jobId:Int, myId: Int): List<ReviewerEntity> {
+    fun toInterviewAdvancerList(settingType: Int, jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.interviewAdvancerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER_ADVANCER.value, jobId, myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.INTERVIEWER_ADVANCER.value, settingType, jobId, myId))
         }
         return reviewerEntityList
     }
 
-    fun toOfferManagerList(jobId:Int, myId: Int): List<ReviewerEntity> {
+    fun toOfferManagerList(settingType: Int, jobId:Int, myId: Int): List<ReviewerEntity> {
         val reviewerEntityList: ArrayList<ReviewerEntity> = arrayListOf()
 
         for (reviewer in this.offerManagerList!!) {
-            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.OFFER_MANAGER.value, jobId,  myId))
+            reviewerEntityList.add(reviewer.toEntity(Enums.ReviewerType.OFFER_MANAGER.value, settingType, jobId,  myId))
         }
         return reviewerEntityList
     }

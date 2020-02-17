@@ -33,10 +33,11 @@ class JobUserManagerVM(
     fun loadUserManagerList(jobId: Int) {
 
         subscription = Observable.fromCallable {
-            reviewerDao.getReviewerByJobIdAndReviewType(
-                AppPreferences.myId,
+            reviewerDao.getReviewerByParentIdAndReviewType(
+                Enums.SettingType.JOB.value,
+                Enums.ReviewerType.USER_MANAGER.value,
                 jobId,
-                Enums.ReviewerType.USER_MANAGER.value
+                AppPreferences.myId
             )
         }
             .concatMap { dbReviewList ->

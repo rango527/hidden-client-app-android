@@ -17,7 +17,9 @@ data class ReviewerEntity (
 
     var reviewerType: Int,
 
-    var jobId: Int,
+    var settingType: Int,           // 1: Job  2: Process
 
-    var myId: Int
+    var parentId: Int,              // Id or Job Entity or Process Entity
+
+    var myId: Int                   // my Id
 )

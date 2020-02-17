@@ -83,4 +83,9 @@ object Enums {
         NEW_PROCESS_ONLY(1),
         INCLUDE_OLD_PROCESS(2)
     }
+
+    enum class SettingType(val value: Int) {
+        JOB(1),
+        PROCESS(2)
+    }
 }
