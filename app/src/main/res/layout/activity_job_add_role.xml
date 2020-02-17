@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/logo_margin_top"
             android:textColor="@color/colorBlack_2"
             android:textSize="@dimen/font_size_medium"
-            android:layout_marginLeft="@dimen/margin_default"
+            android:layout_marginStart="@dimen/margin_default"
             android:textStyle="bold"/>
 
         <EditText
@@ -81,8 +81,7 @@
                     android:textColor="@color/colorBlack_1"
                     android:textSize="16sp"
                     android:padding="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Can\'t find who you\'re looking for? They might for on Hidden yet. Add them here"/>
+                    android:layout_marginBottom="20dp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

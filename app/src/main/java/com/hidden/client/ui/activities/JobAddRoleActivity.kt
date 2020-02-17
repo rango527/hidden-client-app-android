@@ -3,8 +3,10 @@ package com.hidden.client.ui.activities
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.*
+import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,8 +22,6 @@ import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.JobAddUserRoleVM
 import com.kaopiz.kprogresshud.KProgressHUD
-
-
 
 class JobAddRoleActivity : BaseActivity() {
 
@@ -110,6 +110,7 @@ class JobAddRoleActivity : BaseActivity() {
         imgClose.setOnClickListener { finish() }
 
         txtAddTeamMember = findViewById(R.id.text_add_team_member)
+        txtAddTeamMember.text = Html.fromHtml(getString(R.string.add_them_here))
         txtAddTeamMember.setOnClickListener {
             val intent = Intent(this, JobInviteTeamMemberActivity::class.java)
             startActivity(intent)

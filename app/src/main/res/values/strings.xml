@@ -147,8 +147,9 @@
     <string name="clear">Clear</string>
     <string name="view_process">View Process</string>
     <string name="job_and_location">For: %1$s, %2$s</string>
+    <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
 
-    <string name="job_settings">Job Settings</string>
+    <string name="job_settings">Job Settings</string>c
     <string name="shortlist_review_type">Shortlist Review Type</string>
     <string name="shortlist_review_type_description">The shortlist review type is the workflow that you’re following for approving or rejecting new candidate submissions. There are 3 types to choose from: Unanimity, Majority or First Choice Rules. If you want to change your workflow or find out more, please get in touch with your Talent Partner</string>
     <string name="shortlist_reviewers_description">These are the roleAvailableUser who receive all new candidate submissions and who are responsible for approving or rejecting them</string>
