@@ -18,6 +18,9 @@ object AppPreferences {
     private val FIRST_RUN_KEY = Pair("first_run_key", true)
     private val NO_BACKUP_PREFERENCES = Pair("no_backup_preferences", "com.hidden.client.manager.airship.no_backup")
 
+    //Process Tip View
+    private val PROCESS_SETTING_TIP_CHECKED = Pair("process_setting_tip_checked", false)
+
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
     }
@@ -75,5 +78,14 @@ object AppPreferences {
         // custom setter to save a preference back to preferences file
         set(value) = preferences.edit {
             it.putString(NO_BACKUP_PREFERENCES.first, value)
+        }
+
+    var processSettingTipChecked: Boolean
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getBoolean(PROCESS_SETTING_TIP_CHECKED.first, PROCESS_SETTING_TIP_CHECKED.second)
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putBoolean(PROCESS_SETTING_TIP_CHECKED.first, value)
         }
 }
