@@ -11,6 +11,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.ui.viewmodels.main.RoleAvailableUserViewVM
 import com.hidden.client.ui.activities.JobAddRoleActivity
+import com.hidden.client.ui.activities.ProcessAddRoleActivity
 
 
 class RoleAvailableUserListAdapter: RecyclerView.Adapter<RoleAvailableUserListAdapter.ViewHolder>() {
@@ -44,6 +45,8 @@ class RoleAvailableUserListAdapter: RecyclerView.Adapter<RoleAvailableUserListAd
             // Set Save Button Enable/Disable
             if (HCGlobal.getInstance().currentActivity is JobAddRoleActivity) {
                 (HCGlobal.getInstance().currentActivity as JobAddRoleActivity).setSaveButtonEnable()
+            } else if (HCGlobal.getInstance().currentActivity is ProcessAddRoleActivity) {
+                (HCGlobal.getInstance().currentActivity as ProcessAddRoleActivity).setSaveButtonEnable()
             }
         }
     }

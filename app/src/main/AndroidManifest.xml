@@ -31,15 +31,25 @@
             android:value="true" />
 
         <activity
-            android:name=".ui.activities.JobUserManagerActivity"
+            android:name=".ui.activities.ProcessUserManagerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
-
+        <activity
+            android:name=".ui.activities.ProcessAddRoleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ui.activities.ProcessSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ui.activities.JobUserManagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.JobSettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.JobInviteTeamMemberActivity"
             android:screenOrientation="portrait"
@@ -170,7 +180,6 @@
             android:name=".ui.activities.HCSignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-
         <activity
             android:name=".ui.activities.HCSignUpWithInviteCodeActivity"
             android:screenOrientation="portrait"
@@ -188,7 +197,6 @@
                 <!-- note that the leading "/" is required for pathPrefix -->
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activities.HCForgetPasswordActivity"
             android:screenOrientation="portrait"

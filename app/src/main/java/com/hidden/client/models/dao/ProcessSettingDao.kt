@@ -7,7 +7,7 @@ import com.hidden.client.models.entity.ProcessSettingEntity
 interface ProcessSettingDao {
 
     @get:Query("SELECT * FROM ProcessSetting")
-    val all: List<ProcessSettingDao>
+    val all: List<ProcessSettingEntity>
 
     @Query("SELECT * FROM ProcessSetting WHERE myId = :myId AND processId = :processId")
     fun getMyProcessSettingByProcessId(myId: Int, processId: Int): List<ProcessSettingEntity>

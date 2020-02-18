@@ -31,6 +31,7 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
 
             val intent = Intent(HCGlobal.getInstance().currentActivity, ProcessActivity::class.java)
             intent.putExtra("processId", process.id)
+            intent.putExtra("jobId", process.jobId)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
         }
     }
@@ -44,7 +45,7 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: ProcessItemBinding):RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ProcessItemBinding): RecyclerView.ViewHolder(binding.root){
 
         private val viewModel = ProcessViewVM()
 

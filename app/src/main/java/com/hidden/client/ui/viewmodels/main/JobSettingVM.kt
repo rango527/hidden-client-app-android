@@ -184,20 +184,20 @@ class JobSettingVM(
 
         interviewerText.value = context.resources.getQuantityString(
             R.plurals.interviewer,
-            jobSetting.getShortlistReviewerList().size,
-            jobSetting.getShortlistReviewerList().size
+            jobSetting.getInterviewerList().size,
+            jobSetting.getInterviewerList().size
         )
 
         interviewAdvancerText.value = context.resources.getQuantityString(
             R.plurals.interviewer_advancer,
-            jobSetting.getShortlistReviewerList().size,
-            jobSetting.getShortlistReviewerList().size
+            jobSetting.getInterviewAdvancerList().size,
+            jobSetting.getInterviewAdvancerList().size
         )
 
         offerManagerText.value = context.resources.getQuantityString(
             R.plurals.offer_manager,
-            jobSetting.getShortlistReviewerList().size,
-            jobSetting.getShortlistReviewerList().size
+            jobSetting.getOfferManagerList().size,
+            jobSetting.getOfferManagerList().size
         )
     }
 

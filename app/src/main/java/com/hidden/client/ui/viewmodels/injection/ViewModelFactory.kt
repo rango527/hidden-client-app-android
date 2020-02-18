@@ -161,6 +161,9 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        /* ------------------------------------------------------------
+          ProcessSettingVM
+       -------------------------------------------------------------- */
         if (modelClass.isAssignableFrom(ProcessListVM::class.java)) {
             val db = Room.databaseBuilder(
                 context,
@@ -171,6 +174,47 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             return ProcessListVM(
                 db.processDao(),
                 db.processStageDao()
+            ) as T
+        }
+
+        /* ------------------------------------------------------------
+          JobSettingVM
+       -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(ProcessSettingVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessSettingVM(
+                context,
+                db.processSettingDao(),
+                db.reviewerDao()
+            ) as T
+        }
+
+        if (modelClass.isAssignableFrom(ProcessUserManagerVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessUserManagerVM(
+                db.reviewerDao()
+            ) as T
+        }
+
+        if (modelClass.isAssignableFrom(ProcessAddUserRoleVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessAddUserRoleVM(
+                context
             ) as T
         }
 

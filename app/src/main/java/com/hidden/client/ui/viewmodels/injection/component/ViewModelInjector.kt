@@ -47,6 +47,11 @@ interface ViewModelInjector {
     fun inject(processListVM: ProcessListVM)
     fun inject(processViewVM: ProcessViewVM)
 
+    // Process Setting
+    fun inject(processSettingVM: ProcessSettingVM)
+    fun inject(processUserManagerVM: ProcessUserManagerVM)
+    fun inject(processAddUserRoleVM: ProcessAddUserRoleVM)
+
     @Component.Builder
     interface Builder {
         fun build(): ViewModelInjector
