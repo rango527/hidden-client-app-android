@@ -24,7 +24,8 @@ import com.hidden.client.models.entity.*
     JobSettingEntity::class,
     ReviewerEntity::class,
     ProcessEntity::class,
-    ProcessStageEntity::class
+    ProcessStageEntity::class,
+    ProcessSettingEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -55,6 +56,9 @@ abstract class AppDatabase : RoomDatabase() {
     // Process
     abstract fun processDao(): ProcessDao
     abstract fun processStageDao(): ProcessStageDao
+
+    // Process Settings
+    abstract fun processSettingDao(): ProcessSettingDao
 
     companion object {
 
