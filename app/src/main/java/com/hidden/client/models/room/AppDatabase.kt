@@ -21,7 +21,7 @@ import com.hidden.client.models.entity.*
     FeedbackQuestionEntity::class,
     DashboardTileEntity::class,
     DashboardTileContentEntity::class,
-    SettingEntity::class,
+    JobSettingEntity::class,
     ReviewerEntity::class,
     ProcessEntity::class,
     ProcessStageEntity::class
@@ -49,7 +49,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun dashboardTileContentDao(): DashboardTileContentDao
 
     // Job Settings
-    abstract fun jobSettingDao(): SettingDao
+    abstract fun jobSettingDao(): JobSettingDao
     abstract fun reviewerDao(): ReviewerDao
 
     // Process

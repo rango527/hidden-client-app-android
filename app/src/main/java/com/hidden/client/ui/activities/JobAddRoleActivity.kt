@@ -28,7 +28,7 @@ class JobAddRoleActivity : BaseActivity() {
     private lateinit var binding: AddUserRoleBinding
     private lateinit var viewModel: JobAddUserRoleVM
 
-    private lateinit var imgClose: ImageView
+    private lateinit var imgClose: ImageButton
     private lateinit var txtReviewType: TextView
     private lateinit var txtAddTeamMember: TextView
 

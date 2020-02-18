@@ -21,7 +21,7 @@ data class ProcessStageJson(
     val stageCreatedAt: String?,
 
     @Json(name = "interview__agreed_date")
-    val interviewAgreeDate: String,
+    val interviewAgreeDate: String?,
 
     @Json(name = "client_feedback_submitted")
     val clientFeedbackSubmitted: Boolean?,
@@ -45,13 +45,17 @@ data class ProcessStageJson(
             interviewAgreeDate.safeValue(),
             clientFeedbackSubmitted.safeValue(),
             candidateFeedbackSubmitted.safeValue(),
-            actionRequired!!.talentPartner.safeValue(),
-            actionRequired.client.safeValue(),
-            actionRequired.candidate.safeValue(),
+            if (actionRequired != null) actionRequired.talentPartner.safeValue() else false,
+            if (actionRequired != null) actionRequired.client.safeValue() else false,
+            if (actionRequired != null) actionRequired.candidate.safeValue() else false,
             "",
             pProcessId)
 
-        processStage.setNextStage(this.nextStages!!)
+        if (this.nextStages == null) {
+            processStage.setNextStage(listOf())
+        } else {
+            processStage.setNextStage(this.nextStages)
+        }
 
         return processStage
     }

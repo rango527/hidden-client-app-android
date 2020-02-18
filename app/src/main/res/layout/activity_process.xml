@@ -140,7 +140,7 @@
             android:id="@+id/img_process_setting"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:contentDescription="@string/settings"
+            android:contentDescription="@string/jobSettings"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_settings"

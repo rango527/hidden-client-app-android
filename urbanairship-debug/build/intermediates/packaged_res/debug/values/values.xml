@@ -41,7 +41,7 @@
     <string name="ua_debug_title">Airship Debug</string>
     <string name="ua_delete">Delete</string>
     <string name="ua_device_info_title">Device Info</string>
-    <string name="ua_device_info_view_description">View device info and settings</string>
+    <string name="ua_device_info_view_description">View device info and jobSettings</string>
     <string name="ua_duplicate_tag_warning">Tag already exists</string>
     <string name="ua_event_details">Event Details</string>
     <string name="ua_event_name">%s</string>

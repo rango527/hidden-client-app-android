@@ -81,7 +81,7 @@
     <string name="ua_new_tag_hint">New Tag</string>
 
     <string name="ua_device_info_title">Device Info</string>
-    <string name="ua_device_info_view_description">View device info and settings</string>
+    <string name="ua_device_info_view_description">View device info and jobSettings</string>
 
     <string name="ua_push_view_title">Received Pushes</string>
     <string name="ua_push_view_description">List of received push messages</string>

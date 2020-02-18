@@ -25,17 +25,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp">
+                android:paddingTop="9dp"
+                android:paddingBottom="100dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
 
                 <ImageView
                     android:id="@+id/img_close"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="right"
-                    android:padding="5dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="6dp"
                     android:src="@drawable/ic_close"/>
 
                 <LinearLayout
@@ -109,7 +109,6 @@
                             android:layout_height="wrap_content"
                             app:mutableText="@{viewModel.reviewText}"
                             android:textColor="@color/colorBlack_1"
-                            android:textStyle="bold"
                             android:textSize="17sp"
                             android:layout_marginTop="21dp"
                             android:layout_marginBottom="5dp"/>
@@ -127,8 +126,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
@@ -166,8 +163,6 @@
                             android:id="@+id/recyclerview_shortlist_reviewer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="4dp"
                             app:adapter="@{viewModel.getShortlistReviewerListAdapter}"
                             android:nestedScrollingEnabled="false"/>
@@ -186,8 +181,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
@@ -226,8 +219,6 @@
                             android:id="@+id/recyclerview_interviewer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="4dp"
                             android:nestedScrollingEnabled="false"
                             app:adapter="@{viewModel.getInterviewerListAdapter}"/>
@@ -246,8 +237,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
@@ -285,8 +274,6 @@
                             android:id="@+id/recyclerview_interview_advancer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="4dp"
                             android:nestedScrollingEnabled="false"
                             app:adapter="@{viewModel.getInterviewAdvancerListAdapter}"/>
@@ -305,8 +292,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
@@ -328,7 +313,7 @@
                                     android:layout_width="14dp"
                                     android:layout_height="14dp"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
                                     android:src="@drawable/question" />
                             </LinearLayout>
 
@@ -344,8 +329,6 @@
                             android:id="@+id/recyclerview_offer_manager"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
                             android:layout_marginBottom="4dp"
                             android:nestedScrollingEnabled="false"
                             app:adapter="@{viewModel.getOfferManagerListAdapter}"/>

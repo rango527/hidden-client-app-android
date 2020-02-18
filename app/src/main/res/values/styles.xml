@@ -15,7 +15,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:fontFamily">@font/avenir_font</item>
+<!--        <item name="android:fontFamily">@font/avenir_font</item>-->
     </style>
 
     <!-- set the rounded drawable as background to your bottom sheet -->

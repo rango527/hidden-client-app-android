@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Setting")
-data class SettingEntity (
+@Entity(tableName = "JobSetting")
+data class JobSettingEntity (
 
     @field:PrimaryKey(autoGenerate = true)
     var id: Int,

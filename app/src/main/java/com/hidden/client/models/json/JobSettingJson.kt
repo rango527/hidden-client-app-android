@@ -2,7 +2,7 @@ package com.hidden.client.models.json
 
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.entity.SettingEntity
+import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -29,8 +29,8 @@ data class JobSettingJson(
     val roles: RoleJson?
 
 ) {
-    fun toJobSettingEntity(jobId:Int, myId: Int): SettingEntity {
-        return SettingEntity(
+    fun toJobSettingEntity(jobId:Int, myId: Int): JobSettingEntity {
+        return JobSettingEntity(
             0,
             reviewType.safeValue(),
             cityName.safeValue(),

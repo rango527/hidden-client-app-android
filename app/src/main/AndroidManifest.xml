@@ -81,35 +81,35 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.VideoPlayerActivity"
+            android:name=".ui.activities.jobSettings.VideoPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.JobImageSliderActivity"
+            android:name=".ui.activities.jobSettings.JobImageSliderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.CandidateDetailActivity"
+            android:name=".ui.activities.jobSettings.CandidateDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.HCResetPasswordActivity"
+            android:name=".ui.activities.jobSettings.HCResetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.HCPrivacyStatementActivity"
+            android:name=".ui.activities.jobSettings.HCPrivacyStatementActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.HCTermsOfServiceActivity"
+            android:name=".ui.activities.jobSettings.HCTermsOfServiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.HCMyProfileActivity"
+            android:name=".ui.activities.jobSettings.HCMyProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ui.activities.settings.CandidateListActivity"
+            android:name=".ui.activities.jobSettings.CandidateListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity

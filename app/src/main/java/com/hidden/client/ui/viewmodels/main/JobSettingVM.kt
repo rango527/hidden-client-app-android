@@ -6,9 +6,9 @@ import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.models.dao.SettingDao
+import com.hidden.client.models.dao.JobSettingDao
 import com.hidden.client.models.dao.ReviewerDao
-import com.hidden.client.models.entity.SettingEntity
+import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class JobSettingVM(
     private val context: Context,
-    private val settingDao: SettingDao,
+    private val jobSettingDao: JobSettingDao,
     private val reviewerDao: ReviewerDao
 ) : RootVM() {
 
@@ -65,11 +65,11 @@ class JobSettingVM(
 
     fun loadJobSetting(cashMode: Boolean) {
 
-        val apiObservable: Observable<SettingEntity>
+        val apiObservable: Observable<JobSettingEntity>
 
         if (cashMode) {
             apiObservable =
-                Observable.fromCallable { settingDao.getMyJobSettingByJobId(AppPreferences.myId, jobId) }
+                Observable.fromCallable { jobSettingDao.getMyJobSettingByJobId(AppPreferences.myId, jobId) }
                     .concatMap { dbJobSettingData ->
                         if (dbJobSettingData.isEmpty()) {
                             jobApi.getJobSettings(AppPreferences.apiAccessToken, jobId)
@@ -102,25 +102,25 @@ class JobSettingVM(
             )
     }
 
-    private fun parseJsonResult(json: JobSettingJson): SettingEntity {
+    private fun parseJsonResult(json: JobSettingJson): JobSettingEntity {
 
-        val setting: SettingEntity = json.toJobSettingEntity(jobId, AppPreferences.myId)
+        val jobSetting: JobSettingEntity = json.toJobSettingEntity(jobId, AppPreferences.myId)
 
         val reviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         reviewerList.addAll(json.toReviewerList(jobId, AppPreferences.myId))
 
         // Update JobSetting & Reviewer Db
-        settingDao.deleteAll()
+        jobSettingDao.deleteAll()
         reviewerDao.deleteAll(Enums.SettingType.JOB.value)
 
         // Update Job Setting Table
-        settingDao.insertAll(setting)
+        jobSettingDao.insertAll(jobSetting)
         reviewerDao.insertAll(*reviewerList.toTypedArray())
 
-        return parseEntityResult(setting, reviewerList)
+        return parseEntityResult(jobSetting, reviewerList)
     }
 
-    private fun parseEntityResult(setting: SettingEntity, reviewerList: List<ReviewerEntity>): SettingEntity {
+    private fun parseEntityResult(jobSetting: JobSettingEntity, reviewerList: List<ReviewerEntity>): JobSettingEntity {
         val userManagerList: ArrayList<ReviewerEntity> = arrayListOf()
         val shortlistReviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         val interviewerList: ArrayList<ReviewerEntity> = arrayListOf()
@@ -147,13 +147,13 @@ class JobSettingVM(
             }
         }
 
-        setting.setUserManagerList(userManagerList)
-        setting.setShortlistReviewerList(shortlistReviewerList)
-        setting.setInterviewerList(interviewerList)
-        setting.setInterviewAdvancerList(interviewAdvancerList)
-        setting.setOfferManagerList(offerManagerList)
+        jobSetting.setUserManagerList(userManagerList)
+        jobSetting.setShortlistReviewerList(shortlistReviewerList)
+        jobSetting.setInterviewerList(interviewerList)
+        jobSetting.setInterviewAdvancerList(interviewAdvancerList)
+        jobSetting.setOfferManagerList(offerManagerList)
 
-        return setting
+        return jobSetting
     }
 
     private fun onRetrieveJobSettingStart() {
@@ -164,40 +164,40 @@ class JobSettingVM(
         loadingVisibility.value = false
     }
 
-    private fun onRetrieveJobSettingSuccess(setting: SettingEntity) {
+    private fun onRetrieveJobSettingSuccess(jobSetting: JobSettingEntity) {
 
-        isUserManager = setting.isUserManager
+        isUserManager = jobSetting.isUserManager
 
-        shortlistReviewerListAdapter.updateReviewerList(setting.getShortlistReviewerList())
-        interviewerListAdapter.updateReviewerList(setting.getInterviewerList())
-        interviewAdvancerListAdapter.updateReviewerList(setting.getInterviewAdvancerList())
-        offerManagerListAdapter.updateReviewerList(setting.getOfferManagerList())
+        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList())
+        interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList())
+        interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList())
+        offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList())
 
-        jobTitle.value = setting.jobTitle
-        reviewText.value = setting.reviewType
+        jobTitle.value = String.format(context.resources.getString(R.string.job_title), jobSetting.jobTitle, jobSetting.cityName)
+        reviewText.value = jobSetting.reviewType
 
         shortlistReviewerText.value = context.resources.getQuantityString(
                 R.plurals.shortlist_reviewer,
-                setting.getShortlistReviewerList().size,
-                setting.getShortlistReviewerList().size
+                jobSetting.getShortlistReviewerList().size,
+                jobSetting.getShortlistReviewerList().size
             )
 
         interviewerText.value = context.resources.getQuantityString(
             R.plurals.interviewer,
-            setting.getShortlistReviewerList().size,
-            setting.getShortlistReviewerList().size
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
         )
 
         interviewAdvancerText.value = context.resources.getQuantityString(
             R.plurals.interviewer_advancer,
-            setting.getShortlistReviewerList().size,
-            setting.getShortlistReviewerList().size
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
         )
 
         offerManagerText.value = context.resources.getQuantityString(
             R.plurals.offer_manager,
-            setting.getShortlistReviewerList().size,
-            setting.getShortlistReviewerList().size
+            jobSetting.getShortlistReviewerList().size,
+            jobSetting.getShortlistReviewerList().size
         )
     }
 
