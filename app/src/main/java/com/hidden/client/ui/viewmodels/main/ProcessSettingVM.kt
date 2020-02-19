@@ -6,6 +6,7 @@ import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ProcessSettingDao
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.ProcessSettingEntity
@@ -33,7 +34,7 @@ class ProcessSettingVM (
     var processId: Int = 0
         set(value) {
             field = value
-            loadProcessSetting(true)
+            loadProcessSetting(false)
         }
 
     var isUserManager: Boolean = false
@@ -149,6 +150,23 @@ class ProcessSettingVM (
         return processSetting
     }
 
+    fun removeUserRoleToProcessSetting(processId: Int, role: String, clientId: Int, reviewerEntityId: Int) {
+        HCGlobal.getInstance().log(role)
+        subscription = processApi.removeUserRoleProcessSetting(AppPreferences.apiAccessToken, processId, role, clientId).concatMap {
+                addResult ->
+                    reviewerDao.deleteById(reviewerEntityId)
+                    Observable.just(addResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveProcessSettingStart() }
+            .doOnTerminate { onRetrieveProcessSettingFinish() }
+            .subscribe(
+                { result -> onRemoveRoleSuccess(reviewerEntityId) },
+                { error -> onRetrieveProcessSettingError(error) }
+            )
+    }
+
     private fun onRetrieveProcessSettingStart() {
         loadingVisibility.value = true
     }
@@ -186,6 +204,10 @@ class ProcessSettingVM (
             processSetting.getOfferManagerList().size,
             processSetting.getOfferManagerList().size
         )
+    }
+
+    private fun onRemoveRoleSuccess(reviewerEntityId: Int) {
+
     }
 
     private fun onRetrieveProcessSettingError(e: Throwable) {

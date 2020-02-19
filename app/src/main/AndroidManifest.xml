@@ -31,9 +31,13 @@
             android:value="true" />
 
         <activity
-            android:name=".ui.activities.ProcessUserManagerActivity"
+            android:name=".ui.activities.RemoveUserRoleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity
+            android:name=".ui.activities.ProcessUserManagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.ProcessAddRoleActivity"
             android:screenOrientation="portrait"

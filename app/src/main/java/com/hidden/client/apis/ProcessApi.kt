@@ -29,10 +29,19 @@ interface ProcessApi {
 
     @FormUrlEncoded
     @POST("client/processes/{process_id}/roles/{role}/add")
-    fun addUserRoleJobSetting(
+    fun addUserRoleProcessSetting(
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Path("role") role: String,
         @Field("client_ids[]") clientIds: ArrayList<Int>
+    ): Observable<SimpleResponseJson>
+
+    @FormUrlEncoded
+    @POST("client/processes/{process_id}/roles/{role}/remove")
+    fun removeUserRoleProcessSetting(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("role") role: String,
+        @Field("client_id") clientId: Int
     ): Observable<SimpleResponseJson>
 }

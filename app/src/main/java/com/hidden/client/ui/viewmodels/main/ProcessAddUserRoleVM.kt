@@ -81,7 +81,7 @@ class ProcessAddUserRoleVM(
 
     fun addUserRoleToProcessSetting(processId: Int, role: String, clientIds: ArrayList<Int>) {
         HCGlobal.getInstance().log(role)
-        subscription = processApi.addUserRoleJobSetting(AppPreferences.apiAccessToken, processId, role, clientIds).concatMap {
+        subscription = processApi.addUserRoleProcessSetting(AppPreferences.apiAccessToken, processId, role, clientIds).concatMap {
                 addResult -> Observable.just(addResult)
         }
             .subscribeOn(Schedulers.io())

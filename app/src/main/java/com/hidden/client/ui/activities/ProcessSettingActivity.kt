@@ -18,6 +18,7 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessSettingVM
@@ -176,5 +177,15 @@ class ProcessSettingActivity : BaseActivity() {
             startActivity(intent)
             overridePendingVTransitionEnter()
         }
+    }
+
+    fun removeRoleFromProcessSetting(reviewer: ReviewerEntity) {
+        val role: String  = when (reviewer.reviewerType) {
+            Enums.ReviewerType.INTERVIEWER.value -> Enums.ReviewerTypeText.INTERVIEWER.value
+            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> Enums.ReviewerTypeText.INTERVIEWER_ADVANCER.value
+            Enums.ReviewerType.OFFER_MANAGER.value -> Enums.ReviewerTypeText.OFFER_MANAGER.value
+            else -> ""
+        }
+        viewModel.removeUserRoleToProcessSetting(reviewer.parentId, role, reviewer.clientId, reviewer.id)
     }
 }

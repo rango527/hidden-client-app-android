@@ -168,6 +168,7 @@
     <string name="process_setting">Process Setting</string>
     <string name="process_setting_note">Changing these settings will only affect this individual process with Andrea. If you want to change the settings for all candidates in process with this job, please change the <![CDATA[<font color="#66CC66">Job Settings</font>]]></string>
     <string name="got_it">Got it</string>
+    <string name="remove">Remove</string>
 
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>

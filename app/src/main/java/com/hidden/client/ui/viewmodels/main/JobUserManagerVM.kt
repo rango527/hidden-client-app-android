@@ -62,7 +62,9 @@ class JobUserManagerVM(
     }
 
     private fun onRetrieveUserManagerListSuccess(userManagerList: List<ReviewerEntity>) {
-        userManagerListAdapter.updateReviewerList(userManagerList)
+        val userArrayLit: ArrayList<ReviewerEntity> = arrayListOf()
+        userArrayLit.addAll(userManagerList)
+        userManagerListAdapter.updateReviewerList(userArrayLit)
     }
 
     private fun onRetrieveUserManagerListError(e: Throwable) {

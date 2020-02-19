@@ -21,4 +21,7 @@ interface ReviewerDao {
 
     @Query("DELETE FROM Reviewer WHERE settingType = :settingType")
     fun deleteAll(settingType: Int)
+
+    @Query("DELETE FROM Reviewer WHERE id = :id")
+    fun deleteById(id: Int)
 }
