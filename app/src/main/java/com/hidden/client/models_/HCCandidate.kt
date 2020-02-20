@@ -3,6 +3,7 @@ package com.hidden.client.models_
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.rishabhharit.roundedimageview.RoundedImageView
 
 class HCCandidate {
@@ -10,7 +11,7 @@ class HCCandidate {
     private var candidateId: Int = 0
 
     private var candidatePhoto: Int = 0
-    private lateinit var candidatePhotoUrl:  String
+    private lateinit var candidatePhotoUrl: String
 
     private lateinit var candidateFirstName: String
     private lateinit var candidateSurName: String
@@ -21,11 +22,11 @@ class HCCandidate {
     private lateinit var candidateSnapshot: String
 
     private var candidateEmployeeHistory: Array<Int> = arrayOf()
-    private var candidateSkill:  Array<HCSkill> = arrayOf()
+    private var candidateSkill: Array<HCSkill> = arrayOf()
 
     private var candidateWorkExperience: Array<HCWorkExperience> = arrayOf()
 
-    constructor() { }
+    constructor() {}
 
     constructor(
         candidateId: Int,
@@ -58,7 +59,9 @@ class HCCandidate {
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+            if (photoUrl.safeValue() != "") {
+                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
+            }
         }
     }
 
@@ -131,7 +134,7 @@ class HCCandidate {
     }
 
     fun getCandidateEmployeeHistory(): Array<Int> {
-        return  candidateEmployeeHistory
+        return candidateEmployeeHistory
     }
 
     fun setCandidateEmployeeHistory(candidateEmployeeHistory: Array<Int>) {

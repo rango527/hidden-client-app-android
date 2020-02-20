@@ -73,10 +73,10 @@ class JobAddRoleActivity : BaseActivity() {
         jobId = intent.getIntExtra("jobId", 0)
         reviewType = intent.getIntExtra("reviewType", 0)
 
-        // Observing for jumping HomeActivity after login success
+        // Observing for jumping HomeActivity after add role success
         viewModel.navigateToJobSetting.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-                finish()
+                backToJobSetting(false)
             }
         })
 
@@ -107,7 +107,7 @@ class JobAddRoleActivity : BaseActivity() {
         editSearch.doAfterTextChanged { text -> viewModel.search = text }
 
         imgClose = findViewById(R.id.image_close)
-        imgClose.setOnClickListener { finish() }
+        imgClose.setOnClickListener { backToJobSetting(true) }
 
         txtAddTeamMember = findViewById(R.id.text_add_team_member)
         txtAddTeamMember.text = Html.fromHtml(getString(R.string.add_them_here))
@@ -130,7 +130,7 @@ class JobAddRoleActivity : BaseActivity() {
                     }
                 }
 
-                val cascade: Boolean = this.cascadeType == Enums.AddUserRoleJobSetting.NEW_PROCESS_ONLY.value
+                val cascade: Boolean = this.cascadeType != Enums.AddUserRoleJobSetting.NEW_PROCESS_ONLY.value
 
                 val role: String  = when (reviewType) {
                     Enums.ReviewerType.SHORTLIST_REVIEWER.value -> Enums.ReviewerTypeText.SHORTLIST_REVIEWER.value
@@ -198,5 +198,18 @@ class JobAddRoleActivity : BaseActivity() {
                 1, 1
             )
         }
+    }
+
+    override fun onBackPressed() {
+        backToJobSetting(true)
+    }
+
+    private fun backToJobSetting(cashMode: Boolean) {
+        val intent = Intent(this, JobSettingActivity::class.java)
+        intent.putExtra("jobId", jobId)
+        intent.putExtra("cashMode", cashMode)
+        startActivity(intent)
+        overridePendingVTransitionEnter()
+        finish()
     }
 }

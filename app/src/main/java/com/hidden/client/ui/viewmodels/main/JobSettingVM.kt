@@ -1,17 +1,20 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.JobApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.JobSettingDao
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
+import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,8 +36,12 @@ class JobSettingVM(
     var jobId: Int = 0
         set(value) {
             field = value
-            loadJobSetting(true)
         }
+
+    // To jump to JobSetting Activity
+    private val _navigateToJobSetting = MutableLiveData<Event<Boolean>>()
+    val navigateToJobSetting: LiveData<Event<Boolean>>
+        get() = _navigateToJobSetting
 
     var isUserManager: Boolean = false
 
@@ -120,6 +127,22 @@ class JobSettingVM(
         return parseEntityResult(jobSetting, reviewerList)
     }
 
+    fun removeUserRoleToJobSetting(jobId: Int, role: String, clientId: Int, cascade: Boolean) {
+
+        subscription = jobApi.removeUserRoleJobSetting(AppPreferences.apiAccessToken, jobId, role, clientId, cascade).concatMap {
+                addResult ->
+            Observable.just(addResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveJobSettingStart() }
+            .doOnTerminate { onRetrieveJobSettingFinish() }
+            .subscribe(
+                { result -> onRemoveRoleSuccess() },
+                { error -> onRetrieveJobSettingError(error) }
+            )
+    }
+
     private fun parseEntityResult(jobSetting: JobSettingEntity, reviewerList: List<ReviewerEntity>): JobSettingEntity {
         val userManagerList: ArrayList<ReviewerEntity> = arrayListOf()
         val shortlistReviewerList: ArrayList<ReviewerEntity> = arrayListOf()
@@ -168,10 +191,10 @@ class JobSettingVM(
 
         isUserManager = jobSetting.isUserManager
 
-        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList())
-        interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList())
-        interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList())
-        offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList())
+        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList(), jobId)
+        interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList(), jobId)
+        interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList(), jobId)
+        offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList(), jobId)
 
         jobTitle.value = String.format(context.resources.getString(R.string.job_title), jobSetting.jobTitle, jobSetting.cityName)
         reviewText.value = jobSetting.reviewType
@@ -199,6 +222,10 @@ class JobSettingVM(
             jobSetting.getOfferManagerList().size,
             jobSetting.getOfferManagerList().size
         )
+    }
+
+    private fun onRemoveRoleSuccess() {
+        _navigateToJobSetting.value = Event(true)
     }
 
     private fun onRetrieveJobSettingError(e: Throwable) {

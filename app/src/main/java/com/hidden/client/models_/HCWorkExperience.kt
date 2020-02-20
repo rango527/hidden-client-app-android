@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HCWorkExperience {
@@ -24,7 +25,9 @@ class HCWorkExperience {
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
-            Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
+            if (photoUrl.safeValue() != "") {
+                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
+            }
         }
     }
 

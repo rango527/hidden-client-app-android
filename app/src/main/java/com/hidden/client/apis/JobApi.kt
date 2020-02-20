@@ -41,4 +41,14 @@ interface JobApi {
         @Field("email") email: String,
         @Field("is_user_manager") isUserManager: Boolean
     ): Observable<SimpleResponseJson>
+
+    @FormUrlEncoded
+    @POST("client/jobs/{job_id}/roles/{role}/remove")
+    fun removeUserRoleJobSetting(
+        @Header("Authorization") authToken: String,
+        @Path("job_id") jobId: Int,
+        @Path("role") role: String,
+        @Field("client_id") clientId: Int,
+        @Field("cascade") cascade: Boolean
+    ): Observable<SimpleResponseJson>
 }

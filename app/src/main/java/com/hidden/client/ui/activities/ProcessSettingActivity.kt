@@ -47,12 +47,14 @@ class ProcessSettingActivity : BaseActivity() {
 
     private var processId: Int = 0
     private var jobId: Int = 0
+    private var cashMode: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         processId = intent.getIntExtra("processId", 0)
         jobId = intent.getIntExtra("jobId", 0)
+        cashMode = intent.getBooleanExtra("cashMode", true)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process_setting)
 
@@ -74,7 +76,16 @@ class ProcessSettingActivity : BaseActivity() {
             }
         })
 
+        // Observing for reloading after login success
+        viewModel.navigateReload.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                viewModel.processId = this.processId
+                viewModel.loadProcessSetting(false)
+            }
+        })
+
         viewModel.processId = this.processId
+        viewModel.loadProcessSetting(cashMode)
 
         initUI()
     }
@@ -144,8 +155,13 @@ class ProcessSettingActivity : BaseActivity() {
                 )
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER.value)
             intent.putExtra("processId", processId)
+            intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
 
         imgAddRoleInterviewAdvancer.setOnClickListener {
@@ -159,8 +175,13 @@ class ProcessSettingActivity : BaseActivity() {
                 )
             intent.putExtra("reviewType", Enums.ReviewerType.INTERVIEWER_ADVANCER.value)
             intent.putExtra("processId", processId)
+            intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
 
         imgAddRoleOfferManager.setOnClickListener {
@@ -174,8 +195,13 @@ class ProcessSettingActivity : BaseActivity() {
                 )
             intent.putExtra("reviewType", Enums.ReviewerType.OFFER_MANAGER.value)
             intent.putExtra("processId", processId)
+            intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
     }
 

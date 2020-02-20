@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 
 class HCJobDetailTile {
 
@@ -21,12 +22,12 @@ class HCJobDetailTile {
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: ImageView, photoUrl: String?) {
-            if (photoUrl !== null) {
-                if (photoUrl.endsWith(".jpg", true) || photoUrl.endsWith(".png", true) ||
-                            photoUrl.endsWith(".gif", true)) {
+            if (photoUrl.safeValue() != "") {
+                if (photoUrl.safeValue().endsWith(".jpg", true) || photoUrl.safeValue().endsWith(".png", true) ||
+                            photoUrl.safeValue().endsWith(".gif", true)) {
                     Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)
                 } else {
-                    val newPhotoUrl = photoUrl.substring(0, photoUrl.length - 3) + "jpg"
+                    val newPhotoUrl = photoUrl.safeValue().substring(0, photoUrl.safeValue().length - 3) + "jpg"
                     Glide.with(HCGlobal.getInstance().currentActivity).load(newPhotoUrl).into(imageView)
                 }
             } else {

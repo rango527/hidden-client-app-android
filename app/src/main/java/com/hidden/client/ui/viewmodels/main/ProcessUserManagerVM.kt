@@ -69,7 +69,7 @@ class ProcessUserManagerVM(
         val userArrayList: ArrayList<ReviewerEntity> = arrayListOf()
         userArrayList.addAll(userManagerList)
 
-        userManagerListAdapter.updateReviewerList(userArrayList)
+        userManagerListAdapter.updateReviewerList(userArrayList, 0)
     }
 
     private fun onRetrieveUserManagerListError(e: Throwable) {

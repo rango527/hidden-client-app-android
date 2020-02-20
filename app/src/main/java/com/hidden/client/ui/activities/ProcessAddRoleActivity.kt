@@ -19,11 +19,12 @@ import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessAddUserRoleVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
-class ProcessAddRoleActivity : AppCompatActivity() {
+class ProcessAddRoleActivity : BaseActivity() {
 
     private lateinit var binding: AddProcessUserRoleBinding
     private lateinit var viewModel: ProcessAddUserRoleVM
@@ -37,6 +38,7 @@ class ProcessAddRoleActivity : AppCompatActivity() {
     private lateinit var btnSave: Button
     private lateinit var editSearch: EditText
 
+    private var jobId: Int = 0
     private var processId: Int = 0
     private var reviewType: Int = 0
 
@@ -62,13 +64,14 @@ class ProcessAddRoleActivity : AppCompatActivity() {
             }
         })
 
+        jobId = intent.getIntExtra("jobId", 0)
         processId = intent.getIntExtra("processId", 0)
         reviewType = intent.getIntExtra("reviewType", 0)
 
         // Observing for jumping ProcessSetting Activity after add new role
         viewModel.navigateToProcessSetting.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-                finish()
+                backToProcessSetting(false)
             }
         })
 
@@ -95,7 +98,7 @@ class ProcessAddRoleActivity : AppCompatActivity() {
         editSearch.doAfterTextChanged { text -> viewModel.search = text }
 
         imgClose = findViewById(R.id.image_close)
-        imgClose.setOnClickListener { finish() }
+        imgClose.setOnClickListener { backToProcessSetting(true) }
 
         txtAddTeamMember = findViewById(R.id.text_add_team_member)
         txtAddTeamMember.text = Html.fromHtml(getString(R.string.add_them_here))
@@ -149,5 +152,19 @@ class ProcessAddRoleActivity : AppCompatActivity() {
                 1, 1
             )
         }
+    }
+
+    override fun onBackPressed() {
+        backToProcessSetting(true)
+    }
+
+    private fun backToProcessSetting(cashMode: Boolean) {
+        val intent = Intent(this, ProcessSettingActivity::class.java)
+        intent.putExtra("processId", processId)
+        intent.putExtra("jobId", jobId)
+        intent.putExtra("cashMode", cashMode)
+        startActivity(intent)
+        overridePendingVTransitionEnter()
+        finish()
     }
 }

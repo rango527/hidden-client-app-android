@@ -153,7 +153,7 @@
     <string name="job_settings">Job Settings</string>c
     <string name="shortlist_review_type">Shortlist Review Type</string>
     <string name="shortlist_review_type_description">The shortlist review type is the workflow that you’re following for approving or rejecting new candidate submissions. There are 3 types to choose from: Unanimity, Majority or First Choice Rules. If you want to change your workflow or find out more, please get in touch with your Talent Partner</string>
-    <string name="shortlist_reviewers_description">These are the roleAvailableUser who receive all new candidate submissions and who are responsible for approving or rejecting them</string>
+    <string name="shortlist_reviewers_description">These are the users who receive all new candidate submissions and who are responsible for approving or rejecting them</string>
     <string name="interviewers_description">These are the users who can be added to interviews for processes associated with this job</string>
     <string name="interview_advancers_description">Once an interview is completed, these users are responsible for entering whether the candidate is progressing or whether they are rejected. If there are multiple Interview Advancers, only one roleAvailableUser has to make a decision to keep things moving</string>
     <string name="offer_manager_description">These users are the points of contact for gathering offer information. Users who are not Offer Managers will not see any of the offer details, nor will they be able to see any candidate’s salary on their profile, nor the salary on the job in question</string>
@@ -163,6 +163,8 @@
     <string name="no_user_manager_permission">Sorry, you don\'t have roleAvailableUser manager permissions so cannot edit roleAvailableUser responsibilities. Please get in touch with your colleagues below who do have the correct permission. They can make the changes for you or can give you the permissions you need:</string>
     <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
     <string name="job_title">%1$s in %2$s</string>
+    <string name="remove_role_note">Removing %1$s from the %2$s</string>
+    <string name="remove_from">Remove from:</string>
 
     <!-- Process Setting -->
     <string name="process_setting">Process Setting</string>

@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
@@ -13,6 +14,7 @@ import com.hidden.client.models.entity.ProcessSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ProcessSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
+import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,10 +33,14 @@ class ProcessSettingVM (
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
+    // To Reload
+    private val _navigateReload = MutableLiveData<Event<Boolean>>()
+    val navigateReload: LiveData<Event<Boolean>>
+        get() = _navigateReload
+
     var processId: Int = 0
         set(value) {
             field = value
-            loadProcessSetting(false)
         }
 
     var isUserManager: Boolean = false
@@ -151,10 +157,9 @@ class ProcessSettingVM (
     }
 
     fun removeUserRoleToProcessSetting(processId: Int, role: String, clientId: Int, reviewerEntityId: Int) {
-        HCGlobal.getInstance().log(role)
+
         subscription = processApi.removeUserRoleProcessSetting(AppPreferences.apiAccessToken, processId, role, clientId).concatMap {
                 addResult ->
-                    reviewerDao.deleteById(reviewerEntityId)
                     Observable.just(addResult)
         }
             .subscribeOn(Schedulers.io())
@@ -162,7 +167,7 @@ class ProcessSettingVM (
             .doOnSubscribe { onRetrieveProcessSettingStart() }
             .doOnTerminate { onRetrieveProcessSettingFinish() }
             .subscribe(
-                { result -> onRemoveRoleSuccess(reviewerEntityId) },
+                { result -> onRemoveRoleSuccess() },
                 { error -> onRetrieveProcessSettingError(error) }
             )
     }
@@ -179,9 +184,9 @@ class ProcessSettingVM (
 
         isUserManager = processSetting.isUserManager
 
-        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList())
-        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList())
-        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList())
+        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId)
+        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId)
+        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId)
 
         jobTitle.value = String.format(context.resources.getString(R.string.job_title), processSetting.jobTitle, processSetting.cityName)
         candidateName.value = processSetting.candidateFullName
@@ -206,8 +211,8 @@ class ProcessSettingVM (
         )
     }
 
-    private fun onRemoveRoleSuccess(reviewerEntityId: Int) {
-
+    private fun onRemoveRoleSuccess() {
+        _navigateReload.value = Event(true)
     }
 
     private fun onRetrieveProcessSettingError(e: Throwable) {

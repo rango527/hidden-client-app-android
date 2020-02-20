@@ -38,11 +38,13 @@ class JobSettingActivity : BaseActivity() {
     private lateinit var progressDlg: KProgressHUD
 
     private var jobId: Int = 0
+    private var cashMode: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         jobId = intent.getIntExtra("jobId", 0)
+        cashMode = intent.getBooleanExtra("cashMode", true)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_job_setting)
 
@@ -66,11 +68,12 @@ class JobSettingActivity : BaseActivity() {
         })
 
         viewModel.jobId = this.jobId
+        viewModel.loadJobSetting(cashMode)
 
         initUI()
     }
 
-    fun initUI() {
+    private fun initUI() {
         imgClose = findViewById(R.id.img_close)
 
         imgShortlistReviewerTypeDescription = findViewById(R.id.img_shortlist_review_text_tip)
@@ -136,6 +139,9 @@ class JobSettingActivity : BaseActivity() {
             intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
 
         imgAddRoleInterviewer.setOnClickListener {
@@ -151,6 +157,9 @@ class JobSettingActivity : BaseActivity() {
             intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
 
         imgAddRoleInterviewAdvancer.setOnClickListener {
@@ -166,6 +175,9 @@ class JobSettingActivity : BaseActivity() {
             intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
 
         imgAddRoleOfferManager.setOnClickListener {
@@ -181,6 +193,13 @@ class JobSettingActivity : BaseActivity() {
             intent.putExtra("jobId", jobId)
             startActivity(intent)
             overridePendingVTransitionEnter()
+            if (viewModel.isUserManager) {
+                finish()
+            }
         }
+    }
+
+    fun getViewModel(): JobSettingVM {
+        return viewModel
     }
 }

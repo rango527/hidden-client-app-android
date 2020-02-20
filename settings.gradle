@@ -1,4 +1,4 @@
-include ':app',
+include ':app', ':androidswipelayout',
         ':horizontalswipelayout',
         ':urbanairship-core',
         ':urbanairship-fcm',
