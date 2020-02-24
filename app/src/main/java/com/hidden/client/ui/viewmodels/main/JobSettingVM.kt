@@ -191,10 +191,10 @@ class JobSettingVM(
 
         isUserManager = jobSetting.isUserManager
 
-        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList(), jobId)
-        interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList(), jobId)
-        interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList(), jobId)
-        offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList(), jobId)
+        shortlistReviewerListAdapter.updateReviewerList(jobSetting.getShortlistReviewerList(), jobId, isUserManager)
+        interviewerListAdapter.updateReviewerList(jobSetting.getInterviewerList(), jobId, isUserManager)
+        interviewAdvancerListAdapter.updateReviewerList(jobSetting.getInterviewAdvancerList(), jobId, isUserManager)
+        offerManagerListAdapter.updateReviewerList(jobSetting.getOfferManagerList(), jobId, isUserManager)
 
         jobTitle.value = String.format(context.resources.getString(R.string.job_title), jobSetting.jobTitle, jobSetting.cityName)
         reviewText.value = jobSetting.reviewType

@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.hidden.androidswipelayout.SwipeLayout
 import com.hidden.client.databinding.ReviewerItemBinding
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.ui.viewmodels.main.ReviewerViewVM
@@ -19,6 +21,7 @@ import com.hidden.client.ui.activities.RemoveUserRoleActivity
 class ReviewerListAdapter: RecyclerView.Adapter<ReviewerListAdapter.ViewHolder>() {
 
     private var jobProcessId: Int = 0
+    private var isUserManager: Boolean = true
     private lateinit var reviewerList: ArrayList<ReviewerEntity>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,6 +32,17 @@ class ReviewerListAdapter: RecyclerView.Adapter<ReviewerListAdapter.ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(reviewerList[position])
+
+        val swipeLayout: SwipeLayout = holder.itemView.findViewById(R.id.swipe)
+        val normalLayout: ConstraintLayout = holder.itemView.findViewById(R.id.layout_normal)
+
+        if (isUserManager) {
+            swipeLayout.visibility = View.VISIBLE
+            normalLayout.visibility = View.GONE
+        } else {
+            swipeLayout.visibility = View.GONE
+            normalLayout.visibility = View.VISIBLE
+        }
 
         val removeBtn: Button = holder.itemView.findViewById(R.id.button_remove_reviewer)
 
@@ -61,9 +75,10 @@ class ReviewerListAdapter: RecyclerView.Adapter<ReviewerListAdapter.ViewHolder>(
         return if(::reviewerList.isInitialized) reviewerList.size else 0
     }
 
-    fun updateReviewerList(reviewerList: ArrayList<ReviewerEntity>, jobProcessId: Int){
+    fun updateReviewerList(reviewerList: ArrayList<ReviewerEntity>, jobProcessId: Int, isUserManager: Boolean){
         this.reviewerList = reviewerList
         this.jobProcessId = jobProcessId
+        this.isUserManager = isUserManager
         notifyDataSetChanged()
     }
 

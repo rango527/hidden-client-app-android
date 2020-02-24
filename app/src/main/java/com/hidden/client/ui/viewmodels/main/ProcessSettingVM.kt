@@ -184,9 +184,9 @@ class ProcessSettingVM (
 
         isUserManager = processSetting.isUserManager
 
-        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId)
-        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId)
-        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId)
+        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId, true)
+        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId, true)
+        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId, true)
 
         jobTitle.value = String.format(context.resources.getString(R.string.job_title), processSetting.jobTitle, processSetting.cityName)
         candidateName.value = processSetting.candidateFullName

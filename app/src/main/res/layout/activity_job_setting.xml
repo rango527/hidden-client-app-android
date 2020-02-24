@@ -11,336 +11,342 @@
             type="com.hidden.client.ui.viewmodels.main.JobSettingVM" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/viewpager"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="9dp"
-                android:paddingBottom="100dp"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp">
-
-                <ImageView
-                    android:id="@+id/img_close"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="6dp"
-                    android:src="@drawable/ic_close"/>
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/job_settings"
-                        android:textColor="@color/colorBlack_1"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:textSize="26sp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:mutableText="@{viewModel.jobTitle}"
-                        android:textColor="@color/colorBlack_1"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="17sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
+                    android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="35dp">
+                    android:paddingTop="9dp"
+                    android:paddingBottom="100dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp">
+
+                    <ImageView
+                        android:id="@+id/img_close"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/ic_close"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/job_settings"
+                            android:textColor="@color/colorBlack_1"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="5dp"
+                            android:textStyle="bold"
+                            android:textSize="26sp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:mutableText="@{viewModel.jobTitle}"
+                            android:textColor="@color/colorBlack_1"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginTop="35dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/shortlist_review_type"
+                                    android:textColor="@color/colorBlack_1"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"/>
+
+                                <ImageView
+                                    android:id="@+id/img_shortlist_review_text_tip"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/question"/>
+
+                            </LinearLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/shortlist_review_type"
+                                app:mutableText="@{viewModel.reviewText}"
                                 android:textColor="@color/colorBlack_1"
-                                android:textStyle="bold"
-                                android:textSize="20sp"/>
-
-                            <ImageView
-                                android:id="@+id/img_shortlist_review_text_tip"
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="5dp"
-                                android:src="@drawable/question"/>
+                                android:textSize="17sp"
+                                android:layout_marginTop="21dp"
+                                android:layout_marginBottom="5dp"/>
 
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:mutableText="@{viewModel.reviewText}"
-                            android:textColor="@color/colorBlack_1"
-                            android:textSize="17sp"
-                            android:layout_marginTop="21dp"
-                            android:layout_marginBottom="5dp"/>
-
-                    </LinearLayout>
-
-                    <!-- Shortlist Interviewer List Start -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="42dp">
-
+                        <!-- Shortlist Interviewer List Start -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="5dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_weight="1">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:mutableText="@{viewModel.shortlistReviewerText}"
-                                    android:textColor="@color/colorBlack_1"
-                                    android:textStyle="bold"
-                                    android:textSize="20dp"/>
-
-                                <ImageView
-                                    android:id="@+id/img_shortlist_reviewer_tip"
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="15dp"
-                                    android:src="@drawable/question" />
-                            </LinearLayout>
-
-                            <ImageView
-                                android:id="@+id/img_add_role_to_shortlist_reviewer"
-                                android:layout_width="29dp"
-                                android:layout_height="29dp"
-                                android:src="@drawable/add_interviewer"/>
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerview_shortlist_reviewer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            app:adapter="@{viewModel.getShortlistReviewerListAdapter}"
-                            android:nestedScrollingEnabled="false"/>
-
-                    </LinearLayout>
-                    <!-- Shortlist Interviewer List End -->
-
-                    <!-- Interviewers List Start -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="43dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="5dp">
+                            android:orientation="vertical"
+                            android:layout_marginTop="42dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_weight="1">
+                                android:layout_marginBottom="5dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    app:mutableText="@{viewModel.interviewerText}"
-                                    android:textColor="@color/colorBlack_1"
-                                    android:textStyle="bold"
-                                    android:textSize="20sp"/>
+                                    android:orientation="horizontal"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:mutableText="@{viewModel.shortlistReviewerText}"
+                                        android:textColor="@color/colorBlack_1"
+                                        android:textStyle="bold"
+                                        android:textSize="20dp"/>
+
+                                    <ImageView
+                                        android:id="@+id/img_shortlist_reviewer_tip"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginStart="15dp"
+                                        android:src="@drawable/question" />
+                                </LinearLayout>
 
                                 <ImageView
-                                    android:id="@+id/img_interviewer_tip"
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="15dp"
-                                    android:src="@drawable/question" />
+                                    android:id="@+id/img_add_role_to_shortlist_reviewer"
+                                    android:layout_width="29dp"
+                                    android:layout_height="29dp"
+                                    android:src="@drawable/add_interviewer"/>
 
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/img_add_role_to_interviewer"
-                                android:layout_width="29dp"
-                                android:layout_height="29dp"
-                                android:src="@drawable/add_interviewer"/>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerview_shortlist_reviewer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                app:adapter="@{viewModel.getShortlistReviewerListAdapter}"
+                                android:nestedScrollingEnabled="false"/>
 
                         </LinearLayout>
+                        <!-- Shortlist Interviewer List End -->
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerview_interviewer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:nestedScrollingEnabled="false"
-                            app:adapter="@{viewModel.getInterviewerListAdapter}"/>
-
-                    </LinearLayout>
-                    <!-- Interviewers End -->
-
-                    <!-- Interview Advancer List Start -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="43dp">
-
+                        <!-- Interviewers List Start -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="5dp">
+                            android:orientation="vertical"
+                            android:layout_marginTop="43dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_weight="1">
+                                android:layout_marginBottom="5dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:mutableText="@{viewModel.interviewAdvancerText}"
-                                    android:textColor="@color/colorBlack_1"
-                                    android:textStyle="bold"
-                                    android:textSize="20sp"/>
+                                    android:orientation="horizontal"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:mutableText="@{viewModel.interviewerText}"
+                                        android:textColor="@color/colorBlack_1"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"/>
+
+                                    <ImageView
+                                        android:id="@+id/img_interviewer_tip"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginStart="15dp"
+                                        android:src="@drawable/question" />
+
+                                </LinearLayout>
 
                                 <ImageView
-                                    android:id="@+id/img_interview_advancer_tip"
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="15dp"
-                                    android:src="@drawable/question" />
+                                    android:id="@+id/img_add_role_to_interviewer"
+                                    android:layout_width="29dp"
+                                    android:layout_height="29dp"
+                                    android:src="@drawable/add_interviewer"/>
+
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/img_add_role_to_interview_advancer"
-                                android:layout_width="29dp"
-                                android:layout_height="29dp"
-                                android:src="@drawable/add_interviewer"/>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerview_interviewer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:nestedScrollingEnabled="false"
+                                app:adapter="@{viewModel.getInterviewerListAdapter}"/>
 
                         </LinearLayout>
+                        <!-- Interviewers End -->
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerview_interview_advancer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:nestedScrollingEnabled="false"
-                            app:adapter="@{viewModel.getInterviewAdvancerListAdapter}"/>
-
-                    </LinearLayout>
-                    <!-- Interview Advancer End -->
-
-                    <!-- Offer Manager Start -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="43dp">
-
+                        <!-- Interview Advancer List Start -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="5dp">
+                            android:orientation="vertical"
+                            android:layout_marginTop="43dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_weight="1">
+                                android:layout_marginBottom="5dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:mutableText="@{viewModel.offerManagerText}"
-                                    android:textColor="@color/colorBlack_1"
-                                    android:textStyle="bold"
-                                    android:textSize="20sp"/>
+                                    android:orientation="horizontal"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:mutableText="@{viewModel.interviewAdvancerText}"
+                                        android:textColor="@color/colorBlack_1"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"/>
+
+                                    <ImageView
+                                        android:id="@+id/img_interview_advancer_tip"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginStart="15dp"
+                                        android:src="@drawable/question" />
+                                </LinearLayout>
 
                                 <ImageView
-                                    android:id="@+id/img_offer_manager_tip"
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="15dp"
-                                    android:src="@drawable/question" />
+                                    android:id="@+id/img_add_role_to_interview_advancer"
+                                    android:layout_width="29dp"
+                                    android:layout_height="29dp"
+                                    android:src="@drawable/add_interviewer"/>
+
                             </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/img_add_role_to_offer_manager"
-                                android:layout_width="29dp"
-                                android:layout_height="29dp"
-                                android:src="@drawable/add_interviewer"/>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerview_interview_advancer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:nestedScrollingEnabled="false"
+                                app:adapter="@{viewModel.getInterviewAdvancerListAdapter}"/>
 
                         </LinearLayout>
+                        <!-- Interview Advancer End -->
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerview_offer_manager"
+                        <!-- Offer Manager Start -->
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:nestedScrollingEnabled="false"
-                            app:adapter="@{viewModel.getOfferManagerListAdapter}"/>
+                            android:orientation="vertical"
+                            android:layout_marginTop="43dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:mutableText="@{viewModel.offerManagerText}"
+                                        android:textColor="@color/colorBlack_1"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"/>
+
+                                    <ImageView
+                                        android:id="@+id/img_offer_manager_tip"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginStart="15dp"
+                                        android:src="@drawable/question" />
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/img_add_role_to_offer_manager"
+                                    android:layout_width="29dp"
+                                    android:layout_height="29dp"
+                                    android:src="@drawable/add_interviewer"/>
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerview_offer_manager"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:nestedScrollingEnabled="false"
+                                app:adapter="@{viewModel.getOfferManagerListAdapter}"/>
+
+                        </LinearLayout>
+                        <!-- Interviewers End -->
 
                     </LinearLayout>
-                    <!-- Interviewers End -->
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

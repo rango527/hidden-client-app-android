@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessSettingBinding
 import com.hidden.client.helpers.AppPreferences
@@ -20,6 +21,7 @@ import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.ui.BaseActivity
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessSettingVM
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -49,6 +51,8 @@ class ProcessSettingActivity : BaseActivity() {
     private var jobId: Int = 0
     private var cashMode: Boolean = true
 
+    private lateinit var swipeContainer: SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,6 +77,7 @@ class ProcessSettingActivity : BaseActivity() {
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
+                swipeContainer.isRefreshing = false
             }
         })
 
@@ -88,6 +93,11 @@ class ProcessSettingActivity : BaseActivity() {
         viewModel.loadProcessSetting(cashMode)
 
         initUI()
+
+        swipeContainer = findViewById(R.id.swipe_container)
+        swipeContainer.setOnRefreshListener {
+            viewModel.loadProcessSetting(false)
+        }
     }
 
     private fun initUI() {

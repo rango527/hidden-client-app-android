@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.databinding.JobSettingBinding
 import com.hidden.client.helpers.Enums
@@ -40,6 +41,8 @@ class JobSettingActivity : BaseActivity() {
     private var jobId: Int = 0
     private var cashMode: Boolean = true
 
+    private lateinit var swipeContainer: SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,6 +67,7 @@ class JobSettingActivity : BaseActivity() {
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
+                swipeContainer.isRefreshing = false
             }
         })
 
@@ -71,6 +75,11 @@ class JobSettingActivity : BaseActivity() {
         viewModel.loadJobSetting(cashMode)
 
         initUI()
+
+        swipeContainer = findViewById(R.id.swipe_container)
+        swipeContainer.setOnRefreshListener {
+            viewModel.loadJobSetting(false)
+        }
     }
 
     private fun initUI() {
