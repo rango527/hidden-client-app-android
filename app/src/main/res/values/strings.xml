@@ -160,7 +160,7 @@
     <string name="add_new_users_to">Add new users to:</string>
     <string name="new_processes_only">New Processes Only</string>
     <string name="old_new_processes_only">Old + New Processes</string>
-    <string name="no_user_manager_permission">Sorry, you don\'t have roleAvailableUser manager permissions so cannot edit roleAvailableUser responsibilities. Please get in touch with your colleagues below who do have the correct permission. They can make the changes for you or can give you the permissions you need:</string>
+    <string name="no_user_manager_permission">Sorry, you don\'t have user manager permissions so cannot edit user responsibilities. Please get in touch with your colleagues below who do have the correct permissions. They can make the changes for you or can give you the permissions you need:</string>
     <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
     <string name="job_title">%1$s in %2$s</string>
     <string name="remove_role_note">Removing %1$s from the %2$s</string>

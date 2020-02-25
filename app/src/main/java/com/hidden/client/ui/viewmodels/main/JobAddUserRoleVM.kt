@@ -108,6 +108,20 @@ class JobAddUserRoleVM(
 
         for (reviewer in json) {
             userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
+//            userList.add(reviewer.toEntity(0, Enums.SettingType.JOB.value, 0, 0))
         }
 
         val tempRoleAvailableUserList: ArrayList<RoleAvailableUser> = arrayListOf()

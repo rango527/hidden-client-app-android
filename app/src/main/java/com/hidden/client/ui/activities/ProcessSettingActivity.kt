@@ -84,8 +84,13 @@ class ProcessSettingActivity : BaseActivity() {
         // Observing for reloading after login success
         viewModel.navigateReload.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-                viewModel.processId = this.processId
-                viewModel.loadProcessSetting(false)
+//                viewModel.processId = this.processId
+//                viewModel.loadProcessSetting(false)
+                finish()
+                overridePendingTransition( 0, 0);
+                intent.putExtra("cashMode", false)
+                startActivity(intent);
+                overridePendingTransition( 0, 0);
             }
         })
 

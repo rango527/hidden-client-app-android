@@ -158,6 +158,7 @@ class RemoveUserRoleActivity : BaseActivity() {
     }
 
     private fun backToJobSetting(cashMode: Boolean) {
+        finish()
         val intent = Intent(this, JobSettingActivity::class.java)
         intent.putExtra("jobId", jobId)
         intent.putExtra("cashMode", cashMode)
