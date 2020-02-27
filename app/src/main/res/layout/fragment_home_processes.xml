@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="ProcessListBinding">
+
         <variable
             name="viewModel"
             type="com.hidden.client.ui.viewmodels.main.ProcessListVM" />
@@ -13,34 +13,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorGray_2"
-        android:paddingTop="@dimen/menu_padding_vertical_default"
         android:paddingLeft="@dimen/menu_padding_vertical_default"
+        android:paddingTop="@dimen/menu_padding_vertical_default"
         android:paddingRight="@dimen/menu_padding_vertical_default">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scrollbars="none">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/menu_padding_vertical_default"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/menu_padding_vertical_default">
 
                 <LinearLayout
                     android:id="@+id/layout_filter_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/layout_round_black"
                     android:gravity="center_vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/menu_padding_vertical_default"
+                    android:orientation="horizontal"
                     android:paddingLeft="@dimen/menu_padding_vertical_default"
                     android:paddingTop="@dimen/list_row_margin_default"
+                    android:paddingRight="@dimen/menu_padding_vertical_default"
                     android:paddingBottom="@dimen/list_row_margin_default">
 
                     <ImageView
@@ -54,10 +54,10 @@
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="@dimen/list_row_margin_default"
-                        android:textColor="@color/colorWhite_1"
-                        android:text="@string/filter_sort" />
+                        android:layout_weight="1"
+                        android:text="@string/filter_sort"
+                        android:textColor="@color/colorWhite_1" />
 
                 </LinearLayout>
 
@@ -65,9 +65,9 @@
                     android:id="@+id/recyclerview_processes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:background="@color/colorGray_2"
-                    app:adapter="@{viewModel.getProcessListAdapter()}"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"/>
+                    app:adapter="@{viewModel.getProcessListAdapter()}" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
