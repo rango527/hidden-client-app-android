@@ -11,6 +11,7 @@ object AppPreferences {
 
     // list of app specific preferences
     private val MY_ID = Pair("my_id", 0)
+    private val IS_USER_MANAGER = Pair("is_user_manager", false)
     private val MY_FULL_NAME = Pair("my_full_name", "")
     private val API_ACCESS_TOKEN = Pair("api_access_token", "")
 
@@ -51,6 +52,15 @@ object AppPreferences {
         // custom setter to save a preference back to preferences file
         set(value) = preferences.edit {
             it.putInt(MY_ID.first, value)
+        }
+
+    var isUserManager: Boolean
+        // custom getter to get a preference of a desired type, with a predefined default value
+        get() = preferences.getBoolean(IS_USER_MANAGER.first, IS_USER_MANAGER.second)
+
+        // custom setter to save a preference back to preferences file
+        set(value) = preferences.edit {
+            it.putBoolean(IS_USER_MANAGER.first, value)
         }
 
     var myFullName: String

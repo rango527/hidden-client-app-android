@@ -2,8 +2,10 @@ package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
 import android.view.View
+import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.Utility
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ShortlistCandidateEntity
 import com.hidden.client.ui.adapters.*
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -18,12 +20,14 @@ class ShortlistViewVM(private val shortlistCandidate: ShortlistCandidateEntity) 
         shortlistCandidate.jobTitle_2,
         shortlistCandidate.jobTitle_3
     )
+
     fun getJobTitleTextColor(context: Context): Int {
-        return Utility.getResourceByName(
-            context,
-            Enums.Resource.COLOR.value,
-            shortlistCandidate.avatarColor
-        )
+        return if (shortlistCandidate.avatarColor.safeValue() != "")
+            Utility.getResourceByName(
+                context,
+                Enums.Resource.COLOR.value,
+                shortlistCandidate.avatarColor
+            ) else R.color.blue
     }
 
     /**

@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.helpers.*
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -92,7 +93,7 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
             txtClientName.text = resources.getString(R.string.hello_user, AppPreferences.myFullName)
         })
 
-        viewModel.candidateList.observe(this, Observer {candidateVMList ->
+        viewModel.candidateList.observe(this, Observer { candidateVMList ->
 
             this.candidateVMList = candidateVMList
             HCGlobal.getInstance().shortlistCandidateVMList = candidateVMList
@@ -178,26 +179,34 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
 
         if (candidateVMList.size > HCGlobal.getInstance().currentIndex) {
             indicator.setCurrentItem(HCGlobal.getInstance().currentIndex)
-            layoutBackground.setBackgroundResource(
-                Utility.getResourceByName(
-                    context!!,
-                    Enums.Resource.DRAWABLE.value,
-                    candidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
+            if (candidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor.safeValue() != "")
+                layoutBackground.setBackgroundResource(
+                    Utility.getResourceByName(
+                        context!!,
+                        Enums.Resource.DRAWABLE.value,
+                        candidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
+                    )
                 )
-            )
+            else {
+                layoutBackground.setBackgroundResource(R.drawable.blue)
+            }
         }
 
         // Pager listener over indicator
         indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageSelected(position: Int) {
-                layoutBackground.setBackgroundResource(
-                    Utility.getResourceByName(
-                        context!!,
-                        Enums.Resource.DRAWABLE.value,
-                        candidateVMList[position].getShortlistCandidate().avatarColor
+                if (candidateVMList[position].getShortlistCandidate().avatarColor.safeValue() != "") {
+                    layoutBackground.setBackgroundResource(
+                        Utility.getResourceByName(
+                            context!!,
+                            Enums.Resource.DRAWABLE.value,
+                            candidateVMList[position].getShortlistCandidate().avatarColor
+                        )
                     )
-                )
+                } else {
+                    layoutBackground.setBackgroundResource(R.drawable.blue)
+                }
             }
 
             override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {

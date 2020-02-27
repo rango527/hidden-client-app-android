@@ -20,6 +20,9 @@ data class ProcessStageJson(
     @Json(name = "process_stage__created_at")
     val stageCreatedAt: String?,
 
+    @Json(name = "client__tile")
+    val clientTile: ProcessStageClientTile?,
+
     @Json(name = "interview__agreed_date")
     val interviewAgreeDate: String?,
 
@@ -30,7 +33,10 @@ data class ProcessStageJson(
     val candidateFeedbackSubmitted: Boolean?,
 
     @Json(name = "process_stage__interview_date_action_required")
-    val actionRequired: ProcessStageActionRequiredJson?,
+    val interviewDateActionRequired: ProcessStageActionRequiredJson?,
+
+    @Json(name = "process_stage__feedback_action_required")
+    val feedbackActionRequired: ProcessStageActionRequiredJson?,
 
     @Json(name = "process__next_stages")
     val nextStages: List<String>?
@@ -42,12 +48,20 @@ data class ProcessStageJson(
             statusName.safeValue(),
             stageStatus.safeValue(),
             stageCreatedAt.safeValue(),
+            if (clientTile != null) clientTile.backgroundColor.safeValue() else "",
+            if (clientTile != null) clientTile.title.safeValue() else "",
+            if (clientTile != null) clientTile.icon.safeValue() else "",
+            if (clientTile != null) clientTile.text.safeValue() else "",
+            if (clientTile != null) clientTile.button.safeValue() else "",
             interviewAgreeDate.safeValue(),
             clientFeedbackSubmitted.safeValue(),
             candidateFeedbackSubmitted.safeValue(),
-            if (actionRequired != null) actionRequired.talentPartner.safeValue() else false,
-            if (actionRequired != null) actionRequired.client.safeValue() else false,
-            if (actionRequired != null) actionRequired.candidate.safeValue() else false,
+            if (interviewDateActionRequired != null) interviewDateActionRequired.talentPartner.safeValue() else false,
+            if (interviewDateActionRequired != null) interviewDateActionRequired.client.safeValue() else false,
+            if (interviewDateActionRequired != null) interviewDateActionRequired.candidate.safeValue() else false,
+            if (feedbackActionRequired != null) feedbackActionRequired.talentPartner.safeValue() else false,
+            if (feedbackActionRequired != null) feedbackActionRequired.client.safeValue() else false,
+            if (feedbackActionRequired != null) feedbackActionRequired.candidate.safeValue() else false,
             "",
             pProcessId)
 

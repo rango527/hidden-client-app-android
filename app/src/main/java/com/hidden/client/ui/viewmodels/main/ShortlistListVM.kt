@@ -129,11 +129,14 @@ class ShortlistListVM(
             skillDao.insertAll(*skillList.toTypedArray())
 
             // Update Feedback Table
-            val feedback = candidateJson.feedback!!.toEntity(candidateJson.id.safeValue())
-            feedbackDao.insertAll(feedback)
+            val feedbackList: List<FeedbackEntity> = candidateJson.toFeedbackEntityList(candidateJson.id.safeValue())
+            feedbackDao.insertAll(*feedbackList.toTypedArray())
 
             // Update FeedbackQuestion Table
-            feedbackQuestionDao.insertAll(*candidateJson.feedback.toQuestionList(feedback.id).toTypedArray())
+            for (feedback in candidateJson.feedbackList!!) {
+                feedbackQuestionDao.insertAll(*feedback.toQuestionList(feedback.id.safeValue()).toTypedArray())
+            }
+
         }
 
         candidateList.forEachIndexed { index, element ->

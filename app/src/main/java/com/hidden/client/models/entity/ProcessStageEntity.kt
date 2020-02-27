@@ -15,17 +15,33 @@ data class ProcessStageEntity (
 
     val stageCreatedAt: String,
 
+    val clientTileBackgroundColor: String,
+
+    val clientTileTitle: String,
+
+    val clientTileIcon: String,
+
+    val clientTileText: String,
+
+    val clientTileButton: String,
+
     val interviewAgreeDate: String,
 
     val clientFeedbackSubmitted: Boolean,
 
     val candidateFeedbackSubmitted: Boolean,
 
-    val talentPartnerRequired: Boolean,
+    val interviewDateTalentPartnerRequired: Boolean,
 
-    val candidateRequired: Boolean,
+    val interviewDateCandidateRequired: Boolean,
 
-    val clientRequired: Boolean,
+    val interviewDateClientRequired: Boolean,
+
+    val feedbackTalentPartnerRequired: Boolean,
+
+    val FeedbackDateCandidateRequired: Boolean,
+
+    val feedbackDateClientRequired: Boolean,
 
     var nextStages: String,
 

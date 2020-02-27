@@ -93,7 +93,7 @@ data class ShortlistCandidateJson(
     val jobClientIsMessenger: Boolean?,
 
     @Json(name = "feedback")
-    val feedback: FeedbackJson?
+    val feedbackList: List<FeedbackJson>?
 ) {
     fun toEntity(pClientId: Int): ShortlistCandidateEntity {
         return ShortlistCandidateEntity(
@@ -165,5 +165,15 @@ data class ShortlistCandidateJson(
         }
 
         return skillEntityList
+    }
+
+    fun toFeedbackEntityList(pCandidateId: Int): List<FeedbackEntity> {
+        val feedbackEntityList: ArrayList<FeedbackEntity> = arrayListOf()
+
+        for (feedback in feedbackList!!) {
+            feedbackEntityList.add(feedback.toEntity(pCandidateId))
+        }
+
+        return feedbackEntityList
     }
 }

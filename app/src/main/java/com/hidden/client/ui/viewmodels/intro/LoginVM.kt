@@ -6,6 +6,7 @@ import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.User
 import com.hidden.client.helpers.extension.isEmailValid
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.json.LoginJson
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -86,13 +87,13 @@ class LoginVM: RootVM() {
     }
 
     private fun onAuthLoginSuccess(loginResult: LoginJson){
-        if (loginResult.status == User.approved) {
-            AppPreferences.myId = loginResult.clientId!!
-            AppPreferences.myFullName = loginResult.fullName!!
-            AppPreferences.apiAccessToken = """Bearer ${loginResult.token}"""
 
-            _navigateToHome.value = Event(true)
-        }
+        AppPreferences.myId = loginResult.clientId.safeValue()
+        AppPreferences.isUserManager = loginResult.isUserManager.safeValue()
+        AppPreferences.myFullName = loginResult.fullName.safeValue()
+        AppPreferences.apiAccessToken = """Bearer ${loginResult.token}"""
+
+        _navigateToHome.value = Event(true)
 
     }
 
