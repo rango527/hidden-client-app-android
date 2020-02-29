@@ -52,6 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_round_red"
+                android:paddingTop="15dp"
                 android:paddingBottom="29dp"
                 android:layout_weight="1">
 
@@ -60,7 +61,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/first_stage_interview"
-                    android:layout_marginTop="15dp"
                     android:textSize="22sp"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack_1"
@@ -73,7 +73,7 @@
                     android:layout_width="92dp"
                     android:layout_height="92dp"
                     android:padding="15dp"
-                    android:background="@drawable/circle_white"
+                    android:background="@drawable/button_round_white_t"
                     android:layout_marginTop="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -93,7 +93,7 @@
                     android:text="@string/give_availability"
                     android:textColor="@color/colorWhite_1"
                     android:textAllCaps="true"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:background="@drawable/button_round_black_12"
                     android:paddingLeft="28dp"
                     android:paddingRight="28dp"
@@ -112,14 +112,15 @@
                     android:gravity="center_horizontal"
                     android:text="COMPLETE! You approved\nAndrea on 03 June 2018"
                     android:textColor="@color/colorWhite_1"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:lineHeight="27dp"
                     android:layout_marginTop="28dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_image"/>
+                    app:layout_constraintTop_toBottomOf="@id/layout_image"
+                    android:visibility="gone"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
