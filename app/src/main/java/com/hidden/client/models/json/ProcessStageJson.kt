@@ -52,6 +52,8 @@ data class ProcessStageJson(
             if (clientTile != null) clientTile.backgroundColor.safeValue() else "",
             if (clientTile != null) clientTile.title.safeValue() else "",
             if (clientTile != null) clientTile.icon.safeValue() else "",
+            if (clientTile != null) clientTile.iconColor.safeValue() else "",
+            if (clientTile != null) clientTile.iconStyle.safeValue() else "",
             if (clientTile != null) clientTile.text.safeValue() else "",
             if (clientTile != null) clientTile.button.safeValue() else "",
             interviewAgreeDate.safeValue(),

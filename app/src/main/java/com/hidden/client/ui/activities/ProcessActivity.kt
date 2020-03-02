@@ -16,8 +16,10 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.CandidateListBinding
 import com.hidden.client.databinding.ProcessDetailBinding
+import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.Utility
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment

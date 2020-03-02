@@ -54,7 +54,8 @@ object Enums {
 
     enum class Resource(val value: String) {
         DRAWABLE("drawable"),
-        COLOR("color")
+        COLOR("color"),
+        STRING("string")
     }
 
     enum class ProjectAssetsType(val value: String) {
@@ -100,5 +101,10 @@ object Enums {
         COMPLETE("COMPLETE"),
         CURRENT("CURRENT"),
         FUTURE("FUTURE")
+    }
+
+    enum class FontType(val value: String) {
+        REGULAR("regular"),
+        SOLID("solid")
     }
 }

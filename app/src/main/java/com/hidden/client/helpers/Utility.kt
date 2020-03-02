@@ -62,17 +62,24 @@ object Utility {
             else -> R.drawable.progress_item_incomplete_12
         }
 
-    fun getStageClientTileIcon(icon: String): Int =
+    fun getStageClientTileIcon(icon: String): String =
         when (icon) {
-            "turtle" -> R.drawable.tile_turtle
-            "horse-saddle" -> R.drawable.tile_horse
-            "loveseat" ->R.drawable.tile_chair
-            "check" -> R.drawable.tile_tick
-            "forward" -> R.drawable.tile_right_arrow
-
-            "user-plus" -> R.drawable.tick_smile
-            "tachometer-slowest" -> R.drawable.tick_smile
-            "traffic-light-stop" -> R.drawable.tick_smile
-            else -> R.drawable.tick_smile
+            "turtle" -> "\uf726"
+            "horse-saddle" -> "\uf8c3"
+            "loveseat" -> "\uf4cc"
+            "check" -> "\uf00c"
+            "forward" -> "\uf04e"
+            "user-plus" -> "\uf234"
+            "tachometer-slowest" -> "\uf62d"
+            "traffic-light-stop" -> "\uf63a"
+            else -> "\uf118"
         }
+
+    fun getStageClientTileIconColor(color: String): String =  when (color) {
+        Enums.ColorType.BLUE.value -> "#00003E"
+        Enums.ColorType.GREEN.value -> "#66CC66"
+        Enums.ColorType.RED.value -> "#E74A5F"
+        Enums.ColorType.GREY.value -> "#C8C8C8"
+        else -> "#C8C8C8"
+    }
 }
