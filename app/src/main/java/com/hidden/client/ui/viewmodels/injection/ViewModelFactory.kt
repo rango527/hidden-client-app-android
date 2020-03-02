@@ -162,7 +162,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
         }
 
         /* ------------------------------------------------------------
-          ProcessSettingVM
+          Process VM
        -------------------------------------------------------------- */
         if (modelClass.isAssignableFrom(ProcessListVM::class.java)) {
             val db = Room.databaseBuilder(
@@ -177,8 +177,22 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        if (modelClass.isAssignableFrom(ProcessDetailVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessDetailVM(
+                context,
+                db.processDao(),
+                db.processStageDao()
+            ) as T
+        }
+
         /* ------------------------------------------------------------
-          JobSettingVM
+          ProcessSettingVM
        -------------------------------------------------------------- */
         if (modelClass.isAssignableFrom(ProcessSettingVM::class.java)) {
             val db = Room.databaseBuilder(

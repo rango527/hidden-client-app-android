@@ -46,6 +46,7 @@ interface ViewModelInjector {
     // Process
     fun inject(processListVM: ProcessListVM)
     fun inject(processViewVM: ProcessViewVM)
+    fun inject(processDetailVM: ProcessDetailVM)
 
     // Process Setting
     fun inject(processSettingVM: ProcessSettingVM)

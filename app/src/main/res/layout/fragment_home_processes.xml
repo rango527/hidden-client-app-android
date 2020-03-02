@@ -9,67 +9,72 @@
             type="com.hidden.client.ui.viewmodels.main.ProcessListVM" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorGray_2"
-        android:paddingLeft="@dimen/menu_padding_vertical_default"
-        android:paddingTop="@dimen/menu_padding_vertical_default"
-        android:paddingRight="@dimen/menu_padding_vertical_default">
+        android:layout_height="match_parent">-->
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/colorGray_2"
+            android:paddingLeft="@dimen/menu_padding_vertical_default"
+            android:paddingTop="@dimen/menu_padding_vertical_default"
+            android:paddingRight="@dimen/menu_padding_vertical_default">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/menu_padding_vertical_default">
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/layout_filter_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/layout_round_black"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/menu_padding_vertical_default"
-                    android:paddingTop="@dimen/list_row_margin_default"
-                    android:paddingRight="@dimen/menu_padding_vertical_default"
-                    android:paddingBottom="@dimen/list_row_margin_default">
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/filter" />
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/list_row_margin_default"
-                        android:layout_weight="1"
-                        android:text="@string/filter_sort"
-                        android:textColor="@color/colorWhite_1" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_processes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:background="@color/colorGray_2"
-                    app:adapter="@{viewModel.getProcessListAdapter()}" />
-            </LinearLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/menu_padding_vertical_default">
 
+                    <LinearLayout
+                        android:id="@+id/layout_filter_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/layout_round_black"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/menu_padding_vertical_default"
+                        android:paddingTop="@dimen/list_row_margin_default"
+                        android:paddingRight="@dimen/menu_padding_vertical_default"
+                        android:paddingBottom="@dimen/list_row_margin_default">
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/filter" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/list_row_margin_default"
+                            android:layout_weight="1"
+                            android:text="@string/filter_sort"
+                            android:textColor="@color/colorWhite_1" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_processes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:background="@color/colorGray_2"
+                        app:adapter="@{viewModel.getProcessListAdapter()}" />
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </layout>

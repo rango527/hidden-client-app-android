@@ -16,24 +16,15 @@
         android:paddingBottom="@dimen/padding_default">
 
         <LinearLayout
+            android:id="@+id/layout_stage_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginRight="@dimen/margin_default">
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp">
 
-            <com.hidden.client.ui.custom.ProcessStageBarView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:process_stage="3"
-                app:process_status="2"/>
-
-            <com.hidden.client.ui.custom.ProcessStageTriangleView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:process_stage="3"
-                app:process_status="2"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,16 +33,20 @@
             android:layout_marginTop="-2dp">
 
             <ImageView
+                android:id="@+id/image_prev"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
                 android:layout_width="13dp"
-                android:layout_height="22dp"
+                android:layout_height="62dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:src="@drawable/arrow_left" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_round_red"
+                android:background="@drawable/button_round_red_12"
                 android:paddingTop="15dp"
                 android:paddingBottom="29dp"
                 android:layout_weight="1">
@@ -80,6 +75,7 @@
                     app:layout_constraintTop_toBottomOf="@id/text_stage">
 
                     <ImageView
+                        android:id="@+id/image_stage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/waiting_blue"/>
@@ -115,6 +111,8 @@
                     android:textSize="20sp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     android:lineHeight="27dp"
                     android:layout_marginTop="28dp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -125,10 +123,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
+                android:id="@+id/image_next"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
                 android:layout_width="13dp"
-                android:layout_height="22dp"
+                android:layout_height="62dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:src="@drawable/arrow_right" />
 
         </LinearLayout>

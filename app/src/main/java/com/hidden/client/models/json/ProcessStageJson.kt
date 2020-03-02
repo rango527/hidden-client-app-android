@@ -44,6 +44,7 @@ data class ProcessStageJson(
 
     fun toEntity(pProcessId: Int): ProcessStageEntity {
         val processStage = ProcessStageEntity(
+            0,
             statusId.safeValue(),
             statusName.safeValue(),
             stageStatus.safeValue(),

@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "ProcessStage")
 data class ProcessStageEntity (
 
-    @field:PrimaryKey
+    @field:PrimaryKey(autoGenerate = true)
+    val id: Int,
+
     val statusId: Int,
 
     val statusName: String,

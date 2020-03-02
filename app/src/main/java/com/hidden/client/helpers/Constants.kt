@@ -88,4 +88,17 @@ object Enums {
         JOB(1),
         PROCESS(2)
     }
+
+    enum class ColorType(val value: String) {
+        GREEN("GREEN"),
+        BLUE("BLUE"),
+        GREY("GREY"),
+        RED("RED")
+    }
+
+    enum class StageType(val value: String) {
+        COMPLETE("COMPLETE"),
+        CURRENT("CURRENT"),
+        FUTURE("FUTURE")
+    }
 }

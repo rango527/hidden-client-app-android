@@ -8,24 +8,38 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.hidden.client.R
+import com.hidden.client.databinding.CandidateListBinding
+import com.hidden.client.databinding.ProcessDetailBinding
+import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
+import com.hidden.client.ui.viewmodels.main.CandidateListVM
+import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.list_row_circle_image.*
 import java.lang.Math.round
 
 class ProcessActivity : BaseActivity(), View.OnClickListener {
 
+    private lateinit var binding: ProcessDetailBinding
+    private lateinit var viewModel: ProcessDetailVM
+
+    private lateinit var progressDlg: KProgressHUD
+
     private lateinit var textBtnProcess: TextView
     private lateinit var textBtnMessage: TextView
 
-    private lateinit var imgPhoto: ImageView
     private lateinit var layoutTitle: LinearLayout
-    private lateinit var textName: TextView
-    private lateinit var textFor: TextView
     private lateinit var imgProcessSetting: ImageView
 
     private lateinit var buttonBack: ImageButton
@@ -35,35 +49,58 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private var processId: Int = 0
     private var jobId: Int = 0
 
+    private lateinit var imgPhoto: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_process)
+
+        processId = intent.getIntExtra("processId", 0)
+        jobId = intent.getIntExtra("jobId", 0)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
+
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(ProcessDetailVM::class.java)
+
+        binding.viewModel = viewModel
+
+        progressDlg = HCDialog.KProgressDialog(this)
+        viewModel.loadingVisibility.observe(this, Observer { show ->
+            if (show) {
+                progressDlg.show()
+            }
+            else {
+                progressDlg.dismiss()
+            }
+        })
+
+        imgPhoto = findViewById(R.id.img_photo)
+
+        viewModel.process.observe(this, Observer { process ->
+            if (savedInstanceState == null) {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment(process)).commit()
+            }
+            Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
+        })
+
+        viewModel.processId = processId
+        viewModel.loadProcessDetail();
 
         fragmentProcess = findViewById(R.id.fragment_process)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment()).commit()
-        }
 
         // Init View
-        imgPhoto = findViewById(R.id.img_photo)
-        textName = findViewById(R.id.text_name)
-        textFor = findViewById(R.id.text_for)
         layoutTitle = findViewById(R.id.layout_title)
 
         textBtnProcess = findViewById(R.id.text_process)
-        textBtnProcess.setOnClickListener(this)
+//        textBtnProcess.setOnClickListener(this)
 
         textBtnMessage = findViewById(R.id.text_message)
-        textBtnMessage.setOnClickListener(this)
+//        textBtnMessage.setOnClickListener(this)
 
         buttonBack = findViewById(R.id.button_back)
         buttonBack.setOnClickListener(this)
 
         imgProcessSetting = findViewById(R.id.img_process_setting)
         imgProcessSetting.setOnClickListener(this)
-
-        processId = intent.getIntExtra("processId", 0)
-        jobId = intent.getIntExtra("jobId", 0)
     }
 
     override fun onClick(v: View?) {
@@ -102,7 +139,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment(viewModel.process.value!!)).commit()
             }
 
             R.id.text_message -> {

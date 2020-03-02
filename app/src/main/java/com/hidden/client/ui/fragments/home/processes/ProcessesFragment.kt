@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessListBinding
 import com.hidden.client.helpers.HCDialog
@@ -25,6 +26,7 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
     private lateinit var viewModel: ProcessListVM
 
     private lateinit var layoutBtnFilterSearch: LinearLayout
+//    private lateinit var swipeContainer: SwipeRefreshLayout
 
     private lateinit var progressDlg: KProgressHUD
 
@@ -43,6 +45,7 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
             }
             else {
                 progressDlg.dismiss()
+//                swipeContainer.isRefreshing = false
             }
         })
 
@@ -57,6 +60,11 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
 
         layoutBtnFilterSearch = view.findViewById(R.id.layout_filter_search)
         layoutBtnFilterSearch.setOnClickListener(this)
+
+//        swipeContainer = view.findViewById(R.id.swipeContainer)
+//        swipeContainer.setOnRefreshListener {
+//            viewModel.loadProcess(false)
+//        }
 
         return view
     }

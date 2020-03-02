@@ -65,6 +65,7 @@ abstract class RootVM: ViewModel() {
             // Process
             is ProcessListVM -> injector.inject(this)
             is ProcessViewVM -> injector.inject(this)
+            is ProcessDetailVM -> injector.inject(this)
 
             // ProcessSetting
             is ProcessSettingVM -> injector.inject(this)

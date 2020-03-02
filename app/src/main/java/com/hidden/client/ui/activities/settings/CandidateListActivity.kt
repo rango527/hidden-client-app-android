@@ -24,6 +24,7 @@ class CandidateListActivity : BaseActivity() {
 
     private lateinit var binding: CandidateListBinding
     private lateinit var viewModel: CandidateListVM
+
     private var errorSnackbar: Snackbar? = null
 
     private lateinit var progressDlg: KProgressHUD

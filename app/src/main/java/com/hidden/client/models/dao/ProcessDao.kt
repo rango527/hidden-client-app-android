@@ -12,6 +12,9 @@ interface ProcessDao {
     @Query("SELECT * FROM Process WHERE myId = :myId")
     fun getProcess(myId: Int): List<ProcessEntity>
 
+    @Query("SELECT * FROM Process WHERE id = :processId")
+    fun getProcessById(processId: Int): List<ProcessEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg process: ProcessEntity)
 
