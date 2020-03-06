@@ -87,7 +87,10 @@ object Enums {
 
     enum class SettingType(val value: Int) {
         JOB(1),
-        PROCESS(2)
+        PROCESS(2),
+        ADD_INTERVIEWER(3),
+        JOIN_INTERVIEWER(4)
+
     }
 
     enum class ColorType(val value: String) {
@@ -106,5 +109,10 @@ object Enums {
     enum class FontType(val value: String) {
         REGULAR("regular"),
         SOLID("solid")
+    }
+
+    enum class TileActionButtonType(val value: String) {
+        ADD_INTERVIEWERS("ADD_INTERVIEWERS"),
+        JOIN_INTERVIEW("JOIN_INTERVIEW")
     }
 }

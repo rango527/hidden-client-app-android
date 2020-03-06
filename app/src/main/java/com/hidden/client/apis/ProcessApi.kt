@@ -14,6 +14,9 @@ interface ProcessApi {
         @Header("Authorization") authToken: String
     ): Observable<List<ProcessJson>>
 
+    /**
+     * Process Setting
+     */
     @GET("client/processes/{process_id}/settings")
     fun getProcessSettings(
         @Header("Authorization") authToken: String,
@@ -43,5 +46,24 @@ interface ProcessApi {
         @Path("process_id") processId: Int,
         @Path("role") role: String,
         @Field("client_id") clientId: Int
+    ): Observable<SimpleResponseJson>
+
+    /**
+     * Process Detail
+     */
+    @GET("client/processes/{process_id}/{interview_id}/possible-interviewers")
+    fun getAvailableInterviewersForProcess(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("interview_id") interviewId: Int
+    ): Observable<List<ReviewerJson>>
+
+    @FormUrlEncoded
+    @POST("client/processes/{process_id}/interviews/{interview_id}/interviewers/add")
+    fun addInterviewersToInterview(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("interview_id") interviewId: Int,
+        @Field("client_ids") clientIds: List<Int>
     ): Observable<SimpleResponseJson>
 }

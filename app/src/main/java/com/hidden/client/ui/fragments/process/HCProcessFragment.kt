@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
@@ -26,7 +27,6 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
 
     private lateinit var layoutTile: ConstraintLayout
     private lateinit var txtStage: TextView
-    //    private lateinit var imgStage: ImageView
     private lateinit var txtStageIcon: TextView
     private lateinit var txtAvailability: TextView
     private lateinit var txtDescription: TextView
@@ -49,7 +49,6 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
 
         layoutTile = view.findViewById(R.id.layout_title)
         txtStage = view.findViewById(R.id.text_stage)
-//        imgStage = view.findViewById(R.id.image_stage)
         txtStageIcon = view.findViewById(R.id.text_stage_icon)
         txtAvailability = view.findViewById(R.id.text_availability)
         txtDescription = view.findViewById(R.id.text_description)
@@ -82,7 +81,7 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
 
         imgPrev.setOnClickListener {
             if (currentStatus > 0) {
-                currentStatus--;
+                currentStatus--
                 processTriangleBar.setStatus(currentStatus)
                 setTileView(currentStatus)
             }
@@ -90,7 +89,7 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
 
         imgNext.setOnClickListener {
             if (currentStatus < (process.getStageList().size - 1)) {
-                currentStatus++;
+                currentStatus++
                 processTriangleBar.setStatus(currentStatus)
                 setTileView(currentStatus)
             }
@@ -104,15 +103,22 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
         if (stage.clientTileText.safeValue() == "") {
             txtDescription.visibility = View.GONE
             txtAvailability.visibility = View.VISIBLE
+
+            txtAvailability.text = stage.clientTileButton
+
+            txtAvailability.setOnClickListener {
+                when (stage.clientTileButton) {
+                    Enums.TileActionButtonType.ADD_INTERVIEWERS.value -> {
+
+                    }
+                }
+            }
         } else {
             txtDescription.visibility = View.VISIBLE
             txtAvailability.visibility = View.GONE
 
             txtDescription.text = stage.clientTileText
         }
-
-//        imgStage.setImageResource(Utility.getStageClientTileIcon(stage.clientTileIcon))
-//        val fontType = if (stage.clientTileIcon Typeface.createFromAsset(context!!.assets, "")
 
         val fontType =
             if (stage.clientTileIconStyle == Enums.FontType.REGULAR.value) Typeface.createFromAsset(
@@ -123,7 +129,6 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
 
         txtStageIcon.setTypeface(fontType)
         txtStageIcon.text = Utility.getStageClientTileIcon(stage.clientTileIcon)
-//        txtStageIcon.setTextColor(Utility.getStageClientTileIconColor(stage.clientTileIconColor))
         txtStageIcon.setTextColor(Color.parseColor(Utility.getStageClientTileIconColor(stage.clientTileIconColor)))
 
         layoutTile.setBackgroundResource(Utility.getTileBackgroundResourceByStatus(stage.clientTileBackgroundColor))
