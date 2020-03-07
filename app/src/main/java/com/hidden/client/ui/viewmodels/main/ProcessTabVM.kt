@@ -3,6 +3,7 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
@@ -27,10 +28,10 @@ class ProcessTabVM(
     @Inject
     lateinit var processApi: ProcessApi
 
-    // To jump to HomeActivity after login success
-    private val _navigateToJobSetting = MutableLiveData<Event<Boolean>>()
-    val navigateToJobSetting: LiveData<Event<Boolean>>
-        get() = _navigateToJobSetting
+    // To jump to Process Detail Activity after login success
+    private val _navigateToProcess = MutableLiveData<Event<Boolean>>()
+    val navigateToProcess: LiveData<Event<Boolean>>
+        get() = _navigateToProcess
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 

@@ -52,6 +52,7 @@ interface ViewModelInjector {
     fun inject(processSettingVM: ProcessSettingVM)
     fun inject(processUserManagerVM: ProcessUserManagerVM)
     fun inject(processAddUserRoleVM: ProcessAddUserRoleVM)
+    fun inject(processTabVM: ProcessTabVM)
 
     @Component.Builder
     interface Builder {

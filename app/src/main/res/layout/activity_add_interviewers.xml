@@ -71,13 +71,13 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_user_manager"
+                    android:id="@+id/recyclerview_interviewer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="31dp"
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
-                    app:adapter="@{viewModel.getRoleAvailableUserListAdapter}"
+                    app:adapter="@{viewModel.getAvailableInterviewerListAdapter}"
                     android:scrollbars="none" />
 
             </LinearLayout>

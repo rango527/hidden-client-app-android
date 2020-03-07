@@ -191,6 +191,18 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        if (modelClass.isAssignableFrom(ProcessTabVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ProcessTabVM(
+                context
+            ) as T
+        }
+
         /* ------------------------------------------------------------
           ProcessSettingVM
        -------------------------------------------------------------- */

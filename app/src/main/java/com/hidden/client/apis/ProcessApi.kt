@@ -51,7 +51,7 @@ interface ProcessApi {
     /**
      * Process Detail
      */
-    @GET("client/processes/{process_id}/{interview_id}/possible-interviewers")
+    @GET("client/processes/{process_id}/interviews/{interview_id}/possible-interviewers")
     fun getAvailableInterviewersForProcess(
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,

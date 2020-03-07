@@ -1,6 +1,7 @@
 package com.hidden.client.ui.fragments.process
 
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
+import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 
@@ -109,7 +111,12 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
             txtAvailability.setOnClickListener {
                 when (stage.clientTileButton) {
                     Enums.TileActionButtonType.ADD_INTERVIEWERS.value -> {
+                        val intent = Intent(activity, AddInterviewersActivity::class.java)
+                        intent.putExtra("processId", process.id)
+                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
+                        intent.putExtra("candidateName", process.candidateFullName)
 
+                        activity!!.startActivity(intent)
                     }
                 }
             }
