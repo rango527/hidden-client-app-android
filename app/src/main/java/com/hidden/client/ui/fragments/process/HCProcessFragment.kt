@@ -112,9 +112,25 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
                 when (stage.clientTileButton) {
                     Enums.TileActionButtonType.ADD_INTERVIEWERS.value -> {
                         val intent = Intent(activity, AddInterviewersActivity::class.java)
+                        intent.putExtra("from", "Add")
                         intent.putExtra("processId", process.id)
+                        intent.putExtra("jobId", process.jobId)
                         intent.putExtra("interviewId", process.currentInterviewId.toInt())
                         intent.putExtra("candidateName", process.candidateFullName)
+
+                        activity!!.finish()
+
+                        activity!!.startActivity(intent)
+                    }
+                    Enums.TileActionButtonType.JOIN_INTERVIEW.value -> {
+                        val intent = Intent(activity, AddInterviewersActivity::class.java)
+                        intent.putExtra("from", "Join")
+                        intent.putExtra("processId", process.id)
+                        intent.putExtra("jobId", process.jobId)
+                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
+                        intent.putExtra("candidateName", process.candidateFullName)
+
+                        activity!!.finish()
 
                         activity!!.startActivity(intent)
                     }
@@ -134,7 +150,7 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
             )
             else Typeface.createFromAsset(context!!.assets, "fonts/fontawesome_solid_pro.otf")
 
-        txtStageIcon.setTypeface(fontType)
+        txtStageIcon.typeface = fontType
         txtStageIcon.text = Utility.getStageClientTileIcon(stage.clientTileIcon)
         txtStageIcon.setTextColor(Color.parseColor(Utility.getStageClientTileIconColor(stage.clientTileIconColor)))
 

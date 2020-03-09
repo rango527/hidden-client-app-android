@@ -89,7 +89,7 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
 
         viewModel.shortlist.observe(this, Observer { shortlist ->
 
-            Glide.with(context).load(shortlist.clientUrl).into(imgClientPhoto)
+            Glide.with(context!!).load(shortlist.clientUrl).into(imgClientPhoto)
             txtClientName.text = resources.getString(R.string.hello_user, AppPreferences.myFullName)
         })
 

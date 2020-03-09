@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ProcessDao
 import com.hidden.client.models.dao.ProcessStageDao
 import com.hidden.client.models.entity.ProcessEntity
@@ -42,6 +43,8 @@ class ProcessDetailVM(
     }
 
     fun loadProcessDetail() {
+
+        HCGlobal.getInstance().log(processId.toString())
 
         subscription = Observable.fromCallable {
             processDao.getProcessById(processId)

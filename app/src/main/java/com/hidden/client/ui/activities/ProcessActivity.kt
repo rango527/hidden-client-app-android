@@ -1,7 +1,6 @@
 package com.hidden.client.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -11,24 +10,18 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.hidden.client.R
-import com.hidden.client.databinding.CandidateListBinding
 import com.hidden.client.databinding.ProcessDetailBinding
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.helpers.Utility
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.HCProcessFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.main.CandidateListVM
 import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
 import com.kaopiz.kprogresshud.KProgressHUD
-import kotlinx.android.synthetic.main.list_row_circle_image.*
 import java.lang.Math.round
 
 class ProcessActivity : BaseActivity(), View.OnClickListener {
@@ -50,6 +43,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
     private var processId: Int = 0
     private var jobId: Int = 0
+    private var cashMode: Boolean = true
 
     private lateinit var imgPhoto: ImageView
 
@@ -58,6 +52,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         processId = intent.getIntExtra("processId", 0)
         jobId = intent.getIntExtra("jobId", 0)
+        cashMode = intent.getBooleanExtra("cashMode", true)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
 

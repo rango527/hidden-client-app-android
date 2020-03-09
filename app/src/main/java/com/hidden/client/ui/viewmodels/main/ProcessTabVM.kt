@@ -85,31 +85,28 @@ class ProcessTabVM(
             )
     }
 
-    /*fun addUserRoleToJobSetting(
-        jobId: Int,
-        role: String,
-        clientIds: ArrayList<Int>,
-        cascade: Boolean
+    fun addInterviewersToInterview(
+        processId: Int,
+        interviewId: Int,
+        clientIds: ArrayList<Int>
     ) {
-        HCGlobal.getInstance().log(role)
-        subscription = jobApi.addUserRoleJobSetting(
+        subscription = processApi.addInterviewersToInterview(
             AppPreferences.apiAccessToken,
-            jobId,
-            role,
-            clientIds,
-            cascade
+            processId,
+            interviewId,
+            clientIds
         ).concatMap { addResult ->
             Observable.just(addResult)
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveAvailableUserStart() }
-            .doOnTerminate { onRetrieveAvailableUserFinish() }
+            .doOnSubscribe { onRetrieveAvailableInterviewerStart() }
+            .doOnTerminate { onRetrieveAvailableInterviewerFinish() }
             .subscribe(
-                { result -> onAddRoleSuccess(result) },
-                { error -> onRetrieveAvailableUserError(error) }
+                { result -> onAddInterviewerSuccess(result) },
+                { error -> onRetrieveAvailableInterviewerError(error) }
             )
-    }*/
+    }
 
     private fun onRetrieveAvailableInterviewerStart() {
         loadingVisibility.value = true
@@ -138,9 +135,9 @@ class ProcessTabVM(
         availableInterviewerListAdapter.updateUserManagerList(tempAvailableInterviewerList)
     }
 
-    /*fun onAddRoleSuccess(result: SimpleResponseJson) {
-        _navigateToJobSetting.value = Event(true)
-    }*/
+    fun onAddInterviewerSuccess(result: SimpleResponseJson) {
+        _navigateToProcess.value = Event(true)
+    }
 
     private fun onRetrieveAvailableInterviewerError(e: Throwable) {
         e.printStackTrace()
