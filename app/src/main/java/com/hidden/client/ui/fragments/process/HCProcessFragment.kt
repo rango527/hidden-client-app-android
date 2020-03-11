@@ -1,6 +1,5 @@
 package com.hidden.client.ui.fragments.process
 
-
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface

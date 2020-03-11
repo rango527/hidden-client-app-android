@@ -1,9 +1,6 @@
 package com.hidden.client.apis
 
-import com.hidden.client.models.json.ProcessJson
-import com.hidden.client.models.json.ProcessSettingJson
-import com.hidden.client.models.json.ReviewerJson
-import com.hidden.client.models.json.SimpleResponseJson
+import com.hidden.client.models.json.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -66,4 +63,25 @@ interface ProcessApi {
         @Path("interview_id") interviewId: Int,
         @Field("client_ids") clientIds: List<Int>
     ): Observable<SimpleResponseJson>
+
+    /**
+     * Get Timeline
+     */
+    @GET("client/processes/{process_id}/timeline")
+    fun getTimeline(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ): Observable<ProcessSettingJson>
+
+    /**
+     * Get Feedback
+     * GET /client/processes/{process_id}/feedback/{feedback_id}
+     */
+    @GET("client/processes/{process_id}/timeline")
+    fun getFeedback(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("feedback_id") feedbackId: Int
+    ): Observable<FeedbackJson>
+
 }
