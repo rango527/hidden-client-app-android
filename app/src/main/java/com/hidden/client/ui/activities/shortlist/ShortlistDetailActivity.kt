@@ -90,19 +90,21 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
         when (v!!.id) {
             R.id.layout_approve -> {
 
-                val intent = Intent(this, ApproveActivity::class.java)
+                val intent = Intent(this, FeedbackActivity::class.java)
 
                 intent.putExtra("processId", viewModel.getShortlistCandidate().processId)
                 intent.putExtra("avatarName", viewModel.getShortlistCandidate().avatarName)
+                intent.putExtra("isApprove", true)
 
                 startActivity(intent)
             }
             R.id.layout_reject -> {
 
-                val intent = Intent(this, RejectActivity::class.java)
+                val intent = Intent(this, FeedbackActivity::class.java)
 
                 intent.putExtra("processId", viewModel.getShortlistCandidate().processId)
                 intent.putExtra("avatarName", viewModel.getShortlistCandidate().avatarName)
+                intent.putExtra("isApprove", false)
 
                 startActivity(intent)
             }

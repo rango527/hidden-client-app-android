@@ -11,7 +11,7 @@ data class FeedbackQuestionEntity (
 
     val question: String,
 
-    val score: Int,
+    var score: Int,
 
     var pFeedbackId: Int
 )

@@ -19,11 +19,13 @@ class HCGlobal{
         fun getInstance() : HCGlobal{
             return INSTANCE
         }
+
+        const val LOG_TAG: String = "HiddenClient"
     }
 
     fun log(message: String) {
         if (APP.is_debug) {
-            Log.d(HCConstants.LOG_TAG, message)
+            Log.d(LOG_TAG, message)
         }
     }
 

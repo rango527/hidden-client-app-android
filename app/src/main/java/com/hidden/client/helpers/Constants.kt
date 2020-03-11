@@ -115,4 +115,9 @@ object Enums {
         ADD_INTERVIEWERS("ADD_INTERVIEWERS"),
         JOIN_INTERVIEW("JOIN_INTERVIEW")
     }
+
+    enum class VoteType(val value: String) {
+        APPROVE("approve"),
+        REJECT("reject")
+    }
 }

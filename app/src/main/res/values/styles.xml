@@ -71,4 +71,10 @@
     <!--        <item name="android:windowSharedElementExitTransition">@transition/changebounds</item>-->
 
     <!--    </style>-->
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="android:minWidth">50dp</item>
+        <item name="android:minHeight">47dp</item>
+        <item name="android:progressDrawable">@drawable/ratingbar_background</item>
+    </style>
 </resources>

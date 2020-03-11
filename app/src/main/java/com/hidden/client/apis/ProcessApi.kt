@@ -2,6 +2,7 @@ package com.hidden.client.apis
 
 import com.hidden.client.models.json.*
 import io.reactivex.Observable
+import org.json.JSONObject
 import retrofit2.http.*
 
 interface ProcessApi {
@@ -77,11 +78,20 @@ interface ProcessApi {
      * Get Feedback
      * GET /client/processes/{process_id}/feedback/{feedback_id}
      */
-    @GET("client/processes/{process_id}/timeline")
+    @GET("client/processes/{process_id}/feedback/{feedback_id}")
     fun getFeedback(
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Path("feedback_id") feedbackId: Int
     ): Observable<FeedbackJson>
 
+    @FormUrlEncoded
+    @POST("/client/processes/{process_id}/submission-votes")
+    fun submitFeedback(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Field("vote") vote: String,
+        @Field("answers") answers: JSONObject,
+        @Field("comment") comment: String
+    ): Observable<SimpleResponseJson>
 }

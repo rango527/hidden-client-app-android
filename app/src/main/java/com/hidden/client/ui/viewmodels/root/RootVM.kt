@@ -72,6 +72,9 @@ abstract class RootVM: ViewModel() {
             is ProcessUserManagerVM -> injector.inject(this)
             is ProcessAddUserRoleVM -> injector.inject(this)
             is ProcessTabVM -> injector.inject(this)
+
+            // Feedback
+            is FeedbackVM -> injector.inject(this)
         }
     }
 

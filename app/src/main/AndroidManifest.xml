@@ -90,12 +90,9 @@
             android:name=".ui.activities.shortlist.ShortlistDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
         <activity
-            android:name=".ui.activities.shortlist.RejectActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-        <activity
-            android:name=".ui.activities.shortlist.ApproveActivity"
+            android:name=".ui.activities.shortlist.FeedbackActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity

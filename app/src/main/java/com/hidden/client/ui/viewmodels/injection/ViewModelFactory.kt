@@ -244,6 +244,21 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        /**
+         * Feedback
+         */
+        if (modelClass.isAssignableFrom(FeedbackVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return FeedbackVM(
+                context
+            ) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
