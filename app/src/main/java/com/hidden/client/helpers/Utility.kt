@@ -62,18 +62,10 @@ object Utility {
             else -> R.drawable.progress_item_incomplete_12
         }
 
-    fun getStageClientTileIcon(icon: String): String =
-        when (icon) {
-            "turtle" -> "\uf726"
-            "horse-saddle" -> "\uf8c3"
-            "loveseat" -> "\uf4cc"
-            "check" -> "\uf00c"
-            "forward" -> "\uf04e"
-            "user-plus" -> "\uf234"
-            "tachometer-slowest" -> "\uf62d"
-            "traffic-light-stop" -> "\uf63a"
-            else -> "\uf118"
-        }
+    fun getStageClientTileIcon(icon: String): String {
+        val iconHexValue = icon.toInt(16)
+        return (iconHexValue.toChar()).toString()
+    }
 
     fun getStageClientTileIconColor(color: String): String =  when (color) {
         Enums.ColorType.BLUE.value -> "#00003E"

@@ -1,5 +1,7 @@
 package com.hidden.client.ui.viewmodels.injection.module
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.hidden.client.apis.*
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.nullable.*
@@ -11,6 +13,7 @@ import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**

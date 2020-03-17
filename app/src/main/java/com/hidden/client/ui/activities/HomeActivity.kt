@@ -26,17 +26,23 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
 
     private lateinit var layoutMask: LinearLayout
 
+    private var shortlistCashMode: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        shortlistCashMode = intent.getBooleanExtra("shortlistCashMode", true)
 
         val pushId = """client-${AppPreferences.myId}"""
         if (UAirship.shared().namedUser.id != pushId) {
             UAirship.shared().namedUser.id = """client-${AppPreferences.myId}"""
         }
 
+        HCGlobal.getInstance().currentIndex = 0
+
         dashboardFrags.add(DashboardFragment())
-        shortlistsFrags.add(ShortlistsFragment())
+        shortlistsFrags.add(ShortlistsFragment(shortlistCashMode))
         processesFrags.add(ProcessesFragment())
 
         tabBar = findViewById(R.id.nav_view)

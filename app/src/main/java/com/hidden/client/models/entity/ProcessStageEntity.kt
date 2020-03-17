@@ -27,6 +27,8 @@ data class ProcessStageEntity (
 
     val clientTileIconStyle: String,
 
+    val clientTileIconCode: String,
+
     val clientTileText: String,
 
     val clientTileButton: String,

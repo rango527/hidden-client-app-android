@@ -90,10 +90,10 @@ data class ShortlistCandidateJson(
     val jobClientIsOfferManager: Boolean?,
 
     @Json(name = "job_client__is_messenger")
-    val jobClientIsMessenger: Boolean?,
+    val jobClientIsMessenger: Boolean?
 
-    @Json(name = "feedback")
-    val feedbackList: List<FeedbackJson>?
+//    @Json(name = "feedback")
+//    val feedbackList: FeedbackJson
 ) {
     fun toEntity(pClientId: Int): ShortlistCandidateEntity {
         return ShortlistCandidateEntity(
@@ -167,13 +167,13 @@ data class ShortlistCandidateJson(
         return skillEntityList
     }
 
-    fun toFeedbackEntityList(pCandidateId: Int): List<FeedbackEntity> {
-        val feedbackEntityList: ArrayList<FeedbackEntity> = arrayListOf()
-
-        for (feedback in feedbackList!!) {
-            feedbackEntityList.add(feedback.toEntity(pCandidateId))
-        }
-
-        return feedbackEntityList
-    }
+//    fun toFeedbackEntityList(pCandidateId: Int): List<FeedbackEntity> {
+//        val feedbackEntityList: ArrayList<FeedbackEntity> = arrayListOf()
+//
+//        for (feedback in feedbackList!!) {
+//            feedbackEntityList.add(feedback.toEntity(pCandidateId))
+//        }
+//
+//        return feedbackEntityList
+//    }
 }

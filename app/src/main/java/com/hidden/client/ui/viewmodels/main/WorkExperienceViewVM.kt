@@ -34,7 +34,7 @@ class WorkExperienceViewVM: RootVM() {
 
         strDate = HCDate.dateToString(fromDate!!, "d MMMM yyyy").toString()
 
-        if (experienceTo === null ) {
+        if (experienceTo.safeValue() == "" ) {
 
             return strDate + " - " + HCGlobal.getInstance().currentActivity.resources.getString(R.string.present)
 

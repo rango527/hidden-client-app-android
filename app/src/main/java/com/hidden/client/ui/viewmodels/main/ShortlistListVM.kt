@@ -37,10 +37,6 @@ class ShortlistListVM(
 
     private var subscription: Disposable? = null
 
-    init {
-        loadShortlistList(true)
-    }
-
     override fun onCleared() {
         super.onCleared()
         subscription?.dispose()
@@ -129,13 +125,13 @@ class ShortlistListVM(
             skillDao.insertAll(*skillList.toTypedArray())
 
             // Update Feedback Table
-            val feedbackList: List<FeedbackEntity> = candidateJson.toFeedbackEntityList(candidateJson.id.safeValue())
-            feedbackDao.insertAll(*feedbackList.toTypedArray())
+//            val feedbackList: List<FeedbackEntity> = candidateJson.toFeedbackEntityList(candidateJson.id.safeValue())
+//            feedbackDao.insertAll(*feedbackList.toTypedArray())
 
             // Update FeedbackQuestion Table
-            for (feedback in candidateJson.feedbackList!!) {
-                feedbackQuestionDao.insertAll(*feedback.toQuestionList(feedback.id.safeValue()).toTypedArray())
-            }
+//            for (feedback in candidateJson.feedbackList!!) {
+//                feedbackQuestionDao.insertAll(*feedback.toQuestionList(feedback.id.safeValue(), false).toTypedArray())
+//            }
 
         }
 

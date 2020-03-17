@@ -117,7 +117,7 @@ object Enums {
     }
 
     enum class VoteType(val value: String) {
-        APPROVE("approve"),
-        REJECT("reject")
+        APPROVE("ACCEPTED"),
+        REJECT("REJECTED")
     }
 }

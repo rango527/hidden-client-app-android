@@ -125,8 +125,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     override fun onAnimationEnd(animation: Animation?) {
-                        HCGlobal.getInstance().log("Animation end")
-
                         val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
                         param.topMargin = resources.getDimension(R.dimen.margin_default).toInt()
                         layoutTitle.layoutParams = param
@@ -162,8 +160,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     override fun onAnimationEnd(animation: Animation?) {
-                        HCGlobal.getInstance().log("Animation end")
-
                         val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
                         param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
                         layoutTitle.layoutParams = param

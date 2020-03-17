@@ -73,7 +73,7 @@ class JobSettingVM(
     fun loadJobSetting(cashMode: Boolean) {
 
         val apiObservable: Observable<JobSettingEntity>
-
+HCGlobal.getInstance().log(jobId.toString());
         if (cashMode) {
             apiObservable =
                 Observable.fromCallable { jobSettingDao.getMyJobSettingByJobId(AppPreferences.myId, jobId) }

@@ -80,7 +80,6 @@ class JobAddUserRoleVM(
     }
 
     fun addUserRoleToJobSetting(jobId: Int, role: String, clientIds: ArrayList<Int>, cascade: Boolean) {
-        HCGlobal.getInstance().log(role)
         subscription = jobApi.addUserRoleJobSetting(AppPreferences.apiAccessToken, jobId, role, clientIds, cascade).concatMap {
                 addResult -> Observable.just(addResult)
         }

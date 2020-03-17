@@ -44,8 +44,6 @@ class ProcessDetailVM(
 
     fun loadProcessDetail() {
 
-        HCGlobal.getInstance().log(processId.toString())
-
         subscription = Observable.fromCallable {
             processDao.getProcessById(processId)
         }

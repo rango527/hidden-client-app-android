@@ -21,6 +21,9 @@ data class ProcessStageClientTile (
     @Json(name = "icon_style")
     val iconStyle: String?,
 
+    @Json(name = "icon_code")
+    val iconCode: String?,
+
     @Json(name = "text")
     val text: String?,
 

@@ -29,7 +29,7 @@ import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
 
-class ShortlistsFragment : Fragment(), View.OnClickListener {
+class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnClickListener {
 
     private lateinit var imgClientPhoto: ImageView
     private lateinit var txtClientName: TextView
@@ -76,6 +76,8 @@ class ShortlistsFragment : Fragment(), View.OnClickListener {
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!))
             .get(ShortlistListVM::class.java)
+
+        viewModel.loadShortlistList(cashMode)
 
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { visibility ->

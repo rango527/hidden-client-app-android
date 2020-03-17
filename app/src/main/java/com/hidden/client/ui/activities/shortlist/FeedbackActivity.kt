@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
+import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCResponse
 import com.hidden.client.helpers.AppPreferences
@@ -27,6 +28,8 @@ import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.FeedbackVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,7 +50,6 @@ class FeedbackActivity : BaseActivity() {
     private lateinit var indicator: CirclePageIndicator
 
     private var processId: Int = 0
-    private var feedbackId: Int = 0;
     private var isApprove: Boolean = true
     private var avatarName: String = ""
 
@@ -76,7 +78,9 @@ class FeedbackActivity : BaseActivity() {
         // Observing for jumping HomeActivity -> Shortlist after add role success
         feedbackViewModel.navigateToShortlist.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
+                HCGlobal.getInstance().currentIndex = 0
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("shortlistCashMode", false)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
@@ -84,8 +88,12 @@ class FeedbackActivity : BaseActivity() {
 
         initUI()
 
-        // processId = 430, feedbackId = 1044 for testing
-        feedbackViewModel.loadFeedback(430, 1044)
+        feedbackViewModel.loadTimeline(processId);
+        feedbackViewModel.feedbackId.observe(this, Observer { feedbackId ->
+            HCGlobal.getInstance().log("FeedbackId=" + feedbackId)
+            feedbackViewModel.loadFeedback(processId, feedbackId)
+        })
+
         feedbackViewModel.feedback.observe(this, Observer { feedback ->
             initViewPager(feedback);
         })
@@ -132,13 +140,19 @@ class FeedbackActivity : BaseActivity() {
 
     fun submitFeedback(questionList: List<FeedbackQuestionEntity>, comment: String) {
         val vote: String = if (isApprove) Enums.VoteType.APPROVE.value else Enums.VoteType.REJECT.value
-        val answers = JSONObject()
+        val answers = JsonObject()
         for (question in questionList) {
             val questionId = question.id
             val score = question.score
 
-            answers.put(questionId.toString(), score)
+            answers.addProperty(questionId.toString(), score.toString())
         }
-        feedbackViewModel.submitFeedback(processId, vote, answers, comment)
+
+        val body: JsonObject = JsonObject()
+        body.addProperty("vote", vote)
+        body.add("answers", answers)
+        body.addProperty("comment", comment)
+
+        feedbackViewModel.submitFeedback(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
     }
 }

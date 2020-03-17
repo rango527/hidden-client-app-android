@@ -46,11 +46,17 @@ data class FeedbackJson(
         )
     }
 
-    fun toQuestionList(pFeedbackId: Int): List<FeedbackQuestionEntity> {
+    fun toQuestionList(pFeedbackId: Int, resetScore: Boolean): List<FeedbackQuestionEntity> {
         val questionEntityList: ArrayList<FeedbackQuestionEntity> = arrayListOf()
 
-        for (question in this.questionList!!) {
-            questionEntityList.add(question.toEntity(pFeedbackId))
+        if (questionList != null) {
+            for (question in this.questionList) {
+                val questionEntity = question.toEntity(pFeedbackId)
+                if (resetScore) {
+                    questionEntity.score = 0
+                }
+                questionEntityList.add(questionEntity)
+            }
         }
 
         return questionEntityList

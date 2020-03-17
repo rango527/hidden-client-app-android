@@ -1,7 +1,9 @@
 package com.hidden.client.apis
 
+import com.google.gson.JsonObject
 import com.hidden.client.models.json.*
 import io.reactivex.Observable
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.http.*
 
@@ -72,26 +74,34 @@ interface ProcessApi {
     fun getTimeline(
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int
-    ): Observable<ProcessSettingJson>
+    ): Observable<List<TimelineJson>>
 
     /**
      * Get Feedback
      * GET /client/processes/{process_id}/feedback/{feedback_id}
      */
-    @GET("client/processes/{process_id}/feedback/{feedback_id}")
+    @GET("client/processes/{process_id}/feedback/{feedback_id}/answers")
     fun getFeedback(
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Path("feedback_id") feedbackId: Int
     ): Observable<FeedbackJson>
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
+//    @POST("/client/processes/{process_id}/submission-votes")
+//    fun submitFeedback(
+//        @Header("Authorization") authToken: String,
+//        @Path("process_id") processId: Int,
+//        @Field("vote") vote: String,
+//        @Field("answers") answers: String,
+//        @Field("comment") comment: String
+//    ): Observable<SimpleResponseJson>
+
     @POST("/client/processes/{process_id}/submission-votes")
     fun submitFeedback(
+        @Header("Content-Type") contentType: String,
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
-        @Field("vote") vote: String,
-        @Field("answers") answers: JSONObject,
-        @Field("comment") comment: String
+        @Body body: RequestBody
     ): Observable<SimpleResponseJson>
 }

@@ -150,7 +150,8 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
             else Typeface.createFromAsset(context!!.assets, "fonts/fontawesome_solid_pro.otf")
 
         txtStageIcon.typeface = fontType
-        txtStageIcon.text = Utility.getStageClientTileIcon(stage.clientTileIcon)
+
+        txtStageIcon.text = Utility.getStageClientTileIcon(stage.clientTileIconCode)
         txtStageIcon.setTextColor(Color.parseColor(Utility.getStageClientTileIconColor(stage.clientTileIconColor)))
 
         layoutTile.setBackgroundResource(Utility.getTileBackgroundResourceByStatus(stage.clientTileBackgroundColor))
