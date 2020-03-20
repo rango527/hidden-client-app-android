@@ -15,10 +15,11 @@ import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
-import com.hidden.client.ui.fragments.process.HCProcessFragment
+import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -56,7 +57,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(ProcessDetailVM::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ViewModelFactory(this)).get(ProcessDetailVM::class.java)
 
         binding.viewModel = viewModel
 
@@ -64,8 +66,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         viewModel.loadingVisibility.observe(this, Observer { show ->
             if (show) {
                 progressDlg.show()
-            }
-            else {
+            } else {
                 progressDlg.dismiss()
             }
         })
@@ -73,16 +74,27 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         imgPhoto = findViewById(R.id.img_photo)
 
         viewModel.process.observe(this, Observer { process ->
-            if (savedInstanceState == null) {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment(process)).commit()
-            }
+            viewModel.loadTimeline(cashMode)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
+        })
+
+        viewModel.timelineList.observe(this, Observer { timelineList ->
+            if (savedInstanceState == null) {
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_process,
+                    ProcessTimelineFragment(viewModel.process.value!!, timelineList)
+                ).commit()
+            }
         })
 
         viewModel.processId = processId
         HCGlobal.getInstance().log(processId.toString())
         viewModel.loadProcessDetail();
 
+        initUI()
+    }
+
+    private fun initUI() {
         fragmentProcess = findViewById(R.id.fragment_process)
 
         // Init View
@@ -102,7 +114,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id) {
+        when (v!!.id) {
             R.id.text_process -> {
                 textBtnProcess.setBackgroundResource(R.drawable.panel_top_rounded_border_small)
                 textBtnProcess.setTextColor(ContextCompat.getColor(this, R.color.colorBlack_2))
@@ -110,13 +122,17 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 textBtnMessage.setBackgroundResource(android.R.color.transparent)
                 textBtnMessage.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 
-                layoutTitle.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                layoutTitle.measure(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
 
-                val animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
+                val animation: Animation =
+                    TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
                 animation.interpolator = AccelerateInterpolator()
                 animation.duration = 50
 
-                animation.setAnimationListener(object: Animation.AnimationListener {
+                animation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationRepeat(animation: Animation?) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
@@ -135,7 +151,13 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCProcessFragment(viewModel.process.value!!)).commit()
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_process,
+                    ProcessTimelineFragment(
+                        viewModel.process.value!!,
+                        viewModel.timelineList.value!!
+                    )
+                ).commit()
             }
 
             R.id.text_message -> {
@@ -147,11 +169,12 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                 val density: Float = applicationContext.resources.displayMetrics.density
 
-                val animation: Animation = TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
+                val animation: Animation =
+                    TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
                 animation.interpolator = AccelerateInterpolator()
                 animation.duration = 100
 
-                animation.setAnimationListener(object: Animation.AnimationListener {
+                animation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationRepeat(animation: Animation?) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
@@ -162,7 +185,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                     override fun onAnimationEnd(animation: Animation?) {
                         val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
-                        param.topMargin = resources.getDimension(R.dimen.list_row_margin_default).toInt()
+                        param.topMargin =
+                            resources.getDimension(R.dimen.list_row_margin_default).toInt()
                         layoutTitle.layoutParams = param
                     }
                 })
@@ -170,7 +194,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_process, HCMessageFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_process, HCMessageFragment()).commit()
             }
             R.id.button_back -> {
                 finish()
@@ -184,5 +209,4 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
-
 }

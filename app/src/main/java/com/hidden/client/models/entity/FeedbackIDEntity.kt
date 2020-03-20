@@ -19,5 +19,7 @@ data class FeedbackIDEntity (
 
     val feedbackSubmitted: Boolean?,
 
-    val pTimelineId: Int?
+    val pTimelineId: Int?,
+
+    val pProcessId: Int?
 )

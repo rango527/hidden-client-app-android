@@ -22,7 +22,7 @@ data class FeedbackIDsJson(
     @Json(name = "feedback__is_submitted")
     val feedbackSubmitted: Boolean?
 ) {
-    fun toEntity(pTimelineId: Int): FeedbackIDEntity {
+    fun toEntity(pTimelineId: Int, pProcessId: Int): FeedbackIDEntity {
         return FeedbackIDEntity(
             0,
             id,
@@ -30,7 +30,8 @@ data class FeedbackIDsJson(
             clientAvatar,
             clientFullName,
             feedbackSubmitted,
-            pTimelineId
+            pTimelineId,
+            pProcessId
         )
     }
 }

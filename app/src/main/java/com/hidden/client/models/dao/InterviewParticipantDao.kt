@@ -13,11 +13,11 @@ interface InterviewParticipantDao {
     val all: List<InterviewParticipantEntity>
 
     @Query("SELECT * FROM InterviewParticipant WHERE pTimelineId = :timelineId")
-    fun getInterviewParticipant(timelineId: Int): List<FeedbackIDEntity>
+    fun getInterviewParticipant(timelineId: Int): List<InterviewParticipantEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg interviewParticipant: InterviewParticipantEntity)
 
-    @Query("DELETE FROM InterviewParticipant WHERE pTimelineId = :timelineId")
-    fun deleteByTimelineId(timelineId: Int)
+    @Query("DELETE FROM InterviewParticipant WHERE pProcessId = :processId")
+    fun deleteByProcessId(processId: Int)
 }

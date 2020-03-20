@@ -17,6 +17,6 @@ interface FeedbackIDDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg feedback: FeedbackIDEntity)
 
-    @Query("DELETE FROM FeedbackID WHERE pTimelineId = :timelineId")
-    fun deleteByTimelineId(timelineId: Int)
+    @Query("DELETE FROM FeedbackID WHERE pProcessId = :processId")
+    fun deleteByProcessId(processId: Int)
 }

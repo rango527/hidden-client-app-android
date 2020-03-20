@@ -19,11 +19,13 @@ data class InterviewParticipantEntity (
 
     val clientAvatar: String?,
 
-    val isFeedbackSubmitted: String?,
+    val isFeedbackSubmitted: Boolean?,
 
-    val interviewAvailabilitySubmitted: String?,
+    val interviewAvailabilitySubmitted: Boolean?,
 
-    val isCurrentUser: Int?,
+    val isCurrentUser: Boolean?,
 
-    var pTimelineId: Int?
+    var pTimelineId: Int?,
+
+    var pProcessId: Int?
 )

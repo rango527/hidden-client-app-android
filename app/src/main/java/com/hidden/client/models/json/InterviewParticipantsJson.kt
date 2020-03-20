@@ -23,15 +23,15 @@ data class InterviewParticipantsJson(
     val clientAvatar: String?,
 
     @Json(name = "feedback__is_submitted")
-    val isFeedbackSubmitted: String?,
+    val isFeedbackSubmitted: Boolean?,
 
     @Json(name = "interview__availability_submitted")
-    val interviewAvailabilitySubmitted: String?,
+    val interviewAvailabilitySubmitted: Boolean?,
 
     @Json(name = "client__is_current_user")
-    val isCurrentUser: Int?
+    val isCurrentUser: Boolean?
 ) {
-    fun toEntity(pTimelineId: Int): InterviewParticipantEntity {
+    fun toEntity(pTimelineId: Int, pProcessId: Int): InterviewParticipantEntity {
         return InterviewParticipantEntity(
             0,
             feedbackId,
@@ -42,7 +42,8 @@ data class InterviewParticipantsJson(
             isFeedbackSubmitted,
             interviewAvailabilitySubmitted,
             isCurrentUser,
-            pTimelineId
+            pTimelineId,
+            pProcessId
         )
     }
 }

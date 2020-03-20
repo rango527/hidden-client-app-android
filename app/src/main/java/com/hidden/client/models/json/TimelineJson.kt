@@ -93,23 +93,23 @@ data class TimelineJson(
         )
     }
 
-    fun toInterviewParticipantEntityList(pTimelineId: Int): List<InterviewParticipantEntity> {
+    fun toInterviewParticipantEntityList(pTimelineId: Int, pProcessId: Int): List<InterviewParticipantEntity> {
         val list: ArrayList<InterviewParticipantEntity> = arrayListOf()
 
         if (interviewParticipants != null) {
             for (interviewParticipant in interviewParticipants) {
-                list.add(interviewParticipant.toEntity(pTimelineId))
+                list.add(interviewParticipant.toEntity(pTimelineId, pProcessId))
             }
         }
         return list
     }
 
-    fun toFeedbackIDEntityList(pTimelineId: Int): List<FeedbackIDEntity> {
+    fun toFeedbackIDEntityList(pTimelineId: Int, pProcessId: Int): List<FeedbackIDEntity> {
         val list: ArrayList<FeedbackIDEntity> = arrayListOf()
 
         if (feedbackIds != null) {
             for (feedbackId in feedbackIds) {
-                list.add(feedbackId.toEntity(pTimelineId))
+                list.add(feedbackId.toEntity(pTimelineId, pProcessId))
             }
         }
         return list

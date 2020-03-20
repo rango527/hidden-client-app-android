@@ -187,7 +187,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             return ProcessDetailVM(
                 context,
                 db.processDao(),
-                db.processStageDao()
+                db.processStageDao(),
+                db.timelineDao(),
+                db.interviewParticipantDao(),
+                db.feedbackIdDao()
             ) as T
         }
 

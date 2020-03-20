@@ -14,15 +14,18 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
+import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 
-class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
+class ProcessTimelineFragment(
+    private val process: ProcessEntity,
+    private val timelineList: List<TimelineEntity>
+) : Fragment() {
 
     private lateinit var layoutStageControl: LinearLayout
 
@@ -65,7 +68,6 @@ class HCProcessFragment(private val process: ProcessEntity) : Fragment() {
     private fun initUI() {
         val processStageBar = ProcessStageBarView(context!!, process)
         layoutStageControl.addView(processStageBar)
-
 
         for ((index, stage) in process.getStageList().withIndex()) {
             if (stage.stageStatus == Enums.StageType.CURRENT.value) {
