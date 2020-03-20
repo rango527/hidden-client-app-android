@@ -30,7 +30,7 @@ class ProcessListVM(
     private var subscription: Disposable? = null
 
     init {
-        loadProcess(true)
+        loadProcess(false)
     }
 
     override fun onCleared() {

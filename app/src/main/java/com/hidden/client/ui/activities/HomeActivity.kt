@@ -45,6 +45,8 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         shortlistsFrags.add(ShortlistsFragment(shortlistCashMode))
         processesFrags.add(ProcessesFragment())
 
+        shortlistCashMode = true
+
         tabBar = findViewById(R.id.nav_view)
         tabBar.setSelectedListener(this)
 

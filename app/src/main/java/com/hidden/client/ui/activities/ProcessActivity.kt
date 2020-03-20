@@ -80,6 +80,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         })
 
         viewModel.processId = processId
+        HCGlobal.getInstance().log(processId.toString())
         viewModel.loadProcessDetail();
 
         fragmentProcess = findViewById(R.id.fragment_process)

@@ -25,7 +25,10 @@ import com.hidden.client.models.entity.*
     ReviewerEntity::class,
     ProcessEntity::class,
     ProcessStageEntity::class,
-    ProcessSettingEntity::class
+    ProcessSettingEntity::class,
+    TimelineEntity::class,
+    InterviewParticipantEntity::class,
+    FeedbackIDEntity::class
 ], version = APP.databaseVersion)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -56,6 +59,9 @@ abstract class AppDatabase : RoomDatabase() {
     // Process
     abstract fun processDao(): ProcessDao
     abstract fun processStageDao(): ProcessStageDao
+    abstract fun timelineDao(): TimelineDao
+    abstract fun interviewParticipantDao(): InterviewParticipantDao
+    abstract fun feedbackIdDao(): FeedbackIDDao
 
     // Process Settings
     abstract fun processSettingDao(): ProcessSettingDao

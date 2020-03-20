@@ -19,6 +19,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ProcessTabVM(
@@ -88,13 +89,14 @@ class ProcessTabVM(
     fun addInterviewersToInterview(
         processId: Int,
         interviewId: Int,
-        clientIds: ArrayList<Int>
+        body: RequestBody
     ) {
         subscription = processApi.addInterviewersToInterview(
+            "application/json",
             AppPreferences.apiAccessToken,
             processId,
             interviewId,
-            clientIds
+            body
         ).concatMap { addResult ->
             Observable.just(addResult)
         }

@@ -14,6 +14,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessTabBinding
 import com.hidden.client.helpers.HCDialog
@@ -29,6 +31,8 @@ import com.hidden.client.ui.viewmodels.main.JobAddUserRoleVM
 import com.hidden.client.ui.viewmodels.main.ProcessTabVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.bottom_sheet_add_interviewer_to_interview.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
 class AddInterviewersActivity : BaseActivity() {
 
@@ -120,13 +124,23 @@ class AddInterviewersActivity : BaseActivity() {
 
             val interviewerList = viewModel.availableInterviewerListAdapter.getRoleAvailableUserList()
             val interviewerIdList: ArrayList<Int> = arrayListOf()
+
+            val jArray: JsonArray = JsonArray()
+
             for (interviewer in interviewerList) {
                 if (interviewer.tick) {
                     interviewerIdList.add(interviewer.user.clientId)
+                    jArray.add(interviewer.user.clientId)
+                    HCGlobal.getInstance().log(interviewer.user.clientId.toString())
                 }
             }
 
-            viewModel.addInterviewersToInterview(processId, interviewId, interviewerIdList)
+            val body: JsonObject = JsonObject()
+
+            body.add("client_ids", jArray)
+
+            viewModel.addInterviewersToInterview(processId, interviewId, RequestBody.create(
+                MediaType.parse("application/json"), body.toString()))
         }
     }
 

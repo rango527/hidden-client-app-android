@@ -1,11 +1,13 @@
 package com.hidden.client.models.json
 
+import com.hidden.client.models.entity.FeedbackIDEntity
+import com.hidden.client.models.entity.InterviewParticipantEntity
+import com.hidden.client.models.entity.TimelineEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TimelineJson(
-
     @Json(name = "description")
     val description: String?,
 
@@ -51,8 +53,8 @@ data class TimelineJson(
     @Json(name = "lat_lng")
     val latLng: String?,
 
-//    @Json(name = "interview_participants")
-//    val interviewParticipants: List<String>?
+    @Json(name = "interview_participants")
+    val interviewParticipants: List<InterviewParticipantsJson>?,
 
     @Json(name = "accepted_at")
     val acceptedAt: String?,
@@ -65,4 +67,51 @@ data class TimelineJson(
 
     @Json(name = "feedback_id")
     val feedbackId: Int?
-)
+) {
+    fun toEntity(pProcessId: Int): TimelineEntity {
+        return TimelineEntity(
+            0,
+            description,
+            type,
+            clientFeedbackSubmitted,
+            interviewerFeedbackAverage,
+            interviewerFeedbackDecision,
+            candidateFeedbackAverage,
+            candidateFeedbackDecision,
+            candidateFeedbackId,
+            interviewId,
+            dateTime,
+            clientSubmittedInterviewDates,
+            candidateSubmittedInterviewDates,
+            location,
+            clientNotes,
+            latLng,
+            acceptedAt,
+            submittedAt,
+            feedbackId,
+            pProcessId
+        )
+    }
+
+    fun toInterviewParticipantEntityList(pTimelineId: Int): List<InterviewParticipantEntity> {
+        val list: ArrayList<InterviewParticipantEntity> = arrayListOf()
+
+        if (interviewParticipants != null) {
+            for (interviewParticipant in interviewParticipants) {
+                list.add(interviewParticipant.toEntity(pTimelineId))
+            }
+        }
+        return list
+    }
+
+    fun toFeedbackIDEntityList(pTimelineId: Int): List<FeedbackIDEntity> {
+        val list: ArrayList<FeedbackIDEntity> = arrayListOf()
+
+        if (feedbackIds != null) {
+            for (feedbackId in feedbackIds) {
+                list.add(feedbackId.toEntity(pTimelineId))
+            }
+        }
+        return list
+    }
+}

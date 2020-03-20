@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities.shortlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -42,6 +43,7 @@ class FeedbackActivity : BaseActivity() {
     private lateinit var layoutBackground: ConstraintLayout
     private lateinit var txtFeedback: TextView
     private lateinit var txtFeedback2: TextView
+    private lateinit var imgThumbUp: ImageView
 
     private lateinit var progressDlg: KProgressHUD
 
@@ -126,15 +128,18 @@ class FeedbackActivity : BaseActivity() {
         layoutBackground = findViewById(R.id.layout_background)
         txtFeedback = findViewById(R.id.text_feedback_notice)
         txtFeedback2 = findViewById(R.id.text_feedback_notice2)
+        imgThumbUp = findViewById(R.id.image_thumb_up)
 
         if (isApprove) {
             layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGreen_1))
             txtFeedback.text = getString(R.string.feedback_notice, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
+            imgThumbUp.setImageResource(R.drawable.thumb_up_large)
         } else {
             layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed_1))
             txtFeedback.text = getString(R.string.feedback_notice3, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
+            imgThumbUp.setImageResource(R.drawable.thumb_down_large)
         }
     }
 

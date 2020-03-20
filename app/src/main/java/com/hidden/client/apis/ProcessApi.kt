@@ -51,6 +51,12 @@ interface ProcessApi {
     /**
      * Process Detail
      */
+    @GET("client/processes/{process_id}/details")
+    fun getProcessDetail(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ): Observable<ProcessJson>
+
     @GET("client/processes/{process_id}/interviews/{interview_id}/possible-interviewers")
     fun getAvailableInterviewersForProcess(
         @Header("Authorization") authToken: String,
@@ -58,13 +64,13 @@ interface ProcessApi {
         @Path("interview_id") interviewId: Int
     ): Observable<List<ReviewerJson>>
 
-    @FormUrlEncoded
     @POST("client/processes/{process_id}/interviews/{interview_id}/interviewers/add")
     fun addInterviewersToInterview(
+        @Header("Content-Type") contentType: String,
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Path("interview_id") interviewId: Int,
-        @Field("client_ids") clientIds: List<Int>
+        @Body body: RequestBody
     ): Observable<SimpleResponseJson>
 
     /**
@@ -87,16 +93,9 @@ interface ProcessApi {
         @Path("feedback_id") feedbackId: Int
     ): Observable<FeedbackJson>
 
-//    @FormUrlEncoded
-//    @POST("/client/processes/{process_id}/submission-votes")
-//    fun submitFeedback(
-//        @Header("Authorization") authToken: String,
-//        @Path("process_id") processId: Int,
-//        @Field("vote") vote: String,
-//        @Field("answers") answers: String,
-//        @Field("comment") comment: String
-//    ): Observable<SimpleResponseJson>
-
+    /**
+     * Submit Feedback
+     */
     @POST("/client/processes/{process_id}/submission-votes")
     fun submitFeedback(
         @Header("Content-Type") contentType: String,

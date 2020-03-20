@@ -3,7 +3,6 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.JsonObject
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
@@ -17,8 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class FeedbackVM(

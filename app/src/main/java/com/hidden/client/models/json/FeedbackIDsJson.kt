@@ -1,5 +1,6 @@
 package com.hidden.client.models.json
 
+import com.hidden.client.models.entity.FeedbackIDEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -20,4 +21,16 @@ data class FeedbackIDsJson(
 
     @Json(name = "feedback__is_submitted")
     val feedbackSubmitted: Boolean?
-)
+) {
+    fun toEntity(pTimelineId: Int): FeedbackIDEntity {
+        return FeedbackIDEntity(
+            0,
+            id,
+            clientId,
+            clientAvatar,
+            clientFullName,
+            feedbackSubmitted,
+            pTimelineId
+        )
+    }
+}
