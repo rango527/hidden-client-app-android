@@ -31,9 +31,13 @@
             android:value="true" />
 
         <activity
-            android:name=".ui.activities.process.AddInterviewersActivity"
+            android:name=".ui.activities.shortlist.FeedbackDoneActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity
+            android:name=".ui.activities.process.AddInterviewersActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ui.activities.RemoveUserRoleActivity"
             android:screenOrientation="portrait"
@@ -90,7 +94,6 @@
             android:name=".ui.activities.shortlist.ShortlistDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-
         <activity
             android:name=".ui.activities.shortlist.FeedbackActivity"
             android:screenOrientation="portrait"

@@ -91,6 +91,9 @@
     <string name="feedback_here">Add any other comments or \nfeedback here…</string>
     <string name="approve">Approve</string>
     <string name="reject">Reject</string>
+    <string name="feedback_success">Congratulations! you\'ve progressed %1$s to First Stage Interview</string>
+    <string name="back_to_shortlist">Back to shortlist</string>
+    <string name="give_interview_availability">Give interview availability</string>
 
     <!-- Process -->
     <string name="processes">PROCESSES</string>

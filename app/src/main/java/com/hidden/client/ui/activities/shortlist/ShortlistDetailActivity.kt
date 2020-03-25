@@ -41,7 +41,8 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = HCGlobal.getInstance().shortlistCandidateVMList[HCGlobal.getInstance().currentIndex]
+        viewModel =
+            HCGlobal.getInstance().shortlistCandidateVMList[HCGlobal.getInstance().currentIndex]
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_shortlist_detail)
         binding.viewModel = viewModel
@@ -95,6 +96,16 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("processId", viewModel.getShortlistCandidate().processId)
                 intent.putExtra("avatarName", viewModel.getShortlistCandidate().avatarName)
                 intent.putExtra("isApprove", true)
+                intent.putExtra("candidateName", viewModel.getShortlistCandidate().fullName)
+                intent.putExtra("candidateAvatar", viewModel.getShortlistCandidate().assetUrl)
+                intent.putExtra(
+                    "candidateJob",
+                    String.format(
+                        getString(R.string.job_and_location),
+                        viewModel.getShortlistCandidate().jobTitle,
+                        viewModel.getShortlistCandidate().jobCityName
+                    )
+                )
 
                 startActivity(intent)
             }
@@ -105,6 +116,17 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("processId", viewModel.getShortlistCandidate().processId)
                 intent.putExtra("avatarName", viewModel.getShortlistCandidate().avatarName)
                 intent.putExtra("isApprove", false)
+
+                intent.putExtra("candidateName", viewModel.getShortlistCandidate().fullName)
+                intent.putExtra("candidateAvatar", viewModel.getShortlistCandidate().assetUrl)
+                intent.putExtra(
+                    "candidateJob",
+                    String.format(
+                        getString(R.string.job_and_location),
+                        viewModel.getShortlistCandidate().jobTitle,
+                        viewModel.getShortlistCandidate().jobCityName
+                    )
+                )
 
                 startActivity(intent)
             }

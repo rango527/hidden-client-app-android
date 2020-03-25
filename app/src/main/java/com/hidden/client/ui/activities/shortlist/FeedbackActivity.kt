@@ -55,6 +55,10 @@ class FeedbackActivity : BaseActivity() {
     private var isApprove: Boolean = true
     private var avatarName: String = ""
 
+    private var candidateName: String = ""
+    private var candidateAvatar: String = ""
+    private var candidateJob: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
@@ -64,6 +68,10 @@ class FeedbackActivity : BaseActivity() {
         isApprove = intent.getBooleanExtra("isApprove", true);
         processId = intent.getIntExtra("processId", 0)
         avatarName = intent.getStringExtra("avatarName").safeValue()
+
+        candidateName = intent.getStringExtra("candidateName").safeValue()
+        candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
+        candidateJob = intent.getStringExtra("candidateJob").safeValue()
 
         feedbackViewModel =
             ViewModelProviders.of(this, ViewModelFactory(this)).get(FeedbackVM::class.java)
@@ -78,12 +86,15 @@ class FeedbackActivity : BaseActivity() {
         })
 
         // Observing for jumping HomeActivity -> Shortlist after add role success
-        feedbackViewModel.navigateToShortlist.observe(this, Observer {
+        feedbackViewModel.navigateToFeedbackDone.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-                HCGlobal.getInstance().currentIndex = 0
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra("shortlistCashMode", false)
+                val intent = Intent(this, FeedbackDoneActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+                intent.putExtra("candidateName", candidateName)
+                intent.putExtra("candidateAvatar", candidateAvatar)
+                intent.putExtra("candidateJob", candidateJob)
+
                 startActivity(intent)
             }
         })
@@ -92,7 +103,6 @@ class FeedbackActivity : BaseActivity() {
 
         feedbackViewModel.loadTimeline(processId);
         feedbackViewModel.feedbackId.observe(this, Observer { feedbackId ->
-            HCGlobal.getInstance().log("FeedbackId=" + feedbackId)
             feedbackViewModel.loadFeedback(processId, feedbackId)
         })
 

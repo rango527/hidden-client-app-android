@@ -26,9 +26,9 @@ class FeedbackVM(
     lateinit var processApi: ProcessApi
 
     // To jump to Process Detail Activity after login success
-    private val _navigateToShortlist = MutableLiveData<Event<Boolean>>()
-    val navigateToShortlist: LiveData<Event<Boolean>>
-        get() = _navigateToShortlist
+    private val _navigateToFeedbackDone = MutableLiveData<Event<Boolean>>()
+    val navigateToFeedbackDone: LiveData<Event<Boolean>>
+        get() = _navigateToFeedbackDone
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -141,7 +141,7 @@ class FeedbackVM(
     }
 
     private fun onSubmitFeedbackSuccess() {
-        _navigateToShortlist.value = Event(true)
+        _navigateToFeedbackDone.value = Event(true)
     }
 
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {

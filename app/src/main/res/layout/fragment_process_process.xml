@@ -84,7 +84,7 @@
                         android:id="@+id/text_stage_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="50sp"/>
+                        android:textSize="50sp" />
 
                 </LinearLayout>
 
