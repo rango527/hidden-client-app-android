@@ -52,4 +52,5 @@
     <color name="red">#FF0000</color>
     <color name="silver">#AAA9AD</color>
 
+    <color name="transparent">#FFFFFFFF</color>
 </resources>

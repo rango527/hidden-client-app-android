@@ -185,9 +185,10 @@
     <string name="interviewer_feedback">Interviewer Feedback</string>
     <string name="pulled_out">Pulled Out</string>
     <string name="decision_pending">Decision Pending</string>
-    <string name="out_of_five">out of %1$s</string>
+    <string name="out_of_five">out of 5</string>
     <string name="rejected">Rejected</string>
     <string name="progression">Progression</string>
+    <string name="waiting_for_feedback">Waiting for feedback</string>
 
     <string name="reply_to_hidden_team">Reply to the Hidden team</string>
     <string name="send">Send</string>
