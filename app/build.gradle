@@ -137,4 +137,7 @@ dependencies {
 
     //fontawesome
     implementation 'info.androidhive:fontawesome:0.0.5'
+
+    // google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

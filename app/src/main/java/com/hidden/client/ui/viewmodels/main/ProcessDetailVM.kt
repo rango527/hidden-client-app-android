@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessStageEntity
@@ -71,7 +72,7 @@ class ProcessDetailVM(
 
     fun loadTimeline(cashMode: Boolean) {
         val apiObservable: Observable<List<TimelineEntity>>
-
+HCGlobal.getInstance().log(processId.toString());
         if (cashMode) {
             apiObservable =
                 Observable.fromCallable { timelineDao.getTimeline(processId) }

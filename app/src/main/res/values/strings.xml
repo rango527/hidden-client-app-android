@@ -177,6 +177,17 @@
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>
     <string name="view_your_feedback">View Your Feedback</string>
+    <string name="date_tbc">Date TBC</string>
+    <string name="location_tbc">Location</string>
+    <string name="interviewers_tbc">Interviewers TBC</string>
+    <string name="completed_on">Completed on %1$s</string>
+    <string name="candidate_feedback">Candidate Feedback</string>
+    <string name="interviewer_feedback">Interviewer Feedback</string>
+    <string name="pulled_out">Pulled Out</string>
+    <string name="decision_pending">Decision Pending</string>
+    <string name="out_of_five">out of %1$s</string>
+    <string name="rejected">Rejected</string>
+    <string name="progression">Progression</string>
 
     <string name="reply_to_hidden_team">Reply to the Hidden team</string>
     <string name="send">Send</string>
@@ -215,5 +226,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_test_maps">Map</string>
 
 </resources>

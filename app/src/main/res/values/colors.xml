@@ -6,21 +6,29 @@
 
     <color name="splashBackground">#E74A5F</color>
     <color name="colorWhite_1">#FFF</color>
+
     <color name="colorBlack_1">#000040</color>
     <color name="colorBlack_2">#000</color>
-    <color name="colorGreen_1">#6C6</color>
+
+    <color name="colorGreen_1">#66CC66</color>
     <color name="colorGreen_2">#5FCD6D</color>
+
     <color name="colorGray_1">#c8c8c8</color>
     <color name="colorGray_2">#F0F0F0</color>
     <color name="colorGray_3">#B8B6B6</color>
     <color name="colorGray_4">#1b221c35</color>
     <color name="colorGray_5">#f1f0ee</color>
     <color name="colorGray_6">#64646F</color>
+    <color name="colorGray_7">#646161</color>
+
     <color name="colorCyan_1">#3BB1E1</color>
+
     <color name="colorRed_1">#E74A5F</color>
     <color name="colorRed_2">#EB4A5F</color>
     <color name="colorRed_3">#ec4a5f</color>
+
     <color name="colorBlue_1">#00003E</color>
+
     <color name="colorOrange_1">#FF7A32</color>
 
     <color name="colorPurple_1">#7B43C5</color>
