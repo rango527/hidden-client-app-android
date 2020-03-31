@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
@@ -21,6 +22,9 @@ import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
+import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
+import com.hidden.client.ui.custom.process.TimelineInterviewMapTileView
+import java.util.*
 
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
@@ -37,6 +41,8 @@ class ProcessTimelineFragment(
 
     private lateinit var imgPrev: ImageView
     private lateinit var imgNext: ImageView
+
+    private lateinit var layoutTimeline: LinearLayout
 
     private lateinit var processTriangleBar: ProcessStageTriangleView
 
@@ -60,6 +66,8 @@ class ProcessTimelineFragment(
         imgPrev = view.findViewById(R.id.image_prev)
         imgNext = view.findViewById(R.id.image_next)
 
+        layoutTimeline = view.findViewById(R.id.layout_timeline)
+
         initUI()
 
         return view
@@ -81,6 +89,8 @@ class ProcessTimelineFragment(
         layoutStageControl.addView(processTriangleBar)
 
         setTileView(currentStatus)
+
+        setTimelineView();
 
         imgPrev.setOnClickListener {
             if (currentStatus > 0) {
@@ -157,5 +167,28 @@ class ProcessTimelineFragment(
         txtStageIcon.setTextColor(Color.parseColor(Utility.getStageClientTileIconColor(stage.clientTileIconColor)))
 
         layoutTile.setBackgroundResource(Utility.getTileBackgroundResourceByStatus(stage.clientTileBackgroundColor))
+    }
+
+    private fun setTimelineView() {
+        for (timeline in timelineList) {
+            if (timeline.type == Enums.TimelineType.INTERVIEW.value) {
+
+                val interviewDate: Date? = HCDate.convertUTCDateStringToLocal(timeline.dateTime.safeValue(), null)
+
+                if (interviewDate == null) {
+                    val tView: TimelineInterviewMapTileView = TimelineInterviewMapTileView(context!!, this, timeline)
+                    layoutTimeline.addView(tView)
+                } else {
+                    if ((System.currentTimeMillis() - interviewDate.time) <= 3600 * 1000) {
+//                        val tView: TimelineInterviewFeedbackTileView = TimelineInterviewFeedbackTileView(context!!, this, timeline)
+//                        layoutTimeline.addView(tView)
+                    } else {
+                        val tView: TimelineInterviewMapTileView = TimelineInterviewMapTileView(context!!, this, timeline)
+                        layoutTimeline.addView(tView)
+                    }
+                }
+
+            }
+        }
     }
 }

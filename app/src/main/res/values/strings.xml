@@ -180,6 +180,7 @@
     <string name="date_tbc">Date TBC</string>
     <string name="location_tbc">Location</string>
     <string name="interviewers_tbc">Interviewers TBC</string>
+    <string name="interviewers">Interviewers</string>
     <string name="completed_on">Completed on %1$s</string>
     <string name="candidate_feedback">Candidate Feedback</string>
     <string name="interviewer_feedback">Interviewer Feedback</string>

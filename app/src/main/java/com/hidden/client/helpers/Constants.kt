@@ -120,4 +120,9 @@ object Enums {
         APPROVE("ACCEPTED"),
         REJECT("REJECTED")
     }
+
+    enum class TimelineType(val value: String) {
+        INTERVIEW("INTERVIEW"),
+        SHORTLISTED("SHORTLISTED")
+    }
 }
