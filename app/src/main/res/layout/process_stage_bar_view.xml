@@ -1,70 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/layout_stage_init"
+        <ImageView
+            android:id="@+id/img_stage_init"
             android:layout_width="0dp"
             android:layout_height="8dp"
-            android:orientation="horizontal"
             android:layout_weight="1"
             android:background="@drawable/progress_item_complete"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_first_interview"
+        <ImageView
+            android:id="@+id/img_stage_first_interview"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_red"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_further_interview"
+        <ImageView
+            android:id="@+id/img_stage_further_interview"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_incomplete"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_final_interview"
+        <ImageView
+            android:id="@+id/img_stage_final_interview"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_incomplete"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_offer_stage"
+        <ImageView
+            android:id="@+id/img_stage_offer_stage"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_incomplete"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_offer_accepted_stage"
+        <ImageView
+            android:id="@+id/img_stage_offer_accepted_stage"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_incomplete"/>
 
-        <LinearLayout
-            android:id="@+id/layout_stage_started"
+        <ImageView
+            android:id="@+id/img_stage_started"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/list_row_margin_default"
             android:background="@drawable/progress_item_incomplete"/>
 
 </LinearLayout>

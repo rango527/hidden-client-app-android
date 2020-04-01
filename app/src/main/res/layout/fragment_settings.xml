@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/button_back_to_dashboard"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/jobSettings"
+        android:text="@string/settings"
         android:textColor="@color/colorBlack_1"
         android:textSize="@dimen/text_title"
         android:layout_marginTop="@dimen/activity_vertical_margin"/>

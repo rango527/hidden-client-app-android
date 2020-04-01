@@ -7,34 +7,10 @@
     </plurals>
 
     <plurals name="shortlists_profile_count">
-        <item quantity="zero">Sorry, there are no new profiles in your various shortlists</item>
-        <item quantity="one">Please review the new profile in your various shortlists</item>
-        <item quantity="two">Please review the 2 new profiles in your various shortlists</item>
-        <item quantity="other">Please review the %1$d new profiles in your various shortlists</item>
+        <item quantity="zero">Sorry, there are no new profiles in your\r\nvarious shortlists</item>
+        <item quantity="one">Please review the new profile in your\nCreative Director shortlist</item>
+        <item quantity="other">Please review the %d new profiles in your\nCreative Director shortlist</item>
     </plurals>
 
-    <plurals name="shortlist_reviewer">
-        <item quantity="zero">Shortlist Reviewer</item>
-        <item quantity="one">Shortlist Reviewer</item>
-        <item quantity="other">Shortlist Reviewers</item>
-    </plurals>
-
-    <plurals name="interviewer">
-        <item quantity="zero">Interviewer</item>
-        <item quantity="one">Interviewer</item>
-        <item quantity="other">Interviewers</item>
-    </plurals>
-
-    <plurals name="interviewer_advancer">
-        <item quantity="zero">Interview Advancer</item>
-        <item quantity="one">Interview Advancer</item>
-        <item quantity="other">Interview Advancers</item>
-    </plurals>
-
-    <plurals name="offer_manager">
-        <item quantity="zero">Offer Manager</item>
-        <item quantity="one">Offer Manager</item>
-        <item quantity="other">Offer Managers</item>
-    </plurals>
 
 </resources>

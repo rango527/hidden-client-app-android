@@ -1,160 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activities.ProcessActivity">
+    android:id="@+id/swipeContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.HCProcessActivity">
 
-    <data class="ProcessDetailBinding">
-        <variable
-            name="viewModel"
-            type="com.hidden.client.ui.viewmodels.main.ProcessDetailVM" />
-    </data>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient_red">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_gradient_red">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:scrollbars="none">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@id/button_back"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:scrollbars="none">
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/layout_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/man"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="@dimen/text_title"
+                        android:textStyle="bold"
+                        android:text="Minnie Daniels"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+
+                    <TextView
+                        android:id="@+id/text_for"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/text_name"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:textColor="@color/colorWhite_1"
+                        android:text="For: Account Director, New York, NY"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/list_row_margin_default"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:id="@+id/layout_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_default"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/img_photo"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@{viewModel.candidateAvatar, default=@drawable/man}"
-                            android:layout_gravity="center_horizontal"/>
-
-                        <TextView
-                            android:id="@+id/text_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                            android:textColor="@color/colorWhite_1"
-                            android:textSize="29sp"
-                            app:mutableText="@{viewModel.getCandidateFullName()}"/>
-
-                        <TextView
-                            android:id="@+id/text_for"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/list_row_margin_default"
-                            android:textColor="@color/colorWhite_1"
-                            android:textSize="16sp"
-                            app:mutableText="@{viewModel.getJobTitle()}"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_name" />
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/list_row_margin_default"
+                    android:layout_marginRight="@dimen/list_row_margin_default">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/activity_vertical_margin"
-                        android:layout_marginLeft="@dimen/list_row_margin_default"
-                        android:layout_marginRight="@dimen/list_row_margin_default">
-
-                        <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/text_process"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/text_process"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/colorBlack_2"
-                                android:background="@drawable/panel_top_rounded_border_small"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:text="@string/process"
-                                android:paddingTop="@dimen/text_padding"
-                                android:paddingBottom="@dimen/menu_padding_vertical_default"
-                                android:textSize="@dimen/textview_bold"
-                                android:textStyle="bold"
-                                android:textAllCaps="true"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/text_message"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/colorWhite_1"
-                                android:text="@string/messages"
-                                android:textSize="@dimen/textview_bold"
-                                android:textStyle="bold"
-                                android:textAllCaps="true"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:paddingTop="@dimen/text_padding"
-                                android:paddingBottom="@dimen/menu_padding_vertical_default"
-                                android:background="@android:color/transparent"/>
-                        </LinearLayout>
+                            android:layout_height="match_parent"
+                            android:textColor="@color/colorBlack_2"
+                            android:background="@drawable/panel_top_rounded_border_small"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/process"
+                            android:paddingTop="@dimen/text_padding"
+                            android:paddingBottom="@dimen/menu_padding_vertical_default"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"/>
                     </LinearLayout>
-                    <FrameLayout
-                        android:id="@+id/fragment_process"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0"
-                        android:layout_marginTop="-2dp"/>
-
-
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/text_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/colorWhite_1"
+                            android:text="@string/messages"
+                            android:textSize="@dimen/textview_bold"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:paddingTop="@dimen/text_padding"
+                            android:paddingBottom="@dimen/menu_padding_vertical_default"
+                            android:background="@android:color/transparent"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </ScrollView>
+                <FrameLayout
+                    android:id="@+id/fragment_process"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:layout_marginTop="-2dp"/>
 
-            <ImageButton
-                android:id="@+id/button_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="@string/image_description_back"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/arrow_left"
-                android:background="@drawable/button_circle"
-                android:layout_marginTop="17dp"
-                android:layout_marginStart="24dp" />
 
-            <ImageView
-                android:id="@+id/img_process_setting"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="24dp"
-                android:contentDescription="@string/jobSettings"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_settings_white" />
+            </LinearLayout>
+        </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</layout>
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/image_description_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow_left"
+            android:background="@drawable/button_circle"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_default" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

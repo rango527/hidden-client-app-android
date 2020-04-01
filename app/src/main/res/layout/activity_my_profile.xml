@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite_1"
-    tools:context=".ui.activities.jobSettings.HCMyProfileActivity">
+    tools:context=".ui.activities.settings.HCMyProfileActivity">
 
     <ImageView
         android:id="@+id/image_close"
@@ -46,7 +46,6 @@
             android:layout_marginTop="@dimen/margin_default"/>
 
         <Button
-            android:id="@+id/button_choose_photo"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_black_12"
@@ -71,19 +70,14 @@
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"
                 android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/edit_name"
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:background="@color/colorWhite_1"
-                android:text="Akio Den"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:lines="1"/>
+                android:text="Akio Den"/>
         </LinearLayout>
 
         <LinearLayout
@@ -102,19 +96,14 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"/>
-            <EditText
-                android:id="@+id/edit_email"
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:background="@color/colorWhite_1"
-                android:text="akeno.den@protonmail.com"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:lines="1"/>
+                android:text="akeno.den@protonmail.com"/>
         </LinearLayout>
 
         <LinearLayout
@@ -133,19 +122,14 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/textview_bold"
                 android:textColor="@color/colorBlack_1"/>
-            <EditText
-                android:id="@+id/edit_title"
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorBlack_1"
-                android:background="@color/colorWhite_1"
                 android:textSize="@dimen/textview_bold"
                 android:gravity="end"
-                android:text="Developer"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:lines="1"/>
+                android:text="Developer"/>
         </LinearLayout>
 
     </LinearLayout>

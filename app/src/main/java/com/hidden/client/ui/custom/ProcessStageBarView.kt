@@ -1,47 +1,29 @@
 package com.hidden.client.ui.custom
 
-import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.util.AttributeSet
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.hidden.client.R
-import com.hidden.client.helpers.Utility
-import com.hidden.client.models.entity.ProcessEntity
 
-@SuppressLint("ViewConstructor")
-class ProcessStageBarView (context: Context, process: ProcessEntity): LinearLayout(context) {
+class ProcessStageBarView (context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
 
     init {
         inflate(context, R.layout.process_stage_bar_view, this)
 
-        val stageList = process.getStageList()
+        val imgInit: ImageView = findViewById(R.id.img_stage_init)
+        var imgFirstInterview: ImageView = findViewById(R.id.img_stage_first_interview)
+        var imgFurtherInterview: ImageView = findViewById(R.id.img_stage_further_interview)
+        var imgFinalInterview: ImageView = findViewById(R.id.img_stage_final_interview)
+        var imgOfferStage: ImageView = findViewById(R.id.img_stage_offer_stage)
+        var imgOfferAcceptedStage: ImageView = findViewById(R.id.img_stage_offer_accepted_stage)
+        var imgStarted: ImageView = findViewById(R.id.img_stage_started)
 
-        val initStage = stageList[0]
-        val firstInterviewStage = stageList[1]
-        val furtherInterviewStage = stageList[2]
-        val finalInterviewStage = stageList[3]
-        val offerStage = stageList[4]
-        val offerAcceptedStage = stageList[5]
-        val startedStage = stageList[6]
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.ProcessStageBarView)
 
-        val layoutInit: LinearLayout = findViewById(R.id.layout_stage_init)
-        layoutInit.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(initStage.clientTileBackgroundColor))
-
-        val layoutFirstInterview: LinearLayout = findViewById(R.id.layout_stage_first_interview)
-        layoutFirstInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(firstInterviewStage.clientTileBackgroundColor))
-
-        val layoutFurtherInterview: LinearLayout = findViewById(R.id.layout_stage_further_interview)
-        layoutFurtherInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(furtherInterviewStage.clientTileBackgroundColor))
-
-        val layoutFinalInterview: LinearLayout = findViewById(R.id.layout_stage_final_interview)
-        layoutFinalInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(finalInterviewStage.clientTileBackgroundColor))
-
-        val layoutOfferStage: LinearLayout = findViewById(R.id.layout_stage_offer_stage)
-        layoutOfferStage.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(offerStage.clientTileBackgroundColor))
-
-        val layoutOfferAcceptedStage: LinearLayout = findViewById(R.id.layout_stage_offer_accepted_stage)
-        layoutOfferAcceptedStage.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(offerAcceptedStage.clientTileBackgroundColor))
-
-        val layoutStarted: LinearLayout = findViewById(R.id.layout_stage_started)
-        layoutStarted.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(startedStage.clientTileBackgroundColor))
+        attributes.recycle()
     }
 }

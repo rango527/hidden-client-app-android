@@ -5,24 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.hidden.client.R
-import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.extension.safeValue
 
 class HCSplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
-    private val splashDelay: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
+    private val SPLASH_DELAY: Long = 500   // 3 seconds (0.5 SEC FOR TEST)
 
-    private val mRunnable: Runnable = Runnable {
+    internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            if (AppPreferences.apiAccessToken.safeValue().isNotEmpty() && AppPreferences.myFullName.safeValue().isNotEmpty() && AppPreferences.myId.safeValue() != 0) {
-                val intent = Intent(applicationContext, HomeActivity::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(applicationContext, HCLoginActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
@@ -35,7 +28,7 @@ class HCSplashActivity : AppCompatActivity() {
         mDelayHandler = Handler()
 
         // Navigate with delay
-        mDelayHandler!!.postDelayed(mRunnable, splashDelay)
+        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
     }
 
     public override fun onDestroy() {

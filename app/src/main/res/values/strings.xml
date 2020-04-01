@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+<resources>
     <string name="app_name">HiddenClient</string>
 
     <!-- Image Description-->
@@ -18,21 +17,21 @@
     <string name="what_can_we_call_you">What can we call you?</string>
     <string name="next">Next</string>
     <string name="nice_to_meet_you">Nice to meet you Guy!\nWhere are you based?</string>
-    <string name="i_live">I live in…</string>
+    <string name="i_live">I live in...</string>
     <string name="pick_3_job_title">Pick 3 job titles that best describe what you do</string>
-    <string name="primarily_i_am">Primarily, I\'m a…</string>
-    <string name="i_am_also">I am also a…</string>
-    <string name="some_call_me">Some call me a…</string>
-    <string name="lets_talk_money">Let\'s talk money…</string>
-    <string name="my_current_salary">My current salary is…</string>
-    <string name="i_am_looking_for">I\'m looking for…</string>
+    <string name="primarily_i_am">Primarily, I\'m a...</string>
+    <string name="i_am_also">I am also a...</string>
+    <string name="some_call_me">Some call me a...</string>
+    <string name="lets_talk_money">Let\'s talk money...</string>
+    <string name="my_current_salary">My current salary is...</string>
+    <string name="i_am_looking_for">I\'m looking for...</string>
     <string name="where_can_we_find_your_work">Where can we find your work</string>
-    <string name="my_linked_url_is">My LinkedIn URL is…</string>
-    <string name="my_github_url_is">My Github URL is…</string>
-    <string name="my_dribble_url_is">My Dribble URL is…</string>
-    <string name="my_behance_url_is">My Behance URL is…</string>
+    <string name="my_linked_url_is">My LinkedIn URL is...</string>
+    <string name="my_github_url_is">My Github URL is...</string>
+    <string name="my_dribble_url_is">My Dribble URL is...</string>
+    <string name="my_behance_url_is">My Behance URL is...</string>
     <string name="how_can_we_reach_you">How can we reach you to discuss your profile?</string>
-    <string name="call_me">Call me on…</string>
+    <string name="call_me">Call me on...</string>
     <string name="last_step">Last step! Set a username and password for access to the app</string>
     <string name="super_secure_password">Super secure password</string>
     <string name="read_terms_of_service">I have read and accept the Hidden <a href="https://www.google.com">Terms of Service</a></string>
@@ -43,7 +42,7 @@
     <string name="popular_cities">Popular Cities</string>
     <string name="our_people">Our People</string>
 
-    <string name="jobSettings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="candidate_directory">Candidate Directory</string>
     <string name="edit_your_details">Edit Your Details</string>
     <string name="view_company_profiles">View Company Profile</string>
@@ -63,19 +62,25 @@
     <string name="once_more">Once More</string>
     <string name="privacy_statement">Privacy Statement</string>
     <string name="terms_service">Terms of Service</string>
-    <string name="snapshot">Snapshot</string>
 
     <string name="dashboard">DASHBOARD</string>
+    <string name="upcoming_interview">%1$s\'s upcoming interviews</string>
+    <string name="your_metrics">Your metrics</string>
+    <string name="company_metrics">Company metrics</string>
+    <string name="candidates_in_process">Candidates\nIn Process</string>
+    <string name="total_interviews_completed">Total Interviews\nCompleted</string>
+    <string name="shortlisted_candidates_received">Shortlisted\nCandidates Received</string>
+    <string name="shortlist_approve_percent">Shortlist Approve\n%</string>
+    <string name="average_feedback_received">Average Feedback\nReceived</string>
+    <string name="average_feedback_given">Average\nFeedback Given</string>
+    <string name="your_jobs">Your jobs</string>
+    <string name="colleagues_jobs">Colleagues\' jobs</string>
     <string name="at">at</string>
-    <string name="salary_range">£%1$s - £%2$s</string>
     <string name="what_hidden_says">What Hidden Says</string>
     <string name="view_company_profile">View the %1$s\nCompany Profile</string>
     <string name="has_worked_with">Has Worked With</string>
     <string name="portfolio">Portfolio</string>
-    <string name="highlights">Highlights</string>
     <string name="skills">Skills</string>
-    <string name="work_experience">Work Experience</string>
-    <string name="present">Present</string>
 
     <string name="shortlists">SHORTLISTS</string>
     <string name="refresh">Refresh</string>
@@ -83,26 +88,14 @@
     <string name="your_hidden_tribe_busy">Your Hidden Tribe is busy screening\ncandidates.\nCheck back later!</string>
     <string name="add_more">+%1$s more</string>
 
-    <!-- Approve -->
-    <string name="feedback_notice">To Approve %1$s, Please Give Us Some Quick Feedback</string>
-    <string name="feedback_notice2">"This goes to your Hidden Talent Partner and not to %1$s directly</string>
-    <string name="feedback_notice3">To Reject %1$s, Please Give Us Some Quick Feedback</string>
-    <string name="anything_else_to_add">Anything else to add?</string>
-    <string name="feedback_here">Add any other comments or \nfeedback here…</string>
-    <string name="approve">Approve</string>
-    <string name="reject">Reject</string>
-    <string name="feedback_success">Congratulations! you\'ve progressed %1$s to First Stage Interview</string>
-    <string name="back_to_shortlist">Back to shortlist</string>
-    <string name="give_interview_availability">Give interview availability</string>
-
-    <!-- Process -->
     <string name="processes">PROCESSES</string>
     <string name="for_">For</string>
     <string name="process">Process</string>
     <string name="messages">Messages</string>
 
-    <string name="add_interviewers_to_interview">%1$s interviewers to this interview with %2$s</string>
-    <string name="can_not_find_any_interviewers">Can \'t find who you\'re looking for? They might not be a Job Participant on this job or process <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
+    <string name="shortlisted">SHORTLISTED</string>
+    <string name="shortlist_stage">Shortlist Stage</string>
+    <string name="approved_guy">COMPLETE! You approved %1$s on %2$s</string>
 
     <string name="first_stage_interview">First Stage Interview</string>
     <string name="first_state_interview_description">Waiting for Guy\'s availability.\nYou\'ll get a notification when we\'ve confirmed the time/date</string>
@@ -129,10 +122,10 @@
 
     <string name="offer_accepted">Offer Accepted</string>
     <string name="offer_accepted_stage">OFFER ACCEPTED STAGE</string>
-    <string name="hold_your_horse">Hold your horses! Let\'s get the  offer to %1$s first…</string>
+    <string name="hold_your_horse">Hold your horses! Let\'s get the  offer to %1$s first...</string>
 
     <string name="started">Started</string>
-    <string name="hold_tight">Hold tight! I\'m sure %1$s will be starting with you soon…</string>
+    <string name="hold_tight">Hold tight! I\'m sure %1$s will be starting with you soon...</string>
 
     <string name="filter_by_job">FILTER_BY_JOB</string>
     <string name="all">All</string>
@@ -151,74 +144,22 @@
     <string name="view_process">View Process</string>
     <string name="job_and_location">For: %1$s, %2$s</string>
 
-    <!-- Job Setting -->
-    <string name="job_settings">Job Settings</string>c
-    <string name="shortlist_review_type">Shortlist Review Type</string>
-    <string name="shortlist_review_type_description">The shortlist review type is the workflow that you’re following for approving or rejecting new candidate submissions. There are 3 types to choose from: Unanimity, Majority or First Choice Rules. If you want to change your workflow or find out more, please get in touch with your Talent Partner</string>
-    <string name="shortlist_reviewers_description">These are the users who receive all new candidate submissions and who are responsible for approving or rejecting them</string>
-    <string name="interviewers_description">These are the users who can be added to interviews for processes associated with this job</string>
-    <string name="interview_advancers_description">Once an interview is completed, these users are responsible for entering whether the candidate is progressing or whether they are rejected. If there are multiple Interview Advancers, only one roleAvailableUser has to make a decision to keep things moving</string>
-    <string name="offer_manager_description">These users are the points of contact for gathering offer information. Users who are not Offer Managers will not see any of the offer details, nor will they be able to see any candidate’s salary on their profile, nor the salary on the job in question</string>
-    <string name="add_new_users_to">Add new users to:</string>
-    <string name="new_processes_only">New Processes Only</string>
-    <string name="old_new_processes_only">Old + New Processes</string>
-    <string name="no_user_manager_permission">Sorry, you don\'t have user manager permissions so cannot edit user responsibilities. Please get in touch with your colleagues below who do have the correct permissions. They can make the changes for you or can give you the permissions you need:</string>
-    <string name="add_them_here">Can\'t find who you\'re looking for? They might for on Hidden yet. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
-    <string name="job_title">%1$s in %2$s</string>
-    <string name="remove_role_note">Removing %1$s from the %2$s</string>
-    <string name="remove_from">Remove from:</string>
-
-    <!-- Process Setting -->
-    <string name="process_setting">Process Setting</string>
-    <string name="process_setting_note">Changing these settings will only affect this individual process with Andrea. If you want to change the settings for all candidates in process with this job, please change the <![CDATA[<font color="#66CC66">Job Settings</font>]]></string>
-    <string name="got_it">Got it</string>
-    <string name="remove">Remove</string>
-
     <string name="timeline">Timeline</string>
     <string name="waiting_for_candidate">Waiting for Candidate</string>
     <string name="view_your_feedback">View Your Feedback</string>
-    <string name="date">Date</string>
-    <string name="location">Location</string>
-    <string name="tbc">TBC</string>
-    <string name="completed_on">Completed on %1$s</string>
-    <string name="completed_feedback">Completed Feedback</string>
-    <string name="interviewer_feedback">Interviewer Feedback</string>
-    <string name="pulled_out">Pulled Out</string>
-    <string name="decision_pending">Decision Pending</string>
-    <string name="out_of_five">out of %1$s</string>
-    <string name="rejected">Rejected</string>
-    <string name="progression">Progression</string>
 
     <string name="reply_to_hidden_team">Reply to the Hidden team</string>
     <string name="send">Send</string>
 
-    <!-- Invite Accept -->
-    <string name="welcome_hidden_set_password">Welcome to Hidden! Set your password below to get started</string>
-    <string name="letsgo">Let\'s Go!</string>
+    <string name="live">LIVE</string>
 
     <!-- Placeholder -->
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
     <string name="set_password">Set Password</string>
     <string name="invite_code">Invite Code</string>
-    <string name="my_first_name">My first name is…</string>
-    <string name="my_last_name">My last name if you must…</string>
-
-    <!--  Photo Picker BottomDialog -->
-    <string name="select_new_photo">Select New Photo</string>
-    <string name="take_photo">Take Photo</string>
-    <string name="select_existing_photo">Select Existing Photo</string>
-    <string name="cancel">Cancel</string>
-
-    <!-- Error String -->
-    <string name="server_error">Internet Connection or Server Error</string>
-    <string name="unexpected_error">Unexpected Error</string>
-    <string name="login_error">Login Failed…</string>
-    <string name="retry">Retry</string>
-
-    <!-- Transition Name -->
-    <string name="job_cover_transition" />
-    <string name="job_logo_transition" />
+    <string name="my_first_name">My first name is...</string>
+    <string name="my_last_name">My last name if you must...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -226,10 +167,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="interviewers">Interviewers</string>
-    <string name="candidate_feedback">Candidate Feedback</string>
-    <string name="waiting_for_feedback">Waiting for feedback</string>
-    <string name="out_of_5">out of 5</string>
-    <string name="progressing">Progressing</string>
 
 </resources>

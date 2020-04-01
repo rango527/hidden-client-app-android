@@ -1,28 +1,30 @@
 package com.hidden.client.ui.activities.settings
 
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.webkit.WebView
+import android.text.Html
+import android.widget.TextView
 import android.widget.Toast
 import com.hidden.client.R
+import com.hidden.client.apis.RetrofitClient
 import com.hidden.client.datamodels.HCConsentResponse
 import com.hidden.client.enums.Consent
 import com.hidden.client.enums.UserType
-import com.hidden.client.networks.RetrofitClient
-import com.hidden.client.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_privacy_statement.*
+import com.hidden.client.ui.HCBaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HCTermsOfServiceActivity : BaseActivity() {
+class HCTermsOfServiceActivity : HCBaseActivity() {
 
-    private lateinit var txtTerms: WebView
+    private lateinit var txtTerms: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_terms_of_service)
 
-        txtTerms = findViewById(R.id.webview)
+        txtTerms = findViewById(R.id.text_value)
 
         initCloseButton()
 
@@ -38,7 +40,11 @@ class HCTermsOfServiceActivity : BaseActivity() {
                 ) {
 
                     if (response.isSuccessful) {
-                        webview.loadData(response.body()!!.content, "text/html", "utf-8")
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            txtTerms.setText(Html.fromHtml(response.body()!!.content, Html.FROM_HTML_MODE_COMPACT))
+                        } else {
+                            txtTerms.setText(Html.fromHtml(response.body()!!.content))
+                        }
                     } else {
                         Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
                     }
