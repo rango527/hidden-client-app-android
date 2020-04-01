@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/progress_item_incomplete"
+    android:background="@drawable/button_round_gray_12"
     android:paddingTop="@dimen/list_row_margin_default"
     android:paddingBottom="@dimen/list_row_margin_default"
     android:paddingLeft="@dimen/text_padding"
@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack_2"
+        android:textSize="10dp"
         android:textStyle="italic"
         android:text="Art Direction" />
 </LinearLayout>

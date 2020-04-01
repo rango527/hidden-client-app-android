@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment"
+        android:name="com.hidden.client.ui.fragments.home.dashboard.DashboardFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_shortlists" />
 
     <fragment
         android:id="@+id/navigation_shortlists"
-        android:name="com.hidden.client.ui.fragments.home.shortlists.HCShortlistsFragment"
+        android:name="com.hidden.client.ui.fragments.home.shortlists.ShortlistsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_home_dashboard" />
 

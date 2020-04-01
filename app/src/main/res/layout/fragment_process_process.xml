@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ui.fragments.process.HCProcessFragment">
+    tools:context=".ui.fragments.process.ProcessTimelineFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,97 +16,126 @@
         android:paddingBottom="@dimen/padding_default">
 
         <LinearLayout
+            android:id="@+id/layout_stage_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginRight="@dimen/margin_default">
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp">
 
-            <com.hidden.client.ui.custom.ProcessStageBarView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:process_stage="3"
-                app:process_status="2"/>
-
-            <com.hidden.client.ui.custom.ProcessStageTriangleView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:process_stage="3"
-                app:process_status="2"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginTop="-2dp">
 
             <ImageView
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/image_prev"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="13dp"
+                android:layout_height="62dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:src="@drawable/arrow_left" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_title"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_round_red"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round_red_12"
+                android:paddingTop="15dp"
+                android:paddingBottom="29dp"
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/text_stage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/first_stage_interview"
-                    android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                    android:textSize="@dimen/textview_bold"
+                    android:textSize="22sp"
                     android:textAllCaps="true"
-                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack_1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/menu_padding_vertical_default"
-                    android:background="@drawable/circle_white"
-                    android:layout_marginBottom="@dimen/margin_default"
+                    android:id="@+id/layout_image"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
+                    android:padding="15dp"
+                    android:background="@drawable/button_round_white_t"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal|center_vertical"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
-                    <ImageView
+                    app:layout_constraintTop_toBottomOf="@id/text_stage">
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/image_stage"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/waiting_blue"/>-->
+                    <TextView
+                        android:id="@+id/text_stage_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/calendar_red"/>
+                        android:textSize="50sp" />
+
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/text_availability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/give_availability"
                     android:textColor="@color/colorWhite_1"
                     android:textAllCaps="true"
+                    android:textSize="18sp"
                     android:background="@drawable/button_round_black_12"
-                    android:paddingLeft="@dimen/menu_padding_vertical_default"
-                    android:paddingRight="@dimen/menu_padding_vertical_default"
-                    android:paddingTop="@dimen/list_row_margin_default"
-                    android:paddingBottom="@dimen/list_row_margin_default"
+                    android:paddingLeft="28dp"
+                    android:paddingRight="28dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginTop="28dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_image"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+                <TextView
+                    android:id="@+id/text_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="COMPLETE! You approved\nAndrea on 03 June 2018"
+                    android:textColor="@color/colorWhite_1"
+                    android:textSize="20sp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:lineHeight="27dp"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_image"
+                    android:visibility="gone"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="@dimen/padding_default"
+                android:id="@+id/image_next"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="13dp"
+                android:layout_height="62dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:src="@drawable/arrow_right" />
 
         </LinearLayout>
@@ -124,6 +153,63 @@
             android:text="@string/timeline"
             android:textSize="@dimen/textview_bold"
             android:textColor="@color/colorBlack_2"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_interview_tile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/interview_tile_fragment"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment2"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment3"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment4"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment5"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment6"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <fragment
+            android:id="@+id/interview_tile_fragment7"
+            android:name="com.hidden.client.ui.fragments.process.InterviewTileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 

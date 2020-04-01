@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/interview_tile_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/panel_round_shadow_white_top"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/interview_tile_date_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:text="9:30 on 30th Match '20"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/interview_tile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:text="First Stage Interview"
+            android:textColor="@color/green"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/interview_tile_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:text="4 Elder Street, London, E1 6BT"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/interview_tile_interviwers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/interviewers"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/interview_tile_top_layout"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/interview_tile_interviews_count"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="12sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo_4"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignEnd="@id/interview_tile_interviews_count"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/fill_gray"
+            android:visibility="visible"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo_3"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignEnd="@id/img_photo_4"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/fill_gray"
+            android:visibility="visible"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo_2"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignEnd="@id/img_photo_3"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/fill_gray"
+            android:visibility="visible"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_photo_1"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignEnd="@id/img_photo_2"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/fill_gray"
+            android:visibility="visible"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/interview_tile_bottom_gmap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/interview_tile_top_layout"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/panel_round_shadow_gray_bottom"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/interview_tile_map_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/interview_tile_map_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/map_marker_green" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/interview_tile_bottom_feedback_layout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/interview_tile_top_layout"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/panel_round_shadow_purple_bottom"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="18dp"
+        android:visibility="visible" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/candidate_feedback"
+            android:textSize="15sp"
+            android:textColor="@color/colorWhite_1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:tint="@color/colorOrange_1"
+                android:src="@drawable/star_empty"
+                android:layout_weight="0.1" />
+
+            <TextView
+                android:id="@+id/interview_tile_candidate_waiting_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/waiting_for_feedback"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:paddingStart="5dp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/interview_tile_candidate_feedback_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/interview_tile_candidate_feedback_mark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="3.2"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/out_of_5"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/interview_tile_candidate_feedback_spin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/button_round_red"
+                        android:text="@string/pulled_out"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="11sp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/interviewer_feedback"
+            android:textSize="15sp"
+            android:textColor="@color/colorWhite_1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginStart="12dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:tint="@color/colorOrange_1"
+                android:src="@drawable/star_empty"
+                android:layout_weight="0.1" />
+
+            <TextView
+                android:id="@+id/interview_tile_interviewer_waiting_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/waiting_for_feedback"
+                android:paddingStart="5dp"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/interview_tile_interviewer_feedback_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/interview_tile_interviewer_feedback_mark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="3.2"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/out_of_5"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/interview_tile_interviewer_feedback_spin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/button_round_green"
+                        android:text="@string/progressing"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="11sp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -10,10 +10,15 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 
 import com.hidden.client.R
+import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
-import com.hidden.client.ui.activities.HCHomeActivity
+import com.hidden.client.ui.activities.HomeActivity
+import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
-import com.hidden.client.ui.fragments.home.dashboard.HCDashboardFragment
+import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
+import com.urbanairship.UAirship
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -24,76 +29,81 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         // Add OnClickListener
-        var imgBack: ImageButton = root.findViewById(R.id.button_back_to_dashboard);
+        val imgBack: ImageButton = root.findViewById(R.id.button_back_to_dashboard)
         imgBack.setOnClickListener(this)
 
-        var layoutCandidateDirectory: LinearLayout = root.findViewById(R.id.layout_candidate_directory);
-        layoutCandidateDirectory.setOnClickListener(this);
+        val layoutCandidateDirectory: LinearLayout = root.findViewById(R.id.layout_candidate_directory)
+        layoutCandidateDirectory.setOnClickListener(this)
 
-        var layoutEditDetails: LinearLayout = root.findViewById(R.id.layout_edit_your_detail);
-        layoutEditDetails.setOnClickListener(this);
+        val layoutEditDetails: LinearLayout = root.findViewById(R.id.layout_edit_your_detail)
+        layoutEditDetails.setOnClickListener(this)
 
-        var layoutViewCompanyProfile: LinearLayout = root.findViewById(R.id.layout_view_company_profile);
-        layoutViewCompanyProfile.setOnClickListener(this);
+        val layoutViewCompanyProfile: LinearLayout = root.findViewById(R.id.layout_view_company_profile)
+        layoutViewCompanyProfile.setOnClickListener(this)
 
-        var layoutTermsService: LinearLayout = root.findViewById(R.id.layout_terms_of_service);
-        layoutTermsService.setOnClickListener(this);
+        val layoutTermsService: LinearLayout = root.findViewById(R.id.layout_terms_of_service)
+        layoutTermsService.setOnClickListener(this)
 
-        var layoutPrivacyPolicy: LinearLayout = root.findViewById(R.id.layout_privacy_policy);
-        layoutPrivacyPolicy.setOnClickListener(this);
+        val layoutPrivacyPolicy: LinearLayout = root.findViewById(R.id.layout_privacy_policy)
+        layoutPrivacyPolicy.setOnClickListener(this)
 
-        var layoutResetPassword: LinearLayout = root.findViewById(R.id.layout_reset_password);
-        layoutResetPassword.setOnClickListener(this);
+        val layoutResetPassword: LinearLayout = root.findViewById(R.id.layout_reset_password)
+        layoutResetPassword.setOnClickListener(this)
 
-        var layoutLogout: LinearLayout = root.findViewById(R.id.layout_logout);
-        layoutLogout.setOnClickListener(this);
+        val layoutLogout: LinearLayout = root.findViewById(R.id.layout_logout)
+        layoutLogout.setOnClickListener(this)
 
         return root
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
-    }
-
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.button_back_to_dashboard -> {
-                activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, HCDashboardFragment()).commit()
+                activity!!.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, DashboardFragment()).commit()
             }
             R.id.layout_candidate_directory -> {
-                val intent = Intent(context, HCCandidateActivity::class.java)
+                val intent = Intent(context, CandidateListActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_edit_your_detail -> {
                 val intent = Intent(context, HCMyProfileActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_view_company_profile -> {
                 val intent = Intent(context, HCCompanyDetailActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_terms_of_service -> {
                 val intent = Intent(context, HCTermsOfServiceActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_privacy_policy -> {
                 val intent = Intent(context, HCPrivacyStatementActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_reset_password -> {
                 val intent = Intent(context, HCResetPasswordActivity::class.java)
                 startActivity(intent)
-                (activity as HCHomeActivity).overridePendingVTransitionEnter()
+                (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_logout -> {
 
+                AppPreferences.myFullName = ""
+                AppPreferences.apiAccessToken = ""
+                AppPreferences.myId = 0
+
+                UAirship.shared().namedUser.id = null
+                UAirship.shared().namedUser.forceUpdate()
+
+                val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
+                startActivity(intent)
+                HCGlobal.getInstance().currentActivity.finish()
             }
         }
     }
