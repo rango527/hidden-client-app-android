@@ -11,10 +11,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDate
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
@@ -23,8 +25,10 @@ import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
-import com.hidden.client.ui.custom.process.TimelineInterviewMapTileView
+import com.hidden.client.ui.custom.process.TimelineInterviewMapTileFragment
+import com.hidden.client.ui.custom.process.TimelineShortlistedTileView
 import java.util.*
+
 
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
@@ -170,24 +174,47 @@ class ProcessTimelineFragment(
     }
 
     private fun setTimelineView() {
-        for (timeline in timelineList) {
+        for ((index, timeline) in timelineList.withIndex()) {
+            val separator: Boolean = index != (timelineList.size - 1)
             if (timeline.type == Enums.TimelineType.INTERVIEW.value) {
 
                 val interviewDate: Date? = HCDate.convertUTCDateStringToLocal(timeline.dateTime.safeValue(), null)
 
                 if (interviewDate == null) {
-                    val tView: TimelineInterviewMapTileView = TimelineInterviewMapTileView(context!!, this, timeline)
-                    layoutTimeline.addView(tView)
+
+                    val tempLayout = LinearLayout(context)
+                    tempLayout.orientation = LinearLayout.HORIZONTAL;
+                    tempLayout.id = ViewCompat.generateViewId()
+
+                    childFragmentManager!!.beginTransaction().add(
+                        tempLayout.id, TimelineInterviewMapTileFragment.newInstance(timeline, separator),
+                        "tag$index"
+                    ).commit()
+
+                    layoutTimeline.addView(tempLayout)
                 } else {
-                    if ((System.currentTimeMillis() - interviewDate.time) <= 3600 * 1000) {
-//                        val tView: TimelineInterviewFeedbackTileView = TimelineInterviewFeedbackTileView(context!!, this, timeline)
-//                        layoutTimeline.addView(tView)
-                    } else {
-                        val tView: TimelineInterviewMapTileView = TimelineInterviewMapTileView(context!!, this, timeline)
+                    if ((System.currentTimeMillis() - interviewDate.time) > 3600 * 1000) {
+
+                        val tView = TimelineInterviewFeedbackTileView(context!!, timeline, separator)
                         layoutTimeline.addView(tView)
+
+                    } else {
+                        val tempLayout = LinearLayout(context)
+                        tempLayout.orientation = LinearLayout.HORIZONTAL;
+                        tempLayout.id = ViewCompat.generateViewId()
+
+                        childFragmentManager.beginTransaction().add(
+                            tempLayout.id, TimelineInterviewMapTileFragment.newInstance(timeline, separator),
+                            "tag$index"
+                        ).commit()
+
+                        layoutTimeline.addView(tempLayout)
                     }
                 }
 
+            } else if (timeline.type == Enums.TimelineType.SHORTLISTED.value) {
+                val tView = TimelineShortlistedTileView(context!!, process.candidateFullName, timeline, separator)
+                layoutTimeline.addView(tView)
             }
         }
     }

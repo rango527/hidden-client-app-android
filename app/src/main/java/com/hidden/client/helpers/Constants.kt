@@ -125,4 +125,9 @@ object Enums {
         INTERVIEW("INTERVIEW"),
         SHORTLISTED("SHORTLISTED")
     }
+
+    enum class FeedbackDecisionType(val value: String) {
+        PROGRESS("PROGRESS"),
+        REJECT("REJECT")
+    }
 }

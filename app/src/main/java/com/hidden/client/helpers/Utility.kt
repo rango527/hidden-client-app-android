@@ -74,4 +74,8 @@ object Utility {
         Enums.ColorType.GREY.value -> "#C8C8C8"
         else -> "#C8C8C8"
     }
+
+    fun getFirstNameFromFullName(fullName: String): String {
+        return fullName.split(" ")[0]
+    }
 }

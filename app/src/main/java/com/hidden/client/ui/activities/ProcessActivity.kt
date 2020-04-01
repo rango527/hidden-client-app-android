@@ -49,7 +49,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var imgPhoto: ImageView
 
-    private lateinit var swipeContainer: SwipeRefreshLayout
+//    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,10 +115,10 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         imgProcessSetting = findViewById(R.id.img_process_setting)
         imgProcessSetting.setOnClickListener(this)
 
-        swipeContainer = findViewById(R.id.swipeContainer)
-        swipeContainer.setOnRefreshListener {
-            swipeContainer.isRefreshing = false
-        }
+//        swipeContainer = findViewById(R.id.swipeContainer)
+//        swipeContainer.setOnRefreshListener {
+//            swipeContainer.isRefreshing = false
+//        }
     }
 
     override fun onClick(v: View?) {

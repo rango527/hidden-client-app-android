@@ -39,7 +39,6 @@ class HCGlobal{
 
     // Global variable
     lateinit var currentActivity: Activity           // current activity instance
-    var myInfo: HCLogin = HCLogin()                 // user info after login
 
     lateinit var currrentJobTitleList: ArrayList<HCJobDetailTileViewModel>
 
