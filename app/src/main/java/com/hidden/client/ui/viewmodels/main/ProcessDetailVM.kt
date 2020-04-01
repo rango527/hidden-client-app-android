@@ -110,6 +110,9 @@ HCGlobal.getInstance().log(processId.toString());
 
         timelineDao.deleteByProcessId(processId)
 
+        interviewParticipantDao.deleteByProcessId(processId)
+        feedbackIDDao.deleteByProcessId(processId)
+
         val timelineList: ArrayList<TimelineEntity> = arrayListOf()
         for (timeline in json) {
             val timelineEntity: TimelineEntity = timeline.toEntity(processId)
@@ -120,9 +123,6 @@ HCGlobal.getInstance().log(processId.toString());
 
                 val interviewParticipantList = timeline.toInterviewParticipantEntityList(id, processId)
                 val feedbackIdList = timeline.toFeedbackIDEntityList(id, processId)
-
-                interviewParticipantDao.deleteByProcessId(processId)
-                feedbackIDDao.deleteByProcessId(processId)
 
                 interviewParticipantDao.insertAll(*interviewParticipantList.toTypedArray())
                 feedbackIDDao.insertAll(*feedbackIdList.toTypedArray())
