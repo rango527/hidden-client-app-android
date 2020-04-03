@@ -103,4 +103,15 @@ interface ProcessApi {
         @Path("process_id") processId: Int,
         @Body body: RequestBody
     ): Observable<SimpleResponseJson>
+
+    /**
+     * Get Shortlist Feedback
+     * GET /client/processes/{process_id}/shortlist-feedback
+     */
+    @GET("client/processes/{process_id}/shortlist-feedback")
+    fun getShortlistFeedback(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ): Observable<ShortlistFeedbackJson>
+
 }

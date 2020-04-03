@@ -189,6 +189,7 @@
     <string name="out_of_five">out of 5</string>
     <string name="rejected">Rejected</string>
     <string name="progressing">Progressing</string>
+    <string name="none">None</string>
     <string name="waiting_for_feedback">Waiting for feedback</string>
     <string name="shortlisted">%1$s Shortlisted</string>
     <string name="shortlisted_on"><![CDATA[<font color="#000040">Shortlisted</font>]]> on %1$s %2$s at %3$s</string>
@@ -233,5 +234,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_test_maps">Map</string>
+    <string name="shortlist_feedback">Shortlist Feedback</string>
+    <string name="outcome">Outcome:</string>
+    <string name="vote">Vote:</string>
 
 </resources>

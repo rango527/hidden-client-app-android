@@ -17,6 +17,8 @@ import com.hidden.client.models.entity.*
     WorkExperienceEntity::class,
     ShortlistEntity::class,
     ShortlistCandidateEntity::class,
+//    ShortlistFeedbackEntity::class,
+//    ShortlistReviewerEntity::class,
     FeedbackEntity::class,
     FeedbackQuestionEntity::class,
     DashboardTileEntity::class,
@@ -29,7 +31,7 @@ import com.hidden.client.models.entity.*
     TimelineEntity::class,
     InterviewParticipantEntity::class,
     FeedbackIDEntity::class
-], version = APP.databaseVersion)
+], version = APP.databaseVersion, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun candidateDao(): CandidateDao

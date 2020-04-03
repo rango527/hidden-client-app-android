@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -164,6 +165,8 @@ class ProcessTimelineFragment(
                 "fonts/fontawesome_regular_pro.otf"
             )
             else Typeface.createFromAsset(context!!.assets, "fonts/fontawesome_solid_pro.otf")
+
+//        Log.i("stage", stage.toString() + ", " + stage.clientTileIconStyle + ", " + stage.clientTileIconCode + ", " + stage.clientTileIconColor)
 
         txtStageIcon.typeface = fontType
 

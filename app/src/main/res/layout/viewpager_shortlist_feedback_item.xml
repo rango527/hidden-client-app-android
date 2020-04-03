@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="ShortlistReviewerItemViewBinding">
+        <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.ShortlistReviewerViewVM" />
+    </data>
+
+        <LinearLayout
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:duplicateParentState="true"
+            android:clickable="false"
+            android:background="@drawable/layout_round_black"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true"
+                android:clickable="false">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_avatar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/view_company_profiles"
+                    android:src="@{viewModel.avatarImage, default=@drawable/man}"
+                    app:civ_border_color="@android:color/transparent"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:duplicateParentState="true"
+                    android:clickable="false" />
+
+                <TextView
+                    android:id="@+id/text_full_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@{viewModel.fullName}"
+                    android:textColor="@color/colorWhite_1"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/image_avatar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:duplicateParentState="true"
+                    android:clickable="false" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="1dp"
+                    android:duplicateParentState="true"
+                    android:clickable="false"
+                    app:layout_constraintLeft_toRightOf="@id/image_avatar"
+                    app:layout_constraintTop_toBottomOf="@id/text_full_name" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vote"
+                        android:textColor="@color/colorWhite_1"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="5dp" />
+
+                    <Button
+                        android:id="@+id/button_interviewer_feedback_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        android:background="@drawable/button_round_dark_gray_4"
+                        android:textColor="@color/colorWhite_1"
+                        android:text="@{viewModel.getVoteStatus()}"
+                        android:paddingLeft="11dp"
+                        android:paddingRight="11dp"
+                        android:textSize="12sp"
+                        android:lineHeight="16dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAllCaps="false"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/viewpager_feedback_question"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                app:adapter="@{viewModel.feedbackQuestionViewAdapter}"
+                android:padding="@dimen/padding_default"
+                android:visibility="visible"/>
+
+            <LinearLayout
+                android:id="@+id/viewpager_feedback_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_round_3"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="11dp"
+                    android:src="@drawable/comment_mark" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:text="@{viewModel.comment}"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite_1"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/viewpager_feedback_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:lineHeight="28sp"
+                android:text="Jenny Smith did not give feedback at a shortlist stage"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+</layout>

@@ -108,6 +108,18 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ) as T
         }
 
+        if (modelClass.isAssignableFrom(ShortlistFeedbackVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return ShortlistFeedbackVM(
+                context
+            ) as T
+        }
+
         /* ------------------------------------------------------------
           JobSettingVM
        -------------------------------------------------------------- */

@@ -50,6 +50,7 @@ abstract class RootVM: ViewModel() {
             // Shortlists
             is ShortlistListVM -> injector.inject(this)
             is ShortlistViewVM -> injector.inject(this)
+            is ShortlistFeedbackVM -> injector.inject(this)
 
             is ShortlistApproveCandidateVM -> injector.inject(this)
             is ShortlistRejectCandidateVM -> injector.inject(this)
