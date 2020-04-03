@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGreen_1"
+    tools:context=".ui.activities.shortlist.FeedbackDoneActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_avatar"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/man"
+        app:civ_border_color="@android:color/transparent"
+        app:civ_border_width="2dp"
+        android:layout_marginTop="87dp"/>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_avatar"
+        android:textSize="28sp"
+        android:text="Andrea Robinson"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="true"
+        android:textColor="@color/colorBlack_1"/>
+    <TextView
+        android:id="@+id/text_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_name"
+        android:textSize="16sp"
+        android:text="For"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorWhite_1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/text_job"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:background="@color/colorBlack_1">
+        
+        <TextView
+            android:id="@+id/text_congratulation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite_1"
+            android:text="@string/feedback_success"
+            android:lineHeight="38dp"
+            android:gravity="center_horizontal"
+            android:textSize="28sp"
+            android:layout_marginTop="60dp"/>
+
+        <Button
+            android:id="@+id/button_back_to_shortlist"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/back_to_shortlist"
+            android:textSize="20sp"
+            android:lineHeight="27dp"
+            android:background="@drawable/button_round_dark_gray"
+            android:textColor="@color/colorWhite_1"/>
+        <Button
+            android:id="@+id/button_give_interview_availability"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="33dp"
+            android:text="@string/give_interview_availability"
+            android:textSize="20sp"
+            android:lineHeight="27dp"
+            android:background="@drawable/button_round_purple"
+            android:textColor="@color/colorWhite_1"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

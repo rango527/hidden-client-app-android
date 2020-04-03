@@ -5,11 +5,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 
-class HCImageVH : RecyclerView.ViewHolder {
+class HCImageVH(rv: View) : RecyclerView.ViewHolder(rv) {
 
-    var img: ImageView
+    var img: ImageView = rv.findViewById(R.id.img) as ImageView
 
-    constructor(rv: View) : super(rv) {
-        img = rv.findViewById(R.id.img) as ImageView
-    }
 }

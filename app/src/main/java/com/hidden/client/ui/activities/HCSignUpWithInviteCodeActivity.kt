@@ -16,21 +16,20 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
 
         // Get the widgets
         val textAlreadyMember = findViewById<TextView>(R.id.text_already_a_member)
-        var textNotHaveCode = findViewById<TextView>(R.id.text_not_have_code)
-        var buttonGetStarted = findViewById<Button>(R.id.button_get_start)
+        val textNotHaveCode = findViewById<TextView>(R.id.text_not_have_code)
+        val buttonGetStarted = findViewById<Button>(R.id.button_get_start)
 
         // Set a click listener
-        textAlreadyMember.setOnClickListener(this);
-        textNotHaveCode.setOnClickListener(this);
-        buttonGetStarted.setOnClickListener(this);
+        textAlreadyMember.setOnClickListener(this)
+        textNotHaveCode.setOnClickListener(this)
+        buttonGetStarted.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        val id = v!!.id
 
-        when(id){
+        when(v!!.id){
             R.id.text_already_a_member->{
-                val intent = Intent(applicationContext, HCLoginActivity::class.java)
+                val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

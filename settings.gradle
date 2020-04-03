@@ -1,2 +1,7 @@
-include ':app'
+include ':app', ':androidswipelayout',
+        ':horizontalswipelayout',
+        ':urbanairship-core',
+        ':urbanairship-fcm',
+        ':urbanairship-preference'
+
 rootProject.name='HiddenClient'

@@ -15,4 +15,9 @@
         <attr name="process_stage" format="integer" />
         <attr name="process_status" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="SnapshotView">
+        <attr name="snapshot" format="string" />
+        <attr name="ellipsize" format="boolean" />
+    </declare-styleable>
 </resources>

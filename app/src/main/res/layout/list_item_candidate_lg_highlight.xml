@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="CandidateProjectLgItemBinding">
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.ProjectViewVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp">
+
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/img"
+            android:layout_width="152dp"
+            android:layout_height="120dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@{viewModel.getMainImage(), default=@drawable/man}"
+            android:scaleType="centerCrop"
+            app:cornerRadius="8dp"
+            app:roundedCorners="topLeft|topRight|bottomLeft|bottomRight"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

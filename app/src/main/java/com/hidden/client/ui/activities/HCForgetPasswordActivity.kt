@@ -16,15 +16,14 @@ class HCForgetPasswordActivity : AppCompatActivity(), View.OnClickListener {
         val buttonBackToLogin = findViewById<ImageButton>(R.id.button_backToLogin)
 
         // Set a click listener
-        buttonBackToLogin.setOnClickListener(this);
+        buttonBackToLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        val id = v!!.id
 
-        when(id){
+        when(v!!.id){
             R.id.button_backToLogin->{
-                val intent = Intent(applicationContext, HCLoginActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

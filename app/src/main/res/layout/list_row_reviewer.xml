@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="ReviewerItemBinding">
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.ReviewerViewVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_normal"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_photo1"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@{viewModel.getReviewerPhoto(), default=@drawable/man}"
+                app:civ_border_color="@android:color/transparent"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:mutableText="@{viewModel.getReviewerName()}"
+                app:layout_constraintLeft_toRightOf="@id/img_photo1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="17sp"
+                android:layout_marginStart="21dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.hidden.androidswipelayout.SwipeLayout
+            xmlns:swipe="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            swipe:leftEdgeSwipeOffset="0dp"
+            swipe:rightEdgeSwipeOffset="0dp"
+            android:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:tag="Bottom3"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <Button
+                    android:id="@+id/button_remove_reviewer"
+                    android:layout_width="94dp"
+                    android:layout_height="33dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/button_round_red"
+                    android:textColor="@color/colorWhite_1"
+                    android:textSize="12dp"
+                    android:text="@string/remove"
+                    android:textAllCaps="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_photo"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@{viewModel.getReviewerPhoto(), default=@drawable/man}"
+                    app:civ_border_color="@android:color/transparent"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:mutableText="@{viewModel.getReviewerName()}"
+                    app:layout_constraintLeft_toRightOf="@id/img_photo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/colorBlack_2"
+                    android:textSize="17sp"
+                    android:layout_marginStart="21dp"
+                    android:tag="Hover"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.hidden.androidswipelayout.SwipeLayout>
+    </LinearLayout>
+</layout>

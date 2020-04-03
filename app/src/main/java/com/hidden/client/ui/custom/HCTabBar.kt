@@ -1,7 +1,6 @@
 package com.hidden.client.ui.custom
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -69,8 +68,8 @@ class HCTabBar : LinearLayout, View.OnClickListener {
         val iv = view.findViewWithTag<ImageView>("tabIv$num")
         val tv = view.findViewWithTag<TextView>("tabTv$num")
 
-        var color: Int = ContextCompat.getColor(context, if (sel) R.color.colorBlack_1 else R.color.colorGray_3)
-        var img: Int = if (sel) selectedTabImages[num] else unSelectedTabImages[num]
+        val color: Int = ContextCompat.getColor(context, if (sel) R.color.colorBlack_1 else R.color.colorGray_3)
+        val img: Int = if (sel) selectedTabImages[num] else unSelectedTabImages[num]
 
         iv.setImageResource(img)
         tv.setTextColor(color)

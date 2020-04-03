@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="JobSettingBinding">
+        <import type="android.view.View" />
+        <import type="android.content.Context" />
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.JobSettingVM" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="9dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <!-- Close Start -->
+                <ImageView
+                    android:id="@+id/img_close"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/cancel"
+                    android:src="@drawable/ic_close"/>
+                <!-- Close End -->
+
+                <!-- Job Setting - Title Start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/job_settings"
+                        android:textColor="@color/colorBlack_1"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"
+                        android:textSize="26sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:mutableText="@{viewModel.jobTitle}"
+                        android:textColor="@color/colorBlack_1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:textSize="17sp"/>
+
+                </LinearLayout>
+                <!-- Job Setting - Title End -->
+
+                <!-- Job Setting - Review Type -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/shortlist_review_type"
+                            android:textColor="@color/colorBlack_1"
+                            android:textStyle="bold"
+                            android:textSize="20sp"/>
+
+                        <ImageView
+                            android:id="@+id/img_shortlist_review_text_tip"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/question"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:mutableText="@{viewModel.reviewText}"
+                        android:textColor="@color/colorBlack_1"
+                        android:textSize="17sp"
+                        android:layout_marginTop="21dp"
+                        android:layout_marginBottom="5dp"/>
+
+                </LinearLayout>
+                <!-- Job Setting - Review type End -->
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="21dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="100dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp">
+
+                    <!-- Shortlist Interviewer List Start -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="21dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:mutableText="@{viewModel.shortlistReviewerText}"
+                                    android:textColor="@color/colorBlack_1"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"/>
+
+                                <ImageView
+                                    android:id="@+id/img_shortlist_reviewer_tip"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
+                                    android:src="@drawable/question" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/img_add_role_to_shortlist_reviewer"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
+                                android:src="@drawable/add_interviewer"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_shortlist_reviewer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            app:adapter="@{viewModel.getShortlistReviewerListAdapter}"
+                            android:nestedScrollingEnabled="false"/>
+
+                    </LinearLayout>
+                    <!-- Shortlist Interviewer List End -->
+
+                    <!-- Interviewers List Start -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="43dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:mutableText="@{viewModel.interviewerText}"
+                                    android:textColor="@color/colorBlack_1"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"/>
+
+                                <ImageView
+                                    android:id="@+id/img_interviewer_tip"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
+                                    android:src="@drawable/question" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/img_add_role_to_interviewer"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
+                                android:src="@drawable/add_interviewer"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_interviewer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:nestedScrollingEnabled="false"
+                            app:adapter="@{viewModel.getInterviewerListAdapter}"/>
+
+                    </LinearLayout>
+                    <!-- Interviewers End -->
+
+                    <!-- Interview Advancer List Start -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="43dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:mutableText="@{viewModel.interviewAdvancerText}"
+                                    android:textColor="@color/colorBlack_1"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"/>
+
+                                <ImageView
+                                    android:id="@+id/img_interview_advancer_tip"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
+                                    android:src="@drawable/question" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/img_add_role_to_interview_advancer"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
+                                android:src="@drawable/add_interviewer"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_interview_advancer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:nestedScrollingEnabled="false"
+                            app:adapter="@{viewModel.getInterviewAdvancerListAdapter}"/>
+
+                    </LinearLayout>
+                    <!-- Interview Advancer End -->
+
+                    <!-- Offer Manager Start -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="43dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:mutableText="@{viewModel.offerManagerText}"
+                                    android:textColor="@color/colorBlack_1"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"/>
+
+                                <ImageView
+                                    android:id="@+id/img_offer_manager_tip"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginStart="15dp"
+                                    android:src="@drawable/question" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/img_add_role_to_offer_manager"
+                                android:layout_width="29dp"
+                                android:layout_height="29dp"
+                                android:src="@drawable/add_interviewer"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_offer_manager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:nestedScrollingEnabled="false"
+                            app:adapter="@{viewModel.getOfferManagerListAdapter}"/>
+
+                    </LinearLayout>
+                    <!-- Interviewers End -->
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

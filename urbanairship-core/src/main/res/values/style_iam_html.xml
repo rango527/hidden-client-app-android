@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="UrbanAirship.InAppHtml" />
+
+    <!-- Default Activity -->
+    <style name="UrbanAirship.InAppHtml.Activity">
+        <item name="android:windowBackground">@android:drawable/screen_background_dark_transparent
+        </item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.Activity.Fullscreen">
+        <item name="android:windowAnimationStyle">@android:style/Animation.Activity</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.Layout">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.Layout.Fullscreen"></style>
+
+    <style name="UrbanAirship.InAppHtml.Content">
+        <item name="android:elevation" tools:ignore="NewApi">24dp</item>
+        <item name="urbanAirshipMaxWidth">420dp</item>
+        <item name="urbanAirshipMaxHeight">700dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginTop">48dp</item>
+        <item name="android:layout_marginBottom">48dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.Content.Fullscreen">
+        <item name="android:elevation" tools:ignore="NewApi">0dp</item>
+        <item name="urbanAirshipMaxWidth">0dp</item>
+        <item name="urbanAirshipMaxHeight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.DismissButton">
+        <item name="android:background">@drawable/ua_iam_dismiss_background</item>
+        <item name="android:src">@drawable/ua_ic_close_white</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_gravity">top|end</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.WebView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="UrbanAirship.InAppHtml.Progress">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

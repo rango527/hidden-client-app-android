@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="HCProcessBinding">
+    <data class="ProcessItemBinding">
         <import type="android.view.View" />
         <variable
-            name="process_model"
-            type="com.hidden.client.ui.viewmodels.HCProcessViewModel" />
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.ProcessViewVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:id="@+id/img_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@{process_model.getProcess().candidatePhoto, default=@drawable/man}"
+            android:src="@{viewModel.candidateAvatar, default=@drawable/man}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -35,7 +35,7 @@
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/colorBlack_2"
-            android:text="@{process_model.getProcess().candidateName}"
+            android:text="@{viewModel.candidateName}"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
@@ -47,7 +47,7 @@
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toBottomOf="@id/text_name"
             android:textColor="@color/colorBlack_2"
-            android:text="@{@string/job_and_location(process_model.getProcess().candidateJob, process_model.getProcess().candidateLocation)}"
+            android:text="@{@string/job_and_location(viewModel.jobTitle, viewModel.candidateCityName)}"
             android:layout_marginLeft="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
 
