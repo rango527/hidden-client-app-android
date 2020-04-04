@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
-import com.hidden.client.models_.HCLogin
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 

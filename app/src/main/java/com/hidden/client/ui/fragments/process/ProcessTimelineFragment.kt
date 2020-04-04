@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDate
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
@@ -29,7 +27,6 @@ import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
 import com.hidden.client.ui.custom.process.TimelineInterviewMapTileFragment
 import com.hidden.client.ui.custom.process.TimelineShortlistedTileView
 import java.util.*
-
 
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
@@ -95,7 +92,7 @@ class ProcessTimelineFragment(
 
         setTileView(currentStatus)
 
-        setTimelineView();
+        setTimelineView()
 
         imgPrev.setOnClickListener {
             if (currentStatus > 0) {
@@ -114,7 +111,7 @@ class ProcessTimelineFragment(
         }
     }
 
-    fun setTileView(status: Int) {
+    private fun setTileView(status: Int) {
         val stage = process.getStageList()[status]
 
         txtStage.text = stage.clientTileTitle
@@ -186,10 +183,10 @@ class ProcessTimelineFragment(
                 if (interviewDate == null) {
 
                     val tempLayout = LinearLayout(context)
-                    tempLayout.orientation = LinearLayout.HORIZONTAL;
+                    tempLayout.orientation = LinearLayout.HORIZONTAL
                     tempLayout.id = ViewCompat.generateViewId()
 
-                    childFragmentManager!!.beginTransaction().add(
+                    childFragmentManager.beginTransaction().add(
                         tempLayout.id, TimelineInterviewMapTileFragment.newInstance(timeline, separator),
                         "tag$index"
                     ).commit()
@@ -203,7 +200,7 @@ class ProcessTimelineFragment(
 
                     } else {
                         val tempLayout = LinearLayout(context)
-                        tempLayout.orientation = LinearLayout.HORIZONTAL;
+                        tempLayout.orientation = LinearLayout.HORIZONTAL
                         tempLayout.id = ViewCompat.generateViewId()
 
                         childFragmentManager.beginTransaction().add(

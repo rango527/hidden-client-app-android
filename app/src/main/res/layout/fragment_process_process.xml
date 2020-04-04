@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorWhite_1"
-        android:paddingTop="@dimen/padding_default"
+        android:paddingTop="35dp"
         android:paddingBottom="@dimen/padding_default">
 
         <LinearLayout
@@ -22,7 +22,6 @@
             android:orientation="vertical"
             android:layout_marginLeft="26dp"
             android:layout_marginRight="26dp">
-
         </LinearLayout>
 
         <LinearLayout
@@ -30,7 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="-2dp">
+            android:layout_marginTop="-22dp">
 
             <ImageView
                 android:id="@+id/image_prev"
@@ -75,11 +74,6 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_stage">
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_stage"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:src="@drawable/waiting_blue"/>-->
                     <TextView
                         android:id="@+id/text_stage_icon"
                         android:layout_width="wrap_content"
@@ -119,6 +113,7 @@
                     android:paddingBottom="8dp"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
+                    android:textStyle="italic"
                     android:lineHeight="27dp"
                     android:layout_marginTop="28dp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -165,7 +160,7 @@
             android:orientation="vertical"
             android:paddingStart="9dp"
             android:paddingEnd="9dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="12dp">
         </LinearLayout>
     </LinearLayout>
 

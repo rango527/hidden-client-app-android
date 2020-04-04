@@ -4,15 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hidden.client.models_.HCJobDetailTile
 
-class HCJobDetailTileViewModel: ViewModel {
-
-    private lateinit var jobDetailTile: HCJobDetailTile
-
-    constructor() : super()
-
-    constructor(jobDetailTile: HCJobDetailTile) : super() {
-        this.jobDetailTile = jobDetailTile
-    }
+class HCJobDetailTileViewModel(private var jobDetailTile: HCJobDetailTile) : ViewModel() {
 
     fun getJobDetailTile(): HCJobDetailTile {
         return this.jobDetailTile
@@ -27,7 +19,7 @@ class HCJobDetailTileViewModel: ViewModel {
 
     fun setJobDetailTileList(jobDetailTileList: List<HCJobDetailTile>) {
 
-        var tempJobList: ArrayList<HCJobDetailTileViewModel> = arrayListOf();
+        val tempJobList: ArrayList<HCJobDetailTileViewModel> = arrayListOf();
 
         for (job in jobDetailTileList) {
             tempJobList.add(HCJobDetailTileViewModel(job))

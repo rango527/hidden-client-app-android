@@ -26,10 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@id/button_back"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="53dp"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -41,22 +41,22 @@
                         android:id="@+id/layout_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_default"
                         android:orientation="vertical">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/img_photo"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_height="99dp"
                             android:src="@{viewModel.candidateAvatar, default=@drawable/man}"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
                             android:id="@+id/text_name"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center_horizontal|center_vertical"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                            android:layout_marginTop="9dp"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="29sp"
                             app:mutableText="@{viewModel.getCandidateFullName()}"/>
@@ -64,7 +64,8 @@
                         <TextView
                             android:id="@+id/text_for"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="22dp"
+                            android:gravity="center_vertical|center_horizontal"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/list_row_margin_default"
                             android:textColor="@color/colorWhite_1"
@@ -96,10 +97,10 @@
                                 android:background="@drawable/panel_top_rounded_border_small"
                                 android:gravity="center_horizontal|center_vertical"
                                 android:text="@string/process"
-                                android:paddingTop="@dimen/text_padding"
-                                android:paddingBottom="@dimen/menu_padding_vertical_default"
-                                android:textSize="@dimen/textview_bold"
                                 android:textStyle="bold"
+                                android:paddingTop="9dp"
+                                android:paddingBottom="9dp"
+                                android:textSize="18sp"
                                 android:textAllCaps="true"/>
                         </LinearLayout>
                         <LinearLayout
@@ -113,12 +114,12 @@
                                 android:layout_height="match_parent"
                                 android:textColor="@color/colorWhite_1"
                                 android:text="@string/messages"
-                                android:textSize="@dimen/textview_bold"
                                 android:textStyle="bold"
+                                android:textSize= "18sp"
                                 android:textAllCaps="true"
                                 android:gravity="center_horizontal|center_vertical"
-                                android:paddingTop="@dimen/text_padding"
-                                android:paddingBottom="@dimen/menu_padding_vertical_default"
+                                android:paddingTop="9dp"
+                                android:paddingBottom="9dp"
                                 android:background="@android:color/transparent"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -128,15 +129,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0"
                         android:layout_marginTop="-2dp"/>
-
-
                 </LinearLayout>
             </ScrollView>
 
             <ImageButton
                 android:id="@+id/button_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:contentDescription="@string/image_description_back"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -149,7 +148,7 @@
                 android:id="@+id/img_process_setting"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginEnd="24dp"
                 android:contentDescription="@string/jobSettings"
                 app:layout_constraintRight_toRightOf="parent"

@@ -47,10 +47,10 @@ object Utility {
 
     fun getTriangleBackgroundResourceByStatus(color: String): Int =
         when (color) {
-            Enums.ColorType.BLUE.value -> R.drawable.panel_triangle_blue
-            Enums.ColorType.GREEN.value -> R.drawable.panel_triangle_green
-            Enums.ColorType.GREY.value -> R.drawable.panel_triangle_gray
-            Enums.ColorType.RED.value -> R.drawable.panel_triangle_red
+            Enums.ColorType.BLUE.value -> R.drawable.panel_triangle_blue_round
+            Enums.ColorType.GREEN.value -> R.drawable.panel_triangle_green_round
+            Enums.ColorType.GREY.value -> R.drawable.panel_triangle_gray_round
+            Enums.ColorType.RED.value -> R.drawable.panel_triangle_red_round
             else -> R.drawable.panel_triangle_transparent
         }
 

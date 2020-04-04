@@ -4,15 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hidden.client.models_.HCWorkExperience
 
-class HCWorkExperienceViewModel: ViewModel {
-
-    private lateinit var workExperience: HCWorkExperience
-
-    constructor() : super()
-
-    constructor(workExperience: HCWorkExperience) : super() {
-        this.workExperience = workExperience
-    }
+class HCWorkExperienceViewModel(private var workExperience: HCWorkExperience) :
+    ViewModel() {
 
     fun getWorkExperience(): HCWorkExperience {
         return this.workExperience

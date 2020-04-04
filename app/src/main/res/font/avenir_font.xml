@@ -14,7 +14,7 @@
 
     <!-- italic -->
     <font
-        android:font="@font/avenir2"
+        android:font="@font/avenir_italic"
         android:fontStyle="italic"
         android:fontWeight="400"
 
