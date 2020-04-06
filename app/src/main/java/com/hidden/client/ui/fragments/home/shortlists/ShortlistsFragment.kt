@@ -155,7 +155,7 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
         }
 
         // View Pager
-        viewPagerShortlist = root.findViewById(R.id.viewpager_shortlist)
+        viewPagerShortlist = root.findViewById(R.id.viewpager_interviewer)
         indicator = root.findViewById(R.id.indicator)
 
         layoutBackground = root.findViewById(R.id.layout_background)

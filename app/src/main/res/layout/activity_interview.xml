@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.shortlist.InterviewActivity">
+
+    <data class="InterviewDetailBinding">
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.InterviewDetailVM" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite_1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="53dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/interview_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="36sp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="20dp"
+                        android:text="First Stage Interview with Andrea"
+                        android:textColor="@color/colorBlack_1"
+                        android:textSize="26sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:background="@drawable/button_round_light_gray_1x">
+
+                        <TextView
+                            android:id="@+id/interview_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:text="@string/interview_info"
+                            android:layout_weight="1"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="3dp"
+                            android:gravity="center"
+                            android:background="@drawable/button_round_white_1x"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/interview_feedback"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/interview_feedback"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/interview_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:layout_marginTop="1dp"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/image_description_back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/arrow_left"
+                android:background="@drawable/button_circle"
+                android:layout_marginTop="17dp"
+                android:layout_marginStart="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

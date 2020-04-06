@@ -1,6 +1,6 @@
 package com.hidden.client.models.json
 
-import android.util.Log
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -41,15 +41,15 @@ data class ShortlistFeedbackJson(
     fun toEntity(pProcessId: Int): ShortlistFeedbackEntity {
         return ShortlistFeedbackEntity(
             0,
-            submitted,
-            submittedAvailability,
-            type,
-            stageId,
-            description,
-            notes,
-            acceptedAt,
-            voteOutcome,
-            submittedAt,
+            submitted.safeValue(),
+            submittedAvailability.safeValue(),
+            type.safeValue(),
+            stageId.safeValue(),
+            description.safeValue(),
+            notes.safeValue(),
+            acceptedAt.safeValue(),
+            voteOutcome.safeValue(),
+            submittedAt.safeValue(),
             pProcessId
         )
     }
@@ -65,7 +65,7 @@ data class ShortlistFeedbackJson(
                 var pShortlistFeedbackId: Int = 0
                 if (feedbackReviewer.feedbackId!=null) pShortlistFeedbackId = feedbackReviewer.feedbackId!!
 
-                val questions = reviewer.toQuestionList(pShortlistFeedbackId, true)
+                val questions = reviewer.toQuestionList(pShortlistFeedbackId, false)
 
                 feedbackReviewer.setQuestionList(questions)
 

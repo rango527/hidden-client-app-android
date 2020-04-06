@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/interviewers"
+            android:textColor="@color/colorBlack_1"
+            android:textSize="20sp"
+            android:lineHeight="27sp"/>
+
+        <Button
+            android:id="@+id/interview_info_question"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/question"
+            android:backgroundTint="@color/colorCyan_2"
+            android:layout_gravity="top"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/interview_info_add_interviewer"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:background="@drawable/add_interviewer"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/interview_info_no_interviewers_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/interview_info_no_interviewers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_interviewers_sentence"
+            android:textColor="@color/colorBlack_1"
+            android:textSize="14sp"
+            android:lineHeight="19sp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginTop="35dp"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/interview_info_add_interviewer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_interviewers"
+            android:textColor="@color/colorWhite_1"
+            android:textSize="18sp"
+            android:background="@drawable/button_round_red_24"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="50dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/interview_info_interviewers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_padding_vertical_default"
+        android:padding="@dimen/padding_default"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/time_date"
+        android:layout_gravity="center"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="20sp"
+        android:lineHeight="27sp" />
+
+    <TextView
+        android:id="@+id/interview_info_just_confirming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/just_confirming_sentence"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="14sp"
+        android:lineHeight="19sp"
+        android:layout_margin="39dp"
+        android:textAlignment="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/interview_info_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="14:30"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:lineHeight="33sp"
+        android:layout_marginTop="29dp"/>
+
+    <TextView
+        android:id="@+id/interview_info_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tuesday 03 April 2020"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="17sp"
+        android:textAlignment="center"
+        android:lineHeight="23sp"
+        android:layout_marginBottom="39dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:layout_gravity="center"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="20sp"
+        android:lineHeight="27sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/interview_info_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/panel_round_gray_24"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="9dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/colorGray_1"
+            app:cardCornerRadius="24dp">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/panel_round_white_24"
+                android:visibility="gone"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/image_marker"
+            android:layout_width="25dp"
+            android:layout_height="39dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:elevation="2dp"
+            android:src="@drawable/pin_empty"
+            android:visibility="visible"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/interview_info_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First Floor, 4 Elder Street, Shoreditch London, E1 6BT"
+        android:textColor="@color/colorBlack_1"
+        android:textSize="17sp"
+        android:lineHeight="23sp"/>
+
+</LinearLayout>

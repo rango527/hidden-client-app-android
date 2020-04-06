@@ -10,7 +10,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.Utility
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 
@@ -28,7 +27,7 @@ class FeedbackQuestionListAdapter(val context: Context, val questionList: List<F
         holder?.textQuestion.text = questionList[position].question
         holder?.rating.setRating(questionList[position].score.toFloat())
 
-        // rating fontawsome icons
+        // rating font awesome icons
         val filledList: List<Boolean> =
             when(questionList[position].score) {
                 1 -> arrayListOf(true, false, false, false, false)
@@ -54,7 +53,7 @@ class FeedbackQuestionListAdapter(val context: Context, val questionList: List<F
         )
     }
 
-    private fun drawStarIcons(ratingIcons: List<TextView>, filledList: List<Boolean>) {
+    fun drawStarIcons(ratingIcons: List<TextView>, filledList: List<Boolean>) {
 
         var index = 0
         for (ratingIcon in ratingIcons) {

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp" >
+
+    <TextView
+        android:id="@+id/interview_feedback_waiting_feedback_sentence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/waiting_feedback_sentence"
+        android:textSize="14sp"
+        android:lineHeight="19sp"
+        android:textColor="@color/colorBlack_1"
+        android:textAlignment="center"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/interview_feedback_detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/candidate_feedback"
+            android:textSize="20sp"
+            android:lineHeight="27sp"
+            android:textColor="@color/colorBlack_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outcome"
+                android:layout_marginEnd="6dp"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="14sp"
+                android:lineHeight="19sp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/interview_info_candidate_feedback_status"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:background="@drawable/button_round_dark_gray_4"
+                android:text="@string/decision_pending"
+                android:textColor="@color/colorWhite_1"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp"
+                android:textSize="12sp"
+                android:lineHeight="16dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textAllCaps="false"
+                android:visibility="visible"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/interview_feedback_waiting_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waiting_for_feedback"
+            android:textColor="@color/colorBlack_1"
+            android:textSize="18sp"
+            android:lineHeight="28sp"
+            android:textAlignment="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="80dp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:id="@+id/interview_feedback_candidate_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loved the team and can really see myself working with them. If invited back for a further interview, count me in!"
+            android:textColor="@color/colorBlack_1"
+            android:textSize="14sp"
+            android:lineHeight="19sp"
+            android:textAlignment="center"
+            android:layout_marginTop="33dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginEnd="17dp" />
+
+        <LinearLayout
+            android:id="@+id/interview_feedback_average_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="50dp">
+
+            <TextView
+                android:id="@+id/text_stage_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginEnd="3dp"/>
+
+            <TextView
+                android:id="@+id/interview_feedback_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.2 out of 5"
+                android:textSize="18sp"
+                android:lineHeight="28sp"
+                android:textColor="@color/colorBlack_1" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/interviewer_feedback"
+            android:textSize="20sp"
+            android:lineHeight="27sp"
+            android:textColor="@color/colorBlack_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outcome"
+                android:layout_marginEnd="6dp"
+                android:textColor="@color/colorBlack_1"
+                android:textSize="14sp"
+                android:lineHeight="19sp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/interview_info_interviewer_feedback_status"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:background="@drawable/button_round_green_4"
+                android:text="@string/progressing"
+                android:textColor="@color/colorWhite_1"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp"
+                android:textSize="12sp"
+                android:lineHeight="16dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textAllCaps="false"
+                android:visibility="visible"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_has_shortlists"
+            android:layout_width="match_parent"
+            android:layout_height="722dp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:visibility="visible"
+            android:gravity="center">
+
+            <com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
+                android:id="@+id/swipe_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foregroundGravity="center_horizontal">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager_interviewer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp" />
+
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:padding="10dp"
+                    app:centered="true"
+                    app:fillColor="@color/colorGreen_1"
+                    app:pageColor="#fff"
+                    app:snap="false"
+                    android:layout_marginTop="25dp"/>
+
+            </com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

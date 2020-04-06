@@ -118,7 +118,7 @@
             android:foregroundGravity="center_horizontal">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager_shortlist"
+                android:id="@+id/viewpager_interviewer"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

@@ -1,11 +1,13 @@
 package com.hidden.client.ui.custom.process
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -20,8 +22,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDate
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.TimelineEntity
+import com.hidden.client.ui.activities.shortlist.InterviewActivity
+import com.hidden.client.ui.activities.shortlist.ShortlistFeedbackActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -30,7 +35,7 @@ import java.util.*
 class TimelineInterviewMapTileFragment(
     private val data: TimelineEntity,
     private val separator: Boolean
-) : Fragment(), OnMapReadyCallback {
+) : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private lateinit var txtDate: TextView
     private lateinit var txtInterview: TextView
@@ -46,6 +51,9 @@ class TimelineInterviewMapTileFragment(
     private lateinit var imgInterviewer2: CircleImageView
     private lateinit var imgInterviewer3: CircleImageView
     private lateinit var imgInterviewer4: CircleImageView
+
+    private lateinit var topLayout: LinearLayout
+    private lateinit var bottomLayout: ConstraintLayout
 
     var map: GoogleMap? = null
 
@@ -88,6 +96,9 @@ class TimelineInterviewMapTileFragment(
         imgInterviewer2 = view.findViewById(R.id.image_interviewer_2)
         imgInterviewer3 = view.findViewById(R.id.image_interviewer_3)
         imgInterviewer4 = view.findViewById(R.id.image_interviewer_4)
+
+        topLayout = view.findViewById(R.id.layout_timeline_interview_top)
+        bottomLayout = view.findViewById(R.id.layout_timeline_interview_bottom)
 
         initView()
 
@@ -168,6 +179,9 @@ class TimelineInterviewMapTileFragment(
                 }
             }
         }
+
+        topLayout.setOnClickListener(this)
+        bottomLayout.setOnClickListener(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -202,5 +216,28 @@ class TimelineInterviewMapTileFragment(
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    override fun onClick(v: View?) {
+
+        when(v!!.id) {
+            R.id.layout_timeline_interview_top -> {
+                startInterviewActivity()
+            }
+            R.id.layout_timeline_interview_bottom -> {
+                startInterviewActivity()
+            }
+        }
+    }
+
+    private fun startInterviewActivity() {
+
+        val intent = Intent(this.activity, InterviewActivity::class.java)
+        val processId = data.pProcessId!!
+        var interviewId = data.interviewId!!
+
+        intent.putExtra("processId", processId)
+        intent.putExtra("interviewId", interviewId)
+        startActivity(intent)
     }
 }

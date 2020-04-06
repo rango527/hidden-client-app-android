@@ -10,13 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
@@ -92,7 +90,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         viewModel.processId = processId
         HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail();
+        viewModel.loadProcessDetail()
 
         initUI()
     }

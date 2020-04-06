@@ -1,10 +1,8 @@
 package com.hidden.client.apis
 
-import com.google.gson.JsonObject
 import com.hidden.client.models.json.*
 import io.reactivex.Observable
 import okhttp3.RequestBody
-import org.json.JSONObject
 import retrofit2.http.*
 
 interface ProcessApi {
@@ -113,5 +111,16 @@ interface ProcessApi {
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int
     ): Observable<ShortlistFeedbackJson>
+
+    /**
+     * Get Interview
+     * GET /client/processes/{process_id}/interviews/{interview_id}
+     */
+    @GET("client/processes/{process_id}/interviews/{interview_id}")
+    fun getInterview(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("interview_id") interviewId: Int
+    ): Observable<InterviewJson>
 
 }

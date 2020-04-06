@@ -69,7 +69,8 @@ object Enums {
         SHORTLIST_REVIEWER(2),
         INTERVIEWER_ADVANCER(3),
         OFFER_MANAGER(4),
-        USER_MANAGER(5)
+        USER_MANAGER(5),
+        INTERVIEWER_DESCRIPTION(6)
     }
 
     enum class ReviewerTypeText(val value: String) {

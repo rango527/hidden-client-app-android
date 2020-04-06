@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="InterviewerItemViewBinding">
+        <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.InterviewerViewVM" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:duplicateParentState="true"
+        android:clickable="false"
+        android:background="@drawable/layout_round_black"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:clickable="false">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_avatar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/view_company_profiles"
+                android:src="@{viewModel.avatarImage, default=@drawable/man}"
+                app:civ_border_color="@android:color/transparent"
+                app:civ_border_width="2dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/text_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="30dp"
+                android:text="@{viewModel.fullName}"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/image_avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewpager_feedback_question"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:padding="@dimen/padding_default"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/viewpager_feedback_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_round_3"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="11dp"
+                android:src="@drawable/comment_mark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:text="@{viewModel.comment}"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viewpager_feedback_waiting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:lineHeight="28sp"
+                android:text="@string/waiting_for_feedback"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/btn_nudge_for_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_round_green_12"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="58dp"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="18sp"
+                android:text="@string/nudge_for_feedback"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viewpager_feedback_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:lineHeight="28sp"
+                android:text="@string/not_left_feedback"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/btn_give_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_round_red_24"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                android:layout_marginTop="58dp"
+                android:textColor="@color/colorWhite_1"
+                android:textSize="18sp"
+                android:text="@string/give_feedback"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

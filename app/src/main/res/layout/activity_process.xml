@@ -123,12 +123,14 @@
                                 android:background="@android:color/transparent"/>
                         </LinearLayout>
                     </LinearLayout>
+
                     <FrameLayout
                         android:id="@+id/fragment_process"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0"
                         android:layout_marginTop="-2dp"/>
+
                 </LinearLayout>
             </ScrollView>
 

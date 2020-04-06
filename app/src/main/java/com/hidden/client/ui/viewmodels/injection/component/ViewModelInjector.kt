@@ -35,6 +35,7 @@ interface ViewModelInjector {
     fun inject(shortlistApproveCandidateVM: ShortlistApproveCandidateVM)
     fun inject(shortlistRejectCandidateVM: ShortlistRejectCandidateVM)
     fun inject(shortlistFeedbackVM: ShortlistFeedbackVM)
+    fun inject(interviewDetailVM: InterviewDetailVM)
 
     // JobSetting
     fun inject(jobSettingVM: JobSettingVM)

@@ -2,6 +2,7 @@ package com.hidden.client.ui.custom.process
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -15,6 +16,8 @@ import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.TimelineEntity
+import com.hidden.client.ui.activities.shortlist.InterviewActivity
+import com.hidden.client.ui.activities.shortlist.ShortlistFeedbackActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -24,7 +27,8 @@ class TimelineInterviewFeedbackTileView(
     private val data: TimelineEntity,
     private val separator: Boolean
 ) :
-    LinearLayout(context) {
+    LinearLayout(context)
+    , View.OnClickListener {
 
     private var txtDate: TextView
     private var txtInterview: TextView
@@ -48,6 +52,9 @@ class TimelineInterviewFeedbackTileView(
     private var imgInterviewer2: CircleImageView
     private var imgInterviewer3: CircleImageView
     private var imgInterviewer4: CircleImageView
+
+    private var topLayout: LinearLayout
+    private var bottomLayout: LinearLayout
 
     init {
         inflate(context, R.layout.view_process_timeline_interview_feedback_tile, this)
@@ -74,6 +81,9 @@ class TimelineInterviewFeedbackTileView(
         imgInterviewer2 = findViewById(R.id.image_interviewer_2)
         imgInterviewer3 = findViewById(R.id.image_interviewer_3)
         imgInterviewer4 = findViewById(R.id.image_interviewer_4)
+
+        topLayout = findViewById(R.id.layout_timeline_interview_top)
+        bottomLayout = findViewById(R.id.layout_timeline_interview_bottom)
 
         initView()
     }
@@ -181,5 +191,31 @@ class TimelineInterviewFeedbackTileView(
                 Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer4)
             }
         }
+
+        topLayout.setOnClickListener(this)
+        bottomLayout.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+
+        when(v!!.id) {
+            R.id.layout_timeline_interview_top -> {
+                startInterviewActivity()
+            }
+            R.id.layout_timeline_interview_bottom -> {
+                startInterviewActivity()
+            }
+        }
+    }
+
+    private fun startInterviewActivity() {
+
+        val intent = Intent(HCGlobal.getInstance().currentActivity, InterviewActivity::class.java)
+        val processId = data.pProcessId!!
+        var interviewId = data.interviewId!!
+
+        intent.putExtra("processId", processId)
+        intent.putExtra("interviewId", interviewId)
+        HCGlobal.getInstance().currentActivity.startActivity(intent)
     }
 }

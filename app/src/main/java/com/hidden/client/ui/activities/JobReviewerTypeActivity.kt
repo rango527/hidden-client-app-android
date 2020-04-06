@@ -29,6 +29,7 @@ class JobReviewerTypeActivity : BaseActivity() {
             Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> txtReviewType.text = getString(R.string.interview_advancers_description)
             Enums.ReviewerType.INTERVIEWER.value -> txtReviewType.text = getString(R.string.interviewers_description)
             Enums.ReviewerType.OFFER_MANAGER.value -> txtReviewType.text = getString(R.string.offer_manager_description)
+            Enums.ReviewerType.INTERVIEWER_DESCRIPTION.value -> txtReviewType.text = getString(R.string.interviewer_description)
             else -> txtReviewType.text = getString(R.string.shortlist_review_type_description)
         }
     }

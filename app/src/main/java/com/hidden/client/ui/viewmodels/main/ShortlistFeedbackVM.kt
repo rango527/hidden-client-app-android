@@ -59,8 +59,6 @@ class ShortlistFeedbackVM(
 
     private fun parseJsonResult(json: ShortlistFeedbackJson): ShortlistFeedbackEntity {
 
-        Log.i("shortlist_feedback", json.toString())
-
         val shortlistFeedback: ShortlistFeedbackEntity = json.toEntity(processId)
 
         val shortlistReviewerList = json.toShortlistReviewerList(processId)

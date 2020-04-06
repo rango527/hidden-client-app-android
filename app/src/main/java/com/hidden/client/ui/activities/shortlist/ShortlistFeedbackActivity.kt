@@ -1,7 +1,6 @@
 package com.hidden.client.ui.activities.shortlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -34,7 +33,7 @@ class ShortlistFeedbackActivity : BaseActivity() {
 
     private lateinit var layoutViewPager: LinearLayout
 
-    // Viewpager for Profile Sliding
+    // Viewpager for Shortlist Feedback Sliding
     private lateinit var viewPagerShortlistFeedback: ViewPager
     private lateinit var pageAdapter: ShortlistFeedbackViewPagerAdapter
 
@@ -98,7 +97,7 @@ class ShortlistFeedbackActivity : BaseActivity() {
         swipeContainer = findViewById(R.id.swipe_container)
 
         // View Pager
-        viewPagerShortlistFeedback = findViewById(R.id.viewpager_shortlist)
+        viewPagerShortlistFeedback = findViewById(R.id.viewpager_interviewer)
         indicator = findViewById(R.id.indicator)
 
     }

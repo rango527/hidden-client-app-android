@@ -1,6 +1,7 @@
 package com.hidden.client.models.json
 
 import android.util.Log
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.models.entity.InterviewParticipantEntity
 import com.hidden.client.models.entity.ShortlistReviewerEntity
@@ -38,13 +39,13 @@ data class ShortlistReviewerJson(
     fun toEntity(pProcessId: Int): ShortlistReviewerEntity {
         return ShortlistReviewerEntity(
             0,
-            feedbackId,
-            clientId,
-            clientAvatar,
-            fullName,
-            isFeedbackSubmitted,
-            vote,
-            comment,
+            feedbackId.safeValue(),
+            clientId.safeValue(),
+            clientAvatar.safeValue(),
+            fullName.safeValue(),
+            isFeedbackSubmitted.safeValue(),
+            vote.safeValue(),
+            comment.safeValue(),
             pProcessId
         )
     }
