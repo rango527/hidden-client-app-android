@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "392507031739",
+    "firebase_url": "https://hiddenclient-35692.firebaseio.com",
+    "project_id": "hiddenclient-35692",
+    "storage_bucket": "hiddenclient-35692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392507031739:android:d58d17d3810e526bdb699e",
+        "android_client_info": {
+          "package_name": "com.hidden.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392507031739-u0kr04k4akdbcnkfrshskr0bh0qn6orl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQk_nUgM42zZP4zgA_tLLJZoED0PX668k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392507031739-u0kr04k4akdbcnkfrshskr0bh0qn6orl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

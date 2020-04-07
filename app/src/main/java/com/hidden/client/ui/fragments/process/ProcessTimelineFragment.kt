@@ -119,7 +119,7 @@ class ProcessTimelineFragment(
             txtDescription.visibility = View.GONE
             txtAvailability.visibility = View.VISIBLE
 
-            txtAvailability.text = stage.clientTileButton
+            txtAvailability.text = stage.clientTileButton.replace("_", " ")
 
             txtAvailability.setOnClickListener {
                 when (stage.clientTileButton) {

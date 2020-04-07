@@ -73,9 +73,7 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.layout_filter_search -> {
-//                val intent = Intent(context, HCProcessFilterActivity::class.java)
-                val intent = Intent(context, TestMapsActivity::class.java)
-                startActivity(intent)
+                val intent = Intent(context, HCProcessFilterActivity::class.java)
             }
          }
     }
