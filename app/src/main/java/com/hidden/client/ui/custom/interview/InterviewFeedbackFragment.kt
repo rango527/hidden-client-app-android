@@ -166,7 +166,7 @@ class InterviewFeedbackFragment (
                     stageTextView.setTextColor(Color.parseColor("#FF7A32"))
 
                     // average text
-                    averageTextView.text = "${interview.candidateFeedbackAverage} out of 5"
+                    averageTextView.text = String.format("%.1f", interview.candidateFeedbackAverage) + " out of 5"
                 }
             }
 

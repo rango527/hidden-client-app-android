@@ -6,6 +6,7 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
+import com.urbanairship.UAirship.getApplicationContext
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HCWorkExperience {
@@ -26,7 +27,8 @@ class HCWorkExperience {
         @JvmStatic
         fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
             if (photoUrl.safeValue() != "") {
-                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
+//                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
+                Glide.with(getApplicationContext()).load(photoUrl.safeValue()).into(imageView)
             }
         }
     }

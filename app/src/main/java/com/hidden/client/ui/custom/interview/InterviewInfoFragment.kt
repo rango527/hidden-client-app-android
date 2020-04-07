@@ -28,6 +28,8 @@ import com.hidden.client.ui.activities.JobReviewerTypeActivity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.adapters.InterviewerItemListAdapter
 import java.util.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+
 
 class InterviewInfoFragment (
     private val mContext: Context,
@@ -59,6 +61,7 @@ class InterviewInfoFragment (
     private lateinit var locationTextView: TextView
 
     var map: GoogleMap? = null
+    private var latLng:LatLng? = null
 
 
     override fun onCreateView(
@@ -129,18 +132,16 @@ class InterviewInfoFragment (
         }
     }
 
-    override fun onMapReady(map: GoogleMap?) {
+    override fun onMapReady(map: GoogleMap) {
 
         this.map = map
         this.map!!.uiSettings.isMyLocationButtonEnabled = false
 
-        if (!interview.latLng.isNullOrEmpty()) {
-            val latLng = interview.latLng.split(",")
-            if (latLng.size == 2) {
-                this.map!!.addMarker(MarkerOptions().position(LatLng(latLng[0].toDouble(), latLng[1].toDouble())))
-                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng(latLng[0].toDouble(), latLng[1].toDouble()), 14f)
-                this.map!!.animateCamera(cameraUpdate)
-            }
+        if (latLng != null) {
+
+            this.map!!.addMarker(MarkerOptions().position(latLng!!).icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_full)))
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng!!, 14f)
+            map.animateCamera(cameraUpdate)
         }
     }
 
@@ -196,6 +197,20 @@ class InterviewInfoFragment (
 
         setDateTime()
 
+        // map view latLng
+        if (!interview.latLng.isNullOrEmpty()) {
+            val latLngs = interview.latLng.split(",")
+            if (latLngs.size == 2) {
+                latLng = LatLng(
+                    latLngs[0].toDouble(),
+                    latLngs[1].toDouble()
+                )
+
+                mapView.visibility = View.VISIBLE
+                markerImage.visibility = View.GONE
+            }
+        }
+
         locationTextView.text = if (interview.location.isNullOrEmpty()) "" else interview.location
     }
 
@@ -218,6 +233,7 @@ class InterviewInfoFragment (
 
             timeTextView.visibility = View.GONE
             dateTextView.visibility = View.GONE
+            justConfirmingTextView.visibility = View.VISIBLE
         } else {
 
             val date: String = HCDate.dateToString(interviewDate,"EEEE").safeValue()

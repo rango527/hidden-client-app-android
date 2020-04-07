@@ -91,7 +91,7 @@ class InterviewDetailVM (
         interviewDetail.value = interview
 
         // check first name is empty or null
-        interviewTitle.value = "First Stage Interview with " + if (interview.firstName.isNullOrEmpty()) "" else interview.firstName
+        interviewTitle.value = interview.description + " with " + if (interview.firstName.isNullOrEmpty()) "" else interview.firstName
 
         // some sub View Models
 
