@@ -6,6 +6,7 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
+
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
@@ -19,7 +20,7 @@
 
 
 # Airship
-airshipconfig.properties
+#airshipconfig.properties
 
 # urbanairship build
 /urbanairship-fcm/build
