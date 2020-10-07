@@ -27,6 +27,10 @@ import com.hidden.client.models.entity.*
     ReviewerEntity::class,
     ProcessEntity::class,
     ProcessStageEntity::class,
+
+    ConversationEntity::class,
+    MessageListEntity::class,
+
     ProcessSettingEntity::class,
     TimelineEntity::class,
     InterviewParticipantEntity::class,
@@ -67,6 +71,10 @@ abstract class AppDatabase : RoomDatabase() {
 
     // Process Settings
     abstract fun processSettingDao(): ProcessSettingDao
+
+    // Message
+    abstract fun conversationDao(): ConversationDao
+    abstract fun messageListDao(): MessageListDao
 
     companion object {
 

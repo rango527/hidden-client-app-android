@@ -242,7 +242,7 @@ class InterviewInfoFragment (
             val year: String = HCDate.dateToString(interviewDate, "yyyy").safeValue()
             val hour: String = HCDate.dateToString(interviewDate, "HH").safeValue()
             val minute: String = HCDate.dateToString(interviewDate, "mm").safeValue()
-            val interviewDateText = "$date $day $month $year"
+            val interviewDateText = "$date, $month $day, $year"
             val interviewTimeText = "$hour:$minute"
 
             timeTextView.text = interviewTimeText

@@ -102,7 +102,7 @@
     <string name="messages">Messages</string>
 
     <string name="add_interviewers_to_interview">%1$s interviewers to this interview with %2$s</string>
-    <string name="can_not_find_any_interviewers">Can \'t find who you\'re looking for? They might not be a Job Participant on this job or process <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
+    <string name="can_not_find_any_interviewers">Can \'t find who you\'re looking for? They might not be a Job Participant on this job or process. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
 
     <string name="first_stage_interview">First Stage Interview</string>
     <string name="first_state_interview_description">Waiting for Guy\'s availability.\nYou\'ll get a notification when we\'ve confirmed the time/date</string>

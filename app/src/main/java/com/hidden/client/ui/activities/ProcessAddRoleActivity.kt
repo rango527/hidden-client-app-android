@@ -132,12 +132,12 @@ class ProcessAddRoleActivity : BaseActivity() {
     private fun initShortlistReviewerText() {
         txtReviewType = findViewById(R.id.text_review_type)
         when (reviewType) {
-            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> txtReviewType.text =
+            Enums.ReviewerType.INTERVIEWER.value -> txtReviewType.text =
                 resources.getQuantityString(
                     R.plurals.interviewer,
                     1, 1
                 )
-            Enums.ReviewerType.INTERVIEWER.value -> txtReviewType.text =
+            Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> txtReviewType.text =
                 resources.getQuantityString(
                     R.plurals.interviewer_advancer,
                     1, 1

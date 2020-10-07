@@ -7,6 +7,7 @@
     <dimen name="margin_default">20dp</dimen>
     <dimen name="text_padding">8dp</dimen>
     <dimen name="menu_padding_vertical_default">10dp</dimen>
+    <dimen name="message_padding_bottom">16.62dp</dimen>
     <dimen name="list_row_margin_default">5dp</dimen>
 
     <dimen name="progress_item_height">13dp</dimen>

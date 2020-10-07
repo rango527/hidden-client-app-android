@@ -1,55 +1,55 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:1-19:12
 	package
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:11-46
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:1:11-46
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:5:5-30
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:3:5-51
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:3:5-51
 	xmlns:android
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:2:5-63
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:2:5-63
 	android:versionCode
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:4:5-28
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
 application
-ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:7:5-18:19
+ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:7:5-18:19
 service#com.urbanairship.push.fcm.AirshipFirebaseMessagingService
-ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:10:9-16:19
+ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:10:9-16:19
 	tools:ignore
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:12:13-43
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:12:13-43
 	android:name
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:11:13-85
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:11:13-85
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:13:13-15:29
+ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:13:13-15:29
 	android:priority
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:13:28-49
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:13:28-49
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:14:17-78
+ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:14:17-78
 	android:name
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:14:25-75
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml:14:25-75
 uses-sdk
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		ADDED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
-		INJECTED from D:\workspace\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		ADDED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml
+		INJECTED from E:\my_work\android\new_source\hidden-client-app-android\urbanairship-fcm\src\main\AndroidManifest.xml

@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
@@ -113,7 +114,6 @@ class ProcessSettingVM (
 
         val reviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         reviewerList.addAll(json.toReviewerList(processId, AppPreferences.myId))
-
         // Update ProcessSetting & Reviewer Db
         processSettingDao.deleteAll()
         reviewerDao.deleteAll(Enums.SettingType.PROCESS.value)
@@ -121,7 +121,6 @@ class ProcessSettingVM (
         // Update Process Setting Table
         processSettingDao.insertAll(processSetting)
         reviewerDao.insertAll(*reviewerList.toTypedArray())
-
         return parseEntityResult(processSetting, reviewerList)
     }
 
@@ -188,10 +187,10 @@ class ProcessSettingVM (
         interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId, true)
         offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId, true)
 
-        jobTitle.value = String.format(context.resources.getString(R.string.job_title), processSetting.jobTitle, processSetting.cityName)
+        jobTitle.value = String.format(context.resources.getString(R.string.job_and_location), processSetting.jobTitle, processSetting.cityName)
         candidateName.value = processSetting.candidateFullName
         candidateAvatar.value = processSetting.candidateAvatar
-
+Log.d("can", "candidateavatartesttest ${processSetting.candidateAvatar}")
         interviewerText.value = context.resources.getQuantityString(
             R.plurals.interviewer,
             processSetting.getInterviewerList().size,

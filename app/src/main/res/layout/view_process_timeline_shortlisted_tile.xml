@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/view_feedback"
+            android:text="@string/view_your_feedback"
             android:textColor="@color/colorWhite_1"
             android:textSize="14sp"
             android:lineHeight="19dp"

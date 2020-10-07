@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -10,24 +10,55 @@
             type="com.hidden.client.ui.viewmodels.main.ProcessViewVM" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/menu_padding_vertical_default"
         android:background="@drawable/button_round_white"
-        android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+        android:layout_marginStart="@dimen/menu_padding_vertical_default"
         android:layout_marginRight="@dimen/menu_padding_vertical_default"
         android:layout_marginBottom="@dimen/menu_padding_vertical_default">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="69dp"
+            android:layout_height="69dp"
             android:src="@{viewModel.candidateAvatar, default=@drawable/man}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/unreadmessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/text_unreadmessage_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:layout_marginEnd="0dp"
+                android:padding="2dp"
+                android:background="@drawable/button_unreadmessage_red"
+                android:gravity="center"
+                android:width="22sp"
+                android:adjustViewBounds="true"
+                android:height="22sp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="0"
+                android:textColor="#ffffffff"
+                android:textSize="12sp"
+                android:visibility="visible"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
@@ -37,7 +68,7 @@
             android:textColor="@color/colorBlack_2"
             android:text="@{viewModel.candidateName}"
             android:textStyle="bold"
-            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginStart="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
 
         <TextView
@@ -48,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_name"
             android:textColor="@color/colorBlack_2"
             android:text="@{@string/job_and_location(viewModel.jobTitle, viewModel.candidateCityName)}"
-            android:layout_marginLeft="@dimen/menu_padding_vertical_default"
+            android:layout_marginStart="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
 
         <LinearLayout
@@ -64,50 +95,51 @@
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/progress_item_complete"/>
+                android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_first_interview"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
-                android:background="@drawable/progress_item_red"/>
+                android:layout_marginStart="@dimen/list_row_margin_default"
+                android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_further_interview"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
+                android:layout_marginStart="@dimen/list_row_margin_default"
                 android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_final_interview"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
+                android:layout_marginStart="@dimen/list_row_margin_default"
                 android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_offer_stage"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
+                android:layout_marginStart="@dimen/list_row_margin_default"
                 android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_offer_accepted_stage"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
+                android:layout_marginStart="@dimen/list_row_margin_default"
                 android:background="@drawable/progress_item_incomplete"/>
             <ImageView
                 android:id="@+id/img_stage_started"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/list_row_margin_default"
+                android:layout_marginStart="@dimen/list_row_margin_default"
                 android:background="@drawable/progress_item_incomplete"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
