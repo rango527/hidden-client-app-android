@@ -1,5 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
@@ -49,6 +50,7 @@ class ProcessListVM(
                         if (dbProcessData.isEmpty()) {
                             processApi.getProcessList(AppPreferences.apiAccessToken)
                                 .concatMap { apiProcess ->
+                                    Log.d("apiProcess", "apiProcess $apiProcess")
                                     Observable.just(parseJsonResult(apiProcess))
                                 }
                         } else {
@@ -60,6 +62,7 @@ class ProcessListVM(
                 .concatMap {
                     processApi.getProcessList(AppPreferences.apiAccessToken)
                         .concatMap { apiProcess ->
+                            Log.d("apiProcess", "apiProcess $apiProcess")
                             Observable.just(parseJsonResult(apiProcess))
                         }
                 }

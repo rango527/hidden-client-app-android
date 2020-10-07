@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
+import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
@@ -42,6 +44,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private lateinit var fragmentProcess: FrameLayout
 
     private var processId: Int = 0
+    private var conversationId: Int = 0
     private var jobId: Int = 0
     private var cashMode: Boolean = true
 
@@ -53,6 +56,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
 
         processId = intent.getIntExtra("processId", 0)
+        conversationId = intent.getIntExtra("conversationId", 0)
         jobId = intent.getIntExtra("jobId", 0)
         cashMode = intent.getBooleanExtra("cashMode", true)
 
@@ -102,10 +106,10 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         layoutTitle = findViewById(R.id.layout_title)
 
         textBtnProcess = findViewById(R.id.text_process)
-//        textBtnProcess.setOnClickListener(this)
+        textBtnProcess.setOnClickListener(this)
 
         textBtnMessage = findViewById(R.id.text_message)
-//        textBtnMessage.setOnClickListener(this)
+        textBtnMessage.setOnClickListener(this)
 
         buttonBack = findViewById(R.id.button_back)
         buttonBack.setOnClickListener(this)
@@ -199,9 +203,17 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
+Log.d("processID", "conversationId33 $conversationId")
 
+                Log.d("processID", "conversationId333 $processId")
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_process, HCMessageFragment()).commit()
+                    .replace(R.id.fragment_process, HCMessageFragment(conversationId)).commit()
+
+//                val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
+//                intent.putExtra("conversationId", processId)
+//                startActivity(intent)
+//                overridePendingVTransitionEnter()
+
             }
             R.id.button_back -> {
                 finish()

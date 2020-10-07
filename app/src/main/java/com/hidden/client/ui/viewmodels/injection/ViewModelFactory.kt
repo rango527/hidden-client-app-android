@@ -231,6 +231,35 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
         }
 
         /* ------------------------------------------------------------
+         Message VM
+      -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(MessageListVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return MessageListVM(
+                context,
+                db.conversationDao(),
+                db.messageListDao()
+            ) as T
+        }
+
+        if (modelClass.isAssignableFrom(MessageViewVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return MessageViewVM(
+//                db.messageListDao()
+            ) as T
+        }
+
+        /* ------------------------------------------------------------
           ProcessSettingVM
        -------------------------------------------------------------- */
         if (modelClass.isAssignableFrom(ProcessSettingVM::class.java)) {

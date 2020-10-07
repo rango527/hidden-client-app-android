@@ -50,6 +50,11 @@ interface ViewModelInjector {
     fun inject(processViewVM: ProcessViewVM)
     fun inject(processDetailVM: ProcessDetailVM)
 
+    // Message
+    fun inject(messageListVM: MessageListVM)
+    fun inject(messageViewVM: MessageViewVM)
+//    fun inject(messageDetailVM: MessageDetailVM)
+
     fun inject(feedbackVM: FeedbackVM)
 
     // Process Setting

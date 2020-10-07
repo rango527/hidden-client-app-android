@@ -22,6 +22,10 @@
     <color name="colorGray_6">#64646F</color>
     <color name="colorGray_7">#646161</color>
 
+    <color name="colorReceivedMessage">#EAEAEA</color>
+    <color name="colorMyMessage">#45C2F7</color>
+    <color name="colorUnreadMessage">#CF2E2B</color>
+
     <color name="colorCyan_1">#3BB1E1</color>
     <color name="colorCyan_2">#3FC5F5</color>
 

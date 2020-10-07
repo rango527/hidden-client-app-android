@@ -37,7 +37,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dddddd"/>
+            android:background="#EAEAEA"/>
 
         <TextView
             android:id="@+id/text_add_to_process"
@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dddddd"/>
+            android:background="#EAEAEA"/>
 
         <TextView
             android:id="@+id/text_add_to_job"

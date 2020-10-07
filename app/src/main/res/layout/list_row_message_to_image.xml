@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="MessageToImageItemBinding">
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.hidden.client.ui.viewmodels.main.MessageViewVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/menu_padding_vertical_default"
+        android:layout_marginBottom="@dimen/menu_padding_vertical_default">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="220.64dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints"
+            android:src="@{viewModel.getMessageUrl, default=@drawable/man}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
