@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities.shortlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -64,7 +65,7 @@ class FeedbackActivity : BaseActivity() {
         setContentView(R.layout.activity_feedback)
 
         initCloseButton()
-
+Log.d("feedabckdf", "feedbacktesting")
         isApprove = intent.getBooleanExtra("isApprove", true);
         processId = intent.getIntExtra("processId", 0)
         avatarName = intent.getStringExtra("avatarName").safeValue()
@@ -72,7 +73,7 @@ class FeedbackActivity : BaseActivity() {
         candidateName = intent.getStringExtra("candidateName").safeValue()
         candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
         candidateJob = intent.getStringExtra("candidateJob").safeValue()
-
+        Log.d("feedabckdf", "feedbacktesting $candidateName")
         feedbackViewModel =
             ViewModelProviders.of(this, ViewModelFactory(this)).get(FeedbackVM::class.java)
 

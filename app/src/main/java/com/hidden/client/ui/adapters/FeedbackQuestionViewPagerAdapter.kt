@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class FeedbackQuestionViewPagerAdapter(
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var view: View
-
+Log.d("questionList", "questionListtest $questionList")
         if (position < questionList.size) {
             view = inflater.inflate(R.layout.viewpager_feedback_question_item, container, false)
 

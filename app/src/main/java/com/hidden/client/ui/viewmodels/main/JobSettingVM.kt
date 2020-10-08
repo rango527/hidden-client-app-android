@@ -72,9 +72,15 @@ class JobSettingVM(
     }
 
     fun loadJobSetting(cashMode: Boolean) {
-Log.d("aaaa", "fdfdfdd $cashMode")
+
         val apiObservable: Observable<JobSettingEntity>
-HCGlobal.getInstance().log(jobId.toString());
+
+        if (jobId == 0) {
+            jobId = HCGlobal.getInstance().currentJobId
+        }
+
+        HCGlobal.getInstance().log(jobId.toString());
+
         if (cashMode) {
             apiObservable =
                 Observable.fromCallable { jobSettingDao.getMyJobSettingByJobId(AppPreferences.myId, jobId) }
@@ -150,7 +156,7 @@ HCGlobal.getInstance().log(jobId.toString());
         val interviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         val interviewAdvancerList: ArrayList<ReviewerEntity> = arrayListOf()
         val offerManagerList: ArrayList<ReviewerEntity> = arrayListOf()
-Log.d("reviewerlist", "reviewerListtest $reviewerList")
+
         for(reviewer in reviewerList) {
             when (reviewer.reviewerType) {
                 Enums.ReviewerType.USER_MANAGER.value -> {
@@ -176,7 +182,7 @@ Log.d("reviewerlist", "reviewerListtest $reviewerList")
         jobSetting.setInterviewerList(interviewerList)
         jobSetting.setInterviewAdvancerList(interviewAdvancerList)
         jobSetting.setOfferManagerList(offerManagerList)
-        Log.d("reviewerlist", "reviewerListtest $jobSetting")
+
         return jobSetting
     }
 
