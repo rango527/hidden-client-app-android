@@ -33,7 +33,8 @@ class InterviewerViewPagerAdapter(
         val binding: InterviewerItemViewBinding = InterviewerItemViewBinding.inflate(inflater, container, false)
 
         binding.viewModel = interviewerViewVMList[position]
-
+        val testtest = interviewerViewVMList[position].feedbackQuestionViewAdapter
+        Log.d("testtest", "testtesttest $testtest")
         val view = binding.root
 
         if (!interviewerViewVMList[position].isEmpty) {
@@ -86,6 +87,7 @@ class InterviewerViewPagerAdapter(
             R.id.btn_give_feedback -> {
                 // give feedback
                 val intent = Intent(context, HSGiveFeedbackActivity::class.java)
+//                val intent = Intent(context, FeedbackActivity::class.java)
                 context.startActivity(intent)
             }
         }

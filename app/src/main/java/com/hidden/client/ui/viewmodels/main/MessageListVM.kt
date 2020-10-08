@@ -63,25 +63,20 @@ class MessageListVM(
     }
 
     fun loadMessage(cashMode: Boolean, conversationId: Int) {
-        Log.d("conversationtest1", "conversationtest1 $context")
         val apiObservable: Observable<ConversationEntity>
         if (cashMode) {
             apiObservable =
                 Observable.fromCallable { conversationDao.getConversationSelect(AppPreferences.myId, conversationId) }
                     .concatMap { dbMessageData ->
                         val observable = if (dbMessageData.isEmpty()) {
-                            Log.d("conversationtest1", "conversationtest1")
                             conversationApi.getMessage(
                                 AppPreferences.apiAccessToken,
                                 conversationId
                             )
                                 .concatMap { apiMessage ->
-                                    Log.d("apiMessage", "apiMessage $apiMessage")
-
                                     Observable.just(parseJsonResult(apiMessage))
                                 }
                         } else {
-                            Log.d("conversationtest2", "conversationtest2")
                             val conversationEntity = dbMessageData[0]
                             val messageList = messageListDao.getListByMessage(AppPreferences.myId)
                             Observable.just(parseEntityResult(conversationEntity, messageList))
@@ -89,14 +84,10 @@ class MessageListVM(
                         observable
                     }
         } else {
-            Log.d("conversationtest3", "conversationtest3")
-            Log.d("conversationId", "conversationId3 $AppPreferences.apiAccessToken")
             apiObservable = Observable.fromCallable { }
                 .concatMap {
                     conversationApi.getMessage(AppPreferences.apiAccessToken, conversationId)
                         .concatMap { apiMessage ->
-                            Log.d("conversationId", "conversationId4")
-                            Log.d("conversationId", "conversationId4 $apiMessage")
                             Observable.just(parseJsonResult(apiMessage))
                         }
                 }
@@ -113,9 +104,7 @@ class MessageListVM(
     }
 
     private fun parseJsonResult(json: ConversationJson): ConversationEntity {
-        Log.d("conversationId", "conversationId")
         val conversation: ConversationEntity = json.toConversationEntity(conversationId, AppPreferences.myId)
-        Log.d("conversation", "conversationdd $conversation")
         val messageList: ArrayList<MessageListEntity> = arrayListOf()
         messageList.addAll(json.toMessageEntityList(AppPreferences.myId))
 
@@ -126,8 +115,7 @@ class MessageListVM(
         // Update Message Table
         conversationDao.insertAll(conversation)
         messageListDao.insertAll(*messageList.toTypedArray())
-        Log.d("conversation2", "messageList $messageList")
-        Log.d("conversation2", "messageList $conversation")
+
         return parseEntityResult(conversation, messageList)
     }
 
@@ -140,7 +128,7 @@ class MessageListVM(
         }
 
         conversation.setMessageList(userManagerList)
-Log.d("conversation2", "conversation2 $conversation")
+
         return conversation
     }
 

@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class ShortlistFeedbackViewPagerAdapter(
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             val binding: ShortlistReviewerItemViewBinding = ShortlistReviewerItemViewBinding.inflate(inflater, container, false)
-
+            Log.d("testing", "testingquestion2")
             binding.viewModel = shortlistReviewerViewVMList[position]
 
             val view = binding.root
