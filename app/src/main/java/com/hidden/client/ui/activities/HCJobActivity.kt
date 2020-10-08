@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.ChangeClipBounds
+import android.util.Log
 import android.util.Pair
 import android.view.MotionEvent
 import android.view.View

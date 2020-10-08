@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
@@ -71,7 +72,7 @@ class JobSettingVM(
     }
 
     fun loadJobSetting(cashMode: Boolean) {
-
+Log.d("aaaa", "fdfdfdd $cashMode")
         val apiObservable: Observable<JobSettingEntity>
 HCGlobal.getInstance().log(jobId.toString());
         if (cashMode) {
@@ -149,7 +150,7 @@ HCGlobal.getInstance().log(jobId.toString());
         val interviewerList: ArrayList<ReviewerEntity> = arrayListOf()
         val interviewAdvancerList: ArrayList<ReviewerEntity> = arrayListOf()
         val offerManagerList: ArrayList<ReviewerEntity> = arrayListOf()
-
+Log.d("reviewerlist", "reviewerListtest $reviewerList")
         for(reviewer in reviewerList) {
             when (reviewer.reviewerType) {
                 Enums.ReviewerType.USER_MANAGER.value -> {
@@ -175,7 +176,7 @@ HCGlobal.getInstance().log(jobId.toString());
         jobSetting.setInterviewerList(interviewerList)
         jobSetting.setInterviewAdvancerList(interviewAdvancerList)
         jobSetting.setOfferManagerList(offerManagerList)
-
+        Log.d("reviewerlist", "reviewerListtest $jobSetting")
         return jobSetting
     }
 

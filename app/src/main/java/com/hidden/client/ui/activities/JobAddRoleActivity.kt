@@ -180,12 +180,12 @@ class JobAddRoleActivity : BaseActivity() {
                 )
             Enums.ReviewerType.INTERVIEWER_ADVANCER.value -> txtReviewType.text =
                 resources.getQuantityString(
-                    R.plurals.interviewer,
+                    R.plurals.interviewer_advancer,
                     1, 1
                 )
             Enums.ReviewerType.INTERVIEWER.value -> txtReviewType.text =
                 resources.getQuantityString(
-                    R.plurals.interviewer_advancer,
+                    R.plurals.interviewer,
                     1, 1
                 )
             Enums.ReviewerType.OFFER_MANAGER.value -> txtReviewType.text =

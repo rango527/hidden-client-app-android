@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -47,6 +48,11 @@ class JobSettingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         jobId = intent.getIntExtra("jobId", 0)
+        // get jobid global variable
+        if (jobId == 0) {
+            jobId = HCGlobal.getInstance().currentJobId
+        }
+
         cashMode = intent.getBooleanExtra("cashMode", true)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_job_setting)

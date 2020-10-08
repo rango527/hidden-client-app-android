@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -62,7 +63,7 @@ class AddInterviewersActivity : BaseActivity() {
         jobId = intent.getIntExtra("jobId", 0)
         interviewId = intent.getIntExtra("interviewId", 0)
         candidateName = intent.getStringExtra("candidateName")
-
+Log.d("jobId", "jobIdtest $jobId")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_interviewers)
         binding.recyclerviewInterviewer.layoutManager = LinearLayoutManager(this)
 

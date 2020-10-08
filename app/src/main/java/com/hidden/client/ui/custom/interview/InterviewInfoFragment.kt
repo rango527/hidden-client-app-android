@@ -76,7 +76,7 @@ class InterviewInfoFragment (
         initUI(view)
 
         setUI()
-
+Log.d("interviewtest", "interviewtest $interview")
         mapView.onCreate(savedInstanceState);
         mapView.onResume()
         mapView.getMapAsync(this)
@@ -127,6 +127,7 @@ class InterviewInfoFragment (
             }
             R.id.interview_info_add_interviewer_button -> {
                 //
+
                 addInterviewer()
             }
         }
@@ -219,7 +220,7 @@ class InterviewInfoFragment (
         val intent = Intent(HCGlobal.getInstance().currentActivity, AddInterviewersActivity::class.java)
         intent.putExtra("from", "Add")
         intent.putExtra("processId", interview.pProcessId)
-//        intent.putExtra("jobId", process.jobId)
+//        intent.putExtra("jobId", jobId)
         intent.putExtra("interviewId", interview.interviewId)
         intent.putExtra("candidateName", interview.fullName)
         startActivity(intent)
