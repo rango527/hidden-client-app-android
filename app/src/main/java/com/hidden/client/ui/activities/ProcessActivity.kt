@@ -57,9 +57,13 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         processId = intent.getIntExtra("processId", 0)
         conversationId = intent.getIntExtra("conversationId", 0)
-        jobId = intent.getIntExtra("jobId", 0)
-        cashMode = intent.getBooleanExtra("cashMode", true)
 
+        jobId = intent.getIntExtra("jobId", 0)
+        // put jobid global variable - this variable is using at the job setting
+        HCGlobal.getInstance().currentJobId = jobId
+
+        cashMode = intent.getBooleanExtra("cashMode", true)
+        Log.d("interviewtest", "jobIdtesting_process $jobId")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
 
         viewModel =
@@ -203,9 +207,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
-Log.d("processID", "conversationId33 $conversationId")
 
-                Log.d("processID", "conversationId333 $processId")
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_process, HCMessageFragment(conversationId)).commit()
 

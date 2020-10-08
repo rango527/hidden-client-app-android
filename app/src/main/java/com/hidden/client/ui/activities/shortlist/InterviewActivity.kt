@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities.shortlist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -37,6 +38,7 @@ class InterviewActivity : AppCompatActivity(), View.OnClickListener {
 
     private var processId: Int = 0
     private var interviewId: Int = 0
+    private var jobId: Int = 0
 
     private var switchTagInfo = true
 
@@ -49,7 +51,8 @@ class InterviewActivity : AppCompatActivity(), View.OnClickListener {
 
         processId = intent.getIntExtra("processId", 0)
         interviewId = intent.getIntExtra("interviewId", 0)
-
+        jobId = intent.getIntExtra("jobId", 0)
+        Log.d("interviewtest", "interviewtest $jobId")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_interview)
 
         viewModel =

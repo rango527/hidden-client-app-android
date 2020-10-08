@@ -44,6 +44,7 @@ class HCGlobal{
     var currentShortlist: List<HCShortlistCandidateResponse> = arrayListOf()
     var currentIndex: Int = 0
     var currentProjectIndex: Int = 0
+    var currentJobId: Int = 0
 
     var shortlistCandidateVMList: List<ShortlistViewVM> = listOf()
 }

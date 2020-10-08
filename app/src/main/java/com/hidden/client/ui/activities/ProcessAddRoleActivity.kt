@@ -3,6 +3,7 @@ package com.hidden.client.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -65,6 +66,7 @@ class ProcessAddRoleActivity : BaseActivity() {
         })
 
         jobId = intent.getIntExtra("jobId", 0)
+
         processId = intent.getIntExtra("processId", 0)
         reviewType = intent.getIntExtra("reviewType", 0)
 

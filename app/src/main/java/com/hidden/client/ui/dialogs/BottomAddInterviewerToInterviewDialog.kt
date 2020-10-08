@@ -2,6 +2,7 @@ package com.hidden.client.ui.dialogs
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +73,8 @@ class BottomAddInterviewerToInterviewDialog(private val processId: Int, private 
 
         txtAddToJob.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobSettingActivity::class.java)
+            Log.d("txtaddjob", "txtaddtojob $jobId")
+            Log.d("txtaddjob", "txtaddtojob $intent")
             intent.putExtra("jobId", jobId)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
 
