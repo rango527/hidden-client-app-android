@@ -15,6 +15,7 @@ import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.entity.FeedbackQuestionEntity
@@ -23,6 +24,7 @@ import com.hidden.client.ui.activities.shortlist.FeedbackDoneActivity
 import com.hidden.client.ui.adapters.FeedbackQuestionViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.FeedbackVM
+import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
 import okhttp3.MediaType
@@ -30,12 +32,11 @@ import okhttp3.RequestBody
 
 class HSGiveFeedbackActivity : BaseActivity() {
 
-    private lateinit var feedbackViewModel: FeedbackVM
+    private lateinit var giveFeedbackViewModel: GiveFeedbackVM
 
     private lateinit var layoutBackground: ConstraintLayout
     private lateinit var txtFeedback: TextView
     private lateinit var txtFeedback2: TextView
-    private lateinit var imgThumbUp: ImageView
 
     private lateinit var progressDlg: KProgressHUD
 
@@ -44,6 +45,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private lateinit var indicator: CirclePageIndicator
 
     private var processId: Int = 0
+    private var feedbackId: Int = 0
     private var isApprove: Boolean = true
     private var avatarName: String = ""
 
@@ -58,18 +60,23 @@ class HSGiveFeedbackActivity : BaseActivity() {
         initCloseButton()
 
         isApprove = intent.getBooleanExtra("isApprove", true);
-        processId = intent.getIntExtra("processId", 0)
+        processId = intent.getIntExtra("processId", 1)
         avatarName = intent.getStringExtra("avatarName").safeValue()
 
+        if (avatarName == "") {
+            avatarName = HCGlobal.getInstance().currentAvatarName
+        }
+
         candidateName = intent.getStringExtra("candidateName").safeValue()
+
         candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
         candidateJob = intent.getStringExtra("candidateJob").safeValue()
 
-        feedbackViewModel =
-            ViewModelProviders.of(this, ViewModelFactory(this)).get(FeedbackVM::class.java)
+        giveFeedbackViewModel =
+            ViewModelProviders.of(this, ViewModelFactory(this)).get(GiveFeedbackVM::class.java)
 
         progressDlg = HCDialog.KProgressDialog(this)
-        feedbackViewModel.loadingVisibility.observe(this, Observer { show ->
+        giveFeedbackViewModel.loadingVisibility.observe(this, Observer { show ->
             if (show) {
                 progressDlg.show()
             } else {
@@ -78,7 +85,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
         })
 
         // Observing for jumping HomeActivity -> Shortlist after add role success
-        feedbackViewModel.navigateToFeedbackDone.observe(this, Observer {
+        giveFeedbackViewModel.navigateToFeedbackDone.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
                 val intent = Intent(this, FeedbackDoneActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -93,12 +100,14 @@ class HSGiveFeedbackActivity : BaseActivity() {
 
         initUI()
 
-        feedbackViewModel.loadTimeline(processId);
-        feedbackViewModel.feedbackId.observe(this, Observer { feedbackId ->
-            feedbackViewModel.loadFeedback(processId, feedbackId)
-        })
+        feedbackId = HCGlobal.getInstance().currentFeedbackId
 
-        feedbackViewModel.feedback.observe(this, Observer { feedback ->
+        giveFeedbackViewModel.feedbackId = this.feedbackId
+
+        giveFeedbackViewModel.loadGiveFeedback(processId)
+        giveFeedbackViewModel.loadTimeline(processId);
+
+        giveFeedbackViewModel.feedback.observe(this, Observer { feedback ->
             initViewPager(feedback);
         })
     }
@@ -160,6 +169,6 @@ class HSGiveFeedbackActivity : BaseActivity() {
         body.add("answers", answers)
         body.addProperty("comment", comment)
 
-        feedbackViewModel.submitFeedback(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
+        giveFeedbackViewModel.submitFeedback(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
     }
 }

@@ -66,6 +66,8 @@ class TimelineShortlistedTileView(
             imgSeparator.visibility = View.VISIBLE
         }
 
+        HCGlobal.getInstance().currentAvatarName = candiateName
+
         txtTitle.text = String.format(
             context.getString(R.string.shortlisted),
             Utility.getFirstNameFromFullName(candiateName)

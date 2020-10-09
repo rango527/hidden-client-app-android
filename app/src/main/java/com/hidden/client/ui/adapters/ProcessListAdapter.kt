@@ -23,7 +23,6 @@ import com.hidden.client.ui.viewmodels.main.ProcessViewVM
 class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() {
 
     private lateinit var processList: List<ProcessEntity>
-    private lateinit var processStageList: List<ProcessStageEntity>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ProcessItemBinding = DataBindingUtil.inflate(

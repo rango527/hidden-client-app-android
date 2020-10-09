@@ -40,7 +40,6 @@ class ProcessListVM(
     }
 
     fun loadProcess(cashMode: Boolean) {
-
         val apiObservable: Observable<List<ProcessEntity>>
 
         if (cashMode) {
@@ -50,7 +49,6 @@ class ProcessListVM(
                         if (dbProcessData.isEmpty()) {
                             processApi.getProcessList(AppPreferences.apiAccessToken)
                                 .concatMap { apiProcess ->
-                                    Log.d("apiProcess", "apiProcess $apiProcess")
                                     Observable.just(parseJsonResult(apiProcess))
                                 }
                         } else {
@@ -62,7 +60,6 @@ class ProcessListVM(
                 .concatMap {
                     processApi.getProcessList(AppPreferences.apiAccessToken)
                         .concatMap { apiProcess ->
-                            Log.d("apiProcess", "apiProcess $apiProcess")
                             Observable.just(parseJsonResult(apiProcess))
                         }
                 }
@@ -101,7 +98,6 @@ class ProcessListVM(
     }
 
     private fun parseEntityResult(processList: List<ProcessEntity>): List<ProcessEntity> {
-
         for (process in processList) {
             val processStageList = processStageDao.getStageByProcess(process.id)
             process.setStageList(processStageList)

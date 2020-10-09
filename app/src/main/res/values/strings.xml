@@ -85,7 +85,7 @@
 
     <!-- Approve -->
     <string name="feedback_notice">To Approve %1$s, Please Give Us Some Quick Feedback</string>
-    <string name="feedback_notice2">"This goes to your Hidden Talent Partner and not to %1$s directly</string>
+    <string name="feedback_notice2">"*This goes to your Hidden Talent Partner and not to %1$s directly</string>
     <string name="feedback_notice3">To Reject %1$s, Please Give Us Some Quick Feedback</string>
     <string name="anything_else_to_add">Anything else to add?</string>
     <string name="feedback_here">Add any other comments or \nfeedback here…</string>

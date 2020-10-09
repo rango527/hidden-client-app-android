@@ -81,6 +81,7 @@ abstract class RootVM: ViewModel() {
 
             // Feedback
             is FeedbackVM -> injector.inject(this)
+            is GiveFeedbackVM -> injector.inject(this)
         }
     }
 
