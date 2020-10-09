@@ -63,7 +63,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         HCGlobal.getInstance().currentJobId = jobId
 
         cashMode = intent.getBooleanExtra("cashMode", true)
-        Log.d("interviewtest", "jobIdtesting_process $jobId")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
 
         viewModel =

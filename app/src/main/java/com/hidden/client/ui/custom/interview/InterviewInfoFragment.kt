@@ -76,7 +76,7 @@ class InterviewInfoFragment (
         initUI(view)
 
         setUI()
-Log.d("interviewtest", "interviewtest $interview")
+
         mapView.onCreate(savedInstanceState);
         mapView.onResume()
         mapView.getMapAsync(this)

@@ -43,7 +43,6 @@ class HCMessageFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("sdf", "sdsdf $conversationId")
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(MessageListVM::class.java)
 

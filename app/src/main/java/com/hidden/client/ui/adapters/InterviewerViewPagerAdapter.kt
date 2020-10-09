@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import com.hidden.client.R
 import com.hidden.client.databinding.InterviewerItemViewBinding
+import com.hidden.client.datamodels.HCFeedbackQuestionResponse
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.viewmodels.main.InterviewerViewVM
 import kotlinx.android.synthetic.main.viewpager_interviewer_item.view.*
@@ -33,10 +35,10 @@ class InterviewerViewPagerAdapter(
         val binding: InterviewerItemViewBinding = InterviewerItemViewBinding.inflate(inflater, container, false)
 
         binding.viewModel = interviewerViewVMList[position]
-        val testtest = interviewerViewVMList[position].feedbackQuestionViewAdapter
-        Log.d("testtest", "testtesttest $testtest")
-        val view = binding.root
 
+        val questionListItem = interviewerViewVMList[position].feedbackQuestionViewAdapter.questionList
+
+        val view = binding.root
         if (!interviewerViewVMList[position].isEmpty) {
 
             if (!interviewerViewVMList[position].isCurrentUser) {
@@ -50,6 +52,10 @@ class InterviewerViewPagerAdapter(
                 view.viewpager_feedback_empty.visibility = View.VISIBLE
                 view.viewpager_feedback_question.visibility = View.GONE
                 view.viewpager_feedback_comment.visibility = View.GONE
+
+                // put feedbackId global variable
+                val feedbackId = questionListItem[0].pFeedbackId
+                HCGlobal.getInstance().currentFeedbackId = feedbackId
             }
         }
         else {

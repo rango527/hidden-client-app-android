@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
@@ -18,12 +19,13 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class FeedbackVM(
+class GiveFeedbackVM(
     private val context: Context
 ) : RootVM() {
 
     @Inject
     lateinit var processApi: ProcessApi
+
 
     // To jump to Process Detail Activity after login success
     private val _navigateToFeedbackDone = MutableLiveData<Event<Boolean>>()
@@ -33,7 +35,11 @@ class FeedbackVM(
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     val feedback = MutableLiveData<FeedbackEntity>()
-    val feedbackId = MutableLiveData<Int>()
+    //    val feedbackId = MutableLiveData<Int>()
+    var feedbackId: Int = 1
+        set(value) {
+            field = value
+        }
 
     private var subscription: Disposable? = null
 
@@ -42,7 +48,12 @@ class FeedbackVM(
         subscription?.dispose()
     }
 
-    fun loadFeedback(processId: Int, feedbackId: Int) {
+    fun loadGiveFeedback(processId: Int) {
+
+        if (feedbackId == 1) {
+            feedbackId = HCGlobal.getInstance().currentFeedbackId
+        }
+
         subscription = processApi.getFeedback(
             AppPreferences.apiAccessToken,
             processId,
@@ -64,6 +75,7 @@ class FeedbackVM(
         processId: Int,
         body: RequestBody
     ) {
+
         subscription = processApi.submitFeedback(
             "application/json",
             AppPreferences.apiAccessToken,
@@ -83,6 +95,7 @@ class FeedbackVM(
     }
 
     fun loadTimeline(processId: Int) {
+      
         subscription = processApi.getTimeline(AppPreferences.apiAccessToken, processId)
             .concatMap { apiResult ->
                 Observable.just(getFeedbackIdFromTimeline(apiResult))
@@ -144,7 +157,7 @@ class FeedbackVM(
     }
 
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {
-        this.feedbackId.value = feedbackId
+        this.feedbackId = feedbackId
     }
 
     private fun onRetrieveFeedbackError(e: Throwable) {

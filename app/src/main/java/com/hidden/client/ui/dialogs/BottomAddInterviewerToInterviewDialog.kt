@@ -73,8 +73,6 @@ class BottomAddInterviewerToInterviewDialog(private val processId: Int, private 
 
         txtAddToJob.setOnClickListener {
             val intent = Intent(HCGlobal.getInstance().currentActivity, JobSettingActivity::class.java)
-            Log.d("txtaddjob", "txtaddtojob $jobId")
-            Log.d("txtaddjob", "txtaddtojob $intent")
             intent.putExtra("jobId", jobId)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
 

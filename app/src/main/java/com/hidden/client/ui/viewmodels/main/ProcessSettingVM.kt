@@ -190,7 +190,7 @@ class ProcessSettingVM (
         jobTitle.value = String.format(context.resources.getString(R.string.job_and_location), processSetting.jobTitle, processSetting.cityName)
         candidateName.value = processSetting.candidateFullName
         candidateAvatar.value = processSetting.candidateAvatar
-Log.d("can", "candidateavatartesttest ${processSetting.candidateAvatar}")
+
         interviewerText.value = context.resources.getQuantityString(
             R.plurals.interviewer,
             processSetting.getInterviewerList().size,

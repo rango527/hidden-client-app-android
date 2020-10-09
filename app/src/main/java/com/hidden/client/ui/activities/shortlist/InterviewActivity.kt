@@ -52,7 +52,7 @@ class InterviewActivity : AppCompatActivity(), View.OnClickListener {
         processId = intent.getIntExtra("processId", 0)
         interviewId = intent.getIntExtra("interviewId", 0)
         jobId = intent.getIntExtra("jobId", 0)
-        Log.d("interviewtest", "interviewtest $jobId")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_interview)
 
         viewModel =

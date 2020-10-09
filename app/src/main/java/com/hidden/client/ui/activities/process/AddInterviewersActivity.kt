@@ -63,7 +63,7 @@ class AddInterviewersActivity : BaseActivity() {
         jobId = intent.getIntExtra("jobId", 0)
         interviewId = intent.getIntExtra("interviewId", 0)
         candidateName = intent.getStringExtra("candidateName")
-Log.d("jobId", "jobIdtest $jobId")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_interviewers)
         binding.recyclerviewInterviewer.layoutManager = LinearLayoutManager(this)
 

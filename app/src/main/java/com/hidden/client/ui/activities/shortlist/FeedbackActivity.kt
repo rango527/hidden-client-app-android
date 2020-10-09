@@ -65,7 +65,7 @@ class FeedbackActivity : BaseActivity() {
         setContentView(R.layout.activity_feedback)
 
         initCloseButton()
-Log.d("feedabckdf", "feedbacktesting")
+
         isApprove = intent.getBooleanExtra("isApprove", true);
         processId = intent.getIntExtra("processId", 0)
         avatarName = intent.getStringExtra("avatarName").safeValue()
@@ -73,7 +73,7 @@ Log.d("feedabckdf", "feedbacktesting")
         candidateName = intent.getStringExtra("candidateName").safeValue()
         candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
         candidateJob = intent.getStringExtra("candidateJob").safeValue()
-        Log.d("feedabckdf", "feedbacktesting $candidateName")
+
         feedbackViewModel =
             ViewModelProviders.of(this, ViewModelFactory(this)).get(FeedbackVM::class.java)
 

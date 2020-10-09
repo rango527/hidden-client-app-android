@@ -55,9 +55,8 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
         val textSendorName2: TextView = holder.itemView.findViewById(R.id.text_sendor_name2)
 
         val fromDate = HCDate.stringToDate(messageTime!!, null)
-        Log.d("fromDate", "fromDate $fromDate")
+
         val strDate = HCDate.dateToString(fromDate!!, "MM d yy HH:mm a").toString()
-        Log.d("strDate", "strDate $strDate")
 
         if (datetem != "" && (strDate == datetem)) {
                 showDate.visibility = View.GONE
@@ -69,7 +68,6 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
             textSendorName1.setTextColor(Color.parseColor("#4B0082"))
             textSendorName2.setTextColor(Color.parseColor("#4B0082"))
             if (messageMessage == "") {
-                Log.d("messageList", "messageList22")
                 showFromMessage.visibility = View.GONE
                 showFromPhoto.visibility = View.VISIBLE
                 showToMessage.visibility = View.GONE

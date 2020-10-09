@@ -56,6 +56,8 @@ interface ViewModelInjector {
 //    fun inject(messageDetailVM: MessageDetailVM)
 
     fun inject(feedbackVM: FeedbackVM)
+    fun inject(giveFeedbackVM: GiveFeedbackVM)
+
 
     // Process Setting
     fun inject(processSettingVM: ProcessSettingVM)
