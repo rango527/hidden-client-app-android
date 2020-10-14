@@ -2,6 +2,7 @@ package com.hidden.client.ui.activities.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -20,6 +21,7 @@ import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCBrandAdapter
 import com.hidden.client.ui.adapters.HCWorkExperienceAdapter
 import com.hidden.client.ui.custom.SkillItemView
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -64,28 +66,28 @@ class CandidateDetailActivity : BaseActivity() {
 
         // Brand RecyclerView
         rvBrand = findViewById(R.id.recyclerview_brand)
-        brandViewModel = ViewModelProviders.of(this).get(HCBrandViewModel::class.java)
-        brandViewModel.getBrandList().observe(this, Observer {brandViewModel ->
-            brandAdapter = HCBrandAdapter(brandViewModel)
-
-            layoutBrandManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            rvBrand.layoutManager = layoutBrandManager
-            rvBrand.setHasFixedSize(true)
-
-            rvBrand.adapter = brandAdapter
-        })
+//        brandViewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(HCBrandViewModel::class.java)
+//        brandViewModel.getBrandList().observe(this, Observer {brandViewModel ->
+//            brandAdapter = HCBrandAdapter(brandViewModel)
+//
+//            layoutBrandManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//            rvBrand.layoutManager = layoutBrandManager
+//            rvBrand.setHasFixedSize(true)
+//
+//            rvBrand.adapter = brandAdapter
+//        })
 
         // Work Experience RecyclerView
-        rvWorkExperience = findViewById(R.id.recyclerview_work_experience)
-        workExperienceViewModel = ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
-        workExperienceViewModel.getWorkExperienceList().observe(this, Observer {workExperienceViewModels->
-            workExperienceAdapter = HCWorkExperienceAdapter(workExperienceViewModels)
-
-            rvWorkExperience.layoutManager = LinearLayoutManager(this)
-            rvWorkExperience.setHasFixedSize(true)
-
-            rvWorkExperience.adapter = workExperienceAdapter
-        })
+//        rvWorkExperience = findViewById(R.id.recyclerview_work_experience)
+//        workExperienceViewModel = ViewModelProviders.of(this).get(HCWorkExperienceViewModel::class.java)
+//        workExperienceViewModel.getWorkExperienceList().observe(this, Observer {workExperienceViewModels->
+//            workExperienceAdapter = HCWorkExperienceAdapter(workExperienceViewModels)
+//
+//            rvWorkExperience.layoutManager = LinearLayoutManager(this)
+//            rvWorkExperience.setHasFixedSize(true)
+//
+//            rvWorkExperience.adapter = workExperienceAdapter
+//        })
 
         RetrofitClient.instance.getCandidateDetail(AppPreferences.apiAccessToken, categoryId)
             .enqueue(object: Callback<HCCandidateDetailResponse> {
@@ -116,7 +118,7 @@ class CandidateDetailActivity : BaseActivity() {
                         for (candidate_brand_response in candidateDetail.candidate__brands) {
                             candidateBrandList.add(HCBrand(candidate_brand_response.asset__cloudinary_url))
                         }
-                        brandViewModel.setBrandList(candidateBrandList)
+//                        brandViewModel.setBrandList(candidateBrandList)
 
                         // Skill Layout
                         layoutSkill = findViewById(R.id.layout_skills)
@@ -127,21 +129,21 @@ class CandidateDetailActivity : BaseActivity() {
                         }
 
                         // Set WorkExperienceList
-                        val workExperienceList : ArrayList<HCWorkExperience> = arrayListOf()
-                        for (work_experience_response in candidateDetail.candidate__work_experiences) {
-
-                            val workExperience = HCWorkExperience()
-                            workExperience.setExperienceId(work_experience_response.work_experience__work_experience_id)
-                            workExperience.setExperienceJobTitle(work_experience_response.work_experience__job_title)
-                            workExperience.setExperienceDescription(work_experience_response.work_experience__description)
-                            workExperience.setExperienceFrom(work_experience_response.work_experience__worked_from)
-                            workExperience.setExperienceTo(work_experience_response.work_experience__worked_to)
-                            workExperience.setBrandName(work_experience_response.brand__name)
-                            workExperience.setBrandLogoUrl(work_experience_response.asset__cloudinary_url)
-
-                            workExperienceList.add(workExperience)
-                        }
-                        workExperienceViewModel.setWorkExperienceList(workExperienceList)
+//                        val workExperienceList : ArrayList<HCWorkExperience> = arrayListOf()
+//                        for (work_experience_response in candidateDetail.candidate__work_experiences) {
+//
+//                            val workExperience = HCWorkExperience()
+//                            workExperience.setExperienceId(work_experience_response.work_experience__work_experience_id)
+//                            workExperience.setExperienceJobTitle(work_experience_response.work_experience__job_title)
+//                            workExperience.setExperienceDescription(work_experience_response.work_experience__description)
+//                            workExperience.setExperienceFrom(work_experience_response.work_experience__worked_from)
+//                            workExperience.setExperienceTo(work_experience_response.work_experience__worked_to)
+//                            workExperience.setBrandName(work_experience_response.brand__name)
+//                            workExperience.setBrandLogoUrl(work_experience_response.asset__cloudinary_url)
+//
+//                            workExperienceList.add(workExperience)
+//                        }
+//                        workExperienceViewModel.setWorkExperienceList(workExperienceList)
 
                     } else {
                         Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()

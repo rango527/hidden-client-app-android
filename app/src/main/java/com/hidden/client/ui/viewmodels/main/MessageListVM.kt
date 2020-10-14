@@ -14,6 +14,7 @@ import com.hidden.client.models.entity.ConversationEntity
 import com.hidden.client.models.entity.MessageListEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ConversationJson
+import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.ui.adapters.MessageListAdapter
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -34,9 +35,9 @@ class MessageListVM(
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
 //    // To Reload
-//    private val _navigateReload = MutableLiveData<Event<Boolean>>()
-//    val navigateReload: LiveData<Event<Boolean>>
-//        get() = _navigateReload
+    private val _navigateSendMessage = MutableLiveData<Event<Boolean>>()
+    val navigateSendMessage: LiveData<Event<Boolean>>
+        get() = _navigateSendMessage
 
     var conversationId: Int = 1
         set(value) {
@@ -103,6 +104,20 @@ class MessageListVM(
             )
     }
 
+    fun sendMessage(conversationId: Int, message: String) {
+        subscription = conversationApi.sendMessage(AppPreferences.apiAccessToken, conversationId, message).concatMap {
+                sendResult -> Observable.just(sendResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveMessageStart() }
+            .doOnTerminate { onRetrieveMessageFinish() }
+            .subscribe(
+                { result -> onSendMessageSuccess(result) },
+                { error -> onSendMessageError(error) }
+            )
+    }
+
     private fun parseJsonResult(json: ConversationJson): ConversationEntity {
         val conversation: ConversationEntity = json.toConversationEntity(conversationId, AppPreferences.myId)
         val messageList: ArrayList<MessageListEntity> = arrayListOf()
@@ -145,6 +160,14 @@ class MessageListVM(
     }
 
     private fun onRetrieveMessageError(e: Throwable) {
+        e.printStackTrace()
+    }
+
+    fun onSendMessageSuccess(result: SimpleResponseJson) {
+        _navigateSendMessage.value = Event(true)
+    }
+
+    private fun onSendMessageError(e: Throwable) {
         e.printStackTrace()
     }
 }

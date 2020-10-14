@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.hidden.client.helpers.APP
 import com.hidden.client.models.room.AppDatabase
 import com.hidden.client.ui.viewmodels.main.*
+import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

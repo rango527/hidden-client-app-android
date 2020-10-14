@@ -72,7 +72,9 @@ class ProcessDetailVM(
 
     fun loadTimeline(cashMode: Boolean) {
         val apiObservable: Observable<List<TimelineEntity>>
-HCGlobal.getInstance().log(processId.toString());
+
+        HCGlobal.getInstance().log(processId.toString());
+
         if (cashMode) {
             apiObservable =
                 Observable.fromCallable { timelineDao.getTimeline(processId) }

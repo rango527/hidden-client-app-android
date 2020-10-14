@@ -47,6 +47,12 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
             showUnreadmessage.visibility = View.GONE
         }
 
+//        //show unreadmessage testing!!!
+//        if (position == 2) {
+//            showUnreadmessage.visibility = View.VISIBLE
+//            showUnreadmessageCount.text = "2"
+//        }
+
         // get stage process
         val stageList = processs.getStageList()
 
@@ -86,6 +92,7 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
             intent.putExtra("processId", process.id)
             intent.putExtra("conversationId", process.conversationId)
             intent.putExtra("jobId", process.jobId)
+            intent.putExtra("candidateId", process.candidateId)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
         }
     }

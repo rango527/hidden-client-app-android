@@ -1,6 +1,7 @@
 package com.hidden.client.ui.fragments.home.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,7 +80,6 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initUI(root: View) {
-
         // ImageView for jumping Setting Fragment
         imgSetting = root.findViewById(R.id.img_settings)
         imgSetting.setOnClickListener(this)

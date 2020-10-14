@@ -18,7 +18,7 @@ import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 
 @Suppress("NAME_SHADOWING")
-class FeedbackQuestionViewPagerAdapter(
+class GiveFeedbackQuestionViewPagerAdapter(
     private val context: Context,
     private val questionList: List<FeedbackQuestionEntity>,
     private val isApprove: Boolean
@@ -62,7 +62,7 @@ class FeedbackQuestionViewPagerAdapter(
                 txtApprove.text = context.getString(R.string.reject)
             }
             layoutSubmit.setOnClickListener {
-                (HCGlobal.getInstance().currentActivity as FeedbackActivity).submitFeedback(questionList, editComment.text.toString())
+                (HCGlobal.getInstance().currentActivity as HSGiveFeedbackActivity).submitFeedback(questionList, editComment.text.toString())
             }
         }
 

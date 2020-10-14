@@ -21,7 +21,8 @@
         android:background="@color/colorWhite_1"
         android:paddingLeft="@dimen/menu_padding_vertical_default"
         android:paddingTop="20dp"
-        android:paddingRight="@dimen/menu_padding_vertical_default">
+        android:paddingRight="@dimen/menu_padding_vertical_default"
+        android:paddingBottom="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +36,9 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:transcriptMode="alwaysScroll"
+                android:stackFromBottom="true" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,10 +49,12 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview_processes"
                         android:layout_width="match_parent"
-                        android:layout_height="404dp"
+                        android:layout_height="405dp"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:background="@color/colorWhite_1"
-                        app:adapter="@{viewModel.getMessageListAdapter()}" />
+                        app:adapter="@{viewModel.getMessageListAdapter()}"
+                        android:transcriptMode="alwaysScroll"
+                        android:stackFromBottom="true"/>
 
                 </LinearLayout>
             </ScrollView>
@@ -59,6 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
                 android:background="@color/colorWhite_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:orientation="vertical">
 
                 <View
@@ -68,7 +76,7 @@
                     android:background="@color/colorBlack_2" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/edit_text_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#00000000"
@@ -90,17 +98,20 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/take_photo"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:src="@drawable/take_photo" />
 
                     <ImageView
+                        android:id="@+id/file_attachment"
                         android:layout_width="19dp"
                         android:layout_height="19dp"
                         android:layout_marginStart="@dimen/menu_padding_vertical_default"
                         android:src="@drawable/attachment" />
 
                     <Button
+                        android:id="@+id/message_send_button"
                         android:layout_width="50dp"
                         android:layout_height="29dp"
                         android:layout_marginStart="@dimen/menu_padding_vertical_default"
