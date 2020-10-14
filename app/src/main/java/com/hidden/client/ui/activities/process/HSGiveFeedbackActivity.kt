@@ -21,7 +21,7 @@ import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.shortlist.FeedbackDoneActivity
-import com.hidden.client.ui.adapters.FeedbackQuestionViewPagerAdapter
+import com.hidden.client.ui.adapters.GiveFeedbackQuestionViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.FeedbackVM
 import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
@@ -41,7 +41,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private lateinit var progressDlg: KProgressHUD
 
     private lateinit var viewPagerFeedback: ViewPager
-    private lateinit var pageAdapter: FeedbackQuestionViewPagerAdapter
+    private lateinit var pageAdapter: GiveFeedbackQuestionViewPagerAdapter
     private lateinit var indicator: CirclePageIndicator
 
     private var processId: Int = 0
@@ -115,7 +115,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private fun initViewPager(feedback: FeedbackEntity) {
         viewPagerFeedback.pageMargin = 30
 
-        pageAdapter = FeedbackQuestionViewPagerAdapter(
+        pageAdapter = GiveFeedbackQuestionViewPagerAdapter(
             this,
             feedback.getQuestionList(),
             isApprove

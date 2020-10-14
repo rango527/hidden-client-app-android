@@ -20,6 +20,8 @@ import com.hidden.client.models.entity.MessageListEntity
 import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.viewmodels.main.MessageViewVM
 import kotlinx.android.synthetic.main.list_row_message_date.view.*
+import java.lang.reflect.Array
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
 
@@ -38,11 +40,11 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
         holder.bind(messageList[position])
 
         val message = messageList[position]
-
+Log.d("messageList", "messageList  $message")
         val messageSenderType = message.messageSenderType
         val messageMessage = message.messageMessage
         val messageTime = message.messageTime
-//        val messageSenderType = message.messageSenderType
+        val messageUrl = message.messageUrl
 
         // show Layout
         val showDate: ConstraintLayout = holder.itemView.findViewById(R.id.show_date)
@@ -58,65 +60,60 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
 
         val strDate = HCDate.dateToString(fromDate!!, "MM d yy HH:mm a").toString()
 
-        if (datetem != "" && (strDate == datetem)) {
+        if(messageMessage != "") {
+            if (datetem == "" || (strDate != datetem)) {
+                showDate.visibility = View.VISIBLE
+            } else {
                 showDate.visibility = View.GONE
-        }  else {
-            showDate.visibility = View.VISIBLE
-        }
+            }
 
-        if (messageSenderType == "FROM_COLLEAGUE") {
-            textSendorName1.setTextColor(Color.parseColor("#4B0082"))
-            textSendorName2.setTextColor(Color.parseColor("#4B0082"))
-            if (messageMessage == "") {
-                showFromMessage.visibility = View.GONE
-                showFromPhoto.visibility = View.VISIBLE
-                showToMessage.visibility = View.GONE
-                showToPhoto.visibility = View.GONE
-            } else {
+            showFromPhoto.visibility = View.GONE
+            showToPhoto.visibility = View.GONE
+
+            if (messageSenderType == "FROM_COLLEAGUE") {
+                textSendorName1.setTextColor(Color.parseColor("#4B0082"))
                 showFromMessage.visibility = View.VISIBLE
-                showFromPhoto.visibility = View.GONE
                 showToMessage.visibility = View.GONE
-                showToPhoto.visibility = View.GONE
-            }
-        } else if (messageSenderType == "FROM_TP") {
-            textSendorName1.setTextColor(Color.parseColor("#66CC66"))
-            textSendorName2.setTextColor(Color.parseColor("#66CC66"))
-            if(messageMessage == "") {
-                showFromMessage.visibility = View.GONE
-                showFromPhoto.visibility = View.VISIBLE
-                showToMessage.visibility = View.GONE
-                showToPhoto.visibility = View.GONE
-            } else {
+            } else if (messageSenderType == "FROM_TP") {
+                textSendorName1.setTextColor(Color.parseColor("#66CC66"))
                 showFromMessage.visibility = View.VISIBLE
-                showFromPhoto.visibility = View.GONE
                 showToMessage.visibility = View.GONE
-                showToPhoto.visibility = View.GONE
-            }
-        } else if(messageSenderType == "FROM_YOU") {
-            if(messageMessage == "") {
+            } else if (messageSenderType == "FROM_YOU") {
                 showFromMessage.visibility = View.GONE
+                showToMessage.visibility = View.VISIBLE
+            }
+        } else if (messageUrl != "") {
+
+            if (datetem == "" || (strDate != datetem)) {
+                showDate.visibility = View.VISIBLE
+            } else {
+                showDate.visibility = View.GONE
+            }
+
+            showFromMessage.visibility = View.GONE
+            showToMessage.visibility = View.GONE
+
+            if(messageSenderType == "FROM_YOU") {
                 showFromPhoto.visibility = View.GONE
-                showToMessage.visibility = View.GONE
                 showToPhoto.visibility = View.VISIBLE
             } else {
-                showFromMessage.visibility = View.GONE
-                showFromPhoto.visibility = View.GONE
-                showToMessage.visibility = View.VISIBLE
+                showFromPhoto.visibility = View.VISIBLE
                 showToPhoto.visibility = View.GONE
+                if (messageSenderType == "FROM_COLLEAGUE") {
+                    textSendorName2.setTextColor(Color.parseColor("#4B0082"))
+                } else if (messageSenderType == "FROM_TP") {
+                    textSendorName2.setTextColor(Color.parseColor("#66CC66"))
+                }
             }
+        } else {
+            showDate.visibility = View.GONE
+            showFromMessage.visibility = View.GONE
+            showFromPhoto.visibility = View.GONE
+            showToMessage.visibility = View.GONE
+            showToPhoto.visibility = View.GONE
         }
 
         datetem = strDate
-
-        holder.itemView.setOnClickListener {
-
-            val process = messageList[position]
-
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ProcessActivity::class.java)
-            intent.putExtra("processId", process.id)
-            intent.putExtra("jobId", conversationId)
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int {

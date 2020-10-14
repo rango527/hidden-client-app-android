@@ -18,6 +18,8 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
+import com.hidden.client.ui.activities.settings.CandidateDetailActivity
+import com.hidden.client.ui.activities.settings.CandidateListActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
@@ -46,6 +48,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private var processId: Int = 0
     private var conversationId: Int = 0
     private var jobId: Int = 0
+    private var candidateId: Int = 0
     private var cashMode: Boolean = true
 
     private lateinit var imgPhoto: ImageView
@@ -59,6 +62,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         conversationId = intent.getIntExtra("conversationId", 0)
 
         jobId = intent.getIntExtra("jobId", 0)
+        candidateId = intent.getIntExtra("candidateId", 0)
         // put jobid global variable - this variable is using at the job setting
         HCGlobal.getInstance().currentJobId = jobId
 
@@ -81,6 +85,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         })
 
         imgPhoto = findViewById(R.id.img_photo)
+
 
         viewModel.process.observe(this, Observer { process ->
             viewModel.loadTimeline(cashMode)
@@ -105,6 +110,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
     private fun initUI() {
         fragmentProcess = findViewById(R.id.fragment_process)
+        // subview
+        imgPhoto.setOnClickListener(this)
 
         // Init View
         layoutTitle = findViewById(R.id.layout_title)
@@ -120,6 +127,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         imgProcessSetting = findViewById(R.id.img_process_setting)
         imgProcessSetting.setOnClickListener(this)
+
+        imgPhoto.setOnClickListener(this)
 
 //        swipeContainer = findViewById(R.id.swipeContainer)
 //        swipeContainer.setOnRefreshListener {
@@ -210,13 +219,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_process, HCMessageFragment(conversationId)).commit()
-
-//                val intent = Intent(HCGlobal.getInstance().currentActivity, JobReviewerTypeActivity::class.java)
-//                intent.putExtra("conversationId", processId)
-//                startActivity(intent)
-//                overridePendingVTransitionEnter()
-
             }
+
             R.id.button_back -> {
                 finish()
             }
@@ -225,6 +229,16 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("processId", processId)
                 intent.putExtra("jobId", jobId)
                 startActivity(intent)
+                overridePendingVTransitionEnter()
+            }
+            R.id.img_photo -> {
+//                val intent = Intent(this, ProcessSettingActivity::class.java)
+//                intent.putExtra("processId", processId)
+//                startActivity(intent)
+//                overridePendingVTransitionEnter()
+                val intent = Intent(HCGlobal.getInstance().currentActivity, CandidateDetailActivity::class.java)
+                intent.putExtra("category_id", candidateId.toString())
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
                 overridePendingVTransitionEnter()
             }
         }
