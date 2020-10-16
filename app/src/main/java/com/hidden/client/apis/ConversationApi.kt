@@ -1,10 +1,11 @@
 package com.hidden.client.apis
 
 import com.hidden.client.models.json.*
+import com.hidden.client.ui.fileupload.UploadResponse
 import io.reactivex.Observable
-import okhttp3.Call
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -26,38 +27,26 @@ interface ConversationApi {
         @Field("message") message: String
     ): Observable<SimpleResponseJson>
 
-    @Multipart
-    @POST("client/conversations/{conversation_id}")
-    fun attachFile(
-        @Header("Authorization") authToken: String,
-        @Path("conversation_id") conversationId: Int,
-        @Part attachFile: MultipartBody.Part,
-        @Part("attachment") attachment: RequestBody
-
-    ): Observable<SimpleResponseJson>
-
 //    @Multipart
 //    @POST("client/conversations/{conversation_id}")
-//    fun uploadImage(
+//    fun sendAttachFile(
 //        @Header("Authorization") authToken: String,
 //        @Path("conversation_id") conversationId: Int,
-//        @Part image: MultipartBody.Part,
-//        @Part("desc") desc: RequestBody
-//    ): Call<UploadResponse>
+//        @Part attachFile: MultipartBody.Part
+//    ): Observable<SimpleResponseJson>
 
     @Multipart
     @POST("client/conversations/{conversation_id}")
     fun uploadImage(
-//        @Header("Authorization") authToken: String,
-//        @Path("conversation_id") conversationId: Int,
-        @Part image: MultipartBody.Part,
-        @Part("desc") desc: RequestBody
-    ): Observable<SimpleResponseJson>
+        @Header("Authorization") authToken: String,
+        @Path("conversation_id") conversationId: Int,
+        @Part attachment: MultipartBody.Part
+    ): Call<UploadResponse>
 
     companion object {
         operator fun invoke(): ConversationApi {
             return Retrofit.Builder()
-                .baseUrl("https://staging-api.hidden.io/client/conversations/")
+                .baseUrl("https://staging-api.hidden.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ConversationApi::class.java)

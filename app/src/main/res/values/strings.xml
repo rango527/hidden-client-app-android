@@ -100,6 +100,7 @@
     <string name="for_">For</string>
     <string name="process">Process</string>
     <string name="messages">Messages</string>
+    <string name="shared_doc">Shared %1$s Document</string>
 
     <string name="add_interviewers_to_interview">%1$s interviewers to this interview with %2$s</string>
     <string name="can_not_find_any_interviewers">Can \'t find who you\'re looking for? They might not be a Job Participant on this job or process. <![CDATA[<font color="#66CC66">Add them here</font>]]></string>
@@ -253,4 +254,8 @@
     <string name="storage_permission_rationale_title">Storage permission required</string>
     <string name="storage_permition_rationale_message">In order to take a picture, you must grant this permission!</string>
     <string name="storage_permission_denied_message">Storage permission is required in order to take a photo with the camera</string>
+    <string name="choose_media_picker"><font size="16">Media Picker</font>\n<font size="14">Please choose an option</font></string>
+    <string name="take_video">Take Video</string>
+    <string name="choose_video">Choose Video</string>
+    <string name="choose_photo">Choose Photo</string>
 </resources>

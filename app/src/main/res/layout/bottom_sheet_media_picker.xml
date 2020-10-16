@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet_add_interviewer_to_interview"
+    android:id="@+id/bottom_sheet_media_picker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -28,11 +28,11 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textColor="#dbdbdb"
             android:gravity="center"
-            android:textSize="18sp"
-            android:text="Add users to..."/>
+            android:textSize="16sp"
+            android:text="@string/choose_media_picker"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,13 +40,13 @@
             android:background="#EAEAEA"/>
 
         <TextView
-            android:id="@+id/text_add_to_process"
+            android:id="@+id/text_take_video"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textColor="#5eaae3"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="Just this process"/>
+            android:text="@string/take_video"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,13 +54,41 @@
             android:background="#EAEAEA"/>
 
         <TextView
-            android:id="@+id/text_add_to_job"
+            android:id="@+id/text_take_photo"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textColor="#5eaae3"
             android:gravity="center"
             android:textSize="18sp"
-            android:text="All processes for this job"/>
+            android:text="@string/take_photo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EAEAEA"/>
+
+        <TextView
+            android:id="@+id/text_choose_video"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="#5eaae3"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="@string/choose_video"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EAEAEA"/>
+
+        <TextView
+            android:id="@+id/text_choose_photo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="#5eaae3"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="@string/choose_photo"/>
 
     </LinearLayout>
 
@@ -76,7 +104,7 @@
             android:id="@+id/text_cancel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textColor="#5eaae3"
+            android:textColor="@color/colorRed_1"
             android:gravity="center"
             android:textSize="18sp"
             android:text="Cancel"/>

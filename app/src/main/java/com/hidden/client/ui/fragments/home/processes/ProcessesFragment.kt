@@ -15,7 +15,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessListBinding
 import com.hidden.client.helpers.HCDialog
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.TestMapsActivity
+import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessListVM
@@ -73,7 +75,9 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.layout_filter_search -> {
-                val intent = Intent(context, HCProcessFilterActivity::class.java)
+                val intent = Intent(HCGlobal.getInstance().currentActivity, HCProcessFilterActivity::class.java)
+//                intent.putExtra("conversationId", conversationId)
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
          }
     }

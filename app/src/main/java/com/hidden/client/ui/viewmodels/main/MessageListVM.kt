@@ -2,6 +2,7 @@ package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
 import android.content.LocusId
+import android.provider.Telephony
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +23,8 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import java.io.File
 import javax.inject.Inject
 
 class MessageListVM(
@@ -118,6 +121,20 @@ class MessageListVM(
             )
     }
 
+//    fun sendAttachFile(conversationId: Int, attachFile: MultipartBody.Part, attachment: String) {
+//        subscription = conversationApi.sendAttachFile(AppPreferences.apiAccessToken, conversationId, attachFile, attachment).concatMap {
+//                sendResult -> Observable.just(sendResult)
+//        }
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .doOnSubscribe { onRetrieveMessageStart() }
+//            .doOnTerminate { onRetrieveMessageFinish() }
+//            .subscribe(
+//                { result -> onSendMessageSuccess(result) },
+//                { error -> onSendMessageError(error) }
+//            )
+//    }
+
     private fun parseJsonResult(json: ConversationJson): ConversationEntity {
         val conversation: ConversationEntity = json.toConversationEntity(conversationId, AppPreferences.myId)
         val messageList: ArrayList<MessageListEntity> = arrayListOf()
@@ -165,6 +182,7 @@ class MessageListVM(
 
     fun onSendMessageSuccess(result: SimpleResponseJson) {
         _navigateSendMessage.value = Event(true)
+        loadMessage(false, conversationId)
     }
 
     private fun onSendMessageError(e: Throwable) {

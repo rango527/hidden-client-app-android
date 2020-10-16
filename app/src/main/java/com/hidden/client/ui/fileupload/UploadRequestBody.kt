@@ -9,7 +9,7 @@ import java.io.FileInputStream
 import java.util.logging.Handler
 
 class UploadRequestBody (
-    private val file: File,
+    private val attachment: File,
     private val contentType: String,
     private val callback: UploadCallback
 ) : RequestBody() {
@@ -29,12 +29,12 @@ class UploadRequestBody (
     }
     override fun contentType() = MediaType.parse( "$contentType/*")
 
-    override fun contentLength() = file.length()
+    override fun contentLength() = attachment.length()
 
     override fun writeTo(sink: BufferedSink) {
-        val length = file.length()
+        val length = attachment.length()
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-        val fileInputStream = FileInputStream(file)
+        val fileInputStream = FileInputStream(attachment)
         var uploaded = 0L
 
 //        fileInputStream.use {inputStream ->

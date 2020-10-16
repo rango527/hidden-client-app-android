@@ -20,12 +20,28 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import android.content.Intent
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.NonNull
 import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.hidden.client.R
+import com.hidden.client.apis.ConversationApi
+import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.ui.fileupload.UploadRequestBody
+import com.hidden.client.ui.fileupload.UploadResponse
+import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import kotlinx.android.synthetic.main.activity_video_player.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 
-class ConversationTakePhotoActivity : AppCompatActivity(), View.OnClickListener {
+class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private lateinit var imageView: ImageView
     private lateinit var pickImage: Button
     private lateinit var upload: Button
@@ -40,8 +56,12 @@ class ConversationTakePhotoActivity : AppCompatActivity(), View.OnClickListener 
     private var postPath: String? = null
 
     private var conversationId: Int = 0
+    private var requestCode: String? = ""
     private val TAKE_PHOTO_REQUEST = 101
     private var mCurrentPhotoPath: String = ""
+
+    private lateinit var attachment: MultipartBody.Part
+
 //
 //    @JvmField @BindView(R.id.take_photo)
 //    var takePhotoBtn: SimpleDraweeView? = null
@@ -49,97 +69,150 @@ class ConversationTakePhotoActivity : AppCompatActivity(), View.OnClickListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         conversationId = intent.getIntExtra("conversationId", 0)
-        validatePermissions()
-    }
+        requestCode = intent.getStringExtra("requestCode")
 
-    private fun validatePermissions() {
-        Dexter.withActivity(this)
-            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .withListener(object: PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    launchCamera()
+            when (requestCode) {
+                "TAKE_PHOTO" -> {
+                    val values = ContentValues(1)
+                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+
+                    val fileUri = contentResolver
+                        .insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            values
+                        )
+
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    if (intent.resolveActivity(packageManager) != null) {
+                        mCurrentPhotoPath = fileUri.toString()
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+                        intent.addFlags(
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                        )
+                        startActivityForResult(intent, TAKE_PHOTO_REQUEST)
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "SORRY, MEDIA PICKER ERROR...",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
-                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?,
-                                                                token: PermissionToken?) {
-                    AlertDialog.Builder(this@ConversationTakePhotoActivity)
-                        .setTitle(R.string.storage_permission_rationale_title)
-                        .setMessage(R.string.storage_permition_rationale_message)
-                        .setNegativeButton(android.R.string.cancel,
-                            { dialog, _ ->
-                                dialog.dismiss()
-                                token?.cancelPermissionRequest()
-                            })
-                        .setPositiveButton(android.R.string.ok,
-                            { dialog, _ ->
-                                dialog.dismiss()
-                                token?.continuePermissionRequest()
-                            })
-                        .setOnDismissListener({ token?.cancelPermissionRequest() })
-                        .show()
+                "TAKE_VIDEO" -> {
+                    val values = ContentValues(1)
+                    values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+                    val fileUri = contentResolver
+                        .insert(
+                            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                            values
+                        )
+                    val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+                    if (intent.resolveActivity(packageManager) != null) {
+                        mCurrentPhotoPath = fileUri.toString()
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+                        intent.addFlags(
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                        )
+                        startActivityForResult(intent, TAKE_PHOTO_REQUEST)
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "SORRY, MEDIA PICKER ERROR...",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-//                    Snackbar.make(mainContainer!!,
-//                        R.string.storage_permission_denied_message,
-//                        Snackbar.LENGTH_LONG)
-//                        .show()
+                else -> {
+                    Toast.makeText(
+                        applicationContext,
+                        "SORRY, MEDIA PICKER ERROR...",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-            })
-            .check()
-    }
+            }
 
-    private fun launchCamera() {
-        val values = ContentValues(1)
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
-        val fileUri = contentResolver
-            .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                values)
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(packageManager) != null) {
-            mCurrentPhotoPath = fileUri.toString()
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            startActivityForResult(intent, TAKE_PHOTO_REQUEST)
-        }
-//        val capture = Intent()
-//        capture.action = MediaStore.ACTION_IMAGE_CAPTURE
-//        startActivityForResult(capture, TAKE_PHOTO_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
-            processCapturedPhoto()
+
+            if (EasyPermissions.hasPermissions(
+                    this@ConversationTakePhotoActivity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                val cursor = contentResolver.query(
+                    Uri.parse(mCurrentPhotoPath),
+                    Array(1) { android.provider.MediaStore.Images.ImageColumns.DATA },
+                    null, null, null
+                )
+                cursor?.moveToFirst()
+                val photoPath = cursor?.getString(0)
+                cursor?.close()
+
+                val fileToUpload = photoPath.toString()
+                val requestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
+
+                attachment = MultipartBody.Part.createFormData(
+                    "attachment",
+                    File(fileToUpload)?.name,
+                    requestBody
+                )
+
+                val call = ConversationApi().uploadImage(
+                    AppPreferences.apiAccessToken,
+                    conversationId,
+                    attachment
+                )
+                call.enqueue(object : Callback<UploadResponse> {
+
+                    override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
+                        Toast.makeText(applicationContext, "CONNECTION FAILURE", Toast.LENGTH_SHORT)
+                            .show()
+                        Log.d("ONFAILURE", t.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<UploadResponse>?,
+                        response: Response<UploadResponse>?
+                    ) {
+                        if (response != null) {
+                            if (response.isSuccessful) {
+                                var message = response.body()?.message
+
+//                            Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+
+//                            if(message!!.contains("successfull")){
+                                finish()
+//                            }
+                            }
+                        }
+                    }
+                })
+            } else {
+                EasyPermissions.requestPermissions(
+                    this,
+                    "Application need your permission for accessing the Storage",
+                    200,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            }
+//        finish()
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
-    private fun processCapturedPhoto() {
-        val cursor = contentResolver.query(Uri.parse(mCurrentPhotoPath),
-            Array(1) {android.provider.MediaStore.Images.ImageColumns.DATA},
-            null, null, null)
-        cursor?.moveToFirst()
-        val photoPath = cursor?.getString(0)
-        cursor?.close()
-        val file = File(photoPath)
-        val uri = Uri.fromFile(file)
-
-        val height = resources.getDimensionPixelSize(R.dimen.default_panel_width)
-        val width = resources.getDimensionPixelSize(R.dimen.default_panel_height)
-
-        val request = ImageRequestBuilder.newBuilderWithSource(uri)
-            .setResizeOptions(ResizeOptions(width, height))
-            .build()
-//        val controller = Fresco.newDraweeControllerBuilder()
-//            .setOldController(takePhotoBtn?.controller)
-//            .setImageRequest(request)
-//            .build()
-//        takePhotoBtn?.controller = controller
+    override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this@ConversationTakePhotoActivity)
     }
 
-    override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+    override fun onProgressUpdate(percentage: Int) {
+        progressbar.progress = percentage
     }
 }
