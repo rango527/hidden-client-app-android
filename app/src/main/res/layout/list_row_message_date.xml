@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_padding_vertical_default"
-            android:visibility="visible" >
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/textViewDate"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/message_padding_bottom"
-            android:visibility="visible" >
+            android:visibility="gone" >
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_sendor_photo"
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_padding_vertical_default"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_message_photo"
@@ -136,12 +136,56 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/show_from_doc"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_doc_photo"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@{viewModel.getPhotoUrl, default=@drawable/man}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/img_doc_photo"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints,RtlSymmetry"
+                android:maxWidth="240dp"
+                android:paddingStart="10dp"
+                >
+
+                <Button
+                    android:id="@+id/text_from_doc"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:bottomRightRadius="8dp"
+                    android:bottomLeftRadius="8dp"
+                    android:topRightRadius="8dp"
+                    android:topLeftRadius="8dp"
+                    android:text="@string/shared_doc"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite_1"
+                    android:background="@drawable/button_round_black"
+                    app:layout_constraintTop_toTopOf="parent"
+                     />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/show_to_message"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_padding_vertical_default"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -185,7 +229,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_padding_vertical_default"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -194,6 +238,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints"
                 android:src="@{viewModel.getMessageUrl, default=@drawable/man}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/show_to_doc"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/text_to_doc"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints"
+                android:text="@string/shared_doc"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite_1"
+                android:background="@drawable/button_round_black"
+                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
