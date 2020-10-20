@@ -10,12 +10,14 @@ class ProcessViewVM: RootVM() {
     private val candidateName = MutableLiveData<String>()
     private val candidateAvatar = MutableLiveData<String>()
     private val jobTitle = MutableLiveData<String>()
+    private val jobCityName = MutableLiveData<String>()
     private val candidateCityName = MutableLiveData<String>()
 
     fun bind(process: ProcessEntity) {
         candidateName.value = process.candidateFullName
         candidateAvatar.value = process.candidateAvatar
         jobTitle.value = process.jobTitle
+        jobCityName.value = process.jobCityName
         candidateCityName.value = process.candidateCityName
     }
 
@@ -29,6 +31,10 @@ class ProcessViewVM: RootVM() {
 
     fun getJobTitle(): MutableLiveData<String> {
         return jobTitle
+    }
+
+    fun getJobCityName(): MutableLiveData<String> {
+        return jobCityName
     }
 
     fun getCandidateCityName(): MutableLiveData<String> {

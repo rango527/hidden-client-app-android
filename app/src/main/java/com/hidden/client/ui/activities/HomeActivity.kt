@@ -27,6 +27,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
     private lateinit var layoutMask: LinearLayout
 
     private var shortlistCashMode: Boolean = true
+    private var num: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,8 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         tabBar = findViewById(R.id.nav_view)
         tabBar.setSelectedListener(this)
 
-        onTabSelected(1)    // default tab is Shortlists
+        num = intent.getIntExtra("num", 1)
+        onTabSelected(num)    // default tab is Shortlists
 
         layoutMask = findViewById(R.id.layout_mask)
     }

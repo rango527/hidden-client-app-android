@@ -5,6 +5,9 @@ import android.content.Context
 import android.util.Log
 import com.hidden.client.datamodels.HCFeedbackQuestionResponse
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
+import com.hidden.client.models.custom.GetAllJob
+import com.hidden.client.models.custom.JobPick
+import com.hidden.client.models.custom.ProcessFilterList
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
@@ -43,11 +46,21 @@ class HCGlobal{
     lateinit var currrentJobTitleList: ArrayList<HCJobDetailTileViewModel>
 
     var currentShortlist: List<HCShortlistCandidateResponse> = arrayListOf()
+
+    var getAllJobList: ArrayList<GetAllJob> = arrayListOf()
+    var getJobPick: ArrayList<JobPick> = arrayListOf()
+
+    var currentProcessFilterList = ProcessFilterList()
+    var tempProcessFilterList = ProcessFilterList()
+
     var currentIndex: Int = 0
     var currentProjectIndex: Int = 0
     var currentJobId: Int = 0
     var currentFeedbackId: Int = 0
     var currentAvatarName: String = ""
+
+    // Read Status Global
+    var currentReadStatus: Int = -1             //-1: all messages, 0: has no unread messages, 1: has unread messages
 
     var shortlistCandidateVMList: List<ShortlistViewVM> = listOf()
 }

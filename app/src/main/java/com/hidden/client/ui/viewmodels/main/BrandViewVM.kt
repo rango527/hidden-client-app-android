@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
+import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.entity.BrandEntity
 import com.hidden.client.ui.viewmodels.root.RootVM
 

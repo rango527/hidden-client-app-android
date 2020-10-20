@@ -6,11 +6,14 @@ import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.custom.GetAllJob
+import com.hidden.client.models.custom.JobPick
 import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.models.dao.ProcessDao
 import com.hidden.client.models.dao.ProcessStageDao
+import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.json.ProcessJson
+import com.hidden.client.ui.adapters.JobFilterAdapter
 import com.hidden.client.ui.adapters.ProcessListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -18,24 +21,34 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-class ProcessListVM(
+class JobListVM(
     private val processDao: ProcessDao,
     private val processStageDao: ProcessStageDao
 ) : RootVM() {
 
     @Inject
-    lateinit var processApi: ProcessApi
+    internal lateinit var processApi: ProcessApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     val processListCount: MutableLiveData<Boolean> = MutableLiveData()
-    val processListAdapter: ProcessListAdapter = ProcessListAdapter()
+    var jobListAdapter: JobFilterAdapter = JobFilterAdapter()
+    val errorMessage:MutableLiveData<Int> = MutableLiveData()
 
     private var subscription: Disposable? = null
+    var search = 0
+        set(value) {
+            field = value
+            loadJob(true)
+        }
 
     init {
-        loadProcess(false)
+        loadJob(false)
     }
 
     override fun onCleared() {
@@ -43,8 +56,8 @@ class ProcessListVM(
         subscription?.dispose()
     }
 
-    fun loadProcess(cashMode: Boolean) {
-        val apiObservable: Observable<List<ProcessEntity>>
+    fun loadJob(cashMode: Boolean) {
+        lateinit var apiObservable: Observable<List<ProcessEntity>>
 
         if (cashMode) {
             apiObservable =
@@ -80,33 +93,42 @@ class ProcessListVM(
     }
 
     private fun parseJsonResult(jsonList: List<ProcessJson>): List<ProcessEntity> {
-
         processDao.deleteAll()
         processStageDao.deleteAll()
 
         val processList: ArrayList<ProcessEntity> = arrayListOf()
 
         var index = 0
+        HCGlobal.getInstance().getAllJobList.clear()
+        HCGlobal.getInstance().getJobPick.clear()
 
         for (json in jsonList) {
             val process: ProcessEntity = json.toEntity(AppPreferences.myId)
             val processStageList = json.toStageEntityList(process.id)
 
             process.setStageList(processStageList)
-
-            when (HCGlobal.getInstance().currentProcessFilterList.currentReadStatus) {
-                0 -> {
-                    if (json.messageUnreadNumber == 0)
-                        processList.add(process)
-                }
-                1 -> {
-                    if (json.messageUnreadNumber!! >= 1)
-                        processList.add(process)
-                }
-                else -> {
+            // get all job id, title and city name
+            for (x in 0 until index + 1) {
+                if (HCGlobal.getInstance().getAllJobList.size > x) {
+                    if (HCGlobal.getInstance().getAllJobList[x].jobId == json.jobId) {
+                        break
+                    }
+                } else {
+                    val getJobList = GetAllJob()
+                    val getJobPick = JobPick()
+                    getJobList.jobId = json.jobId!!
+                    getJobList.jobTitle = json.jobTitle.toString()
+                    getJobList.jobCityName = json.jobCityName.toString()
+                    getJobList.jobTick = false
+                    getJobPick.jobTick = false
+                    HCGlobal.getInstance().getAllJobList.add(getJobList)
+                    HCGlobal.getInstance().getJobPick.add(getJobPick)
                     processList.add(process)
+                    break
                 }
             }
+            index += 1
+            // end get all job id..
 
             processStageDao.insertAll(*processStageList.toTypedArray())
         }
@@ -134,18 +156,7 @@ class ProcessListVM(
     }
 
     private fun onRetrieveProcessSuccess(processList: List<ProcessEntity>) {
-        processListCount.value = processList.isEmpty()
-
-        val jobId: Array<Int> = emptyArray()
-
-        for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
-            if (HCGlobal.getInstance().getAllJobList[x].jobTick) {
-                var number: Int = -1
-                jobId[number++] = HCGlobal.getInstance().getAllJobList[x].jobId
-            }
-        }
-//        processList.filter { s -> s (jobId) }
-        processListAdapter.updateProcessList(processList)
+        jobListAdapter.updateProcessList(processList)
     }
 
     private fun onRetrieveProcessError(e: Throwable) {

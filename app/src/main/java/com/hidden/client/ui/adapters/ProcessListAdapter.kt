@@ -15,6 +15,7 @@ import com.hidden.client.R
 import com.hidden.client.databinding.ProcessItemBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
+import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessStageEntity
 import com.hidden.client.ui.activities.ProcessActivity
@@ -33,11 +34,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(processList[position])
 
-        // get unread message count
+        val sddd = processList
         val processs = processList[position]
+
+        // get unread message count
         val processMessageUnreadNumber = processs.messageUnreadNumber
-        val showUnreadmessage: ConstraintLayout = holder.itemView.findViewById(R.id.unreadmessage)
-        val showUnreadmessageCount: TextView = holder.itemView.findViewById(R.id.text_unreadmessage_count)
+        val showUnreadmessage: ConstraintLayout =
+            holder.itemView.findViewById(R.id.unreadmessage)
+        val showUnreadmessageCount: TextView =
+            holder.itemView.findViewById(R.id.text_unreadmessage_count)
 
         // show unread message count
         if (processMessageUnreadNumber != 0) {
@@ -46,12 +51,6 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
         } else {
             showUnreadmessage.visibility = View.GONE
         }
-
-//        //show unreadmessage testing!!!
-//        if (position == 2) {
-//            showUnreadmessage.visibility = View.VISIBLE
-//            showUnreadmessageCount.text = "2"
-//        }
 
         // get stage process
         val stageList = processs.getStageList()
@@ -65,30 +64,64 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
         val startedStage = stageList[6]
 
         val layoutInit: ImageView = holder.itemView.findViewById(R.id.img_stage_init)
-        layoutInit.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(initStage.clientTileBackgroundColor))
+        layoutInit.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                initStage.clientTileBackgroundColor
+            )
+        )
 
-        val layoutFirstInterview: ImageView = holder.itemView.findViewById(R.id.img_stage_first_interview)
-        layoutFirstInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(firstInterviewStage.clientTileBackgroundColor))
+        val layoutFirstInterview: ImageView =
+            holder.itemView.findViewById(R.id.img_stage_first_interview)
+        layoutFirstInterview.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                firstInterviewStage.clientTileBackgroundColor
+            )
+        )
 
-        val layoutFurtherInterview: ImageView = holder.itemView.findViewById(R.id.img_stage_further_interview)
-        layoutFurtherInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(furtherInterviewStage.clientTileBackgroundColor))
+        val layoutFurtherInterview: ImageView =
+            holder.itemView.findViewById(R.id.img_stage_further_interview)
+        layoutFurtherInterview.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                furtherInterviewStage.clientTileBackgroundColor
+            )
+        )
 
-        val layoutFinalInterview: ImageView = holder.itemView.findViewById(R.id.img_stage_final_interview)
-        layoutFinalInterview.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(finalInterviewStage.clientTileBackgroundColor))
+        val layoutFinalInterview: ImageView =
+            holder.itemView.findViewById(R.id.img_stage_final_interview)
+        layoutFinalInterview.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                finalInterviewStage.clientTileBackgroundColor
+            )
+        )
 
-        val layoutOfferStage: ImageView = holder.itemView.findViewById(R.id.img_stage_offer_stage)
-        layoutOfferStage.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(offerStage.clientTileBackgroundColor))
+        val layoutOfferStage: ImageView =
+            holder.itemView.findViewById(R.id.img_stage_offer_stage)
+        layoutOfferStage.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                offerStage.clientTileBackgroundColor
+            )
+        )
 
-        val layoutOfferAcceptedStage: ImageView = holder.itemView.findViewById(R.id.img_stage_offer_accepted_stage)
-        layoutOfferAcceptedStage.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(offerAcceptedStage.clientTileBackgroundColor))
+        val layoutOfferAcceptedStage: ImageView =
+            holder.itemView.findViewById(R.id.img_stage_offer_accepted_stage)
+        layoutOfferAcceptedStage.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                offerAcceptedStage.clientTileBackgroundColor
+            )
+        )
 
         val layoutStarted: ImageView = holder.itemView.findViewById(R.id.img_stage_started)
-        layoutStarted.setBackgroundResource(Utility.getBackgroundResourceFromCurrentStatus(startedStage.clientTileBackgroundColor))
+        layoutStarted.setBackgroundResource(
+            Utility.getBackgroundResourceFromCurrentStatus(
+                startedStage.clientTileBackgroundColor
+            )
+        )
 
         holder.itemView.setOnClickListener {
             val process = processList[position]
 
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ProcessActivity::class.java)
+            val intent =
+                Intent(HCGlobal.getInstance().currentActivity, ProcessActivity::class.java)
             intent.putExtra("processId", process.id)
             intent.putExtra("conversationId", process.conversationId)
             intent.putExtra("jobId", process.jobId)

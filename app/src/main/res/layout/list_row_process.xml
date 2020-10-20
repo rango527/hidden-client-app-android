@@ -10,8 +10,8 @@
             type="com.hidden.client.ui.viewmodels.main.ProcessViewVM" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/processlist"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,8 @@
         android:background="@drawable/button_round_white"
         android:layout_marginStart="@dimen/menu_padding_vertical_default"
         android:layout_marginRight="@dimen/menu_padding_vertical_default"
-        android:layout_marginBottom="@dimen/menu_padding_vertical_default">
+        android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+        android:visibility="visible">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_photo"

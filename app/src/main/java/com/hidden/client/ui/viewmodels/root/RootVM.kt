@@ -63,6 +63,7 @@ abstract class RootVM: ViewModel() {
             is JobAddUserRoleVM -> injector.inject(this)
             is JobUserManagerVM -> injector.inject(this)
             is JobInviteTeamMemberVM -> injector.inject(this)
+            is JobListVM -> injector.inject(this)
 
             // Process
             is ProcessListVM -> injector.inject(this)

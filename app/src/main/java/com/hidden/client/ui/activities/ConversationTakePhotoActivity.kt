@@ -71,6 +71,22 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
         conversationId = intent.getIntExtra("conversationId", 0)
         requestCode = intent.getStringExtra("requestCode")
 
+//        if (!EasyPermissions.hasPermissions(
+//                this@ConversationTakePhotoActivity,
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//            )
+//        ) {EasyPermissions.requestPermissions(
+//            this,
+//            "Application need your permission for accessing the Storage",
+//            991,
+//            android.Manifest.permission.READ_EXTERNAL_STORAGE
+//        )
+//            EasyPermissions.requestPermissions(
+//                this,
+//                "Application need your permission for accessing the Storage",
+//                992,
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)}
+
             when (requestCode) {
                 "TAKE_PHOTO" -> {
                     val values = ContentValues(1)
@@ -91,6 +107,9 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                                     or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                         )
                         startActivityForResult(intent, TAKE_PHOTO_REQUEST)
+//                    val photoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//                    if (photoIntent.resolveActivity(packageManager) != null) {
+//                        startActivityForResult(photoIntent)
                     } else {
                         Toast.makeText(
                             applicationContext,
@@ -103,8 +122,7 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                 "TAKE_VIDEO" -> {
                     val values = ContentValues(1)
                     values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-                    val fileUri = contentResolver
-                        .insert(
+                    val fileUri = contentResolver.insert(
                             MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
                             values
                         )
@@ -197,9 +215,15 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                 EasyPermissions.requestPermissions(
                     this,
                     "Application need your permission for accessing the Storage",
-                    200,
+                    991,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 )
+                EasyPermissions.requestPermissions(
+                    this,
+                    "Application need your permission for accessing the Storage",
+                    992,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
             }
 //        finish()
         } else {
