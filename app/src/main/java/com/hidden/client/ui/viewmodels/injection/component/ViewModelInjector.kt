@@ -44,6 +44,7 @@ interface ViewModelInjector {
     fun inject(jobAddUserRoleVM: JobAddUserRoleVM)
     fun inject(jobUserManagerVM: JobUserManagerVM)
     fun inject(jobInviteTeamMemberVM: JobInviteTeamMemberVM)
+    fun inject(jobListVM: JobListVM)
 
     // Process
     fun inject(processListVM: ProcessListVM)

@@ -6,4 +6,259 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.HCFilterProcessStageActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding_default">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/arrow_left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/back_to_shortlist" />
+
+        <TextView
+            android:id="@+id/text_filter_process_stage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/process_stage"
+            android:textSize="@dimen/textview_bold"
+            android:textColor="@color/colorBlack_2"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_topbar"
+        android:paddingTop="@dimen/padding_default"
+        android:paddingBottom="@dimen/padding_default">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_shortlist_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/shortlist_stage"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_shortlist_stage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_first_stage_interview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/first_stage_interview"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_first_stage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_further_stage_interviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/further_stage_interviews"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_further_stage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_final_stage_interviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/final_stage_interviews"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_final_stage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_offer_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/offer_stage"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_offer_stage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_offer_accepted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/offer_accepted"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_offer_accepted"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter_started"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/progress_item_height"
+            android:paddingBottom="@dimen/progress_item_height"
+            android:background="@drawable/layout_bottom_border_only">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_2"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="bold"
+                android:text="@string/started"
+                tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/img_tick_started"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/tick_off"
+                android:contentDescription="@string/tick_on_off" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/button_filter_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/button_round_black"
+        android:textColor="@color/colorWhite_1"
+        android:textAllCaps="false"
+        android:layout_marginLeft="@dimen/logo_margin_top"
+        android:layout_marginRight="@dimen/logo_margin_top"
+        android:layout_marginBottom="@dimen/margin_default"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

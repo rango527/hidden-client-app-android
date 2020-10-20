@@ -185,6 +185,21 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 context
             ) as T
         }
+        /* ------------------------------------------------------------
+          JobList VM
+       -------------------------------------------------------------- */
+        if (modelClass.isAssignableFrom(JobListVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return JobListVM(
+                db.processDao(),
+                db.processStageDao()
+            ) as T
+        }
 
         /* ------------------------------------------------------------
           Process VM
