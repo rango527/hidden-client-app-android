@@ -12,7 +12,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
@@ -35,7 +36,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.shortlist.InterviewActivity"></activity>
+        <activity android:name=".ui.activities.shortlist.InterviewActivity" />
         <activity android:name=".ui.activities.shortlist.ShortlistFeedbackActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

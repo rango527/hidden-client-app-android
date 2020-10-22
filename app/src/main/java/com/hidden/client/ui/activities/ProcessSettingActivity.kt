@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessSettingBinding
 import com.hidden.client.helpers.AppPreferences
@@ -51,6 +52,7 @@ class ProcessSettingActivity : BaseActivity() {
     private var processId: Int = 0
     private var jobId: Int = 0
     private var cashMode: Boolean = true
+    private lateinit var imgPhoto: ImageView
 
     private lateinit var swipeContainer: SwipeRefreshLayout
 
@@ -82,6 +84,12 @@ class ProcessSettingActivity : BaseActivity() {
             }
         })
 
+        imgPhoto = findViewById(R.id.img_photo)
+
+        viewModel.processSetting.observe(this, Observer { process ->
+            viewModel.loadProcessSetting(cashMode)
+            Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
+        })
         // Observing for reloading after login success
         viewModel.navigateReload.observe(this, Observer {
             it.getContentIfNotHandled()?.let {

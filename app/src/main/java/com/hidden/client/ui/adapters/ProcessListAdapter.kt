@@ -135,6 +135,7 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
     }
 
     fun updateProcessList(processList: List<ProcessEntity>){
+
         this.processList = processList
         notifyDataSetChanged()
     }

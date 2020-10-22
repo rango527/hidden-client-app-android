@@ -11,6 +11,7 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ProcessSettingDao
 import com.hidden.client.models.dao.ReviewerDao
+import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ProcessSettingJson
@@ -46,6 +47,7 @@ class ProcessSettingVM (
 
     var isUserManager: Boolean = false
 
+    var processSetting: MutableLiveData<ProcessSettingEntity> = MutableLiveData()
     val candidateName: MutableLiveData<String> = MutableLiveData("")
     val candidateAvatar: MutableLiveData<String> = MutableLiveData("")
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
@@ -180,9 +182,9 @@ class ProcessSettingVM (
     }
 
     private fun onRetrieveProcessSettingSuccess(processSetting: ProcessSettingEntity) {
-
         isUserManager = processSetting.isUserManager
 
+        this.processSetting.value = processSetting
         interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId, true)
         interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId, true)
         offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId, true)

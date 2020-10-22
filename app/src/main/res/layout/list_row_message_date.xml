@@ -20,7 +20,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone" >
 
             <TextView
@@ -38,7 +38,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/message_padding_bottom"
+            android:layout_marginTop="@dimen/message_padding_bottom"
             android:visibility="gone" >
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -90,7 +90,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -106,9 +106,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@id/img_message_photo"
                 android:orientation="vertical"
-                tools:ignore="MissingConstraints"
-                android:maxWidth="240dp"
-                android:paddingStart="10dp"
+                tools:ignore="MissingConstraints,RtlSymmetry,UseCompoundDrawables"
                 >
 
                 <TextView
@@ -123,8 +121,8 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
                     android:bottomRightRadius="8dp"
                     android:bottomLeftRadius="8dp"
                     android:topRightRadius="8dp"
@@ -140,7 +138,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -184,7 +182,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone">
 
             <LinearLayout
@@ -225,15 +223,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/show_to_photo"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints"
@@ -246,14 +244,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_padding_vertical_default"
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
             android:visibility="gone">
 
             <Button
                 android:id="@+id/text_to_doc"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints"
                 android:text="@string/shared_doc"
