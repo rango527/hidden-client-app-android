@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.hidden.client.helpers.APP
 import com.hidden.client.models.room.AppDatabase
+import com.hidden.client.models_.HCBrand
+import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.ui.viewmodels.main.*
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -33,6 +36,30 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ).build()
             @Suppress("UNCHECKED_CAST")
             return DashboardTileListVM(db.dashboardTileContentDao()) as T
+        }
+
+        if (modelClass.isAssignableFrom(HCBrandViewModel::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return HCBrandViewModel(
+                HCBrand(brandPhotoUrl = "")
+            ) as T
+        }
+
+        if (modelClass.isAssignableFrom(HCWorkExperienceViewModel::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return HCWorkExperienceViewModel(
+                HCWorkExperience()
+            ) as T
         }
 
         /* ------------------------------------------------------------

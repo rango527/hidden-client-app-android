@@ -48,10 +48,10 @@ class HCGlobal{
     var currentShortlist: List<HCShortlistCandidateResponse> = arrayListOf()
 
     var getAllJobList: ArrayList<GetAllJob> = arrayListOf()
-    var getJobPick: ArrayList<JobPick> = arrayListOf()
+    var getJobPick: ArrayList<JobPick> = arrayListOf()          //job temp
 
     var currentProcessFilterList = ProcessFilterList()
-    var tempProcessFilterList = ProcessFilterList()
+    var tempProcessFilterList = ProcessFilterList()             //process temp
 
     var currentIndex: Int = 0
     var currentProjectIndex: Int = 0

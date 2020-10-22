@@ -11,6 +11,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
+import android.content.Context
 //import butterknife.BindView
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -19,6 +20,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -86,14 +88,20 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
 //                "Application need your permission for accessing the Storage",
 //                992,
 //                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)}
-
+        if(if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            } else {
+                TODO("VERSION.SDK_INT < M")
+            }
+        ) {
             when (requestCode) {
                 "TAKE_PHOTO" -> {
                     val values = ContentValues(1)
                     values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
 
-                    val fileUri = contentResolver
-                        .insert(
+                    val fileUri: Uri? =
+                        contentResolver
+                            .insert(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                             values
                         )
@@ -123,9 +131,9 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                     val values = ContentValues(1)
                     values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
                     val fileUri = contentResolver.insert(
-                            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-                            values
-                        )
+                        MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                        values
+                    )
                     val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
                     if (intent.resolveActivity(packageManager) != null) {
                         mCurrentPhotoPath = fileUri.toString()
@@ -151,7 +159,22 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                     ).show()
                 }
             }
-
+        } else {
+            EasyPermissions.requestPermissions(
+                this,
+                "Application need your permission for accessing the Storage",
+                992,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            EasyPermissions.requestPermissions(
+                this,
+                "Application need your permission for accessing the Storage",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                requestPermissions(arrayOf(Manifest.permission.CAMERA), TAKE_PHOTO_REQUEST)
+//            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

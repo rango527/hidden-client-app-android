@@ -6,6 +6,8 @@ import dagger.Component
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.*
+import com.hidden.client.ui.viewmodels___.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -28,6 +30,8 @@ interface ViewModelInjector {
     fun inject(brandViewVM: BrandViewVM)
     fun inject(projectViewVM: ProjectViewVM)
     fun inject(workExperienceViewVM: WorkExperienceViewVM)
+    fun inject(HCBrandViewModel: HCBrandViewModel)
+    fun inject(HCWorkExperienceViewModel: HCWorkExperienceViewModel)
 
     // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)

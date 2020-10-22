@@ -20,53 +20,67 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite_1"
         android:paddingLeft="@dimen/menu_padding_vertical_default"
-        android:paddingTop="20dp"
         android:paddingRight="@dimen/menu_padding_vertical_default"
         android:paddingBottom="0dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="32dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            tools:layout_editor_absoluteX="3dp"-->
+<!--            tools:layout_editor_absoluteY="32dp">-->
 
             <ScrollView
+                android:id="@+id/scrollview_message"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
+                android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:transcriptMode="alwaysScroll"
+                android:requiresFadingEdge="vertical"
+                app:layout_constraintBottom_toTopOf="@id/layout_send_message"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:stackFromBottom="true" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/menu_padding_vertical_default">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:paddingBottom="@dimen/menu_padding_vertical_default">-->
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_processes"
+                        android:id="@+id/recyclerview_messages"
                         android:layout_width="match_parent"
-                        android:layout_height="405dp"
-                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_height="wrap_content"
                         android:background="@color/colorWhite_1"
                         app:adapter="@{viewModel.getMessageListAdapter()}"
-                        android:transcriptMode="alwaysScroll"
-                        android:stackFromBottom="true"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
 
-                </LinearLayout>
+                        />
+
+<!--                </LinearLayout>-->
             </ScrollView>
 
             <LinearLayout
+                android:id="@+id/layout_send_message"
                 android:layout_width="match_parent"
-                android:layout_height="79dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorWhite_1"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintTop_toBottomOf="@id/scrollview_message"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintHeight_min="?actionBarSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                >
 
                 <View
                     android:id="@+id/divider"
@@ -124,7 +138,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+<!--        </LinearLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </layout>

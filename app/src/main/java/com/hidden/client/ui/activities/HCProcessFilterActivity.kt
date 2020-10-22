@@ -183,7 +183,7 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
-//                finish()
+                finish()
             }
         }
     }

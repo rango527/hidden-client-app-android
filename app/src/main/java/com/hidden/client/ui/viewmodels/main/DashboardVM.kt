@@ -48,24 +48,19 @@ class DashboardVM (
                 Observable.fromCallable { dashboardTileDao.getTileList(AppPreferences.myId) }
                     .concatMap { dbTileListData ->
                         if (dbTileListData.isEmpty()) {
-                            Log.d("testing", "testmyIds1")
                             dashboardApi.getDashboard(AppPreferences.apiAccessToken)
                                 .concatMap { apiDashboardTileList ->
-                                    Log.d("testing", "testmyIds11")
                                     Observable.just(parseJsonResult(apiDashboardTileList))
                                 }
                         } else {
-                            Log.d("testing", "testmyIds2")
                             Observable.just(parseEntityResult(dbTileListData))
                         }
                     }
         } else {
             apiObservable = Observable.fromCallable { }
                 .concatMap {
-                    Log.d("testing", "testmyIds3")
                     dashboardApi.getDashboard(AppPreferences.apiAccessToken)
                         .concatMap { apiDashboardTileList ->
-                            Log.d("testing", "testmyIds4")
                             Observable.just(parseJsonResult(apiDashboardTileList))
                         }
                 }

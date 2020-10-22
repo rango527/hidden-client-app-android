@@ -86,7 +86,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         imgPhoto = findViewById(R.id.img_photo)
 
-
         viewModel.process.observe(this, Observer { process ->
             viewModel.loadTimeline(cashMode)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)

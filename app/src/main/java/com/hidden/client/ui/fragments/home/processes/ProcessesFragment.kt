@@ -63,19 +63,34 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
         binding.viewModel = viewModel
         val view = binding.root
 
-        noProcessList = view.findViewById(R.id.no_processlist)
+
+        // if filter result is true, change filter layout
         layoutBtnFilterSearch = view.findViewById(R.id.layout_filter_search)
         layoutBtnFilterResult = view.findViewById(R.id.layout_filter_search_result)
 
+        val isJobFilter = isJobFilterResult()
+        val isProcessFilter = isProcessFilterResult()
+        val isSortBy = isSortByResult()
+
+        if (isJobFilter || isProcessFilter || isSortBy) {
+            layoutBtnFilterResult.visibility = View.VISIBLE
+            layoutBtnFilterSearch.visibility = View.GONE
+        } else {
+            layoutBtnFilterResult.visibility = View.GONE
+            layoutBtnFilterSearch.visibility = View.VISIBLE
+        }
+        // end
+
+        // if processlist count is 0, show no_processlist layout
+        noProcessList = view.findViewById(R.id.no_processlist)
         viewModel.processListCount.observe(this, Observer { show ->
             if (show) {
                 noProcessList.visibility = View.VISIBLE
-                layoutBtnFilterResult.visibility = View.VISIBLE
             } else {
                 noProcessList.visibility = View.GONE
-                layoutBtnFilterSearch.visibility = View.VISIBLE
             }
         })
+        // end
 
         binding.recyclerviewProcesses.layoutManager = LinearLayoutManager(context!!)
 
@@ -87,11 +102,6 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
         layoutBtnClearFilter = view.findViewById(R.id.layout_clear_filter)
         layoutBtnClearFilter.setOnClickListener(this)
 
-//        swipeContainer = view.findViewById(R.id.swipeContainer)
-//        swipeContainer.setOnRefreshListener {
-//            viewModel.loadProcess(false)
-//        }
-
         return view
     }
 
@@ -99,7 +109,6 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             R.id.layout_filter_search -> {
                 val intent = Intent(HCGlobal.getInstance().currentActivity, HCProcessFilterActivity::class.java)
-//                intent.putExtra("conversationId", conversationId)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
 
@@ -110,6 +119,7 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
 
             R.id.layout_clear_filter -> {
                 HCGlobal.getInstance().currentProcessFilterList.currentReadStatus = -1
+                HCGlobal.getInstance().currentProcessFilterList.currentSortBy = -1
                 HCGlobal.getInstance().currentProcessFilterList.currentFinalStage = false
                 HCGlobal.getInstance().currentProcessFilterList.currentFirstStage = false
                 HCGlobal.getInstance().currentProcessFilterList.currentFurtherStage = false
@@ -117,7 +127,22 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
                 HCGlobal.getInstance().currentProcessFilterList.currentOfferStage = false
                 HCGlobal.getInstance().currentProcessFilterList.currentShortlistStage = false
                 HCGlobal.getInstance().currentProcessFilterList.currentStarted = false
-                HCGlobal.getInstance().currentProcessFilterList.currentSortBy = -1
+
+                HCGlobal.getInstance().tempProcessFilterList.currentReadStatus = -1
+                HCGlobal.getInstance().tempProcessFilterList.currentSortBy = -1
+                HCGlobal.getInstance().tempProcessFilterList.currentStarted = false
+                HCGlobal.getInstance().tempProcessFilterList.currentShortlistStage = false
+                HCGlobal.getInstance().tempProcessFilterList.currentOfferStage = false
+                HCGlobal.getInstance().tempProcessFilterList.currentOfferAccepted = false
+                HCGlobal.getInstance().tempProcessFilterList.currentFurtherStage = false
+                HCGlobal.getInstance().tempProcessFilterList.currentFinalStage = false
+                HCGlobal.getInstance().tempProcessFilterList.currentFirstStage = false
+
+
+                for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
+                    HCGlobal.getInstance().getJobPick[x].jobTick = false
+                    HCGlobal.getInstance().getAllJobList[x].jobTick = false
+                }
 
                 val intent = Intent(HCGlobal.getInstance().currentActivity, HomeActivity::class.java)
                 intent.putExtra("num", 2)
@@ -126,5 +151,48 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
          }
+    }
+
+    fun isJobFilterResult(): Boolean {
+
+        val isJobFilter = HCGlobal.getInstance().getAllJobList
+
+        for (x in 0 until isJobFilter.size) {
+            if (isJobFilter[x].jobTick) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    fun isProcessFilterResult(): Boolean {
+        val isProcessFilter = HCGlobal.getInstance().currentProcessFilterList
+
+        if (isProcessFilter.currentFinalStage)
+            return true
+        if (isProcessFilter.currentFirstStage)
+            return true
+        if (isProcessFilter.currentFurtherStage)
+            return true
+        if (isProcessFilter.currentOfferAccepted)
+            return true
+        if (isProcessFilter.currentOfferStage)
+            return true
+        if (isProcessFilter.currentShortlistStage)
+            return true
+        if (isProcessFilter.currentStarted)
+            return true
+        if (isProcessFilter.currentReadStatus != -1)
+            return true
+
+        return false
+    }
+
+    fun isSortByResult(): Boolean {
+        if (HCGlobal.getInstance().currentProcessFilterList.currentSortBy != -1)
+            return true
+
+        return false
     }
 }

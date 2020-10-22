@@ -4,8 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,15 +20,12 @@ import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.ConversationFileAttachActivity
-import com.hidden.client.ui.activities.ConversationTakePhotoActivity
-import com.hidden.client.ui.activities.ConversationTakePhototestActivity
-import com.hidden.client.ui.activities.HCProcessFilterActivity
-import com.hidden.client.ui.dialogs.BottomAddInterviewerToInterviewDialog
 import com.hidden.client.ui.dialogs.BottomAddMediaPickerDialog
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_home_message.*
+
 
 class HCMessageFragment(
     private val conversationId: Int
@@ -36,10 +34,11 @@ class HCMessageFragment(
     private lateinit var binding: MessageListBinding
     private lateinit var viewModel: MessageListVM
 
-    private lateinit var layoutBtnFilterSearch: LinearLayout
     private lateinit var messageSendBtn: Button
     private lateinit var attachFileBtn: ImageView
     private lateinit var takePhotoBtn: ImageView
+    private lateinit var scrollView: ScrollView
+    private lateinit var layoutSendMessage: LinearLayout
 
     private lateinit var imageView: ImageView
 
@@ -62,8 +61,7 @@ class HCMessageFragment(
         viewModel.loadingVisibility.observe(this, Observer { show ->
             if (show) {
                 progressDlg.show()
-            }
-            else {
+            } else {
                 progressDlg.dismiss()
             }
         })
@@ -75,7 +73,22 @@ class HCMessageFragment(
 
         val view = binding.root
 
-        binding.recyclerviewProcesses.layoutManager = LinearLayoutManager(context!!)
+        val displayMetrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+
+        val height = displayMetrics.heightPixels
+
+        scrollView = view.findViewById(R.id.scrollview_message)
+        layoutSendMessage = view.findViewById(R.id.layout_send_message)
+
+        val layoutSendMessageHeight = layoutSendMessage.height
+
+        scrollView.layoutParams.height = height - layoutSendMessageHeight - 650
+
+        binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
+
+//        val lp = RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
+//        binding.recyclerviewMessages.layoutParams = lp
 
         messageSendBtn = view.findViewById(R.id.message_send_button)
         messageSendBtn.setOnClickListener(this)
@@ -103,13 +116,19 @@ class HCMessageFragment(
             }
 
             R.id.file_attachment -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    ConversationFileAttachActivity::class.java
+                )
                 intent.putExtra("conversationId", conversationId)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
 
             R.id.take_photo -> {
-                BottomAddMediaPickerDialog.display(activity!!.supportFragmentManager, conversationId);
+                BottomAddMediaPickerDialog.display(
+                    activity!!.supportFragmentManager,
+                    conversationId
+                );
             }
         }
     }
