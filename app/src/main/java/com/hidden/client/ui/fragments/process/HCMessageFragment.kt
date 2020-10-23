@@ -25,6 +25,7 @@ import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_home_message.*
+import kotlin.math.roundToInt
 
 
 class HCMessageFragment(
@@ -76,19 +77,20 @@ class HCMessageFragment(
         val displayMetrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
 
+        val density: Float = resources.displayMetrics.density
+
         val height = displayMetrics.heightPixels
 
         scrollView = view.findViewById(R.id.scrollview_message)
         layoutSendMessage = view.findViewById(R.id.layout_send_message)
 
-        val layoutSendMessageHeight = layoutSendMessage.height
+        layoutSendMessage.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val layoutSendMessageHeight = layoutSendMessage.measuredHeight
 
-        scrollView.layoutParams.height = height - layoutSendMessageHeight - 650
+        // get message list - scrollview height
+        scrollView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
 
         binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
-
-//        val lp = RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
-//        binding.recyclerviewMessages.layoutParams = lp
 
         messageSendBtn = view.findViewById(R.id.message_send_button)
         messageSendBtn.setOnClickListener(this)
