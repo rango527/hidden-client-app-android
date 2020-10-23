@@ -10,7 +10,7 @@
     <dimen name="filter_match_padding_vertical_default">49dp</dimen>
     <dimen name="message_padding_bottom">16.62dp</dimen>
     <dimen name="list_row_margin_default">5dp</dimen>
-
+    <dimen name="list_row_margin_default2">15dp</dimen>
     <dimen name="progress_item_height">13dp</dimen>
 
     <!-- Font -->
@@ -33,5 +33,7 @@
     <dimen name="default_panel_width">200dp</dimen>
     <dimen name="default_panel_height">200dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
+    <dimen name="process_margin_top">22dp</dimen>
+    <dimen name="process_img_padding">29dp</dimen>
+    <dimen name="process_img_size">29dp</dimen>
 </resources>

@@ -26,7 +26,9 @@ import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_splash.*
 import java.lang.Math.round
+import kotlin.math.roundToInt
 
 class ProcessActivity : BaseActivity(), View.OnClickListener {
 
@@ -150,7 +152,10 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 )
 
                 val animation: Animation =
-                    TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight)
+                    TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight + 22)
+                // +23 is layoutTitle and process, message layout distance
+                val density: Float = applicationContext.resources.displayMetrics.density
+
                 animation.interpolator = AccelerateInterpolator()
                 animation.duration = 50
 
@@ -165,11 +170,14 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                     override fun onAnimationEnd(animation: Animation?) {
                         val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
-                        param.topMargin = resources.getDimension(R.dimen.margin_default).toInt()
+//                        param.topMargin = resources.getDimension(R.dimen.margin_default).toInt()
+                        imgPhoto.layoutParams.width = (density * 100).roundToInt()
+                        imgPhoto.layoutParams.height = (density * 99).roundToInt()
                         layoutTitle.layoutParams = param
                     }
 
                 })
+
                 layoutTitle.animation = animation
                 layoutTitle.startAnimation(animation)
 
@@ -192,7 +200,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 val density: Float = applicationContext.resources.displayMetrics.density
 
                 val animation: Animation =
-                    TransformAnimation(layoutTitle, layoutTitle.height, round(40 * density))
+                    TransformAnimation(layoutTitle, layoutTitle.height, (42 * density).roundToInt())
                 animation.interpolator = AccelerateInterpolator()
                 animation.duration = 100
 
@@ -207,8 +215,12 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                     override fun onAnimationEnd(animation: Animation?) {
                         val param = layoutTitle.layoutParams as LinearLayout.LayoutParams
-                        param.topMargin =
+                        param.bottomMargin =
                             resources.getDimension(R.dimen.list_row_margin_default).toInt()
+//                        imgPhoto.setPadding((30 * density).roundToInt(), 0, (30 * density).roundToInt(), (60 * density).roundToInt())
+                        imgPhoto.layoutParams.height = (density * 42).roundToInt()
+                        imgPhoto.layoutParams.width = (density * 41).roundToInt()
+
                         layoutTitle.layoutParams = param
                     }
                 })

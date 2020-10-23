@@ -42,12 +42,15 @@
                         android:id="@+id/layout_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="@dimen/process_margin_top"
                         android:orientation="vertical">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/img_photo"
                             android:layout_width="100dp"
                             android:layout_height="99dp"
+                            android:scaleType="centerCrop"
                             android:src="@{viewModel.candidateAvatar, default=@drawable/man}"
                             android:layout_gravity="center_horizontal"/>
 
@@ -68,28 +71,29 @@
                             android:layout_height="22dp"
                             android:gravity="center_vertical|center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/list_row_margin_default"
                             android:textColor="@color/colorWhite_1"
                             android:textSize="16sp"
                             app:mutableText="@{viewModel.getJobTitle()}"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_name" />
+                            app:layout_constraintTop_toBottomOf="@id/text_name"
+                            />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginLeft="@dimen/list_row_margin_default"
-                        android:layout_marginRight="@dimen/list_row_margin_default">
+                        android:layout_marginRight="@dimen/list_row_margin_default"
+                        tools:ignore="DisableBaselineAlignment">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_weight="1">
+
                             <TextView
                                 android:id="@+id/text_process"
                                 android:layout_width="match_parent"
@@ -103,12 +107,15 @@
                                 android:paddingBottom="9dp"
                                 android:textSize="18sp"
                                 android:textAllCaps="true"/>
+
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_weight="1">
+
                             <TextView
                                 android:id="@+id/text_message"
                                 android:layout_width="match_parent"
@@ -122,6 +129,7 @@
                                 android:paddingTop="9dp"
                                 android:paddingBottom="9dp"
                                 android:background="@android:color/transparent"/>
+
                         </LinearLayout>
                     </LinearLayout>
 
@@ -130,7 +138,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0"
-                        android:layout_marginTop="-2dp"/>
+                        android:layout_marginTop="-2dp"
+                        tools:ignore="InefficientWeight" />
 
                 </LinearLayout>
             </ScrollView>
