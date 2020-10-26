@@ -152,6 +152,7 @@
     <string name="most_recent_activity">Most Recent Activity</string>
     <string name="shortlisting_date">Shortlisting Date</string>
     <string name="clear">Clear</string>
+    <string name="close">Close</string>
     <string name="view_process">View Process</string>
     <string name="job_and_location">For: %1$s, %2$s</string>
     <string name="job_and_location_filter">%1$s, %2$s</string>

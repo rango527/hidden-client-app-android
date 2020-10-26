@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ConversationDao
 import com.hidden.client.models.dao.MessageListDao
 import com.hidden.client.models.entity.ConversationEntity
@@ -36,7 +37,7 @@ class MessageListVM(
     @Inject
     lateinit var conversationApi: ConversationApi
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-
+    val loadingMessageList: MutableLiveData<Boolean> = MutableLiveData()
 //    // To Reload
     private val _navigateSendMessage = MutableLiveData<Event<Boolean>>()
     val navigateSendMessage: LiveData<Event<Boolean>>
@@ -148,6 +149,8 @@ class MessageListVM(
         conversationDao.insertAll(conversation)
         messageListDao.insertAll(*messageList.toTypedArray())
 
+        HCGlobal.getInstance().currentMessageCount = messageList.size
+
         return parseEntityResult(conversation, messageList)
     }
 
@@ -158,6 +161,8 @@ class MessageListVM(
         for(message in messageList) {
             userManagerList.add(message)
         }
+
+        HCGlobal.getInstance().currentMessageCount = messageList.size
 
         conversation.setMessageList(userManagerList)
 
@@ -173,6 +178,7 @@ class MessageListVM(
     }
 
     private fun onRetrieveMessageSuccess(conversation: ConversationEntity) {
+        loadingMessageList.value = true
         messageListAdapter.updateMessageList(conversation.getMessageList(), conversationId)
     }
 

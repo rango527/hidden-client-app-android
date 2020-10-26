@@ -64,10 +64,6 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
 
     private lateinit var attachment: MultipartBody.Part
 
-//
-//    @JvmField @BindView(R.id.take_photo)
-//    var takePhotoBtn: SimpleDraweeView? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         conversationId = intent.getIntExtra("conversationId", 0)
@@ -88,12 +84,15 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
 //                "Application need your permission for accessing the Storage",
 //                992,
 //                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)}
-        if(if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-            } else {
-                TODO("VERSION.SDK_INT < M")
-            }
-        ) {
+
+//        if (!EasyPermissions.hasPermissions(
+//                this@ConversationTakePhotoActivity,
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//            ) && !EasyPermissions.hasPermissions(
+//                this@ConversationTakePhotoActivity,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE
+//            )
+//        ) {
             when (requestCode) {
                 "TAKE_PHOTO" -> {
                     val values = ContentValues(1)
@@ -102,9 +101,9 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                     val fileUri: Uri? =
                         contentResolver
                             .insert(
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            values
-                        )
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                values
+                            )
 
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     if (intent.resolveActivity(packageManager) != null) {
@@ -159,22 +158,19 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                     ).show()
                 }
             }
-        } else {
-            EasyPermissions.requestPermissions(
-                this,
-                "Application need your permission for accessing the Storage",
-                992,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            EasyPermissions.requestPermissions(
-                this,
-                "Application need your permission for accessing the Storage",
-                991,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                requestPermissions(arrayOf(Manifest.permission.CAMERA), TAKE_PHOTO_REQUEST)
-//            }
-        }
+//        } else {
+//            EasyPermissions.requestPermissions(
+//                this,
+//                "Application need your permission for accessing the Storage",
+//                992,
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//            EasyPermissions.requestPermissions(
+//                this,
+//                "Application need your permission for accessing the Storage",
+//                991,
+//                android.Manifest.permission.READ_EXTERNAL_STORAGE
+//            )
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -223,13 +219,8 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
                     ) {
                         if (response != null) {
                             if (response.isSuccessful) {
-                                var message = response.body()?.message
-
-//                            Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
-
-//                            if(message!!.contains("successfull")){
+//                                var message = response.body()?.message
                                 finish()
-//                            }
                             }
                         }
                     }
