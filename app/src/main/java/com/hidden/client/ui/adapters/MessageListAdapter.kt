@@ -1,10 +1,12 @@
 package com.hidden.client.ui.adapters
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.*
 import com.hidden.client.helpers.HCDate
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.MessageListEntity
 import com.hidden.client.ui.viewmodels.main.MessageViewVM
 
@@ -29,6 +32,10 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(messageList[position])
+
+
+        val messageCount = messageList.size
+        HCGlobal.getInstance().currentMessageCount = messageCount
 
         val message = messageList[position]
         val messageSenderType = message.messageSenderType

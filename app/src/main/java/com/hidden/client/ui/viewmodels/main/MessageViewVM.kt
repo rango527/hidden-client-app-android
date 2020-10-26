@@ -36,7 +36,7 @@ class MessageViewVM: RootVM() {
 
     fun getMessageTime(): String {
         val fromDate = HCDate.stringToDate(messageTime.value!!, null)
-        var strDate: String
+        val strDate: String
         strDate = HCDate.dateToString(fromDate!!, "MMM d, yyyy' at 'hh:mm a").toString()
         return strDate
     }

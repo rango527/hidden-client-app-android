@@ -54,6 +54,7 @@ class HCGlobal{
     var tempProcessFilterList = ProcessFilterList()             //process temp
 
     var currentIndex: Int = 0
+    var currentMessageCount: Int = 71
     var currentProjectIndex: Int = 0
     var currentJobId: Int = 0
     var currentFeedbackId: Int = 0
