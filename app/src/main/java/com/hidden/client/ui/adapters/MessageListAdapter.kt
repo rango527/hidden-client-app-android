@@ -1,28 +1,40 @@
 package com.hidden.client.ui.adapters
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.*
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.custom.GetAllJob
+import com.hidden.client.models.custom.ImageMessageList
 import com.hidden.client.models.entity.MessageListEntity
+import com.hidden.client.ui.activities.ConversationFileAttachActivity
+import com.hidden.client.ui.activities.ConversationImageShowActivity
+import com.hidden.client.ui.activities.ProcessSettingActivity
+import com.hidden.client.ui.activities.settings.CandidateListActivity
+import com.hidden.client.ui.dialogs.BottomAddMediaPickerDialog
 import com.hidden.client.ui.viewmodels.main.MessageViewVM
+import kotlinx.android.synthetic.main.fragment_home_message.*
 
-class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
+class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>(){
 
     private var conversationId: Int = 0
     private lateinit var messageList: ArrayList<MessageListEntity>
     private  var datetem: String = ""
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: MessageDateItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.list_row_message_date, parent, false)
@@ -57,7 +69,18 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
         val textSendorName2: TextView = holder.itemView.findViewById(R.id.text_sendor_name2)
         val textFromDoc: Button = holder.itemView.findViewById(R.id.text_from_doc)
         val textToDoc: Button = holder.itemView.findViewById(R.id.text_to_doc)
-        val fromDate = HCDate.stringToDate(messageTime!!, null)
+        val fromDate = HCDate.stringToDate(messageTime, null)
+
+        val playFromButton:ImageView = holder.itemView.findViewById(R.id.play_from_button)
+        val playToButton:ImageView = holder.itemView.findViewById(R.id.play_to_button)
+
+        if (message.messageAssetType == "IMAGE" || message.messageAssetType == "VIDEO") {
+            holder.itemView.setOnClickListener {
+                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationImageShowActivity::class.java)
+                intent.putExtra("messageId", message.messageId)
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
+            }
+        }
 
         val strDate = HCDate.dateToString(fromDate!!, "MM d yy HH:mm a").toString()
 
@@ -96,9 +119,17 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
             showFromMessage.visibility = View.GONE
             showToMessage.visibility = View.GONE
 
-            if (messageAssetType == "IMAGE") {
+            if (messageAssetType == "IMAGE" || messageAssetType == "VIDEO") {
                 showFromDoc.visibility = View.GONE
                 showToDoc.visibility = View.GONE
+
+                if (messageAssetType == "IMAGE") {
+                    playFromButton.visibility = View.GONE
+                    playToButton.visibility = View.GONE
+                } else {
+                    playFromButton.visibility = View.VISIBLE
+                    playToButton.visibility = View.VISIBLE
+                }
 
                 if(messageSenderType == "FROM_YOU") {
                     showFromPhoto.visibility = View.GONE
@@ -155,6 +186,22 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>() 
     }
 
     fun updateMessageList(messageList: ArrayList<MessageListEntity>, conversationId: Int){
+        HCGlobal.getInstance().imageMessageList.clear()
+
+        var index = 1
+
+        for (message in messageList) {
+            if (message.messageAssetType == "IMAGE" || message.messageAssetType == "VIDEO") {
+                val imageMessageList = ImageMessageList()
+                imageMessageList.id = index
+                imageMessageList.messageId = message.messageId
+                imageMessageList.messageUrl = message.messageUrl
+                imageMessageList.messageTime = message.messageTime
+                imageMessageList.messageAssetType = message.messageAssetType
+                HCGlobal.getInstance().imageMessageList.add(imageMessageList)
+                index += 1
+            }
+        }
         this.messageList = messageList
         this.conversationId = conversationId
         notifyDataSetChanged()

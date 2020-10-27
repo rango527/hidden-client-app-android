@@ -6,6 +6,7 @@ import android.util.Log
 import com.hidden.client.datamodels.HCFeedbackQuestionResponse
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.models.custom.GetAllJob
+import com.hidden.client.models.custom.ImageMessageList
 import com.hidden.client.models.custom.JobPick
 import com.hidden.client.models.custom.ProcessFilterList
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
@@ -49,6 +50,8 @@ class HCGlobal{
 
     var getAllJobList: ArrayList<GetAllJob> = arrayListOf()
     var getJobPick: ArrayList<JobPick> = arrayListOf()          //job temp
+
+    var imageMessageList: ArrayList<ImageMessageList> = arrayListOf()
 
     var currentProcessFilterList = ProcessFilterList()
     var tempProcessFilterList = ProcessFilterList()             //process temp
