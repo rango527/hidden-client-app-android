@@ -45,7 +45,6 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(messageList[position])
 
-
         val messageCount = messageList.size
         HCGlobal.getInstance().currentMessageCount = messageCount
 
