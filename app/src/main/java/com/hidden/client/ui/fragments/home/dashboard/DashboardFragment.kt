@@ -60,7 +60,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             if (layoutScrollContent.childCount > 0) {
                 layoutScrollContent.removeAllViewsInLayout()
             }
-
+Log.d("trest", "test $layoutScrollContent")
             for (tileEntity in tileEntityList) {
                 when(tileEntity.type) {
                     Enums.TileType.DATETIME_LOCATION_TILE_LIST.value -> {

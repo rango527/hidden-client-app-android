@@ -50,10 +50,10 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
                         apiTileContentList ->
                     val tileContentEntityList: ArrayList<DashboardTileContentEntity> = arrayListOf()
                     for (tileContentJson in apiTileContentList) {
-                        if (tileContentJson.extra.toString().any { it.isDigit() }) {
-                            val tileContentEntity = tileContentJson.toEntity(tileEntity.id)
-                            tileContentEntityList.add(tileContentEntity)
-                        }
+//                        if (tileContentJson.extra.toString().any { it.isDigit() }) {
+                        val tileContentEntity = tileContentJson.toEntity(tileEntity.id)
+                        tileContentEntityList.add(tileContentEntity)
+//                        }
                     }
                     dashboardTileContentDao.deleteByTileId(tileEntity.id)
                     dashboardTileContentDao.insertAll(*tileContentEntityList.toTypedArray())
