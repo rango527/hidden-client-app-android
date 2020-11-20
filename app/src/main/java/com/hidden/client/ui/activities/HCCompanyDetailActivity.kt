@@ -23,6 +23,7 @@ import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
 import com.hidden.client.ui.custom.CompanyDetailBadgeView
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
@@ -59,7 +60,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
 
         /** Company Detail Tile RecyclerView **/
         rvCompanyDetailTile = findViewById(R.id.recyclerview_company_detail_tile)
-        companyDetailTileViewModel = ViewModelProviders.of(this).get(HCJobDetailTileViewModel::class.java)
+        companyDetailTileViewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(HCJobDetailTileViewModel::class.java)
         companyDetailTileViewModel.getJobDetailTileList().observe(this, Observer {jobDetailTileViewModels->
             companyDetailTileAdapter = HCJobDetailTileAdapter(jobDetailTileViewModels)
             rvCompanyDetailTile.layoutManager = LinearLayoutManager(applicationContext)

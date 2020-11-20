@@ -1,5 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.DashboardApi
@@ -45,14 +46,15 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
             onRetrieveTileContentListSuccess(tileEntity.getTileContentList(), tileEntity)
         } else {
             if (tileEntity.url != "") {
-                subscription = dashboardApi.getTileContent(tileEntity.url, AppPreferences.apiAccessToken).concatMap { apiTileContentList ->
-
+                subscription = dashboardApi.getTileContent(tileEntity.url, AppPreferences.apiAccessToken).concatMap {
+                        apiTileContentList ->
                     val tileContentEntityList: ArrayList<DashboardTileContentEntity> = arrayListOf()
                     for (tileContentJson in apiTileContentList) {
-                        val tileContentEntity = tileContentJson.toEntity(tileEntity.id)
-                        tileContentEntityList.add(tileContentEntity)
+                        if (tileContentJson.extra.toString().any { it.isDigit() }) {
+                            val tileContentEntity = tileContentJson.toEntity(tileEntity.id)
+                            tileContentEntityList.add(tileContentEntity)
+                        }
                     }
-
                     dashboardTileContentDao.deleteByTileId(tileEntity.id)
                     dashboardTileContentDao.insertAll(*tileContentEntityList.toTypedArray())
 
@@ -108,7 +110,6 @@ class DashboardTileListVM(private val dashboardTileContentDao: DashboardTileCont
     }
 
     private fun onRetrieveTileContentListSuccess(tileContentEntityList: List<DashboardTileContentEntity>, tileEntity: DashboardTileEntity){
-
         if (tileEntity.type == Enums.TileType.NUMBER_TILE_LIST.value) {
             val viewModelList: ArrayList<DashboardNumberTileViewVM> = arrayListOf()
             for (tileContentEntity in tileContentEntityList) {

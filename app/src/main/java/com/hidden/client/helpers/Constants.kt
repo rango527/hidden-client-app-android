@@ -114,7 +114,8 @@ object Enums {
 
     enum class TileActionButtonType(val value: String) {
         ADD_INTERVIEWERS("ADD_INTERVIEWERS"),
-        JOIN_INTERVIEW("JOIN_INTERVIEW")
+        JOIN_INTERVIEW("JOIN_INTERVIEW"),
+        GIVE_AVAILABILITY("GIVE_AVAILABILITY")
     }
 
     enum class VoteType(val value: String) {

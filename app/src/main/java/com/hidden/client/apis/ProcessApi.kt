@@ -103,6 +103,19 @@ interface ProcessApi {
     ): Observable<SimpleResponseJson>
 
     /**
+     * Nudge for Feedback
+     */
+    @POST("/client/processes/{process_id}/feedback/{feedback_id}/nudge")
+    fun nudgeFeedback(
+        @Header("Content-Type") contentType: String,
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int?,
+        @Path("feedback_id") feedbackId: Int?,
+        @Body body: RequestBody
+    ): Observable<SimpleResponseJson>
+
+
+    /**
      * Get Shortlist Feedback
      * GET /client/processes/{process_id}/shortlist-feedback
      */

@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class HCJobDetailTileAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val jobDetailTileBinding: HCJobDetailTileBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_row_job_detail_tile, parent, false)
 
-        HCGlobal.getInstance().currrentJobTitleList = list
+        HCGlobal.getInstance().currentJobTitleList = list
 
         return HCJobDetailTileVH(jobDetailTileBinding)
     }
@@ -31,6 +32,7 @@ class HCJobDetailTileAdapter(
     override fun onBindViewHolder(holder: HCJobDetailTileVH, position: Int) {
 
         val jobDetailTileViewModel = list[position]
+
         holder.bind(jobDetailTileViewModel)
 
         val layoutText: LinearLayout = holder.itemView.findViewById(R.id.layout_text_tile)

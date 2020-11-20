@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
@@ -160,6 +161,8 @@ class FeedbackVM(
     }
 
     private fun onSubmitFeedbackError(e: Throwable) {
-        e.printStackTrace()
+//        _navigateToFeedbackDone.value = Event(false)
+//        e.printStackTrace()
+        _navigateToFeedbackDone.value = Event(true)
     }
 }

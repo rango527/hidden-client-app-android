@@ -22,7 +22,7 @@ class HCJobDetailTile {
         @BindingAdapter("android:src")
         @JvmStatic
         fun setImageViewResource(imageView: ImageView, photoUrl: String?) {
-            if (photoUrl.safeValue() != "") {
+            if (photoUrl != null && photoUrl.safeValue() != "") {
                 if (photoUrl.safeValue().endsWith(".jpg", true) || photoUrl.safeValue().endsWith(".png", true) ||
                             photoUrl.safeValue().endsWith(".gif", true)) {
                     Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imageView)

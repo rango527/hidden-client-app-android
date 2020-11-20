@@ -25,8 +25,8 @@ class HCWorkExperience {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
-            if (photoUrl.safeValue() != "") {
+        fun setImageViewResource(imageView: CircleImageView, photoUrl: String?) {
+            if (photoUrl != null && photoUrl.safeValue() != "") {
 //                Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
                 Glide.with(getApplicationContext()).load(photoUrl.safeValue()).into(imageView)
             }

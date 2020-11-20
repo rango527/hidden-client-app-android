@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Context
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +12,20 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.activities.shortlist.FeedbackActivity
+import java.util.*
 
 @Suppress("NAME_SHADOWING")
 class FeedbackQuestionViewPagerAdapter(
     private val context: Context,
     private val questionList: List<FeedbackQuestionEntity>,
-    private val isApprove: Boolean
+    private val isApprove: Boolean,
+private val viewPagerFeedback: ViewPager
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =
@@ -35,7 +39,7 @@ class FeedbackQuestionViewPagerAdapter(
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        var view: View
+        val view: View
 
         if (position < questionList.size) {
             view = inflater.inflate(R.layout.viewpager_feedback_question_item, container, false)
@@ -46,6 +50,19 @@ class FeedbackQuestionViewPagerAdapter(
             val rating: RatingBar = view.findViewById(R.id.rating_feedback)
             rating.setOnRatingBarChangeListener { _, rating, _ ->
                 questionList[position].score = rating.toInt()
+
+                // change default speed of viewpager auto sliding
+                val handler = Handler()
+                val updateCurrentItem = Runnable {
+                    viewPagerFeedback.currentItem = viewPagerFeedback.currentItem + 1
+                }
+
+                val swipeTimer = Timer()
+                swipeTimer.schedule(object : TimerTask() {
+                    override fun run() {
+                        handler.post(updateCurrentItem)
+                    }
+                }, 500)
             }
         } else {
             view = inflater.inflate(R.layout.viewpager_feedback_comment, container, false)

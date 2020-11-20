@@ -1,22 +1,38 @@
-package com.hidden.client.ui.dialogs
+package com.hidden.client.ui.fileupload
 
+import android.Manifest
+import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.hidden.client.R
+import com.hidden.client.apis.ConversationApi
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.ConversationTakePhotoActivity
-import com.hidden.client.ui.activities.JobSettingActivity
-import com.hidden.client.ui.activities.ProcessSettingActivity
+import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 
 class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragment() {
 
@@ -27,6 +43,8 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
     private lateinit var txtCancel: TextView
 
     private lateinit var layoutBlack: LinearLayout
+    private lateinit var attachment: MultipartBody.Part
+    private var mCurrentPhotoPath: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,39 +95,92 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
         }
 
         txtTakePhoto.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
-            intent.putExtra("conversationId", conversationId)
-            intent.putExtra("requestCode", "TAKE_PHOTO")
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
+//            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
+//            intent.putExtra("conversationId", conversationId)
+//            intent.putExtra("requestCode", "TAKE_PHOTO")
+//            HCGlobal.getInstance().currentActivity.startActivity(intent)
+//
+//            dismiss()
 
-            dismiss()
+//            val values = ContentValues(1)
+//            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+//
+//            val fileUri: Uri? =
+//                contentResolver
+//                    .insert(
+//                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                        values
+//                    )
+//
+//            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            if (intent.resolveActivity(packageManager) != null) {
+//                mCurrentPhotoPath = fileUri.toString()
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+//                intent.addFlags(
+//                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+//                )
+//                startActivityForResult(intent, TAKE_PHOTO_CODE)
+//            } else {
+//                Toast.makeText(
+//                    context,
+//                    "SORRY, MEDIA PICKER ERROR...",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+
         }
 
         txtTakeVideo.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
-            intent.putExtra("conversationId", conversationId)
-            intent.putExtra("requestCode", "TAKE_VIDEO")
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
+//            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
+//            intent.putExtra("conversationId", conversationId)
+//            intent.putExtra("requestCode", "TAKE_VIDEO")
+//            HCGlobal.getInstance().currentActivity.startActivity(intent)
+//
+//            dismiss()
 
-            dismiss()
+//            val values = ContentValues(1)
+//            values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+//            val fileUri = contentResolver.insert(
+//                MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+//                values
+//            )
+//            val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+//            if (intent.resolveActivity(packageManager) != null) {
+//                mCurrentPhotoPath = fileUri.toString()
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+//                intent.addFlags(
+//                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+//                )
+//                startActivityForResult(intent, TAKE_PHOTO_CODE)
+//            } else {
+//                Toast.makeText(
+//                    context,
+//                    "SORRY, MEDIA PICKER ERROR...",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
         }
 
         txtChoosePhoto.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
-            intent.putExtra("conversationId", conversationId)
-            intent.putExtra("requestCode", "CHOOSE_PHOTO")
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
-
-            dismiss()
+            if (checkFileAttachPermission()) {
+                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                intent.type = "image/*"
+                startActivityForResult(intent, IMAGE_PICK_CODE)
+            } else {
+                requestFileAttachPermission()
+            }
         }
 
         txtChooseVideo.setOnClickListener {
-            val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
-            intent.putExtra("conversationId", conversationId)
-            intent.putExtra("requestCode", "CHOOSE_VIDEO")
-            HCGlobal.getInstance().currentActivity.startActivity(intent)
-
-            dismiss()
+            if (checkFileAttachPermission()) {
+                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+                intent.type = "video/*"
+                startActivityForResult(intent, IMAGE_PICK_CODE)
+            } else {
+                requestFileAttachPermission()
+            }
         }
 
         layoutBlack.setOnClickListener {
@@ -117,8 +188,88 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
         }
     }
 
+    private fun checkFileAttachPermission(): Boolean {
+        return (ContextCompat.checkSelfPermission(HCGlobal.getInstance().currentActivity,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun requestFileAttachPermission() {
+        ActivityCompat.requestPermissions(HCGlobal.getInstance().currentActivity, arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ),
+            PERMISSION_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            if (requestCode == IMAGE_PICK_CODE ) {
+                val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
+                val requestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
+
+                attachment = MultipartBody.Part.createFormData(
+                    "attachment",
+                    File(fileToUpload)?.name,
+                    requestBody
+                )
+            } else if (requestCode == TAKE_PHOTO_CODE) {
+//                val cursor = contentResolver.query(
+//                    Uri.parse(mCurrentPhotoPath),
+//                    Array(1) { android.provider.MediaStore.Images.ImageColumns.DATA },
+//                    null, null, null
+//                )
+//                cursor.moveToFirst()
+//                val photoPath = cursor.getString(0)
+//                cursor.close()
+
+//                val fileToUpload = photoPath.toString()
+//                val requestBody =
+//                    RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
+
+//                attachment = MultipartBody.Part.createFormData(
+//                    "attachment",
+//                    File(fileToUpload).name,
+//                    requestBody
+//                )
+            }
+
+            val call = ConversationApi().uploadImage(
+                AppPreferences.apiAccessToken,
+                conversationId,
+                attachment
+            )
+            call.enqueue(object : Callback<UploadResponse> {
+
+                override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
+                    Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    Log.d("ONFAILURE",t.toString())
+                }
+
+                override fun onResponse(call: Call<UploadResponse>?, response: Response<UploadResponse>?) {
+                    if (response != null) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(context,"Success file upload", Toast.LENGTH_SHORT).show()
+//                            finish()
+                        }
+                    } else {
+                        Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+    }
+
     companion object {
-        const val TAG = "bottom_add_media_picker_dialog"
+        private const val TAG = "bottom_add_media_picker_dialog"
+        private const val IMAGE_PICK_CODE = 1000
+        private const val TAKE_PHOTO_CODE = 2000
+        private val CAPTURE_FROM_GALLEY = 1
+        private val CAPTURE_FROM_CAMERA = 2
+
+        private val PERMISSION_REQUEST_CODE: Int = 101
         fun display(fragmentManager: FragmentManager?, conversationId: Int): BottomAddMediaPickerDialog {
             val dialog = BottomAddMediaPickerDialog(conversationId)
             dialog.show(fragmentManager!!, TAG)

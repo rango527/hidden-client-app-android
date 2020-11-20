@@ -3,6 +3,7 @@ package com.hidden.client.ui.activities.shortlist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -20,11 +21,12 @@ class FeedbackDoneActivity : AppCompatActivity() {
     private lateinit var txtCongratulation: TextView
 
     private lateinit var btnBackToShortlist: Button
-    private lateinit var btnGiveAvailability: Button
+//    private lateinit var btnGiveAvailability: Button
 
     private var candidateName: String = ""
     private var candidateJob: String = ""
     private var candidateAvatar: String = ""
+    private var event: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class FeedbackDoneActivity : AppCompatActivity() {
         candidateName = intent.getStringExtra("candidateName").safeValue()
         candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
         candidateJob = intent.getStringExtra("candidateJob").safeValue()
-
+        event = intent.getBooleanExtra("event", false)
         initUI()
     }
 
@@ -47,7 +49,13 @@ class FeedbackDoneActivity : AppCompatActivity() {
         Glide.with(this).load(candidateAvatar).into(imgCandidateAvatar)
 
         btnBackToShortlist = findViewById(R.id.button_back_to_shortlist)
-        btnGiveAvailability = findViewById(R.id.button_give_interview_availability)
+//        btnGiveAvailability = findViewById(R.id.button_give_interview_availability)
+        txtCongratulation = findViewById(R.id.text_congratulation)
+        if (event) {
+            txtCongratulation.text = getString(R.string.feedback_success, candidateName)
+        } else {
+            txtCongratulation.text = getString(R.string.feedback_false)
+        }
 
         btnBackToShortlist.setOnClickListener {
             HCGlobal.getInstance().currentIndex = 0
@@ -57,8 +65,8 @@ class FeedbackDoneActivity : AppCompatActivity() {
             finish()
         }
 
-        btnGiveAvailability.setOnClickListener {
-
-        }
+//        btnGiveAvailability.setOnClickListener {
+//
+//        }
     }
 }

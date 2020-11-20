@@ -36,9 +36,8 @@ class HCPrivacyStatementActivity : BaseActivity() {
                     call: Call<HCConsentResponse>,
                     response: Response<HCConsentResponse>
                 ) {
-
                     if (response.isSuccessful) {
-                        webview.loadData(response.body()!!.content, "text/html", "utf-8")
+                        webview.loadData(response.body()!!.content, "text/html; charset=utf-8", "UTF-8")
                     } else {
                         Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
                     }

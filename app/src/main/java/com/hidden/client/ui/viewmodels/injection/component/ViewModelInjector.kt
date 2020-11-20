@@ -7,6 +7,7 @@ import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.*
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import javax.inject.Singleton
 
@@ -32,6 +33,7 @@ interface ViewModelInjector {
     fun inject(workExperienceViewVM: WorkExperienceViewVM)
     fun inject(HCBrandViewModel: HCBrandViewModel)
     fun inject(HCWorkExperienceViewModel: HCWorkExperienceViewModel)
+    fun inject(HCJobDetailTileViewModel: HCJobDetailTileViewModel)
 
     // Shortlists
     fun inject(shortlistListVM: ShortlistListVM)
@@ -62,7 +64,6 @@ interface ViewModelInjector {
 
     fun inject(feedbackVM: FeedbackVM)
     fun inject(giveFeedbackVM: GiveFeedbackVM)
-
 
     // Process Setting
     fun inject(processSettingVM: ProcessSettingVM)

@@ -2,20 +2,22 @@ package com.hidden.client.ui.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
+import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.databinding.InterviewerItemViewBinding
-import com.hidden.client.datamodels.HCFeedbackQuestionResponse
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.viewmodels.main.InterviewerViewVM
 import kotlinx.android.synthetic.main.viewpager_interviewer_item.view.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
 class InterviewerViewPagerAdapter(
     private val context: Context,
@@ -70,7 +72,19 @@ class InterviewerViewPagerAdapter(
         view.viewpager_feedback_question.setHasFixedSize(true)
         view.viewpager_feedback_question.adapter = interviewerViewVMList[position].feedbackQuestionViewAdapter
 
-        view.btn_nudge_for_feedback.setOnClickListener(this)
+        // nudge feedback parameters
+        val processId = interviewerViewVMList[position].processId
+        val feedbackId = interviewerViewVMList[position].feedbackId
+        val clientId = interviewerViewVMList[position].clientId
+        val body: JsonObject = JsonObject()
+        body.addProperty("client_id", clientId)
+
+        view.btn_nudge_for_feedback.setOnClickListener {
+            if (clientId != null && feedbackId != null) {
+                (HCGlobal.getInstance().currentActivity as ProcessActivity).nudgeFeedback(clientId, feedbackId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
+            }
+        }
+
         view.btn_give_feedback.setOnClickListener(this)
 
         container.addView(view)
@@ -89,7 +103,7 @@ class InterviewerViewPagerAdapter(
 
         when(v!!.id) {
             R.id.btn_nudge_for_feedback -> {
-                // nudge for feedback
+
             }
             R.id.btn_give_feedback -> {
                 // give feedback

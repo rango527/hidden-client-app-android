@@ -1,27 +1,34 @@
 package com.hidden.client.ui.viewmodels.intro
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCDialog
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.User
 import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.json.LoginJson
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
+import com.kaopiz.kprogresshud.KProgressHUD
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class LoginVM: RootVM() {
+class LoginVM(private val context: Context): RootVM() {
 
     @Inject
     lateinit var loginApi: LoginApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    private lateinit var progressDlg: KProgressHUD
 
     // To jump to HomeActivity after login success
     private val _navigateToHome = MutableLiveData<Event<Boolean>>()
@@ -87,17 +94,17 @@ class LoginVM: RootVM() {
     }
 
     private fun onAuthLoginSuccess(loginResult: LoginJson){
-
         AppPreferences.myId = loginResult.clientId.safeValue()
         AppPreferences.isUserManager = loginResult.isUserManager.safeValue()
         AppPreferences.myFullName = loginResult.fullName.safeValue()
         AppPreferences.apiAccessToken = """Bearer ${loginResult.token}"""
 
         _navigateToHome.value = Event(true)
-
     }
 
     private fun onAuthLoginError(e: Throwable){
+Log.d("dd", "$e")
+        HToast.show(HCGlobal.getInstance().currentActivity, "Wrong email and password", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 }

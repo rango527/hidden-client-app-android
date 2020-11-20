@@ -21,6 +21,7 @@ import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
+import com.hidden.client.ui.activities.process.HSDetermineProcessActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
@@ -51,7 +52,8 @@ class ProcessTimelineFragment(
     private var currentStatus: Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -138,6 +140,18 @@ class ProcessTimelineFragment(
                     Enums.TileActionButtonType.JOIN_INTERVIEW.value -> {
                         val intent = Intent(activity, AddInterviewersActivity::class.java)
                         intent.putExtra("from", "Join")
+                        intent.putExtra("processId", process.id)
+                        intent.putExtra("jobId", process.jobId)
+                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
+                        intent.putExtra("candidateName", process.candidateFullName)
+
+                        activity!!.finish()
+
+                        activity!!.startActivity(intent)
+                    }
+                    Enums.TileActionButtonType.GIVE_AVAILABILITY.value -> {
+                        val intent = Intent(activity, HSDetermineProcessActivity::class.java)
+                        intent.putExtra("from", "Add")
                         intent.putExtra("processId", process.id)
                         intent.putExtra("jobId", process.jobId)
                         intent.putExtra("interviewId", process.currentInterviewId.toInt())

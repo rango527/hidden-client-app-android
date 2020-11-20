@@ -51,7 +51,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/layout_bottom_border_only"
                 android:paddingTop="@dimen/menu_padding_vertical_default"
-                android:paddingBottom="@dimen/menu_padding_vertical_default">
+                android:paddingBottom="@dimen/menu_padding_vertical_default"
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,6 +85,7 @@
                     android:gravity="center_vertical"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_image_view_your_photo"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical|end"
@@ -113,6 +115,7 @@
                     android:gravity="center_vertical"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_image_view_company_logo"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical|end"

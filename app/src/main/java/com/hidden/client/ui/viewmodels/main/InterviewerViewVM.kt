@@ -40,5 +40,7 @@ class InterviewerViewVM(private val context: Context, private val interviewerEnt
      *      is current user
      */
     val isCurrentUser: Boolean = (interviewerEntity.isCurrentUser == true)
-
+    val processId = interviewerEntity.pProcessId
+    val feedbackId = interviewerEntity.feedbackId
+    val clientId = interviewerEntity.clientId
 }

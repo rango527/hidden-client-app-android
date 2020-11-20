@@ -1,35 +1,46 @@
 package com.hidden.client.ui.fragments.process
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ScrollView
+import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
+import com.hidden.client.apis.ConversationApi
 import com.hidden.client.databinding.MessageListBinding
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
-import com.hidden.client.ui.adapters.MessageListAdapter
-import com.hidden.client.ui.dialogs.BottomAddMediaPickerDialog
+import com.hidden.client.ui.fileupload.BottomAddMediaPickerDialog
+import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_home_message.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import kotlin.math.roundToInt
 
 
@@ -50,8 +61,11 @@ class HCMessageFragment(
     private lateinit var imageView: ImageView
 
     private val CAPTURE_REQUEST_CODE = 42
-
+    private lateinit var attachment: MultipartBody.Part
     private lateinit var progressDlg: KProgressHUD
+
+    private val CAPTURE_FROM_CAMERA = 2
+    private val PERMISSION_REQUEST_CODE: Int = 101
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,7 +109,7 @@ class HCMessageFragment(
 
         scrollView = view.findViewById(R.id.scrollview_message)
         recyclerView = view.findViewById(R.id.recyclerview_messages)
-//
+
 //        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 //        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 
@@ -132,25 +146,23 @@ class HCMessageFragment(
 
         // get message list - scrollview height
         scrollView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
-
-        viewModel.loadingMessageList.observe(this, Observer { show ->
-            if (show) {
-                scrollView.post(Runnable {
-                    scrollView.scrollTo(0, scrollView.bottom)
-                })
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-            } else {
-                scrollView.post(Runnable {
-                    scrollView.scrollTo(0, scrollView.bottom)
-                })
-            }
-        })
+//        viewModel.loadingMessageList.observe(this, Observer { show ->
+//            if (show) {
+//                scrollView.post(Runnable {
+//                    scrollView.scrollTo(0, scrollView.bottom)
+//                })
+////                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+////                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
+//            } else {
+//                scrollView.post(Runnable {
+//                    scrollView.scrollTo(0, scrollView.bottom)
+//                })
+//            }
+//        })
 
         binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
 
         messageSendBtn = view.findViewById(R.id.message_send_button)
-
         messageSendBtn.setOnClickListener(this)
 
         attachFileBtn = view.findViewById(R.id.file_attachment)
@@ -175,12 +187,12 @@ class HCMessageFragment(
             }
 
             R.id.file_attachment -> {
-                val intent = Intent(
-                    HCGlobal.getInstance().currentActivity,
-                    ConversationFileAttachActivity::class.java
-                )
-                intent.putExtra("conversationId", conversationId)
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
+                if (checkPermission()) {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    startActivityForResult(intent, IMAGE_PICK_CODE)
+                } else {
+                    requestPermission()
+                }
             }
 
             R.id.take_photo -> {
@@ -192,14 +204,59 @@ class HCMessageFragment(
         }
     }
 
+    private fun checkPermission(): Boolean {
+        return (ContextCompat.checkSelfPermission(HCGlobal.getInstance().currentActivity,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(HCGlobal.getInstance().currentActivity, arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ),
+            PERMISSION_REQUEST_CODE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == CAPTURE_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                val takenImage = data?.extras?.get("data") as Bitmap
-                imageView.setImageBitmap(takenImage)
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
+            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
+            val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
+
+            attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name, requestBody)
+
+            val call = ConversationApi().uploadImage(
+                AppPreferences.apiAccessToken,
+                conversationId,
+                attachment
+            )
+            call.enqueue(object : Callback<UploadResponse> {
+
+                override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
+                    Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    Log.d("ONFAILURE",t.toString())
+                }
+
+                override fun onResponse(call: Call<UploadResponse>?, response: Response<UploadResponse>?) {
+                    if (response != null) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(context,"Success file upload", Toast.LENGTH_SHORT).show()
+    //                        finish()
+                        }
+                    } else {
+                        Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
+    }
+
+//    override fun onProgressUpdate(percentage: Int) {
+//        progressbar.progress = percentage
+//    }
+
+    companion object {
+        private const val IMAGE_PICK_CODE = 1000
+        const val PERMISSION_CODE = 1001
     }
 }

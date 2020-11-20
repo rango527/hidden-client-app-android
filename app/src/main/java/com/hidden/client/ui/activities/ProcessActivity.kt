@@ -24,9 +24,11 @@ import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
+import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
 import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_splash.*
+import okhttp3.RequestBody
 import java.lang.Math.round
 import kotlin.math.roundToInt
 
@@ -54,7 +56,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private var cashMode: Boolean = true
 
     private lateinit var imgPhoto: ImageView
-
+    private lateinit var giveFeedbackViewModel: GiveFeedbackVM
 //    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -199,6 +201,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
                 val density: Float = applicationContext.resources.displayMetrics.density
 
+//                HCGlobal.getInstance().convertDpToPx(applicationContext, 42)
                 val animation: Animation =
                     TransformAnimation(layoutTitle, layoutTitle.height, (42 * density).roundToInt())
                 animation.interpolator = AccelerateInterpolator()
@@ -253,5 +256,11 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 overridePendingVTransitionEnter()
             }
         }
+    }
+
+    fun nudgeFeedback(processId: Int, feedbackId: Int, body: RequestBody) {
+        giveFeedbackViewModel =
+            ViewModelProviders.of(this, ViewModelFactory(this)).get(GiveFeedbackVM::class.java)
+        giveFeedbackViewModel.nudgeFeedback(processId, feedbackId, body)
     }
 }

@@ -19,13 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_padding_vertical_default"
-            android:layout_marginLeft="@dimen/list_row_margin_default"
-            android:layout_marginRight="@dimen/list_row_margin_default"
+            android:layout_marginLeft="@dimen/text_padding"
+            android:layout_marginRight="@dimen/text_padding"
             android:background="@drawable/panel_round_shadow_white"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/padding_default"
-            android:paddingBottom="@dimen/padding_default">
+            android:paddingBottom="@dimen/padding_default"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/text_tile_title"
@@ -51,16 +52,17 @@
             android:id="@+id/layout_img_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/image_tile"
                 android:src="@{job_detail_tile_model.getJobDetailTile().jobDetailTileImg, default=@drawable/man}"
                 android:layout_marginTop="@dimen/menu_padding_vertical_default"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

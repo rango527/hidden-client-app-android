@@ -18,8 +18,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.hidden.client.R
+import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -28,6 +30,9 @@ import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnClickListener {
 
@@ -74,6 +79,9 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
 
         initUI(root)
 
+        val imageClientPhoto: de.hdodenhof.circleimageview.CircleImageView = root.findViewById(R.id.image_client_photo)
+        val textHello: TextView = root.findViewById(R.id.text_hello)
+
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!))
             .get(ShortlistListVM::class.java)
 
@@ -82,6 +90,8 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { visibility ->
             if (visibility) {
+                imageClientPhoto.visibility = View.GONE
+                textHello.visibility = View.GONE
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
@@ -90,7 +100,8 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
         })
 
         viewModel.shortlist.observe(this, Observer { shortlist ->
-
+            imageClientPhoto.visibility = View.VISIBLE
+            textHello.visibility = View.VISIBLE
             Glide.with(context!!).load(shortlist.clientUrl).into(imgClientPhoto)
             txtClientName.text = resources.getString(R.string.hello_user, AppPreferences.myFullName)
         })

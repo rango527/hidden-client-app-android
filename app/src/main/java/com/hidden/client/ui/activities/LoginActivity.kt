@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         progressDlg = HCDialog.KProgressDialog(this)
 
         // Init ViewModel
-        viewModel = ViewModelProviders.of(this).get(LoginVM::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(LoginVM::class.java)
 
         editEmail.doAfterTextChanged { text -> viewModel.email = text }
         editPassword.doAfterTextChanged { text -> viewModel.password = text }

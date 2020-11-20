@@ -1,9 +1,12 @@
 package com.hidden.client.models.json
 
+import com.google.gson.Gson
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.DashboardTileContentEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.lang.reflect.Array
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @JsonClass(generateAdapter = true)
 data class DashboardTileContentJson(
@@ -24,7 +27,8 @@ data class DashboardTileContentJson(
     val subTitle: String?,
 
     @Json(name = "extra")
-    val extra: DashboardTileExtraJson?,
+    val extra: Any?,
+//    val extra: DashboardTileExtraJson?,
 
     @Json(name = "value")
     val value: String?
@@ -34,7 +38,10 @@ data class DashboardTileContentJson(
         var jobId = 0
 
         if (extra != null && extra.toString().isNotEmpty()) {
-            jobId = extra.jobId.safeValue()
+            val result = extra.toString().filter { it.isDigit() }
+            if (result.isNotEmpty()) {
+                jobId = result.toInt()
+            }
         }
 
         return DashboardTileContentEntity(

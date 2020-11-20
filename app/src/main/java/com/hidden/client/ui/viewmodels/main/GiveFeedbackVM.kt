@@ -1,7 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
@@ -10,6 +9,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.json.FeedbackJson
 import com.hidden.client.models.json.TimelineJson
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -94,6 +94,25 @@ class GiveFeedbackVM(
             )
     }
 
+    fun nudgeFeedback(processId: Int?, feedbackId: Int?, body: RequestBody) {
+        subscription = processApi.nudgeFeedback(
+                    "application/json",
+                    AppPreferences.apiAccessToken,
+            processId,
+            feedbackId,
+                    body
+                ).concatMap { addResult ->
+                    Observable.just(addResult)
+                }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { onRetrieveFeedbackStart() }
+                    .doOnTerminate { onRetrieveFeedbackFinish() }
+                    .subscribe(
+                        { onNudgeFeedbackSuccess() },
+                        { error -> onNudgeFeedbackError(error) }
+                    )
+    }
     fun loadTimeline(processId: Int) {
       
         subscription = processApi.getTimeline(AppPreferences.apiAccessToken, processId)
@@ -156,6 +175,10 @@ class GiveFeedbackVM(
         _navigateToFeedbackDone.value = Event(true)
     }
 
+    private fun onNudgeFeedbackSuccess() {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Nudge sent", HToast.TOAST_SUCCESS)
+    }
+
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {
         this.feedbackId = feedbackId
     }
@@ -173,6 +196,11 @@ class GiveFeedbackVM(
     }
 
     private fun onSubmitFeedbackError(e: Throwable) {
+        e.printStackTrace()
+    }
+
+    private fun onNudgeFeedbackError(e: Throwable) {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Sorry, can't Nudge send", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 }

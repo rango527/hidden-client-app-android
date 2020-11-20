@@ -25,6 +25,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.adapters.HCJobDetailTileAdapter
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
@@ -91,7 +92,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         // Job Detail Tile RecyclerView
         rvJobDetailTile = findViewById(R.id.recyclerview_job_detail_tile)
-        jobDetailTileViewModel = ViewModelProviders.of(this).get(HCJobDetailTileViewModel::class.java)
+        jobDetailTileViewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(HCJobDetailTileViewModel::class.java)
         jobDetailTileViewModel.getJobDetailTileList().observe(this, Observer {jobDetailTileViewModels->
             jobDetailTileAdapter = HCJobDetailTileAdapter(jobDetailTileViewModels)
             rvJobDetailTile.layoutManager = LinearLayoutManager(applicationContext)
@@ -121,7 +122,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
 
                         Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany)
                         Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany2)
-//                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
+                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
 
                         txtJobTitle.text = response.body()!!.job__title
                         txtJobCompany.text = response.body()!!.company__name

@@ -2,32 +2,23 @@ package com.hidden.client.ui.adapters
 
 import android.content.Intent
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
 import com.hidden.client.databinding.*
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.custom.ImageMessageList
 import com.hidden.client.models.entity.MessageListEntity
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.ConversationImageShowActivity
-import com.hidden.client.ui.activities.ProcessSettingActivity
-import com.hidden.client.ui.activities.settings.CandidateListActivity
-import com.hidden.client.ui.dialogs.BottomAddMediaPickerDialog
 import com.hidden.client.ui.viewmodels.main.MessageViewVM
-import kotlinx.android.synthetic.main.fragment_home_message.*
 
 class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>(){
 
@@ -44,7 +35,6 @@ class MessageListAdapter: RecyclerView.Adapter<MessageListAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(messageList[position])
-
 
         val messageCount = messageList.size
         HCGlobal.getInstance().currentMessageCount = messageCount

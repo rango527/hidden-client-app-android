@@ -11,14 +11,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.hidden.client.R
+import com.hidden.client.datamodels.HCProfileResponse
+import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.custom.dashboard.HCDatetimeLocationTileView
 import com.hidden.client.ui.custom.dashboard.HCNumberTileView
 import com.hidden.client.ui.custom.dashboard.HCPhotoTileView
 import com.hidden.client.ui.fragments.settings.HCSettingsFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.DashboardVM
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DashboardFragment : Fragment(), View.OnClickListener {
 
@@ -75,6 +83,22 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 }
             }
         })
+
+        RetrofitClient.instance.getProfile(AppPreferences.apiAccessToken)
+            .enqueue(object: Callback<HCProfileResponse> {
+                override fun onFailure(call: Call<HCProfileResponse>, t: Throwable) {
+                }
+                override fun onResponse(
+                    call: Call<HCProfileResponse>,
+                    response: Response<HCProfileResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        HCGlobal.getInstance().isAdmin = response.body()!!.client__is_admin
+                        HCGlobal.getInstance().currentClientUrl = response.body()!!.asset_client__cloudinary_url
+                        HCGlobal.getInstance().currentCompanyLogoUrl = response.body()!!.company.company_logo_asset__cloudinary_url
+                    }
+                }
+            })
 
         return root
     }

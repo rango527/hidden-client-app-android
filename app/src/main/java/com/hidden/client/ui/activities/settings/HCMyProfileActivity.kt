@@ -106,7 +106,6 @@ class HCMyProfileActivity : BaseActivity(), View.OnClickListener {
                     } else {
                         requestPermission()
                     }
-
                 }
 
                 dialog.setCancelable(false)

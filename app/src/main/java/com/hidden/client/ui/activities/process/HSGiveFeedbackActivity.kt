@@ -59,7 +59,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
 
         initCloseButton()
 
-        isApprove = intent.getBooleanExtra("isApprove", true);
+        isApprove = intent.getBooleanExtra("isApprove", true)
         processId = intent.getIntExtra("processId", 1)
         avatarName = intent.getStringExtra("avatarName").safeValue()
 

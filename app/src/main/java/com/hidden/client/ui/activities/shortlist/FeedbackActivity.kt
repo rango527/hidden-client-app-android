@@ -3,6 +3,8 @@ package com.hidden.client.ui.activities.shortlist
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -44,7 +46,6 @@ class FeedbackActivity : BaseActivity() {
     private lateinit var layoutBackground: ConstraintLayout
     private lateinit var txtFeedback: TextView
     private lateinit var txtFeedback2: TextView
-    private lateinit var imgThumbUp: ImageView
 
     private lateinit var progressDlg: KProgressHUD
 
@@ -66,7 +67,7 @@ class FeedbackActivity : BaseActivity() {
 
         initCloseButton()
 
-        isApprove = intent.getBooleanExtra("isApprove", true);
+        isApprove = intent.getBooleanExtra("isApprove", true)
         processId = intent.getIntExtra("processId", 0)
         avatarName = intent.getStringExtra("avatarName").safeValue()
 
@@ -86,39 +87,39 @@ class FeedbackActivity : BaseActivity() {
             }
         })
 
-        // Observing for jumping HomeActivity -> Shortlist after add role success
-        feedbackViewModel.navigateToFeedbackDone.observe(this, Observer {
-            it.getContentIfNotHandled()?.let {
-                val intent = Intent(this, FeedbackDoneActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-                intent.putExtra("candidateName", candidateName)
-                intent.putExtra("candidateAvatar", candidateAvatar)
-                intent.putExtra("candidateJob", candidateJob)
-
-                startActivity(intent)
-            }
-        })
-
         initUI()
 
-        feedbackViewModel.loadTimeline(processId);
+        feedbackViewModel.loadTimeline(processId)
         feedbackViewModel.feedbackId.observe(this, Observer { feedbackId ->
             feedbackViewModel.loadFeedback(processId, feedbackId)
         })
-
         feedbackViewModel.feedback.observe(this, Observer { feedback ->
-            initViewPager(feedback);
+            initViewPager(feedback)
+        })
+        // Observing for jumping HomeActivity -> Shortlist after add role success
+        feedbackViewModel.navigateToFeedbackDone.observe(this, Observer { it ->
+            it.getContentIfNotHandled()?.let {
+                val intent = Intent(this, FeedbackDoneActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.putExtra("event", it)
+                intent.putExtra("candidateName", candidateName)
+                intent.putExtra("candidateAvatar", candidateAvatar)
+                intent.putExtra("candidateJob", candidateJob)
+                startActivity(intent)
+            }
         })
     }
 
     private fun initViewPager(feedback: FeedbackEntity) {
         viewPagerFeedback.pageMargin = 30
+        // disable scrolling on a viewpager
+        viewPagerFeedback.beginFakeDrag()
 
         pageAdapter = FeedbackQuestionViewPagerAdapter(
             this,
             feedback.getQuestionList(),
-            isApprove
+            isApprove,
+            viewPagerFeedback
         )
         viewPagerFeedback.adapter = pageAdapter
 
@@ -139,18 +140,13 @@ class FeedbackActivity : BaseActivity() {
         layoutBackground = findViewById(R.id.layout_background)
         txtFeedback = findViewById(R.id.text_feedback_notice)
         txtFeedback2 = findViewById(R.id.text_feedback_notice2)
-        imgThumbUp = findViewById(R.id.image_thumb_up)
 
         if (isApprove) {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGreen_1))
             txtFeedback.text = getString(R.string.feedback_notice, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
-            imgThumbUp.setImageResource(R.drawable.thumb_up_large)
         } else {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed_1))
             txtFeedback.text = getString(R.string.feedback_notice3, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
-            imgThumbUp.setImageResource(R.drawable.thumb_down_large)
         }
     }
 
@@ -164,11 +160,10 @@ class FeedbackActivity : BaseActivity() {
             answers.addProperty(questionId.toString(), score.toString())
         }
 
-        val body: JsonObject = JsonObject()
+        val body = JsonObject()
         body.addProperty("vote", vote)
         body.add("answers", answers)
         body.addProperty("comment", comment)
-
         feedbackViewModel.submitFeedback(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
     }
 }

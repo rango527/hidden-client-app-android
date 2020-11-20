@@ -17,7 +17,7 @@ class JobImageSliderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_image_slider)
 
-        for (item in HCGlobal.getInstance().currrentJobTitleList) {
+        for (item in HCGlobal.getInstance().currentJobTitleList) {
             if (item.getJobDetailTile().getJobDetailTileType().equals(DetailTileType.TEXT.value)) continue
             imgSourceList.add(item.getJobDetailTile())
         }

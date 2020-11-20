@@ -41,7 +41,7 @@ class HCProject {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: CircleImageView, photoUrl: String) {
+        fun setImageViewResource(imageView: CircleImageView, photoUrl: String?) {
             if (photoUrl.safeValue() != "") {
                 Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
             }

@@ -5,7 +5,7 @@
     android:id="@+id/layout_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreen_1"
+    android:background="@color/colorBlack_1"
     tools:context=".ui.activities.shortlist.FeedbackActivity">
 
     <ImageButton
@@ -20,16 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_left" />
 
-    <ImageView
-        android:id="@+id/image_thumb_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
-        android:contentDescription="@string/image_description_back"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/thumb_up_large" />
 
     <TextView
         android:id="@+id/text_feedback_notice"
@@ -40,7 +30,7 @@
         android:paddingRight="@dimen/padding_default"
         android:text="@string/feedback_notice"
         android:textAllCaps="true"
-        android:textColor="@color/colorBlack_1"
+        android:textColor="@color/colorWhite_1"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/image_close" />
@@ -54,7 +44,7 @@
         android:paddingRight="@dimen/padding_default"
         android:text="@string/feedback_notice2"
         android:textAllCaps="true"
-        android:textColor="@color/colorBlack_1"
+        android:textColor="@color/colorWhite_1"
         android:textSize="13sp"
         app:layout_constraintTop_toBottomOf="@id/text_feedback_notice" />
 
@@ -65,7 +55,6 @@
         android:layout_marginTop="@dimen/padding_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_feedback_notice2"
-        android:background="@color/colorBlack_1"
         android:paddingBottom="35dp"
         android:paddingTop="33dp">
 

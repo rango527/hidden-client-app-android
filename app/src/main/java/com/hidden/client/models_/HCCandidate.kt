@@ -58,7 +58,7 @@ class HCCandidate {
 
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: RoundedImageView, photoUrl: String) {
+        fun setImageViewResource(imageView: RoundedImageView, photoUrl: String?) {
             if (photoUrl.safeValue() != "") {
                 Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
             }

@@ -1,9 +1,12 @@
 package com.hidden.client.ui.activities
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -40,56 +43,74 @@ class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.Up
         super.onCreate(savedInstanceState)
         conversationId = intent.getIntExtra("conversationId", 0)
         requestCode = intent.getStringExtra("requestCode")
-        openImageChooser()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                requestPermissions(permissions, PERMISSION_CODE)
+            } else {
+                openImageChooser()
+            }
+        } else {
+            openImageChooser()
+        }
     }
 
     private fun openImageChooser() {
-        if (!EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",991,android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",992,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
+//        if (!EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",991,android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",992,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//        }
 
-        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+//        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
             when (requestCode) {
                 "CHOOSE_PHOTO" -> {
-                    MaterialFilePicker()
-                        .withActivity(this)
-                        .withRequestCode(1)
-                        .withFilter(Pattern.compile("^.*.(jpg|jpeg|png)$"))
-                        .withHiddenFiles(true)
-                        .start()
+//                    MaterialFilePicker()
+//                        .withActivity(this)
+//                        .withRequestCode(IMAGE_PICK_CODE)
+//                        .withFilter(Pattern.compile("^.*.(jpg|jpeg|png)$"))
+//                        .withHiddenFiles(true)
+//                        .start()
+                    val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    intent.type = "image/*"
+                    startActivityForResult(intent, IMAGE_PICK_CODE)
                 }
                 "CHOOSE_VIDEO" -> {
-                    MaterialFilePicker()
-                        .withActivity(this)
-                        .withRequestCode(1)
-                        .withFilter(Pattern.compile("^.*.(mp4|avi|3gp|wmv|flv)$"))
-                        .withHiddenFiles(true)
-                        .start()
+//                    MaterialFilePicker()
+//                        .withActivity(this)
+//                        .withRequestCode(IMAGE_PICK_CODE)
+//                        .withFilter(Pattern.compile("^.*.(mp4|avi|3gp|wmv|flv)$"))
+//                        .withHiddenFiles(true)
+//                        .start()
+                    val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+                    intent.type = "video/*"
+                    startActivityForResult(intent, IMAGE_PICK_CODE)
                 }
                 else -> {
                     MaterialFilePicker()
                         .withActivity(this)
-                        .withRequestCode(1)
+                        .withRequestCode(IMAGE_PICK_CODE)
                         .withFilter(Pattern.compile("^.*"))
                         .withHiddenFiles(true)
                         .start()
                 }
             }
-        } else {
-            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",991,android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",992,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
+//        } else {
+//            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",991,android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//            EasyPermissions.requestPermissions(this,"Application need your permission for accessing the Storage",992,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//        }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1 && data != null) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
 
             val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
-            val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),File(fileToUpload))
+            val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
-            attachment = MultipartBody.Part.createFormData("attachment",File(fileToUpload)?.name,requestBody)
+            attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name,requestBody)
 
             val call = ConversationApi().uploadImage(
                 AppPreferences.apiAccessToken,
@@ -121,7 +142,8 @@ class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.Up
     }
 
     companion object {
-        private const val REQUEST_CODE_IMAGE_PICKER = 100
+        private const val IMAGE_PICK_CODE = 1000
+        const val PERMISSION_CODE = 1001
     }
 }
 

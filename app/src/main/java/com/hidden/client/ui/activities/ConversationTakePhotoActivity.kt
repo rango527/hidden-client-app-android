@@ -196,7 +196,7 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
 
                 attachment = MultipartBody.Part.createFormData(
                     "attachment",
-                    File(fileToUpload)?.name,
+                    File(fileToUpload).name,
                     requestBody
                 )
 

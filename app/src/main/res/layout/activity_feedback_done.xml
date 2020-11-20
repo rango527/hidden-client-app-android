@@ -71,20 +71,22 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="@string/back_to_shortlist"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="33dp"
             android:textSize="20sp"
             android:lineHeight="27dp"
             android:background="@drawable/button_round_dark_gray"
             android:textColor="@color/colorWhite_1"/>
-        <Button
-            android:id="@+id/button_give_interview_availability"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="33dp"
-            android:text="@string/give_interview_availability"
-            android:textSize="20sp"
-            android:lineHeight="27dp"
-            android:background="@drawable/button_round_purple"
-            android:textColor="@color/colorWhite_1"/>
+<!--        <Button-->
+<!--            android:id="@+id/button_give_interview_availability"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:layout_marginTop="11dp"-->
+<!--            android:layout_marginBottom="33dp"-->
+<!--            android:text="@string/give_interview_availability"-->
+<!--            android:textSize="20sp"-->
+<!--            android:lineHeight="27dp"-->
+<!--            android:background="@drawable/button_round_purple"-->
+<!--            android:textColor="@color/colorWhite_1"/>-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

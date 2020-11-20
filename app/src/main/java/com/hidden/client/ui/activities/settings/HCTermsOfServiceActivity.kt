@@ -10,6 +10,8 @@ import com.hidden.client.enums.UserType
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_privacy_statement.*
+import kotlinx.android.synthetic.main.activity_privacy_statement.webview
+import kotlinx.android.synthetic.main.activity_terms_of_service.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,9 +38,9 @@ class HCTermsOfServiceActivity : BaseActivity() {
                     call: Call<HCConsentResponse>,
                     response: Response<HCConsentResponse>
                 ) {
-
                     if (response.isSuccessful) {
-                        webview.loadData(response.body()!!.content, "text/html", "utf-8")
+                        webview.loadData(response.body()!!.content, "text/html; charset=utf-8", "UTF-8")
+//                        webview.loadDataWithBaseURL(null, "<html>...</html>", "text/html", "utf-8", null)
                     } else {
                         Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
                     }

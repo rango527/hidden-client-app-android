@@ -8,17 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import com.bumptech.glide.Glide
 
 import com.hidden.client.R
+import com.hidden.client.datamodels.HCLoginResponse
+import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.models_.HCLogin
+import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
+import com.hidden.horizontalswipelayout.CircleImageView
 import com.urbanairship.UAirship
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -33,13 +44,45 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
         imgBack.setOnClickListener(this)
 
         val layoutCandidateDirectory: LinearLayout = root.findViewById(R.id.layout_candidate_directory)
+        // candidate directory visible/gone
+        if (HCGlobal.getInstance().isAdmin) {
+            layoutCandidateDirectory.visibility = View.VISIBLE
+        } else {
+            layoutCandidateDirectory.visibility = View.GONE
+        }
+
         layoutCandidateDirectory.setOnClickListener(this)
 
         val layoutEditDetails: LinearLayout = root.findViewById(R.id.layout_edit_your_detail)
         layoutEditDetails.setOnClickListener(this)
+        val circleImageViewYourPhoto: de.hdodenhof.circleimageview.CircleImageView = root.findViewById(R.id.circle_image_view_your_photo)
+        Glide.with(HCGlobal.getInstance().currentActivity).load(HCGlobal.getInstance().currentClientUrl).into(circleImageViewYourPhoto)
 
         val layoutViewCompanyProfile: LinearLayout = root.findViewById(R.id.layout_view_company_profile)
         layoutViewCompanyProfile.setOnClickListener(this)
+        val circleImageViewCompanyLogo: de.hdodenhof.circleimageview.CircleImageView = root.findViewById(R.id.circle_image_view_company_logo)
+        Glide.with(HCGlobal.getInstance().currentActivity).load(HCGlobal.getInstance().currentCompanyLogoUrl).into(circleImageViewCompanyLogo)
+
+        // show profile image and company logo, but if use it, loading speed is slow
+        RetrofitClient.instance.getProfile(AppPreferences.apiAccessToken)
+            .enqueue(object: Callback<HCProfileResponse> {
+                override fun onFailure(call: Call<HCProfileResponse>, t: Throwable) {
+                }
+                override fun onResponse(
+                    call: Call<HCProfileResponse>,
+                    response: Response<HCProfileResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.asset_client__cloudinary_url).into(circleImageViewYourPhoto)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.company.company_logo_asset__cloudinary_url).into(circleImageViewCompanyLogo)
+                        if (response.body()!!.client__is_admin) {
+                            layoutCandidateDirectory.visibility = View.VISIBLE
+                        } else {
+                            layoutCandidateDirectory.visibility = View.GONE
+                        }
+                    }
+                }
+            })
 
         val layoutTermsService: LinearLayout = root.findViewById(R.id.layout_terms_of_service)
         layoutTermsService.setOnClickListener(this)

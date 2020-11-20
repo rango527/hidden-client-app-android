@@ -62,7 +62,8 @@ data class TimelineJson(
     @Json(name = "submitted_at")
     val submittedAt: String?,
 
-    @Json(name = "feedback_ids")
+//    @Json(name = "feedback_ids")
+    @Json(name = "shortlist__reviewers")
     val feedbackIds: List<FeedbackIDsJson>?,
 
     @Json(name = "feedback_id")

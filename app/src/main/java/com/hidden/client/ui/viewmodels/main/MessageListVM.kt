@@ -186,7 +186,7 @@ class MessageListVM(
         e.printStackTrace()
     }
 
-    fun onSendMessageSuccess(result: SimpleResponseJson) {
+    private fun onSendMessageSuccess(result: SimpleResponseJson) {
         _navigateSendMessage.value = Event(true)
         loadMessage(false, conversationId)
     }

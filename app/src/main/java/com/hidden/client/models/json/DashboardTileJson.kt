@@ -53,7 +53,9 @@ data class DashboardTileJson(
         val tileContentList: ArrayList<DashboardTileContentEntity> = arrayListOf()
 
         for (tileContent in this.tileContentList!!) {
-            tileContentList.add(tileContent.toEntity(pDashboardTileId))
+            if (tileContent.extra.toString().any { it.isDigit() }) {
+                tileContentList.add(tileContent.toEntity(pDashboardTileId))
+            }
         }
 
         return tileContentList

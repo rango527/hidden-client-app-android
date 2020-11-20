@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.hidden.client.datamodels.HCFeedbackQuestionResponse
+import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
 import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.custom.ImageMessageList
@@ -44,9 +45,13 @@ class HCGlobal{
     // Global variable
     lateinit var currentActivity: Activity           // current activity instance
 
-    lateinit var currrentJobTitleList: ArrayList<HCJobDetailTileViewModel>
+    lateinit var currentJobTitleList: ArrayList<HCJobDetailTileViewModel>
 
     var currentShortlist: List<HCShortlistCandidateResponse> = arrayListOf()
+
+    var isAdmin: Boolean = false
+    var currentClientUrl: String = ""
+    var currentCompanyLogoUrl: String = ""
 
     var getAllJobList: ArrayList<GetAllJob> = arrayListOf()
     var getJobPick: ArrayList<JobPick> = arrayListOf()          //job temp
@@ -57,7 +62,7 @@ class HCGlobal{
     var tempProcessFilterList = ProcessFilterList()             //process temp
 
     var currentIndex: Int = 0
-    var currentMessageCount: Int = 71
+    var currentMessageCount: Int = 0
     var currentProjectIndex: Int = 0
     var currentJobId: Int = 0
     var currentFeedbackId: Int = 0

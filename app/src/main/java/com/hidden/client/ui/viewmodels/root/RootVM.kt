@@ -88,11 +88,10 @@ abstract class RootVM: ViewModel() {
 
     // Binding Adapter
     companion object {
-
         @BindingAdapter("android:src")
         @JvmStatic
-        fun setImageViewResource(imageView: ImageView, photoUrl: String) {
-            if (photoUrl.safeValue() != "") {
+        fun setImageViewResource(imageView: ImageView, photoUrl: String?) {
+            if (photoUrl.safeValue() != "" && photoUrl != null) {
                 Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl.safeValue()).into(imageView)
             }
         }

@@ -7,14 +7,27 @@ import androidx.room.Room
 import com.hidden.client.helpers.APP
 import com.hidden.client.models.room.AppDatabase
 import com.hidden.client.models_.HCBrand
+import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.models_.HCWorkExperience
+import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.main.*
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
+import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-
+        if (modelClass.isAssignableFrom(LoginVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return LoginVM(
+                context
+            ) as T
+        }
         /* ------------------------------------------------------------
            Dashboard
         -------------------------------------------------------------- */
@@ -59,6 +72,18 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             @Suppress("UNCHECKED_CAST")
             return HCWorkExperienceViewModel(
                 HCWorkExperience()
+            ) as T
+        }
+
+        if (modelClass.isAssignableFrom(HCJobDetailTileViewModel::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return HCJobDetailTileViewModel(
+                HCJobDetailTile()
             ) as T
         }
 

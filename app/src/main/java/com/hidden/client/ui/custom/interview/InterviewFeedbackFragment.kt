@@ -198,7 +198,6 @@ class InterviewFeedbackFragment (
         for (interviewer in interview.getInterviewerList()) {
             interviewersViewVM.add(InterviewerViewVM(mContext, interviewer))
         }
-
         this.interviewersViewVM = interviewersViewVM
 
         viewPagerInterviewer.pageMargin = 20
