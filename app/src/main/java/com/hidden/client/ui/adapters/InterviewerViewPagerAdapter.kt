@@ -14,6 +14,7 @@ import com.hidden.client.databinding.InterviewerItemViewBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
+import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.viewmodels.main.InterviewerViewVM
 import kotlinx.android.synthetic.main.viewpager_interviewer_item.view.*
 import okhttp3.MediaType

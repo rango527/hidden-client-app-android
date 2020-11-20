@@ -109,7 +109,6 @@ class HCMessageFragment(
 
         scrollView = view.findViewById(R.id.scrollview_message)
         recyclerView = view.findViewById(R.id.recyclerview_messages)
-
 //        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 //        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 

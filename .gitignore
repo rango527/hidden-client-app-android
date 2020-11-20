@@ -25,3 +25,5 @@
 # urbanairship build
 /urbanairship-fcm/build
 /urbanairship-preference/build
+/horizontalswipelayout/build
+/urbanairship-core/build

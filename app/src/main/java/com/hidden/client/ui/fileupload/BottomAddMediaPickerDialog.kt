@@ -270,6 +270,7 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
         private val CAPTURE_FROM_CAMERA = 2
 
         private val PERMISSION_REQUEST_CODE: Int = 101
+
         fun display(fragmentManager: FragmentManager?, conversationId: Int): BottomAddMediaPickerDialog {
             val dialog = BottomAddMediaPickerDialog(conversationId)
             dialog.show(fragmentManager!!, TAG)
