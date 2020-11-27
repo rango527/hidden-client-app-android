@@ -94,6 +94,28 @@ class GiveFeedbackVM(
             )
     }
 
+    fun submitInterviewProposedDates(
+        processId: Int,
+        body: RequestBody
+    ) {
+        subscription = processApi.submitInterviewProposedDates(
+            "application/json",
+            AppPreferences.apiAccessToken,
+            processId,
+            body
+        ).concatMap { addResult ->
+            Observable.just(addResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveFeedbackStart() }
+            .doOnTerminate { onRetrieveFeedbackFinish() }
+            .subscribe(
+                { onSubmitInterviewProposedDatesSuccess() },
+                { error -> onSubmitInterviewProposedDatesError(error) }
+            )
+    }
+
     fun nudgeFeedback(processId: Int?, feedbackId: Int?, body: RequestBody) {
         subscription = processApi.nudgeFeedback(
                     "application/json",
@@ -179,6 +201,10 @@ class GiveFeedbackVM(
         HToast.show(HCGlobal.getInstance().currentActivity, "Nudge sent", HToast.TOAST_SUCCESS)
     }
 
+    private fun onSubmitInterviewProposedDatesSuccess() {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Message sent!", HToast.TOAST_SUCCESS)
+    }
+
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {
         this.feedbackId = feedbackId
     }
@@ -201,6 +227,11 @@ class GiveFeedbackVM(
 
     private fun onNudgeFeedbackError(e: Throwable) {
         HToast.show(HCGlobal.getInstance().currentActivity, "Sorry, can't Nudge send", HToast.TOAST_ERROR)
+        e.printStackTrace()
+    }
+
+    private fun onSubmitInterviewProposedDatesError(e: Throwable) {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Sorry, can't Message send", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 }

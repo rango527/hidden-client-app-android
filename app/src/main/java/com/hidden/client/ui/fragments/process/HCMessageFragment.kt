@@ -1,6 +1,7 @@
 package com.hidden.client.ui.fragments.process
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -13,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,11 +26,14 @@ import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.activities.ConversationFileAttachActivity
+import com.hidden.client.ui.activities.shortlist.InterviewActivity
 import com.hidden.client.ui.fileupload.BottomAddMediaPickerDialog
 import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.MediaType
@@ -41,6 +44,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 
@@ -64,8 +68,12 @@ class HCMessageFragment(
     private lateinit var attachment: MultipartBody.Part
     private lateinit var progressDlg: KProgressHUD
 
-    private val CAPTURE_FROM_CAMERA = 2
+    private val CAPTURE_FROM_GALLEY = 1
     private val PERMISSION_REQUEST_CODE: Int = 101
+
+//    private var resolver = requireActivity().contentResolver
+    private var mediaPath: String? = null
+    private var postPath: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -177,9 +185,8 @@ class HCMessageFragment(
         when (v!!.id) {
             R.id.message_send_button -> {
                 val message = edit_text_message.text.toString()
-                if (message == "") {
-//                    Toast.makeText(this@HCMessageFragment, "Please write a message, first...", Toast.LENGTH_LONG).show()
-                } else {
+
+                if (message != "") {
                     viewModel.sendMessage(conversationId, message)
                     edit_text_message.setText("")
                 }
@@ -187,11 +194,21 @@ class HCMessageFragment(
 
             R.id.file_attachment -> {
                 if (checkPermission()) {
-                    val intent = Intent(Intent.ACTION_PICK)
-                    startActivityForResult(intent, IMAGE_PICK_CODE)
+//                    val intent = Intent(Intent.ACTION_PICK)
+//                    startActivityForResult(intent, CAPTURE_FROM_GALLEY)
+                    MaterialFilePicker()
+                        .withActivity(HCGlobal.getInstance().currentActivity)
+                        .withRequestCode(CAPTURE_FROM_GALLEY)
+                        .withFilter(Pattern.compile("^.*"))
+                        .withHiddenFiles(true)
+                        .start()
                 } else {
                     requestPermission()
                 }
+//                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
+//
+//                intent.putExtra("conversationId", conversationId)
+//                HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
 
             R.id.take_photo -> {
@@ -210,15 +227,32 @@ class HCMessageFragment(
     }
 
     private fun requestPermission() {
-        ActivityCompat.requestPermissions(HCGlobal.getInstance().currentActivity, arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE
+        requestPermissions(arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
         ),
             PERMISSION_REQUEST_CODE)
     }
 
+    @SuppressLint("Recycle", "Assert")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
+        if (resultCode == Activity.RESULT_OK && requestCode == CAPTURE_FROM_GALLEY && data != null) {
+////            val selectedImage = data.data
+//////            val filePathColumn = arrayOf(FilePickerActivity.RESULT_FILE_PATH)
+////            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+////
+////            val cursor = resolver.query(selectedImage!!, filePathColumn, null, null, null)
+////            assert(cursor != null)
+////            cursor!!.moveToFirst()
+////
+////            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+////            mediaPath = cursor.getString(columnIndex)
+////            cursor.close()
+////            postPath = mediaPath
+
+//            val fileToUpload = data.data?.path
             val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
@@ -241,6 +275,8 @@ class HCMessageFragment(
                         if (response.isSuccessful) {
                             Toast.makeText(context,"Success file upload", Toast.LENGTH_SHORT).show()
     //                        finish()
+                        } else {
+                            Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
@@ -248,14 +284,5 @@ class HCMessageFragment(
                 }
             })
         }
-    }
-
-//    override fun onProgressUpdate(percentage: Int) {
-//        progressbar.progress = percentage
-//    }
-
-    companion object {
-        private const val IMAGE_PICK_CODE = 1000
-        const val PERMISSION_CODE = 1001
     }
 }

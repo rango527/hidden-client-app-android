@@ -57,7 +57,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var imgPhoto: ImageView
     private lateinit var giveFeedbackViewModel: GiveFeedbackVM
-//    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

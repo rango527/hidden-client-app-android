@@ -39,27 +39,33 @@
             android:textStyle="bold"/>
 
         <Button
+            android:id="@+id/btn_further_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/further_stage_interviews"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/default_margin_super_top"/>
+            android:layout_marginTop="@dimen/default_margin_super_top"
+            android:visibility="gone"/>
 
         <Button
+            android:id="@+id/btn_final_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/final_stage_interviews"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:visibility="gone"/>
 
         <Button
+            android:id="@+id/btn_make_offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/make_offer"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
+            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:visibility="gone"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

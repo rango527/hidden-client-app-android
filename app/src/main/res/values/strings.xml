@@ -116,6 +116,8 @@
     <string name="what_stage_do_you_want_to_progress_to">That\'s great!\nWhat stage do you want to\nprogress to?</string>
     <string name="make_offer">Make Offer</string>
     <string name="please_give_us_some_feedback">To progress %1$s, please give us some quick feedback</string>
+    <string name="give_availability_write_message">Write a message to your Talent Partner with your availability and we\'ll do the rest…</string>
+    <string name="give_availability_message_placeholder">Type your message here</string>
     <string name="this_goes_to_your_hiddenclient_team">*This goes to your Hidden Talent Partner and not to %1$s directly</string>
 
     <string name="further_interviews">FURTHER INTERVIEWS</string>

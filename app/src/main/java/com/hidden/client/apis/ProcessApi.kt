@@ -103,6 +103,28 @@ interface ProcessApi {
     ): Observable<SimpleResponseJson>
 
     /**
+     * Submit Give Availability Message
+     */
+    @POST("/client/processes/{process_id}/interview-dates")
+    fun submitInterviewProposedDates(
+        @Header("Content-Type") contentType: String,
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Body body: RequestBody
+    ): Observable<SimpleResponseJson>
+
+    /**
+     * Schedule Or advance to next step
+     */
+    @POST("/client/processes/{process_id}/next-step")
+    fun scheduleOrAdvanceToNextStep(
+        @Header("Content-Type") contentType: String,
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Body body: RequestBody
+    ): Observable<SimpleResponseJson>
+
+    /**
      * Nudge for Feedback
      */
     @POST("/client/processes/{process_id}/feedback/{feedback_id}/nudge")

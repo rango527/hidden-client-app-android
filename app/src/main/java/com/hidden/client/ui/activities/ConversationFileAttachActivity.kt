@@ -106,7 +106,6 @@ class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.Up
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
-
             val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 

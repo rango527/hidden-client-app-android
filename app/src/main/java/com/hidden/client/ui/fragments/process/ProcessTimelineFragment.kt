@@ -22,6 +22,7 @@ import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.activities.process.HSDetermineProcessActivity
+import com.hidden.client.ui.activities.process.HSGiveAvailabilityActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
@@ -150,12 +151,19 @@ class ProcessTimelineFragment(
                         activity!!.startActivity(intent)
                     }
                     Enums.TileActionButtonType.GIVE_AVAILABILITY.value -> {
-                        val intent = Intent(activity, HSDetermineProcessActivity::class.java)
-                        intent.putExtra("from", "Add")
+                        val intent = Intent(activity, HSGiveAvailabilityActivity::class.java)
                         intent.putExtra("processId", process.id)
-                        intent.putExtra("jobId", process.jobId)
-                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
+
+                        activity!!.finish()
+
+                        activity!!.startActivity(intent)
+                    }
+                    Enums.TileActionButtonType.GIVE_FEEDBACK.value -> {
+                        val intent = Intent(activity, HSDetermineProcessActivity::class.java)
+                        intent.putExtra("processId", process.id)
                         intent.putExtra("candidateName", process.candidateFullName)
+                        intent.putExtra("nextStages", stage.nextStages)
+                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
 
                         activity!!.finish()
 
