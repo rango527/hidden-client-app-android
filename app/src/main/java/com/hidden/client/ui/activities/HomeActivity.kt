@@ -27,6 +27,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
     private lateinit var layoutMask: LinearLayout
 
     private var shortlistCashMode: Boolean = true
+    private var processCashMode: Boolean = true
     private var num: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         setContentView(R.layout.activity_home)
 
         shortlistCashMode = intent.getBooleanExtra("shortlistCashMode", true)
+        processCashMode = intent.getBooleanExtra("processCashMode", true)
 
         val pushId = """client-${AppPreferences.myId}"""
         if (UAirship.shared().namedUser.id != pushId) {
@@ -44,7 +46,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
 
         dashboardFrags.add(DashboardFragment())
         shortlistsFrags.add(ShortlistsFragment(shortlistCashMode))
-        processesFrags.add(ProcessesFragment())
+        processesFrags.add(ProcessesFragment(processCashMode))
 
         shortlistCashMode = true
 

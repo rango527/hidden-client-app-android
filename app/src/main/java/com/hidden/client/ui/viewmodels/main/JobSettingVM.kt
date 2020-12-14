@@ -15,6 +15,7 @@ import com.hidden.client.models.entity.JobSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -236,6 +237,7 @@ class JobSettingVM(
     }
 
     private fun onRetrieveJobSettingError(e: Throwable) {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Minium 1 user required", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 }

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="@color/colorBlack_1"
+        android:fontFamily="@font/avenir"
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginTop="@dimen/margin_default"/>
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="16sp"
+        android:fontFamily="@font/avenir"
         android:textStyle="bold"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

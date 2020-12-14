@@ -113,7 +113,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         // SwipeContainer
         swipeContainer = root.findViewById(R.id.swipe_container)
         swipeContainer.setOnRefreshListener {
-            viewModel.loadDashboard(true)
+            viewModel.loadDashboard(false)
         }
     }
 

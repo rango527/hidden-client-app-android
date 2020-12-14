@@ -85,11 +85,17 @@ class ProcessSettingActivity : BaseActivity() {
         })
 
         imgPhoto = findViewById(R.id.img_photo)
+        viewModel.processId = this.processId
+//        viewModel.processSetting.observe(this, Observer { process ->
+//            viewModel.loadProcessSetting(cashMode)
+//            Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
+//        })
 
         viewModel.processSetting.observe(this, Observer { process ->
-            viewModel.loadProcessSetting(cashMode)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
         })
+        viewModel.loadProcessSetting(cashMode)
+
         // Observing for reloading after login success
         viewModel.navigateReload.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
@@ -102,9 +108,6 @@ class ProcessSettingActivity : BaseActivity() {
                 overridePendingTransition( 0, 0);
             }
         })
-
-        viewModel.processId = this.processId
-        viewModel.loadProcessSetting(cashMode)
 
         initUI()
 

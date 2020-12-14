@@ -71,7 +71,6 @@ class HCMessageFragment(
     private val CAPTURE_FROM_GALLEY = 1
     private val PERMISSION_REQUEST_CODE: Int = 101
 
-//    private var resolver = requireActivity().contentResolver
     private var mediaPath: String? = null
     private var postPath: String? = null
 
@@ -95,19 +94,6 @@ class HCMessageFragment(
             }
         })
 
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
         val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         binding = MessageListBinding.inflate(inflater, container, false)
@@ -115,25 +101,15 @@ class HCMessageFragment(
 
         val view = binding.root
 
-        scrollView = view.findViewById(R.id.scrollview_message)
         recyclerView = view.findViewById(R.id.recyclerview_messages)
-//        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
+        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
+        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
-
+        viewModel.loadingMessageList.observe(this, Observer { show ->
+            if (show) {
+                recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
+            }
+        })
 
         val displayMetrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
@@ -151,23 +127,9 @@ class HCMessageFragment(
         )
         val layoutSendMessageHeight = layoutSendMessage.measuredHeight
 
-        // get message list - scrollview height
-        scrollView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-////                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-////                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
-
         binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
+        // get message list - scrollview height
+//        recyclerView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
 
         messageSendBtn = view.findViewById(R.id.message_send_button)
         messageSendBtn.setOnClickListener(this)
@@ -253,7 +215,7 @@ class HCMessageFragment(
 ////            postPath = mediaPath
 
 //            val fileToUpload = data.data?.path
-            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
+            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)!!.toString()
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
             attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name, requestBody)
@@ -264,7 +226,6 @@ class HCMessageFragment(
                 attachment
             )
             call.enqueue(object : Callback<UploadResponse> {
-
                 override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
                     Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
                     Log.d("ONFAILURE",t.toString())

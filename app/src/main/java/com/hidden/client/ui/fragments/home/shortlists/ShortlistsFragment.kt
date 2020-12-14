@@ -94,14 +94,16 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
                 textHello.visibility = View.GONE
                 progressDlg.show()
             } else {
+                imageClientPhoto.visibility = View.VISIBLE
+                textHello.visibility = View.VISIBLE
                 progressDlg.dismiss()
                 swipeContainer.isRefreshing = false
             }
         })
+        imageClientPhoto.visibility = View.VISIBLE
+        textHello.visibility = View.VISIBLE
 
         viewModel.shortlist.observe(this, Observer { shortlist ->
-            imageClientPhoto.visibility = View.VISIBLE
-            textHello.visibility = View.VISIBLE
             Glide.with(context!!).load(shortlist.clientUrl).into(imgClientPhoto)
             txtClientName.text = resources.getString(R.string.hello_user, AppPreferences.myFullName)
         })

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
@@ -38,6 +39,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private lateinit var viewModel: ProcessDetailVM
 
     private lateinit var progressDlg: KProgressHUD
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     private lateinit var textBtnProcess: TextView
     private lateinit var textBtnMessage: TextView
@@ -132,10 +134,11 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         imgPhoto.setOnClickListener(this)
 
-//        swipeContainer = findViewById(R.id.swipeContainer)
-//        swipeContainer.setOnRefreshListener {
-//            swipeContainer.isRefreshing = false
-//        }
+        swipeContainer = findViewById(R.id.swipeContainer)
+        swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = false
+            viewModel.loadProcessDetail()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -192,6 +195,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.text_message -> {
+                swipeContainer.isEnabled = false
+                swipeContainer.isRefreshing = false
                 textBtnProcess.setBackgroundResource(android.R.color.transparent)
                 textBtnProcess.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 

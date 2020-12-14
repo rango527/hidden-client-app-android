@@ -1,14 +1,21 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.DashboardApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.DashboardTileContentEntity
 import com.hidden.client.models.entity.DashboardTileEntity
 import com.hidden.client.models.dao.DashboardTileContentDao
 import com.hidden.client.models.dao.DashboardTileDao
 import com.hidden.client.models.json.DashboardTileJson
+import com.hidden.client.models.json.SimpleResponseJson
+import com.hidden.client.ui.activities.LoginActivity
+import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,6 +34,10 @@ class DashboardVM (
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     val dashboardTileList: MutableLiveData<List<DashboardTileEntity>> = MutableLiveData()
+
+    private val _navigateHome = MutableLiveData<Event<Boolean>>()
+    val navigateHome: LiveData<Event<Boolean>>
+        get() = _navigateHome
 
     private var subscription: Disposable? = null
 
@@ -73,6 +84,20 @@ class DashboardVM (
             .subscribe(
                 { result -> onRetrieveDashboardSuccess(result) },
                 { error -> onRetrieveDashboardError(error) }
+            )
+    }
+
+    fun logOut() {
+        subscription = dashboardApi.clientLogout().concatMap {
+                sendResult -> Observable.just(sendResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveDashboardStart() }
+            .doOnTerminate { onRetrieveDashboardFinish() }
+            .subscribe(
+                { onLogOutSuccess() },
+                { error -> onLogOutError(error) }
             )
     }
 
@@ -126,6 +151,14 @@ class DashboardVM (
     }
 
     private fun onRetrieveDashboardError(e: Throwable){
+        e.printStackTrace()
+    }
+
+    private fun onLogOutSuccess() {
+        _navigateHome.value = Event(true)
+    }
+
+    private fun onLogOutError(e: Throwable) {
         e.printStackTrace()
     }
 }

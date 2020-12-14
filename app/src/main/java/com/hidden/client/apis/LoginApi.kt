@@ -1,10 +1,11 @@
 package com.hidden.client.apis
 
+import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.models.json.LoginJson
+import com.hidden.client.models.json.SimpleResponseJson
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.Call
+import retrofit2.http.*
 
 /**
  * LoginJson API
@@ -17,4 +18,10 @@ interface LoginApi {
         @Field("email") email: String,
         @Field("password") password: String
     ): Observable<LoginJson>
+
+    @FormUrlEncoded
+    @POST("/client/request-password")
+    fun sendPasswordRequest(
+        @Field("email") email: String
+    ): Observable<SimpleResponseJson>
 }

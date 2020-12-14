@@ -2,7 +2,9 @@ package com.hidden.client.apis
 
 import com.hidden.client.models.json.DashboardTileContentJson
 import com.hidden.client.models.json.DashboardTileJson
+import com.hidden.client.models.json.SimpleResponseJson
 import io.reactivex.Observable
+import retrofit2.Call
 import retrofit2.http.*
 
 interface DashboardApi {
@@ -17,4 +19,8 @@ interface DashboardApi {
         @Url url: String,
         @Header("Authorization") authToken: String
     ):Observable<List<DashboardTileContentJson>>
+
+    @POST("client/logout")
+    fun clientLogout(
+    ): Observable<SimpleResponseJson>
 }

@@ -2,6 +2,7 @@ package com.hidden.client.ui.fragments.settings
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +11,29 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 
 import com.hidden.client.R
+import com.hidden.client.apis.ConversationApi
 import com.hidden.client.datamodels.HCLoginResponse
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.models_.HCLogin
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
+import com.hidden.client.ui.activities.HCSentEmailActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.activities.settings.*
+import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
+import com.hidden.client.ui.viewmodels.main.DashboardVM
 import com.hidden.horizontalswipelayout.CircleImageView
 import com.urbanairship.UAirship
 import retrofit2.Call
@@ -32,7 +41,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
-
+    private lateinit var viewModel: DashboardVM
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -136,7 +145,6 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_logout -> {
-
                 AppPreferences.myFullName = ""
                 AppPreferences.apiAccessToken = ""
                 AppPreferences.myId = 0
@@ -144,9 +152,18 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 UAirship.shared().namedUser.id = null
                 UAirship.shared().namedUser.forceUpdate()
 
+                viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(DashboardVM::class.java)
+                viewModel.logOut()
                 val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
                 startActivity(intent)
                 HCGlobal.getInstance().currentActivity.finish()
+                viewModel.navigateHome.observe(this, Observer {
+                    it.getContentIfNotHandled()?.let {
+                        val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        HCGlobal.getInstance().currentActivity.finish()
+                    }
+                })
             }
         }
     }

@@ -12,6 +12,7 @@ import com.hidden.client.helpers.User
 import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.json.LoginJson
+import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -28,12 +29,18 @@ class LoginVM(private val context: Context): RootVM() {
     lateinit var loginApi: LoginApi
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingResetPasswordVisibility: MutableLiveData<Boolean> = MutableLiveData()
     private lateinit var progressDlg: KProgressHUD
 
     // To jump to HomeActivity after login success
     private val _navigateToHome = MutableLiveData<Event<Boolean>>()
     val navigateToHome: LiveData<Event<Boolean>>
         get() = _navigateToHome
+
+    // To jump to HomeActivity after login success
+    private val _navigateSendMessageHome = MutableLiveData<Event<Boolean>>()
+    val navigateSendMessageHome: LiveData<Event<Boolean>>
+        get() = _navigateSendMessageHome
 
     // LoginJson form validation
     private val _isFormValid = MutableLiveData<Boolean>()
@@ -61,6 +68,25 @@ class LoginVM(private val context: Context): RootVM() {
         }
     }
 
+    // ResetPasswordJson form validation
+    private val _isResetFormValid = MutableLiveData<Boolean>()
+    val isResetFormValid: LiveData<Boolean>
+        get() = _isResetFormValid
+
+    var resetEmail = ""
+        set(value) {
+            field = value
+            validateResetForm()
+        }
+
+    private fun validateResetForm() {
+        if (resetEmail.isEmailValid()) {
+            _isResetFormValid.postValue(true)
+        } else {
+            _isResetFormValid.postValue(false)
+        }
+    }
+
     private var subscription: Disposable? = null
 
     init {
@@ -85,12 +111,34 @@ class LoginVM(private val context: Context): RootVM() {
             )
     }
 
+    fun resetPassword() {
+        subscription = loginApi.sendPasswordRequest(resetEmail).concatMap {
+                resetPasswordResult -> Observable.just(resetPasswordResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onResetPasswordStart() }
+            .doOnTerminate { onResetPasswordFinish() }
+            .subscribe(
+                { result -> onResetPasswordSuccess(result) },
+                { error -> onResetPasswordError(error) }
+            )
+    }
+
     private fun onAuthLoginStart(){
         loadingVisibility.value = true
     }
 
     private fun onAuthLoginFinish(){
         loadingVisibility.value = false
+    }
+
+    private fun onResetPasswordStart(){
+        loadingResetPasswordVisibility.value = true
+    }
+
+    private fun onResetPasswordFinish(){
+        loadingResetPasswordVisibility.value = false
     }
 
     private fun onAuthLoginSuccess(loginResult: LoginJson){
@@ -103,8 +151,17 @@ class LoginVM(private val context: Context): RootVM() {
     }
 
     private fun onAuthLoginError(e: Throwable){
-Log.d("dd", "$e")
-        HToast.show(HCGlobal.getInstance().currentActivity, "Wrong email and password", HToast.TOAST_ERROR)
         e.printStackTrace()
+        HToast.show(HCGlobal.getInstance().currentActivity, "Wrong email and password", HToast.TOAST_ERROR)
+    }
+
+    private fun onResetPasswordSuccess(result: SimpleResponseJson){
+        _navigateSendMessageHome.value = Event(true)
+    }
+
+    private fun onResetPasswordError(e: Throwable){
+        e.printStackTrace()
+        val mess = "$resetEmail: User not found"
+        HToast.show(HCGlobal.getInstance().currentActivity, mess, HToast.TOAST_ERROR)
     }
 }

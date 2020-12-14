@@ -1,6 +1,7 @@
 package com.hidden.client.ui.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,8 +56,8 @@ class ReviewerListAdapter: RecyclerView.Adapter<ReviewerListAdapter.ViewHolder>(
         removeBtn.setOnClickListener {
             if (HCGlobal.getInstance().currentActivity is ProcessSettingActivity) {
                 (HCGlobal.getInstance().currentActivity as ProcessSettingActivity).removeRoleFromProcessSetting(reviewerList[position])
-//                reviewerList.removeAt(position)
-//                notifyDataSetChanged()
+                reviewerList.removeAt(position)
+                notifyDataSetChanged()
             } else {
                 val intent = Intent(HCGlobal.getInstance().currentActivity, RemoveUserRoleActivity::class.java)
                 intent.putExtra("clientId", reviewerList[position].clientId)

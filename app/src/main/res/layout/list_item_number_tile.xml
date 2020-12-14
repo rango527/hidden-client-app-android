@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@{viewModel.tileContent.title}"
+            android:fontFamily="@font/avenir"
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeMaxTextSize="100sp"
@@ -38,6 +39,7 @@
             android:textColor="@{ContextCompat.getColor(context, viewModel.getNumberTileTextColor())}"
             android:layout_marginTop="-20dp"
             android:textSize="104sp"
+            android:fontFamily="@font/avenir"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -179,7 +179,7 @@
     <string name="remove_from">Remove from:</string>
 
     <!-- Process Setting -->
-    <string name="process_setting">Process Setting</string>
+    <string name="process_setting">Process Settings</string>
     <string name="process_setting_note">Changing these settings will only affect this individual process with Andrea. If you want to change the settings for all candidates in process with this job, please change the <![CDATA[<font color="#66CC66">Job Settings</font>]]></string>
     <string name="got_it">Got it</string>
     <string name="remove">Remove</string>
@@ -268,6 +268,10 @@
     <string name="choose_video">Choose Video</string>
     <string name="choose_photo">Choose Photo</string>
 
+    <string name="sent_email">We\'ve sent you an email with a link to reset your password</string>
+
     <string name="no_match_filter">No processes match those filters.\nTry broadening your search</string>
+    <string name="empty_process1">You don\'t have any candidates in process yet… </string>
+    <string name="empty_process2">As soon as you approve a candidate from you shortlist, they\'ll show up here</string>
     <string name="select_image_number">%1$s/%2$s</string>
 </resources>

@@ -45,6 +45,7 @@ class ShortlistViewPagerAdapter(
         layout.setOnClickListener {
             HCGlobal.getInstance().currentIndex = position
             val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistDetailActivity::class.java)
+            HCGlobal.getInstance().currentActivity.overridePendingTransition(R.anim.ua_iam_fade_out, R.anim.ua_iam_fade_in)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
         }
 

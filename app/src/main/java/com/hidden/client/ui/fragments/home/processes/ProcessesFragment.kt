@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,19 +25,24 @@ import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessListVM
+import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 
-class ProcessesFragment : Fragment(), View.OnClickListener {
+class ProcessesFragment(private val cashMode: Boolean) : Fragment(), View.OnClickListener {
 
     private lateinit var binding: ProcessListBinding
     private lateinit var viewModel: ProcessListVM
 
+    private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var layoutBtnFilterSearch: LinearLayout
     private lateinit var layoutBtnViewFilter: LinearLayout
     private lateinit var layoutBtnClearFilter: LinearLayout
     private lateinit var layoutBtnFilterResult: LinearLayout
     private lateinit var noProcessList: LinearLayout
-
+    private lateinit var filterText: TextView
+    private lateinit var emptyText1: TextView
+    private lateinit var emptyText2: TextView
+    private lateinit var buttonRefresh: Button
     private lateinit var progressDlg: KProgressHUD
 
     override fun onCreateView(
@@ -43,8 +50,8 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(ProcessListVM::class.java)
+        viewModel.loadProcess(cashMode)
 
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { show ->
@@ -53,7 +60,7 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
             }
             else {
                 progressDlg.dismiss()
-//                swipeContainer.isRefreshing = false
+                swipeContainer.isRefreshing = false
             }
         })
 
@@ -61,8 +68,8 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
 
         binding = ProcessListBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-        val view = binding.root
 
+        val view = binding.root
 
         // if filter result is true, change filter layout
         layoutBtnFilterSearch = view.findViewById(R.id.layout_filter_search)
@@ -82,9 +89,24 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
         // end
 
         // if processlist count is 0, show no_processlist layout
+
         noProcessList = view.findViewById(R.id.no_processlist)
+        filterText = view.findViewById(R.id.filter_text)
+        emptyText1 = view.findViewById(R.id.empty_list_text1)
+        emptyText2 = view.findViewById(R.id.empty_list_text2)
+        buttonRefresh = view.findViewById(R.id.button_refresh)
+        buttonRefresh.setOnClickListener(this)
         viewModel.processListCount.observe(this, Observer { show ->
             if (show) {
+                if (!isJobFilter && !isProcessFilter && !isSortBy) {
+                    layoutBtnFilterResult.visibility = View.GONE
+                    layoutBtnFilterSearch.visibility = View.GONE
+                    emptyText1.visibility = View.VISIBLE
+                    emptyText2.visibility = View.VISIBLE
+                    buttonRefresh.visibility = View.VISIBLE
+                } else {
+                    filterText.visibility = View.VISIBLE
+                }
                 noProcessList.visibility = View.VISIBLE
             } else {
                 noProcessList.visibility = View.GONE
@@ -101,12 +123,20 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
 
         layoutBtnClearFilter = view.findViewById(R.id.layout_clear_filter)
         layoutBtnClearFilter.setOnClickListener(this)
-
+        // refreshing
+        swipeContainer = view.findViewById(R.id.swipeContainer)
+        swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = false
+            viewModel.loadProcess(false)
+        }
         return view
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.button_refresh -> {
+                viewModel.loadProcess(false)
+            }
             R.id.layout_filter_search -> {
                 val intent = Intent(HCGlobal.getInstance().currentActivity, HCProcessFilterActivity::class.java)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
@@ -137,7 +167,6 @@ class ProcessesFragment : Fragment(), View.OnClickListener {
                 HCGlobal.getInstance().tempProcessFilterList.currentFurtherStage = false
                 HCGlobal.getInstance().tempProcessFilterList.currentFinalStage = false
                 HCGlobal.getInstance().tempProcessFilterList.currentFirstStage = false
-
 
                 for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
                     HCGlobal.getInstance().getJobPick[x].jobTick = false
