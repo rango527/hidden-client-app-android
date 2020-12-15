@@ -88,13 +88,11 @@ class DashboardVM (
     }
 
     fun logOut() {
-        subscription = dashboardApi.clientLogout().concatMap {
+        subscription = dashboardApi.clientLogout(AppPreferences.apiAccessToken).concatMap {
                 sendResult -> Observable.just(sendResult)
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveDashboardStart() }
-            .doOnTerminate { onRetrieveDashboardFinish() }
             .subscribe(
                 { onLogOutSuccess() },
                 { error -> onLogOutError(error) }

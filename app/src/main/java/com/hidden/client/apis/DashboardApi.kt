@@ -22,5 +22,6 @@ interface DashboardApi {
 
     @POST("client/logout")
     fun clientLogout(
+        @Header("Authorization") authToken: String
     ): Observable<SimpleResponseJson>
 }

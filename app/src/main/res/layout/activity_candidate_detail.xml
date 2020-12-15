@@ -24,14 +24,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/candidate_background"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/candidate_background">
+                app:srcCompat="@drawable/candidate_background"
+                android:contentDescription="@string/candidate_detail">
 
             </ImageView>
 
@@ -49,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorBlack_2"
-                    android:text="Tanya Walters"
+                    android:text=""
                     android:textSize="@dimen/textview_bold"
                     android:textStyle="bold"
                     />
@@ -60,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
                     android:layout_gravity="center_horizontal"
-                    android:text="Berkhamsted"
+                    android:text=""
                     android:textColor="@color/colorBlack_2"/>
 
                 <TextView
@@ -68,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Desinger | Art Director | UX Designer"
+                    android:text=""
                     android:textColor="@color/colorCyan_1"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"/>
 
@@ -88,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
                     android:textColor="@color/colorBlack_2"
-                    android:text="blablabla"
+                    android:text=""
                     android:visibility="visible"/>
 
                 <TextView
@@ -144,7 +145,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/menu_padding_vertical_default"
                     android:visibility="visible"/>
-
 
             </LinearLayout>
         </LinearLayout>

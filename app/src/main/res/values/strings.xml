@@ -92,6 +92,7 @@
     <string name="approve">Approve</string>
     <string name="reject">Reject</string>
     <string name="feedback_success">Congratulations! you\'ve progressed %1$s to First Stage Interview</string>
+    <string name="feedback_reject">%1$s has been rejected. Thanks for the feedback.</string>
     <string name="feedback_false">Sorry</string>
     <string name="back_to_shortlist">Back to shortlist</string>
     <string name="give_interview_availability">Give interview availability</string>
@@ -138,7 +139,7 @@
     <string name="started">Started</string>
     <string name="hold_tight">Hold tight! I\'m sure %1$s will be starting with you soon…</string>
 
-    <string name="filter_by_job">FILTER_BY_JOB</string>
+    <string name="filter_by_job">FILTER BY JOB</string>
     <string name="all">All</string>
     <string name="filter_sort">Filter and Sort</string>
     <string name="view_filters">View Filters</string>
@@ -274,4 +275,5 @@
     <string name="empty_process1">You don\'t have any candidates in process yet… </string>
     <string name="empty_process2">As soon as you approve a candidate from you shortlist, they\'ll show up here</string>
     <string name="select_image_number">%1$s/%2$s</string>
+    <string name="candidate_detail">candidate_detail</string>
 </resources>

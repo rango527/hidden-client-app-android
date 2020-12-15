@@ -10,11 +10,6 @@
             type="com.hidden.client.ui.viewmodels.main.MessageListVM" />
     </data>
 
-    <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,50 +25,26 @@
 <!--            tools:layout_editor_absoluteX="3dp"-->
 <!--            tools:layout_editor_absoluteY="32dp">-->
 
-<!--            <ScrollView-->
-<!--                android:id="@+id/scrollview_message"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="0dp"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                android:requiresFadingEdge="vertical"-->
-<!--                app:layout_constraintBottom_toTopOf="@id/layout_send_message"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:layout_marginBottom="@dimen/activity_horizontal_margin"-->
-<!--                android:transcriptMode="alwaysScroll"-->
-<!--                android:stackFromBottom="true"-->
-<!--                android:focusable="true"-->
-<!--                android:focusableInTouchMode="true"-->
-<!--                android:isScrollContainer="true"-->
-<!--                >-->
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeContainerMessageList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_send_message"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:paddingBottom="@dimen/menu_padding_vertical_default">-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_messages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite_1"
+                    app:adapter="@{viewModel.getMessageListAdapter()}"
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_messages"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite_1"
-                        app:adapter="@{viewModel.getMessageListAdapter()}"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/layout_send_message"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                        android:scrollbars="vertical"
-                        android:transcriptMode="alwaysScroll"
-                        android:stackFromBottom="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        />
 
-<!--                </LinearLayout>-->
-<!--            </ScrollView>-->
+                    />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <LinearLayout
                 android:id="@+id/layout_send_message"
@@ -82,7 +53,6 @@
                 android:background="@color/colorWhite_1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclerview_messages"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintHeight_min="?actionBarSize"
@@ -112,15 +82,16 @@
                     android:paddingBottom="@dimen/text_padding"
                     android:text=""
                     android:textSize="13sp" >
-                    <requestFocus />
                 </EditText>
 
                 <LinearLayout
+                    android:id="@+id/layout_feat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:gravity="end|center_vertical"
                     android:layout_gravity="bottom"
+                    android:fitsSystemWindows="true"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -153,5 +124,4 @@
             </LinearLayout>
 <!--        </LinearLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </layout>

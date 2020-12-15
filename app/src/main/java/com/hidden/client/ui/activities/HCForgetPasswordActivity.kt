@@ -36,7 +36,9 @@ class HCForgetPasswordActivity : AppCompatActivity(), View.OnClickListener {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(LoginVM::class.java)
         HCGlobal.getInstance().currentActivity = this
 
-        editEmail.doAfterTextChanged { text -> viewModel.resetEmail = text }
+        editEmail.doAfterTextChanged {
+                text -> viewModel.resetEmail = text
+        }
 
         progressDlg = HCDialog.KProgressDialog(this)
 

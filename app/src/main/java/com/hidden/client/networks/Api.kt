@@ -45,10 +45,4 @@ interface Api {
     fun getCompanyProfile(
         @Header("Authorization") authToken: String
     ):Call<HCCompanyResponse>
-
-    @FormUrlEncoded
-    @POST("client/logout")
-    fun clientLogout(
-        @Header("Authorization") authToken: String
-    ): Call<SimpleResponseJson>
 }

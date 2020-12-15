@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -27,11 +28,13 @@ class FeedbackDoneActivity : AppCompatActivity() {
     private var candidateJob: String = ""
     private var candidateAvatar: String = ""
     private var event: Boolean = false
+    private var isApprove: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback_done)
 
+        isApprove = intent.getBooleanExtra("isApprove", true).safeValue()
         candidateName = intent.getStringExtra("candidateName").safeValue()
         candidateAvatar = intent.getStringExtra("candidateAvatar").safeValue()
         candidateJob = intent.getStringExtra("candidateJob").safeValue()
@@ -43,20 +46,32 @@ class FeedbackDoneActivity : AppCompatActivity() {
         txtCandidateName = findViewById(R.id.text_name)
         txtCandidatJob = findViewById(R.id.text_job)
         imgCandidateAvatar = findViewById(R.id.image_avatar)
-
-        txtCandidateName.text = candidateName
-        txtCandidatJob.text = candidateJob
-        Glide.with(this).load(candidateAvatar).into(imgCandidateAvatar)
-
-        btnBackToShortlist = findViewById(R.id.button_back_to_shortlist)
-//        btnGiveAvailability = findViewById(R.id.button_give_interview_availability)
         txtCongratulation = findViewById(R.id.text_congratulation)
-        if (event) {
-            txtCongratulation.text = getString(R.string.feedback_success, candidateName)
+
+        if (isApprove) {
+            txtCandidateName.visibility = View.VISIBLE
+            txtCandidatJob.visibility = View.VISIBLE
+            imgCandidateAvatar.visibility = View.VISIBLE
+
+            txtCandidateName.text = candidateName
+            txtCandidatJob.text = candidateJob
+            Glide.with(this).load(candidateAvatar).into(imgCandidateAvatar)
+
+//        btnGiveAvailability = findViewById(R.id.button_give_interview_availability)
+            if (event) {
+                txtCongratulation.text = getString(R.string.feedback_success, candidateName)
+            } else {
+                txtCongratulation.text = getString(R.string.feedback_false)
+            }
         } else {
-            txtCongratulation.text = getString(R.string.feedback_false)
+            txtCandidateName.visibility = View.GONE
+            txtCandidatJob.visibility = View.GONE
+            imgCandidateAvatar.visibility = View.GONE
+            txtCongratulation.text = getString(R.string.feedback_reject, candidateName)
         }
 
+
+        btnBackToShortlist = findViewById(R.id.button_back_to_shortlist)
         btnBackToShortlist.setOnClickListener {
             HCGlobal.getInstance().currentIndex = 0
             val intent = Intent(this, HomeActivity::class.java)

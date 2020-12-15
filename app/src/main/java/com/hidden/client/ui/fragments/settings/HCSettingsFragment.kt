@@ -145,20 +145,18 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
                 (activity as HomeActivity).overridePendingVTransitionEnter()
             }
             R.id.layout_logout -> {
-                AppPreferences.myFullName = ""
-                AppPreferences.apiAccessToken = ""
-                AppPreferences.myId = 0
-
-                UAirship.shared().namedUser.id = null
-                UAirship.shared().namedUser.forceUpdate()
-
                 viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(DashboardVM::class.java)
                 viewModel.logOut()
-                val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
-                startActivity(intent)
-                HCGlobal.getInstance().currentActivity.finish()
+
                 viewModel.navigateHome.observe(this, Observer {
                     it.getContentIfNotHandled()?.let {
+                        AppPreferences.myFullName = ""
+                        AppPreferences.apiAccessToken = ""
+                        AppPreferences.myId = 0
+
+                        UAirship.shared().namedUser.id = null
+                        UAirship.shared().namedUser.forceUpdate()
+
                         val intent = Intent(HCGlobal.getInstance().currentActivity, LoginActivity::class.java)
                         startActivity(intent)
                         HCGlobal.getInstance().currentActivity.finish()

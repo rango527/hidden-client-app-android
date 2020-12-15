@@ -2,7 +2,9 @@ package com.hidden.client.ui.fragments.home.shortlists
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +19,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.networks.RetrofitClient
+import com.hidden.client.ui.activities.HCFilterJobActivity
 import com.hidden.client.ui.activities.HomeActivity
+import com.hidden.client.ui.activities.shortlist.ShortlistJobFilterActivity
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ShortlistListVM
@@ -90,8 +95,6 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { visibility ->
             if (visibility) {
-                imageClientPhoto.visibility = View.GONE
-                textHello.visibility = View.GONE
                 progressDlg.show()
             } else {
                 imageClientPhoto.visibility = View.VISIBLE
@@ -122,8 +125,16 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
             if (candidateVMList.isEmpty()) {
                 layoutViewPager.visibility = View.GONE
                 layoutEmpty.visibility = View.VISIBLE
-
             } else {
+//                val candidateInfo = JsonObject()
+//                for (candidate in candidateVMList) {
+//                    val jobTitle = candidate.getShortlistCandidate().jobTitle
+//                    val jobCityName = candidate.getShortlistCandidate().jobCityName
+//
+//                    if (candidateInfo.has())
+//                    candidateInfo.addProperty(jobTitle, jobCityName)
+//
+//                }
                 initViewPager()
 
                 layoutViewPager.visibility = View.VISIBLE
@@ -153,10 +164,10 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
         // Layout Filter
         layoutFilterContainer = root.findViewById(R.id.layout_filter_container)
         layoutFilterPanel = root.findViewById(R.id.layout_filter_panel)
-        imgOpenFilter = root.findViewById(R.id.img_open_filter_layout)
         imgCloseFilter = root.findViewById(R.id.img_close_filter_layout)
-        imgOpenFilter.setOnClickListener(this)
         imgCloseFilter.setOnClickListener(this)
+        imgOpenFilter = root.findViewById(R.id.img_open_filter_layout)
+        imgOpenFilter.setOnClickListener(this)
 
         // Layout container
         layoutEmpty = root.findViewById(R.id.layout_empty_shortlists)
@@ -238,6 +249,7 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
                 viewModel.loadShortlistList(false)
             }
             R.id.img_open_filter_layout -> {
+
                 layoutFilterContainer.visibility = View.VISIBLE
 
                 // slide-up animation
@@ -247,6 +259,10 @@ class ShortlistsFragment(private val cashMode: Boolean) : Fragment(), View.OnCli
                 layoutFilterPanel.startAnimation(slideUp)
 
                 (activity as HomeActivity).toggleMask()
+//
+//                val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistJobFilterActivity::class.java)
+//                HCGlobal.getInstance().currentActivity.startActivity(intent)
+
             }
             R.id.img_close_filter_layout -> {
 

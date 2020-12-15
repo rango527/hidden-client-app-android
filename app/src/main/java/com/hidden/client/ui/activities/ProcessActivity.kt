@@ -86,13 +86,18 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
+                swipeContainer.isRefreshing = false
             }
         })
 
         imgPhoto = findViewById(R.id.img_photo)
 
+        viewModel.processId = processId
+        HCGlobal.getInstance().log(processId.toString())
+        viewModel.loadProcessDetail()
+
         viewModel.process.observe(this, Observer { process ->
-            viewModel.loadTimeline(cashMode)
+            viewModel.loadTimeline(false)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
         })
 
@@ -105,9 +110,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
         })
 
-        viewModel.processId = processId
-        HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail()
+
 
         initUI()
     }
@@ -138,6 +141,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = false
             viewModel.loadProcessDetail()
+            viewModel.loadTimeline(false)
         }
     }
 
@@ -195,8 +199,9 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.text_message -> {
-                swipeContainer.isEnabled = false
                 swipeContainer.isRefreshing = false
+                swipeContainer.isEnabled = false
+
                 textBtnProcess.setBackgroundResource(android.R.color.transparent)
                 textBtnProcess.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 
