@@ -132,7 +132,6 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="52dp"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -140,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="52dp"
                     android:paddingTop="9dp"
                     android:paddingBottom="100dp"
                     android:paddingLeft="24dp"
@@ -311,9 +311,9 @@
                     <!-- Interviewers End -->
 
                 </LinearLayout>
-
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

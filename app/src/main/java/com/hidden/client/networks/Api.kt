@@ -2,6 +2,8 @@ package com.hidden.client.networks
 
 import com.hidden.client.datamodels.*
 import com.hidden.client.models.json.ShortlistJson
+import com.hidden.client.models.json.SimpleResponseJson
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_padding_vertical_default"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_message_photo"

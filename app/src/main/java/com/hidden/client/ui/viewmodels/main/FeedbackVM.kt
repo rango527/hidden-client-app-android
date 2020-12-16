@@ -75,8 +75,8 @@ class FeedbackVM(
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveFeedbackStart() }
-            .doOnTerminate { onRetrieveFeedbackFinish() }
+//            .doOnSubscribe { onRetrieveFeedbackStart() }
+//            .doOnTerminate { onRetrieveFeedbackFinish() }
             .subscribe(
                 { onSubmitFeedbackSuccess() },
                 { error -> onSubmitFeedbackError(error) }
@@ -140,10 +140,6 @@ class FeedbackVM(
         feedback.value = feedbackEntity
     }
 
-    private fun onSubmitFeedbackSuccess() {
-        _navigateToFeedbackDone.value = Event(true)
-    }
-
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {
         this.feedbackId.value = feedbackId
     }
@@ -158,6 +154,10 @@ class FeedbackVM(
 
     private fun onRetrieveTimelineError(e: Throwable) {
         e.printStackTrace()
+    }
+
+    private fun onSubmitFeedbackSuccess() {
+        _navigateToFeedbackDone.value = Event(true)
     }
 
     private fun onSubmitFeedbackError(e: Throwable) {

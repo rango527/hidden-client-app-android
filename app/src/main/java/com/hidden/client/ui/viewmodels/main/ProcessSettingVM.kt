@@ -16,6 +16,7 @@ import com.hidden.client.models.entity.ProcessSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ProcessSettingJson
 import com.hidden.client.ui.adapters.ReviewerListAdapter
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -185,9 +186,9 @@ class ProcessSettingVM (
         isUserManager = processSetting.isUserManager
 
         this.processSetting.value = processSetting
-        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId, true)
-        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId, true)
-        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId, true)
+        interviewerListAdapter.updateReviewerList(processSetting.getInterviewerList(), processId, isUserManager)
+        interviewAdvancerListAdapter.updateReviewerList(processSetting.getInterviewAdvancerList(), processId, isUserManager)
+        offerManagerListAdapter.updateReviewerList(processSetting.getOfferManagerList(), processId, isUserManager)
 
         jobTitle.value = String.format(context.resources.getString(R.string.job_and_location), processSetting.jobTitle, processSetting.cityName)
         candidateName.value = processSetting.candidateFullName
@@ -217,6 +218,7 @@ class ProcessSettingVM (
     }
 
     private fun onRetrieveProcessSettingError(e: Throwable) {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Minium 1 user required", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 }

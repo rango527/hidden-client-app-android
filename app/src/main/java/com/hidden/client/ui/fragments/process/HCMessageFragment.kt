@@ -20,12 +20,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.doAfterTextChanged
 import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.shortlist.InterviewActivity
 import com.hidden.client.ui.fileupload.BottomAddMediaPickerDialog
@@ -61,8 +63,10 @@ class HCMessageFragment(
     private lateinit var scrollView: ScrollView
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutSendMessage: LinearLayout
-
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var imageView: ImageView
+    private lateinit var textMessage: EditText
+    private lateinit var layoutFeat: LinearLayout
 
     private val CAPTURE_REQUEST_CODE = 42
     private lateinit var attachment: MultipartBody.Part
@@ -71,7 +75,6 @@ class HCMessageFragment(
     private val CAPTURE_FROM_GALLEY = 1
     private val PERMISSION_REQUEST_CODE: Int = 101
 
-//    private var resolver = requireActivity().contentResolver
     private var mediaPath: String? = null
     private var postPath: String? = null
 
@@ -92,22 +95,10 @@ class HCMessageFragment(
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
+                swipeRefreshLayout.isRefreshing = false
             }
         })
 
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
         val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         binding = MessageListBinding.inflate(inflater, container, false)
@@ -115,25 +106,15 @@ class HCMessageFragment(
 
         val view = binding.root
 
-        scrollView = view.findViewById(R.id.scrollview_message)
         recyclerView = view.findViewById(R.id.recyclerview_messages)
 //        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
 //        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
-
+//
+        viewModel.loadingMessageList.observe(this, Observer { show ->
+            if (show) {
+                recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount )
+            }
+        })
 
         val displayMetrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
@@ -142,32 +123,43 @@ class HCMessageFragment(
 
         val height = displayMetrics.heightPixels
 
-
+        swipeRefreshLayout = view.findViewById(R.id.swipeContainerMessageList)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            viewModel.loadMessage(false, conversationId)
+        }
         layoutSendMessage = view.findViewById(R.id.layout_send_message)
+        textMessage = view.findViewById(R.id.edit_text_message)
+//        layoutFeat = view.findViewById(R.id.layout_feat)
+
+        textMessage.measure(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val textSendMessageHeight = textMessage.measuredHeight
 
         layoutSendMessage.measure(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        val layoutSendMessageHeight = layoutSendMessage.measuredHeight
-
-        // get message list - scrollview height
-        scrollView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
-//        viewModel.loadingMessageList.observe(this, Observer { show ->
-//            if (show) {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-////                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-////                recyclerview_messages.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//            } else {
-//                scrollView.post(Runnable {
-//                    scrollView.scrollTo(0, scrollView.bottom)
-//                })
-//            }
-//        })
+        var layoutSendMessageHeight = layoutSendMessage.measuredHeight
 
         binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
+
+        // get message list - scrollview height
+//        recyclerView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
+        swipeRefreshLayout.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
+
+        textMessage.doAfterTextChanged {
+//                text -> viewModel.resetEmail = text
+            layoutSendMessage.measure(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            layoutSendMessageHeight = layoutSendMessage.measuredHeight
+            swipeRefreshLayout.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
+            recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
+        }
 
         messageSendBtn = view.findViewById(R.id.message_send_button)
         messageSendBtn.setOnClickListener(this)
@@ -253,7 +245,7 @@ class HCMessageFragment(
 ////            postPath = mediaPath
 
 //            val fileToUpload = data.data?.path
-            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
+            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)!!.toString()
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
             attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name, requestBody)
@@ -264,7 +256,6 @@ class HCMessageFragment(
                 attachment
             )
             call.enqueue(object : Callback<UploadResponse> {
-
                 override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
                     Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
                     Log.d("ONFAILURE",t.toString())

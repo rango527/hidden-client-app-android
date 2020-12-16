@@ -63,8 +63,8 @@ class ProcessDetailVM(
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveProcessDetailStart() }
-            .doOnTerminate { onRetrieveProcessDetailFinish() }
+//            .doOnSubscribe { onRetrieveProcessDetailStart() }
+//            .doOnTerminate { onRetrieveProcessDetailFinish() }
             .subscribe(
                 { result -> onRetrieveProcessDetailSuccess(result) },
                 { error -> onRetrieveProcessDetailError(error) }

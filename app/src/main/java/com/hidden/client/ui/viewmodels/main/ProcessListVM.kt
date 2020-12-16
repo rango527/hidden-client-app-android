@@ -36,13 +36,13 @@ class ProcessListVM(
 
     val processListCount: MutableLiveData<Boolean> = MutableLiveData()
     val processListAdapter: ProcessListAdapter = ProcessListAdapter()
-    val processesFragment: ProcessesFragment = ProcessesFragment()
+    val processesFragment: ProcessesFragment = ProcessesFragment(true)
 
     private var subscription: Disposable? = null
 
-    init {
-        loadProcess(false)
-    }
+//    init {
+//        loadProcess(false)
+//    }
 
     override fun onCleared() {
         super.onCleared()

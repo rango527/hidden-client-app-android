@@ -34,7 +34,6 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(processList[position])
 
-        val sddd = processList
         val processs = processList[position]
 
         // get unread message count
@@ -135,7 +134,6 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
     }
 
     fun updateProcessList(processList: List<ProcessEntity>){
-
         this.processList = processList
         notifyDataSetChanged()
     }

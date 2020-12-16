@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
@@ -38,6 +39,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private lateinit var viewModel: ProcessDetailVM
 
     private lateinit var progressDlg: KProgressHUD
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     private lateinit var textBtnProcess: TextView
     private lateinit var textBtnMessage: TextView
@@ -84,13 +86,18 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 progressDlg.show()
             } else {
                 progressDlg.dismiss()
+                swipeContainer.isRefreshing = false
             }
         })
 
         imgPhoto = findViewById(R.id.img_photo)
 
+        viewModel.processId = processId
+        HCGlobal.getInstance().log(processId.toString())
+        viewModel.loadProcessDetail()
+
         viewModel.process.observe(this, Observer { process ->
-            viewModel.loadTimeline(cashMode)
+            viewModel.loadTimeline(false)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
         })
 
@@ -103,9 +110,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
         })
 
-        viewModel.processId = processId
-        HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail()
+
 
         initUI()
     }
@@ -132,10 +137,12 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         imgPhoto.setOnClickListener(this)
 
-//        swipeContainer = findViewById(R.id.swipeContainer)
-//        swipeContainer.setOnRefreshListener {
-//            swipeContainer.isRefreshing = false
-//        }
+        swipeContainer = findViewById(R.id.swipeContainer)
+        swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = false
+            viewModel.loadProcessDetail()
+            viewModel.loadTimeline(false)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -192,6 +199,9 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.text_message -> {
+                swipeContainer.isRefreshing = false
+                swipeContainer.isEnabled = false
+
                 textBtnProcess.setBackgroundResource(android.R.color.transparent)
                 textBtnProcess.setTextColor(ContextCompat.getColor(this, R.color.colorWhite_1))
 

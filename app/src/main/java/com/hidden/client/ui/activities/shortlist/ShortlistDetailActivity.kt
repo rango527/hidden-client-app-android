@@ -3,6 +3,7 @@ package com.hidden.client.ui.activities.shortlist
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
@@ -16,6 +17,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.SkillItemView
+import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 
 class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
@@ -26,7 +28,7 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
     private lateinit var rvWorkExperience: RecyclerView
 
     private lateinit var layoutSkill: FlexboxLayout
-
+    private lateinit var imgClose: ImageView
     // Background
     private lateinit var layoutBackground: ConstraintLayout
 
@@ -49,8 +51,9 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
 
         HCGlobal.getInstance().currentActivity = this
 
-        initCloseButton()
-
+//        initCloseButton()
+        imgClose = findViewById(R.id.image_close)
+        imgClose.setOnClickListener(this)
         // BrandList
         rvBrand = findViewById(R.id.recyclerview_brand)
         rvBrand.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -89,6 +92,10 @@ class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.image_close -> {
+                finish()
+                overridePendingTransition(R.anim.ua_iam_fade_in, R.anim.ua_iam_fade_out)
+            }
             R.id.layout_approve -> {
 
                 val intent = Intent(this, FeedbackActivity::class.java)

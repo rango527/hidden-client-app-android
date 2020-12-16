@@ -12,6 +12,7 @@
         android:layout_marginTop="@dimen/margin_default"
         android:text=""
         android:textColor="@color/colorBlack_1"
+        android:fontFamily="@font/avenir"
         android:textStyle="bold"
         android:textSize="@dimen/textview_signup_fragment_header"
         android:visibility="visible" />
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite_1"
             android:textColor="@color/colorBlack_2"
+            android:fontFamily="@font/avenir"
             android:textStyle="bold"
             android:text="2233"
             android:gravity="center_horizontal"

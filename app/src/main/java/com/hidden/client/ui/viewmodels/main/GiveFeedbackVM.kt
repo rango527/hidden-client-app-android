@@ -98,13 +98,8 @@ class GiveFeedbackVM(
         processId: Int,
         body: RequestBody
     ) {
-        subscription = processApi.submitInterviewProposedDates(
-            "application/json",
-            AppPreferences.apiAccessToken,
-            processId,
-            body
-        ).concatMap { addResult ->
-            Observable.just(addResult)
+        subscription = processApi.submitInterviewProposedDates("application/json", AppPreferences.apiAccessToken, processId, body)
+            .concatMap { addResult -> Observable.just(addResult)
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -117,14 +112,8 @@ class GiveFeedbackVM(
     }
 
     fun nudgeFeedback(processId: Int?, feedbackId: Int?, body: RequestBody) {
-        subscription = processApi.nudgeFeedback(
-                    "application/json",
-                    AppPreferences.apiAccessToken,
-            processId,
-            feedbackId,
-                    body
-                ).concatMap { addResult ->
-                    Observable.just(addResult)
+        subscription = processApi.nudgeFeedback("application/json", AppPreferences.apiAccessToken, processId, feedbackId, body)
+            .concatMap { addResult -> Observable.just(addResult)
                 }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

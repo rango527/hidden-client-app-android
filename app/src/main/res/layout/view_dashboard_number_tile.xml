@@ -11,6 +11,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin_super_top"
             android:text=""
+            android:fontFamily="@font/avenir"
             android:textColor="@color/colorBlack_1"
             android:textSize="@dimen/textview_bold"
             android:textStyle="bold" />

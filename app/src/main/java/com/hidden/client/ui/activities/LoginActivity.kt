@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDialog
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.intro.LoginVM
@@ -44,6 +45,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         // Init ViewModel
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(LoginVM::class.java)
+        HCGlobal.getInstance().currentActivity = this
 
         editEmail.doAfterTextChanged { text -> viewModel.email = text }
         editPassword.doAfterTextChanged { text -> viewModel.password = text }
@@ -51,7 +53,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.isFormValid.observe(this, Observer { valid ->
             btnSignIn.isEnabled = valid ?: false
         })
-
         viewModel.loadingVisibility.observe(this, Observer { show ->
             if (show)
                 progressDlg.show()

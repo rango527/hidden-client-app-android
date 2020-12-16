@@ -84,7 +84,6 @@ class TimelineInterviewMapTileFragment(
         mapView.getMapAsync(this)
 
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
         try {
             MapsInitializer.initialize(this.activity)
         } catch (e: GooglePlayServicesNotAvailableException) {

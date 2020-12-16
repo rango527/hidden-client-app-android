@@ -1,5 +1,6 @@
 package com.hidden.client.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.BaseActivity
+import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.adapters.HCProjectImageAdapter
 
 class ProjectDetailActivity : BaseActivity() {
@@ -72,6 +74,11 @@ class ProjectDetailActivity : BaseActivity() {
         rvImages.setHasFixedSize(true)
         val imageAdapter = HCProjectImageAdapter(imageList.toTypedArray(),this)
         rvImages.adapter = imageAdapter
+
+//        rvImages.setOnClickListener {
+//            val intent = Intent(HCGlobal.getInstance().currentActivity, JobImageSliderActivity::class.java)
+//            HCGlobal.getInstance().currentActivity.startActivity(intent)
+//        }
 
         rvVideos = findViewById(R.id.recyclerview_video)
         val layoutVideo: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

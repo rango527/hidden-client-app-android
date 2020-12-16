@@ -101,6 +101,7 @@ class FeedbackActivity : BaseActivity() {
             it.getContentIfNotHandled()?.let {
                 val intent = Intent(this, FeedbackDoneActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.putExtra("isApprove", isApprove)
                 intent.putExtra("event", it)
                 intent.putExtra("candidateName", candidateName)
                 intent.putExtra("candidateAvatar", candidateAvatar)
@@ -157,7 +158,7 @@ class FeedbackActivity : BaseActivity() {
             val questionId = question.id
             val score = question.score
 
-            answers.addProperty(questionId.toString(), score.toString())
+            answers.addProperty(questionId.toString(), score)
         }
 
         val body = JsonObject()
