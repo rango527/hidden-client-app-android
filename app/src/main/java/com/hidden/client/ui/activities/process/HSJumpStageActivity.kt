@@ -15,6 +15,7 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnBackDashboard: ImageButton
     private lateinit var btnFurtherStage: Button
     private lateinit var btnFinalStage: Button
+    private lateinit var btnAddInterview: Button
     private lateinit var btnMakeOffer: Button
 
     private var interviewId: Int = 0
@@ -44,13 +45,19 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
 
         btnFinalStage = findViewById(R.id.btn_final_stage)
         if (nextStages.contains("TO_FINAL_STAGE", ignoreCase = false)) {
-            btnFurtherStage.visibility = View.VISIBLE
+            btnFinalStage.visibility = View.VISIBLE
             btnFinalStage.setOnClickListener(this)
+        }
+
+        btnAddInterview = findViewById(R.id.btn_add_interview_stage)
+        if (nextStages.contains("ADD_INTERVIEW", ignoreCase = false)) {
+            btnAddInterview.visibility = View.VISIBLE
+            btnAddInterview.setOnClickListener(this)
         }
 
         btnMakeOffer = findViewById(R.id.btn_make_offer)
         if (nextStages.contains("MAKE_OFFER", ignoreCase = false)) {
-            btnFurtherStage.visibility = View.VISIBLE
+            btnMakeOffer.visibility = View.VISIBLE
             btnMakeOffer.setOnClickListener(this)
         }
     }
@@ -70,6 +77,15 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.btn_final_stage -> {
+                val intent = Intent(this, FeedbackActivity::class.java)
+
+                intent.putExtra("processId", processId)
+                intent.putExtra("isApprove", true)
+                intent.putExtra("candidateName", candidateName)
+
+                startActivity(intent)
+            }
+            R.id.btn_add_interview_stage -> {
                 val intent = Intent(this, FeedbackActivity::class.java)
 
                 intent.putExtra("processId", processId)

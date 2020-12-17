@@ -23,6 +23,7 @@ import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.activities.process.HSDetermineProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveAvailabilityActivity
+import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
@@ -32,6 +33,7 @@ import java.util.*
 
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
+    private val isInterviewAdvancer: Boolean,
     private val timelineList: List<TimelineEntity>
 ) : Fragment() {
 
@@ -159,15 +161,23 @@ class ProcessTimelineFragment(
                         activity!!.startActivity(intent)
                     }
                     Enums.TileActionButtonType.GIVE_FEEDBACK.value -> {
-                        val intent = Intent(activity, HSDetermineProcessActivity::class.java)
-                        intent.putExtra("processId", process.id)
-                        intent.putExtra("candidateName", process.candidateFullName)
-                        intent.putExtra("nextStages", stage.nextStages)
-                        intent.putExtra("interviewId", process.currentInterviewId.toInt())
+                        if (isInterviewAdvancer) {
+                            val intent = Intent(activity, HSDetermineProcessActivity::class.java)
+                            intent.putExtra("processId", process.id)
+                            intent.putExtra("candidateName", process.candidateFullName)
+                            intent.putExtra("nextStages", stage.nextStages)
+                            intent.putExtra("interviewId", process.currentInterviewId.toInt())
+                            activity!!.finish()
+                            activity!!.startActivity(intent)
+                        } else {
+                            val intent = Intent(activity, FeedbackActivity::class.java)
 
-                        activity!!.finish()
-
-                        activity!!.startActivity(intent)
+                            intent.putExtra("processId", process.id)
+                            intent.putExtra("isApprove", true)
+                            intent.putExtra("candidateName", process.candidateFullName)
+                            activity!!.finish()
+                            activity!!.startActivity(intent)
+                        }
                     }
                 }
             }

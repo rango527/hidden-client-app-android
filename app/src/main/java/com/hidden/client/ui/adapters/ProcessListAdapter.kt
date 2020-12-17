@@ -125,6 +125,7 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
             intent.putExtra("conversationId", process.conversationId)
             intent.putExtra("jobId", process.jobId)
             intent.putExtra("candidateId", process.candidateId)
+            intent.putExtra("cashMode", false)
             HCGlobal.getInstance().currentActivity.startActivity(intent)
         }
     }

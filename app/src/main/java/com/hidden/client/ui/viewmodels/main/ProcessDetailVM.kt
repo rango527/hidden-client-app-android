@@ -36,6 +36,8 @@ class ProcessDetailVM(
     var process: MutableLiveData<ProcessEntity> = MutableLiveData()
 
     val candidateAvatar: MutableLiveData<String> = MutableLiveData("")
+    val isInterviewAdvancer: MutableLiveData<Boolean> = MutableLiveData(false)
+//    val advanceDecisionNeeded: MutableLiveData<Boolean> = MutableLiveData(false)
     val candidateFullName: MutableLiveData<String> = MutableLiveData("")
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
 
@@ -163,7 +165,7 @@ class ProcessDetailVM(
 
     private fun onRetrieveProcessDetailSuccess(process: ProcessEntity) {
         this.process.value = process
-
+        this.isInterviewAdvancer.value = process.isClientInterviewerAdvancer
         this.candidateAvatar.value = process.candidateAvatar
         this.candidateFullName.value = process.candidateFullName
         jobTitle.value = String.format(context.resources.getString(R.string.job_title), process.jobTitle, process.jobCityName)

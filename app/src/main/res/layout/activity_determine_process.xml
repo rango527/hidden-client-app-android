@@ -40,8 +40,10 @@
         app:layout_constraintBottom_toTopOf="@id/guideline6"
         android:textColor="@color/colorWhite_1"
         android:text="@string/what_was_the_outcome_of_the_interview"
-        android:textSize="@dimen/textview_bold"
-        android:textStyle="bold"
+        android:fontFamily="@font/avenir"
+        android:lineHeight="@dimen/progress_title_line_height"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_size_medium"
         android:gravity="center_horizontal"/>
 
     <Button
@@ -53,8 +55,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/progress_to_next_stage"
+        android:fontFamily="@font/avenir"
+        android:lineHeight="@dimen/progress_button_line_height"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_size_normal"
         android:textColor="@color/colorWhite_1"
-        android:layout_marginBottom="@dimen/list_row_margin_default"/>
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_process_reject"
@@ -65,7 +71,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/reject_from_process"
+        android:fontFamily="@font/avenir"
+        android:lineHeight="@dimen/progress_button_line_height"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_size_normal"
         android:textColor="@color/colorWhite_1"
-        android:layout_marginTop="@dimen/list_row_margin_default"/>
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/small_margin_super_top"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
