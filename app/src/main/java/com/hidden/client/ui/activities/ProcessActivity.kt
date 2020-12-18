@@ -89,7 +89,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 swipeContainer.isRefreshing = false
             }
         })
-
         imgPhoto = findViewById(R.id.img_photo)
 
         viewModel.processId = processId
@@ -97,7 +96,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         viewModel.loadProcessDetail()
 
         viewModel.process.observe(this, Observer { process ->
-            viewModel.loadTimeline(false)
+            viewModel.loadTimeline(cashMode)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
         })
 
@@ -105,12 +104,10 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             if (savedInstanceState == null) {
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_process,
-                    ProcessTimelineFragment(viewModel.process.value!!, timelineList)
+                    ProcessTimelineFragment(viewModel.process.value!!, viewModel.isInterviewAdvancer.value!!, timelineList)
                 ).commit()
             }
         })
-
-
 
         initUI()
     }
@@ -193,6 +190,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                     R.id.fragment_process,
                     ProcessTimelineFragment(
                         viewModel.process.value!!,
+                        viewModel.isInterviewAdvancer.value!!,
                         viewModel.timelineList.value!!
                     )
                 ).commit()

@@ -1,5 +1,6 @@
 package com.hidden.client.apis
 
+import com.hidden.client.BuildConfig
 import com.hidden.client.models.json.*
 import com.hidden.client.ui.fileupload.UploadResponse
 import io.reactivex.Observable
@@ -46,7 +47,7 @@ interface ConversationApi {
     companion object {
         operator fun invoke(): ConversationApi {
             return Retrofit.Builder()
-                .baseUrl("https://staging-api.hidden.io/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ConversationApi::class.java)

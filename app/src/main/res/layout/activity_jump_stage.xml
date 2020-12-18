@@ -35,27 +35,55 @@
             android:textColor="@color/colorWhite_1"
             android:text="@string/what_stage_do_you_want_to_progress_to"
             android:gravity="center_horizontal"
-            android:textSize="@dimen/textview_bold"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/avenir"
+            android:lineHeight="@dimen/progress_title_line_height"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_medium"
+            android:layout_marginBottom="79dp"
+            />
 
         <Button
             android:id="@+id/btn_further_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/further_stage_interviews"
+            android:text="@string/further_stage_interview"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/default_margin_super_top"
+            android:fontFamily="@font/avenir"
+            android:lineHeight="@dimen/progress_button_line_height"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
+            android:textAllCaps="false"
             android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_final_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/final_stage_interviews"
+            android:text="@string/final_stage_interview"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:fontFamily="@font/avenir"
+            android:lineHeight="@dimen/progress_button_line_height"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/small_margin_super_top"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_add_interview_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_interviewer"
+            android:background="@drawable/button_round_green"
+            android:textColor="@color/colorWhite_1"
+            android:fontFamily="@font/avenir"
+            android:lineHeight="@dimen/progress_button_line_height"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/small_margin_super_top"
             android:visibility="gone"/>
 
         <Button
@@ -64,8 +92,13 @@
             android:layout_height="wrap_content"
             android:text="@string/make_offer"
             android:background="@drawable/button_round_green"
+            android:fontFamily="@font/avenir"
+            android:lineHeight="@dimen/progress_button_line_height"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
             android:textColor="@color/colorWhite_1"
-            android:layout_marginTop="@dimen/menu_padding_vertical_default"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/small_margin_super_top"
             android:visibility="gone"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

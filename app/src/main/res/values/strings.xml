@@ -124,9 +124,11 @@
     <string name="further_interviews">FURTHER INTERVIEWS</string>
     <string name="further_interviews_description">Don\'t jump the gun! Let\'s get through the First Stage first!</string>
     <string name="further_stage_interviews">Further Stage Interviews</string>
+    <string name="further_stage_interview">Further Stage Interview</string>
 
     <string name="final_interview">FINAL INTERVIEW</string>
     <string name="final_stage_interviews">Final Stage Interviews</string>
+    <string name="final_stage_interview">Final Stage Interview</string>
     <string name="chill_your_beans">Chill your beans! You\'ll have to interview</string>
 
     <string name="offer_stage">Offer Stage</string>
@@ -255,6 +257,7 @@
     <string name="just_confirming_sentence">We\'re just confirming the time and date with everyone</string>
     <string name="no_interviewers_sentence">There are no interviewers set for this interview</string>
     <string name="add_interviewers">Add Interviewers</string>
+    <string name="add_interviewer">Add Interviewer</string>
     <string name="location">Location</string>
     <string name="waiting_feedback_sentence">Waiting for the interview to happen before we gather feedback. Check back after the interview!</string>
     <string name="nudge_for_feedback">NUDGE For Feedback</string>

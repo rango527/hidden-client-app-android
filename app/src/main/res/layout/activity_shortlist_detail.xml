@@ -87,8 +87,8 @@
                         android:layout_marginBottom="5dp"
                         android:textSize="16sp"
                         android:textFontWeight="900"
-                        android:lineHeight="22px"
-                        android:fontFamily="@font/avenir"
+                        android:lineHeight="22dp"
+                        android:fontFamily="@font/avenir_bold"
                         android:textColor="@color/colorBlack_2"
                         android:text="@string/snapshot"/>
 
@@ -116,8 +116,8 @@
                         android:text="@string/has_worked_with"
                         android:textSize="16sp"
                         android:textFontWeight="900"
-                        android:lineHeight="22sp"
-                        android:fontFamily="@font/avenir"
+                        android:lineHeight="22dp"
+                        android:fontFamily="@font/avenir_bold"
                         android:textColor="@color/colorBlack_2"/>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -144,8 +144,8 @@
                         android:text="@string/highlights"
                         android:textSize="16sp"
                         android:textFontWeight="900"
-                        android:lineHeight="22sp"
-                        android:fontFamily="@font/avenir"
+                        android:lineHeight="22dp"
+                        android:fontFamily="@font/avenir_bold"
                         android:textColor="@color/colorBlack_2"/>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -172,8 +172,8 @@
                         android:text="@string/skills"
                         android:textSize="16sp"
                         android:textFontWeight="900"
-                        android:lineHeight="22sp"
-                        android:fontFamily="@font/avenir"
+                        android:lineHeight="22dp"
+                        android:fontFamily="@font/avenir_bold"
                         android:textColor="@color/colorBlack_2"/>
 
                     <com.google.android.flexbox.FlexboxLayout
@@ -202,8 +202,8 @@
                         android:text="@string/work_experience"
                         android:textSize="16sp"
                         android:textFontWeight="900"
-                        android:lineHeight="22sp"
-                        android:fontFamily="@font/avenir"
+                        android:lineHeight="22dp"
+                        android:fontFamily="@font/avenir_bold"
                         android:textColor="@color/colorBlack_2"/>
 
                     <androidx.recyclerview.widget.RecyclerView

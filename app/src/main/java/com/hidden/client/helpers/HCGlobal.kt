@@ -3,13 +3,11 @@ package com.hidden.client.helpers
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.google.gson.JsonArray
 import com.hidden.client.datamodels.HCFeedbackQuestionResponse
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.datamodels.HCShortlistCandidateResponse
-import com.hidden.client.models.custom.GetAllJob
-import com.hidden.client.models.custom.ImageMessageList
-import com.hidden.client.models.custom.JobPick
-import com.hidden.client.models.custom.ProcessFilterList
+import com.hidden.client.models.custom.*
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
 
@@ -54,6 +52,8 @@ class HCGlobal{
     var currentCompanyLogoUrl: String = ""
 
     var getAllJobList: ArrayList<GetAllJob> = arrayListOf()
+    var ShortlistJobList: ArrayList<ShortlistJob> = arrayListOf()
+
     var getJobPick: ArrayList<JobPick> = arrayListOf()          //job temp
 
     var imageMessageList: ArrayList<ImageMessageList> = arrayListOf()

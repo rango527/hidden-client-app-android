@@ -163,7 +163,7 @@ class AddInterviewersActivity : BaseActivity() {
     private fun backToProcess(cashMode: Boolean) {
         val intent = Intent(this, ProcessActivity::class.java)
         intent.putExtra("processId", processId)
-        intent.putExtra("cashMode", cashMode)
+        intent.putExtra("cashMode", true)
         startActivity(intent)
         overridePendingVTransitionEnter()
         finish()

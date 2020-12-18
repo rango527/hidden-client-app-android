@@ -87,6 +87,9 @@ data class ProcessJson(
     @Json(name = "process_client__is_messenger")
     val isClientMessenger: Boolean?,
 
+//    @Json(name = "process_stage__feedback_action_required")
+//    val feedbackRequired: List<ProcessStageFeedbackJson>?,
+
     @Json(name = "process__stages")
     val stages: List<ProcessStageJson>?,
 

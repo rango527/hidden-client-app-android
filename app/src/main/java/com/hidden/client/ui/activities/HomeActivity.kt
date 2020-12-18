@@ -45,7 +45,7 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         HCGlobal.getInstance().currentIndex = 0
 
         dashboardFrags.add(DashboardFragment())
-        shortlistsFrags.add(ShortlistsFragment(shortlistCashMode))
+        shortlistsFrags.add(ShortlistsFragment(this, shortlistCashMode))
         processesFrags.add(ProcessesFragment(processCashMode))
 
         shortlistCashMode = true

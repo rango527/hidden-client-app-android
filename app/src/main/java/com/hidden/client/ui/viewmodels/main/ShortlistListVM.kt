@@ -3,7 +3,9 @@ package com.hidden.client.ui.viewmodels.main
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.models.custom.ShortlistJob
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.*
 import com.hidden.client.models.json.ShortlistCandidateJson
@@ -96,6 +98,9 @@ class ShortlistListVM(
             *candidateList.toTypedArray()
         )
 
+        var index = 0
+        HCGlobal.getInstance().ShortlistJobList.clear()
+
         val candidateJsonList: List<ShortlistCandidateJson> = json.shortlistCandidates!!
         for (candidateJson in candidateJsonList) {
 
@@ -133,6 +138,27 @@ class ShortlistListVM(
 //                feedbackQuestionDao.insertAll(*feedback.toQuestionList(feedback.id.safeValue(), false).toTypedArray())
 //            }
 
+            // get shortlist jobs list
+            for (x in 0 until index + 1) {
+                if (HCGlobal.getInstance().ShortlistJobList.size > x) {
+                    if (HCGlobal.getInstance().ShortlistJobList[x].jobId == candidateJson.jobId) {
+                        break
+                    }
+                } else {
+                    val jobId = candidateJson.jobId
+                    val jobTitle = candidateJson.jobTitle
+                    val jobCityName = candidateJson.jobCityName
+                    val joblist = ShortlistJob()
+
+                    joblist.jobId = jobId!!
+                    joblist.jobTitle = jobTitle!!
+                    joblist.jobCityName = jobCityName!!
+                    joblist.jobTick = false
+
+                    HCGlobal.getInstance().ShortlistJobList.add(joblist)
+                }
+            }
+            index += 1
         }
 
         candidateList.forEachIndexed { index, element ->
