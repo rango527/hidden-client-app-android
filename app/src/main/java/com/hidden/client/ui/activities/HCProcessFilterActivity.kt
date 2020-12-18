@@ -179,11 +179,10 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
                     HCGlobal.getInstance().getJobPick[x].jobTick = false
                 }
 
-                val intent = Intent(HCGlobal.getInstance().currentActivity, HCProcessFilterActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
-                finish()
+                textBtnSortBy.setText(R.string.all)
+                textBtnReadStatus.setText(R.string.all)
+                textBtnStorageProcess.setText(R.string.all)
+                textBtnJob.setText(R.string.all)
             }
         }
     }

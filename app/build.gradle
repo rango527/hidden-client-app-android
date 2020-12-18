@@ -19,7 +19,11 @@ android {
         multiDexEnabled true
     }
     buildTypes {
-        release {
+        debug {
+            buildConfigField "String", "BASE_URL", '"https://staging-api.hidden.io"'
+        }
+        release{
+            buildConfigField "String", "BASE_URL", '"https://api.hidden.io"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

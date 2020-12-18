@@ -14,9 +14,12 @@
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="@font/avenir"
         android:textColor="@color/colorRed_1"
-        android:textSize="@dimen/font_size_small"
-        android:textStyle="bold"
+        android:textSize="@dimen/font_size_xnormal"
+        android:lineHeight="25dp"
+        android:textFontWeight="900"
         android:layout_marginStart="@dimen/menu_padding_vertical_default"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

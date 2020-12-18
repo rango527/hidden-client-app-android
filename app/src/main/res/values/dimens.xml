@@ -26,12 +26,14 @@
     <dimen name="font_size_tiny">10sp</dimen>
     <dimen name="font_size_xsmall">13sp</dimen>
     <dimen name="font_size_small">16sp</dimen>
+    <dimen name="font_size_xnormal">18sp</dimen>
     <dimen name="font_size_normal">20sp</dimen>
     <dimen name="font_size_medium">28sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="row_vertical_margin_top">13dp</dimen>
 
     <!-- Panel Size -->
     <dimen name="default_panel_width">200dp</dimen>

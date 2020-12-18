@@ -3,8 +3,8 @@ package com.hidden.client.ui.fragments.home.shortlists
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.custom.ShortlistJob
-import com.hidden.client.models.json.ShortlistCandidateJson
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.adapters.ShortlistJobFilterAdapter
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
@@ -37,7 +34,6 @@ import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
-import org.json.JSONObject
 
 class ShortlistsFragment(private val mContext: Context, private val cashMode: Boolean) : Fragment(), View.OnClickListener {
 
@@ -57,10 +53,11 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
     private lateinit var viewPagerShortlist: ViewPager
     private lateinit var pageAdapter: ShortlistViewPagerAdapter
     private var candidateVMList: List<ShortlistViewVM> = listOf()
-
+    private var filteredCandidateVMList: List<ShortlistViewVM> = listOf()
     // Filter Layout
     private lateinit var layoutFilterContainer: LinearLayout
     private lateinit var layoutFilterPanel: ConstraintLayout
+    private lateinit var textAllJob: TextView
     private lateinit var shortlistFilterJob: RecyclerView
     private lateinit var imgOpenFilter: ImageView
     private lateinit var imgCloseFilter: ImageView
@@ -112,18 +109,38 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
             txtClientName.text = resources.getString(R.string.hello_user, AppPreferences.myFullName)
         })
 
-        viewModel.candidateList.observe(this, Observer { candidateVMList ->
+        initCandidateVMList()
 
+        return root
+    }
+
+     fun initCandidateVMList() {
+        viewModel.candidateList.observe(this, Observer { candidateVMList ->
             this.candidateVMList = candidateVMList
-            HCGlobal.getInstance().shortlistCandidateVMList = candidateVMList
+
+            // set job filter
+            val filteredCandidateVMList = candidateVMList.toMutableList()
+            for (ShortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                if (ShortlistJob.jobTick) {
+                    for (index in candidateVMList.size downTo 1) {
+                        if (ShortlistJob.jobId != candidateVMList[index-1].getShortlistCandidate().jobId) {
+                            filteredCandidateVMList.removeAt(index-1)
+                        }
+                    }
+                    break
+                }
+            }
+
+            this.filteredCandidateVMList = filteredCandidateVMList
+            HCGlobal.getInstance().shortlistCandidateVMList = filteredCandidateVMList
 
             txtNewProfileCount.text = resources.getQuantityString(
                 R.plurals.shortlists_profile_count,
-                candidateVMList.size,
-                candidateVMList.size
+                filteredCandidateVMList.size,
+                filteredCandidateVMList.size
             )
 
-            if (candidateVMList.isEmpty()) {
+            if (filteredCandidateVMList.isEmpty()) {
                 layoutViewPager.visibility = View.GONE
                 layoutEmpty.visibility = View.VISIBLE
             } else {
@@ -134,15 +151,13 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
                 layoutBackground.setBackgroundResource(
                     resources.getIdentifier(
-                        candidateVMList[0].getShortlistCandidate().avatarColor,
+                        filteredCandidateVMList[0].getShortlistCandidate().avatarColor,
                         "drawable",
                         context!!.packageName
                     )
                 )
             }
         })
-
-        return root
     }
 
     private fun initUI(root: View) {
@@ -155,6 +170,8 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         // Layout Filter
         layoutFilterContainer = root.findViewById(R.id.layout_filter_container)
+        textAllJob = root.findViewById(R.id.text_job_all)
+        textAllJob.setOnClickListener(this)
         layoutFilterPanel = root.findViewById(R.id.layout_filter_panel)
         shortlistFilterJob = root.findViewById(R.id.listview_job_list)
         imgCloseFilter = root.findViewById(R.id.img_close_filter_layout)
@@ -184,7 +201,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         pageAdapter = ShortlistViewPagerAdapter(
             activity!!.applicationContext,
-            candidateVMList
+            filteredCandidateVMList
         )
         viewPagerShortlist.adapter = pageAdapter
 
@@ -196,14 +213,14 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
         //Set circle indicator radius
         indicator.radius = 5 * density
 
-        if (candidateVMList.size > HCGlobal.getInstance().currentIndex) {
+        if (filteredCandidateVMList.size > HCGlobal.getInstance().currentIndex) {
             indicator.setCurrentItem(HCGlobal.getInstance().currentIndex)
-            if (candidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor.safeValue() != "")
+            if (filteredCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor.safeValue() != "")
                 layoutBackground.setBackgroundResource(
                     Utility.getResourceByName(
                         context!!,
                         Enums.Resource.DRAWABLE.value,
-                        candidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
+                        filteredCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
                     )
                 )
             else {
@@ -215,12 +232,12 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
         indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageSelected(position: Int) {
-                if (candidateVMList[position].getShortlistCandidate().avatarColor.safeValue() != "") {
+                if (filteredCandidateVMList[position].getShortlistCandidate().avatarColor.safeValue() != "") {
                     layoutBackground.setBackgroundResource(
                         Utility.getResourceByName(
                             context!!,
                             Enums.Resource.DRAWABLE.value,
-                            candidateVMList[position].getShortlistCandidate().avatarColor
+                            filteredCandidateVMList[position].getShortlistCandidate().avatarColor
                         )
                     )
                 } else {
@@ -242,34 +259,53 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                 viewModel.loadShortlistList(false)
             }
             R.id.img_open_filter_layout -> {
+                // get all job list
                 if (HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
-                    var index = 0
                     HCGlobal.getInstance().ShortlistJobList.clear()
 
                     for (candidateJson in candidateVMList) {
-                        for (x in 0 until index + 1) {
-                            if (HCGlobal.getInstance().ShortlistJobList.size > x) {
-                                if (HCGlobal.getInstance().ShortlistJobList[x].jobId == candidateJson.getShortlistCandidate().jobId) {
+                        var index = 0
+                        if (HCGlobal.getInstance().ShortlistJobList.isNotEmpty()) {
+                            for (shortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                                if (candidateJson.getShortlistCandidate().jobId == shortlistJob.jobId) {
                                     break
+                                } else {
+                                    index += 1
                                 }
-                            } else {
-                                val jobId = candidateJson.getShortlistCandidate().jobId
-                                val jobTitle = candidateJson.getShortlistCandidate().jobTitle
-                                val jobCityName = candidateJson.getShortlistCandidate().jobCityName
-                                val joblist = ShortlistJob()
-
-                                joblist.jobId = jobId
-                                joblist.jobTitle = jobTitle
-                                joblist.jobCityName = jobCityName
-                                joblist.jobTick = false
-
-                                HCGlobal.getInstance().ShortlistJobList.add(joblist)
                             }
                         }
-                        index += 1
+                        if (index == HCGlobal.getInstance().ShortlistJobList.size || HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
+                            val jobId = candidateJson.getShortlistCandidate().jobId
+                            val jobTitle = candidateJson.getShortlistCandidate().jobTitle
+                            val jobCityName = candidateJson.getShortlistCandidate().jobCityName
+                            val joblist = ShortlistJob()
+
+                            joblist.jobId = jobId
+                            joblist.jobTitle = jobTitle
+                            joblist.jobCityName = jobCityName
+                            joblist.jobTick = false
+
+                            HCGlobal.getInstance().ShortlistJobList.add(joblist)
+                        }
                     }
                 }
+
                 layoutFilterContainer.visibility = View.VISIBLE
+
+                // set All job filter text color
+                var jobListIndex =0
+                for (ShortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                    if (ShortlistJob.jobTick) {
+                        textAllJob.setTextColor(Color.parseColor("#8C8C8C"))
+                        break
+                    } else {
+                        jobListIndex += 1
+                    }
+                }
+
+                if (jobListIndex == HCGlobal.getInstance().ShortlistJobList.size) {
+                    textAllJob.setTextColor(Color.parseColor("#E74A5F"))
+                }
 
                 // slide-up animation
                 val slideUp = AnimationUtils.loadAnimation(activity, R.anim.anim_slide_in_top)
@@ -278,6 +314,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                 layoutFilterPanel.startAnimation(slideUp)
 
                 (activity as HomeActivity).toggleMask()
+                // show job list
                 if (HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
                     shortlistFilterJob.visibility = View.GONE
                 } else {
@@ -285,33 +322,23 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                     shortlistFilterJob.layoutManager = LinearLayoutManager(mContext)
                     shortlistFilterJob.adapter = ShortlistJobFilterAdapter(this)
                 }
-//
-//                val intent = Intent(HCGlobal.getInstance().currentActivity, ShortlistJobFilterActivity::class.java)
-//                HCGlobal.getInstance().currentActivity.startActivity(intent)
-
             }
             R.id.img_close_filter_layout -> {
+                layoutSlideDown()
+            }
+            R.id.text_job_all -> {
+                textAllJob.setTextColor(Color.parseColor("#E74A5F"))
+                for (ShortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                    ShortlistJob.jobTick = false
+                }
 
-                // slide-down animation
-                val slideDown = AnimationUtils.loadAnimation(activity, R.anim.anim_slide_out_top)
-                layoutFilterPanel.startAnimation(slideDown)
-                layoutFilterPanel.visibility = View.INVISIBLE
-
-                layoutFilterContainer.animate()
-                    .alpha(1f)
-                    .setDuration(200)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            layoutFilterContainer.visibility = View.GONE
-                            (activity as HomeActivity).toggleMask()
-                        }
-                    })
+                layoutSlideDown()
+                initCandidateVMList()
             }
         }
     }
 
-    fun closed() {
-        // slide-down animation
+    fun layoutSlideDown() {
         val slideDown = AnimationUtils.loadAnimation(activity, R.anim.anim_slide_out_top)
         layoutFilterPanel.startAnimation(slideDown)
         layoutFilterPanel.visibility = View.INVISIBLE

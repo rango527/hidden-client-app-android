@@ -118,9 +118,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/snapshot"
                     android:textColor="@color/colorBlack_2"
-                    android:fontFamily="@font/avenir"
+                    android:fontFamily="@font/avenir_bold"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:duplicateParentState="true"
                     android:clickable="false" />
 
@@ -159,9 +158,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/has_worked_with"
                     android:textColor="@color/colorBlack_2"
-                    android:fontFamily="@font/avenir"
+                    android:fontFamily="@font/avenir_bold"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:duplicateParentState="true"
                     android:clickable="false" />
 
@@ -195,9 +193,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/highlights"
                     android:textColor="@color/colorBlack_2"
-                    android:fontFamily="@font/avenir"
+                    android:fontFamily="@font/avenir_bold"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:duplicateParentState="true"
                     android:clickable="false" />
 
@@ -231,9 +228,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/skills"
                     android:textColor="@color/colorBlack_2"
-                    android:fontFamily="@font/avenir"
+                    android:fontFamily="@font/avenir_bold"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:duplicateParentState="true"
                     android:clickable="false" />
 
