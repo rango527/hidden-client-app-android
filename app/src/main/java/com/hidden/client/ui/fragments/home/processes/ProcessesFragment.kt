@@ -19,19 +19,23 @@ import com.hidden.client.R
 import com.hidden.client.databinding.ProcessListBinding
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.ui.TestMapsActivity
 import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessListVM
+import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.list_row_process.*
 
-class ProcessesFragment(private val cashMode: Boolean) : Fragment(), View.OnClickListener {
+class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View.OnClickListener {
 
     private lateinit var binding: ProcessListBinding
     private lateinit var viewModel: ProcessListVM
+    private var processList: List<ProcessEntity> = arrayListOf()
 
     private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var layoutBtnFilterSearch: LinearLayout
@@ -51,7 +55,7 @@ class ProcessesFragment(private val cashMode: Boolean) : Fragment(), View.OnClic
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(ProcessListVM::class.java)
-        viewModel.loadProcess(cashMode)
+        viewModel.loadProcess(processCashMode)
 
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { show ->
@@ -129,9 +133,17 @@ class ProcessesFragment(private val cashMode: Boolean) : Fragment(), View.OnClic
             swipeContainer.isRefreshing = false
             viewModel.loadProcess(false)
         }
+        initProcessList()
         return view
     }
 
+    fun initProcessList() {
+        viewModel.processList.observe(this, Observer { processList ->
+            this.processList = processList
+
+
+        })
+    }
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_refresh -> {

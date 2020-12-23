@@ -47,13 +47,13 @@ class LoginVM(private val context: Context): RootVM() {
     val isFormValid: LiveData<Boolean>
         get() = _isFormValid
 
-    var email = "test1@test.com"
+    var email = ""
         set(value) {
             field = value
             validateForm()
         }
 
-    var password = "test"
+    var password = ""
         set(value) {
             field = value
             validateForm()

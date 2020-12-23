@@ -151,6 +151,7 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
 
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("num", 2)
+                intent.putExtra("processCashMode", false)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)

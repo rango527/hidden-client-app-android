@@ -93,10 +93,9 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { visibility ->
             if (visibility) {
+                txtClientName.text = "Hello"
                 progressDlg.show()
             } else {
-                imageClientPhoto.visibility = View.VISIBLE
-                textHello.visibility = View.VISIBLE
                 progressDlg.dismiss()
                 swipeContainer.isRefreshing = false
             }

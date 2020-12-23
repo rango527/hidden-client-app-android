@@ -35,6 +35,8 @@ class ProcessListVM(
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     val processListCount: MutableLiveData<Boolean> = MutableLiveData()
+    val processList: MutableLiveData<List<ProcessEntity1>> = MutableLiveData()
+
     val processListAdapter: ProcessListAdapter = ProcessListAdapter()
     val processesFragment: ProcessesFragment = ProcessesFragment(true)
 
@@ -293,6 +295,7 @@ class ProcessListVM(
 
     private fun onRetrieveProcessSuccess(processList: List<ProcessEntity1>) {
         processListCount.value = processList.isEmpty()
+//        this.processList.value = processList
         processListAdapter.updateProcessList(processList)
     }
 
