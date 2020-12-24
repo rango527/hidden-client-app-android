@@ -243,6 +243,8 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.button_back -> {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 finish()
             }
             R.id.img_process_setting -> {

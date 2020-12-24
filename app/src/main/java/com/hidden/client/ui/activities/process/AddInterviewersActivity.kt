@@ -164,6 +164,8 @@ class AddInterviewersActivity : BaseActivity() {
         val intent = Intent(this, ProcessActivity::class.java)
         intent.putExtra("processId", processId)
         intent.putExtra("cashMode", true)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         overridePendingVTransitionEnter()
         finish()
