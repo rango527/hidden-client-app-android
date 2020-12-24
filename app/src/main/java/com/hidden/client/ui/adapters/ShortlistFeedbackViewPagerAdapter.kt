@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
+import com.hidden.client.R
 import com.hidden.client.databinding.ShortlistReviewerItemViewBinding
 import com.hidden.client.ui.viewmodels.main.ShortlistReviewerViewVM
 import kotlinx.android.synthetic.main.viewpager_candidate_item.view.*
@@ -30,9 +33,23 @@ class ShortlistFeedbackViewPagerAdapter(
 
             val binding: ShortlistReviewerItemViewBinding = ShortlistReviewerItemViewBinding.inflate(inflater, container, false)
 
+            val view = binding.root
+
             binding.viewModel = shortlistReviewerViewVMList[position]
 
-            val view = binding.root
+            val feedbackStatus: Button = view.findViewById(R.id.button_interviewer_feedback_status)
+
+            when (shortlistReviewerViewVMList[position].vote) {
+                "ACCEPTED" -> {
+                    feedbackStatus.setBackgroundResource(R.drawable.button_round_green_4)
+                }
+                "REJECTED" -> {
+                    feedbackStatus.setBackgroundResource(R.drawable.button_round_red_4)
+                }
+                else -> {
+                    feedbackStatus.setBackgroundResource(R.drawable.button_round_dark_gray_4)
+                }
+            }
 
             if (!shortlistReviewerViewVMList[position].isEmpty) {
                 view.viewpager_feedback_empty.visibility = View.VISIBLE

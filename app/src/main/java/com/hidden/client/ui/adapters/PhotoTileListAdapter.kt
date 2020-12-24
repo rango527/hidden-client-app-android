@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
@@ -28,6 +29,23 @@ class PhotoTileListAdapter(
 
         val viewModel: DashboardPhotoTileViewVM = list[position]
         holder.bind(viewModel)
+
+        val layoutLive: LinearLayout = holder.itemView.findViewById(R.id.layout_live)
+
+        when (viewModel.getTileContent().tag) {
+            "LIVE" -> {
+                layoutLive.setBackgroundResource(R.drawable.button_round_green_12)
+            }
+            "ARCHIVED" -> {
+                layoutLive.setBackgroundResource(R.drawable.button_round_red_24)
+            }
+            "DRAFT" -> {
+                layoutLive.setBackgroundResource(R.drawable.button_round_gray_12)
+            }
+            else -> {
+                layoutLive.setBackgroundResource(R.drawable.button_round_gray_12)
+            }
+        }
 
         holder.itemView.setOnClickListener {
 
