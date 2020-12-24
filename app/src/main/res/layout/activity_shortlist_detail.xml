@@ -211,6 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/menu_padding_vertical_default"
+                        android:layout_marginBottom="70dp"
                         app:adapter="@{viewModel.getWorkExperienceListAdapter()}"/>
 
                 </LinearLayout>
