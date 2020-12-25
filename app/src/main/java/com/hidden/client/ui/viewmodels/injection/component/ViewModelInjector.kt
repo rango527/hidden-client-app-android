@@ -5,6 +5,7 @@ import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import dagger.Component
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
+import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.hidden.client.ui.viewmodels.main.*
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 import com.hidden.client.ui.viewmodels___.HCJobDetailTileViewModel
@@ -16,6 +17,7 @@ import javax.inject.Singleton
 interface ViewModelInjector {
 
     fun inject(loginVM: LoginVM)
+    fun inject(resetPasswordVM: ResetPasswordVM)
 
     // Dashboard
     fun inject(dashboardVM: DashboardVM)
@@ -70,6 +72,7 @@ interface ViewModelInjector {
     fun inject(processUserManagerVM: ProcessUserManagerVM)
     fun inject(processAddUserRoleVM: ProcessAddUserRoleVM)
     fun inject(processTabVM: ProcessTabVM)
+
 
     @Component.Builder
     interface Builder {

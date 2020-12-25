@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
 
 class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {

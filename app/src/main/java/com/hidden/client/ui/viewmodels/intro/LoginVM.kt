@@ -60,7 +60,6 @@ class LoginVM(private val context: Context): RootVM() {
         }
 
     private fun validateForm() {
-
         if (email.isEmailValid() && password.length >= User.passwordMinLength) {
             _isFormValid.postValue(true)
         } else {

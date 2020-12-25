@@ -13,6 +13,7 @@ import com.hidden.client.ui.viewmodels.injection.component.DaggerViewModelInject
 import com.hidden.client.ui.viewmodels.injection.component.ViewModelInjector
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
 import com.hidden.client.ui.viewmodels.intro.LoginVM
+import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.hidden.client.ui.viewmodels.main.*
 
 abstract class RootVM: ViewModel() {
@@ -32,6 +33,7 @@ abstract class RootVM: ViewModel() {
     private fun inject() {
         when (this) {
             is LoginVM -> injector.inject(this)
+            is ResetPasswordVM -> injector.inject(this)
 
             // Dashboard
             is DashboardVM -> injector.inject(this)

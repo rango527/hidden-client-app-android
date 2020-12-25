@@ -24,4 +24,12 @@ interface LoginApi {
     fun sendPasswordRequest(
         @Field("email") email: String
     ): Observable<SimpleResponseJson>
+
+    @FormUrlEncoded
+    @POST("/client/change-password")
+    fun resetPassword(
+        @Header("Authorization") authToken: String,
+        @Field("password") currentPassword: String,
+        @Field("new_password") newPassword: String
+    ): Observable<SimpleResponseJson>
 }
