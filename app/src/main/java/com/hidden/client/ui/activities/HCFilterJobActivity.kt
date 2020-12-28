@@ -30,9 +30,7 @@ class HCFilterJobActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var buttonBack: ImageView
     private lateinit var buttonDone: Button
-    private lateinit var layoutFilterJobList: ConstraintLayout
     private lateinit var imgTickJob: ImageView
-    private var tempJob: Boolean = false
 
     private lateinit var binding: JobListBinding
     private lateinit var viewModel: JobListVM
@@ -41,13 +39,8 @@ class HCFilterJobActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var progressDlg: KProgressHUD
 
-    private lateinit var editSearch: EditText
-
-    private lateinit var swipeContainer: SwipeRefreshLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_filter_job)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_filter_job)
         binding.listviewJobList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

@@ -9,6 +9,7 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.json.FeedbackJson
+import com.hidden.client.models.json.SubmissionVotesJson
 import com.hidden.client.models.json.TimelineJson
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
@@ -27,9 +28,7 @@ class FeedbackVM(
     lateinit var processApi: ProcessApi
 
     // To jump to Process Detail Activity after login success
-    private val _navigateToFeedbackDone = MutableLiveData<Event<Boolean>>()
-    val navigateToFeedbackDone: LiveData<Event<Boolean>>
-        get() = _navigateToFeedbackDone
+    val statusAfterVote = MutableLiveData<SubmissionVotesJson>()
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -78,7 +77,7 @@ class FeedbackVM(
 //            .doOnSubscribe { onRetrieveFeedbackStart() }
 //            .doOnTerminate { onRetrieveFeedbackFinish() }
             .subscribe(
-                { onSubmitFeedbackSuccess() },
+                { result -> onSubmitFeedbackSuccess(result) },
                 { error -> onSubmitFeedbackError(error) }
             )
     }
@@ -156,13 +155,11 @@ class FeedbackVM(
         e.printStackTrace()
     }
 
-    private fun onSubmitFeedbackSuccess() {
-        _navigateToFeedbackDone.value = Event(true)
+    private fun onSubmitFeedbackSuccess(statusAfterVoteJson: SubmissionVotesJson) {
+        statusAfterVote.value = statusAfterVoteJson
     }
 
     private fun onSubmitFeedbackError(e: Throwable) {
-//        _navigateToFeedbackDone.value = Event(false)
-//        e.printStackTrace()
-        _navigateToFeedbackDone.value = Event(true)
+        e.printStackTrace()
     }
 }

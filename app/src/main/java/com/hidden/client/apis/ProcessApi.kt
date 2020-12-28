@@ -100,7 +100,7 @@ interface ProcessApi {
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Body body: RequestBody
-    ): Observable<SimpleResponseJson>
+    ): Observable<SubmissionVotesJson>
 
     /**
      * Submit Give Availability Message
@@ -135,7 +135,6 @@ interface ProcessApi {
         @Path("feedback_id") feedbackId: Int?,
         @Body body: RequestBody
     ): Observable<SimpleResponseJson>
-
 
     /**
      * Get Shortlist Feedback
