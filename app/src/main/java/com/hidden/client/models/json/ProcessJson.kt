@@ -62,6 +62,9 @@ data class ProcessJson(
 
     @Json(name = "process__rejected_on")
     val rejectedOn: String?,
+//
+//    @Json(name = "current_outcome")
+//    val statusAfterVote: String?,
 
     @Json(name = "process__current_interview_id")
     val currentInterviewId: String?,
@@ -123,6 +126,7 @@ data class ProcessJson(
             isRejected.safeValue(),
             rejectedBy.safeValue(),
             rejectedOn.safeValue(),
+//            statusAfterVote.safeValue(),
             currentInterviewId.safeValue(),
             companyLogo.safeValue(),
             jobCityName.safeValue(),

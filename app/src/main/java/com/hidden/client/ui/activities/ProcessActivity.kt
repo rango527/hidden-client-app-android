@@ -93,7 +93,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         viewModel.processId = processId
         HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail()
+        viewModel.loadProcessDetail(cashMode)
 
         viewModel.process.observe(this, Observer { process ->
             viewModel.loadTimeline(cashMode)
@@ -137,7 +137,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         swipeContainer = findViewById(R.id.swipeContainer)
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = false
-            viewModel.loadProcessDetail()
+            viewModel.loadProcessDetail(false)
             viewModel.loadTimeline(false)
         }
     }

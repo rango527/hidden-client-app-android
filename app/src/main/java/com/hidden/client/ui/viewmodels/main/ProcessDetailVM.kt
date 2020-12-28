@@ -1,7 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
@@ -52,21 +51,33 @@ class ProcessDetailVM(
         subscription?.dispose()
     }
 
-    fun loadProcessDetail() {
-
-        subscription = Observable.fromCallable {
-            processDao.getProcessById(processId)
-        }
-            .concatMap { dbProcess ->
-                val process = dbProcess[0]
+    fun loadProcessDetail(cashMode: Boolean) {
+//        subscription = Observable.fromCallable {
+//            processDao.getProcessById(processId)
+//        }
+//            .concatMap { dbProcess ->
+//                val process = dbProcess[0]
+//                val processStageList: List<ProcessStageEntity> = processStageDao.getStageByProcess(processId)
+//                process.setStageList(processStageList)
+//                Observable.just(process)
+//            }
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(
+//                { result -> onRetrieveProcessDetailSuccess(result) },
+//                { error -> onRetrieveProcessDetailError(error) }
+//            )
+        subscription = processApi.getProcessDetail(AppPreferences.apiAccessToken, processId)
+            .concatMap { getResult ->
+                val process = getResult.toEntity(processId)
                 val processStageList: List<ProcessStageEntity> = processStageDao.getStageByProcess(processId)
                 process.setStageList(processStageList)
                 Observable.just(process)
-            }
+        }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSubscribe { onRetrieveProcessDetailStart() }
-//            .doOnTerminate { onRetrieveProcessDetailFinish() }
+            .doOnSubscribe { onRetrieveProcessDetailStart() }
+            .doOnTerminate { onRetrieveProcessDetailFinish() }
             .subscribe(
                 { result -> onRetrieveProcessDetailSuccess(result) },
                 { error -> onRetrieveProcessDetailError(error) }
@@ -76,7 +87,7 @@ class ProcessDetailVM(
     fun loadTimeline(cashMode: Boolean) {
         val apiObservable: Observable<List<TimelineEntity>>
 
-        HCGlobal.getInstance().log(processId.toString());
+        HCGlobal.getInstance().log(processId.toString())
 
         if (cashMode) {
             apiObservable =

@@ -26,7 +26,7 @@ data class ShortlistCandidateEntity (
 
     val avatarName: String,
 
-    val     avatarColor: String,
+    val avatarColor: String,
 
     val avatarImage: String,
 

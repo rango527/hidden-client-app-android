@@ -44,6 +44,8 @@ data class ProcessEntity (
 
     val rejectedOn: String,
 
+//    val statusAfterVote: String,
+
     val currentInterviewId: String,
 
     val companyLogo: String,
