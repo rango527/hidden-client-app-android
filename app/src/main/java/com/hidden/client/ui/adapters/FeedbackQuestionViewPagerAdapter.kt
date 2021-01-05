@@ -25,7 +25,7 @@ class FeedbackQuestionViewPagerAdapter(
     private val context: Context,
     private val questionList: List<FeedbackQuestionEntity>,
     private val isApprove: Boolean,
-private val viewPagerFeedback: ViewPager
+    private val viewPagerFeedback: ViewPager
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =

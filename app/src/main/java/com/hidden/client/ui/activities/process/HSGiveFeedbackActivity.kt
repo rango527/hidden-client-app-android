@@ -20,6 +20,7 @@ import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.BaseActivity
+import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.activities.shortlist.FeedbackDoneActivity
 import com.hidden.client.ui.adapters.GiveFeedbackQuestionViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -87,14 +88,14 @@ class HSGiveFeedbackActivity : BaseActivity() {
         // Observing for jumping HomeActivity -> Shortlist after add role success
         giveFeedbackViewModel.navigateToFeedbackDone.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-                val intent = Intent(this, FeedbackDoneActivity::class.java)
+                val intent = Intent(this, ProcessActivity::class.java)
+                intent.putExtra("processId", processId)
+                intent.putExtra("cashMode", true)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-                intent.putExtra("candidateName", candidateName)
-                intent.putExtra("candidateAvatar", candidateAvatar)
-                intent.putExtra("candidateJob", candidateJob)
-
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
+                overridePendingVTransitionEnter()
+                finish()
             }
         })
 
@@ -105,20 +106,23 @@ class HSGiveFeedbackActivity : BaseActivity() {
         giveFeedbackViewModel.feedbackId = this.feedbackId
 
         giveFeedbackViewModel.loadGiveFeedback(processId)
-        giveFeedbackViewModel.loadTimeline(processId);
+        giveFeedbackViewModel.loadTimeline(processId)
 
         giveFeedbackViewModel.feedback.observe(this, Observer { feedback ->
-            initViewPager(feedback);
+            initViewPager(feedback)
         })
     }
 
     private fun initViewPager(feedback: FeedbackEntity) {
         viewPagerFeedback.pageMargin = 30
+        // disable scrolling on a viewpager
+        viewPagerFeedback.beginFakeDrag()
 
         pageAdapter = GiveFeedbackQuestionViewPagerAdapter(
             this,
             feedback.getQuestionList(),
-            isApprove
+            isApprove,
+            viewPagerFeedback
         )
         viewPagerFeedback.adapter = pageAdapter
 
@@ -155,7 +159,6 @@ class HSGiveFeedbackActivity : BaseActivity() {
     }
 
     fun submitFeedback(questionList: List<FeedbackQuestionEntity>, comment: String) {
-        val vote: String = if (isApprove) Enums.VoteType.APPROVE.value else Enums.VoteType.REJECT.value
         val answers = JsonObject()
         for (question in questionList) {
             val questionId = question.id
@@ -165,10 +168,9 @@ class HSGiveFeedbackActivity : BaseActivity() {
         }
 
         val body: JsonObject = JsonObject()
-        body.addProperty("vote", vote)
         body.add("answers", answers)
         body.addProperty("comment", comment)
 
-        giveFeedbackViewModel.submitFeedback(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
+        giveFeedbackViewModel.submitFeedback(processId, feedbackId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
     }
 }

@@ -23,7 +23,7 @@ import okhttp3.RequestBody
 class InterviewerViewPagerAdapter(
     private val context: Context,
     private val interviewerViewVMList: List<InterviewerViewVM>
-) : PagerAdapter(), View.OnClickListener {
+) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =
         view == `object` as View
@@ -81,12 +81,18 @@ class InterviewerViewPagerAdapter(
         body.addProperty("client_id", clientId)
 
         view.btn_nudge_for_feedback.setOnClickListener {
-            if (clientId != null && feedbackId != null) {
-                (HCGlobal.getInstance().currentActivity as ProcessActivity).nudgeFeedback(clientId, feedbackId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
-            }
+            (HCGlobal.getInstance().currentActivity as ProcessActivity).nudgeFeedback(processId!!, feedbackId!!, RequestBody.create(MediaType.parse("application/json"), body.toString()))
         }
 
-        view.btn_give_feedback.setOnClickListener(this)
+        view.btn_give_feedback.setOnClickListener {
+            val intent = Intent(context, HSGiveFeedbackActivity::class.java)
+
+            intent.putExtra("processId", processId)
+            intent.putExtra("isApprove", true)
+            intent.putExtra("avatarName", interviewerViewVMList[position].fullName)
+
+            context.startActivity(intent)
+        }
 
         container.addView(view)
         return view
@@ -98,20 +104,5 @@ class InterviewerViewPagerAdapter(
 
     override fun getPageWidth(position: Int): Float {
         return 1.0f
-    }
-
-    override fun onClick(v: View?) {
-
-        when(v!!.id) {
-            R.id.btn_nudge_for_feedback -> {
-
-            }
-            R.id.btn_give_feedback -> {
-                // give feedback
-                val intent = Intent(context, HSGiveFeedbackActivity::class.java)
-//                val intent = Intent(context, FeedbackActivity::class.java)
-                context.startActivity(intent)
-            }
-        }
     }
 }

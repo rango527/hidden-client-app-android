@@ -14,6 +14,7 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
+import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 
 class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -21,7 +22,7 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var layoutBtnStorageProcess: LinearLayout
     private lateinit var layoutBtnReadStatus: LinearLayout
     private lateinit var layoutBtnSortBy: LinearLayout
-
+    private var processFragment: ProcessesFragment? = null
     private lateinit var textBtnJob: TextView
     private lateinit var textBtnStorageProcess: TextView
     private lateinit var textBtnReadStatus: TextView
@@ -123,7 +124,6 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
         btnViewProcess.setOnClickListener(this)
         btnClear = findViewById(R.id.button_clear)
         btnClear.setOnClickListener(this)
-
     }
 
     override fun onClick(v: View?) {
@@ -149,13 +149,17 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
                 for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
                     HCGlobal.getInstance().getAllJobList[x].jobTick = HCGlobal.getInstance().getJobPick[x].jobTick
                 }
-
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("num", 2)
                 intent.putExtra("processCashMode", false)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
+
+//                supportFragmentManager.beginTransaction().replace(
+//                    R.id.nav_host_fragment,
+//                    ProcessesFragment(true)
+//                ).commit()
             }
             R.id.img_back -> {
                 HCGlobal.getInstance().tempProcessFilterList = HCGlobal.getInstance().currentProcessFilterList

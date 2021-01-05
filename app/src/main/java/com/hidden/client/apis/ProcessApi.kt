@@ -91,6 +91,15 @@ interface ProcessApi {
         @Path("feedback_id") feedbackId: Int
     ): Observable<FeedbackJson>
 
+    @POST("client/processes/{process_id}/feedback/{feedback_id}")
+    fun addFeedback(
+        @Header("Content-Type") contentType: String,
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int,
+        @Path("feedback_id") feedbackId: Int,
+        @Body body: RequestBody
+    ): Observable<SimpleResponseJson>
+
     /**
      * Submit Feedback
      */

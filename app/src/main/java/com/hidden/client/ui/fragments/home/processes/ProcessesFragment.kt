@@ -24,6 +24,7 @@ import com.hidden.client.ui.TestMapsActivity
 import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.activities.HomeActivity
+import com.hidden.client.ui.adapters.ProcessListAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessListVM
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
@@ -31,12 +32,12 @@ import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.list_row_process.*
 
-class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View.OnClickListener {
+class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View.OnClickListener {
 
     private lateinit var binding: ProcessListBinding
     private lateinit var viewModel: ProcessListVM
     private var processList: List<ProcessEntity> = arrayListOf()
-
+    private lateinit var processListAdapter: ProcessListAdapter
     private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var layoutBtnFilterSearch: LinearLayout
     private lateinit var layoutBtnViewFilter: LinearLayout
@@ -54,15 +55,15 @@ class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(ProcessListVM::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ViewModelFactory(context!!)).get(ProcessListVM::class.java)
         viewModel.loadProcess(processCashMode)
 
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { show ->
             if (show) {
                 progressDlg.show()
-            }
-            else {
+            } else {
                 progressDlg.dismiss()
                 swipeContainer.isRefreshing = false
             }
@@ -77,8 +78,32 @@ class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View
 
         // if filter result is true, change filter layout
         layoutBtnFilterSearch = view.findViewById(R.id.layout_filter_search)
+        layoutBtnFilterSearch.setOnClickListener(this)
+
+        layoutBtnViewFilter = view.findViewById(R.id.layout_view_filter)
+        layoutBtnViewFilter.setOnClickListener(this)
+
+        layoutBtnClearFilter = view.findViewById(R.id.layout_clear_filter)
+        layoutBtnClearFilter.setOnClickListener(this)
         layoutBtnFilterResult = view.findViewById(R.id.layout_filter_search_result)
 
+        // if processlist count is 0, show no_processlist layout
+
+        noProcessList = view.findViewById(R.id.no_processlist)
+        filterText = view.findViewById(R.id.filter_text)
+        emptyText1 = view.findViewById(R.id.empty_list_text1)
+        emptyText2 = view.findViewById(R.id.empty_list_text2)
+        buttonRefresh = view.findViewById(R.id.button_refresh)
+        buttonRefresh.setOnClickListener(this)
+
+        swipeContainer = view.findViewById(R.id.swipeContainer)
+
+        initProcessVM()
+
+        return view
+    }
+
+    fun initProcessVM() {
         val isJobFilter = isJobFilterResult()
         val isProcessFilter = isProcessFilterResult()
         val isSortBy = isSortByResult()
@@ -90,16 +115,7 @@ class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View
             layoutBtnFilterResult.visibility = View.GONE
             layoutBtnFilterSearch.visibility = View.VISIBLE
         }
-        // end
 
-        // if processlist count is 0, show no_processlist layout
-
-        noProcessList = view.findViewById(R.id.no_processlist)
-        filterText = view.findViewById(R.id.filter_text)
-        emptyText1 = view.findViewById(R.id.empty_list_text1)
-        emptyText2 = view.findViewById(R.id.empty_list_text2)
-        buttonRefresh = view.findViewById(R.id.button_refresh)
-        buttonRefresh.setOnClickListener(this)
         viewModel.processListCount.observe(this, Observer { show ->
             if (show) {
                 if (!isJobFilter && !isProcessFilter && !isSortBy) {
@@ -116,33 +132,21 @@ class ProcessesFragment(private val processCashMode: Boolean) : Fragment(), View
                 noProcessList.visibility = View.GONE
             }
         })
-        // end
 
         binding.recyclerviewProcesses.layoutManager = LinearLayoutManager(context!!)
 
-        layoutBtnFilterSearch.setOnClickListener(this)
-
-        layoutBtnViewFilter = view.findViewById(R.id.layout_view_filter)
-        layoutBtnViewFilter.setOnClickListener(this)
-
-        layoutBtnClearFilter = view.findViewById(R.id.layout_clear_filter)
-        layoutBtnClearFilter.setOnClickListener(this)
         // refreshing
-        swipeContainer = view.findViewById(R.id.swipeContainer)
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = false
             viewModel.loadProcess(false)
         }
         initProcessList()
-        return view
     }
 
     fun initProcessList() {
-        viewModel.processList.observe(this, Observer { processList ->
-            this.processList = processList
-
-
-        })
+//        viewModel.processListVM.observe(this, Observer { processList ->
+//            processListAdapter.updateProcessList(processList)
+//        })
     }
     override fun onClick(v: View?) {
         when (v!!.id) {

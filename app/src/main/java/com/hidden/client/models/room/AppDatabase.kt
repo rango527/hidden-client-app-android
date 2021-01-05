@@ -16,6 +16,8 @@ import com.hidden.client.models.entity.*
     SkillEntity::class,
     WorkExperienceEntity::class,
     ShortlistEntity::class,
+    ConsentEntity::class,
+    ConsentTermsAndPrivacyEntity::class,
     ShortlistCandidateEntity::class,
 //    ShortlistFeedbackEntity::class,
 //    ShortlistReviewerEntity::class,

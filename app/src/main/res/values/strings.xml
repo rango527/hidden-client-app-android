@@ -63,6 +63,11 @@
     <string name="once_more">Once More</string>
     <string name="privacy_statement">Privacy Statement</string>
     <string name="terms_service">Terms of Service</string>
+    <string name="update_terms_service">We\'ve updated our Terms of Service.</string>
+    <string name="update_terms_service_subTitle">Please review the new terms below to continue</string>
+    <string name="update_privacy_service">We\'ve updated our Privacy Statement</string>
+    <string name="update_privacy_service_subTitle">Please review the new privacy statement below to continue.</string>
+    <string name="accept">ACCEPT</string>
     <string name="snapshot">Snapshot</string>
 
     <string name="dashboard">DASHBOARD</string>

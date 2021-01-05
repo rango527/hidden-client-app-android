@@ -24,10 +24,7 @@ data class CandidateJson(
 
     @Json(name = "candidate__full_name")
     val fullName: String?
-
-
 ) {
-
     fun toEntity(): CandidateEntity {
         return CandidateEntity(
             id.safeValue(),

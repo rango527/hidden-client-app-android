@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDate
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.entity.ProcessEntity
@@ -23,6 +25,7 @@ import com.hidden.client.models.entity.TimelineEntity
 import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.activities.process.HSDetermineProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveAvailabilityActivity
+import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
@@ -161,21 +164,27 @@ class ProcessTimelineFragment(
                         activity!!.startActivity(intent)
                     }
                     Enums.TileActionButtonType.GIVE_FEEDBACK.value -> {
+                        val index = timelineList.size - status - 1
+                        for (interviewDetail in timelineList[index].getInterviewParticipantList()) {
+                            if (interviewDetail.isCurrentUser!!) {
+                                HCGlobal.getInstance().currentFeedbackId = interviewDetail.feedbackId!!
+                                break
+                            }
+                        }
+
                         if (isInterviewAdvancer) {
                             val intent = Intent(activity, HSDetermineProcessActivity::class.java)
                             intent.putExtra("processId", process.id)
                             intent.putExtra("candidateName", process.candidateFullName)
                             intent.putExtra("nextStages", stage.nextStages)
                             intent.putExtra("interviewId", process.currentInterviewId.toInt())
+
                             activity!!.finish()
                             activity!!.startActivity(intent)
                         } else {
-                            val intent = Intent(activity, FeedbackActivity::class.java)
-
+                            val intent = Intent(context, HSGiveFeedbackActivity::class.java)
                             intent.putExtra("processId", process.id)
-                            intent.putExtra("isApprove", true)
-                            intent.putExtra("candidateName", process.candidateFullName)
-                            activity!!.finish()
+
                             activity!!.startActivity(intent)
                         }
                     }

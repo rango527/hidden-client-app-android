@@ -3,6 +3,7 @@ package com.hidden.client.ui.fragments.home.shortlists
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,7 +26,9 @@ import com.hidden.client.R
 import com.hidden.client.helpers.*
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.custom.ShortlistJob
+import com.hidden.client.ui.activities.ConsentActivity
 import com.hidden.client.ui.activities.HomeActivity
+import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.adapters.ShortlistJobFilterAdapter
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -87,6 +90,24 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!))
             .get(ShortlistListVM::class.java)
+        // get consent value
+        viewModel.getConsentUpdate()
+        viewModel.consentList.observe(this, Observer { consentList ->
+            if (consentList.isNotEmpty()) {
+                if (consentList[0].type == "terms") {
+                    val intent = Intent(context, ConsentActivity::class.java)
+                    intent.putExtra("termsNewVersion", consentList[0].newVersion)
+                    intent.putExtra("privacyNewVersion", consentList[1].newVersion)
+
+                    activity!!.startActivity(intent)
+                } else if (consentList[1].type == "privacy"){
+//                    val intent = Intent(context, ConsentPrivacyActivity::class.java)
+//                    intent.putExtra("privacyType", consentList[1].type)
+//                    intent.putExtra("privacyNewVersion", consentList[1].newVersion)
+//                    activity!!.startActivity(intent)
+                }
+            }
+        })
 
         viewModel.loadShortlistList(cashMode)
 

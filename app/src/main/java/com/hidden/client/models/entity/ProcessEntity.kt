@@ -70,7 +70,6 @@ data class ProcessEntity (
 
     val myId: Int
 ) {
-
     @Ignore
     private var stageList: List<ProcessStageEntity> = listOf()
 
@@ -81,5 +80,4 @@ data class ProcessEntity (
     fun setStageList(stageList: List<ProcessStageEntity>) {
         this.stageList = stageList
     }
-
 }

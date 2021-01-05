@@ -90,7 +90,7 @@ class HCJobActivity : BaseActivity(), View.OnClickListener {
         RetrofitClient.instance.getJobDetail(AppPreferences.apiAccessToken, jobId)
             .enqueue(object : Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
-                    Toast.makeText(this@HCJobActivity, "Failed...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(HCGlobal.getInstance().currentActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
                 @SuppressLint("SetTextI18n")
@@ -100,10 +100,10 @@ class HCJobActivity : BaseActivity(), View.OnClickListener {
                 ) {
                     if (response.isSuccessful) {
 
-                        Glide.with(this@HCJobActivity)
+                        Glide.with(HCGlobal.getInstance().currentActivity)
                             .load(response.body()!!.job_cover_image_asset__cloudinary_url)
                             .into(imgBackground)
-                        Glide.with(this@HCJobActivity)
+                        Glide.with(HCGlobal.getInstance().currentActivity)
                             .load(response.body()!!.company_logo_asset__cloudinary_url).into(imgJob)
                         txtJobTitle.text = response.body()!!.job__title
                         txtJobCompany.text = response.body()!!.company__name
@@ -114,7 +114,7 @@ class HCJobActivity : BaseActivity(), View.OnClickListener {
                         txtJobLocation.text = """   ${response.body()!!.job_city__name}"""
 
                     } else {
-                        Toast.makeText(this@HCJobActivity, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(HCGlobal.getInstance().currentActivity, "Error", Toast.LENGTH_LONG).show()
                     }
                 }
             })

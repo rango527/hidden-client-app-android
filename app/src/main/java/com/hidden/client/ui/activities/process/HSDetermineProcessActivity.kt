@@ -66,12 +66,8 @@ class HSDetermineProcessActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_process_reject -> {
-                val intent = Intent(this, FeedbackActivity::class.java)
-
+                val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("isApprove", false)
-                intent.putExtra("candidateName", candidateName)
-
                 startActivity(intent)
             }
         }

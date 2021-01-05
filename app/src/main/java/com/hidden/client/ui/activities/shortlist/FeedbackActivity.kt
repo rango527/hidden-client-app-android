@@ -93,6 +93,7 @@ class FeedbackActivity : BaseActivity() {
         feedbackViewModel.feedbackId.observe(this, Observer { feedbackId ->
             feedbackViewModel.loadFeedback(processId, feedbackId)
         })
+
         feedbackViewModel.feedback.observe(this, Observer { feedback ->
             initViewPager(feedback)
         })
@@ -100,7 +101,6 @@ class FeedbackActivity : BaseActivity() {
         // Observing for jumping HomeActivity -> Shortlist after add role success
         feedbackViewModel.statusAfterVote.observe(this, Observer { statusAfterVote ->
             val intent = Intent(this, FeedbackDoneActivity::class.java)
-            Log.d("statusAfterVote", "$statusAfterVote")
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.putExtra("statusAfterVote", statusAfterVote.statusAfterVote)
             intent.putExtra("candidateName", candidateName)

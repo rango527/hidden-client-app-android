@@ -19,11 +19,13 @@ import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessStageEntity
 import com.hidden.client.ui.activities.ProcessActivity
+import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
 import com.hidden.client.ui.viewmodels.main.ProcessViewVM
 
 class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() {
 
     private lateinit var processList: List<ProcessEntity>
+    private var processesFragment: ProcessesFragment = ProcessesFragment(true)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ProcessItemBinding = DataBindingUtil.inflate(
@@ -134,8 +136,179 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
         return if(::processList.isInitialized) processList.size else 0
     }
 
-    fun updateProcessList(processList: List<ProcessEntity>){
+    fun updateProcessList(processEntityList: List<ProcessEntity>){
+        val processList: ArrayList<ProcessEntity> = arrayListOf()
+
+        for (list in processEntityList) {
+            //filter job id
+            val filterJobList = HCGlobal.getInstance().getAllJobList
+            val filterProcessList = HCGlobal.getInstance().currentProcessFilterList
+            if (!processesFragment.isJobFilterResult() && !processesFragment.isProcessFilterResult()) {
+                processList.add(list)
+            } else if (processesFragment.isJobFilterResult()) {
+                for (x in 0 until filterJobList.size) {
+                    if (filterJobList[x].jobTick && list.jobId == filterJobList[x].jobId) {
+                        if (processesFragment.isProcessFilterResult()) {
+                            when (HCGlobal.getInstance().currentProcessFilterList.currentReadStatus) {
+                                0 -> {
+                                    if (list.messageUnreadNumber == 0){
+                                        if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                    }
+                                }
+                                1 -> {
+                                    if (list.messageUnreadNumber >= 1) {
+                                        if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                        if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                                            processList.add(list)
+                                    }
+                                }
+                                else -> {
+                                    if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                    if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                                        processList.add(list)
+                                }
+                            }
+                        } else {
+                            processList.add(list)
+                        }
+                    }
+                }
+            } else if (processesFragment.isProcessFilterResult()){
+                when (HCGlobal.getInstance().currentProcessFilterList.currentReadStatus) {
+                    0 -> {
+                        if (list.messageUnreadNumber == 0){
+                            if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                                processList.add(list)
+                        }
+                    }
+                    1 -> {
+                        if (list.messageUnreadNumber >= 1) {
+                            if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                                processList.add(list)
+                            if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                                processList.add(list)
+                        }
+                    }
+                    else -> {
+                        if (filterProcessList.currentShortlistStage && list.getStageList()[0].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentFirstStage && list.getStageList()[1].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentFurtherStage && list.getStageList()[2].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentFinalStage && list.getStageList()[3].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentOfferStage && list.getStageList()[4].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentOfferAccepted && list.getStageList()[5].stageStatus == "CURRENT")
+                            processList.add(list)
+                        if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
+                            processList.add(list)
+                    }
+                }
+            }
+        }
+
+        val tempList: ArrayList<ProcessEntity> = arrayListOf()
+
+        when (HCGlobal.getInstance().currentProcessFilterList.currentSortBy) {
+            0 -> {
+                for (x in 0 until processList.size - 1) {
+                    for (y in x + 1 until processList.size) {
+                        if (processList[y].lastMessageCreatedAt > processList[x].lastMessageCreatedAt) {
+                            tempList.clear()
+                            tempList.add(processList[x])
+                            processList[x] = processList[y]
+                            processList[y] = tempList[0]
+                        }
+                    }
+                }
+            }
+            1 -> {
+                for (x in 0 until processList.size - 1) {
+                    for (y in x + 1 until processList.size) {
+                        if (processList[y].statusId > processList[x].statusId) {
+                            tempList.clear()
+                            tempList.add(processList[x])
+                            processList[x] = processList[y]
+                            processList[y] = tempList[0]
+                        }
+                    }
+                }
+            }
+            2 -> {
+                for (x in 0 until processList.size - 1) {
+                    for (y in x + 1 until processList.size) {
+                        if (processList[y].getStageList()[0].stageCreatedAt > processList[x].getStageList()[0].stageCreatedAt) {
+                            tempList.clear()
+                            tempList.add(processList[x])
+                            processList[x] = processList[y]
+                            processList[y] = tempList[0]
+                        }
+                    }
+                }
+            }
+        }
+
         this.processList = processList
+
         notifyDataSetChanged()
     }
 

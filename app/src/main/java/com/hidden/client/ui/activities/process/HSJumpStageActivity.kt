@@ -68,39 +68,23 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.btn_further_stage -> {
-                val intent = Intent(this, FeedbackActivity::class.java)
-
+                val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("isApprove", true)
-                intent.putExtra("candidateName", candidateName)
-
                 startActivity(intent)
             }
             R.id.btn_final_stage -> {
-                val intent = Intent(this, FeedbackActivity::class.java)
-
+                val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("isApprove", true)
-                intent.putExtra("candidateName", candidateName)
-
                 startActivity(intent)
             }
             R.id.btn_add_interview_stage -> {
-                val intent = Intent(this, FeedbackActivity::class.java)
-
+                val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("isApprove", true)
-                intent.putExtra("candidateName", candidateName)
-
                 startActivity(intent)
             }
             R.id.btn_make_offer -> {
-                val intent = Intent(this, FeedbackActivity::class.java)
-
+                val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("isApprove", true)
-                intent.putExtra("candidateName", candidateName)
-
                 startActivity(intent)
             }
         }

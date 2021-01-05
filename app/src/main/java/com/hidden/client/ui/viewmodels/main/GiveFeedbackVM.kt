@@ -8,6 +8,8 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.json.FeedbackJson
+import com.hidden.client.models.json.SimpleResponseJson
+import com.hidden.client.models.json.SubmissionVotesJson
 import com.hidden.client.models.json.TimelineJson
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
@@ -73,13 +75,14 @@ class GiveFeedbackVM(
 
     fun submitFeedback(
         processId: Int,
+        feedbackId: Int,
         body: RequestBody
     ) {
-
-        subscription = processApi.submitFeedback(
+        subscription = processApi.addFeedback(
             "application/json",
             AppPreferences.apiAccessToken,
             processId,
+            feedbackId,
             body
         ).concatMap { addResult ->
             Observable.just(addResult)
@@ -89,7 +92,7 @@ class GiveFeedbackVM(
             .doOnSubscribe { onRetrieveFeedbackStart() }
             .doOnTerminate { onRetrieveFeedbackFinish() }
             .subscribe(
-                { onSubmitFeedbackSuccess() },
+                { result -> onSubmitFeedbackSuccess(result) },
                 { error -> onSubmitFeedbackError(error) }
             )
     }
@@ -182,7 +185,7 @@ class GiveFeedbackVM(
         feedback.value = feedbackEntity
     }
 
-    private fun onSubmitFeedbackSuccess() {
+    private fun onSubmitFeedbackSuccess(apiResult: SimpleResponseJson) {
         _navigateToFeedbackDone.value = Event(true)
     }
 
@@ -211,6 +214,7 @@ class GiveFeedbackVM(
     }
 
     private fun onSubmitFeedbackError(e: Throwable) {
+        HToast.show(HCGlobal.getInstance().currentActivity, "Sorry, can't submit feedback", HToast.TOAST_ERROR)
         e.printStackTrace()
     }
 

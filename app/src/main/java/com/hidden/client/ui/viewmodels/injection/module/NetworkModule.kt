@@ -66,7 +66,6 @@ object NetworkModule {
     internal fun provideShortlistApi(retrofit: Retrofit): ShortlistApi {
         return retrofit.create(ShortlistApi::class.java)
     }
-
     /*-------------------------------------------------------------------
     Job Setting
     ------------------------------------------------------------------- */
