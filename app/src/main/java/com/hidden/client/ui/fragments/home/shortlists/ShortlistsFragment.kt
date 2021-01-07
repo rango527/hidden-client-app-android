@@ -27,8 +27,8 @@ import com.hidden.client.helpers.*
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.custom.ShortlistJob
 import com.hidden.client.ui.activities.ConsentActivity
+import com.hidden.client.ui.activities.ConsentPrivacyActivity
 import com.hidden.client.ui.activities.HomeActivity
-import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
 import com.hidden.client.ui.adapters.ShortlistJobFilterAdapter
 import com.hidden.client.ui.adapters.ShortlistViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -90,8 +90,10 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!))
             .get(ShortlistListVM::class.java)
+
         // get consent value
         viewModel.getConsentUpdate()
+
         viewModel.consentList.observe(this, Observer { consentList ->
             if (consentList.isNotEmpty()) {
                 if (consentList[0].type == "terms") {
@@ -100,11 +102,11 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                     intent.putExtra("privacyNewVersion", consentList[1].newVersion)
 
                     activity!!.startActivity(intent)
-                } else if (consentList[1].type == "privacy"){
-//                    val intent = Intent(context, ConsentPrivacyActivity::class.java)
-//                    intent.putExtra("privacyType", consentList[1].type)
-//                    intent.putExtra("privacyNewVersion", consentList[1].newVersion)
-//                    activity!!.startActivity(intent)
+                } else if (consentList[0].type == "privacy"){
+                    val intent = Intent(context, ConsentPrivacyActivity::class.java)
+                    intent.putExtra("privacyNewVersion", consentList[0].newVersion)
+
+                    activity!!.startActivity(intent)
                 }
             }
         })

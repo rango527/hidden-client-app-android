@@ -3,7 +3,6 @@ package com.hidden.client.ui.fragments.home.processes
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,20 +19,14 @@ import com.hidden.client.databinding.ProcessListBinding
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ProcessEntity
-import com.hidden.client.ui.TestMapsActivity
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.activities.HCProcessFilterActivity
 import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.adapters.ProcessListAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessListVM
-import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
-import com.hidden.horizontalswipelayout.HorizontalSwipeRefreshLayout
 import com.kaopiz.kprogresshud.KProgressHUD
-import kotlinx.android.synthetic.main.list_row_process.*
 
 class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View.OnClickListener {
-
     private lateinit var binding: ProcessListBinding
     private lateinit var viewModel: ProcessListVM
     private var processList: List<ProcessEntity> = arrayListOf()
@@ -103,7 +96,7 @@ class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View
         return view
     }
 
-    fun initProcessVM() {
+    private fun initProcessVM() {
         val isJobFilter = isJobFilterResult()
         val isProcessFilter = isProcessFilterResult()
         val isSortBy = isSortByResult()
@@ -143,7 +136,7 @@ class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View
         initProcessList()
     }
 
-    fun initProcessList() {
+    private fun initProcessList() {
 //        viewModel.processListVM.observe(this, Observer { processList ->
 //            processListAdapter.updateProcessList(processList)
 //        })
@@ -234,7 +227,7 @@ class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View
         return false
     }
 
-    fun isSortByResult(): Boolean {
+    private fun isSortByResult(): Boolean {
         if (HCGlobal.getInstance().currentProcessFilterList.currentSortBy != -1)
             return true
 

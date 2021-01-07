@@ -1,7 +1,6 @@
 package com.hidden.client.ui.fragments.home.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.AppPreferences

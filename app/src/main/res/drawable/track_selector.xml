@@ -15,7 +15,7 @@
             <solid android:color="@color/colorGray_1"/>
             <stroke
                 android:width="2dp"
-                android:color="@color/colorGreen_1" />
+                android:color="@color/colorGray_1" />
         </shape>
     </item>
 </selector>

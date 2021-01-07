@@ -1,10 +1,12 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.custom.ShortlistJob
 import com.hidden.client.models.dao.*
@@ -45,6 +47,23 @@ class ShortlistListVM(
 
     private var subscription: Disposable? = null
 
+    private val _isFormValid = MutableLiveData<Boolean>()
+    val isFormValid: LiveData<Boolean>
+        get() = _isFormValid
+
+    var isChecked: Boolean = false
+        set(value) {
+            field = value
+            validateForm()
+        }
+
+    private fun validateForm() {
+        if (isChecked) {
+            _isFormValid.postValue(true)
+        } else {
+            _isFormValid.postValue(false)
+        }
+    }
     override fun onCleared() {
         super.onCleared()
         subscription?.dispose()
@@ -85,16 +104,6 @@ class ShortlistListVM(
     }
 
     fun getConsentTerms() {
-//        subscription = shortlistApi.getConsentTerms(AppPreferences.apiAccessToken).concatMap {
-//                sendResult -> Observable.just(sendResult)
-//        }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                { result -> onRetrieveConsentTPSuccess(result) },
-//                { error -> onRetrieveConsentTPError(error) }
-//            )
-
         val apiObservable: Observable<ConsentTermsAndPrivacyEntity>
         apiObservable = Observable.fromCallable { }.concatMap { shortlistApi.getConsentTerms(
             AppPreferences.apiAccessToken
@@ -107,8 +116,26 @@ class ShortlistListVM(
             .doOnSubscribe { onRetrieveShortlistStart() }
             .doOnTerminate { onRetrieveShortlistFinish() }
             .subscribe(
-                { result -> onRetrieveConsentTPSuccess(result) },
-                { error -> onRetrieveConsentTPError(error) }
+                { result -> onRetrieveConsentTermsSuccess(result) },
+                { error -> onRetrieveConsentTermsError(error) }
+            )
+    }
+
+    fun getConsentPrivacy() {
+        val apiObservable: Observable<ConsentTermsAndPrivacyEntity>
+        apiObservable = Observable.fromCallable { }.concatMap { shortlistApi.getConsentPrivacy(
+            AppPreferences.apiAccessToken
+        ).concatMap { apiResult ->
+            Observable.just(parseConsentTPJsonResult(apiResult))
+        } }
+
+        subscription = apiObservable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveShortlistStart() }
+            .doOnTerminate { onRetrieveShortlistFinish() }
+            .subscribe(
+                { result -> onRetrieveConsentPrivacySuccess(result) },
+                { error -> onRetrieveConsentPrivacyError(error) }
             )
     }
 
@@ -326,11 +353,19 @@ class ShortlistListVM(
         e.printStackTrace()
     }
 
-    private fun onRetrieveConsentTPSuccess(json: ConsentTermsAndPrivacyEntity) {
+    private fun onRetrieveConsentTermsSuccess(json: ConsentTermsAndPrivacyEntity) {
         this.consentTerms.value = json
     }
 
-    private fun onRetrieveConsentTPError(e: Throwable) {
+    private fun onRetrieveConsentTermsError(e: Throwable) {
+        e.printStackTrace()
+    }
+
+    private fun onRetrieveConsentPrivacySuccess(json: ConsentTermsAndPrivacyEntity) {
+        this.consentPrivacy.value = json
+    }
+
+    private fun onRetrieveConsentPrivacyError(e: Throwable) {
         e.printStackTrace()
     }
 

@@ -53,12 +53,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.isFormValid.observe(this, Observer { valid ->
             btnSignIn.isEnabled = valid ?: false
         })
-        viewModel.loadingVisibility.observe(this, Observer { show ->
-            if (show)
-                progressDlg.show()
-            else
-                progressDlg.dismiss()
-        })
 
         // Observing for jumping HomeActivity after login success
         viewModel.navigateToHome.observe(this, Observer {

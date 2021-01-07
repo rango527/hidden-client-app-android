@@ -22,21 +22,19 @@ import kotlinx.android.synthetic.main.activity_privacy_statement.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 
-class ConsentActivity : AppCompatActivity(), View.OnClickListener {
+class ConsentPrivacyActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: ShortlistListVM
     private lateinit var txtPrivacy: WebView
     private lateinit var btnAccept: Button
-    private var termsNewVersion: String = ""
     private var privacyNewVersion: String = ""
     private lateinit var switchUserManager: Switch
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_consent_terms)
+        setContentView(R.layout.activity_consent_privacy)
 
-        termsNewVersion = intent.getStringExtra("termsNewVersion").safeValue()
-        privacyNewVersion = intent.getStringExtra("termsNewVersion").safeValue()
+        privacyNewVersion = intent.getStringExtra("privacyNewVersion").safeValue()
 
         btnAccept = findViewById(R.id.button_save)
         btnAccept.setOnClickListener(this)
@@ -45,23 +43,15 @@ class ConsentActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(ShortlistListVM::class.java)
 
-        viewModel.getConsentTerms()
+        viewModel.getConsentPrivacy()
 
-        viewModel.consentTerms.observe(this, Observer { consentTerms ->
-            webview.loadData(consentTerms.content, "text/html; charset=utf-8", "UTF-8")
-        })
-
-        switchUserManager.setOnCheckedChangeListener { buttonView, isChecked -> viewModel.isChecked = isChecked }
-
-        viewModel.isFormValid.observe(this, Observer { valid ->
-            btnAccept.isEnabled = valid ?: true
+        viewModel.consentPrivacy.observe(this, Observer { consentPrivacy ->
+            webview.loadData(consentPrivacy.content, "text/html; charset=utf-8", "UTF-8")
         })
 
         viewModel.successUpdate.observe(this, Observer { successUpdate ->
             if (successUpdate) {
-                val intent = Intent(applicationContext, ConsentPrivacyActivity::class.java)
-                intent.putExtra("privacyNewVersion", privacyNewVersion)
-
+                val intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(intent)
             }
         })
@@ -77,9 +67,13 @@ class ConsentActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun submitFeedback() {
         val body: JsonObject = JsonObject()
-        body.addProperty("type", "TERMS")
-        body.addProperty("version", termsNewVersion)
-        body.addProperty("meta", "{\\\"accept_marketing\\\":true}")
+        body.addProperty("type", "PRIVACY")
+        body.addProperty("version", privacyNewVersion)
+        if (switchUserManager.isChecked) {
+            body.addProperty("meta", "{\\\"accept_marketing\\\":true}")
+        } else {
+            body.addProperty("meta", "{\\\"accept_marketing\\\":false}")
+        }
 
         viewModel.updateConsent(RequestBody.create(MediaType.parse("application/json"), body.toString()))
     }
