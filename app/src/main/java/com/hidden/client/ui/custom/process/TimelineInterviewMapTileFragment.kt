@@ -119,10 +119,6 @@ class TimelineInterviewMapTileFragment(
 
             mapView.visibility = View.GONE
             imgMarker.visibility = View.VISIBLE
-
-            imgInterviewer2.visibility = View.VISIBLE
-            imgInterviewer3.visibility = View.VISIBLE
-            imgInterviewer4.visibility = View.VISIBLE
         } else {
             val interviewDate: Date? = HCDate.stringToDate(data.dateTime!!, null)
 
@@ -138,44 +134,44 @@ class TimelineInterviewMapTileFragment(
 
             mapView.visibility = View.VISIBLE
             imgMarker.visibility = View.GONE
+        }
 
-            val interviewerCount = data.getInterviewParticipantList().size
-            when {
-                interviewerCount >= 4 -> {
-                    imgInterviewer1.visibility = View.VISIBLE
-                    imgInterviewer2.visibility = View.VISIBLE
-                    imgInterviewer3.visibility = View.VISIBLE
-                    imgInterviewer4.visibility = View.VISIBLE
-                    Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer1)
-                    Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer2)
-                    Glide.with(this).load(data.getInterviewParticipantList()[2].clientAvatar).into(imgInterviewer3)
-                    Glide.with(this).load(data.getInterviewParticipantList()[3].clientAvatar).into(imgInterviewer4)
+        val interviewerCount = data.getInterviewParticipantList().size
+        when {
+            interviewerCount >= 4 -> {
+                imgInterviewer1.visibility = View.VISIBLE
+                imgInterviewer2.visibility = View.VISIBLE
+                imgInterviewer3.visibility = View.VISIBLE
+                imgInterviewer4.visibility = View.VISIBLE
+                Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer1)
+                Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer2)
+                Glide.with(this).load(data.getInterviewParticipantList()[2].clientAvatar).into(imgInterviewer3)
+                Glide.with(this).load(data.getInterviewParticipantList()[3].clientAvatar).into(imgInterviewer4)
 
-                    if (interviewerCount > 4) {
-                        txtInterviewerMore.visibility = View.VISIBLE
-                        txtInterviewerMore.text = """+${(interviewerCount - 4)}"""
-                    }
+                if (interviewerCount > 4) {
+                    txtInterviewerMore.visibility = View.VISIBLE
+                    txtInterviewerMore.text = """+${(interviewerCount - 4)}"""
                 }
-                interviewerCount == 3 -> {
-                    imgInterviewer2.visibility = View.VISIBLE
-                    imgInterviewer3.visibility = View.VISIBLE
-                    imgInterviewer4.visibility = View.VISIBLE
+            }
+            interviewerCount == 3 -> {
+                imgInterviewer2.visibility = View.VISIBLE
+                imgInterviewer3.visibility = View.VISIBLE
+                imgInterviewer4.visibility = View.VISIBLE
 
-                    Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer2)
-                    Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer3)
-                    Glide.with(this).load(data.getInterviewParticipantList()[2].clientAvatar).into(imgInterviewer4)
-                }
-                interviewerCount == 2 -> {
-                    imgInterviewer3.visibility = View.VISIBLE
-                    imgInterviewer4.visibility = View.VISIBLE
+                Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer2)
+                Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer3)
+                Glide.with(this).load(data.getInterviewParticipantList()[2].clientAvatar).into(imgInterviewer4)
+            }
+            interviewerCount == 2 -> {
+                imgInterviewer3.visibility = View.VISIBLE
+                imgInterviewer4.visibility = View.VISIBLE
 
-                    Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer3)
-                    Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer4)
-                }
-                interviewerCount == 1 -> {
-                    imgInterviewer4.visibility = View.VISIBLE
-                    Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer4)
-                }
+                Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer3)
+                Glide.with(this).load(data.getInterviewParticipantList()[1].clientAvatar).into(imgInterviewer4)
+            }
+            interviewerCount == 1 -> {
+                imgInterviewer4.visibility = View.VISIBLE
+                Glide.with(this).load(data.getInterviewParticipantList()[0].clientAvatar).into(imgInterviewer4)
             }
         }
 

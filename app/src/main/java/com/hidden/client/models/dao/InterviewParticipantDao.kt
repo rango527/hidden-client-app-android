@@ -18,6 +18,9 @@ interface InterviewParticipantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg interviewParticipant: InterviewParticipantEntity)
 
+    @Query("DELETE FROM InterviewParticipant")
+    fun deleteAll()
+
     @Query("DELETE FROM InterviewParticipant WHERE pProcessId = :processId")
     fun deleteByProcessId(processId: Int)
 }

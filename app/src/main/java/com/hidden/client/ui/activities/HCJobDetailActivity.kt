@@ -110,7 +110,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
         RetrofitClient.instance.getJobDetail(AppPreferences.apiAccessToken, jobId)
             .enqueue(object: Callback<HCJobDetailResponse> {
                 override fun onFailure(call: Call<HCJobDetailResponse>, t: Throwable) {
-                    Toast.makeText(this@HCJobDetailActivity, "Failed...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(HCGlobal.getInstance().currentActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
                 @SuppressLint("SetTextI18n")
@@ -120,9 +120,9 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                 ) {
                     if (response.isSuccessful) {
 
-                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany)
-                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany2)
-                        Glide.with(this@HCJobDetailActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompany2)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.job_cover_image_asset__cloudinary_url).into(imgJob)
 
                         txtJobTitle.text = response.body()!!.job__title
                         txtJobCompany.text = response.body()!!.company__name
@@ -149,7 +149,7 @@ class HCJobDetailActivity : AppCompatActivity(), View.OnClickListener {
                         jobDetailTileViewModel.setJobDetailTileList(jobDetailTileList)
 
                     } else {
-                        Toast.makeText(this@HCJobDetailActivity, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(HCGlobal.getInstance().currentActivity, "Error", Toast.LENGTH_LONG).show()
                     }
                 }
             })

@@ -54,6 +54,9 @@ class HomeActivity : BaseActivity(), HCTabBar.OnTabSelectedListener {
         tabBar.setSelectedListener(this)
 
         num = intent.getIntExtra("num", 1)
+        if (num == 2) {
+            tabBar.processTag(num)
+        }
         onTabSelected(num)    // default tab is Shortlists
 
         layoutMask = findViewById(R.id.layout_mask)

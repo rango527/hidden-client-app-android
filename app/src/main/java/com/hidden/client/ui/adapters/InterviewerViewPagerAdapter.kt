@@ -5,16 +5,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import com.google.gson.JsonObject
-import com.hidden.client.R
 import com.hidden.client.databinding.InterviewerItemViewBinding
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.viewmodels.main.InterviewerViewVM
 import kotlinx.android.synthetic.main.viewpager_interviewer_item.view.*
 import okhttp3.MediaType

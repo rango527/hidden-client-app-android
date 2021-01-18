@@ -36,7 +36,7 @@ class ConsentActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_consent_terms)
 
         termsNewVersion = intent.getStringExtra("termsNewVersion").safeValue()
-        privacyNewVersion = intent.getStringExtra("termsNewVersion").safeValue()
+        privacyNewVersion = intent.getStringExtra("privacyNewVersion").safeValue()
 
         btnAccept = findViewById(R.id.button_save)
         btnAccept.setOnClickListener(this)

@@ -19,6 +19,9 @@ interface TimelineDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(timeline: TimelineEntity): Long
 
+    @Query("DELETE FROM Timeline")
+    fun deleteAll()
+
     @Query("DELETE FROM Timeline WHERE pProcessId = :processId")
     fun deleteByProcessId(processId: Int)
 }

@@ -39,13 +39,10 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
 
 class ShortlistsFragment(private val mContext: Context, private val cashMode: Boolean) : Fragment(), View.OnClickListener {
-
     private lateinit var imgClientPhoto: ImageView
     private lateinit var txtClientName: TextView
     private lateinit var txtNewProfileCount: TextView
-
     private lateinit var btnRefresh: Button
-
     private lateinit var layoutBackground: ConstraintLayout
 
     // Layout: Empty & ViewPager
@@ -57,6 +54,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
     private lateinit var pageAdapter: ShortlistViewPagerAdapter
     private var candidateVMList: List<ShortlistViewVM> = listOf()
     private var filteredCandidateVMList: List<ShortlistViewVM> = listOf()
+
     // Filter Layout
     private lateinit var layoutFilterContainer: LinearLayout
     private lateinit var layoutFilterPanel: ConstraintLayout
@@ -73,7 +71,6 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
     // ViewModel
     private lateinit var viewModel: ShortlistListVM
-
     private lateinit var progressDlg: KProgressHUD
 
     override fun onCreateView(
@@ -102,7 +99,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                     intent.putExtra("privacyNewVersion", consentList[1].newVersion)
 
                     activity!!.startActivity(intent)
-                } else if (consentList[0].type == "privacy"){
+                } else if (consentList[0].type == "privacy") {
                     val intent = Intent(context, ConsentPrivacyActivity::class.java)
                     intent.putExtra("privacyNewVersion", consentList[0].newVersion)
 
@@ -141,6 +138,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
             this.candidateVMList = candidateVMList
 
             // set job filter
+            var jobText = "various"
             val filteredCandidateVMList = candidateVMList.toMutableList()
             for (ShortlistJob in HCGlobal.getInstance().ShortlistJobList) {
                 if (ShortlistJob.jobTick) {
@@ -149,6 +147,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                             filteredCandidateVMList.removeAt(index-1)
                         }
                     }
+                    jobText = ShortlistJob.jobTitle
                     break
                 }
             }
@@ -156,11 +155,16 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
             this.filteredCandidateVMList = filteredCandidateVMList
             HCGlobal.getInstance().shortlistCandidateVMList = filteredCandidateVMList
 
-            txtNewProfileCount.text = resources.getQuantityString(
-                R.plurals.shortlists_profile_count,
-                filteredCandidateVMList.size,
-                filteredCandidateVMList.size
-            )
+            if (filteredCandidateVMList.size == 0) {
+                txtNewProfileCount.text = "Sorry, there are no new profiles in your $jobText shortlists"
+            } else {
+                txtNewProfileCount.text = resources.getQuantityString(
+                    R.plurals.shortlists_profile_count,
+                    filteredCandidateVMList.size,
+                    filteredCandidateVMList.size,
+                    jobText
+                )
+            }
 
             if (filteredCandidateVMList.isEmpty()) {
                 layoutViewPager.visibility = View.GONE
@@ -237,7 +241,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         if (filteredCandidateVMList.size > HCGlobal.getInstance().currentIndex) {
             indicator.setCurrentItem(HCGlobal.getInstance().currentIndex)
-            if (filteredCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor.safeValue() != "")
+            if (filteredCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor.safeValue() != "") {
                 layoutBackground.setBackgroundResource(
                     Utility.getResourceByName(
                         context!!,
@@ -245,7 +249,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
                         filteredCandidateVMList[HCGlobal.getInstance().currentIndex].getShortlistCandidate().avatarColor
                     )
                 )
-            else {
+            } else {
                 layoutBackground.setBackgroundResource(R.drawable.blue)
             }
         }

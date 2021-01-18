@@ -20,7 +20,6 @@ class ShortlistJobFilterAdapter(
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_row_shortlist_job_item, parent, false))
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val jobList = HCGlobal.getInstance().ShortlistJobList[position]
         holder.textName.text = jobList.jobTitle + ", " + jobList.jobCityName

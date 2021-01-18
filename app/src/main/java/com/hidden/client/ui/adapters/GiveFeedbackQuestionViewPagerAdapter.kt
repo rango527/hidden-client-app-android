@@ -2,7 +2,6 @@ package com.hidden.client.ui.adapters
 
 import android.content.Context
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,12 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import java.util.*
 
 @Suppress("NAME_SHADOWING")

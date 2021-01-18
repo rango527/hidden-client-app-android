@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,8 +27,6 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
-import com.hidden.client.ui.activities.shortlist.InterviewActivity
 import com.hidden.client.ui.fileupload.BottomAddMediaPickerDialog
 import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -41,14 +38,12 @@ import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.util.regex.Pattern
 import kotlin.math.roundToInt
-
 
 class HCMessageFragment(
     private val conversationId: Int
@@ -60,23 +55,16 @@ class HCMessageFragment(
     private lateinit var messageSendBtn: Button
     private lateinit var attachFileBtn: ImageView
     private lateinit var takePhotoBtn: ImageView
-    private lateinit var scrollView: ScrollView
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutSendMessage: LinearLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var imageView: ImageView
     private lateinit var textMessage: EditText
-    private lateinit var layoutFeat: LinearLayout
 
-    private val CAPTURE_REQUEST_CODE = 42
     private lateinit var attachment: MultipartBody.Part
     private lateinit var progressDlg: KProgressHUD
 
     private val CAPTURE_FROM_GALLEY = 1
     private val PERMISSION_REQUEST_CODE: Int = 101
-
-    private var mediaPath: String? = null
-    private var postPath: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -107,9 +95,7 @@ class HCMessageFragment(
         val view = binding.root
 
         recyclerView = view.findViewById(R.id.recyclerview_messages)
-//        recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//        recyclerView.scrollToPosition(HCGlobal.getInstance().currentMessageCount - 1)
-//
+
         viewModel.loadingMessageList.observe(this, Observer { show ->
             if (show) {
                 recyclerView.smoothScrollToPosition(HCGlobal.getInstance().currentMessageCount )
@@ -130,7 +116,6 @@ class HCMessageFragment(
         }
         layoutSendMessage = view.findViewById(R.id.layout_send_message)
         textMessage = view.findViewById(R.id.edit_text_message)
-//        layoutFeat = view.findViewById(R.id.layout_feat)
 
         textMessage.measure(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -147,11 +132,9 @@ class HCMessageFragment(
         binding.recyclerviewMessages.layoutManager = LinearLayoutManager(context!!)
 
         // get message list - scrollview height
-//        recyclerView.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
         swipeRefreshLayout.layoutParams.height = height - layoutSendMessageHeight - (140 * density).roundToInt()
 
         textMessage.doAfterTextChanged {
-//                text -> viewModel.resetEmail = text
             layoutSendMessage.measure(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

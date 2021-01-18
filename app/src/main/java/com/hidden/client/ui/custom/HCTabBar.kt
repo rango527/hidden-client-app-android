@@ -64,6 +64,13 @@ class HCTabBar : LinearLayout, View.OnClickListener {
         }
     }
 
+    fun processTag(num: Int) {
+        if (curSel == num) return
+        selectAt(curSel, false)
+        selectAt(num, true)
+        curSel = num
+    }
+
     private fun selectAt(num: Int, sel: Boolean) {
         val iv = view.findViewWithTag<ImageView>("tabIv$num")
         val tv = view.findViewWithTag<TextView>("tabTv$num")

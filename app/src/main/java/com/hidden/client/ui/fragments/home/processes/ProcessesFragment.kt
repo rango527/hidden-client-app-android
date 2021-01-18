@@ -96,7 +96,7 @@ class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View
         return view
     }
 
-    private fun initProcessVM() {
+    fun initProcessVM() {
         val isJobFilter = isJobFilterResult()
         val isProcessFilter = isProcessFilterResult()
         val isSortBy = isSortByResult()
@@ -133,14 +133,8 @@ class ProcessesFragment(private var processCashMode: Boolean) : Fragment(), View
             swipeContainer.isRefreshing = false
             viewModel.loadProcess(false)
         }
-        initProcessList()
     }
 
-    private fun initProcessList() {
-//        viewModel.processListVM.observe(this, Observer { processList ->
-//            processListAdapter.updateProcessList(processList)
-//        })
-    }
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_refresh -> {

@@ -9,12 +9,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
-import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
+
 
 class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -32,7 +30,6 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnViewProcess: Button
     private lateinit var btnClear: Button
 
-//    private var readStatus: Int = HCGlobal.getInstance().currentReadStatus
     private var readStatus: Int = HCGlobal.getInstance().tempProcessFilterList.currentReadStatus
     private var tempSortActivity: Int = HCGlobal.getInstance().tempProcessFilterList.currentSortBy
 
@@ -129,25 +126,39 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.layout_filter_job -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, HCFilterJobActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    HCFilterJobActivity::class.java
+                )
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
             R.id.layout_filter_process_stage -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, HCFilterProcessStageActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    HCFilterProcessStageActivity::class.java
+                )
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
             R.id.layout_filter_read_status -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, HCFilterReadStatusActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    HCFilterReadStatusActivity::class.java
+                )
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
             R.id.layout_filter_sort_by -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, HCFilterSortByActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    HCFilterSortByActivity::class.java
+                )
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
             R.id.button_view_process -> {
-                HCGlobal.getInstance().currentProcessFilterList = HCGlobal.getInstance().tempProcessFilterList
+                HCGlobal.getInstance().currentProcessFilterList =
+                    HCGlobal.getInstance().tempProcessFilterList
                 for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
-                    HCGlobal.getInstance().getAllJobList[x].jobTick = HCGlobal.getInstance().getJobPick[x].jobTick
+                    HCGlobal.getInstance().getAllJobList[x].jobTick =
+                        HCGlobal.getInstance().getJobPick[x].jobTick
                 }
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("num", 2)
@@ -155,16 +166,13 @@ class HCProcessFilterActivity : AppCompatActivity(), View.OnClickListener {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
-
-//                supportFragmentManager.beginTransaction().replace(
-//                    R.id.nav_host_fragment,
-//                    ProcessesFragment(true)
-//                ).commit()
             }
             R.id.img_back -> {
-                HCGlobal.getInstance().tempProcessFilterList = HCGlobal.getInstance().currentProcessFilterList
+                HCGlobal.getInstance().tempProcessFilterList =
+                    HCGlobal.getInstance().currentProcessFilterList
                 for (x in 0 until HCGlobal.getInstance().getAllJobList.size) {
-                    HCGlobal.getInstance().getJobPick[x].jobTick = HCGlobal.getInstance().getAllJobList[x].jobTick
+                    HCGlobal.getInstance().getJobPick[x].jobTick =
+                        HCGlobal.getInstance().getAllJobList[x].jobTick
                 }
 
                 finish()

@@ -50,7 +50,30 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 APP.database
             ).build()
             @Suppress("UNCHECKED_CAST")
-            return DashboardVM(db.dashboardTileDao(), db.dashboardTileContentDao()) as T
+            return DashboardVM(
+                db.brandDao(),
+                db.candidateDao(),
+                db.conversationDao(),
+                db.dashboardTileContentDao(),
+                db.dashboardTileDao(),
+                db.feedbackDao(),
+                db.feedbackIdDao(),
+                db.feedbackQuestionDao(),
+                db.interviewParticipantDao(),
+                db.jobSettingDao(),
+                db.messageListDao(),
+                db.processDao(),
+                db.processSettingDao(),
+                db.projectAssetsDao(),
+                db.processStageDao(),
+                db.projectDao(),
+                db.reviewerDao(),
+                db.shortlistCandidateDao(),
+                db.shortlistDao(),
+                db.skillDao(),
+                db.timelineDao(),
+                db.workExperienceDao()
+            ) as T
         }
 
         if (modelClass.isAssignableFrom(DashboardTileListVM::class.java)) {

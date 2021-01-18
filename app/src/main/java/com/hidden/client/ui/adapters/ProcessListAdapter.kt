@@ -166,6 +166,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                                             processList.add(list)
                                         if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                                             processList.add(list)
+                                        if (!filterProcessList.currentShortlistStage &&
+                                            !filterProcessList.currentFirstStage &&
+                                            !filterProcessList.currentFurtherStage &&
+                                            !filterProcessList.currentFinalStage &&
+                                            !filterProcessList.currentOfferStage &&
+                                            !filterProcessList.currentOfferAccepted &&
+                                            !filterProcessList.currentStarted) {
+                                            processList.add(list)
+                                        }
                                     }
                                 }
                                 1 -> {
@@ -184,6 +193,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                                             processList.add(list)
                                         if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                                             processList.add(list)
+                                        if (!filterProcessList.currentShortlistStage &&
+                                            !filterProcessList.currentFirstStage &&
+                                            !filterProcessList.currentFurtherStage &&
+                                            !filterProcessList.currentFinalStage &&
+                                            !filterProcessList.currentOfferStage &&
+                                            !filterProcessList.currentOfferAccepted &&
+                                            !filterProcessList.currentStarted) {
+                                            processList.add(list)
+                                        }
                                     }
                                 }
                                 else -> {
@@ -201,6 +219,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                                         processList.add(list)
                                     if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                                         processList.add(list)
+                                    if (!filterProcessList.currentShortlistStage &&
+                                        !filterProcessList.currentFirstStage &&
+                                        !filterProcessList.currentFurtherStage &&
+                                        !filterProcessList.currentFinalStage &&
+                                        !filterProcessList.currentOfferStage &&
+                                        !filterProcessList.currentOfferAccepted &&
+                                        !filterProcessList.currentStarted) {
+                                        processList.add(list)
+                                    }
                                 }
                             }
                         } else {
@@ -226,6 +253,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                                 processList.add(list)
                             if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                                 processList.add(list)
+                            if (!filterProcessList.currentShortlistStage &&
+                                !filterProcessList.currentFirstStage &&
+                                !filterProcessList.currentFurtherStage &&
+                                !filterProcessList.currentFinalStage &&
+                                !filterProcessList.currentOfferStage &&
+                                !filterProcessList.currentOfferAccepted &&
+                                !filterProcessList.currentStarted) {
+                                processList.add(list)
+                            }
                         }
                     }
                     1 -> {
@@ -244,6 +280,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                                 processList.add(list)
                             if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                                 processList.add(list)
+                            if (!filterProcessList.currentShortlistStage &&
+                                !filterProcessList.currentFirstStage &&
+                                !filterProcessList.currentFurtherStage &&
+                                !filterProcessList.currentFinalStage &&
+                                !filterProcessList.currentOfferStage &&
+                                !filterProcessList.currentOfferAccepted &&
+                                !filterProcessList.currentStarted) {
+                                processList.add(list)
+                            }
                         }
                     }
                     else -> {
@@ -261,6 +306,15 @@ class ProcessListAdapter: RecyclerView.Adapter<ProcessListAdapter.ViewHolder>() 
                             processList.add(list)
                         if (filterProcessList.currentStarted && list.getStageList()[6].stageStatus == "CURRENT")
                             processList.add(list)
+                        if (!filterProcessList.currentShortlistStage &&
+                            !filterProcessList.currentFirstStage &&
+                            !filterProcessList.currentFurtherStage &&
+                            !filterProcessList.currentFinalStage &&
+                            !filterProcessList.currentOfferStage &&
+                            !filterProcessList.currentOfferAccepted &&
+                            !filterProcessList.currentStarted) {
+                            processList.add(list)
+                        }
                     }
                 }
             }

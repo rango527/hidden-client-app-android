@@ -79,7 +79,7 @@
             app:layout_constraintLeft_toRightOf="@id/img_photo"
             app:layout_constraintTop_toBottomOf="@id/text_name"
             android:textColor="@color/colorBlack_2"
-            android:text="@{@string/job_and_location(viewModel.jobTitle, viewModel.candidateCityName)}"
+            android:text="@{@string/job_and_location(viewModel.jobTitle, viewModel.jobCityName)}"
             android:layout_marginStart="@dimen/menu_padding_vertical_default"
             android:layout_marginTop="@dimen/list_row_margin_default"/>
 

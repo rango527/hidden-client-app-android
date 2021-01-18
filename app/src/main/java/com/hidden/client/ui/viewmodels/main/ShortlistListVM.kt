@@ -256,21 +256,20 @@ class ShortlistListVM(
                     val jobId = candidateJson.jobId
                     val jobTitle = candidateJson.jobTitle
                     val jobCityName = candidateJson.jobCityName
-                    val joblist = ShortlistJob()
+                    val jobList = ShortlistJob()
 
-                    joblist.jobId = jobId!!
-                    joblist.jobTitle = jobTitle!!
-                    joblist.jobCityName = jobCityName!!
-                    joblist.jobTick = false
+                    jobList.jobId = jobId!!
+                    jobList.jobTitle = jobTitle!!
+                    jobList.jobCityName = jobCityName!!
+                    jobList.jobTick = false
 
-                    HCGlobal.getInstance().ShortlistJobList.add(joblist)
+                    HCGlobal.getInstance().ShortlistJobList.add(jobList)
                 }
             }
             index += 1
         }
 
         candidateList.forEachIndexed { index, element ->
-
             candidateList[index].setBrandList(
                 json.shortlistCandidates[index].toBrandEntityList(element.candidateId)
             )
@@ -333,6 +332,7 @@ class ShortlistListVM(
 
     private fun onRetrieveShortlistSuccess(shortlist: ShortlistEntity) {
         this.shortlist.value = shortlist
+        HCGlobal.getInstance().currentIndex = 0
 
         val shortlistViewVMList: ArrayList<ShortlistViewVM> = arrayListOf()
         for (candidate in shortlist.getCandidateList()) {

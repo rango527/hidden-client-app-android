@@ -136,7 +136,6 @@ class HSGiveFeedbackActivity : BaseActivity() {
     }
 
     private fun initUI() {
-
         viewPagerFeedback = findViewById(R.id.viewpager_give_feedback)
         indicator = findViewById(R.id.give_feedback_indicator)
 
