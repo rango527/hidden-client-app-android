@@ -2,7 +2,6 @@ package com.hidden.client.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
@@ -15,12 +14,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.databinding.ProcessDetailBinding
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.settings.CandidateDetailActivity
-import com.hidden.client.ui.activities.settings.CandidateListActivity
 import com.hidden.client.ui.animation.TransformAnimation
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
@@ -28,9 +25,7 @@ import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
 import com.hidden.client.ui.viewmodels.main.ProcessDetailVM
 import com.kaopiz.kprogresshud.KProgressHUD
-import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.RequestBody
-import java.lang.Math.round
 import kotlin.math.roundToInt
 
 class ProcessActivity : BaseActivity(), View.OnClickListener {
@@ -93,10 +88,10 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         viewModel.processId = processId
         HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail(cashMode)
+        viewModel.loadProcessDetail(false)
 
         viewModel.process.observe(this, Observer { process ->
-            viewModel.loadTimeline(cashMode)
+            viewModel.loadTimeline(false)
             Glide.with(this).load(process.candidateAvatar).into(imgPhoto)
         })
 
@@ -138,7 +133,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = false
             viewModel.loadProcessDetail(false)
-            viewModel.loadTimeline(false)
         }
     }
 
@@ -255,10 +249,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 overridePendingVTransitionEnter()
             }
             R.id.img_photo -> {
-//                val intent = Intent(this, ProcessSettingActivity::class.java)
-//                intent.putExtra("processId", processId)
-//                startActivity(intent)
-//                overridePendingVTransitionEnter()
                 val intent = Intent(HCGlobal.getInstance().currentActivity, CandidateDetailActivity::class.java)
                 intent.putExtra("category_id", candidateId.toString())
                 HCGlobal.getInstance().currentActivity.startActivity(intent)

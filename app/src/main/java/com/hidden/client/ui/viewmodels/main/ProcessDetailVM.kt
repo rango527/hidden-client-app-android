@@ -36,7 +36,6 @@ class ProcessDetailVM(
 
     val candidateAvatar: MutableLiveData<String> = MutableLiveData("")
     val isInterviewAdvancer: MutableLiveData<Boolean> = MutableLiveData(false)
-//    val advanceDecisionNeeded: MutableLiveData<Boolean> = MutableLiveData(false)
     val candidateFullName: MutableLiveData<String> = MutableLiveData("")
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
 
@@ -72,6 +71,11 @@ class ProcessDetailVM(
                 val process = getResult.toEntity(processId)
                 val processStageList: List<ProcessStageEntity> = processStageDao.getStageByProcess(processId)
                 process.setStageList(processStageList)
+//                processApi.getProcessList(AppPreferences.apiAccessToken)
+//                    .concatMap { apiProcess ->
+//                        Observable.just(parseJsonResult(apiProcess))
+//                    }
+
                 Observable.just(process)
         }
             .subscribeOn(Schedulers.io())

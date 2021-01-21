@@ -32,7 +32,7 @@
         android:icon="@mipmap/icon_master"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/icon_master"
+        android:roundIcon="@mipmap/icon_master_round"
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
