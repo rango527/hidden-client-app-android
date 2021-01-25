@@ -28,7 +28,6 @@ class GiveFeedbackVM(
     @Inject
     lateinit var processApi: ProcessApi
 
-
     // To jump to Process Detail Activity after login success
     private val _navigateToFeedbackDone = MutableLiveData<Event<Boolean>>()
     val navigateToFeedbackDone: LiveData<Event<Boolean>>

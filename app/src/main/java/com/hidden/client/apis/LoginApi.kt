@@ -1,6 +1,7 @@
 package com.hidden.client.apis
 
 import com.hidden.client.datamodels.HCProfileResponse
+import com.hidden.client.models.json.AcceptInviteJson
 import com.hidden.client.models.json.LoginJson
 import com.hidden.client.models.json.SimpleResponseJson
 import io.reactivex.Observable
@@ -18,6 +19,15 @@ interface LoginApi {
         @Field("email") email: String,
         @Field("password") password: String
     ): Observable<LoginJson>
+
+    @FormUrlEncoded
+    @POST("/client/accept-invite")
+    fun acceptInvite(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("token") code: String,
+        @Field("meta") meta: String
+    ): Observable<AcceptInviteJson>
 
     @FormUrlEncoded
     @POST("/client/request-password")

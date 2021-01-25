@@ -50,7 +50,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
     private var conversationId: Int = 0
     private var jobId: Int = 0
     private var candidateId: Int = 0
-    private var cashMode: Boolean = true
 
     private lateinit var imgPhoto: ImageView
     private lateinit var giveFeedbackViewModel: GiveFeedbackVM
@@ -65,8 +64,6 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         candidateId = intent.getIntExtra("candidateId", 0)
         // put jobid global variable - this variable is using at the job setting
         HCGlobal.getInstance().currentJobId = jobId
-
-        cashMode = intent.getBooleanExtra("cashMode", true)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_process)
 
@@ -88,7 +85,12 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
 
         viewModel.processId = processId
         HCGlobal.getInstance().log(processId.toString())
-        viewModel.loadProcessDetail(false)
+
+        viewModel.loadProcess()
+
+        viewModel.loadProcess.observe(this, Observer { loadProcess ->
+            viewModel.loadProcessDetail()
+        })
 
         viewModel.process.observe(this, Observer { process ->
             viewModel.loadTimeline(false)
@@ -132,7 +134,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         swipeContainer = findViewById(R.id.swipeContainer)
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = false
-            viewModel.loadProcessDetail(false)
+            viewModel.loadProcess()
         }
     }
 

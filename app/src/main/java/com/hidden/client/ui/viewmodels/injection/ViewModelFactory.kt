@@ -10,6 +10,7 @@ import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCJobDetailTile
 import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.ui.viewmodels.intro.LoginVM
+import com.hidden.client.ui.viewmodels.intro.SignUpVM
 import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.hidden.client.ui.viewmodels.main.*
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
@@ -26,6 +27,17 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ).build()
             @Suppress("UNCHECKED_CAST")
             return LoginVM(
+                context
+            ) as T
+        }
+        if (modelClass.isAssignableFrom(SignUpVM::class.java)) {
+            val db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                APP.database
+            ).build()
+            @Suppress("UNCHECKED_CAST")
+            return SignUpVM(
                 context
             ) as T
         }

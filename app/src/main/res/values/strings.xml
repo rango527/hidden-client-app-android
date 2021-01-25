@@ -12,6 +12,8 @@
     <string name="not_a_member">Not a member?</string>
     <string name="reset_password">Reset Password</string>
     <string name="enter_your_invite_code">Please enter your invite code\nbelow to get started</string>
+    <string name="enter_legal_bit">Now the legal bit…</string>
+
     <string name="get_started">Get Started</string>
     <string name="not_have_code">I don\'t have a code</string>d
     <string name="already_member">Already a member?</string>

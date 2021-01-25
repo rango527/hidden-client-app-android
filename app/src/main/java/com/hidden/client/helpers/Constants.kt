@@ -20,6 +20,7 @@ object API {
 
 object User {
     const val passwordMinLength: Int = 4
+    const val inviteCodeLength: Int = 4
     const val approved: String = "APPROVED"
 }
 

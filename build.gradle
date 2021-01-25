@@ -17,7 +17,7 @@ buildscript {
         minSdkVersion = 21
 
         // Gradle plugins
-        gradlePluginVersion = '4.1.1'
+        gradlePluginVersion = '4.1.2'
         bintrayPluginVersion = '1.8.4'
         googleServicesPluginVersion = '4.3.3'
 

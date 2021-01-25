@@ -10,6 +10,7 @@ import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessStageEntity
 import com.hidden.client.models.entity.TimelineEntity
+import com.hidden.client.models.json.ProcessJson
 import com.hidden.client.models.json.TimelineJson
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
@@ -33,6 +34,7 @@ class ProcessDetailVM(
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     var process: MutableLiveData<ProcessEntity> = MutableLiveData()
+    var loadProcess: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val candidateAvatar: MutableLiveData<String> = MutableLiveData("")
     val isInterviewAdvancer: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -50,32 +52,30 @@ class ProcessDetailVM(
         subscription?.dispose()
     }
 
-    fun loadProcessDetail(cashMode: Boolean) {
-//        subscription = Observable.fromCallable {
-//            processDao.getProcessById(processId)
-//        }
-//            .concatMap { dbProcess ->
-//                val process = dbProcess[0]
-//                val processStageList: List<ProcessStageEntity> = processStageDao.getStageByProcess(processId)
-//                process.setStageList(processStageList)
-//                Observable.just(process)
-//            }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                { result -> onRetrieveProcessDetailSuccess(result) },
-//                { error -> onRetrieveProcessDetailError(error) }
-//            )
+    fun loadProcess() {
+        val apiObservable: Observable<List<ProcessEntity>>
+        apiObservable = Observable.fromCallable { }
+            .concatMap {
+                processApi.getProcessList(AppPreferences.apiAccessToken)
+                    .concatMap { apiProcess ->
+                        Observable.just(parseJsonProcessListResult(apiProcess))
+                    }
+            }
+
+        subscription = apiObservable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> onRetrieveProcessSuccess(result) },
+                { error -> onRetrieveProcessError(error) }
+            )
+    }
+
+    fun loadProcessDetail() {
         subscription = processApi.getProcessDetail(AppPreferences.apiAccessToken, processId)
             .concatMap { getResult ->
                 val process = getResult.toEntity(processId)
                 val processStageList: List<ProcessStageEntity> = processStageDao.getStageByProcess(processId)
                 process.setStageList(processStageList)
-//                processApi.getProcessList(AppPreferences.apiAccessToken)
-//                    .concatMap { apiProcess ->
-//                        Observable.just(parseJsonResult(apiProcess))
-//                    }
-
                 Observable.just(process)
         }
             .subscribeOn(Schedulers.io())
@@ -157,6 +157,26 @@ class ProcessDetailVM(
         return timelineList
     }
 
+    private fun parseJsonProcessListResult(jsonList: List<ProcessJson>): List<ProcessEntity> {
+        processDao.deleteAll()
+        processStageDao.deleteAll()
+
+        val processList: ArrayList<ProcessEntity> = arrayListOf()
+
+        for (json in jsonList) {
+            val process: ProcessEntity = json.toEntity(AppPreferences.myId)
+            val processStageList = json.toStageEntityList(process.id)
+
+            process.setStageList(processStageList)
+            processList.add(process)
+            processStageDao.insertAll(*processStageList.toTypedArray())
+        }
+
+        processDao.insertAll(*processList.toTypedArray())
+
+        return processList
+    }
+
     private fun parseEntityResult(timelineList: List<TimelineEntity>): List<TimelineEntity> {
 
         for (timeline in timelineList) {
@@ -194,4 +214,11 @@ class ProcessDetailVM(
         e.printStackTrace()
     }
 
+    private fun onRetrieveProcessSuccess(processList: List<ProcessEntity>) {
+        this.loadProcess.value = true
+    }
+
+    private fun onRetrieveProcessError(e: Throwable) {
+        e.printStackTrace()
+    }
 }

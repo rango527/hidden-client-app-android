@@ -114,8 +114,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/get_started"
                 android:layout_marginTop="@dimen/margin_default"
+                android:enabled="false"
                 android:background="@drawable/button_round_red"
-                android:textColor="@color/colorWhite_1"/>
+                android:textColor="@drawable/button_textcolor_selector"/>
 
             <TextView
                 android:id="@+id/text_not_have_code"

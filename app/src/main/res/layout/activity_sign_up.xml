@@ -7,14 +7,142 @@
     android:background="@color/colorBlack_1"
     tools:context=".ui.activities.HCSignUpActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_layoutSignUp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/default_margin_super_top" />
+
+    <ImageButton
+        android:id="@+id/image_close"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/image_description_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_left"
+        android:background="@drawable/button_circle"
+        android:layout_margin="@dimen/margin_default"
+        />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        android:scrollbars="none">
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_description_logo"
+                app:srcCompat="@drawable/hidden_logo_red" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="@string/enter_legal_bit"
+                android:textColor="@color/colorWhite_1"
+                android:gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:id="@+id/switchTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/button_save"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/switch_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="7dp"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector_red"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:layout_marginStart="13dp"
+                    android:lineHeight="19dp"
+                    android:text="@string/read_terms_of_service"
+                    android:textColor="@color/colorWhite_1"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/switchService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/button_save"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/switch_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="7dp"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector_red"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_marginStart="13dp"
+                        android:lineHeight="19dp"
+                        android:text="@string/i_want_to_receive_email"
+                        android:textColor="@color/colorWhite_1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="15dp"
+                        android:lineHeight="19dp"
+                        android:text="@string/read_privacy_policy"
+                        android:textColor="@color/colorWhite_1"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                android:id="@+id/button_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/done"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/button_round_red"
+                android:textColor="@color/colorWhite_1"/>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
