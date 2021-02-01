@@ -4,34 +4,26 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.fileupload.UploadRequestBody
 import com.hidden.client.ui.fileupload.UploadResponse
-import com.hidden.client.ui.fileupload.getFileName
-import pub.devrel.easypermissions.EasyPermissions
-import com.hidden.client.ui.viewmodels.main.MessageListVM
+import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.activity_video_player.*
-import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.*
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
-import kotlin.reflect.jvm.internal.impl.load.java.JavaClassesTracker
 
 class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private var conversationId: Int = 0
@@ -119,17 +111,18 @@ class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.Up
             call.enqueue(object : Callback<UploadResponse>{
 
                 override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
-                    Toast.makeText(applicationContext,"CONNECTION FAILURE",Toast.LENGTH_SHORT).show()
+                    HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     Log.d("ONFAILURE",t.toString())
                 }
 
                 override fun onResponse(call: Call<UploadResponse>?, response: Response<UploadResponse>?) {
                     if (response != null) {
                         if (response.isSuccessful) {
+//                            HCMessageFragment.onRefreshMessageFragment()
                             finish()
                         }
                     } else {
-                        Toast.makeText(applicationContext,"CONNECTION FAILURE",Toast.LENGTH_SHORT).show()
+                        HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     }
                 }
             })

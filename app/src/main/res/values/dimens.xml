@@ -6,6 +6,7 @@
     <dimen name="small_margin_super_top">15dp</dimen>
 
     <dimen name="padding_default">20dp</dimen>
+    <dimen name="padding_large">63dp</dimen>
     <dimen name="margin_default">20dp</dimen>
     <dimen name="text_padding">8dp</dimen>
     <dimen name="menu_padding_vertical_default">10dp</dimen>

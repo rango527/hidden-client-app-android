@@ -28,6 +28,13 @@ class ProjectListAdapter: RecyclerView.Adapter<ProjectListAdapter.ViewHolder>() 
     }
 
     fun updateProjectList(projectList: List<ProjectEntity>){
+//        val projectNewList: ArrayList<ProjectEntity> = arrayListOf()
+//        for (project in projectList) {
+//            if (project.getAssetsList().isNotEmpty()) {
+//                projectNewList.add(project)
+//            }
+//        }
+//        this.projectList = projectNewList
         this.projectList = projectList
         notifyDataSetChanged()
     }

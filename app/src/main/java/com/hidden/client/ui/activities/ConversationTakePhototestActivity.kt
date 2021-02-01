@@ -31,6 +31,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.fileupload.UploadRequestBody
 import com.hidden.client.ui.fileupload.UploadResponse
 import com.karumi.dexter.MultiplePermissionsReport
@@ -83,7 +84,7 @@ class ConversationTakePhototestActivity : AppCompatActivity(), UploadRequestBody
             .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
-                    AlertDialog.Builder(this@ConversationTakePhototestActivity)
+                    AlertDialog.Builder(HCGlobal.getInstance().currentActivity)
                         .setTitle("getString(R.string.storage_permission_rationale_title)")
                         .setMessage("getString(R.string.storage_permission_rationale_message)")
                         .setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener {
@@ -107,12 +108,12 @@ class ConversationTakePhototestActivity : AppCompatActivity(), UploadRequestBody
                             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                             if(callCameraIntent.resolveActivity(packageManager) != null) {
                                 val authorities = packageName + ".fileprovider"
-                                val imageUri = FileProvider.getUriForFile(this@ConversationTakePhototestActivity, authorities, imageFile)
+                                val imageUri = FileProvider.getUriForFile(HCGlobal.getInstance().currentActivity, authorities, imageFile)
                                 callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                                 startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE)
                             }
                         } catch (e: IOException) {
-                            Toast.makeText(this@ConversationTakePhototestActivity, "Could not create file!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(HCGlobal.getInstance().currentActivity, "Could not create file!", Toast.LENGTH_SHORT).show()
                         }
                     }
 

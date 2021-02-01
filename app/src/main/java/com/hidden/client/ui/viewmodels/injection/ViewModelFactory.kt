@@ -172,10 +172,9 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ).build()
             @Suppress("UNCHECKED_CAST")
             return ShortlistListVM(
+                context,
                 db.shortlistDao(),
                 db.shortlistCandidateDao(),
-                db.feedbackDao(),
-                db.feedbackQuestionDao(),
                 db.brandDao(),
                 db.projectDao(),
                 db.projectAssetsDao(),
@@ -311,6 +310,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             ).build()
             @Suppress("UNCHECKED_CAST")
             return ProcessListVM(
+                context,
                 db.processDao(),
                 db.processStageDao()
             ) as T

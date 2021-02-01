@@ -27,12 +27,13 @@ import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
+import com.hidden.client.ui.activities.ConversationFileAttachActivity
+import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.fileupload.BottomAddMediaPickerDialog
 import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
-import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.MediaType
@@ -42,7 +43,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 class HCMessageFragment(
@@ -71,7 +71,6 @@ class HCMessageFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(MessageListVM::class.java)
 
         viewModel.conversationId = conversationId
@@ -156,6 +155,11 @@ class HCMessageFragment(
         return view
     }
 
+    fun onRefreshMessageFragment() {
+        swipeRefreshLayout.isRefreshing = false
+        viewModel.loadMessage(false, conversationId)
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.message_send_button -> {
@@ -169,28 +173,31 @@ class HCMessageFragment(
 
             R.id.file_attachment -> {
                 if (checkPermission()) {
-//                    val intent = Intent(Intent.ACTION_PICK)
-//                    startActivityForResult(intent, CAPTURE_FROM_GALLEY)
-                    MaterialFilePicker()
-                        .withActivity(HCGlobal.getInstance().currentActivity)
-                        .withRequestCode(CAPTURE_FROM_GALLEY)
-                        .withFilter(Pattern.compile("^.*"))
-                        .withHiddenFiles(true)
-                        .start()
+//                    MaterialFilePicker()
+//                        .withActivity(HCGlobal.getInstance().currentActivity)
+//                        .withRequestCode(CAPTURE_FROM_GALLEY)
+//                        .withFilter(Pattern.compile("^.*"))
+//                        .withHiddenFiles(true)
+//                        .start()
+
+                    val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
+                    intent.putExtra("conversationId", conversationId)
+                    HCGlobal.getInstance().currentActivity.startActivity(intent)
                 } else {
                     requestPermission()
                 }
-//                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
-//
-//                intent.putExtra("conversationId", conversationId)
-//                HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
 
             R.id.take_photo -> {
                 BottomAddMediaPickerDialog.display(
                     activity!!.supportFragmentManager,
+                    this,
                     conversationId
                 )
+//                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
+//                intent.putExtra("conversationId", conversationId)
+//                intent.putExtra("requestCode", "TAKE_PHOTO")
+//                startActivity(intent)
             }
         }
     }
@@ -214,24 +221,26 @@ class HCMessageFragment(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == CAPTURE_FROM_GALLEY && data != null) {
-////            val selectedImage = data.data
-//////            val filePathColumn = arrayOf(FilePickerActivity.RESULT_FILE_PATH)
-////            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-////
-////            val cursor = resolver.query(selectedImage!!, filePathColumn, null, null, null)
-////            assert(cursor != null)
-////            cursor!!.moveToFirst()
-////
-////            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-////            mediaPath = cursor.getString(columnIndex)
-////            cursor.close()
-////            postPath = mediaPath
+//            val selectedImage = data.data
+//            val filePathColumn = arrayOf(FilePickerActivity.RESULT_FILE_PATH)
+//            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+//
+//            val cursor = contentResolver.query(selectedImage!!, filePathColumn, null, null, null)
+//            assert(cursor != null)
+//            cursor!!.moveToFirst()
+//
+//            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+//            mediaPath = cursor.getString(columnIndex)
+//            cursor.close()
+//            postPath = mediaPath
+
 
 //            val fileToUpload = data.data?.path
-            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)!!.toString()
+            val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
-            attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name, requestBody)
+            attachment = MultipartBody.Part.createFormData("attachment",
+                File(fileToUpload).name, requestBody)
 
             val call = ConversationApi().uploadImage(
                 AppPreferences.apiAccessToken,
@@ -240,20 +249,20 @@ class HCMessageFragment(
             )
             call.enqueue(object : Callback<UploadResponse> {
                 override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
-                    Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     Log.d("ONFAILURE",t.toString())
                 }
 
                 override fun onResponse(call: Call<UploadResponse>?, response: Response<UploadResponse>?) {
                     if (response != null) {
                         if (response.isSuccessful) {
-                            Toast.makeText(context,"Success file upload", Toast.LENGTH_SHORT).show()
-    //                        finish()
+//                            onRefreshMessageFragment()
+                            HToast.show(HCGlobal.getInstance().currentActivity, "Success file upload", HToast.TOAST_SUCCESS)
                         } else {
-                            Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                            HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                         }
                     } else {
-                        Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                        HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     }
                 }
             })

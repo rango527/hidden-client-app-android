@@ -73,7 +73,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
         RetrofitClient.instance.getCompanyProfile(AppPreferences.apiAccessToken)
             .enqueue(object: Callback<HCCompanyResponse> {
                 override fun onFailure(call: Call<HCCompanyResponse>, t: Throwable) {
-                    Toast.makeText(this@HCCompanyDetailActivity, "Failed...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(HCGlobal.getInstance().currentActivity, "Failed...", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(
@@ -82,16 +82,16 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                 ) {
                     if (response.isSuccessful) {
 
-                        Glide.with(this@HCCompanyDetailActivity).load(response.body()!!.company_cover_image_asset__cloudinary_url).into(imgCompanyBg)
-                        Glide.with(this@HCCompanyDetailActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompanyLogo)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.company_cover_image_asset__cloudinary_url).into(imgCompanyBg)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(response.body()!!.company_logo_asset__cloudinary_url).into(imgCompanyLogo)
 
                         txtCompanyName.text = response.body()!!.company__name
                         txtHiddenSays.text = response.body()!!.company__hidden_says
 
                         /** Add Badge View **/
-                        val brandItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                        val brandItemBadge = CompanyDetailBadgeView(HCGlobal.getInstance().currentActivity,
                             response.body()!!.company_type__name, R.drawable.brand_type, R.drawable.progress_item_purple_12)
-                        val sizeItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                        val sizeItemBadge = CompanyDetailBadgeView(HCGlobal.getInstance().currentActivity,
                             response.body()!!.company_size__name, R.drawable.company_size, R.drawable.progress_item_complete_12)
 
                         layoutBadge.addView(brandItemBadge)
@@ -106,7 +106,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                         for (i in 0 until defaultShowCount) {
                             val location = cityLocationList[i].city__name
 
-                            val locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                            val locationItemBadge = CompanyDetailBadgeView(HCGlobal.getInstance().currentActivity,
                                 location, R.drawable.pin, R.drawable.progress_item_black_24)
 
                             layoutBadge.addView(locationItemBadge)
@@ -114,7 +114,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
 
                         // add `+ $(cnt) more`
                         if (badgeCount > UI.defaultSkillItemViewCount) {
-                            val textAddMore = TextView(this@HCCompanyDetailActivity)
+                            val textAddMore = TextView(HCGlobal.getInstance().currentActivity)
                             val params : LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT, // This will define text view width
                                 LinearLayout.LayoutParams.MATCH_PARENT // This will define text view height
@@ -131,7 +131,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
 
                                 for (i in defaultShowCount until badgeCount) {
                                     val location = cityLocationList[i].city__name
-                                    val locationItemBadge = CompanyDetailBadgeView(this@HCCompanyDetailActivity,
+                                    val locationItemBadge = CompanyDetailBadgeView(HCGlobal.getInstance().currentActivity,
                                         location, R.drawable.pin, R.drawable.progress_item_black_24)
 
                                     layoutBadge.addView(locationItemBadge)
@@ -157,7 +157,7 @@ class HCCompanyDetailActivity : BaseActivity(), View.OnClickListener {
                         companyDetailTileViewModel.setJobDetailTileList(companyDetailTileList)
 
                     } else {
-                        Toast.makeText(this@HCCompanyDetailActivity, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(HCGlobal.getInstance().currentActivity, "Error", Toast.LENGTH_LONG).show()
                     }
                 }
             })

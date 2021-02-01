@@ -62,9 +62,8 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
                 finish()
             }
             R.id.text_not_have_code->{
-//                val intent = Intent(applicationContext, HCSignUpActivity::class.java)
-//                startActivity(intent)
-//                finish()
+                val intent = Intent(applicationContext, HCSignUpGetInviteCodeActivity::class.java)
+                startActivity(intent)
             }
             R.id.button_get_start->{
                 val intent = Intent(applicationContext, HCSignUpActivity::class.java)

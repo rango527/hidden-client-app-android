@@ -13,7 +13,7 @@
     <string name="reset_password">Reset Password</string>
     <string name="enter_your_invite_code">Please enter your invite code\nbelow to get started</string>
     <string name="enter_legal_bit">Now the legal bit…</string>
-
+    <string name="enter_learn_more_sign_up">The Hidden app is exclusively for existing clients. Keen to learn more and to sign up? Email the team below and we\'ll get right back to you.</string>
     <string name="get_started">Get Started</string>
     <string name="not_have_code">I don\'t have a code</string>d
     <string name="already_member">Already a member?</string>
@@ -161,6 +161,7 @@
     <string name="has_unread_messages">Has Unread Messages</string>
     <string name="has_no_unread_messages">Has No Unread Messages</string>
     <string name="done">Done</string>
+    <string name="email_team">Email the team</string>
     <string name="filter">Filter</string>
     <string name="sort_by">Sort By</string>
     <string name="most_recent_activity">Most Recent Activity</string>

@@ -18,9 +18,6 @@ import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.kaopiz.kprogresshud.KProgressHUD
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var progressDlg: KProgressHUD
-
     private lateinit var viewModel: LoginVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +37,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         lblNotMember.setOnClickListener(this)
         btnSignIn.setOnClickListener(this)
 
-        // KProgressHUD
-        progressDlg = HCDialog.KProgressDialog(this)
-
         // Init ViewModel
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(LoginVM::class.java)
         HCGlobal.getInstance().currentActivity = this
@@ -54,15 +48,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             btnSignIn.isEnabled = valid ?: false
         })
 
-        viewModel.loadingVisibility.observe(this, Observer { show ->
-            if (show) {
-                progressDlg.show()
-            }
-            else {
-                progressDlg.dismiss()
-            }
-        })
-
         // Observing for jumping HomeActivity after login success
         viewModel.navigateToHome.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
@@ -71,7 +56,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
         })
-
     }
 
     override fun onClick(v: View?) {

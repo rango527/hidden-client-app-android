@@ -1,12 +1,11 @@
 package com.hidden.client.ui.viewmodels.main
 
-import android.util.Log
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.custom.ShortlistJob
 import com.hidden.client.models.dao.*
@@ -22,10 +21,9 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ShortlistListVM(
+    private val context: Context,
     private val shortlistDao: ShortlistDao,
     private val shortlistCandidateDao: ShortlistCandidateDao,
-    private val feedbackDao: FeedbackDao,
-    private val feedbackQuestionDao: FeedbackQuestionDao,
     private val brandDao: BrandDao,
     private val projectDao: ProjectDao,
     private val projectAssetsDao: ProjectAssetsDao,
@@ -191,20 +189,6 @@ class ShortlistListVM(
 
     private fun parseJsonResult(json: ShortlistJson): ShortlistEntity {
 
-        val shortlist: ShortlistEntity = json.toEntity()
-
-        // Update Shortlist Table
-        shortlistDao.deleteAll()
-        shortlistDao.insertAll(shortlist)
-
-        // Update ShortlistCandidate Table
-        val candidateList: List<ShortlistCandidateEntity> =
-            json.toShortlistCandidateEntityList(json.clientId.safeValue())
-
-        shortlistCandidateDao.deleteAll()
-        shortlistCandidateDao.insertAll(
-            *candidateList.toTypedArray()
-        )
 
         var index = 0
         HCGlobal.getInstance().ShortlistJobList.clear()
@@ -269,6 +253,10 @@ class ShortlistListVM(
             index += 1
         }
 
+        // Update ShortlistCandidate Table
+        val candidateList: List<ShortlistCandidateEntity> =
+            json.toShortlistCandidateEntityList(json.clientId.safeValue())
+
         candidateList.forEachIndexed { index, element ->
             candidateList[index].setBrandList(
                 json.shortlistCandidates[index].toBrandEntityList(element.candidateId)
@@ -284,13 +272,25 @@ class ShortlistListVM(
             )
         }
 
+        val shortlist: ShortlistEntity = json.toEntity()
+
+        // Update Shortlist Table
+        shortlistDao.deleteAll()
+        shortlistDao.insertAll(shortlist)
+
+        shortlistCandidateDao.deleteAll()
+        shortlistCandidateDao.insertAll(
+            *candidateList.toTypedArray()
+        )
+
         shortlist.setCandidateList(candidateList)
+
 
         return shortlist
     }
 
     private fun parseEntityResult(shortlist: ShortlistEntity): ShortlistEntity {
-        val candidateList = shortlistCandidateDao.getCandidateByClientId(shortlist.clientId)
+        val candidateList = shortlistCandidateDao.getCandidateByClientId(shortlist.clientId.safeValue())
 
         candidateList.forEachIndexed { index, element ->
             candidateList[index].setBrandList(

@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -247,6 +248,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 val intent = Intent(this, ProcessSettingActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("jobId", jobId)
+                intent.putExtra("cashMode", false)
                 startActivity(intent)
                 overridePendingVTransitionEnter()
             }

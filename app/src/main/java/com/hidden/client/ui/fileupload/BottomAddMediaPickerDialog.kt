@@ -3,32 +3,38 @@ package com.hidden.client.ui.fileupload
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
+import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
-import com.hidden.client.ui.activities.ConversationTakePhotoActivity
-import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import com.hidden.client.ui.dialogs.HToast
+import com.hidden.client.ui.fragments.process.HCMessageFragment
+import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
+import com.hidden.client.ui.viewmodels.main.MessageListVM
+import com.kaopiz.kprogresshud.KProgressHUD
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,8 +43,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragment() {
-
+class BottomAddMediaPickerDialog(
+    private val HCMessageFragment: HCMessageFragment,
+    private val conversationId: Int
+    ) : DialogFragment() {
     private lateinit var txtTakeVideo: TextView
     private lateinit var txtTakePhoto: TextView
     private lateinit var txtChooseVideo: TextView
@@ -53,6 +61,7 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
     private val CAPTURE_FROM_CAMERA = 2
 
     private val PERMISSION_REQUEST_CODE: Int = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(
@@ -136,7 +145,6 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
 
         txtTakeVideo.setOnClickListener {
             if (checkCameraPermission()) {
-
                 val values = ContentValues(1)
                 values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
                 val fileUri = HCGlobal.getInstance().currentActivity.contentResolver.insert(
@@ -162,12 +170,12 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
             } else {
                 requestCameraPermission()
             }
-
         }
 
         txtChoosePhoto.setOnClickListener {
             if (checkFileAttachPermission()) {
                 val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//                val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, CAPTURE_FROM_GALLEY)
             } else {
@@ -227,6 +235,7 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && data != null) {
+            dismiss()
             if (requestCode == CAPTURE_FROM_GALLEY ) {
 //                data.data?.path
                 val fileToUpload = data.data?.path.toString()
@@ -267,18 +276,15 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
             call.enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>?, t: Throwable?) {
-                    Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                    HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     Log.d("ONFAILURE",t.toString())
                 }
 
                 override fun onResponse(call: Call<UploadResponse>?, response: Response<UploadResponse>?) {
                     if (response != null) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(context,"Success file upload", Toast.LENGTH_SHORT).show()
-//                            finish()
-                        }
+                        HCMessageFragment.onRefreshMessageFragment()
                     } else {
-                        Toast.makeText(context,"UPLOAD FAILURE", Toast.LENGTH_SHORT).show()
+                        HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)
                     }
                 }
             })
@@ -288,8 +294,8 @@ class BottomAddMediaPickerDialog(private val conversationId: Int) : DialogFragme
     companion object {
         private const val TAG = "bottom_add_media_picker_dialog"
 
-        fun display(fragmentManager: FragmentManager?, conversationId: Int): BottomAddMediaPickerDialog {
-            val dialog = BottomAddMediaPickerDialog(conversationId)
+        fun display(fragmentManager: FragmentManager?,HCMessageFragment:HCMessageFragment, conversationId: Int): BottomAddMediaPickerDialog {
+            val dialog = BottomAddMediaPickerDialog(HCMessageFragment, conversationId)
             dialog.show(fragmentManager!!, TAG)
             return dialog
         }

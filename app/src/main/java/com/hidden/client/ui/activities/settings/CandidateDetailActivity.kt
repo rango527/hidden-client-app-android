@@ -15,6 +15,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCCandidateDetailResponse
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models_.HCBrand
 import com.hidden.client.models_.HCWorkExperience
 import com.hidden.client.networks.RetrofitClient
@@ -125,7 +126,7 @@ class CandidateDetailActivity : BaseActivity() {
                         val candidateDetail = response.body()!!
 
                         val photoUrl = candidateDetail.asset__cloudinary_url
-                        Glide.with(this@CandidateDetailActivity).load(photoUrl).into(imgPhoto)
+                        Glide.with(HCGlobal.getInstance().currentActivity).load(photoUrl).into(imgPhoto)
 
                         textName.text = candidateDetail.candidate__full_name
                         textLocation.text = candidateDetail.candidate_city__name
@@ -167,7 +168,7 @@ class CandidateDetailActivity : BaseActivity() {
 
                             for (candidate_skill in candidateDetail.candidate__skills) {
                                 val skillItemView = SkillItemView(
-                                    this@CandidateDetailActivity,
+                                    HCGlobal.getInstance().currentActivity,
                                     candidate_skill.skill__name,
                                     candidate_skill.candidate_skill__ranking
                                 )

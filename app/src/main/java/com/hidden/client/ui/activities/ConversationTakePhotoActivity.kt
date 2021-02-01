@@ -30,6 +30,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.fileupload.UploadRequestBody
 import com.hidden.client.ui.fileupload.UploadResponse
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
@@ -177,7 +178,7 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
         if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
 
             if (EasyPermissions.hasPermissions(
-                    this@ConversationTakePhotoActivity,
+                    HCGlobal.getInstance().currentActivity,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
@@ -247,7 +248,7 @@ class ConversationTakePhotoActivity : AppCompatActivity(), UploadRequestBody.Upl
 
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this@ConversationTakePhotoActivity)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, HCGlobal.getInstance().currentActivity)
     }
 
     override fun onProgressUpdate(percentage: Int) {

@@ -1,5 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
@@ -22,6 +23,7 @@ import javax.inject.Inject
 import com.hidden.client.models.entity.ProcessEntity as ProcessEntity1
 
 class ProcessListVM(
+    private val context: Context,
     private val processDao: ProcessDao,
     private val processStageDao: ProcessStageDao
 ) : RootVM() {

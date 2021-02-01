@@ -274,6 +274,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activities.HCSignUpGetInviteCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+        </activity>
+        <activity
             android:name=".ui.activities.HCForgetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

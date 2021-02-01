@@ -12,6 +12,7 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.BaseActivity
+import com.hidden.client.ui.activities.project.ImageSliderActivity
 import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.adapters.HCProjectImageAdapter
 
@@ -72,19 +73,14 @@ class ProjectDetailActivity : BaseActivity() {
         val layoutImage: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvImages.layoutManager = layoutImage
         rvImages.setHasFixedSize(true)
-        val imageAdapter = HCProjectImageAdapter(imageList.toTypedArray(),this)
+        val imageAdapter = HCProjectImageAdapter(imageList.toTypedArray(), Enums.ProjectAssetsType.IMAGE.value, this)
         rvImages.adapter = imageAdapter
-
-//        rvImages.setOnClickListener {
-//            val intent = Intent(HCGlobal.getInstance().currentActivity, JobImageSliderActivity::class.java)
-//            HCGlobal.getInstance().currentActivity.startActivity(intent)
-//        }
 
         rvVideos = findViewById(R.id.recyclerview_video)
         val layoutVideo: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvVideos.layoutManager = layoutVideo
         rvVideos.setHasFixedSize(true)
-        val videoAdapter = HCProjectImageAdapter(videoList.toTypedArray(),this)
+        val videoAdapter = HCProjectImageAdapter(videoList.toTypedArray(),Enums.ProjectAssetsType.VIDEO.value,this)
         rvVideos.adapter = videoAdapter
     }
 }
