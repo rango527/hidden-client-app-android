@@ -1,6 +1,7 @@
 package com.hidden.client.ui.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -27,7 +28,14 @@ class HCSignUpGetInviteCodeActivity : AppCompatActivity(), View.OnClickListener 
             }
 
             R.id.button_email_team -> {
-
+                val intent = Intent(Intent.ACTION_VIEW)
+                val data: Uri = Uri.parse(
+                    "mailto:"
+                            + "xyz@abc.com"
+                            + "?subject=" + "" + "&body=" + ""
+                )
+                intent.data = data
+                startActivity(intent)
             }
         }
     }

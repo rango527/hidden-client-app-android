@@ -42,4 +42,12 @@ interface LoginApi {
         @Field("password") currentPassword: String,
         @Field("new_password") newPassword: String
     ): Observable<SimpleResponseJson>
+
+    @FormUrlEncoded
+    @POST("/client/change-forgotten-password")
+    fun changeForgottenPassword(
+        @Field("email") email: String,
+        @Field("token") code: String,
+        @Field("password") newPassword: String
+    ): Observable<SimpleResponseJson>
 }

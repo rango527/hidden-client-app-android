@@ -63,6 +63,7 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="once_more">Once More</string>
+    <string name="once_more_time">Once More Time</string>
     <string name="privacy_statement">Privacy Statement</string>
     <string name="terms_service">Terms of Service</string>
     <string name="update_terms_service">We\'ve updated our Terms of Service.</string>

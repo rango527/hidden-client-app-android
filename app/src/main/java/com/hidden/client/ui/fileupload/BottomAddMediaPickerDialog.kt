@@ -30,6 +30,7 @@ import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -131,13 +132,6 @@ class BottomAddMediaPickerDialog(
                                 or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     )
                     startActivityForResult(intent, CAPTURE_FROM_CAMERA)
-//                } else {
-//                    Toast.makeText(
-//                        context,
-//                        "SORRY, MEDIA PICKER ERROR...",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
             } else {
                 requestCameraPermission()
             }
@@ -160,13 +154,6 @@ class BottomAddMediaPickerDialog(
                             or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 )
                 startActivityForResult(intent, CAPTURE_FROM_CAMERA)
-//            } else {
-//                Toast.makeText(
-//                    context,
-//                    "SORRY, MEDIA PICKER ERROR...",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
             } else {
                 requestCameraPermission()
             }
@@ -174,10 +161,14 @@ class BottomAddMediaPickerDialog(
 
         txtChoosePhoto.setOnClickListener {
             if (checkFileAttachPermission()) {
-                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
+//                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+////                val intent = Intent(Intent.ACTION_PICK)
+//                intent.type = "image/*"
+//                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
+                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
+                intent.putExtra("conversationId", conversationId)
+                intent.putExtra("requestCode", "CHOOSE_PHOTO")
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
             } else {
                 requestFileAttachPermission()
             }
@@ -185,9 +176,13 @@ class BottomAddMediaPickerDialog(
 
         txtChooseVideo.setOnClickListener {
             if (checkFileAttachPermission()) {
-                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
-                intent.type = "video/*"
-                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
+//                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+//                intent.type = "video/*"
+//                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
+                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
+                intent.putExtra("conversationId", conversationId)
+                intent.putExtra("requestCode", "CHOOSE_VIDEO")
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
             } else {
                 requestFileAttachPermission()
             }

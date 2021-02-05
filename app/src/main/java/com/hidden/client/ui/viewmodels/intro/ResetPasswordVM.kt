@@ -7,7 +7,6 @@ import com.hidden.client.apis.LoginApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.User
-import com.hidden.client.helpers.extension.isEmailValid
 import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
@@ -30,10 +29,18 @@ class ResetPasswordVM(private val context: Context): RootVM()  {
     val navigateSetting: LiveData<Event<Boolean>>
         get() = _navigateSetting
 
+    private val _navigateNewPassword = MutableLiveData<Event<Boolean>>()
+    val navigateNewPassword: LiveData<Event<Boolean>>
+        get() = _navigateNewPassword
+
     // LoginJson form validation
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean>
         get() = _isFormValid
+
+    private val _isNewPasswordValid = MutableLiveData<Boolean>()
+    val isNewPasswordValid: LiveData<Boolean>
+        get() = _isNewPasswordValid
 
     var currentPassword = ""
         set(value) {
@@ -62,6 +69,14 @@ class ResetPasswordVM(private val context: Context): RootVM()  {
         } else {
             _isFormValid.postValue(false)
         }
+
+        if (newPassword.length >= User.passwordMinLength
+            && newPasswordOnceMore.length >= User.passwordMinLength
+            && newPassword == newPasswordOnceMore) {
+            _isNewPasswordValid.postValue(true)
+        } else {
+            _isNewPasswordValid.postValue(false)
+        }
     }
 
     private var subscription: Disposable? = null
@@ -88,6 +103,20 @@ class ResetPasswordVM(private val context: Context): RootVM()  {
             )
     }
 
+    fun changeForgottenPassword(email: String, token: String) {
+        subscription = loginApi.changeForgottenPassword(email, token, newPassword).concatMap {
+                changeForgottenPasswordResult -> Observable.just(changeForgottenPasswordResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onAuthResetPasswordStart() }
+            .doOnTerminate { onAuthResetPasswordFinish() }
+            .subscribe(
+                { result -> onChangeForgottenPasswordSuccess(result) },
+                { error -> onChangeForgottenPasswordError(error) }
+            )
+    }
+
     private fun onAuthResetPasswordStart(){
         loadingVisibility.value = true
     }
@@ -100,8 +129,18 @@ class ResetPasswordVM(private val context: Context): RootVM()  {
         _navigateSetting.value = Event(true)
     }
 
+    private fun onChangeForgottenPasswordSuccess(result: SimpleResponseJson){
+        _navigateNewPassword.value = Event(true)
+        HToast.show(HCGlobal.getInstance().currentActivity, "New password set!", HToast.TOAST_SUCCESS)
+    }
+
     private fun onAuthResetPasswordError(e: Throwable){
         e.printStackTrace()
         HToast.show(HCGlobal.getInstance().currentActivity, "Wrong password", HToast.TOAST_ERROR)
+    }
+
+    private fun onChangeForgottenPasswordError(e: Throwable){
+        e.printStackTrace()
+        HToast.show(HCGlobal.getInstance().currentActivity, "Can't reset password", HToast.TOAST_ERROR)
     }
 }
