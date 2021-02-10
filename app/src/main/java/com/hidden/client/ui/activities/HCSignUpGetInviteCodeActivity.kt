@@ -31,7 +31,7 @@ class HCSignUpGetInviteCodeActivity : AppCompatActivity(), View.OnClickListener 
                 val intent = Intent(Intent.ACTION_VIEW)
                 val data: Uri = Uri.parse(
                     "mailto:"
-                            + "xyz@abc.com"
+                            + "hello@hidden.io"
                             + "?subject=" + "" + "&body=" + ""
                 )
                 intent.data = data
