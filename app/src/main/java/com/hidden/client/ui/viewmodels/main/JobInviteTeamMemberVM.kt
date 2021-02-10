@@ -55,7 +55,7 @@ class JobInviteTeamMemberVM(private val context: Context) : RootVM() {
 
     private fun validateForm() {
 
-        if (email.isEmailValid() && firstName.isNotEmpty() && lastName.isNotEmpty()) {
+        if (email.trim().isEmailValid() && firstName.isNotEmpty() && lastName.isNotEmpty()) {
             _isFormValid.postValue(true)
         } else {
             _isFormValid.postValue(false)

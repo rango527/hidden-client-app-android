@@ -58,7 +58,7 @@ class LoginVM(private val context: Context): RootVM() {
         }
 
     private fun validateForm() {
-        if (email.isEmailValid() && password.length >= User.passwordMinLength) {
+        if (email.trim().isEmailValid() && password.length >= User.passwordMinLength) {
             _isFormValid.postValue(true)
         } else {
             _isFormValid.postValue(false)
@@ -77,7 +77,7 @@ class LoginVM(private val context: Context): RootVM() {
         }
 
     private fun validateResetForm() {
-        if (resetEmail.isEmailValid()) {
+        if (resetEmail.trim().isEmailValid()) {
             _isResetFormValid.postValue(true)
         } else {
             _isResetFormValid.postValue(false)

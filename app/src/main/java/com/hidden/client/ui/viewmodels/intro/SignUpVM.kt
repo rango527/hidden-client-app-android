@@ -54,7 +54,7 @@ class SignUpVM(private val context: Context): RootVM() {
         }
 
     private fun validateForm() {
-        if (email.isEmailValid() && password.length >= User.passwordMinLength && code.length >= User.inviteCodeLength) {
+        if (email.trim().isEmailValid() && password.length >= User.passwordMinLength && code.length >= User.inviteCodeLength) {
             _isFormValid.postValue(true)
         } else {
             _isFormValid.postValue(false)
