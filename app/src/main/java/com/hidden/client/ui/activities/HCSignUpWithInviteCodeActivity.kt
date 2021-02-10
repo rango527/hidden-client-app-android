@@ -35,7 +35,6 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
         // Set a click listener
         textAlreadyMember.setOnClickListener(this)
         textNotHaveCode.setOnClickListener(this)
-        buttonGetStarted.setOnClickListener(this)
 
         // KProgressHUD
         progressDlg = HCDialog.KProgressDialog(this)
@@ -44,12 +43,24 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(SignUpVM::class.java)
         HCGlobal.getInstance().currentActivity = this
 
-        editEmail.doAfterTextChanged { text -> viewModel.email = text }
-        editPassword.doAfterTextChanged { text -> viewModel.password = text }
-        inviteCode.doAfterTextChanged { text -> viewModel.code = text }
+        editEmail.doAfterTextChanged { email -> viewModel.email = email }
+        editPassword.doAfterTextChanged { password -> viewModel.password = password }
+        inviteCode.doAfterTextChanged { code -> viewModel.code = code }
 
         viewModel.isFormValid.observe(this, Observer { valid ->
             buttonGetStarted.isEnabled = valid ?: false
+            if (valid) {
+                val email = viewModel.email
+                val password = viewModel.password
+                val code = viewModel.code
+                buttonGetStarted.setOnClickListener{
+                    val intent = Intent(applicationContext, HCSignUpActivity::class.java)
+                    intent.putExtra("email", email)
+                    intent.putExtra("password", password)
+                    intent.putExtra("code", code)
+                    startActivity(intent)
+                }
+            }
         })
     }
 
@@ -63,10 +74,6 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
             }
             R.id.text_not_have_code->{
                 val intent = Intent(applicationContext, HCSignUpGetInviteCodeActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.button_get_start->{
-                val intent = Intent(applicationContext, HCSignUpActivity::class.java)
                 startActivity(intent)
             }
         }

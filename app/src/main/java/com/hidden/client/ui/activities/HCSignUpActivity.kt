@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
+import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.intro.SignUpVM
@@ -26,6 +27,10 @@ class HCSignUpActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+        val email: String = intent.getStringExtra("email").safeValue()
+        val password: String = intent.getStringExtra("password").safeValue()
+        val code: String = intent.getStringExtra("code").safeValue()
 
         // KProgressHUD
         progressDlg = HCDialog.KProgressDialog(this)
@@ -50,8 +55,14 @@ class HCSignUpActivity : AppCompatActivity(), View.OnClickListener {
                 "{\"accept_marketing\":false}"
         }
 
-        val doneButton = findViewById<Button>(R.id.button_done)
-        doneButton.setOnClickListener(this)
+        val buttonDone = findViewById<Button>(R.id.button_done)
+        buttonDone.setOnClickListener{
+            if (isCheckedTerms) {
+                viewModel.signUp(email, password, code, meta)
+            } else {
+                HToast.show(HCGlobal.getInstance().currentActivity, "Please accept the Terms", HToast.TOAST_ERROR)
+            }
+        }
 
         viewModel.loadingVisibility.observe(this, Observer { show ->
             if (show) {
@@ -76,14 +87,6 @@ class HCSignUpActivity : AppCompatActivity(), View.OnClickListener {
         when(v!!.id){
             R.id.image_close -> {
                 finish()
-            }
-
-            R.id.button_done -> {
-                if (isCheckedTerms) {
-                    viewModel.signUp(meta)
-                } else {
-                    HToast.show(HCGlobal.getInstance().currentActivity, "Please accept the Terms", HToast.TOAST_ERROR)
-                }
             }
         }
     }

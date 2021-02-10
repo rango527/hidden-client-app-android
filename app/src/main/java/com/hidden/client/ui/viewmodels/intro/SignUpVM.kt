@@ -1,6 +1,7 @@
 package com.hidden.client.ui.viewmodels.intro
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.LoginApi
@@ -88,7 +89,7 @@ class SignUpVM(private val context: Context): RootVM() {
         subscription?.dispose()
     }
 
-    fun signUp(meta: String) {
+    fun signUp(email: String, password: String, code: String, meta: String) {
         subscription = loginApi.acceptInvite(email, password, code, meta).concatMap {
                 acceptInviteResult -> Observable.just(acceptInviteResult)
         }
