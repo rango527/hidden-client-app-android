@@ -265,11 +265,10 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "http://com.hidden.client/invite” -->
+                <!-- Accepts URIs that begin with "hidden-client://invite” -->
                 <data
-                    android:host="com.hidden.client"
-                    android:pathPrefix="/invite"
-                    android:scheme="http" />
+                    android:host="invite"
+                    android:scheme="hidden-client" />
                 <!-- note that the leading "/" is required for pathPrefix -->
             </intent-filter>
         </activity>

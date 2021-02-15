@@ -20,9 +20,16 @@ import com.kaopiz.kprogresshud.KProgressHUD
 class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var progressDlg: KProgressHUD
     private lateinit var viewModel: SignUpVM
+    private lateinit var email: String
+    private lateinit var token: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_with_invite_code)
+
+        val data = intent.data
+        email = data?.getQueryParameter("email").toString()
+        token = data?.getQueryParameter("token").toString()
 
         // Get the widgets
         val textAlreadyMember = findViewById<TextView>(R.id.text_already_a_member)
@@ -44,8 +51,16 @@ class HCSignUpWithInviteCodeActivity : AppCompatActivity(), View.OnClickListener
         HCGlobal.getInstance().currentActivity = this
 
         editEmail.doAfterTextChanged { email -> viewModel.email = email }
+        if (email != "null") {
+            editEmail.setText(email)
+        }
+
         editPassword.doAfterTextChanged { password -> viewModel.password = password }
+
         inviteCode.doAfterTextChanged { code -> viewModel.code = code }
+        if (token != "null") {
+            inviteCode.setText(token)
+        }
 
         viewModel.isFormValid.observe(this, Observer { valid ->
             buttonGetStarted.isEnabled = valid ?: false
