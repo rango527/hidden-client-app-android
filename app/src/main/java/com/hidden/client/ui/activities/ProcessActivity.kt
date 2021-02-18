@@ -8,7 +8,6 @@ import android.view.animation.Animation
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -102,7 +101,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             if (savedInstanceState == null) {
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_process,
-                    ProcessTimelineFragment(viewModel.process.value!!, viewModel.isInterviewAdvancer.value!!, timelineList)
+                    ProcessTimelineFragment(viewModel.process.value!!, viewModel.isInterviewAdvancer.value!!, viewModel.feedbackRequired.value!!, timelineList)
                 ).commit()
             }
         })
@@ -188,6 +187,7 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                     ProcessTimelineFragment(
                         viewModel.process.value!!,
                         viewModel.isInterviewAdvancer.value!!,
+                        viewModel.feedbackRequired.value!!,
                         viewModel.timelineList.value!!
                     )
                 ).commit()

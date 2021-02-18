@@ -7,11 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import com.hidden.client.R
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.activities.ProcessActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
-import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 
 class HSDetermineProcessActivity : AppCompatActivity(), View.OnClickListener {
 

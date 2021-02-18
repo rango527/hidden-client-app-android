@@ -9,7 +9,6 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.json.FeedbackJson
 import com.hidden.client.models.json.SimpleResponseJson
-import com.hidden.client.models.json.SubmissionVotesJson
 import com.hidden.client.models.json.TimelineJson
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.event.Event
@@ -47,6 +46,22 @@ class GiveFeedbackVM(
     override fun onCleared() {
         super.onCleared()
         subscription?.dispose()
+    }
+
+    fun nextStep(processId: Int, body: RequestBody) {
+        subscription = processApi.scheduleOrAdvanceToNextStep(
+            AppPreferences.apiAccessToken,
+            processId,
+            body
+        ).concatMap { addResult ->
+            Observable.just(addResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> onNextStepSuccess(result) },
+                { error -> onNextStepError(error) }
+            )
     }
 
     fun loadGiveFeedback(processId: Int) {
@@ -194,6 +209,15 @@ class GiveFeedbackVM(
 
     private fun onSubmitInterviewProposedDatesSuccess() {
         HToast.show(HCGlobal.getInstance().currentActivity, "Message sent!", HToast.TOAST_SUCCESS)
+    }
+
+    private fun onNextStepSuccess(simpleResponseJson: SimpleResponseJson) {
+
+    }
+
+    private fun onNextStepError(e: Throwable) {
+        e.printStackTrace()
+        HToast.show(HCGlobal.getInstance().currentActivity, "Next Step Error", HToast.TOAST_ERROR)
     }
 
     private fun onRetrieveTimelineSuccess(feedbackId: Int) {

@@ -1,10 +1,7 @@
 package com.hidden.client.ui.activities.process
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -13,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.JsonObject
 import com.hidden.client.R
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
@@ -21,10 +17,8 @@ import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.ProcessActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackDoneActivity
 import com.hidden.client.ui.adapters.GiveFeedbackQuestionViewPagerAdapter
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.main.FeedbackVM
 import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
@@ -50,6 +44,8 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private var isApprove: Boolean = true
     private var avatarName: String = ""
     private var processFeedback: Boolean = false
+    private var nextStep: String = ""
+
     private var candidateName: String = ""
     private var candidateAvatar: String = ""
     private var candidateJob: String = ""
@@ -64,6 +60,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
         processId = intent.getIntExtra("processId", 1)
         avatarName = intent.getStringExtra("avatarName").safeValue()
         processFeedback = intent.getBooleanExtra("processFeedback", false)
+        nextStep = intent.getStringExtra("next_step").safeValue()
 
         if (avatarName == "") {
             avatarName = HCGlobal.getInstance().currentAvatarName
@@ -103,6 +100,12 @@ class HSGiveFeedbackActivity : BaseActivity() {
         initUI()
 
         feedbackId = HCGlobal.getInstance().currentFeedbackId
+
+        if (nextStep != "") {
+            val body: JsonObject = JsonObject()
+            body.addProperty("next_step", nextStep)
+            giveFeedbackViewModel.nextStep(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
+        }
 
         giveFeedbackViewModel.feedbackId = this.feedbackId
 
@@ -145,19 +148,16 @@ class HSGiveFeedbackActivity : BaseActivity() {
         txtFeedback2 = findViewById(R.id.text_give_feedback_2)
 //        imgThumbUp = findViewById(R.id.image_thumb_up)
 
+        layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
+        txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
+
         if (processFeedback) {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
             txtFeedback.text = getString(R.string.feedback_notice1, avatarName)
-            txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
         } else if (isApprove) {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
             txtFeedback.text = getString(R.string.feedback_notice, avatarName)
-            txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
 //            imgThumbUp.setImageResource(R.drawable.thumb_up_large)
         } else {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
             txtFeedback.text = getString(R.string.feedback_notice3, avatarName)
-            txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
 //            imgThumbUp.setImageResource(R.drawable.thumb_down_large)
         }
     }

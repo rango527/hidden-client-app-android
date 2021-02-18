@@ -4,7 +4,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
-import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM

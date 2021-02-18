@@ -127,7 +127,6 @@ interface ProcessApi {
      */
     @POST("/client/processes/{process_id}/next-step")
     fun scheduleOrAdvanceToNextStep(
-        @Header("Content-Type") contentType: String,
         @Header("Authorization") authToken: String,
         @Path("process_id") processId: Int,
         @Body body: RequestBody

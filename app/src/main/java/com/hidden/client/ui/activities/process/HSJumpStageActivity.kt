@@ -71,24 +71,28 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("processFeedback", true)
+                intent.putExtra("next_step", "TO_FURTHER_STAGE")
                 startActivity(intent)
             }
             R.id.btn_final_stage -> {
                 val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("processFeedback", true)
+                intent.putExtra("next_step", "TO_FINAL_STAGE")
                 startActivity(intent)
             }
             R.id.btn_add_interview_stage -> {
                 val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("processFeedback", true)
+                intent.putExtra("next_step", "ADD_INTERVIEW")
                 startActivity(intent)
             }
             R.id.btn_make_offer -> {
                 val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("processFeedback", true)
+                intent.putExtra("next_step", "MAKE_OFFER")
                 startActivity(intent)
             }
         }

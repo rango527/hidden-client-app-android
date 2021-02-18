@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,6 @@ import com.hidden.client.ui.activities.process.AddInterviewersActivity
 import com.hidden.client.ui.activities.process.HSDetermineProcessActivity
 import com.hidden.client.ui.activities.process.HSGiveAvailabilityActivity
 import com.hidden.client.ui.activities.process.HSGiveFeedbackActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 import com.hidden.client.ui.custom.ProcessStageBarView
 import com.hidden.client.ui.custom.ProcessStageTriangleView
 import com.hidden.client.ui.custom.process.TimelineInterviewFeedbackTileView
@@ -37,6 +35,7 @@ import java.util.*
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
     private val isInterviewAdvancer: Boolean,
+    private val feedbackRequired: Boolean,
     private val timelineList: List<TimelineEntity>
 ) : Fragment() {
 
@@ -172,7 +171,7 @@ class ProcessTimelineFragment(
                             }
                         }
 
-                        if (isInterviewAdvancer) {
+                        if (isInterviewAdvancer && feedbackRequired) {
                             val intent = Intent(activity, HSDetermineProcessActivity::class.java)
                             intent.putExtra("processId", process.id)
                             intent.putExtra("candidateName", process.candidateFullName)

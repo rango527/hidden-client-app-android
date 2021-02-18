@@ -62,6 +62,8 @@ data class ProcessEntity (
 
     val isClientMessenger: Boolean,
 
+    val feedbackRequired: Boolean,
+
     val conversationId: Int,
 
     val messageUnreadNumber: Int,
