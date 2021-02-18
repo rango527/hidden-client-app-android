@@ -49,7 +49,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private var feedbackId: Int = 0
     private var isApprove: Boolean = true
     private var avatarName: String = ""
-
+    private var processFeedback: Boolean = false
     private var candidateName: String = ""
     private var candidateAvatar: String = ""
     private var candidateJob: String = ""
@@ -63,6 +63,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
         isApprove = intent.getBooleanExtra("isApprove", true)
         processId = intent.getIntExtra("processId", 1)
         avatarName = intent.getStringExtra("avatarName").safeValue()
+        processFeedback = intent.getBooleanExtra("processFeedback", false)
 
         if (avatarName == "") {
             avatarName = HCGlobal.getInstance().currentAvatarName
@@ -144,13 +145,17 @@ class HSGiveFeedbackActivity : BaseActivity() {
         txtFeedback2 = findViewById(R.id.text_give_feedback_2)
 //        imgThumbUp = findViewById(R.id.image_thumb_up)
 
-        if (isApprove) {
+        if (processFeedback) {
+            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
+            txtFeedback.text = getString(R.string.feedback_notice1, avatarName)
+            txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
+        } else if (isApprove) {
             layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
             txtFeedback.text = getString(R.string.feedback_notice, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
 //            imgThumbUp.setImageResource(R.drawable.thumb_up_large)
         } else {
-            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed_1))
+            layoutBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlack_1))
             txtFeedback.text = getString(R.string.feedback_notice3, avatarName)
             txtFeedback2.text = getString(R.string.feedback_notice2, avatarName)
 //            imgThumbUp.setImageResource(R.drawable.thumb_down_large)

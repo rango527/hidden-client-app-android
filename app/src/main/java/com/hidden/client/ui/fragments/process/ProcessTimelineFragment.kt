@@ -184,7 +184,7 @@ class ProcessTimelineFragment(
                         } else {
                             val intent = Intent(context, HSGiveFeedbackActivity::class.java)
                             intent.putExtra("processId", process.id)
-
+                            intent.putExtra("processFeedback", true)
                             activity!!.startActivity(intent)
                         }
                     }

@@ -107,7 +107,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
             }
         })
 
-        viewModel.loadShortlistList(cashMode)
+        viewModel.loadShortlistList(false)
 
         progressDlg = HCDialog.KProgressDialog(context!!)
         viewModel.loadingVisibility.observe(this, Observer { visibility ->

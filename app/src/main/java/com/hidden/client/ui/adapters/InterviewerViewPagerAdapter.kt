@@ -87,6 +87,7 @@ class InterviewerViewPagerAdapter(
             intent.putExtra("processId", processId)
             intent.putExtra("isApprove", true)
             intent.putExtra("avatarName", interviewerViewVMList[position].fullName)
+            intent.putExtra("processFeedback", true)
 
             context.startActivity(intent)
         }

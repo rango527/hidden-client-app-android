@@ -69,6 +69,7 @@ class HSDetermineProcessActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, HSGiveFeedbackActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("isApprove", false)
+                intent.putExtra("processFeedback", true)
                 startActivity(intent)
             }
         }
