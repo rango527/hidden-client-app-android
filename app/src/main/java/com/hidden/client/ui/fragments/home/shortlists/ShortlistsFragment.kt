@@ -44,7 +44,6 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
     private lateinit var txtNewProfileCount: TextView
     private lateinit var btnRefresh: Button
     private lateinit var layoutBackground: ConstraintLayout
-
     // Layout: Empty & ViewPager
     private lateinit var layoutEmpty: LinearLayout
     private lateinit var layoutViewPager: LinearLayout
@@ -211,6 +210,7 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
 
         swipeContainer = root.findViewById(R.id.swipe_container)
         swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = false
             viewModel.loadShortlistList(false)
         }
 
@@ -282,37 +282,46 @@ class ShortlistsFragment(private val mContext: Context, private val cashMode: Bo
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_refresh -> {
+                swipeContainer.isRefreshing = false
                 viewModel.loadShortlistList(false)
             }
             R.id.img_open_filter_layout -> {
                 // get all job list
-                if (HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
-                    HCGlobal.getInstance().ShortlistJobList.clear()
+                var currentJob = -1
+                if (HCGlobal.getInstance().ShortlistJobList.isNotEmpty()) {
+                    for (shortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                        if (shortlistJob.jobTick) {
+                            currentJob = shortlistJob.jobId
+                            break
+                        }
+                    }
+                }
 
-                    for (candidateJson in candidateVMList) {
-                        var index = 0
-                        if (HCGlobal.getInstance().ShortlistJobList.isNotEmpty()) {
-                            for (shortlistJob in HCGlobal.getInstance().ShortlistJobList) {
-                                if (candidateJson.getShortlistCandidate().jobId == shortlistJob.jobId) {
-                                    break
-                                } else {
-                                    index += 1
-                                }
+                HCGlobal.getInstance().ShortlistJobList.clear()
+
+                for (candidateJson in candidateVMList) {
+                    var index = 0
+                    if (HCGlobal.getInstance().ShortlistJobList.isNotEmpty()) {
+                        for (shortlistJob in HCGlobal.getInstance().ShortlistJobList) {
+                            if (candidateJson.getShortlistCandidate().jobId == shortlistJob.jobId) {
+                                break
+                            } else {
+                                index += 1
                             }
                         }
-                        if (index == HCGlobal.getInstance().ShortlistJobList.size || HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
-                            val jobId = candidateJson.getShortlistCandidate().jobId
-                            val jobTitle = candidateJson.getShortlistCandidate().jobTitle
-                            val jobCityName = candidateJson.getShortlistCandidate().jobCityName
-                            val joblist = ShortlistJob()
+                    }
+                    if (index == HCGlobal.getInstance().ShortlistJobList.size || HCGlobal.getInstance().ShortlistJobList.isEmpty()) {
+                        val jobId = candidateJson.getShortlistCandidate().jobId
+                        val jobTitle = candidateJson.getShortlistCandidate().jobTitle
+                        val jobCityName = candidateJson.getShortlistCandidate().jobCityName
+                        val jobList = ShortlistJob()
 
-                            joblist.jobId = jobId
-                            joblist.jobTitle = jobTitle
-                            joblist.jobCityName = jobCityName
-                            joblist.jobTick = false
+                        jobList.jobId = jobId
+                        jobList.jobTitle = jobTitle
+                        jobList.jobCityName = jobCityName
+                        jobList.jobTick = currentJob == jobId
 
-                            HCGlobal.getInstance().ShortlistJobList.add(joblist)
-                        }
+                        HCGlobal.getInstance().ShortlistJobList.add(jobList)
                     }
                 }
 

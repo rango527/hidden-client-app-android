@@ -1,21 +1,16 @@
 package com.hidden.client.ui.viewmodels.main
 
-import android.content.Intent
-import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.DashboardApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.CandidateDao
 import com.hidden.client.models.entity.DashboardTileContentEntity
 import com.hidden.client.models.entity.DashboardTileEntity
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.json.DashboardTileJson
 import com.hidden.client.models.json.SimpleResponseJson
-import com.hidden.client.ui.activities.LoginActivity
 import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable

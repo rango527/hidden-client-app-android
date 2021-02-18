@@ -188,11 +188,6 @@ class ShortlistListVM(
     }
 
     private fun parseJsonResult(json: ShortlistJson): ShortlistEntity {
-
-
-        var index = 0
-        HCGlobal.getInstance().ShortlistJobList.clear()
-
         val candidateJsonList: List<ShortlistCandidateJson> = json.shortlistCandidates!!
         for (candidateJson in candidateJsonList) {
 
@@ -229,28 +224,6 @@ class ShortlistListVM(
 //            for (feedback in candidateJson.feedbackList!!) {
 //                feedbackQuestionDao.insertAll(*feedback.toQuestionList(feedback.id.safeValue(), false).toTypedArray())
 //            }
-
-            // get shortlist jobs list
-            for (x in 0 until index + 1) {
-                if (HCGlobal.getInstance().ShortlistJobList.size > x) {
-                    if (HCGlobal.getInstance().ShortlistJobList[x].jobId == candidateJson.jobId) {
-                        break
-                    }
-                } else {
-                    val jobId = candidateJson.jobId
-                    val jobTitle = candidateJson.jobTitle
-                    val jobCityName = candidateJson.jobCityName
-                    val jobList = ShortlistJob()
-
-                    jobList.jobId = jobId!!
-                    jobList.jobTitle = jobTitle!!
-                    jobList.jobCityName = jobCityName!!
-                    jobList.jobTick = false
-
-                    HCGlobal.getInstance().ShortlistJobList.add(jobList)
-                }
-            }
-            index += 1
         }
 
         // Update ShortlistCandidate Table
