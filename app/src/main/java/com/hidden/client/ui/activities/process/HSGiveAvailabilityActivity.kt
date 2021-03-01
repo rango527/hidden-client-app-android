@@ -56,7 +56,7 @@ class HSGiveAvailabilityActivity : BaseActivity() {
     }
 
     private fun submitFeedback(comment: String) {
-        val body: JsonObject = JsonObject()
+        val body = JsonObject()
         body.addProperty("message", comment)
 
         giveFeedbackViewModel.submitInterviewProposedDates(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
@@ -66,7 +66,7 @@ class HSGiveAvailabilityActivity : BaseActivity() {
     private fun backToProcess(cashMode: Boolean) {
         val intent = Intent(this, ProcessActivity::class.java)
         intent.putExtra("processId", processId)
-        intent.putExtra("cashMode", true)
+        intent.putExtra("cashMode", cashMode)
         startActivity(intent)
         overridePendingVTransitionEnter()
         finish()

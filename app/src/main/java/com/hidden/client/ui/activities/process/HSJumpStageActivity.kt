@@ -65,6 +65,8 @@ class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.button_back_to_dashboard -> {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 finish()
             }
             R.id.btn_further_stage -> {

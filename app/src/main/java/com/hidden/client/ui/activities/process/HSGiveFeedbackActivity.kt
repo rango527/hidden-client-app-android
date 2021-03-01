@@ -88,7 +88,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
             it.getContentIfNotHandled()?.let {
                 val intent = Intent(this, ProcessActivity::class.java)
                 intent.putExtra("processId", processId)
-                intent.putExtra("cashMode", true)
+                intent.putExtra("cashMode", false)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)

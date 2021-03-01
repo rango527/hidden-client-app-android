@@ -37,9 +37,9 @@
     <string name="call_me">Call me on…</string>
     <string name="last_step">Last step! Set a username and password for access to the app</string>
     <string name="super_secure_password">Super secure password</string>
-    <string name="read_terms_of_service">I have read and accept the Hidden <a href="https://www.google.com">Terms of Service</a></string>
+    <string name="read_terms_of_service">I have read and accept the Hidden <![CDATA[<font color="#66CC66">Terms of Service</font>]]></string>
     <string name="i_want_to_receive_email">I want to receive emails from Hidden about updates, news and events</string>
-    <string name="read_privacy_policy">If you want to read about how we process your personal data please read our <a href="https://www.google.com">Privacy Policy</a></string>
+    <string name="read_privacy_policy">If you want to read about how we process your personal data please read our <![CDATA[<font color="#66CC66">Privacy Policy</font>]]></string>
     <string name="thanks_for_applying">Thanks for applying to be part of the Hidden community!\n\nOur Tribe team are reviewing your application and will be in touch soon</string>
     <string name="refresh_status">Refresh </string>
     <string name="popular_cities">Popular Cities</string>

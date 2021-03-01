@@ -47,6 +47,8 @@ class HSDetermineProcessActivity : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("processId", processId)
                 intent.putExtra("cashMode", true)
                 startActivity(intent)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 finish()
             }
 

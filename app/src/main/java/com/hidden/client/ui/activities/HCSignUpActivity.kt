@@ -3,16 +3,20 @@ package com.hidden.client.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Switch
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
 import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
+import com.hidden.client.ui.activities.settings.HCPrivacyStatementActivity
+import com.hidden.client.ui.activities.settings.HCTermsOfServiceActivity
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.intro.SignUpVM
@@ -53,6 +57,20 @@ class HCSignUpActivity : AppCompatActivity(), View.OnClickListener {
                 "{\"accept_marketing\":true}"
             else
                 "{\"accept_marketing\":false}"
+        }
+
+        val textTerms = findViewById<TextView>(R.id.text_terms)
+        textTerms.text = Html.fromHtml(getString(R.string.read_terms_of_service))
+        textTerms.setOnClickListener {
+            val intent = Intent(this, HCTermsOfServiceActivity::class.java)
+            startActivity(intent)
+        }
+
+        val textService = findViewById<TextView>(R.id.text_service)
+        textService.text = Html.fromHtml(getString(R.string.read_privacy_policy))
+        textService.setOnClickListener {
+            val intent = Intent(this, HCPrivacyStatementActivity::class.java)
+            startActivity(intent)
         }
 
         val buttonDone = findViewById<Button>(R.id.button_done)

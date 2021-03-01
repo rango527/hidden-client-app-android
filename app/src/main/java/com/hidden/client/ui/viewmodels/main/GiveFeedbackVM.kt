@@ -123,7 +123,7 @@ class GiveFeedbackVM(
             .doOnSubscribe { onRetrieveFeedbackStart() }
             .doOnTerminate { onRetrieveFeedbackFinish() }
             .subscribe(
-                { onSubmitInterviewProposedDatesSuccess() },
+                { result -> onSubmitInterviewProposedDatesSuccess(result) },
                 { error -> onSubmitInterviewProposedDatesError(error) }
             )
     }
@@ -207,7 +207,7 @@ class GiveFeedbackVM(
         HToast.show(HCGlobal.getInstance().currentActivity, "Nudge sent", HToast.TOAST_SUCCESS)
     }
 
-    private fun onSubmitInterviewProposedDatesSuccess() {
+    private fun onSubmitInterviewProposedDatesSuccess(simpleResponseJson: SimpleResponseJson) {
         HToast.show(HCGlobal.getInstance().currentActivity, "Message sent!", HToast.TOAST_SUCCESS)
     }
 
