@@ -75,7 +75,7 @@
 
     <string name="dashboard">DASHBOARD</string>
     <string name="at">at</string>
-    <string name="salary_range">£%1$s - £%2$s</string>
+    <string name="salary_range">%1$s - %2$s</string>
     <string name="what_hidden_says">What Hidden Says</string>
     <string name="view_company_profile">View the %1$s\nCompany Profile</string>
     <string name="has_worked_with">Has Worked With</string>
