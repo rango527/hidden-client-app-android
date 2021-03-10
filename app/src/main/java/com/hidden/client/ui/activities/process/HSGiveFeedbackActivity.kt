@@ -105,6 +105,8 @@ class HSGiveFeedbackActivity : BaseActivity() {
             val body: JsonObject = JsonObject()
             body.addProperty("next_step", nextStep)
             giveFeedbackViewModel.nextStep(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
+        }else{
+            giveFeedbackViewModel.reject(processId);
         }
 
         giveFeedbackViewModel.feedbackId = this.feedbackId

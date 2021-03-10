@@ -21,11 +21,6 @@ interface ShortlistApi {
         @Path("process_id") processId: Int
     ): Observable<SimpleResponseJson>
 
-    @POST("client/processes/{process_id}/reject")
-    fun rejectCandidate(
-        @Header("Authorization") authToken: String,
-        @Path("process_id") processId: Int
-    ): Observable<SimpleResponseJson>
 
     @GET("/client/consent/need-accepting")
     fun getConsentUpdate(

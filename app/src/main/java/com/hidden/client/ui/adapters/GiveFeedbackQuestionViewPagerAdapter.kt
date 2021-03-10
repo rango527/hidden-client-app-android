@@ -70,10 +70,10 @@ class GiveFeedbackQuestionViewPagerAdapter(
 
             if (isApprove) {
                 layoutSubmit.background = context.getDrawable(R.drawable.panel_bottom_rounded_green)
-                txtApprove.text = context.getString(R.string.approve)
+                txtApprove.text = "Submit";
             } else {
                 layoutSubmit.background = context.getDrawable(R.drawable.panel_bottom_rounded_red)
-                txtApprove.text = context.getString(R.string.reject)
+                txtApprove.text = "Submit"
             }
             layoutSubmit.setOnClickListener {
                 (HCGlobal.getInstance().currentActivity as HSGiveFeedbackActivity).submitFeedback(questionList, editComment.text.toString())

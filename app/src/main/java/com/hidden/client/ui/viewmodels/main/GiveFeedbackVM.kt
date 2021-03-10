@@ -3,6 +3,7 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
@@ -17,6 +18,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
 import okhttp3.RequestBody
 import javax.inject.Inject
 
@@ -53,6 +55,21 @@ class GiveFeedbackVM(
             AppPreferences.apiAccessToken,
             processId,
             body
+        ).concatMap { addResult ->
+            Observable.just(addResult)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> onNextStepSuccess(result) },
+                { error -> onNextStepError(error) }
+            )
+    }
+
+    fun reject(processId: Int) {
+        subscription = processApi.rejectCandidate(
+            AppPreferences.apiAccessToken,
+            processId
         ).concatMap { addResult ->
             Observable.just(addResult)
         }

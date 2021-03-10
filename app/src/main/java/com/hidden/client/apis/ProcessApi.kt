@@ -132,6 +132,12 @@ interface ProcessApi {
         @Body body: RequestBody
     ): Observable<SimpleResponseJson>
 
+    @POST("client/processes/{process_id}/reject")
+    fun rejectCandidate(
+        @Header("Authorization") authToken: String,
+        @Path("process_id") processId: Int
+    ): Observable<SimpleResponseJson>
+
     /**
      * Nudge for Feedback
      */
