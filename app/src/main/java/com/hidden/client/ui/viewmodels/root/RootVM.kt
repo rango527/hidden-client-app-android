@@ -11,6 +11,7 @@ import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import com.hidden.client.ui.viewmodels.injection.component.DaggerViewModelInjector
 import com.hidden.client.ui.viewmodels.injection.component.ViewModelInjector
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
+import com.hidden.client.ui.viewmodels.intro.EditProfileVM
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.hidden.client.ui.viewmodels.intro.SignUpVM
@@ -35,6 +36,7 @@ abstract class RootVM: ViewModel() {
             is LoginVM -> injector.inject(this)
             is SignUpVM -> injector.inject(this)
             is ResetPasswordVM -> injector.inject(this)
+            is EditProfileVM -> injector.inject(this)
 
             // Dashboard
             is DashboardVM -> injector.inject(this)

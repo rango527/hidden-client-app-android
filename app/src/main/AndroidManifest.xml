@@ -322,7 +322,7 @@
 <!--            android:grantUriPermissions="true">-->
 <!--            <meta-data-->
 <!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@layout/file_paths"></meta-data>-->
+<!--                android:resource="@layout/file_paths" />-->
 
 <!--        </provider>-->
     </application>

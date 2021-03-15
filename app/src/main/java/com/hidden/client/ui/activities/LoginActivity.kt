@@ -19,6 +19,7 @@ import com.kaopiz.kprogresshud.KProgressHUD
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: LoginVM
+    private lateinit var progressDlg: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -46,6 +47,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel.isFormValid.observe(this, Observer { valid ->
             btnSignIn.isEnabled = valid ?: false
+        })
+
+        progressDlg = HCDialog.KProgressDialog(this)
+        viewModel.loadingVisibility.observe(this, Observer { show ->
+            if (show) {
+                progressDlg.show()
+            } else {
+                progressDlg.dismiss()
+            }
         })
 
         // Observing for jumping HomeActivity after login success

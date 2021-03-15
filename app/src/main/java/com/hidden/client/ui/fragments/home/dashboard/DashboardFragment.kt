@@ -61,19 +61,16 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             for (tileEntity in tileEntityList) {
                 when(tileEntity.type) {
                     Enums.TileType.DATETIME_LOCATION_TILE_LIST.value -> {
-
                         val tileView = HCDatetimeLocationTileView(activity!!.applicationContext, tileEntity)
                         layoutScrollContent.addView(tileView)
                     }
 
                     Enums.TileType.NUMBER_TILE_LIST.value -> {
-
                         val tileView = HCNumberTileView(activity!!.applicationContext, this@DashboardFragment, tileEntity)
                         layoutScrollContent.addView(tileView)
                     }
 
                     Enums.TileType.PHOTO_TILE_LIST.value -> {
-
                         val jobView = HCPhotoTileView(activity!!.applicationContext, this@DashboardFragment, tileEntity)
                         layoutScrollContent.addView(jobView)
                     }

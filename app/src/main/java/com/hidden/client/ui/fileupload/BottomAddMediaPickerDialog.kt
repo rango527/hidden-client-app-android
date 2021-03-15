@@ -19,23 +19,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
-import com.hidden.client.databinding.MessageListBinding
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.ui.activities.ConversationFileAttachActivity
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.fragments.process.HCMessageFragment
-import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.main.MessageListVM
-import com.kaopiz.kprogresshud.KProgressHUD
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -114,7 +103,7 @@ class BottomAddMediaPickerDialog(
         txtTakePhoto.setOnClickListener {
             if (checkCameraPermission()) {
                 val values = ContentValues(1)
-                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
 
                 val fileUri: Uri? =
                     HCGlobal.getInstance().currentActivity.contentResolver
@@ -122,16 +111,14 @@ class BottomAddMediaPickerDialog(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                             values
                         )
-
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                if (intent.resolveActivity(packageManager) != null) {
-                    mCurrentPhotoPath = fileUri.toString()
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
-                    intent.addFlags(
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                                or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                    )
-                    startActivityForResult(intent, CAPTURE_FROM_CAMERA)
+                mCurrentPhotoPath = fileUri.toString()
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+                intent.addFlags(
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
+                startActivityForResult(intent, CAPTURE_FROM_CAMERA)
             } else {
                 requestCameraPermission()
             }
@@ -146,7 +133,6 @@ class BottomAddMediaPickerDialog(
                     values
                 )
                 val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-//              if (intent.resolveActivity(packageManager) != null) {
                 mCurrentPhotoPath = fileUri.toString()
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
                 intent.addFlags(
@@ -161,14 +147,9 @@ class BottomAddMediaPickerDialog(
 
         txtChoosePhoto.setOnClickListener {
             if (checkFileAttachPermission()) {
-//                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-////                val intent = Intent(Intent.ACTION_PICK)
-//                intent.type = "image/*"
-//                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
-                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
-                intent.putExtra("conversationId", conversationId)
-                intent.putExtra("requestCode", "CHOOSE_PHOTO")
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
+                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                intent.type = "image/*"
+                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
             } else {
                 requestFileAttachPermission()
             }
@@ -176,13 +157,9 @@ class BottomAddMediaPickerDialog(
 
         txtChooseVideo.setOnClickListener {
             if (checkFileAttachPermission()) {
-//                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
-//                intent.type = "video/*"
-//                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
-                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
-                intent.putExtra("conversationId", conversationId)
-                intent.putExtra("requestCode", "CHOOSE_VIDEO")
-                HCGlobal.getInstance().currentActivity.startActivity(intent)
+                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                intent.type = "video/*"
+                startActivityForResult(intent, CAPTURE_FROM_GALLEY)
             } else {
                 requestFileAttachPermission()
             }
@@ -207,8 +184,6 @@ class BottomAddMediaPickerDialog(
     }
 
     private fun checkCameraPermission(): Boolean {
-//        return (ContextCompat.checkSelfPermission(HCGlobal.getInstance().currentActivity, Manifest.permission.CAMERA)
-//                == PackageManager.PERMISSION_GRANTED)
         return (ContextCompat.checkSelfPermission(HCGlobal.getInstance().currentActivity, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(HCGlobal.getInstance().currentActivity,
             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -216,13 +191,11 @@ class BottomAddMediaPickerDialog(
     }
 
     private fun requestCameraPermission() {
-//        ActivityCompat.requestPermissions(HCGlobal.getInstance().currentActivity, arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
         ActivityCompat.requestPermissions(HCGlobal.getInstance().currentActivity, arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
-        ),
-            PERMISSION_REQUEST_CODE)
+        ), PERMISSION_REQUEST_CODE)
     }
 
     @SuppressLint("Recycle")
@@ -232,16 +205,29 @@ class BottomAddMediaPickerDialog(
         if (resultCode == Activity.RESULT_OK && data != null) {
             dismiss()
             if (requestCode == CAPTURE_FROM_GALLEY ) {
-//                data.data?.path
-                val fileToUpload = data.data?.path.toString()
-                val requestBody =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
+                val selectedImage: Uri? = data.data
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                if (selectedImage != null) {
+                    val cursor = HCGlobal.getInstance().currentActivity.contentResolver.query(
+                        selectedImage,
+                        filePathColumn, null, null, null
+                    )
+                    if (cursor != null) {
+                        cursor.moveToFirst()
+                        val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+                        val picturePath: String = cursor.getString(columnIndex)
 
-                attachment = MultipartBody.Part.createFormData(
-                    "attachment",
-                    File(fileToUpload).name,
-                    requestBody
-                )
+                        val requestBody =
+                            RequestBody.create(MediaType.parse("multipart/form-data"), File(picturePath))
+
+                        attachment = MultipartBody.Part.createFormData(
+                            "attachment",
+                            File(picturePath).name,
+                            requestBody
+                        )
+                        cursor.close()
+                    }
+                }
             } else if (requestCode == CAPTURE_FROM_CAMERA) {
                 val cursor = HCGlobal.getInstance().currentActivity.contentResolver.query(
                     Uri.parse(mCurrentPhotoPath),

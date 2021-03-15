@@ -113,6 +113,8 @@ class DashboardVM (
 
         subscription = logOutJson.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveDashboardStart() }
+            .doOnTerminate { onRetrieveDashboardFinish() }
             .subscribe(
                 { result -> onLogOutSuccess(result) },
                 { error -> onLogOutError(error) }

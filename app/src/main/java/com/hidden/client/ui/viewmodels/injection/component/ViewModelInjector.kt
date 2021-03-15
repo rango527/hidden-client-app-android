@@ -4,6 +4,7 @@ import com.hidden.client.ui.viewmodels.custom.DashboardNumberTileViewVM
 import com.hidden.client.ui.viewmodels.custom.DashboardPhotoTileViewVM
 import dagger.Component
 import com.hidden.client.ui.viewmodels.injection.module.NetworkModule
+import com.hidden.client.ui.viewmodels.intro.EditProfileVM
 import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.hidden.client.ui.viewmodels.intro.SignUpVM
@@ -20,6 +21,7 @@ interface ViewModelInjector {
     fun inject(loginVM: LoginVM)
     fun inject(signUpVM: SignUpVM)
     fun inject(resetPasswordVM: ResetPasswordVM)
+    fun inject(editProfileVM: EditProfileVM)
 
     // Dashboard
     fun inject(dashboardVM: DashboardVM)

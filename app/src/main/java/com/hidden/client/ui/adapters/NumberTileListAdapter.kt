@@ -1,6 +1,8 @@
 package com.hidden.client.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +22,6 @@ class NumberTileListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val viewModel: DashboardNumberTileViewVM = list[position]
         holder.bind(viewModel)
     }

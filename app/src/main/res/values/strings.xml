@@ -15,7 +15,7 @@
     <string name="enter_legal_bit">Now the legal bit…</string>
     <string name="enter_learn_more_sign_up">The Hidden app is exclusively for existing clients. Keen to learn more and to sign up? Email the team below and we\'ll get right back to you.</string>
     <string name="get_started">Get Started</string>
-    <string name="not_have_code">I don\'t have a code</string>d
+    <string name="not_have_code">I don\'t have a code</string>
     <string name="already_member">Already a member?</string>
     <string name="what_can_we_call_you">What can we call you?</string>
     <string name="next">Next</string>
@@ -56,7 +56,8 @@
     <string name="search">Search</string>
     <string name="your_details">Your Details</string>
     <string name="change_photo">Change Photo</string>
-    <string name="name">Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="title">Title</string>
     <string name="save">Save</string>

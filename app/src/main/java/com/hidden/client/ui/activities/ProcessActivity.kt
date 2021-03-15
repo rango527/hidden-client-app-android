@@ -19,6 +19,7 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.settings.CandidateDetailActivity
 import com.hidden.client.ui.animation.TransformAnimation
+import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -242,13 +243,17 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             R.id.button_back -> {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                finish()
+//                finish()
+                onBackPressed()
+                onBackPressed()
             }
             R.id.img_process_setting -> {
                 val intent = Intent(this, ProcessSettingActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("jobId", jobId)
                 intent.putExtra("cashMode", false)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 overridePendingVTransitionEnter()
             }

@@ -68,6 +68,8 @@ class HCGlobal{
     var currentFeedbackId: Int = 0
     var currentAvatarName: String = ""
 
+    var conversationId: Int = 0
+
     // Read Status Global
     var currentReadStatus: Int = -1             //-1: all messages, 0: has no unread messages, 1: has unread messages
 

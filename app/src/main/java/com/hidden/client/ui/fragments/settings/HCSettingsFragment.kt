@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.hidden.client.R
 import com.hidden.client.datamodels.HCProfileResponse
 import com.hidden.client.helpers.AppPreferences
+import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.activities.HCCompanyDetailActivity
@@ -23,6 +24,7 @@ import com.hidden.client.ui.activities.settings.*
 import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.DashboardVM
+import com.kaopiz.kprogresshud.KProgressHUD
 import com.urbanairship.UAirship
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +32,7 @@ import retrofit2.Response
 
 class HCSettingsFragment : Fragment(), View.OnClickListener {
     private lateinit var viewModel: DashboardVM
+    private lateinit var progressDlg: KProgressHUD
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -136,6 +139,14 @@ class HCSettingsFragment : Fragment(), View.OnClickListener {
             R.id.layout_logout -> {
                 viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(DashboardVM::class.java)
                 viewModel.logOut()
+                progressDlg = HCDialog.KProgressDialog(HCGlobal.getInstance().currentActivity)
+                viewModel.loadingVisibility.observe(this, Observer { show ->
+                    if (show) {
+                        progressDlg.show()
+                    } else {
+                        progressDlg.dismiss()
+                    }
+                })
                 viewModel.navigateHome.observe(this, Observer {
                     it.getContentIfNotHandled()?.let {
                         AppPreferences.myFullName = ""

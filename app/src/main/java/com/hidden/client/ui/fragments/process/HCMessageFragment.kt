@@ -6,7 +6,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,6 +38,7 @@ import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.MediaType
@@ -43,6 +48,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 class HCMessageFragment(
@@ -63,7 +69,6 @@ class HCMessageFragment(
     private lateinit var attachment: MultipartBody.Part
     private lateinit var progressDlg: KProgressHUD
 
-    private val CAPTURE_FROM_GALLEY = 1
     private val PERMISSION_REQUEST_CODE: Int = 101
 
     override fun onCreateView(
@@ -73,6 +78,7 @@ class HCMessageFragment(
     ): View? {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(context!!)).get(MessageListVM::class.java)
 
+        HCGlobal.getInstance().conversationId = conversationId
         viewModel.conversationId = conversationId
         viewModel.loadMessage(false, conversationId)
 
@@ -175,7 +181,7 @@ class HCMessageFragment(
                 if (checkPermission()) {
 //                    MaterialFilePicker()
 //                        .withActivity(HCGlobal.getInstance().currentActivity)
-//                        .withRequestCode(CAPTURE_FROM_GALLEY)
+//                        .withRequestCode(IMAGE_PICK_CODE)
 //                        .withFilter(Pattern.compile("^.*"))
 //                        .withHiddenFiles(true)
 //                        .start()
@@ -194,10 +200,6 @@ class HCMessageFragment(
                     this,
                     conversationId
                 )
-//                val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationTakePhotoActivity::class.java)
-//                intent.putExtra("conversationId", conversationId)
-//                intent.putExtra("requestCode", "TAKE_PHOTO")
-//                startActivity(intent)
             }
         }
     }
@@ -217,30 +219,13 @@ class HCMessageFragment(
             PERMISSION_REQUEST_CODE)
     }
 
-    @SuppressLint("Recycle", "Assert")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == CAPTURE_FROM_GALLEY && data != null) {
-//            val selectedImage = data.data
-//            val filePathColumn = arrayOf(FilePickerActivity.RESULT_FILE_PATH)
-//            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-//
-//            val cursor = contentResolver.query(selectedImage!!, filePathColumn, null, null, null)
-//            assert(cursor != null)
-//            cursor!!.moveToFirst()
-//
-//            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//            mediaPath = cursor.getString(columnIndex)
-//            cursor.close()
-//            postPath = mediaPath
-
-
-//            val fileToUpload = data.data?.path
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
             val fileToUpload = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
             val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), File(fileToUpload))
 
-            attachment = MultipartBody.Part.createFormData("attachment",
-                File(fileToUpload).name, requestBody)
+            attachment = MultipartBody.Part.createFormData("attachment", File(fileToUpload)?.name,requestBody)
 
             val call = ConversationApi().uploadImage(
                 AppPreferences.apiAccessToken,
@@ -266,6 +251,14 @@ class HCMessageFragment(
                     }
                 }
             })
+        }
+    }
+
+    companion object {
+        private const val IMAGE_PICK_CODE = 1000
+        const val PERMISSION_CODE = 1001
+        fun newInstance(): HCMessageFragment {
+            return HCMessageFragment(HCGlobal.getInstance().conversationId)
         }
     }
 }

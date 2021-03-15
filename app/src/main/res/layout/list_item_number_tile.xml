@@ -15,6 +15,7 @@
         android:layout_height="@dimen/default_panel_height"
         android:background="@{context.getDrawable(viewModel.getNumberTileBackground())}"
         android:orientation="vertical"
+        android:layout_marginStart="@dimen/menu_padding_vertical_default"
         android:layout_marginEnd="@dimen/menu_padding_vertical_default"
         android:padding="@dimen/activity_vertical_margin">
 
@@ -33,12 +34,13 @@
         <TextView
             android:id="@+id/text_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="120dp"
+            android:gravity="center"
             android:text="@{viewModel.getTileContent().value}"
             android:textColor="@{ContextCompat.getColor(context, viewModel.getNumberTileTextColor())}"
-            android:layout_marginTop="-20dp"
-            android:textSize="104sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="100sp"
             android:fontFamily="@font/avenir"
             android:textStyle="bold" />
 

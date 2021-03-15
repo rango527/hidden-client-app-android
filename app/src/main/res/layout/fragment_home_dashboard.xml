@@ -2,15 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/padding_default"
-    android:paddingLeft="@dimen/padding_default"
-    android:paddingRight="@dimen/padding_default">
+    android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,6 +31,8 @@
                     android:layout_height="25dp"
                     android:layout_gravity="end"
                     android:contentDescription="@string/jobSettings"
+                    android:layout_marginTop="@dimen/padding_default"
+                    android:layout_marginEnd="@dimen/padding_default"
                     app:srcCompat="@drawable/ic_settings" />
 
                 <LinearLayout

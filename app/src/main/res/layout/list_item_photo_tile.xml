@@ -15,8 +15,8 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/list_row_margin_default"
-        android:layout_marginLeft="@dimen/list_row_margin_default"
-        android:layout_marginRight="@dimen/list_row_margin_default"
+        android:layout_marginStart="@dimen/menu_padding_vertical_default"
+        android:layout_marginEnd="@dimen/menu_padding_vertical_default"
         android:background="@drawable/panel_round_shadow_white"
         android:paddingBottom="@dimen/activity_horizontal_margin">
 
