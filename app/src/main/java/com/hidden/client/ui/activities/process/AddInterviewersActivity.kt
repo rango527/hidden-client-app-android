@@ -88,7 +88,7 @@ class AddInterviewersActivity : BaseActivity() {
     private fun initUI() {
         imgClose = findViewById(R.id.image_close)
         imgClose.setOnClickListener {
-            finish()
+            backToProcess(true)
         }
 
         txtTitle = findViewById(R.id.text_title)
@@ -148,16 +148,10 @@ class AddInterviewersActivity : BaseActivity() {
         btnSave.isEnabled = enable
     }
 
-    override fun onBackPressed() {
-        backToProcess(true)
-    }
-
     private fun backToProcess(cashMode: Boolean) {
         val intent = Intent(this, ProcessActivity::class.java)
         intent.putExtra("processId", processId)
         intent.putExtra("cashMode", cashMode)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         overridePendingVTransitionEnter()
         finish()

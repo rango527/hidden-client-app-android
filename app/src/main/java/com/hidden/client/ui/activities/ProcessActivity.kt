@@ -1,5 +1,6 @@
 package com.hidden.client.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -19,7 +20,6 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.settings.CandidateDetailActivity
 import com.hidden.client.ui.animation.TransformAnimation
-import com.hidden.client.ui.fragments.home.processes.ProcessesFragment
 import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
@@ -29,8 +29,8 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import okhttp3.RequestBody
 import kotlin.math.roundToInt
 
-class ProcessActivity : BaseActivity(), View.OnClickListener {
 
+class ProcessActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ProcessDetailBinding
     private lateinit var viewModel: ProcessDetailVM
 
@@ -102,7 +102,12 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             if (savedInstanceState == null) {
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_process,
-                    ProcessTimelineFragment(viewModel.process.value!!, viewModel.isInterviewAdvancer.value!!, viewModel.feedbackRequired.value!!, timelineList)
+                    ProcessTimelineFragment(
+                        viewModel.process.value!!,
+                        viewModel.isInterviewAdvancer.value!!,
+                        viewModel.feedbackRequired.value!!,
+                        timelineList
+                    )
                 ).commit()
             }
         })
@@ -154,7 +159,11 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
                 )
 
                 val animation: Animation =
-                    TransformAnimation(layoutTitle, layoutTitle.height, layoutTitle.measuredHeight + 22)
+                    TransformAnimation(
+                        layoutTitle,
+                        layoutTitle.height,
+                        layoutTitle.measuredHeight + 22
+                    )
                 // +23 is layoutTitle and process, message layout distance
                 val density: Float = applicationContext.resources.displayMetrics.density
 
@@ -241,24 +250,24 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.button_back -> {
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                finish()
-                onBackPressed()
-                onBackPressed()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("num", 2)
+                intent.putExtra("processCashMode", true)
+                HCGlobal.getInstance().currentActivity.startActivity(intent)
             }
             R.id.img_process_setting -> {
                 val intent = Intent(this, ProcessSettingActivity::class.java)
                 intent.putExtra("processId", processId)
                 intent.putExtra("jobId", jobId)
                 intent.putExtra("cashMode", false)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 overridePendingVTransitionEnter()
             }
             R.id.img_photo -> {
-                val intent = Intent(HCGlobal.getInstance().currentActivity, CandidateDetailActivity::class.java)
+                val intent = Intent(
+                    HCGlobal.getInstance().currentActivity,
+                    CandidateDetailActivity::class.java
+                )
                 intent.putExtra("category_id", candidateId.toString())
                 HCGlobal.getInstance().currentActivity.startActivity(intent)
                 overridePendingVTransitionEnter()
@@ -270,5 +279,9 @@ class ProcessActivity : BaseActivity(), View.OnClickListener {
         giveFeedbackViewModel =
             ViewModelProviders.of(this, ViewModelFactory(this)).get(GiveFeedbackVM::class.java)
         giveFeedbackViewModel.nudgeFeedback(processId, feedbackId, body)
+    }
+
+    @SuppressLint("ValidFragment")
+    fun ProcessTimelineFragment() {
     }
 }

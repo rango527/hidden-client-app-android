@@ -2,11 +2,21 @@
 <resources>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowActionBar">false</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:fontFamily">@font/avenir_font</item>
+        <item name="android:navigationBarColor">
+            @android:color/background_dark
+        </item>
+        <!--            #000040-->
+
+        <!-- Optional, if drawing behind the status bar too -->
+        <item name="android:statusBarColor">
+            @android:color/background_dark
+        </item>
+<!--        #E74A5F-->
     </style>
 </resources>
