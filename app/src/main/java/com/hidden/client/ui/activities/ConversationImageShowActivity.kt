@@ -1,7 +1,6 @@
 package com.hidden.client.ui.activities
 
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -13,9 +12,6 @@ import com.hidden.client.R
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
-import kotlinx.android.synthetic.main.activity_splash.*
-import java.net.URL
-
 
 class ConversationImageShowActivity : AppCompatActivity(), View.OnClickListener {
 

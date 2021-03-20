@@ -163,7 +163,7 @@ class ProcessTimelineFragment(
                         activity!!.startActivity(intent)
                     }
                     Enums.TileActionButtonType.GIVE_FEEDBACK.value -> {
-                        val index = timelineList.size - status - 1
+                        val index = timelineList.size - status
                         for (interviewDetail in timelineList[index].getInterviewParticipantList()) {
                             if (interviewDetail.isCurrentUser!!) {
                                 HCGlobal.getInstance().currentFeedbackId = interviewDetail.feedbackId!!

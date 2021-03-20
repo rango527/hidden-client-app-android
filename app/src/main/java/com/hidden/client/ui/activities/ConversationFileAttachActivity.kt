@@ -9,14 +9,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.hidden.client.R
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.fileupload.UploadRequestBody
 import com.hidden.client.ui.fileupload.UploadResponse
-import com.hidden.client.ui.fragments.process.HCMessageFragment
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.activity_video_player.*
@@ -83,8 +81,6 @@ class ConversationFileAttachActivity : AppCompatActivity(), UploadRequestBody.Up
                     if (response != null) {
                         if (response.isSuccessful) {
                             finish()
-//                            onBackPressed()
-//                            onBackPressed()
                         }
                     } else {
                         HToast.show(HCGlobal.getInstance().currentActivity, "Upload Failure!", HToast.TOAST_ERROR)

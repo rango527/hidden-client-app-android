@@ -3,7 +3,6 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.JsonObject
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
@@ -18,7 +17,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
 import okhttp3.RequestBody
 import javax.inject.Inject
 
@@ -37,7 +35,6 @@ class GiveFeedbackVM(
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
     val feedback = MutableLiveData<FeedbackEntity>()
-    //    val feedbackId = MutableLiveData<Int>()
     var feedbackId: Int = 1
         set(value) {
             field = value

@@ -7,7 +7,6 @@ import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.custom.ShortlistJob
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.*
 import com.hidden.client.models.json.*

@@ -9,9 +9,7 @@ import com.hidden.client.enums.Consent
 import com.hidden.client.enums.UserType
 import com.hidden.client.networks.RetrofitClient
 import com.hidden.client.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_privacy_statement.*
 import kotlinx.android.synthetic.main.activity_privacy_statement.webview
-import kotlinx.android.synthetic.main.activity_terms_of_service.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

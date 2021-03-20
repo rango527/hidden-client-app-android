@@ -1,7 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.models.entity.InterviewerEntity
 import com.hidden.client.ui.adapters.*
 import com.hidden.client.ui.viewmodels.root.RootVM

@@ -1,26 +1,16 @@
 package com.hidden.client.ui.adapters
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidden.client.R
-import com.hidden.client.databinding.ProcessItemBinding
 import com.hidden.client.databinding.JobItemBinding
 import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.helpers.Utility
-import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.entity.ProcessEntity
-import com.hidden.client.models.entity.ProcessStageEntity
-import com.hidden.client.ui.activities.ProcessActivity
 import com.hidden.client.ui.viewmodels.main.ProcessViewVM
 
 class JobFilterAdapter: RecyclerView.Adapter<JobFilterAdapter.ViewHolder>() {

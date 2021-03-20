@@ -1,30 +1,22 @@
 package com.hidden.client.ui.viewmodels.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.custom.GetAllJob
 import com.hidden.client.models.custom.JobPick
-import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.models.dao.ProcessDao
 import com.hidden.client.models.dao.ProcessStageDao
-import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.json.ProcessJson
 import com.hidden.client.ui.adapters.JobFilterAdapter
-import com.hidden.client.ui.adapters.ProcessListAdapter
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 class JobListVM(
     private val processDao: ProcessDao,
@@ -36,7 +28,6 @@ class JobListVM(
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
 
-    val processListCount: MutableLiveData<Boolean> = MutableLiveData()
     var jobListAdapter: JobFilterAdapter = JobFilterAdapter()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
 

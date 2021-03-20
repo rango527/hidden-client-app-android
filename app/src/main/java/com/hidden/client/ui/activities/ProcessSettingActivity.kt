@@ -3,7 +3,6 @@ package com.hidden.client.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -23,7 +22,6 @@ import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.ui.BaseActivity
-import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.ProcessSettingVM
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -99,8 +97,6 @@ class ProcessSettingActivity : BaseActivity() {
         // Observing for reloading after login success
         viewModel.navigateReload.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
-//                viewModel.processId = this.processId
-//                viewModel.loadProcessSetting(false)
                 finish()
                 overridePendingTransition( 0, 0);
                 intent.putExtra("cashMode", false)

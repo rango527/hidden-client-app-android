@@ -1,10 +1,8 @@
 package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ReviewerDao
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.ui.adapters.ReviewerListAdapter
@@ -13,7 +11,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 class ProcessUserManagerVM(
     private val reviewerDao: ReviewerDao

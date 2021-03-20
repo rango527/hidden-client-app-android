@@ -1,16 +1,11 @@
 package com.hidden.client.ui.fragments.process
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,7 +33,6 @@ import com.hidden.client.ui.fileupload.UploadResponse
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.MessageListVM
 import com.kaopiz.kprogresshud.KProgressHUD
-import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_home_message.*
 import okhttp3.MediaType
@@ -48,7 +42,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 class HCMessageFragment(
@@ -179,13 +172,6 @@ class HCMessageFragment(
 
             R.id.file_attachment -> {
                 if (checkPermission()) {
-//                    MaterialFilePicker()
-//                        .withActivity(HCGlobal.getInstance().currentActivity)
-//                        .withRequestCode(IMAGE_PICK_CODE)
-//                        .withFilter(Pattern.compile("^.*"))
-//                        .withHiddenFiles(true)
-//                        .start()
-
                     val intent = Intent(HCGlobal.getInstance().currentActivity, ConversationFileAttachActivity::class.java)
                     intent.putExtra("conversationId", conversationId)
                     HCGlobal.getInstance().currentActivity.startActivity(intent)

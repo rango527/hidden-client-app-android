@@ -1,6 +1,5 @@
 package com.hidden.client.ui.viewmodels.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.helpers.HCDate
 import com.hidden.client.models.entity.MessageListEntity

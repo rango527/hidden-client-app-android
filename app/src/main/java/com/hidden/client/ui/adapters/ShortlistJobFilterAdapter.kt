@@ -1,6 +1,5 @@
 package com.hidden.client.ui.adapters
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View

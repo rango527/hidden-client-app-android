@@ -2,7 +2,6 @@ package com.hidden.client.ui.activities.shortlist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton

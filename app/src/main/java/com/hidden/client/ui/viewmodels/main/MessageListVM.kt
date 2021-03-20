@@ -1,20 +1,15 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.content.LocusId
-import android.provider.Telephony
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ConversationApi
 import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ConversationDao
 import com.hidden.client.models.dao.MessageListDao
 import com.hidden.client.models.entity.ConversationEntity
 import com.hidden.client.models.entity.MessageListEntity
-import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ConversationJson
 import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.ui.adapters.MessageListAdapter
@@ -24,8 +19,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MultipartBody
-import java.io.File
 import javax.inject.Inject
 
 class MessageListVM(
@@ -38,7 +31,7 @@ class MessageListVM(
     lateinit var conversationApi: ConversationApi
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val loadingMessageList: MutableLiveData<Boolean> = MutableLiveData()
-//    // To Reload
+    // To Reload
     private val _navigateSendMessage = MutableLiveData<Event<Boolean>>()
     val navigateSendMessage: LiveData<Event<Boolean>>
         get() = _navigateSendMessage
@@ -57,10 +50,6 @@ class MessageListVM(
     val jobTitle: MutableLiveData<String> = MutableLiveData("")
 
     private var subscription: Disposable? = null
-
-//    init {
-//        loadMessage(false, conversationId)
-//    }
 
     override fun onCleared() {
         super.onCleared()

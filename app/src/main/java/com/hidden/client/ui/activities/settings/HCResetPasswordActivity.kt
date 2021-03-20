@@ -1,12 +1,9 @@
 package com.hidden.client.ui.activities.settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hidden.client.R
@@ -14,15 +11,10 @@ import com.hidden.client.helpers.HCDialog
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.extension.doAfterTextChanged
 import com.hidden.client.ui.BaseActivity
-import com.hidden.client.ui.activities.HCForgetPasswordActivity
-import com.hidden.client.ui.activities.HCSignUpWithInviteCodeActivity
-import com.hidden.client.ui.activities.HomeActivity
 import com.hidden.client.ui.dialogs.HToast
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.intro.LoginVM
 import com.hidden.client.ui.viewmodels.intro.ResetPasswordVM
 import com.kaopiz.kprogresshud.KProgressHUD
-import org.w3c.dom.Text
 
 class HCResetPasswordActivity : BaseActivity(), View.OnClickListener {
     private lateinit var progressDlg: KProgressHUD

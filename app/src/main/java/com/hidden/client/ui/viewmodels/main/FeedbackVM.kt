@@ -1,8 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
@@ -11,7 +9,6 @@ import com.hidden.client.models.entity.FeedbackEntity
 import com.hidden.client.models.json.FeedbackJson
 import com.hidden.client.models.json.SubmissionVotesJson
 import com.hidden.client.models.json.TimelineJson
-import com.hidden.client.ui.viewmodels.event.Event
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -74,8 +71,6 @@ class FeedbackVM(
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSubscribe { onRetrieveFeedbackStart() }
-//            .doOnTerminate { onRetrieveFeedbackFinish() }
             .subscribe(
                 { result -> onSubmitFeedbackSuccess(result) },
                 { error -> onSubmitFeedbackError(error) }

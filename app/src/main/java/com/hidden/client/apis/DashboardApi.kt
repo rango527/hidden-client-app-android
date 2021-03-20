@@ -5,7 +5,6 @@ import com.hidden.client.models.json.DashboardTileJson
 import com.hidden.client.models.json.SimpleResponseJson
 import io.reactivex.Observable
 import okhttp3.MultipartBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface DashboardApi {

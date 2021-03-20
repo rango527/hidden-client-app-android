@@ -26,12 +26,8 @@ class CandidateDetailVM(private val context: Context,
 
     @Inject
     lateinit var candidateApi: CandidateApi
-    val candidateListAdapter: CandidateListAdapter = CandidateListAdapter()
 
     val loadingVisibility: MutableLiveData<Boolean> = MutableLiveData()
-    val errorMessage:MutableLiveData<Int> = MutableLiveData()
-
-    val candidateInfo: MutableLiveData<CandidateJson> = MutableLiveData()
 
     private lateinit var subscription: Disposable
 
@@ -41,45 +37,5 @@ class CandidateDetailVM(private val context: Context,
     override fun onCleared() {
         super.onCleared()
         subscription.dispose()
-    }
-
-    private fun loadCandidateList(getOnlyFromLocal: Boolean){
-//        subscription = Observable.fromCallable { candidateDao.getCandidateById(candidateId) }
-//            .concatMap {
-//                    dbCandidateList ->
-//                if(dbCandidateList.isEmpty() && !getOnlyFromLocal)
-//                    candidateApi.getCandidateById(AppPreferences.apiAccessToken, candidateId.toString()).concatMap {
-//                        apiCandidateList -> candidateDao.insertAll(*apiCandidateList.toTypedArray())
-//                        Observable.just(apiCandidateList)
-//                    }
-//                else
-//                    Observable.just(dbCandidateList)
-//            }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSubscribe { onRetrieveCandidateListStart() }
-//            .doOnTerminate { onRetrieveCandidateListFinish() }
-//            .subscribe(
-//                { result -> onRetrieveCandidateListSuccess(result) },
-//                { error -> onRetrieveCandidateListError(error) }
-//            )
-    }
-
-    private fun onRetrieveCandidateListStart(){
-        loadingVisibility.value = true
-        errorMessage.value = null
-    }
-
-    private fun onRetrieveCandidateListFinish(){
-        loadingVisibility.value = false
-    }
-
-    private fun onRetrieveCandidateListSuccess(candidateList: List<CandidateEntity>){
-        candidateListAdapter.updateCandidateList(candidateList)
-    }
-
-    private fun onRetrieveCandidateListError(e: Throwable){
-        e.printStackTrace()
-        errorMessage.value = R.string.server_error
     }
 }

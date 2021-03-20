@@ -3,11 +3,9 @@ package com.hidden.client.ui.viewmodels.main
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hidden.client.R
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.custom.RoleAvailableUser
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ReviewerJson

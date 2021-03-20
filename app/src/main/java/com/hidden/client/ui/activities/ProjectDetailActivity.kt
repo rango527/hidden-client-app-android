@@ -1,6 +1,5 @@
 package com.hidden.client.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,8 +11,6 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.entity.ProjectEntity
 import com.hidden.client.ui.BaseActivity
-import com.hidden.client.ui.activities.project.ImageSliderActivity
-import com.hidden.client.ui.activities.settings.JobImageSliderActivity
 import com.hidden.client.ui.adapters.HCProjectImageAdapter
 
 class ProjectDetailActivity : BaseActivity() {

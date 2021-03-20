@@ -1,6 +1,5 @@
 package com.hidden.client.apis
 
-import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.JobSettingJson
 import com.hidden.client.models.json.ReviewerJson
 import com.hidden.client.models.json.SimpleResponseJson

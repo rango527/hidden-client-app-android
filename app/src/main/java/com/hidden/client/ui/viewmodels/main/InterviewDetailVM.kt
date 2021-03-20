@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ProcessApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.models.entity.InterviewEntity
-import com.hidden.client.models.entity.ShortlistFeedbackEntity
 import com.hidden.client.models.json.InterviewJson
-import com.hidden.client.models.json.ShortlistFeedbackJson
 import com.hidden.client.ui.viewmodels.root.RootVM
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

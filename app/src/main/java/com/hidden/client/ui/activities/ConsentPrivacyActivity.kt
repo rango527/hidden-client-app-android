@@ -3,7 +3,6 @@ package com.hidden.client.ui.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.Button
@@ -14,9 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.hidden.client.R
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
-import com.hidden.client.ui.viewmodels.main.JobListVM
 import com.hidden.client.ui.viewmodels.main.ShortlistListVM
 import kotlinx.android.synthetic.main.activity_privacy_statement.*
 import okhttp3.MediaType

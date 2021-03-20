@@ -3,12 +3,10 @@ package com.hidden.client.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders

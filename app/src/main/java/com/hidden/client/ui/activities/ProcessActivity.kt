@@ -29,7 +29,6 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import okhttp3.RequestBody
 import kotlin.math.roundToInt
 
-
 class ProcessActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ProcessDetailBinding
     private lateinit var viewModel: ProcessDetailVM

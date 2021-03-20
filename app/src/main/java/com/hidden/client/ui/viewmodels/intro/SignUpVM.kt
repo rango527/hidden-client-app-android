@@ -1,7 +1,6 @@
 package com.hidden.client.ui.viewmodels.intro
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.LoginApi

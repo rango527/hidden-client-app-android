@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ShortlistApi
 import com.hidden.client.helpers.AppPreferences
 import com.hidden.client.models.dao.ShortlistCandidateDao
-import com.hidden.client.models.entity.CandidateEntity
 import com.hidden.client.models.entity.ShortlistEntity
 import com.hidden.client.models.json.SimpleResponseJson
 import com.hidden.client.ui.viewmodels.root.RootVM

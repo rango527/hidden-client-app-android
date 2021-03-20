@@ -1,7 +1,6 @@
 package com.hidden.client.ui.viewmodels.main
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.R
@@ -11,7 +10,6 @@ import com.hidden.client.helpers.Enums
 import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.models.dao.ProcessSettingDao
 import com.hidden.client.models.dao.ReviewerDao
-import com.hidden.client.models.entity.ProcessEntity
 import com.hidden.client.models.entity.ProcessSettingEntity
 import com.hidden.client.models.entity.ReviewerEntity
 import com.hidden.client.models.json.ProcessSettingJson

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hidden.client.R
 import com.hidden.client.helpers.HCGlobal
 
-
 @SuppressLint("Registered")
 open class BaseActivity: AppCompatActivity() {
 

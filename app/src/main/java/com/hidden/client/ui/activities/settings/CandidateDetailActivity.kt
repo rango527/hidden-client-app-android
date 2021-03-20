@@ -2,7 +2,6 @@ package com.hidden.client.ui.activities.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -27,7 +26,6 @@ import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels___.HCBrandViewModel
 import com.hidden.client.ui.viewmodels___.HCWorkExperienceViewModel
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_candidate_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

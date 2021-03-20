@@ -2,17 +2,10 @@ package com.hidden.client.ui.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
 import com.hidden.client.apis.ShortlistApi
-import com.hidden.client.helpers.AppPreferences
-import com.hidden.client.helpers.extension.safeValue
 import com.hidden.client.models.dao.*
 import com.hidden.client.models.entity.*
-import com.hidden.client.models.json.ShortlistCandidateJson
-import com.hidden.client.models.json.ShortlistJson
 import com.hidden.client.ui.viewmodels.root.RootVM
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ShortlistRejectCandidateVM(

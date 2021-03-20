@@ -1,23 +1,15 @@
 package com.hidden.client.ui.activities.process
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.hidden.client.R
-import com.hidden.client.helpers.Enums
-import com.hidden.client.helpers.HCGlobal
-import com.hidden.client.models.entity.FeedbackQuestionEntity
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.activities.ProcessActivity
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
-import com.hidden.client.ui.fragments.process.ProcessTimelineFragment
 import com.hidden.client.ui.viewmodels.injection.ViewModelFactory
 import com.hidden.client.ui.viewmodels.main.GiveFeedbackVM
 import okhttp3.MediaType

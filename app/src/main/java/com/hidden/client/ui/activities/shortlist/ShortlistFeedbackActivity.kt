@@ -23,14 +23,9 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import com.viewpagerindicator.CirclePageIndicator
 
 class ShortlistFeedbackActivity : BaseActivity() {
-
     private var processId: Int = 0
-
-
     private lateinit var imgClose: ImageView
-
     private lateinit var btnInterviewerFeedbackStatus: Button
-
     private lateinit var layoutViewPager: LinearLayout
 
     // Viewpager for Shortlist Feedback Sliding

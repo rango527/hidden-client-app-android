@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import com.hidden.client.R
 import com.hidden.client.helpers.extension.safeValue
-import com.hidden.client.ui.activities.shortlist.FeedbackActivity
 
 class HSJumpStageActivity : AppCompatActivity(), View.OnClickListener {
 

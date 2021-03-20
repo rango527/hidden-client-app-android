@@ -17,11 +17,9 @@ import com.hidden.client.helpers.HCGlobal
 import com.hidden.client.helpers.Utility
 import com.hidden.client.ui.BaseActivity
 import com.hidden.client.ui.custom.SkillItemView
-import com.hidden.client.ui.fragments.home.dashboard.DashboardFragment
 import com.hidden.client.ui.viewmodels.main.ShortlistViewVM
 
 class ShortlistDetailActivity : BaseActivity(), View.OnClickListener {
-
     // RecyclerViews
     private lateinit var rvBrand: RecyclerView
     private lateinit var rvProject: RecyclerView
