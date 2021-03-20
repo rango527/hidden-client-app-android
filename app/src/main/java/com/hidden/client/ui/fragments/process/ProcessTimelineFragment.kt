@@ -1,6 +1,5 @@
 package com.hidden.client.ui.fragments.process
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -33,7 +32,6 @@ import com.hidden.client.ui.custom.process.TimelineInterviewMapTileFragment
 import com.hidden.client.ui.custom.process.TimelineShortlistedTileView
 import java.util.*
 
-@SuppressLint("ValidFragment")
 class ProcessTimelineFragment(
     private val process: ProcessEntity,
     private val isInterviewAdvancer: Boolean,
@@ -260,12 +258,6 @@ class ProcessTimelineFragment(
                 val tView = TimelineShortlistedTileView(context!!, process.candidateFullName, timeline, separator)
                 layoutTimeline.addView(tView)
             }
-        }
-    }
-
-    companion object {
-        fun newInstance() {
-
         }
     }
 }

@@ -25,7 +25,6 @@
         android:required="true" />
 
     <application
-
         android:name=".HiddenClientApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"

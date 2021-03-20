@@ -62,4 +62,5 @@
     <color name="silver">#AAA9AD</color>
 
     <color name="transparent">#FFFFFFFF</color>
+    <color name="transparent_background">#80000000</color>
 </resources>

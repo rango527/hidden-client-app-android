@@ -39,7 +39,8 @@
                 android:layout_height="62dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:src="@drawable/arrow_left" />
+                android:src="@drawable/arrow_left"
+                tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_title"
@@ -131,7 +132,8 @@
                 android:layout_height="62dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:src="@drawable/arrow_right" />
+                android:src="@drawable/arrow_right"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
     </LinearLayout>

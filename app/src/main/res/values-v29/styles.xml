@@ -3,13 +3,15 @@
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
         <item name="android:fontFamily">@font/avenir_font</item>
         <item name="android:navigationBarColor">
             @color/transparent_background
         </item>
 
         <item name="android:statusBarColor">
-           @color/transparent_background
+            @color/transparent_background
         </item>
     </style>
 </resources>
