@@ -42,6 +42,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
     private var processId: Int = 0
     private var feedbackId: Int = 0
     private var isApprove: Boolean = true
+    private var isRejected: Boolean = false
     private var avatarName: String = ""
     private var processFeedback: Boolean = false
     private var nextStep: String = ""
@@ -57,6 +58,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
         initCloseButton()
 
         isApprove = intent.getBooleanExtra("isApprove", true)
+        isRejected = intent.getBooleanExtra("isRejected", false)
         processId = intent.getIntExtra("processId", 1)
         avatarName = intent.getStringExtra("avatarName").safeValue()
         processFeedback = intent.getBooleanExtra("processFeedback", false)
@@ -105,7 +107,7 @@ class HSGiveFeedbackActivity : BaseActivity() {
             val body: JsonObject = JsonObject()
             body.addProperty("next_step", nextStep)
             giveFeedbackViewModel.nextStep(processId, RequestBody.create(MediaType.parse("application/json"), body.toString()))
-        }else{
+        }else if(isRejected){
             giveFeedbackViewModel.reject(processId);
         }
 
