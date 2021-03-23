@@ -178,7 +178,7 @@
     <!-- Job Setting -->
     <string name="job_settings">Job Settings</string>c
     <string name="shortlist_review_type">Shortlist Review Type</string>
-    <string name="shortlist_review_type_description">The shortlist review type is the workflow that you’re following for approving or rejecting new candidate submissions. There are 3 types to choose from: Unanimity, Majority or First Choice Rules. If you want to change your workflow or find out more, please get in touch with your Talent Partner</string>
+    <string name="shortlist_review_type_description">The shortlist review type is the workflow that you’re following for approving or rejecting new candidate submissions. There are 4 types to choose from: Unanimity, Slow Majority, Fast Majority or First Choice Rules. If you want to change your workflow or find out more, please get in touch with your Talent Partner</string>
     <string name="shortlist_reviewers_description">These are the users who receive all new candidate submissions and who are responsible for approving or rejecting them</string>
     <string name="interviewers_description">These are the users who can be added to interviews for processes associated with this job</string>
     <string name="interview_advancers_description">Once an interview is completed, these users are responsible for entering whether the candidate is progressing or whether they are rejected. If there are multiple Interview Advancers, only one Interview Advancer has to make a decision to keep things moving</string>
