@@ -75,7 +75,7 @@
             android:id="@+id/btn_add_interview_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_interviewer"
+            android:text="@string/add_interview"
             android:background="@drawable/button_round_green"
             android:textColor="@color/colorWhite_1"
             android:fontFamily="@font/avenir"

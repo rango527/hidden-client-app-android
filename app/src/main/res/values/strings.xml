@@ -291,4 +291,5 @@
     <string name="empty_process2">As soon as you approve a candidate from you shortlist, they\'ll show up here</string>
     <string name="select_image_number">%1$s/%2$s</string>
     <string name="candidate_detail">candidate_detail</string>
+    <string name="add_interview">Add Interview</string>
 </resources>
