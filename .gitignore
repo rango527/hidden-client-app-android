@@ -27,3 +27,5 @@
 /urbanairship-preference/build
 /horizontalswipelayout/build
 /urbanairship-core/build
+.env
+google-services.json
